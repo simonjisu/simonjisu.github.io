@@ -51,9 +51,17 @@ descriptions:
   - cat: jekyll
     desc: "Posts describing Jekyll setup techniques."
 
-  - cat: dummy
-    desc: "Just some placeholder posts, lorem ipsum and the rest."
+  - cat: DataScience
+    desc: "DataScience"
 
+  - cat: Library
+    desc: "책을 읽고"
+
+  - cat: Study_Analysis
+    desc: "공부 및 분석"
+
+  - cat: BlaBla
+    desc: "잡념"
 # Social icons and sharing options
 #
 # Social settings are used in two places:

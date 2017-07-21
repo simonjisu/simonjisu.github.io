@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://simonjisu.github.io/datascience/2017/07/21/Test.html</loc>
+<lastmod>2017-07-21T17:43:59+09:00</lastmod>
+</url>
+<url>
 <loc>http://simonjisu.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</loc>
-<lastmod>2015-04-18T17:43:59+09:00</lastmod>
-</url>
-<url>
-<loc>http://simonjisu.github.io/dummy/2015/04/18/dummy6.html</loc>
-<lastmod>2015-04-18T17:43:59+09:00</lastmod>
-</url>
-<url>
-<loc>http://simonjisu.github.io/dummy/2015/04/18/dummy5.html</loc>
-<lastmod>2015-04-18T17:43:59+09:00</lastmod>
-</url>
-<url>
-<loc>http://simonjisu.github.io/dummy/2015/04/18/dummy4.html</loc>
-<lastmod>2015-04-18T17:43:59+09:00</lastmod>
-</url>
-<url>
-<loc>http://simonjisu.github.io/dummy/2015/04/18/dummy3.html</loc>
-<lastmod>2015-04-18T17:43:59+09:00</lastmod>
-</url>
-<url>
-<loc>http://simonjisu.github.io/dummy/2015/04/18/dummy2.html</loc>
 <lastmod>2015-04-18T17:43:59+09:00</lastmod>
 </url>
 <url>
