@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Soo's-box</title>
-    <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 21 Jul 2017 20:19:29 +0900</pubDate>
-    <lastBuildDate>Fri, 21 Jul 2017 20:19:29 +0900</lastBuildDate>
-    <generator>Jekyll v3.5.0</generator>
+    <title>Soo</title>
+    <description>Blog
+</description>
+    <link>http://simonjisu.github.io/</link>
+    <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 21 Jul 2017 21:27:22 +0900</pubDate>
+    <lastBuildDate>Fri, 21 Jul 2017 21:27:22 +0900</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
     
       <item>
         <title>Welcome to Jekyll!</title>
@@ -67,8 +68,8 @@ function demo(string, times) {
 
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/jekyll/2015/04/18/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
+        <link>http://simonjisu.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
         
         <category>jekyll</category>
         
@@ -91,8 +92,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/18/dummy6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/18/dummy6.html</guid>
+        <link>http://simonjisu.github.io/dummy/2015/04/18/dummy6.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/dummy/2015/04/18/dummy6.html</guid>
         
         <category>lorem</category>
         
@@ -115,8 +116,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/18/dummy5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/18/dummy5.html</guid>
+        <link>http://simonjisu.github.io/dummy/2015/04/18/dummy5.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/dummy/2015/04/18/dummy5.html</guid>
         
         <category>lorem</category>
         
@@ -137,8 +138,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/18/dummy4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/18/dummy4.html</guid>
+        <link>http://simonjisu.github.io/dummy/2015/04/18/dummy4.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/dummy/2015/04/18/dummy4.html</guid>
         
         <category>ipsum</category>
         
@@ -159,8 +160,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/18/dummy3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/18/dummy3.html</guid>
+        <link>http://simonjisu.github.io/dummy/2015/04/18/dummy3.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/dummy/2015/04/18/dummy3.html</guid>
         
         
         <category>Dummy</category>
@@ -179,8 +180,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/18/dummy2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/18/dummy2.html</guid>
+        <link>http://simonjisu.github.io/dummy/2015/04/18/dummy2.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/dummy/2015/04/18/dummy2.html</guid>
         
         
         <category>Dummy</category>
@@ -199,8 +200,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/18/dummy.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/18/dummy.html</guid>
+        <link>http://simonjisu.github.io/dummy/2015/04/18/dummy.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/dummy/2015/04/18/dummy.html</guid>
         
         
         <category>Dummy</category>
