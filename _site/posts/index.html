@@ -72,7 +72,38 @@
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
   <!-- Latex -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
+    MathJax.Hub.Config({
+        TeX: {
+            extensions: ["mhchem.js", "cancel.js"]
+        },
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true,
+            ignoreClass: "no-mathjax",
+        },
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        },
+        menuSettings: {
+            zoom: "Click",
+            zscale: "200%"
+        }
+    });
+  </script>
 </head>
 
 
@@ -138,6 +169,12 @@
   
     
   
+    
+  
+    
+  
+    
+  
   <ul class="posts-list">
   
     <li>
@@ -152,6 +189,12 @@
 
   
   <h2 id="Jekyll">Jekyll</h2>
+  
+    
+  
+    
+  
+    
   
     
   
@@ -175,8 +218,23 @@
     
   
     
+      <p class="desc"><em>DataScience</em></p>
+    
+  
+    
+  
+    
+  
+    
   
   <ul class="posts-list">
+  
+    <li>
+      <strong>
+        <a href="/datascience/2017/08/04/E2EMN.html">End-to-End Memory Network 논문 요약 및 정리</a>
+      </strong>
+      <span class="post-date">- 04 August 2017</span>
+    </li>
   
     <li>
       <strong>
