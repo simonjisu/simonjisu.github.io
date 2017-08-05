@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 04 Aug 2017 22:49:53 +0900</pubDate>
-    <lastBuildDate>Fri, 04 Aug 2017 22:49:53 +0900</lastBuildDate>
+    <pubDate>Sat, 05 Aug 2017 13:49:19 +0900</pubDate>
+    <lastBuildDate>Sat, 05 Aug 2017 13:49:19 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -16,44 +16,47 @@
 &lt;h2 id=&quot;single-layer&quot;&gt;Single layer&lt;/h2&gt;
 &lt;hr /&gt;
 &lt;h3 id=&quot;input&quot;&gt;Input&lt;/h3&gt;
-
 &lt;ol&gt;
-  &lt;li&gt;n 개의 단어가 포함된 한 &lt;strong&gt;문장 sentence i&lt;/strong&gt; 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{in}]$ 로 표현 할 수 있으며, 하나의 &lt;strong&gt;단어&lt;/strong&gt;는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. 이렇게 구성된 여러 문장들의 집합을 Context ${x_i}$라고 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;x_{ij} = [0, 0, \cdots, 1 , \cdots, 0, 0]\quad for\ j^{th}\ words\ in\ sentence\ i&lt;/script&gt;
-
-&lt;p&gt;sentence $x_1$ = Mary journeyed to the den. 을 예제로 들면,
-$x_{i1}$ = mary = $[1, 0, \cdots, 0, 0]$
-$x_{i2}$ = journeyed = $[0, 1, \cdots, 0, 0]$
-$x_{i3}$ = to = $[0, \cdots, 1, \cdots, 0, 0]$
-이런식으로 인코딩이 된다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;주의: Mary혹은 mary와 같이 같은 단어를 두 번 세는 것을 피하기 위해서, 모든 단어는 소문자로 바꿔준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
+  &lt;li&gt;n 개의 단어가 포함된 한 &lt;strong&gt;문장 sentence i&lt;/strong&gt; 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{in}]$ 로 표현 할 수 있으며, 하나의 &lt;strong&gt;단어&lt;/strong&gt;는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. 이렇게 구성된 여러 문장들의 집합을 Context ${x_i}$라고 한다.
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;x_{ij} = [0, 0, \cdots, 1 , \cdots, 0, 0]\quad for\ j^{th}\ words\ in\ sentence\ i&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
   &lt;li&gt;t 개의 단어가 포함된 질문 question q도 마찬가지로 BoW방식으로 인코딩해준다.&lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;sentence $x_1$ = Mary journeyed to the den. 을 예제로 들면,&lt;/p&gt;
+
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;x_{i1} = mary = [1, 0, \cdots, 0, 0]&lt;/script&gt;
+
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;x_{i2} = journeyed = [0, 1, \cdots, 0, 0]&lt;/script&gt;
+
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;x_{i3} = to = [0, \cdots, 1, \cdots, 0, 0]&lt;/script&gt;
+
+  &lt;p&gt;이런식으로 인코딩이 된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;주의: Mary혹은 mary와 같이 같은 단어를 두 번 세는 것을 피하기 위해서, 모든 단어는 소문자로 바꿔준다.&lt;/p&gt;
+
 &lt;h3 id=&quot;input-memory&quot;&gt;Input Memory&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 구성된 여러개의 메모리 벡터 $m_i$들 중 일부를 사용하게 된다.&lt;/li&gt;
+  &lt;li&gt;하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 구성된 여러개의 메모리 벡터 $m_i$들 중 일부를 사용하게 된다.
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;m_i = \sum_{j}^{n} Ax_{ij} = Ax_{i1} + Ax_{i2} + \cdots + Ax_{in}&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Question도 마찬가지로 Embedding matrix $B$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 Internal state $u$를 구한다.
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;u = \sum_{j} Bx_{ij} = Bx_{i1} + Bx_{i2} + \cdots + Bx_{in}&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이후 Context와 Question의 유사성(match)를 구하기 위해 inner product를 시행한 후, Softmax Function으로 출력해준다. 이러한 결과로 input에 대한 확률을 도출 해낼 수 있다.
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;p_i = Softmax(u^Tm_i)&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;m_i = \sum_{j}^{n} Ax_{ij} = Ax_{i1} + Ax_{i2} + \cdots + Ax_{in}&lt;/script&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Question도 마찬가지로 Embedding matrix $B$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 Internal state $u$를 구한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;u = \sum_{j} Bx_{ij} = Bx_{i1} + Bx_{i2} + \cdots + Bx_{in}&lt;/script&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;이후 Context와 Question의 유사성(match)를 구하기 위해 inner product를 시행한 후, Softmax Function으로 출력해준다. 이러한 결과로 input에 대한 확률을 도출 해낼 수 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;p_i = Softmax(u^Tm_i)&lt;/script&gt;
 
 &lt;p&gt;즉 $p_i$가 높을 수록 높은 유사성을 띈다.&lt;/p&gt;
 
@@ -61,21 +64,23 @@ $x_{i3}$ = to = $[0, \cdots, 1, \cdots, 0, 0]$
 
 &lt;h3 id=&quot;output-memory&quot;&gt;Output Memory&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;모든 Context 문장들 ${x_i}$ 의 각각의 단어에  다시 Embedding matrix C를 곱하고 더하여 $c_i$로 변환한다.&lt;/li&gt;
+  &lt;li&gt;모든 Context 문장들 ${x_i}$ 의 각각의 단어에  다시 Embedding matrix C를 곱하고 더하여 $c_i$로 변환한다.
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;c_i = \sum_{j} Cx_{ij} = Cx_{i1} + Cx_{i2} + \cdots + Cx_{in}&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이는 출력으로 나오는 Response vector 인$o$ 를 구하기 위해서 인데, $o$는 아래와 같이 Input Memory에서 나오는 유사성(match, $p_i$)와 가중평균합을 진행한다.
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;o = \sum_{i} p_ic_i&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;c_i = \sum_{j} Cx_{ij} = Cx_{i1} + Cx_{i2} + \cdots + Cx_{in}&lt;/script&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;이는 출력으로 나오는 Response vector 인$o$ 를 구하기 위해서 인데, $o$는 아래와 같이 Input Memory에서 나오는 유사성(match, $p_i$)와 가중평균합을 진행한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;o = \sum_{i} p_ic_i&lt;/script&gt;
 
 &lt;h3 id=&quot;final-prediction&quot;&gt;Final Prediction&lt;/h3&gt;
 &lt;p&gt;output $o$와 질문으로부터 추출한 Internal state $u$에 가중치값 $W$를 곱하여 더한뒤에 Softmax Function을 적용하여 답 $\hat{a}$을 추론한다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{a} = Softmax(W(o+u))&lt;/script&gt;
+&lt;blockquote&gt;
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{a} = Softmax(W(o+u))&lt;/script&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;weight-updating&quot;&gt;Weight Updating&lt;/h3&gt;
 &lt;p&gt;Loss Function은 standard cross-entropy loss를 사용하여 예측치 $\hat{a}$ 와 정답인 true 값 $a$ 간의 오차를 최소화해서 학습 시킨다.&lt;/p&gt;
@@ -84,58 +89,90 @@ $x_{i3}$ = to = $[0, \cdots, 1, \cdots, 0, 0]$
 
 &lt;p&gt;업데이트 되는 weight Matrix는 $A$, $B$, $C$ 그리고 $W$다.&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;multiple-layers&quot;&gt;Multiple layers&lt;/h2&gt;
 &lt;hr /&gt;
 &lt;p&gt;위와 같은 Final Prediction 전 단계까지를 1 hop라고 규정하며, Multiple layers $K$ hops까지 확장 시킨다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;첫번째, k번째 layer에서 나온 output으로 나온 $o^k$과 input $u^k$ 는 합쳐져서 새로운 input $u^{k+1}$ 가 되어서 k + 1 layer로 들어가게 된다.
-&lt;script type=&quot;math/tex&quot;&gt;u^{k+1} = u^k + o^k&lt;/script&gt;&lt;/li&gt;
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;u^{k+1} = u^k + o^k&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
   &lt;li&gt;각 layer마다 input에 embed로 사용된 embedding matrices $A^k$ 와 $C^k$ 가 존재한다. 그러나 이들은 쉽게 트레이닝하고, parameter 갯수를 줄이기 위해서 제약이 존재한다.&lt;/li&gt;
   &lt;li&gt;Network의 마지막 부분에서만 W를 곱해서 Softmax 로 출력한다.
-&lt;script type=&quot;math/tex&quot;&gt;\hat{a} = Softmax(Wu^{K+1}) = Softmax(W(o^K + u^K))&lt;/script&gt;&lt;/li&gt;
+    &lt;blockquote&gt;
+      &lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{a} = Softmax(Wu^{K+1}) = Softmax(W(o^K + u^K))&lt;/script&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;두 가지 가중치 버젼&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Adjacent:
-$k_{th}$output layer embedding matrix가 다음 input layer의 embedding matrix가 된다. 예를 들면, $A^{k+1} = C^k$. 또한, 두 가지 제약 조건을 추가했는데, (a) answer prediction matrix가 최종 output embedding과 같고 ($W^T = C^K)$, (b) question embedding 과 첫번째 layer의 input embedding과 같게 했다($B = A^1$).&lt;/p&gt;
+  &lt;li&gt;Adjacent:
+    &lt;blockquote&gt;
+      &lt;p&gt;$k_{th}$ output layer embedding matrix가 다음 input layer의 embedding matrix가 된다. 예를 들면, $A^{k+1} = C^k$. 또한, 두 가지 제약 조건을 추가했는데, (a) answer prediction matrix가 최종 output embedding과 같고 ($W^T = C^K)$, (b) question embedding 과 첫번째 layer의 input embedding과 같게 했다($B = A^1$).&lt;/p&gt;
+    &lt;/blockquote&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Layer-wise (RNN - like):
-Input 과 Output embedding들이 layer마다 다 같다. 예를 들면, $A^1 = A^2 = \cdots = A^K$ 과 $C^1 = C^2 = \cdots = C^K$. 또한, hops간 u를 업데이트하기위한 linear mapping $H$ 를 추가하는 것이 도움이 된다는 것을 알아냈다. $u^{k+1} = Hu^k + o^k$.&lt;/p&gt;
+  &lt;li&gt;Layer-wise (RNN - like):
+    &lt;blockquote&gt;
+      &lt;p&gt;Input 과 Output embedding들이 layer마다 다 같다. 예를 들면, $A^1 = A^2 = \cdots = A^K$ 과 $C^1 = C^2 = \cdots = C^K$ 같은 것들. 또한, hops간 u를 업데이트하기위한 linear mapping $H$ 를 추가하는 것이 도움이 된다는 것을 알아냈다. $u^{k+1} = Hu^k + o^k$.&lt;/p&gt;
+    &lt;/blockquote&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;층별로 가중치를 묶는 두 번째 방법은, tranditional 한 RNN 방식으로 생각할 수가 있다. Internal output($u$)을 내보내는 것은 memory에 해당하고, external outputs($\hat{a}$)는 라벨을 예측하는 것과 같다. RNN 관점에서 보면, $u$, $u^{k+1}$ 은 hidden state고, 모델은 $A$ 를 사용하여internal output $p$ 를 생성한다. 모델은 $C$ 를 사용해서 $p$ 의 정보를 흡수하고, hidden state를 업데이트면서 이런 식으로 계속 진행한다. 여기서 표준 RNN과 다르게 output들을 $K$ hops 동안 계속 메모리에 저장하고, sampling하는 대신에 soft하게 둔다. 그렇게 하여 답변이 “진짜 세상”에 나오기 전에 여러번 계산을 거치게 된다.&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;synthetic-question-and-answering-experiments&quot;&gt;Synthetic Question and Answering Experiments&lt;/h2&gt;
 &lt;hr /&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;예시:
-  Sam walks into the kitchen.
-  Sam picks up an apple.
-  Sam walks into the bedroom.
-  Sam drops the apple.
-  Q: Where is the apple?
-  A. Bedroom&lt;/p&gt;
+  &lt;li&gt;예시1:
+    &lt;blockquote&gt;
+      &lt;p&gt;Sam walks into the kitchen.&lt;/p&gt;
 
-    &lt;p&gt;Brian is a lion.
-  Julius is white.
-  Julius is a lion.
-  Bernhard is green.
-  Q: What color is Brian?
-  A. White&lt;/p&gt;
+      &lt;p&gt;Sam picks up an apple.&lt;/p&gt;
 
-    &lt;p&gt;Mary journeyed to the den.
-  Mary went back to the kitchen.
-  John journeyed to the bedroom.
-  Mary discarded the milk.
-  Q: Where was the milk before the den?
-  A. Hallway&lt;/p&gt;
+      &lt;p&gt;Sam walks into the bedroom.&lt;/p&gt;
+
+      &lt;p&gt;Sam drops the apple.&lt;/p&gt;
+
+      &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Q: Where is the apple?&lt;/span&gt;&lt;/p&gt;
+
+      &lt;p&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;A. Bedroom&lt;/span&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;예시2:
+    &lt;blockquote&gt;
+      &lt;p&gt;Brian is a lion.&lt;/p&gt;
+
+      &lt;p&gt;Julius is white.&lt;/p&gt;
+
+      &lt;p&gt;Julius is a lion.&lt;/p&gt;
+
+      &lt;p&gt;Bernhard is green.&lt;/p&gt;
+
+      &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Q: What color is Brian?&lt;/span&gt;&lt;/p&gt;
+
+      &lt;p&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;A. White&lt;/span&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;예시3:
+    &lt;blockquote&gt;
+      &lt;p&gt;Mary journeyed to the den.&lt;/p&gt;
+
+      &lt;p&gt;Mary went back to the kitchen.&lt;/p&gt;
+
+      &lt;p&gt;John journeyed to the bedroom.&lt;/p&gt;
+
+      &lt;p&gt;Mary discarded the milk.&lt;/p&gt;
+
+      &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Q: Where was the milk before the den?&lt;/span&gt;&lt;/p&gt;
+
+      &lt;p&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;A. Hallway&lt;/span&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
