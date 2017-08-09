@@ -7,8 +7,11 @@ categories: DataScience
 ---
 End-to-End Memory Network 논문 요약 및 정리
 ===
-## A. Single layer
+
 ---
+## A. Single layer
+
+![](https://github.com/simonjisu/simonjisu.github.io/tree/master/assets/E2EMN.png)
 ### Input
 1. n 개의 단어가 포함된 한 **문장 sentence i** 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{in}]$ 로 표현 할 수 있으며, 하나의 **단어**는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. 이렇게 구성된 여러 문장들의 집합을 Context $\{x_i\}$라고 한다.
 > $$x_{ij} = [0, 0, \cdots, 1 , \cdots, 0, 0]\quad for\ j^{th}\ words\ in\ sentence\ i $$
@@ -63,8 +66,10 @@ Input에서 Output까지 함수들은 무한정미분가능(function is smooth)�
 
 <p><br /></p>
 <p><br /></p>
-## B. Multiple layers
+
 ---
+## B. Multiple layers
+
 위와 같은 Final Prediction 전 단계까지를 1 hop라고 규정하며, Multiple layers $K$ hops까지 확장 시킨다.
 
 * 첫번째, k번째 layer에서 나온 output으로 나온 $o^k$과 input $u^k$ 는 합쳐져서 새로운 input $u^{k+1}$ 가 되어서 k + 1 layer로 들어가게 된다.
@@ -84,8 +89,9 @@ Input에서 Output까지 함수들은 무한정미분가능(function is smooth)�
 
 <p><br /></p>
 <p><br /></p>
-## C. Synthetic Question and Answering Experiments
+
 ---
+## C. Synthetic Question and Answering Experiments
 
 * 예시1:
 > Sam walks into the kitchen.
@@ -132,5 +138,39 @@ $K=3$ hops이고 weight sharing(Layer-wise) 모델을 쓸 것이다.  모든 out
 #### Sentence Representaion:
 문장들을 표현할 때 두 가지 방법을 쓰기로 한다. 첫번째로는 BoW가 하나의 문장을 표현하는 것인데, 이 방법은 문장에서 단어의 순서(the order of the words in sentence)라는 특징을 잡을 수가 없다. 따라서 두 번째 방법으로, 문장에서 단어의 순서(the position of words)를 인코딩 한다. $m_i = \sum_{j} l_j \cdot Ax_{ij}$ 여기서 $l_j$ 연산은 element-wise multiplication이다. 또한, $l_j$ 는 $l_{kj} = (1-j/J) - (k/d)(1-2j/J)$, J는 문장에 있는 단어 갯수인 column vector 구조를 가지고 있다. 이것을 $PE$ (position encoding)이라고 하며, 이는 단어의 순서가 얼만큼 문장$m_i$에 영향을 주는지 알려준다. 나머지 question, memory inputs 그리고 memory outputs에서도 두 번째 방법으로 문장을 표현할 것이다.
 
-#### Temporal Encoding:
-많은 QA tasks에서는 temporal context라는 개념이 필요한데, 예를 들어 첫 번째 예시에서 Sam이 kitchen에 간 다음에 bedroom
+**Temporal Encoding:**
+많은 QA tasks에서는 temporal context라는 개념이 필요한데, 예를 들어 첫 번째 예시에서 Sam이 kitchen에 간 다음에 bedroom에 들어간 것을 알 수 있다. 이것을 모델에 적용하려면, memory vector를 약간 변형시킨다. $m_i = \sum_{j} Ax_{ij} + T_A(i)$, 여기서 $T_A(i)$ 는 일시적인 정보를 저장할 특별한 행렬 $T_A$ 의 i 번째 행이다. Ouput embedding할 때도 마찬가지로 해준다. $c_i = \sum_{j} Cx_{ij} + T_C(i)$. $T_A$ 와 $T_C$ 둘다 training 할 때 갱신한다. 그리고 A 와 C 랑 마찬가지로 제약 또한 같이 공유한다. 여기서 주의할 점은 문장들이 역순으로 인덱싱되어있다.  문장이 질문으로부터 상대적인 거리를 반영한다, 즉 $x_1$ 은 이야기의 마지막 문장이 된다.
+
+**Learning time invariance by injecting random noise**
+$T_A$ 를 정규화 시킬때 더미 변수를 넣는 것이 도움이 된다. 즉, 트레이닝할 때는 랜덤으로 10%의 빈 메모리를 스토리에 넣는 것이다. 여기서 이를 Random Noise (RN)라고 한다
+
+### Training Details
+bAbI training set중 10%는 Validation용으로 쓴다. 이는 optimal model architecture 과 hyperparameters를 선택하기 위해서다. Learning rate $\eta$는 0.01로 설정하고, 100번째 epoch가 될때 까지, 매 25번째 epochs 마다, $\eta$ 를 2로 나눠준다. Momentum 이나 weight decay는 사용되지 않았다. 가중치들은 $\mu = 0$, $\sigma = 0.1$ 인 가우시안 정규분포로 초기값을 설정했다. 모든 training에 사용된 batch size는 32 이며, gradients는 L2로 정규화해서 40이 넘으면 어떤 스칼라를 나눠서 norm을 40으로 만들어준다.
+
+어떤 모델에서는 처음시작에 softmax를 안쓰다가 (linear하게 만드는 것) 나중에 최종 예측시에 softmax를 썼다. 그러다 validation loss가 더 이상 떨어지지 않을 때, 다시 softmax 층이 다시 입력이 되서 트레이닝을 한다. 이를 Linear Start (LS) training이라고 하며, 이때 초기 learning rate 를 $\eta = 0.005$ 로 설정한다.
+
+### Baselines
+* MemNN: strongly supervised, softmax대신 max operation사용
+* MemNN-WSH: weakly supervised, 트레이닝시 supporting sentence labels를 안씀
+* LSTM: weakly supervised
+
+### Result
+모델 선택을 다양하게 했다.
+
+1) BoW vs Position Encoding
+
+2) 20 tasks를 독립적으로 트레이닝공유($d = 20$) vs joint 트레이닝 ($d = 50$)
+
+3) Linear Start Training(Softmax처음에 없엔 것) vs Softmax가 처음부터 있는 것
+
+4) hops를 1 ~ 3까지 설정
+
+결과는 논문 참조. 퍼포먼스는 supervised models이 제일 좋게 나왔으나, MemN2N with position encoding + linear start + random noise, jointly trained 도 근접하게 나옴
+
+<p><br /></p>
+<p><br /></p>
+
+---
+## D.참고문헌
+
+[End-To-End Memory Networks: Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus](https://arxiv.org/abs/1503.08895)
