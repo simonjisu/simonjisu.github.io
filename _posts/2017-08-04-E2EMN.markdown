@@ -11,7 +11,7 @@ End-to-End Memory Network 논문 요약 및 정리
 ---
 ## A. Single layer
 
-![](https://github.com/simonjisu/simonjisu.github.io/tree/master/assets/E2EMN.png)
+![](/assets/E2EMN.png)
 ### Input
 1. n 개의 단어가 포함된 한 **문장 sentence i** 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{in}]$ 로 표현 할 수 있으며, 하나의 **단어**는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. 이렇게 구성된 여러 문장들의 집합을 Context $\{x_i\}$라고 한다.
 > $$x_{ij} = [0, 0, \cdots, 1 , \cdots, 0, 0]\quad for\ j^{th}\ words\ in\ sentence\ i $$
