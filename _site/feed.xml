@@ -6,18 +6,128 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Aug 2017 20:50:44 +0900</pubDate>
-    <lastBuildDate>Wed, 09 Aug 2017 20:50:44 +0900</lastBuildDate>
+    <pubDate>Mon, 14 Aug 2017 20:17:17 +0900</pubDate>
+    <lastBuildDate>Mon, 14 Aug 2017 20:17:17 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
+        <title>pycon2017</title>
+        <description>&lt;h1 id=&quot;pycon-2017-&quot;&gt;&lt;strong&gt;PYCON 2017 후기&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;section&quot;&gt;8월 12일&lt;/h2&gt;
+
+&lt;h3 id=&quot;nlp&quot;&gt;노가다 없는 텍스트 분석을 위한 한국어 NLP&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;발표자: 김현중님&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;느낀점:&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;제일 처음 들었던 발표기도 했지만, 이번 발표에서 제일 감명깊게 들은 발표, “어떻게 이런 방식으로 생각했지?”라는 생각을 계속함.&lt;/p&gt;
+
+      &lt;p&gt;soynlp라는 패키지로 소스를 공개해주셨으니 앞으로 내가하는 프로젝트에도 아이디어를 적용할 생각이다.&lt;/p&gt;
+
+      &lt;p&gt;이런 컨퍼런스를 많이 참가해서 다른 사람의 아이디어에서 영감을 많이 받을 수도 있다는 생각을 했음.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;python-nltk-tensorflow---&quot;&gt;전지양의 꿈을 꾸는 안드로이드: Python과 NLTK, TensorFlow를 이용한 챗봇 감정모형구현&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;발표자: 신정규님&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;느낀점:&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;챗봇 팀프로젝트 처음 시작했을 때, 이분의 작년 파이콘강연을 보고 챗봇의 기본적인 구상을 참고했었다. “역시 챗봇은 쉬운게 아니구나”라면서 말이다…&lt;/p&gt;
+
+      &lt;p&gt;다른 곳에서도 이런 생각이 들었지만, 준비하신 내용에 비해 발표시간이 너무 짧았던 것 안타까웠음…코드도 공개하신다고 했으니까 나중에 참고해서 공부하기로 함.&lt;/p&gt;
+
+      &lt;p&gt;감정, 생각 혹은 문장의 이해를 해야하는 부분에서는 Word2vec을 많이 써야된다는 것도 생각하게 됨.&lt;/p&gt;
+
+      &lt;p&gt;또한, 챗봇의 제일 문제점은 사람같지 않다는 점(물론 챗봇이 원래 사람은 아니다만…), 이용자 입장에서 답답하게 느끼지 않게 대화를 이어나갈수 있게하는게 최대의 과제같음.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;8월 13일&lt;/h2&gt;
+
+&lt;h3 id=&quot;python-tensorflow--&quot;&gt;구름이 하늘의 일이라면: Python과 TensorFlow를 이용한 기상예측&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;발표자: 윤상웅님&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;느낀점:&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;데이터 분석할때의 과정과 방향성을 어떻게 잡아야할지 잘 이야기해주셨음.&lt;/p&gt;
+
+      &lt;p&gt;“문제만들기 $\rightarrow$ 모형만들기 $\rightarrow$ 시스템만들기” 라는 순서로 정의하며, 제일 중요한 부분이 “문제를 어떻게 정의 할 것인가”다.&lt;/p&gt;
+
+      &lt;p&gt;물론 도메인 지식이 많이 필요하지만, 공통적인 부분도 있다고 생각했다. 주로, 데이터의 입력/출력, 문제의 유형(supervised/unsupervised), 데이터의 표현 등이었다.&lt;/p&gt;
+
+      &lt;p&gt;결국 우리가 머신러닝을 쓰는 것도 어떤 문제를 해결하려고 하는 것이기 때문에, 문제에 대한 질문을 잘 하고, 문제의 본질을 해석하는 것이 우선순위 같다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;기업 인사담당자들과의 토크&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;느낀점:
+    &lt;blockquote&gt;
+      &lt;p&gt;중간에 시간이 떠가지고 발표 듣는 대신, wanted에서 마련한 몇개 기업 인사담당자들과의 토크시간에 참석했는데, 생각보다 현업에 계신 분들의 이야기를 많이 들어서 좋았다.&lt;/p&gt;
+
+      &lt;p&gt;업계는 이제 데이터 사이언스 분야의 직업경계선이 차츰 나눠진 듯 하다. 데이터 분석가, 데이터 사이언티스트, 데이터 엔지니어, 세분류로 나눠졌고, 더 이상 머신러닝 패키지를 잘 사용한다고 해서 데이터 사이언티스트가 아니라(요즘은 누구나 시간을 들이면 사용해서 간단한 분석정돈 할 수 있다고 한다.), 어떻게 머신러닝관련 이론을 더 효율적으로 구현을 하는지가 데이터 사이언티스트의 임무라고 생각한다.&lt;/p&gt;
+
+      &lt;p&gt;그리고 기업을 지원할 때, 자신의 무기를 잘 가져야하고(물론 이건 공통된 의견이긴 하지만), 자신이 지원한 분야가 무엇인지 정확히 파악해야한다. 아무튼 알찼던 시간이었다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;공통&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;느낀점:
+    &lt;blockquote&gt;
+      &lt;p&gt;이번 파이콘에서는 Django에 관련된 발표가 유난히 많았었던것 같다. 아무래도 장고공부도 해야할 것 같다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 14 Aug 2017 19:22:36 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2017/08/14/PYCON2017.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/08/14/PYCON2017.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
+    
+      <item>
         <title>End-to-End Memory Network 논문 요약 및 정리</title>
-        <description>&lt;h1 id=&quot;end-to-end-memory-network----&quot;&gt;End-to-End Memory Network 논문 요약 및 정리&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;end-to-end-memory-network----&quot;&gt;&lt;strong&gt;End-to-End Memory Network 논문 요약 및 정리&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;hr /&gt;
 &lt;h2 id=&quot;a-single-layer&quot;&gt;A. Single layer&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://github.com/simonjisu/simonjisu.github.io/tree/master/assets/E2EMN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/E2EMN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;h3 id=&quot;input&quot;&gt;Input&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;n 개의 단어가 포함된 한 &lt;strong&gt;문장 sentence i&lt;/strong&gt; 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{in}]$ 로 표현 할 수 있으며, 하나의 &lt;strong&gt;단어&lt;/strong&gt;는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. 이렇게 구성된 여러 문장들의 집합을 Context ${x_i}$라고 한다.
@@ -192,11 +302,11 @@
 &lt;h4 id=&quot;sentence-representaion&quot;&gt;Sentence Representaion:&lt;/h4&gt;
 &lt;p&gt;문장들을 표현할 때 두 가지 방법을 쓰기로 한다. 첫번째로는 BoW가 하나의 문장을 표현하는 것인데, 이 방법은 문장에서 단어의 순서(the order of the words in sentence)라는 특징을 잡을 수가 없다. 따라서 두 번째 방법으로, 문장에서 단어의 순서(the position of words)를 인코딩 한다. $m_i = \sum_{j} l_j \cdot Ax_{ij}$ 여기서 $l_j$ 연산은 element-wise multiplication이다. 또한, $l_j$ 는 $l_{kj} = (1-j/J) - (k/d)(1-2j/J)$, J는 문장에 있는 단어 갯수인 column vector 구조를 가지고 있다. 이것을 $PE$ (position encoding)이라고 하며, 이는 단어의 순서가 얼만큼 문장$m_i$에 영향을 주는지 알려준다. 나머지 question, memory inputs 그리고 memory outputs에서도 두 번째 방법으로 문장을 표현할 것이다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Temporal Encoding:&lt;/strong&gt;
-많은 QA tasks에서는 temporal context라는 개념이 필요한데, 예를 들어 첫 번째 예시에서 Sam이 kitchen에 간 다음에 bedroom에 들어간 것을 알 수 있다. 이것을 모델에 적용하려면, memory vector를 약간 변형시킨다. $m_i = \sum_{j} Ax_{ij} + T_A(i)$, 여기서 $T_A(i)$ 는 일시적인 정보를 저장할 특별한 행렬 $T_A$ 의 i 번째 행이다. Ouput embedding할 때도 마찬가지로 해준다. $c_i = \sum_{j} Cx_{ij} + T_C(i)$. $T_A$ 와 $T_C$ 둘다 training 할 때 갱신한다. 그리고 A 와 C 랑 마찬가지로 제약 또한 같이 공유한다. 여기서 주의할 점은 문장들이 역순으로 인덱싱되어있다.  문장이 질문으로부터 상대적인 거리를 반영한다, 즉 $x_1$ 은 이야기의 마지막 문장이 된다.&lt;/p&gt;
+&lt;h4 id=&quot;temporal-encoding&quot;&gt;Temporal Encoding:&lt;/h4&gt;
+&lt;p&gt;많은 QA tasks에서는 temporal context라는 개념이 필요한데, 예를 들어 첫 번째 예시에서 Sam이 kitchen에 간 다음에 bedroom에 들어간 것을 알 수 있다. 이것을 모델에 적용하려면, memory vector를 약간 변형시킨다. $m_i = \sum_{j} Ax_{ij} + T_A(i)$, 여기서 $T_A(i)$ 는 일시적인 정보를 저장할 특별한 행렬 $T_A$ 의 i 번째 행이다. Ouput embedding할 때도 마찬가지로 해준다. $c_i = \sum_{j} Cx_{ij} + T_C(i)$. $T_A$ 와 $T_C$ 둘다 training 할 때 갱신한다. 그리고 A 와 C 랑 마찬가지로 제약 또한 같이 공유한다. 여기서 주의할 점은 문장들이 역순으로 인덱싱되어있다.  문장이 질문으로부터 상대적인 거리를 반영한다, 즉 $x_1$ 은 이야기의 마지막 문장이 된다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Learning time invariance by injecting random noise&lt;/strong&gt;
-$T_A$ 를 정규화 시킬때 더미 변수를 넣는 것이 도움이 된다. 즉, 트레이닝할 때는 랜덤으로 10%의 빈 메모리를 스토리에 넣는 것이다. 여기서 이를 Random Noise (RN)라고 한다&lt;/p&gt;
+&lt;h4 id=&quot;learning-time-invariance-by-injecting-random-noise&quot;&gt;Learning time invariance by injecting random noise:&lt;/h4&gt;
+&lt;p&gt;$T_A$ 를 정규화 시킬때 더미 변수를 넣는 것이 도움이 된다. 즉, 트레이닝할 때는 랜덤으로 10%의 빈 메모리를 스토리에 넣는 것이다. 여기서 이를 Random Noise (RN)라고 한다&lt;/p&gt;
 
 &lt;h3 id=&quot;training-details&quot;&gt;Training Details&lt;/h3&gt;
 &lt;p&gt;bAbI training set중 10%는 Validation용으로 쓴다. 이는 optimal model architecture 과 hyperparameters를 선택하기 위해서다. Learning rate $\eta$는 0.01로 설정하고, 100번째 epoch가 될때 까지, 매 25번째 epochs 마다, $\eta$ 를 2로 나눠준다. Momentum 이나 weight decay는 사용되지 않았다. 가중치들은 $\mu = 0$, $\sigma = 0.1$ 인 가우시안 정규분포로 초기값을 설정했다. 모든 training에 사용된 batch size는 32 이며, gradients는 L2로 정규화해서 40이 넘으면 어떤 스칼라를 나눠서 norm을 40으로 만들어준다.&lt;/p&gt;
@@ -234,21 +344,6 @@ $T_A$ 를 정규화 시킬때 더미 변수를 넣는 것이 도움이 된다. �
         <pubDate>Fri, 04 Aug 2017 22:09:05 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2017/08/04/E2EMN.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/08/04/E2EMN.html</guid>
-        
-        
-        <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>Test</title>
-        <description>&lt;h1 id=&quot;test&quot;&gt;Test&lt;/h1&gt;
-
-&lt;p&gt;test for blog&lt;/p&gt;
-</description>
-        <pubDate>Fri, 21 Jul 2017 17:43:59 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2017/07/21/Test.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/07/21/Test.html</guid>
         
         
         <category>DataScience</category>
