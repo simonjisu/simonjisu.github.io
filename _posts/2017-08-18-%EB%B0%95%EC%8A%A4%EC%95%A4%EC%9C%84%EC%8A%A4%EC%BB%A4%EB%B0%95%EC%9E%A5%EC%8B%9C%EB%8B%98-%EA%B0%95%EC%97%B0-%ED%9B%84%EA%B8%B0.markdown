@@ -2,10 +2,10 @@
 layout: post
 title: "박스앤위스커-박장시님 강연 후기"
 date: "2017-08-18 13:34:35 +0900"
-author: Soo
-categories: DataScience
+author: "Soo"
+categories: "DataScience"
 ---
-박스앤위스커 - 박장시님 강연 후기
+**박스앤위스커 - 박장시님 강연 후기**
 ===
 ## 주제: 데이터 사이언스에 대한 몇 가지 실제 사례 소개
 ---
