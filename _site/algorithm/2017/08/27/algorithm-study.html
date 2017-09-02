@@ -284,6 +284,156 @@
 </ul>
 
 <h4 id="section-2">선택 정렬</h4>
+<p>리스트에에서 모든 항목을 살펴보고 최대값을 찾아서 새로운 리스트에 정렬</p>
+
+<p>걸리는 시간: $O(n^2)$</p>
+
+<blockquote>
+  <ul>
+    <li>왜 $O(n^2)$ 시간인가?</li>
+  </ul>
+
+  <p>매번 실행할 때마다 점검횟수는 $n-1, n-2, \cdots , 2, 1$ 로 줄어들고, 평균적으로 $n/2$ 만큼 점검한다. 따라서 실제 시간은 평균적으로 $O(n \times 1/2 \times n)$ 인데, 빅오 표기법에서는 상수항은 무시하기 때문에 $O(n \times n)$이 되는 것이다.</p>
+</blockquote>
+
+<p><br /></p>
+<p><br /></p>
+
+<h2 id="chapter-3--recursion">Chapter 3. 재귀 Recursion</h2>
+<hr />
+<h3 id="section-3">재귀</h3>
+<p>함수가 자기 자신을 호출하는 것</p>
+
+<ul>
+  <li>
+    <p>기본 단계(base case): 함수가 자기 자신을 다시 호출하지 않는 경우, 즉 무한 반복으로 빠져들지 않게 하는 부분</p>
+  </li>
+  <li>
+    <p>재귀 단계(recursive case): 함수가 자기 자신을 호출하는 부분</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def countdown(i):
+    print i
+    if i &lt;= 1:  # 기본 단계
+        return
+    else:  # 재귀 단계
+        countdown(i-1)
+</code></pre>
+</div>
+<h3 id="section-4">스택</h3>
+<p>아래와 같은 자료구조를 <strong>스택</strong>이라고 함</p>
+
+<ul>
+  <li>
+    <p>푸시(push): 맨 위에 새로운 항목 삽입</p>
+  </li>
+  <li>
+    <p>팝(pop): 맨 위에 항목을 읽기</p>
+  </li>
+</ul>
+
+<p><strong>호출 스택(call stack)</strong>: 여러 개의 함수를 호출하면서 함수에 사용되는 변수를 저장하는 스택을 호출 스택이라함</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def fact(x):
+    if x == 1:
+        return 1
+    else:
+        return x * fact(x-1)
+</code></pre>
+</div>
+<p>호출 할때 마치 레고블럭을 쌓고 떼듯이 호출함,</p>
+
+<p>예를 들어, factorial 함수를 들자면</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">진행 순서</th>
+      <th style="text-align: left">함수</th>
+      <th style="text-align: center">설명</th>
+      <th style="text-align: center">스택(제일 앞에 것이 최근 스택)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">fact(3)</td>
+      <td style="text-align: center">fact(3) 호출</td>
+      <td style="text-align: center"><code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">if x == 1</td>
+      <td style="text-align: center">False</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">else:</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">return x * fact(x-1)</td>
+      <td style="text-align: center">fact(2) 호출</td>
+      <td style="text-align: center"><code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">if x == 1</td>
+      <td style="text-align: center">False</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">else:</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: left">return x * fact(x-1)</td>
+      <td style="text-align: center">fact(1) 호출</td>
+      <td style="text-align: center"><code class="highlighter-rouge">fact(1)안의 x = 1</code>, <code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: left">if x == 1</td>
+      <td style="text-align: center">True</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td style="text-align: left">return 1</td>
+      <td style="text-align: center">아직 함수 호출이 끝난건 아니다. 이제 스택에서 <code class="highlighter-rouge">fact(1)안의 x=1</code>를 pop하면 된다. 즉, 반환해야하는 첫 번째 호출인 것이다. 1을 반환</td>
+      <td style="text-align: center"><code class="highlighter-rouge">fact(1)안의 x = 1</code>, <code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td style="text-align: left">return x * fact(x-1)</td>
+      <td style="text-align: center">2 * fact(1) 반환하기</td>
+      <td style="text-align: center"><code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11</td>
+      <td style="text-align: left">return x * fact(x-1)</td>
+      <td style="text-align: center">3 * fact(2) 반환하기</td>
+      <td style="text-align: center"><code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td style="text-align: left">6</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>단점: 모든 정보를 저장해두어야 하기 때문에 메모리를 많이 소비한다.</li>
+</ul>
 
 </article>
 
