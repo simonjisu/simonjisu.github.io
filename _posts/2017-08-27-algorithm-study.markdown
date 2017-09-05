@@ -126,3 +126,52 @@ def fact(x):
 | 12 | 6 |  |  |
 
 * 단점: 모든 정보를 저장해두어야 하기 때문에 메모리를 많이 소비한다.
+
+## Chapter 4. 분할 정복
+---
+### 분할 정복(divide-and-conquer)
+단계:
+
+1. 가장 간단한 경우로 기본 단계를 찾음.
+2. 문제가 기본 단계가 될 때까지 나누거나 작게 만듬.
+
+예제: summation
+```
+def sum(arr):
+    total = 0
+    for x in arr:
+        total += x
+    return total
+```
+분할 정복 전략으로 재귀 함수를 이요해서 합계를 구하려면?
+1. 기본 단계: 간단하게 원소 갯수가 0 혹은 1이면 기본 단계가 됨
+2. 재귀 함수 호출: sum([2,3,4]) 가 아닌 2 + sum([3,4]) 로 문제를 줄임, 즉 이 함수는 리스트를 받으면, 리스트가 비어 있을 시 0을 반환하고, 아니면 총합 = 리스트의 첫번째 숫자와 나머지 리스트의 총합을 더한 값으로 출력한다.
+
+```
+def newsum(lst):
+    summ = 0
+    if not lst:
+        return 0
+    elif len(lst) == 1:  
+        return lst[0]
+    else:
+        summ = lst[0] + newsum(lst[1:])
+        return summ
+
+print(newsum([2,3,4]))
+```
+
+### 퀵 정렬(quick sort)
+기준을 정해서 그것보다 작은 것과 큰 것을 나눠서 재귀함수를 호출하는 방법
+
+```
+# ascending
+def quicksort(lst):
+    if len(lst) < 2:
+        return lst
+    else:
+        pivot = lst[0]
+        less = [i for i in lst[1:] if i <= pivot]
+        greater = [i for i in lst[1:] if i > pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
+```
