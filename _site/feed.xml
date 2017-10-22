@@ -6,9 +6,31 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Sep 2017 18:02:45 +0900</pubDate>
-    <lastBuildDate>Sat, 02 Sep 2017 18:02:45 +0900</lastBuildDate>
+    <pubDate>Sun, 22 Oct 2017 15:22:04 +0900</pubDate>
+    <lastBuildDate>Sun, 22 Oct 2017 15:22:04 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Text Mining Study [0]</title>
+        <description>&lt;h1 id=&quot;text-mining-study-0&quot;&gt;&lt;strong&gt;Text Mining Study [0]&lt;/strong&gt;&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;1. 개요&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;텍스트 마이닝(Text Mining)&lt;/strong&gt; 혹은 &lt;strong&gt;덱스트 애널리틱스(text analytics)&lt;/strong&gt;란, 반정형 또는 비정형 텍스트 데이터의 분석과 처리를 위한 다양한 기술을 일컫는 포괄적 용어.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;텍스트 마이닝의 핵심&lt;/h3&gt;
+&lt;p&gt;텍스트 마이닝의 핵심은 비정형 혹은 반정형의 텍스트 또는 텍스트 집합으로부터 정보 가치가 있는 항목들을 추출하여 정형 텍스트, 즉 표로 구성하는 것이라고 할 수 있다. 이 과정은 대체로 정보 가치가 있는 것으로 판단되는 항목, 혹은 단위의 인식, 그리고 특정 범위 내에서의 이 단위의 출현 빈도 계수로 구성된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;2. 텍스트 분석의 과정&lt;/h2&gt;
+&lt;p&gt;과제의 목표 설정 $\rightarrow$ 데이터 입수 $\rightarrow$ 데이터 준비 $\rightarrow$ 데이터 탐색 $\rightarrow$ 데이터 모델링&lt;/p&gt;
+</description>
+        <pubDate>Sun, 22 Oct 2017 12:59:21 +0900</pubDate>
+        <link>http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html</guid>
+        
+        
+        <category>[Study]Text_Mining</category>
+        
+      </item>
     
       <item>
         <title>algorithm study</title>
@@ -271,6 +293,59 @@
 &lt;ul&gt;
   &lt;li&gt;단점: 모든 정보를 저장해두어야 하기 때문에 메모리를 많이 소비한다.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;chapter-4--&quot;&gt;Chapter 4. 분할 정복&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;h3 id=&quot;divide-and-conquer&quot;&gt;분할 정복(divide-and-conquer)&lt;/h3&gt;
+&lt;p&gt;단계:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;가장 간단한 경우로 기본 단계를 찾음.&lt;/li&gt;
+  &lt;li&gt;문제가 기본 단계가 될 때까지 나누거나 작게 만듬.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;예제: summation&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def sum(arr):
+    total = 0
+    for x in arr:
+        total += x
+    return total
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;분할 정복 전략으로 재귀 함수를 이요해서 합계를 구하려면?&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;기본 단계: 간단하게 원소 갯수가 0 혹은 1이면 기본 단계가 됨&lt;/li&gt;
+  &lt;li&gt;재귀 함수 호출: sum([2,3,4]) 가 아닌 2 + sum([3,4]) 로 문제를 줄임, 즉 이 함수는 리스트를 받으면, 리스트가 비어 있을 시 0을 반환하고, 아니면 총합 = 리스트의 첫번째 숫자와 나머지 리스트의 총합을 더한 값으로 출력한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def newsum(lst):
+    summ = 0
+    if not lst:
+        return 0
+    elif len(lst) == 1:  
+        return lst[0]
+    else:
+        summ = lst[0] + newsum(lst[1:])
+        return summ
+
+print(newsum([2,3,4]))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;quick-sort&quot;&gt;퀵 정렬(quick sort)&lt;/h3&gt;
+&lt;p&gt;기준을 정해서 그것보다 작은 것과 큰 것을 나눠서 재귀함수를 호출하는 방법&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ascending
+def quicksort(lst):
+    if len(lst) &amp;lt; 2:
+        return lst
+    else:
+        pivot = lst[0]
+        less = [i for i in lst[1:] if i &amp;lt;= pivot]
+        greater = [i for i in lst[1:] if i &amp;gt; pivot]
+        return quicksort(less) + [pivot] + quicksort(greater)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sun, 27 Aug 2017 15:43:39 +0900</pubDate>
         <link>http://simonjisu.github.io/algorithm/2017/08/27/algorithm-study.html</link>
