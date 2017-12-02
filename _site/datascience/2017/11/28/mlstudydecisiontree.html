@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Text Mining Study [0]</title>
-  <meta name="description" content="Text Mining Study [0]">
+  <title>ML-DecisionTree</title>
+  <meta name="description" content="[ML] DecisionTree의사결정나무의 소개는 링크로 대체하고 어떻게 진행되는지만 알아보자">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2017">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Text Mining Study [0]" />
+  <meta property="og:description" content="[ML] DecisionTree의사결정나무의 소개는 링크로 대체하고 어떻게 진행되는지만 알아보자" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="Text Mining Study [0]" />
+  <meta property="og:title" content="ML-DecisionTree" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Text Mining Study [0]">
-  <meta name="twitter:description" content="Text Mining Study [0]">
+  <meta name="twitter:title" content="ML-DecisionTree">
+  <meta name="twitter:description" content="[ML] DecisionTree의사결정나무의 소개는 링크로 대체하고 어떻게 진행되는지만 알아보자">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
   <!-- Latex -->
@@ -151,8 +151,8 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">Text Mining Study [0]</h1>
-      <p class="info">by <strong>Soo</strong></p>
+      <h1 class="title">ML-DecisionTree</h1>
+      <p class="info">by <strong></strong></p>
     </header>
   </div>
 </div>
@@ -166,49 +166,172 @@
  
 
 <section class="post-meta">
-  <div class="post-date">October 22, 2017</div>
+  <div class="post-date">November 28, 2017</div>
   <div class="post-categories">
   in 
     
-    <a href="/category/[Study]Text_Mining">[study]text_mining</a>
+    <a href="/category/DataScience">Datascience</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <h1 id="text-mining-study-0"><strong>Text Mining Study [0]</strong></h1>
+  <h1 id="ml-decisiontree">[ML] DecisionTree</h1>
+<p>의사결정나무의 소개는 <a href="https://ko.wikipedia.org/wiki/%EA%B2%B0%EC%A0%95_%ED%8A%B8%EB%A6%AC_%ED%95%99%EC%8A%B5%EB%B2%95">링크</a>로 대체하고 어떻게 진행되는지만 알아보자</p>
 
-<h2 id="section">1. 개요</h2>
-<p><strong>텍스트 마이닝(Text Mining)</strong> 혹은 <strong>덱스트 애널리틱스(text analytics)</strong>란, 반정형 또는 비정형 텍스트 데이터의 분석과 처리를 위한 다양한 기술을 일컫는 포괄적 용어.</p>
+<p>의사 결정나무모델은 분류를 할때 책상정리에 비유한다. 더러운 책상에 있는 물건을 어떤 기준에 따라서 하나씩 정리하는 거다.</p>
 
-<h3 id="section-1">텍스트 마이닝의 핵심</h3>
-<p>텍스트 마이닝의 핵심은 비정형 혹은 반정형의 텍스트 또는 텍스트 집합으로부터 정보 가치가 있는 항목들을 추출하여 정형 텍스트, 즉 표로 구성하는 것이라고 할 수 있다. 이 과정은 대체로 정보 가치가 있는 것으로 판단되는 항목, 혹은 단위의 인식, 그리고 특정 범위 내에서의 이 단위의 출현 빈도 계수로 구성된다.</p>
+<p><img src="/assets/ML/DecisionTree_Desk.jpeg" alt="Drawing" style="width: 400px;" /></p>
 
-<h3 id="text-data--">Text Data 분석의 어려움</h3>
+<p>(사진출처: 네이버 블로그)</p>
+
+<p>그렇다면 데이터를 분류하는 기준은 도대체 무엇인가?</p>
+
+<h1 id="entropy-information-gain">엔트로피(Entropy)와 정보획득(Information Gain)</h1>
+<p>데이터를 분류하는 기준은 아래와 같다.</p>
+
+<ol>
+  <li>어떤 기준으로 분류 후에 histogram으로부터 조건부 엔트로피를 계산 함</li>
+  <li>이전 entropy와 새로구한 조건부 엔트로피의 차이(:=Infomation Gain)이 최대 인 것을 best feature로 선택한다</li>
+</ol>
+
+<p><a href="https://ko.wikipedia.org/wiki/%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BC">엔트로피</a>를 이해하자면 정리안된 책상의 상태를 생각하면 편할 것이다. 엔트로피가 높으면 책상이 굉장히 정리가 안된 상태(혼돈의 상태)고, 엔트로피가 적을 수록 점점 정리되어가는 책상을 생각하면 된다.</p>
+
+<p>엔트로피의 계산 방식은 아래와 같다.</p>
+<blockquote>
+  <p>엔트로피: $H[Y] = -\sum_{k=1}^K p(y_k) \log_2 p(y_k)$</p>
+
+  <p>조건부 엔트로피: $H[Y \mid X] = - \sum_i \sum_j \,p(x_i, y_j) \log_2 p(y_j \mid x_i)$</p>
+</blockquote>
 
 <ul>
-  <li>텍스트 데이터는 항목(단위) 구분이 명시적이지 않음</li>
-  <li>데이터 항목 구분이 중요한 이유는 Reductionism:
-    <ul>
-      <li>높은 단계의 사상이나 개념을 하위 단계의 요소로 세분화 하여 명확하게 정의 가능</li>
-    </ul>
-  </li>
-  <li>기호의 성질: 기호의 자의성
-    <ul>
-      <li>심볼(Symbol)과 의미가 자꾸 변하거나 모든 사람들에게 항상 일치하지 않다. 또한 컴퓨터와 사람이 이해하는 언어 기호가 달라서 사람의 언어기호를 computer native하게 만들어 줘야함</li>
-      <li>해결방안:
-        <ol>
-          <li>규칙을 만들고 그것에 따르게 한다. 그러나 만들기 힘들고, 모두가 만족할 수가 없다는 단점이 있다.</li>
-          <li>경험, 데이터에 의해 컴퓨터에게 학습하게 한다. 최근 추세.</li>
-        </ol>
-      </li>
-    </ul>
-  </li>
+  <li>$y_k$: $k$ 카테고리에 속하는 $y$ 의 갯수</li>
+  <li>$p(y_k)$: 변수 $y$ 가 카테고리 $k$ 에 속할 확률</li>
 </ul>
 
-<h2 id="section-2">2. 텍스트 분석의 과정</h2>
-<p>과제의 목표 설정 $\rightarrow$ 데이터 입수 $\rightarrow$ 데이터 준비 $\rightarrow$ 데이터 탐색 $\rightarrow$ 데이터 모델링</p>
+<p>본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.
+| f1 | f2 | f3 | y |
+|:-:|:-:|:-:|:-:|
+|0|1|1| yes|
+|0|1|0| no|
+|1|1|1| no|
+|0|1|0| no|
+|0|0|1| no|
+|1|0|1| yes|</p>
+
+<h2 id="section">계산과정</h2>
+<h3 id="base-entropy----entropy">[1 단계] base entropy: 분류가 안되었을 때의 entropy</h3>
+<p>기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.</p>
+
+<p>기초 엔트로피를 $E_{base}$ 라고 하면,
+|y=yes|y=no|total|
+|:-:|:-:|:-:|
+|2|4|6|
+class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.</p>
+<blockquote>
+  <p>$E_{base} = -[\ P(y_{=yes})\log{P(y_{=yes})} + P(y_{=no})\log{P(y_{=no})}\ ]<br />
+= -(\frac{2}{6}\log{\frac{2}{6}}+\frac{4}{6}\log{\frac{4}{6}}) = 0.9182$</p>
+</blockquote>
+
+<h3 id="feature----infomation-gain">[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함</h3>
+<p>Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.</p>
+<h4 id="feature-1">feature 1</h4>
+<p>|f1|y=yes|y=no|total|
+|:-:|:-:|:-:|:-:|
+|x=1|1|1|2|
+|x=0|1|3|4|
+|total|2|4|6|</p>
+
+<blockquote>
+  <p>$E_1 = -[\ P(y_{=yes},x_{=1})\log{P(y_{=yes}|x_{=1})} + P(y_{=no},x_{=1})\log{P(y_{=no}|x_{=1})} +P(y_{=yes},x_{=0})\log{P(y_{=yes}|x_{=0})} + P(y_{=no},x_{=0})\log{P(y_{=no}|x_{=0})}\ ]$
+$= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{4}}+\frac{3}{6}\log{\frac{3}{4}}\ ] = 0.8741$</p>
+
+  <p>$IG_1 = E_{base} - E_1 = 0.0441$</p>
+</blockquote>
+
+<p>마찬가지로 feature2 와 feature3도 똑같이 구할 수 있다.</p>
+<h4 id="feature-2">feature 2</h4>
+<p>|f2|y=yes|y=no|total|
+|:-:|:-:|:-:|:-:|
+|x=1|1|3|4|
+|x=0|1|1|2|
+|total|2|4|6|</p>
+
+<blockquote>
+  <p>$E_2 = -[\ \frac{1}{6}\log{\frac{1}{4}} + \frac{3}{6}\log{\frac{3}{4}} + \frac{1}{6}\log{\frac{1}{2}} + \frac{1}{6}\log{\frac{1}{2}}] = 0.8741$</p>
+
+  <p>$IG_2 = E_{base} - E_2 = 0.0441$</p>
+</blockquote>
+
+<h4 id="feature-3">feature 3</h4>
+<p>|f3|y=yes|y=no|total|
+|:-:|:-:|:-:|:-:|
+|x=1|2|0|2|
+|x=0|2|2|4|
+|total|4|2|6|</p>
+
+<blockquote>
+  <p>$E_3 = -[\ \frac{2}{6}\log{\frac{2}{2}} + \frac{0}{6}\log{\frac{0}{2}} + \frac{2}{6}\log{\frac{2}{4}} + \frac{2}{6}\log{\frac{2}{4}}] = 0.6666$</p>
+
+  <p>$IG_3 = E_{base} - E_3=0.2516$</p>
+</blockquote>
+
+<h3 id="section-1">[3단계] 결과 및 선택:</h3>
+<p>| f|Entropy|IG|
+|:-:|:-:|:-:|
+|base |0.9182| -  |
+|f1 |0.8742|0.0441|
+|f2 |0.8742|0.0441|
+|f3 |0.6667|0.2516|</p>
+
+<p>결과에 따라 첫번째 기준으로 엔트로피가 가장 많이 줄고, IG가 가장 높은 feature3를 선택하게 된다.</p>
+
+<p>따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.
+| f1 | f2 | f3 | y |
+|:-:|:-:|:-:|:-:|
+|0|1|<span style="color: #7d7ee8">1</span>| <span style="color: #7d7ee8">yes</span>|
+|0|1|<span style="color: #e87d7d">0</span>| <span style="color: #e87d7d">no</span>|
+|1|1|1| no|
+|0|1|<span style="color: #e87d7d">0</span>| <span style="color: #e87d7d">no</span>|
+|0|0|1| no|
+|1|0|<span style="color: #7d7ee8">1</span>| <span style="color: #7d7ee8">yes</span>|</p>
+
+<p>남은 데이터는 아래와 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f1</th>
+      <th style="text-align: center">f2</th>
+      <th style="text-align: center">y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">no</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이제 다시 위에 과정을 반복하게 된다.</p>
+<blockquote>
+  <p>$E_{base2} = -(0 + 1 \cdot \log{1}) =0$</p>
+</blockquote>
+
+<p>이 예제에서는 더이상 나눌 엔트로피가 없기 때문에 사실상 어떤 기준으로 선택해도 no가 나오지만 컴퓨터는 계산시 둘중 아무거나 기준으로 결과를 낼 것이다.</p>
+
+<p>데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.</p>
+
+<h2 id="section-2">코드</h2>
+<p>모든 코드는 <a href="https://github.com/simonjisu/ML/tree/master/DecisionTreeModel">Github</a>, DecisionTree.py에 공개되어 있다.</p>
 
 </article>
 
@@ -226,7 +349,7 @@
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=Text+Mining+Study+%5B0%5D&u=http%3A%2F%2Fsimonjisu.github.io%2F%255Bstudy%255Dtext_mining%2F2017%2F10%2F22%2Ftext-mining-study.html"
+      <a href="//www.facebook.com/sharer.php?t=ML-DecisionTree&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2017%2F11%2F28%2Fmlstudydecisiontree.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -250,7 +373,7 @@
     
     
     
-      <a href="//plus.google.com/share?title=Text+Mining+Study+%5B0%5D&url=http%3A%2F%2Fsimonjisu.github.io%2F%255Bstudy%255Dtext_mining%2F2017%2F10%2F22%2Ftext-mining-study.html"
+      <a href="//plus.google.com/share?title=ML-DecisionTree&url=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2017%2F11%2F28%2Fmlstudydecisiontree.html"
         onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
         <i class="fa fa-google-plus-square fa-lg"></i>
       </a>
@@ -284,7 +407,7 @@
     
     
     
-      <a href="//www.pinterest.com/pin/create/button/?description=Text+Mining+Study+%5B0%5D&url=http%3A%2F%2Fsimonjisu.github.io%2F%255Bstudy%255Dtext_mining%2F2017%2F10%2F22%2Ftext-mining-study.html&media=http://simonjisu.github.io/assets/star.jpg"
+      <a href="//www.pinterest.com/pin/create/button/?description=ML-DecisionTree&url=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2017%2F11%2F28%2Fmlstudydecisiontree.html&media=http://simonjisu.github.io/assets/star.jpg"
         onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
         <i class="fa fa-pinterest-square fa-lg"></i>
       </a>
@@ -353,7 +476,7 @@
     
     
     
-      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html') + '&title=Text Mining Study [0]'; return false">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html') + '&title=ML-DecisionTree'; return false">
         <i class="fa fa-reddit-square fa-lg"></i>
       </a>
     

@@ -6,9 +6,176 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Oct 2017 15:22:04 +0900</pubDate>
-    <lastBuildDate>Sun, 22 Oct 2017 15:22:04 +0900</lastBuildDate>
+    <pubDate>Sat, 02 Dec 2017 15:33:05 +0900</pubDate>
+    <lastBuildDate>Sat, 02 Dec 2017 15:33:05 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>ML-DecisionTree</title>
+        <description>&lt;h1 id=&quot;ml-decisiontree&quot;&gt;[ML] DecisionTree&lt;/h1&gt;
+&lt;p&gt;의사결정나무의 소개는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EA%B2%B0%EC%A0%95_%ED%8A%B8%EB%A6%AC_%ED%95%99%EC%8A%B5%EB%B2%95&quot;&gt;링크&lt;/a&gt;로 대체하고 어떻게 진행되는지만 알아보자&lt;/p&gt;
+
+&lt;p&gt;의사 결정나무모델은 분류를 할때 책상정리에 비유한다. 더러운 책상에 있는 물건을 어떤 기준에 따라서 하나씩 정리하는 거다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/DecisionTree_Desk.jpeg&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(사진출처: 네이버 블로그)&lt;/p&gt;
+
+&lt;p&gt;그렇다면 데이터를 분류하는 기준은 도대체 무엇인가?&lt;/p&gt;
+
+&lt;h1 id=&quot;entropy-information-gain&quot;&gt;엔트로피(Entropy)와 정보획득(Information Gain)&lt;/h1&gt;
+&lt;p&gt;데이터를 분류하는 기준은 아래와 같다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;어떤 기준으로 분류 후에 histogram으로부터 조건부 엔트로피를 계산 함&lt;/li&gt;
+  &lt;li&gt;이전 entropy와 새로구한 조건부 엔트로피의 차이(:=Infomation Gain)이 최대 인 것을 best feature로 선택한다&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BC&quot;&gt;엔트로피&lt;/a&gt;를 이해하자면 정리안된 책상의 상태를 생각하면 편할 것이다. 엔트로피가 높으면 책상이 굉장히 정리가 안된 상태(혼돈의 상태)고, 엔트로피가 적을 수록 점점 정리되어가는 책상을 생각하면 된다.&lt;/p&gt;
+
+&lt;p&gt;엔트로피의 계산 방식은 아래와 같다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;엔트로피: $H[Y] = -\sum_{k=1}^K p(y_k) \log_2 p(y_k)$&lt;/p&gt;
+
+  &lt;p&gt;조건부 엔트로피: $H[Y \mid X] = - \sum_i \sum_j \,p(x_i, y_j) \log_2 p(y_j \mid x_i)$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$y_k$: $k$ 카테고리에 속하는 $y$ 의 갯수&lt;/li&gt;
+  &lt;li&gt;$p(y_k)$: 변수 $y$ 가 카테고리 $k$ 에 속할 확률&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.
+| f1 | f2 | f3 | y |
+|:-:|:-:|:-:|:-:|
+|0|1|1| yes|
+|0|1|0| no|
+|1|1|1| no|
+|0|1|0| no|
+|0|0|1| no|
+|1|0|1| yes|&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;계산과정&lt;/h2&gt;
+&lt;h3 id=&quot;base-entropy----entropy&quot;&gt;[1 단계] base entropy: 분류가 안되었을 때의 entropy&lt;/h3&gt;
+&lt;p&gt;기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;기초 엔트로피를 $E_{base}$ 라고 하면,
+|y=yes|y=no|total|
+|:-:|:-:|:-:|
+|2|4|6|
+class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;$E_{base} = -[\ P(y_{=yes})\log{P(y_{=yes})} + P(y_{=no})\log{P(y_{=no})}\ ]&lt;br /&gt;
+= -(\frac{2}{6}\log{\frac{2}{6}}+\frac{4}{6}\log{\frac{4}{6}}) = 0.9182$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;feature----infomation-gain&quot;&gt;[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함&lt;/h3&gt;
+&lt;p&gt;Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.&lt;/p&gt;
+&lt;h4 id=&quot;feature-1&quot;&gt;feature 1&lt;/h4&gt;
+&lt;p&gt;|f1|y=yes|y=no|total|
+|:-:|:-:|:-:|:-:|
+|x=1|1|1|2|
+|x=0|1|3|4|
+|total|2|4|6|&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$E_1 = -[\ P(y_{=yes},x_{=1})\log{P(y_{=yes}|x_{=1})} + P(y_{=no},x_{=1})\log{P(y_{=no}|x_{=1})} +P(y_{=yes},x_{=0})\log{P(y_{=yes}|x_{=0})} + P(y_{=no},x_{=0})\log{P(y_{=no}|x_{=0})}\ ]$
+$= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{4}}+\frac{3}{6}\log{\frac{3}{4}}\ ] = 0.8741$&lt;/p&gt;
+
+  &lt;p&gt;$IG_1 = E_{base} - E_1 = 0.0441$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;마찬가지로 feature2 와 feature3도 똑같이 구할 수 있다.&lt;/p&gt;
+&lt;h4 id=&quot;feature-2&quot;&gt;feature 2&lt;/h4&gt;
+&lt;p&gt;|f2|y=yes|y=no|total|
+|:-:|:-:|:-:|:-:|
+|x=1|1|3|4|
+|x=0|1|1|2|
+|total|2|4|6|&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$E_2 = -[\ \frac{1}{6}\log{\frac{1}{4}} + \frac{3}{6}\log{\frac{3}{4}} + \frac{1}{6}\log{\frac{1}{2}} + \frac{1}{6}\log{\frac{1}{2}}] = 0.8741$&lt;/p&gt;
+
+  &lt;p&gt;$IG_2 = E_{base} - E_2 = 0.0441$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;feature-3&quot;&gt;feature 3&lt;/h4&gt;
+&lt;p&gt;|f3|y=yes|y=no|total|
+|:-:|:-:|:-:|:-:|
+|x=1|2|0|2|
+|x=0|2|2|4|
+|total|4|2|6|&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$E_3 = -[\ \frac{2}{6}\log{\frac{2}{2}} + \frac{0}{6}\log{\frac{0}{2}} + \frac{2}{6}\log{\frac{2}{4}} + \frac{2}{6}\log{\frac{2}{4}}] = 0.6666$&lt;/p&gt;
+
+  &lt;p&gt;$IG_3 = E_{base} - E_3=0.2516$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;[3단계] 결과 및 선택:&lt;/h3&gt;
+&lt;p&gt;| f|Entropy|IG|
+|:-:|:-:|:-:|
+|base |0.9182| -  |
+|f1 |0.8742|0.0441|
+|f2 |0.8742|0.0441|
+|f3 |0.6667|0.2516|&lt;/p&gt;
+
+&lt;p&gt;결과에 따라 첫번째 기준으로 엔트로피가 가장 많이 줄고, IG가 가장 높은 feature3를 선택하게 된다.&lt;/p&gt;
+
+&lt;p&gt;따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.
+| f1 | f2 | f3 | y |
+|:-:|:-:|:-:|:-:|
+|0|1|&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;| &lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;|
+|0|1|&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;| &lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;|
+|1|1|1| no|
+|0|1|&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;| &lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;|
+|0|0|1| no|
+|1|0|&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;| &lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;|&lt;/p&gt;
+
+&lt;p&gt;남은 데이터는 아래와 같다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;이제 다시 위에 과정을 반복하게 된다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;$E_{base2} = -(0 + 1 \cdot \log{1}) =0$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이 예제에서는 더이상 나눌 엔트로피가 없기 때문에 사실상 어떤 기준으로 선택해도 no가 나오지만 컴퓨터는 계산시 둘중 아무거나 기준으로 결과를 낼 것이다.&lt;/p&gt;
+
+&lt;p&gt;데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;코드&lt;/h2&gt;
+&lt;p&gt;모든 코드는 &lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/DecisionTreeModel&quot;&gt;Github&lt;/a&gt;, DecisionTree.py에 공개되어 있다.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Nov 2017 14:48:12 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>Text Mining Study [0]</title>
@@ -19,6 +186,28 @@
 
 &lt;h3 id=&quot;section-1&quot;&gt;텍스트 마이닝의 핵심&lt;/h3&gt;
 &lt;p&gt;텍스트 마이닝의 핵심은 비정형 혹은 반정형의 텍스트 또는 텍스트 집합으로부터 정보 가치가 있는 항목들을 추출하여 정형 텍스트, 즉 표로 구성하는 것이라고 할 수 있다. 이 과정은 대체로 정보 가치가 있는 것으로 판단되는 항목, 혹은 단위의 인식, 그리고 특정 범위 내에서의 이 단위의 출현 빈도 계수로 구성된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;text-data--&quot;&gt;Text Data 분석의 어려움&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;텍스트 데이터는 항목(단위) 구분이 명시적이지 않음&lt;/li&gt;
+  &lt;li&gt;데이터 항목 구분이 중요한 이유는 Reductionism:
+    &lt;ul&gt;
+      &lt;li&gt;높은 단계의 사상이나 개념을 하위 단계의 요소로 세분화 하여 명확하게 정의 가능&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;기호의 성질: 기호의 자의성
+    &lt;ul&gt;
+      &lt;li&gt;심볼(Symbol)과 의미가 자꾸 변하거나 모든 사람들에게 항상 일치하지 않다. 또한 컴퓨터와 사람이 이해하는 언어 기호가 달라서 사람의 언어기호를 computer native하게 만들어 줘야함&lt;/li&gt;
+      &lt;li&gt;해결방안:
+        &lt;ol&gt;
+          &lt;li&gt;규칙을 만들고 그것에 따르게 한다. 그러나 만들기 힘들고, 모두가 만족할 수가 없다는 단점이 있다.&lt;/li&gt;
+          &lt;li&gt;경험, 데이터에 의해 컴퓨터에게 학습하게 한다. 최근 추세.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;2. 텍스트 분석의 과정&lt;/h2&gt;
 &lt;p&gt;과제의 목표 설정 $\rightarrow$ 데이터 입수 $\rightarrow$ 데이터 준비 $\rightarrow$ 데이터 탐색 $\rightarrow$ 데이터 모델링&lt;/p&gt;
