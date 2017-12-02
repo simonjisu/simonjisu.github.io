@@ -6,6 +6,7 @@ permalink: /about/
 
 <img src="{{ site.baseurl }}/assets/profile_img.jpeg" title="Profile Picture" class="profile">
 
+
 [e-mail]: simonjisu@gmail.com
 [github]: https://github.com/simonjisu
 
@@ -22,3 +23,25 @@ permalink: /about/
 * Etc
   - Github
   - Trello
+
+### Other
+* 중국어: 12년 살다옴, HSK 6급
+* 금융: CFA Lv2 취득
+
+## 관심분야 활동
+
+* 컴퓨터, 머신러닝
+  - [패스트캠퍼스] 데이터 사이언스 스쿨 (17.05 ~ 17.08)
+  - [Pycon] Pycon2017 참가 (17.08.12 ~ 13)
+  - [스터디] 매주 토요일 DSSSTUDY 진행
+* 자연어 처리
+  - [패스트캠퍼스] 파이썬을 활용한 텍스트 마이닝 (17.10.19 ~)
+  - [T-Academy] Talk-On 16차 딥러닝을 활용한 자연어 처리기술 (17.11.29)
+* 금융
+  - 금융공학회 동아리 (16.03 ~ 16.12)
+
+## 취미
+* 게임:
+  - 주로 모바일 게임, "어떤 게임이든 최소 한 번 씩은 해본다"주의
+  - Clash Royal 시작부터 현재까지 무과금 유저
+* 독서: 독서모임 '동그리'
