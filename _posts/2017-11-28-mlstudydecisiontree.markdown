@@ -32,6 +32,7 @@ date: "2017-11-28 14:48:12 +0900"
 * $p(y_k)$: 변수 $y$ 가 카테고리 $k$ 에 속할 확률
 
 본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.
+
 | f1 | f2 | f3 | y |
 |:-:|:-:|:-:|:-:|
 |0|1|1| yes|
@@ -46,6 +47,7 @@ date: "2017-11-28 14:48:12 +0900"
 기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.
 
 기초 엔트로피를 $E_{base}$ 라고 하면,
+
 |y=yes|y=no|total|
 |:-:|:-:|:-:|
 |2|4|6|
@@ -56,6 +58,7 @@ class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는
 ### [2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함
 Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.
 #### feature 1  
+
 |f1|y=yes|y=no|total|
 |:-:|:-:|:-:|:-:|
 |x=1|1|1|2|
@@ -69,6 +72,7 @@ Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로�
 
 마찬가지로 feature2 와 feature3도 똑같이 구할 수 있다.
 #### feature 2
+
 |f2|y=yes|y=no|total|
 |:-:|:-:|:-:|:-:|
 |x=1|1|3|4|
@@ -80,6 +84,7 @@ Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로�
 > $IG_2 = E_{base} - E_2 = 0.0441$
 
 #### feature 3
+
 |f3|y=yes|y=no|total|
 |:-:|:-:|:-:|:-:|
 |x=1|2|0|2|
@@ -91,6 +96,7 @@ Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로�
 >$IG_3 = E_{base} - E_3=0.2516$
 
 ### [3단계] 결과 및 선택:
+
 | f|Entropy|IG|
 |:-:|:-:|:-:|
 |base |0.9182| -  |
@@ -101,6 +107,7 @@ Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로�
 결과에 따라 첫번째 기준으로 엔트로피가 가장 많이 줄고, IG가 가장 높은 feature3를 선택하게 된다.
 
 따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.
+
 | f1 | f2 | f3 | y |
 |:-:|:-:|:-:|:-:|
 |0|1|<span style="color: #7d7ee8">1</span>| <span style="color: #7d7ee8">yes</span>|
