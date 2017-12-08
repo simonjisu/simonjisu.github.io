@@ -11,7 +11,9 @@ date: "2017-12-08 11:52:21 +0900"
 
 ## 활성화 함수(Activation Function)
 
+
 <img src="/assets/ML/nn/NN.jpg" alt="Drawing" style="width: 350px;"/>
+
 
 $$
 a = b + w_1x_1 + w_2x_2\\
@@ -309,10 +311,10 @@ $$
 
 실습할 데이터는 mnist 데이터 이며, 아래 링크로 받을 수 있다.
 
-<밑바닥 부터 시작하는 딥러닝> 책의 Github: [[<span style="color: #7d7ee8">링크</span>](
-https://github.com/WegraLee/deep-learning-from-scratch)]
+\<밑바닥 부터 시작하는 딥러닝\> 책의 Github: [[<span style="color: #7d7ee8">링크</span>](https://github.com/WegraLee/deep-learning-from-scratch)]
 
 입력층에는 784 개의 뉴런, 은닉층1에는 50개, 은닉층2에는 100개, 마지막 층에는 10개의 뉴런으로 구성되어 있는 네트워크다. 활성화 함수는 sigmoid를 쓰고, 마지막에 Softmax로 확률을 구했다. 실행단계에서 batch라는 것이 있는데, 한번에 많은 양의 데이터를 계산하면 느리니, 조금씩 데이터를 사용해서 계산하는 방법이라고 생각하면 된다.
+
 
     # 네트워크 만들기
     from dataset.mnist import load_mnist
@@ -365,6 +367,7 @@ https://github.com/WegraLee/deep-learning-from-scratch)]
         p = np.argmax(y_batch, axis=0)
         acc_count += np.sum(p == t_train[i:i+batch_size])
     print("accuracy:", acc_count / len(x_train))
+
 
 > accuracy: 0.0857833333333
 
