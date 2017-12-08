@@ -11,7 +11,7 @@ date: "2017-12-08 11:52:21 +0900"
 
 ## 활성화 함수(Activation Function)
 
-<img src="/assets/ML/nn/NN_1.jpg" alt="Drawing" style="width: 350px;"/>
+<img src="/assets/ML/nn/NN.jpg" alt="Drawing" style="width: 350px;"/>
 
 $$
 a = b + w_1x_1 + w_2x_2\\
