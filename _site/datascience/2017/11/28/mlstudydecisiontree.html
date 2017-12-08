@@ -210,25 +210,81 @@
   <li>$p(y_k)$: 변수 $y$ 가 카테고리 $k$ 에 속할 확률</li>
 </ul>
 
-<p>본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.
-| f1 | f2 | f3 | y |
-|:-:|:-:|:-:|:-:|
-|0|1|1| yes|
-|0|1|0| no|
-|1|1|1| no|
-|0|1|0| no|
-|0|0|1| no|
-|1|0|1| yes|</p>
+<p>본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f1</th>
+      <th style="text-align: center">f2</th>
+      <th style="text-align: center">f3</th>
+      <th style="text-align: center">y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">yes</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="section">계산과정</h2>
 <h3 id="base-entropy----entropy">[1 단계] base entropy: 분류가 안되었을 때의 entropy</h3>
 <p>기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.</p>
 
-<p>기초 엔트로피를 $E_{base}$ 라고 하면,
-|y=yes|y=no|total|
-|:-:|:-:|:-:|
-|2|4|6|
-class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.</p>
+<p>기초 엔트로피를 $E_{base}$ 라고 하면,</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">y=yes</th>
+      <th style="text-align: center">y=no</th>
+      <th style="text-align: center">total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">6</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.</p>
 <blockquote>
   <p>$E_{base} = -[\ P(y_{=yes})\log{P(y_{=yes})} + P(y_{=no})\log{P(y_{=no})}\ ]<br />
 = -(\frac{2}{6}\log{\frac{2}{6}}+\frac{4}{6}\log{\frac{4}{6}}) = 0.9182$</p>
@@ -237,11 +293,37 @@ class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는
 <h3 id="feature----infomation-gain">[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함</h3>
 <p>Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.</p>
 <h4 id="feature-1">feature 1</h4>
-<p>|f1|y=yes|y=no|total|
-|:-:|:-:|:-:|:-:|
-|x=1|1|1|2|
-|x=0|1|3|4|
-|total|2|4|6|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f1</th>
+      <th style="text-align: center">y=yes</th>
+      <th style="text-align: center">y=no</th>
+      <th style="text-align: center">total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">x=1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">x=0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">total</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">6</td>
+    </tr>
+  </tbody>
+</table>
 
 <blockquote>
   <p>$E_1 = -[\ P(y_{=yes},x_{=1})\log{P(y_{=yes}|x_{=1})} + P(y_{=no},x_{=1})\log{P(y_{=no}|x_{=1})} +P(y_{=yes},x_{=0})\log{P(y_{=yes}|x_{=0})} + P(y_{=no},x_{=0})\log{P(y_{=no}|x_{=0})}\ ]$
@@ -252,11 +334,37 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 
 <p>마찬가지로 feature2 와 feature3도 똑같이 구할 수 있다.</p>
 <h4 id="feature-2">feature 2</h4>
-<p>|f2|y=yes|y=no|total|
-|:-:|:-:|:-:|:-:|
-|x=1|1|3|4|
-|x=0|1|1|2|
-|total|2|4|6|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f2</th>
+      <th style="text-align: center">y=yes</th>
+      <th style="text-align: center">y=no</th>
+      <th style="text-align: center">total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">x=1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">x=0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">total</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">6</td>
+    </tr>
+  </tbody>
+</table>
 
 <blockquote>
   <p>$E_2 = -[\ \frac{1}{6}\log{\frac{1}{4}} + \frac{3}{6}\log{\frac{3}{4}} + \frac{1}{6}\log{\frac{1}{2}} + \frac{1}{6}\log{\frac{1}{2}}] = 0.8741$</p>
@@ -265,11 +373,37 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 </blockquote>
 
 <h4 id="feature-3">feature 3</h4>
-<p>|f3|y=yes|y=no|total|
-|:-:|:-:|:-:|:-:|
-|x=1|2|0|2|
-|x=0|2|2|4|
-|total|4|2|6|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f3</th>
+      <th style="text-align: center">y=yes</th>
+      <th style="text-align: center">y=no</th>
+      <th style="text-align: center">total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">x=1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">x=0</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">4</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">total</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">6</td>
+    </tr>
+  </tbody>
+</table>
 
 <blockquote>
   <p>$E_3 = -[\ \frac{2}{6}\log{\frac{2}{2}} + \frac{0}{6}\log{\frac{0}{2}} + \frac{2}{6}\log{\frac{2}{4}} + \frac{2}{6}\log{\frac{2}{4}}] = 0.6666$</p>
@@ -278,24 +412,91 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 </blockquote>
 
 <h3 id="section-1">[3단계] 결과 및 선택:</h3>
-<p>| f|Entropy|IG|
-|:-:|:-:|:-:|
-|base |0.9182| -  |
-|f1 |0.8742|0.0441|
-|f2 |0.8742|0.0441|
-|f3 |0.6667|0.2516|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f</th>
+      <th style="text-align: center">Entropy</th>
+      <th style="text-align: center">IG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">base</td>
+      <td style="text-align: center">0.9182</td>
+      <td style="text-align: center">-</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">f1</td>
+      <td style="text-align: center">0.8742</td>
+      <td style="text-align: center">0.0441</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">f2</td>
+      <td style="text-align: center">0.8742</td>
+      <td style="text-align: center">0.0441</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">f3</td>
+      <td style="text-align: center">0.6667</td>
+      <td style="text-align: center">0.2516</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>결과에 따라 첫번째 기준으로 엔트로피가 가장 많이 줄고, IG가 가장 높은 feature3를 선택하게 된다.</p>
 
-<p>따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.
-| f1 | f2 | f3 | y |
-|:-:|:-:|:-:|:-:|
-|0|1|<span style="color: #7d7ee8">1</span>| <span style="color: #7d7ee8">yes</span>|
-|0|1|<span style="color: #e87d7d">0</span>| <span style="color: #e87d7d">no</span>|
-|1|1|1| no|
-|0|1|<span style="color: #e87d7d">0</span>| <span style="color: #e87d7d">no</span>|
-|0|0|1| no|
-|1|0|<span style="color: #7d7ee8">1</span>| <span style="color: #7d7ee8">yes</span>|</p>
+<p>따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">f1</th>
+      <th style="text-align: center">f2</th>
+      <th style="text-align: center">f3</th>
+      <th style="text-align: center">y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><span style="color: #7d7ee8">1</span></td>
+      <td style="text-align: center"><span style="color: #7d7ee8">yes</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><span style="color: #e87d7d">0</span></td>
+      <td style="text-align: center"><span style="color: #e87d7d">no</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><span style="color: #e87d7d">0</span></td>
+      <td style="text-align: center"><span style="color: #e87d7d">no</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center"><span style="color: #7d7ee8">1</span></td>
+      <td style="text-align: center"><span style="color: #7d7ee8">yes</span></td>
+    </tr>
+  </tbody>
+</table>
 
 <p>남은 데이터는 아래와 같다.</p>
 
@@ -331,7 +532,7 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 <p>데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.</p>
 
 <h2 id="section-2">코드</h2>
-<p>모든 코드는 <a href="https://github.com/simonjisu/ML/tree/master/DecisionTreeModel">Github</a>, DecisionTree.py에 공개되어 있다.</p>
+<p>모든 코드는 Github<a href="https://github.com/simonjisu/ML/tree/master/DecisionTreeModel">링크</a>, DecisionTree.py에 공개되어 있다.</p>
 
 </article>
 

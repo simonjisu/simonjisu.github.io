@@ -6,9 +6,389 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Dec 2017 15:33:05 +0900</pubDate>
-    <lastBuildDate>Sat, 02 Dec 2017 15:33:05 +0900</lastBuildDate>
+    <pubDate>Thu, 07 Dec 2017 19:28:04 +0900</pubDate>
+    <lastBuildDate>Thu, 07 Dec 2017 19:28:04 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>BasicNN - 1</title>
+        <description>&lt;h1 id=&quot;numpy--neural-network-basic---1&quot;&gt;Numpy로 짜보는 Neural Network Basic - 1&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;Neural Network의 역사: &lt;a href=&quot;http://solarisailab.com/archives/1206&quot;&gt;링크&lt;/a&gt; 참고&lt;/p&gt;
+
+&lt;p&gt;Neural Network를 알려먼 퍼셉트론이란 개념을 우선 이야기 해보자&lt;/p&gt;
+&lt;h2 id=&quot;perceptron&quot;&gt;퍼셉트론(Perceptron)&lt;/h2&gt;
+&lt;p&gt;퍼셉트론(perceptron)은 인공신경망의 한 종류로서, 1957년에 코넬 항공 연구소(Cornell Aeronautical Lab)의 프랑크 로젠블라트 (Frank Rosenblatt)에 의해 고안되었다. 이것은 가장 간단한 형태의 피드포워드(Feedforward) 네트워크 - 선형분류기- 으로도 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;퍼셉트론이 동작하는 방식은 다음과 같다. 각 노드의 가중치와 입력치를 곱한 것을 모두 합한 값이 활성함수에 의해 판단되는데, 그 값이 임계치(보통 0)보다 크면 뉴런이 활성화되고 결과값으로 1을 출력한다. 뉴런이 활성화되지 않으면 결과값으로 -1을 출력한다.&lt;/p&gt;
+
+&lt;p&gt;(출처: 위키백과 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%85%89%ED%8A%B8%EB%A1%A0&quot;&gt;링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;퍼셉트론을 이야기 하면 XOR문제를 빠트릴 수가 없는데, 그 이유는 XOR문제를 푸는데 다층 퍼셉트론이 사용되며, 이게 Neural Network의 모태이기 되기 때문이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;and-or-nand&quot;&gt;AND, OR, NAND&lt;/h3&gt;
+&lt;p&gt;XOR문제를 이야기 하기 전에 AND, OR, NAND에 대해 이야기 해야한다. 어떤 이산 변수 $x_1$과 $x_2$가 있다고 생각해보자. 어떤 선형식을 통해서 아래와 같은 표를 분류하고 싶다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;어떤 선형식을 세워야 $x_1$과 $x_2$를 넣었을 때 y값이 나올까? 아래 식을 한번 보자.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y =
+\begin{cases}
+  0\ \ (b + w_1x_1 + w_2x_2 \leq 0) \\
+  1\ \ (b + w_1x_1 + w_2x_2 &gt; 0) \\
+\end{cases}&lt;/script&gt;
+
+&lt;p&gt;만약에 $b$ 가 임의의 음수이고, $w_1$, $w_2$ 값이 $b$ 보다 작거나 같은 임의의 양수면 이 식은 항상 성립한다. 각종 변수가 이를 만족 할 때 &lt;strong&gt;AND 게이트&lt;/strong&gt; 라고 부르며 코드로 이렇게 짜볼 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def AND(x1, x2):
+  x = np.array([x1, x2])
+  w = np.array([0.5, 0.5])
+  b = -0.7
+  tmp = np.sum(x*w) + b
+  if tmp &amp;lt;= 0:
+      return 0
+  else:
+      return 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;확인해보면&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+  print('AND({0},{1}) : {2}'.format(x[0], x[1], AND(x[0], x[1])))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;AND(0,0) : 0&lt;/p&gt;
+
+  &lt;p&gt;AND(0,1) : 0&lt;/p&gt;
+
+  &lt;p&gt;AND(1,0) : 0&lt;/p&gt;
+
+  &lt;p&gt;AND(1,1) : 1&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위에 있는 식을를 그림으로 표현하면 아래와 같은 그림이다. ($b$는 빠졌지만 위에다가 같이 더해준다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_1.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 OR 게이트와, NAND게이트도 한 번 생각해보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NAND 게이트&lt;/strong&gt; 는 아래와 같은 표로 나타낼 수 있다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def NAND(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([-0.5, -0.5])
+    b = 0.7
+    tmp = np.sum(x*w) + b
+    if tmp &amp;lt;= 0:
+        return 0
+    else:
+        return 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;결과 값을 측정해보면&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('NAND({0},{1}) : {2}'.format(x[0], x[1], NAND(x[0], x[1])))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;NAND(0,0) : 1&lt;/p&gt;
+
+  &lt;p&gt;NAND(0,1) : 1&lt;/p&gt;
+
+  &lt;p&gt;NAND(1,0) : 1&lt;/p&gt;
+
+  &lt;p&gt;NAND(1,1) : 0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;마찬가지로 &lt;strong&gt;OR 게이트&lt;/strong&gt; 는 아래와 같은 표로 나타낼 수 있다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def OR(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([0.5, 0.5])
+    b = -0.2
+    tmp = np.sum(x*w) + b
+    if tmp &amp;lt;= 0:
+        return 0
+    else:
+        return 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;결과 값을 확인해보면&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('OR({0},{1}) : {2}'.format(x[0], x[1], OR(x[0], x[1])))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;OR(0,0) : 0&lt;/p&gt;
+
+  &lt;p&gt;OR(0,1) : 1&lt;/p&gt;
+
+  &lt;p&gt;OR(1,0) : 1&lt;/p&gt;
+
+  &lt;p&gt;OR(1,1) : 1&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이제 정리해서 각각의 게이트가 제대로 선형으로 분리 되었는지 확인해보자. x축과 y축은 각각 $x_1$ 과 $x_2$를 나타내며, 빨간 동그라미는 1, X로 표시된 곳은 0이라는 뜻이다. 우리의 예시 $(b=-0.7\ w_1, w_2=0.5)$ AND 게이트에서 $x_1$이 0일때 절편인 $x_2$가 1.2가 되니까 맞게 분류하는 것을 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_2.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 800px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;xor-&quot;&gt;XOR 문제&lt;/h3&gt;
+&lt;p&gt;XOR 문제란 어떤 선형식으로 이산 변수 $x_1$과 $x_2$에 대해서 둘중에 하나라도 1이 되면 결과 값으로 1를 반환하, 둘다 0이거나 1이면 0을 반환하는 식을 찾는 것이다.&lt;/p&gt;
+
+&lt;p&gt;표로 그려보면 아래와 같은 문제다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;그림으로 보면 아래와 같은 문제를 푸는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_3.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;아까와 같은 방법으로 단일 선으로 이 문제를 풀수 있을까?&lt;/p&gt;
+
+&lt;p&gt;절대 풀 수 없다. 그래서 나타난 것이 게이트를 겹쳐서 올리는 것이다. 아래 그림을 보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_4.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이런 구조로 게이트를 짜면 어떻게 될까? 예를 들어 $x_1, x_2 = 0$ 이라고 가정해보자. $x_1$과 $x_2$가 NAND 게이트를 거치면 1, OR 게이트를 거치면 0이 나온다. 1과 0이 AND 게이트를 거치면 0이 된다! 마찬가지로 해보면 XOR 문제를 풀 수가 있다! 이처럼 게이트 층을 두개 만들어 XOR문제를 풀었으며, 이것이 &lt;strong&gt;다층 퍼셉트론&lt;/strong&gt; 의 기원이라고 말 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;표로 그려보면 아래와 같다. $s_1$ 과 $s_2$는 각각 NAND 게이트와 OR 게이트를 뜻하면 최종단에 AND 게이트를 거쳐 y 값을 구할 수 있다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$s_1$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$s_2$&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;코드로 구현하느 것은 아까 만든 코드를 나열하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def XOR(x1, x2):
+    s1 = NAND(x1, x2)
+    s2 = OR(x1, x2)
+    y = AND(s1, s2)
+    return y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;확인해보면&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('XOR({0},{1}) : {2}'.format(x[0], x[1], XOR(x[0], x[1])))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;XOR(0,0) : 0&lt;/p&gt;
+
+  &lt;p&gt;XOR(0,1) : 1&lt;/p&gt;
+
+  &lt;p&gt;XOR(1,0) : 1&lt;/p&gt;
+
+  &lt;p&gt;XOR(1,1) : 0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Rosenblatt이 제시한 정확한 단일 퍼셉트로은 아래의 그림과 같다. Input과 Weight를 곱해서 더한 다음에 Activation function을 적용해서 그 값이 0보다 크면 1 작으면 -1를 반환하는 Feedforward 선형 분류기의 구조다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_5.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이는 XOR 문제를 해결 할 수 없었고, Multi-Layer Perceptrons이 1986년에 등장 했는데 중간에 Hidden 층을 더 쌓으면서 XOR 문제를 해결하였다.&lt;/p&gt;
+
+&lt;p&gt;다음 시간에는 Feedforward과정을 자세히 알아본다.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 07 Dec 2017 17:54:18 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2017/12/07/basicnn_1.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/07/basicnn_1.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
+    
+      <item>
+        <title>[T-academy] 토크온 세미나 16차 딥러닝을 활용한 자연어처리 기술 참석후기</title>
+        <description>
+</description>
+        <pubDate>Mon, 04 Dec 2017 15:37:42 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2017/12/04/tacademynlpwithdeeplearning.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/04/tacademynlpwithdeeplearning.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>ML-DecisionTree</title>
@@ -45,25 +425,81 @@
   &lt;li&gt;$p(y_k)$: 변수 $y$ 가 카테고리 $k$ 에 속할 확률&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.
-| f1 | f2 | f3 | y |
-|:-:|:-:|:-:|:-:|
-|0|1|1| yes|
-|0|1|0| no|
-|1|1|1| no|
-|0|1|0| no|
-|0|0|1| no|
-|1|0|1| yes|&lt;/p&gt;
+&lt;p&gt;본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f3&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;계산과정&lt;/h2&gt;
 &lt;h3 id=&quot;base-entropy----entropy&quot;&gt;[1 단계] base entropy: 분류가 안되었을 때의 entropy&lt;/h3&gt;
 &lt;p&gt;기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.&lt;/p&gt;
 
-&lt;p&gt;기초 엔트로피를 $E_{base}$ 라고 하면,
-|y=yes|y=no|total|
-|:-:|:-:|:-:|
-|2|4|6|
-class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.&lt;/p&gt;
+&lt;p&gt;기초 엔트로피를 $E_{base}$ 라고 하면,&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;$E_{base} = -[\ P(y_{=yes})\log{P(y_{=yes})} + P(y_{=no})\log{P(y_{=no})}\ ]&lt;br /&gt;
 = -(\frac{2}{6}\log{\frac{2}{6}}+\frac{4}{6}\log{\frac{4}{6}}) = 0.9182$&lt;/p&gt;
@@ -72,11 +508,37 @@ class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는
 &lt;h3 id=&quot;feature----infomation-gain&quot;&gt;[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함&lt;/h3&gt;
 &lt;p&gt;Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.&lt;/p&gt;
 &lt;h4 id=&quot;feature-1&quot;&gt;feature 1&lt;/h4&gt;
-&lt;p&gt;|f1|y=yes|y=no|total|
-|:-:|:-:|:-:|:-:|
-|x=1|1|1|2|
-|x=0|1|3|4|
-|total|2|4|6|&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x=1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x=0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;total&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;$E_1 = -[\ P(y_{=yes},x_{=1})\log{P(y_{=yes}|x_{=1})} + P(y_{=no},x_{=1})\log{P(y_{=no}|x_{=1})} +P(y_{=yes},x_{=0})\log{P(y_{=yes}|x_{=0})} + P(y_{=no},x_{=0})\log{P(y_{=no}|x_{=0})}\ ]$
@@ -87,11 +549,37 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 
 &lt;p&gt;마찬가지로 feature2 와 feature3도 똑같이 구할 수 있다.&lt;/p&gt;
 &lt;h4 id=&quot;feature-2&quot;&gt;feature 2&lt;/h4&gt;
-&lt;p&gt;|f2|y=yes|y=no|total|
-|:-:|:-:|:-:|:-:|
-|x=1|1|3|4|
-|x=0|1|1|2|
-|total|2|4|6|&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x=1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x=0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;total&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;$E_2 = -[\ \frac{1}{6}\log{\frac{1}{4}} + \frac{3}{6}\log{\frac{3}{4}} + \frac{1}{6}\log{\frac{1}{2}} + \frac{1}{6}\log{\frac{1}{2}}] = 0.8741$&lt;/p&gt;
@@ -100,11 +588,37 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 &lt;/blockquote&gt;
 
 &lt;h4 id=&quot;feature-3&quot;&gt;feature 3&lt;/h4&gt;
-&lt;p&gt;|f3|y=yes|y=no|total|
-|:-:|:-:|:-:|:-:|
-|x=1|2|0|2|
-|x=0|2|2|4|
-|total|4|2|6|&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f3&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x=1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;x=0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;total&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;$E_3 = -[\ \frac{2}{6}\log{\frac{2}{2}} + \frac{0}{6}\log{\frac{0}{2}} + \frac{2}{6}\log{\frac{2}{4}} + \frac{2}{6}\log{\frac{2}{4}}] = 0.6666$&lt;/p&gt;
@@ -113,24 +627,91 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;[3단계] 결과 및 선택:&lt;/h3&gt;
-&lt;p&gt;| f|Entropy|IG|
-|:-:|:-:|:-:|
-|base |0.9182| -  |
-|f1 |0.8742|0.0441|
-|f2 |0.8742|0.0441|
-|f3 |0.6667|0.2516|&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Entropy&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;IG&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;base&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.9182&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;f1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.8742&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.0441&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;f2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.8742&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.0441&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;f3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.6667&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.2516&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;결과에 따라 첫번째 기준으로 엔트로피가 가장 많이 줄고, IG가 가장 높은 feature3를 선택하게 된다.&lt;/p&gt;
 
-&lt;p&gt;따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.
-| f1 | f2 | f3 | y |
-|:-:|:-:|:-:|:-:|
-|0|1|&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;| &lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;|
-|0|1|&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;| &lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;|
-|1|1|1| no|
-|0|1|&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;| &lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;|
-|0|0|1| no|
-|1|0|&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;| &lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;|&lt;/p&gt;
+&lt;p&gt;따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;f3&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;y&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;남은 데이터는 아래와 같다.&lt;/p&gt;
 
@@ -166,7 +747,7 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 &lt;p&gt;데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.&lt;/p&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;코드&lt;/h2&gt;
-&lt;p&gt;모든 코드는 &lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/DecisionTreeModel&quot;&gt;Github&lt;/a&gt;, DecisionTree.py에 공개되어 있다.&lt;/p&gt;
+&lt;p&gt;모든 코드는 Github&lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/DecisionTreeModel&quot;&gt;링크&lt;/a&gt;, DecisionTree.py에 공개되어 있다.&lt;/p&gt;
 </description>
         <pubDate>Tue, 28 Nov 2017 14:48:12 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html</link>

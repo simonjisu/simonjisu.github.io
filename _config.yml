@@ -60,6 +60,9 @@ descriptions:
   - cat: Study_Analysis
     desc: "공부 및 분석"
 
+  - cat: Stock
+    desc: "주식"
+
   - cat: Algorithm
     desc: "알고리즘 공부"
 
