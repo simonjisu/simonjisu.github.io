@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>NUMPY with NN - 2</title>
-  <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 2저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자.">
+  <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 2">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2017">
@@ -41,7 +41,7 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 2저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자." />
+  <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 2" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 2" />
@@ -56,7 +56,7 @@
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 2">
-  <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 2저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자.">
+  <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 2">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -179,6 +179,7 @@
 <article class="post-content">
   <h1 id="numpy--neural-network-basic---2">Numpy로 짜보는 Neural Network Basic - 2</h1>
 <hr />
+
 <p>저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자.</p>
 
 <h2 id="activation-function">활성화 함수(Activation Function)</h2>
@@ -276,7 +277,9 @@ y = h(a)</script>
 
 <p>Input에서 Hidden1 층으로 가는 과정을 행렬로 표시해볼 것이다.</p>
 
-<p>가중치 $w$ 의 표기법은 $w_{오른쪽\ 뉴런위치,\ 왼쪽\ 뉴런위치}^{몇번째\ 층}$ 로써, 첫번째 층에서 입력층 $x_1$ 뉴런에서 히든층1 $a_2^{(1)}$ 방향인 가중치는 $w_{21}^{(1)}$ 이라고 표기합니다.</p>
+<p>가중치 $w$ 의 표기법은 $w_{오른쪽\ 뉴런위치,\ 왼쪽\ 뉴런위치}^{몇번째\ 층}$ 로써,</p>
+
+<p>첫번째 층에서 입력층 $x_1$ 뉴런에서 히든층1 $a_2^{(1)}$ 방향인 가중치는 $w_{21}^{(1)}$ 이라고 표기한다.</p>
 
 <p>따라서 각각의 가중치 합을 구하면,</p>
 

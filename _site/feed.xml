@@ -6,14 +6,15 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Dec 2017 16:36:48 +0900</pubDate>
-    <lastBuildDate>Fri, 08 Dec 2017 16:36:48 +0900</lastBuildDate>
+    <pubDate>Fri, 08 Dec 2017 16:41:42 +0900</pubDate>
+    <lastBuildDate>Fri, 08 Dec 2017 16:41:42 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
         <title>NUMPY with NN - 2</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---2&quot;&gt;Numpy로 짜보는 Neural Network Basic - 2&lt;/h1&gt;
 &lt;hr /&gt;
+
 &lt;p&gt;저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자.&lt;/p&gt;
 
 &lt;h2 id=&quot;activation-function&quot;&gt;활성화 함수(Activation Function)&lt;/h2&gt;
@@ -111,7 +112,9 @@ y = h(a)&lt;/script&gt;
 
 &lt;p&gt;Input에서 Hidden1 층으로 가는 과정을 행렬로 표시해볼 것이다.&lt;/p&gt;
 
-&lt;p&gt;가중치 $w$ 의 표기법은 $w_{오른쪽\ 뉴런위치,\ 왼쪽\ 뉴런위치}^{몇번째\ 층}$ 로써, 첫번째 층에서 입력층 $x_1$ 뉴런에서 히든층1 $a_2^{(1)}$ 방향인 가중치는 $w_{21}^{(1)}$ 이라고 표기합니다.&lt;/p&gt;
+&lt;p&gt;가중치 $w$ 의 표기법은 $w_{오른쪽\ 뉴런위치,\ 왼쪽\ 뉴런위치}^{몇번째\ 층}$ 로써,&lt;/p&gt;
+
+&lt;p&gt;첫번째 층에서 입력층 $x_1$ 뉴런에서 히든층1 $a_2^{(1)}$ 방향인 가중치는 $w_{21}^{(1)}$ 이라고 표기한다.&lt;/p&gt;
 
 &lt;p&gt;따라서 각각의 가중치 합을 구하면,&lt;/p&gt;
 
