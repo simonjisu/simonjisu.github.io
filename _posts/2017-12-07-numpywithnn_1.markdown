@@ -7,7 +7,7 @@ date: "2017-12-07 17:54:18 +0900"
 ---
 # Numpy로 짜보는 Neural Network Basic - 1
 ---
-Neural Network의 역사: [링크](http://solarisailab.com/archives/1206) 참고
+Neural Network의 역사: [<span style="color: #7d7ee8">링크</span>](http://solarisailab.com/archives/1206) 참고
 
 Neural Network를 알려먼 퍼셉트론이란 개념을 우선 이야기 해보자
 ## 퍼셉트론(Perceptron)
@@ -15,7 +15,7 @@ Neural Network를 알려먼 퍼셉트론이란 개념을 우선 이야기 해보
 
 퍼셉트론이 동작하는 방식은 다음과 같다. 각 노드의 가중치와 입력치를 곱한 것을 모두 합한 값이 활성함수에 의해 판단되는데, 그 값이 임계치(보통 0)보다 크면 뉴런이 활성화되고 결과값으로 1을 출력한다. 뉴런이 활성화되지 않으면 결과값으로 -1을 출력한다.
 
-(출처: 위키백과 [링크](https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%85%89%ED%8A%B8%EB%A1%A0))
+(출처: 위키백과 [<span style="color: #7d7ee8">링크</span>](https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%85%89%ED%8A%B8%EB%A1%A0))
 
 퍼셉트론을 이야기 하면 XOR문제를 빠트릴 수가 없는데, 그 이유는 XOR문제를 푸는데 다층 퍼셉트론이 사용되며, 이게 Neural Network의 모태이기 되기 때문이다.
 
@@ -196,7 +196,7 @@ XOR 문제란 어떤 선형식으로 이산 변수 $x_1$과 $x_2$에 대해서 �
 >
 >XOR(1,1) : 0
 
-Rosenblatt이 제시한 정확한 단일 퍼셉트로은 아래의 그림과 같다. Input과 Weight를 곱해서 더한 다음에 Activation function을 적용해서 그 값이 0보다 크면 1 작으면 -1를 반환하는 Feedforward 선형 분류기의 구조다.
+Rosenblatt이 제시한 정확한 단일 퍼셉트론은 아래의 그림과 같다. Input과 Weight를 곱해서 더한 다음에 Activation function을 적용해서 그 값이 0보다 크면 1 작으면 -1를 반환하는 Feedforward 선형 분류기의 구조다.
 
 <img src="/assets/ML/perceptron/perceptron_5.png" alt="Drawing" style="width: 600px;"/>
 

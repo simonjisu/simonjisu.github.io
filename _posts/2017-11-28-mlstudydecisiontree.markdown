@@ -136,4 +136,4 @@ Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로�
 데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.
 
 ## 코드
-모든 코드는 Github[링크](https://github.com/simonjisu/ML/tree/master/DecisionTreeModel), DecisionTree.py에 공개되어 있다.
+모든 코드는 Github[<span style="color: #7d7ee8">링크</span>](https://github.com/simonjisu/ML/tree/master/DecisionTreeModel), DecisionTree.py에 공개되어 있다.
