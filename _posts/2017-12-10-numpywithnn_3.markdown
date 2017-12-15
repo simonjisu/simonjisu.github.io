@@ -195,5 +195,78 @@ $\eta$ 는 학습률(learning rate)라고 하며 갱신하는 양을 나타낸�
 
   1~3 단계를 반복한다.
 
+### 2층 Neural Network 실습
 
-2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 **오차역전파** 로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.
+<img src="/assets/ML/nn/NN_3.png" alt="Drawing" style="width: 350px;"/>
+
+* Input Size: m = 3
+* Hidden Size: h = 4
+* Output Size: o = 3
+$$ X_{(batch,\ m)} \cdot W1_{(m,\ h)} + B1_{(batch,\ h)} \rightarrow A1_{(batch,\ h)} $$
+$$ sigmoid(A1_{(batch,\ h)}) \rightarrow Z1_{(batch,\ h)}$$
+$$ Z1_{(batch,\ h)} \cdot W1_{(h,\ o)} + B1_{(batch,\ o)} \rightarrow A2_{(batch,\ o)} $$
+$$ \sigma(A2_{(batch,\ o)}) \rightarrow Y_{(batch,\ o)}$$
+
+이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [[<span style="color: #7d7ee8">여기</span>](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py)]서 가져왔다.
+
+    (x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+
+    train_loss_list = []
+    train_acc_list = []
+    test_acc_list = []
+
+    #highper parameter
+    epoch_num = 1
+    train_size = x_train.shape[0]
+    batch_size = 100
+    alpha = 0.1  # learning rate
+    epsilon = 1e-6
+
+    # 1에폭당 반복 수
+    iter_per_epoch = max(train_size / batch_size, 1)
+    nn = TwoLayer(input_size=784, hidden_size=100, output_size=10)
+
+    start = time.time()
+    for epoch in range(epoch_num):
+        # get mini batch:
+        batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
+        x_batch = x_train[batch_mask]
+        y_batch = y_train[batch_mask]
+
+        # gradient 계산
+        grad = nn.num_gradient(x_batch, y_batch)
+
+        # update
+        for key in ['W1', 'b1', 'W2', 'b2']:
+            nn.params[key] = nn.params[key] - alpha * grad[key]
+
+        # record
+        loss = nn.loss(x_batch, y_batch)
+        train_loss_list.append(loss)
+
+        # 1에폭당 정확도 계산
+        if epoch % iter_per_epoch == 0:
+            train_acc = nn.accuracy(x_train, y_train)
+            test_acc = nn.accuracy(x_test, y_test)
+            train_acc_list.append(train_acc)
+            test_acc_list.append(test_acc)
+            print('trian acc: {0:.5f} | test acc: {1:.5f}'.format(train_acc, test_acc))
+
+        # stop point
+        if epoch > 10:
+            stop_point = np.sum(np.diff(np.array(train_loss_list[i-11:])) < epsilon)
+            if stop_point == 10:
+                print(epoch)
+                break
+
+    end = time.time()
+    print('total time:', (end - start))
+
+> trian acc: 0.10442 | test acc: 0.10280
+> 
+> total time: 175.5657160282135
+
+
+2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 168초 걸렸다.
+
+따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 **오차역전파** 방법으로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.

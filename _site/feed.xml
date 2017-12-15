@@ -6,9 +6,337 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Dec 2017 21:22:36 +0900</pubDate>
-    <lastBuildDate>Sun, 10 Dec 2017 21:22:36 +0900</lastBuildDate>
+    <pubDate>Fri, 15 Dec 2017 15:42:36 +0900</pubDate>
+    <lastBuildDate>Fri, 15 Dec 2017 15:42:36 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>NUMPY with NN - 4</title>
+        <description>&lt;h1 id=&quot;numpy--neural-network-basic---4&quot;&gt;Numpy로 짜보는 Neural Network Basic - 4&lt;/h1&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;backpropagation&quot;&gt;오차역전파(Backpropagation)&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;연쇄법칙의 원리&lt;/h3&gt;
+&lt;p&gt;합성 함수의 미분은 합성 함수를 구성하는 각 함수의 미분의 곱으로 나타낼 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} z = t^2\newline t = x + y \end{cases}&lt;/script&gt;
+
+&lt;p&gt;위 식의 미분을 나타내면
+&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;따라서 $z$, $t$ 식을 미분하게 되면&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{z}}{\partial{t}} = 2t&lt;/script&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{t}}{\partial{x}}=1&lt;/script&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\therefore\  \frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}} = 2t \cdot 1 = 2(x+y)&lt;/script&gt;
+
+&lt;p&gt;우리의 목적은 $L$ 에 대해서 $W$ 를 미분하여 조금씩 업데이트 하는 것임으로 아래와 같다고 할 수 있다.
+&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{\partial{Y}}{\partial{W}}&lt;/script&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;덧셈노드와 곱셈노드의 역전파&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_add.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(그림출처: ratsgo님의 블로그[&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;])&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} L(z) \newline z = x + y \end{cases}&lt;/script&gt;
+
+&lt;p&gt;각각 미분하게 되면&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
+    \dfrac{\partial{L}}{\partial{z}} \newline
+    \dfrac{\partial{z}}{\partial{x}} =
+    \dfrac{\partial{z}}{\partial{y}} = 1
+  \end{cases}&lt;/script&gt;
+
+&lt;p&gt;따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
+    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \newline
+    \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1
+  \end{cases}&lt;/script&gt;
+
+&lt;p&gt;따라서 &lt;strong&gt;덧셈&lt;/strong&gt; 노드는 들어온 신호($\frac{\partial{L}}{\partial{z}}$)를 &lt;strong&gt;그대로&lt;/strong&gt; 보낸다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_multiply.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(그림출처: ratsgo님의 블로그[&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;])&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} L(z) \newline z = x \times y \end{cases}&lt;/script&gt;
+
+&lt;p&gt;각각 미분하게 되면&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
+    \dfrac{\partial{L}}{\partial{z}} \newline
+    \dfrac{\partial{z}}{\partial{x}} = y \newline
+    \dfrac{\partial{z}}{\partial{y}} = x
+  \end{cases}&lt;/script&gt;
+
+&lt;p&gt;따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
+    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \newline
+    \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot x
+  \end{cases}&lt;/script&gt;
+
+&lt;p&gt;따라서 &lt;strong&gt;곱셈&lt;/strong&gt; 노드는 들어온 신호에 서로 바뀐 입력신호 값을 &lt;strong&gt;곱해서&lt;/strong&gt; 하류로 보낸다.&lt;/p&gt;
+
+&lt;h2 id=&quot;sigmoid---&quot;&gt;Sigmoid 계층의 순전파와 역전파&lt;/h2&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y = \frac{1}{1+\exp(-x)}&lt;/script&gt;
+
+&lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_forward.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_back.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_back2.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;section-2&quot;&gt;역전파 1단계 ( / )&lt;/h4&gt;
+
+  &lt;p&gt;”/” 연산은 입력변수 x를 $\dfrac{1}{x}$ 로 바꿔준다. 즉 $f_1(x) = \dfrac{1}{x}$ 가 된다.&lt;/p&gt;
+
+  &lt;p&gt;미분을 하게 되면 $\dfrac{\partial{f_1}}{\partial{x}} = -\dfrac{1}{x^2} = -y^2$가 되서 입력신호를 하류로 보낸다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;section-3&quot;&gt;역전파 2단계 ( + )&lt;/h4&gt;
+
+  &lt;p&gt;”+” 연산은 신호를 그대로 하류로 흘러 보낸다&lt;/p&gt;
+
+  &lt;h4 id=&quot;exp&quot;&gt;역전파 3단계 (exp)&lt;/h4&gt;
+
+  &lt;p&gt;“exp”연산은 $f_2(x) = exp(x)$ 이며, 미분도 $\dfrac{\partial{f_2}}{\partial{x}} = exp(x)$ 로 그대로 곱해서 하류로 보낸다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;x-&quot;&gt;역전파 4단계 ( x )&lt;/h4&gt;
+
+  &lt;p&gt;”$\times$”연산은 서로 바뀐 입력신호의 값을 곱해서 보낸다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;따라서, 최종적으로 시그모이드의 역전파 출력값은 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_last.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{eqnarray}
+&amp;&amp;\dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x) \\
+&amp;=&amp; \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
+&amp;=&amp; \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
+&amp;=&amp; \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
+\end{eqnarray} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;이것을 코드로 구현하게 되면&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Sigmoid(object):
+    def __init__(self):
+        self.out = None  # 역전파시 곱해야 하기 때문에 저장해둔다
+
+    def forward(self, x):
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
+
+        return out
+
+    def backward(self, dout):
+        dx = dout * self.out * (1 - self.out)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;affine--affine-transform&quot;&gt;Affine 계층과 Affine Transform&lt;/h2&gt;
+&lt;p&gt;기하학에서 신경망 순전파 때 수행하는 행렬의 내적을 Affine Transform이라 하며, Affine 계층은 어파인 변환을 수행 처리하는 계층이다.&lt;/p&gt;
+
+&lt;p&gt;위키백과[&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%95%84%ED%95%80_%EB%B3%80%ED%99%98&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;]&lt;/p&gt;
+
+&lt;h3 id=&quot;forward-1&quot;&gt;Forward&lt;/h3&gt;
+
+&lt;p&gt;$A = X \cdot W + B$&lt;/p&gt;
+
+&lt;h3 id=&quot;backward-1&quot;&gt;Backward&lt;/h3&gt;
+
+&lt;p&gt;$\begin{cases}
+    \dfrac{\partial{L}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot W^T \newline
+    \dfrac{\partial{L}}{\partial{W}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{W}} = X^T \cdot \dfrac{\partial{L}}{\partial{A}} \newline
+    \dfrac{\partial{L}}{\partial{B}} = 1
+  \end{cases}$&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Affine(object):
+    def __init__(self, W, b):
+        self.W = W
+        self.b = b
+        self.x = None
+        self.dW = None
+        self.db = None
+
+    def forward(self, x):
+        self.x = x
+        out = np.dot(self.x, self.W) + self.b
+
+        return out
+
+    def backward(self, dout):
+        dx = np.dot(dout, self.W.T)
+        self.dW = np.dot(self.x.T, dout)
+        self.db = np.sum(self.b, axis=0)
+
+        return dx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;backpropogation--&quot;&gt;Backpropogation 사용한 학습구현&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import collections
+from layers import *
+
+class TwoLayer(object):
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
+        self.params = {}
+        self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
+        self.params['b1'] = np.zeros(hidden_size)
+        self.params['W2'] = weight_init_std * np.random.randn(hidden_size, output_size)
+        self.params['b2'] = np.zeros(hidden_size)
+
+        # 계층 생성
+        self.layers = collections.OrderedDict()
+        self.layers['Affine1'] = Affine(self.params['W1'], self.params['b1'])
+        self.layers['ReLu1'] = ReLu()
+        self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
+
+        self.lastLayer = SoftmaxWithLoss()
+
+    def predict(self, x):
+        for layer in self.layers.values():
+            x = layer.forward(x)
+
+        return x
+
+    # x: 입력 데이터, t: 정답 데이터
+    def loss(self, x, t):
+        y = self.predict(x)
+        return self.lastLayer.forward(y, t)
+
+    def accuracy(self, x, t):
+        y = self.predict(x)
+        y = np.argmax(y, axis=1)
+        if t.ndim != 1: t = np.argmax(t, axis=1)
+
+        acc = np.sum(y == t) / float(x.shape[0])
+        return acc
+
+    def gradient(self, x, t):
+        # forward
+        self.loss(x, t)
+
+        # backward
+        dout = 1
+        dout = self.lastLayer.backward(dout)
+
+        layers = list(self.layers.values())
+        layers.reverse()
+
+        for layer in layers:
+            dout = layer.backward(dout)
+
+        # save
+        grads = {}
+        grads['W1'] = self.layers['Affine1'].dW
+        grads['b1'] = self.layers['Affine1'].db
+        grads['W2'] = self.layers['Affine2'].dW
+        grads['b2'] = self.layers['Affine2'].db
+
+        return grads
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;TwoLayer Neural Network 를 생성하는 객체는 따로 파일에 저장하고 불러내는 것이 좋다. OrderedDict은 dictionary 형태로 입력 순서를 기억해주는 좋은 함수다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from dataset.mnist import load_mnist
+from two_layer_nn import TwoLayer
+
+# data_loading
+(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+
+#highper parameter
+epoch_num = 10000
+train_size = x_train.shape[0]
+batch_size = 100
+alpha = 0.01  # learning rate
+epsilon = 1e-6
+
+# 1에폭당 반복 수
+iter_per_epoch = max(train_size / batch_size, 1)
+
+start = time.time()
+nn = TwoLayer(input_size=784, hidden_size=100, output_size=10, weight_init_std=0.01)
+for epoch in range(epoch_num):
+    # get mini batch:
+    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
+    x_batch = x_train[batch_mask]
+    y_batch = y_train[batch_mask]
+
+    # gradient 계산
+    grad = nn.gradient(x_batch, y_batch)
+
+    # update
+    for key in ['W1', 'b1', 'W2', 'b2']:
+        nn.params[key] = nn.params[key] - alpha * grad[key]
+
+    # record
+    loss = nn.loss(x_batch, y_batch)
+    train_loss_list.append(loss)
+
+    # 1에폭당 정확도 계산
+    if epoch % iter_per_epoch == 0:
+        train_acc = nn.accuracy(x_train, y_train)
+        test_acc = nn.accuracy(x_test, y_test)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+        print('# {0} | trian acc: {1:.5f} | test acc: {2:.5f}'.format(epoch, train_acc, test_acc))
+
+end = time.time()
+print('total time:', (end - start))
+
+# 결과
+# 0 | trian acc: 0.10775 | test acc: 0.10700
+# 600 | trian acc: 0.10775 | test acc: 0.10700
+# 1200 | trian acc: 0.10775 | test acc: 0.10700
+# 1800 | trian acc: 0.10775 | test acc: 0.10700
+# 2400 | trian acc: 0.10775 | test acc: 0.10700
+# 3000 | trian acc: 0.10775 | test acc: 0.10700
+# 3600 | trian acc: 0.10775 | test acc: 0.10700
+# 4200 | trian acc: 0.10775 | test acc: 0.10700
+# 4800 | trian acc: 0.10775 | test acc: 0.10700
+# 5400 | trian acc: 0.10775 | test acc: 0.10700
+# 6000 | trian acc: 0.10775 | test acc: 0.10700
+# 6600 | trian acc: 0.10775 | test acc: 0.10700
+# 7200 | trian acc: 0.10775 | test acc: 0.10700
+# 7800 | trian acc: 0.10775 | test acc: 0.10700
+# 8400 | trian acc: 0.10775 | test acc: 0.10700
+# 9000 | trian acc: 0.10775 | test acc: 0.10700
+# 9600 | trian acc: 0.10775 | test acc: 0.10700
+# total time: 61.07117795944214
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;학습은 전혀 안되지만 수치 미분보다 더 빠르게 진행된다는 것을 알 수 있다.&lt;/p&gt;
+
+&lt;p&gt;왜 학습이 안됐을까에 대해서는 담은 시간에 이야기 하겠다.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 15 Dec 2017 12:21:48 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>NUMPY with NN - 3</title>
@@ -235,7 +563,93 @@ print(dW)
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 &lt;strong&gt;오차역전파&lt;/strong&gt; 로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.&lt;/p&gt;
+&lt;h3 id=&quot;neural-network-&quot;&gt;2층 Neural Network 실습&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_3.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 350px;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Input Size: m = 3&lt;/li&gt;
+  &lt;li&gt;Hidden Size: h = 4&lt;/li&gt;
+  &lt;li&gt;Output Size: o = 3
+&lt;script type=&quot;math/tex&quot;&gt;X_{(batch,\ m)} \cdot W1_{(m,\ h)} + B1_{(batch,\ h)} \rightarrow A1_{(batch,\ h)}&lt;/script&gt;
+&lt;script type=&quot;math/tex&quot;&gt;sigmoid(A1_{(batch,\ h)}) \rightarrow Z1_{(batch,\ h)}&lt;/script&gt;
+&lt;script type=&quot;math/tex&quot;&gt;Z1_{(batch,\ h)} \cdot W1_{(h,\ o)} + B1_{(batch,\ o)} \rightarrow A2_{(batch,\ o)}&lt;/script&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\sigma(A2_{(batch,\ o)}) \rightarrow Y_{(batch,\ o)}&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [&lt;a href=&quot;https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;]서 가져왔다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+
+#highper parameter
+epoch_num = 1
+train_size = x_train.shape[0]
+batch_size = 100
+alpha = 0.1  # learning rate
+epsilon = 1e-6
+
+# 1에폭당 반복 수
+iter_per_epoch = max(train_size / batch_size, 1)
+nn = TwoLayer(input_size=784, hidden_size=100, output_size=10)
+
+start = time.time()
+for epoch in range(epoch_num):
+    # get mini batch:
+    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
+    x_batch = x_train[batch_mask]
+    y_batch = y_train[batch_mask]
+
+    # gradient 계산
+    grad = nn.num_gradient(x_batch, y_batch)
+
+    # update
+    for key in ['W1', 'b1', 'W2', 'b2']:
+        nn.params[key] = nn.params[key] - alpha * grad[key]
+
+    # record
+    loss = nn.loss(x_batch, y_batch)
+    train_loss_list.append(loss)
+
+    # 1에폭당 정확도 계산
+    if epoch % iter_per_epoch == 0:
+        train_acc = nn.accuracy(x_train, y_train)
+        test_acc = nn.accuracy(x_test, y_test)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+        print('trian acc: {0:.5f} | test acc: {1:.5f}'.format(train_acc, test_acc))
+
+    # stop point
+    if epoch &amp;gt; 10:
+        stop_point = np.sum(np.diff(np.array(train_loss_list[i-11:])) &amp;lt; epsilon)
+        if stop_point == 10:
+            print(epoch)
+            break
+
+end = time.time()
+print('total time:', (end - start))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;trian acc: 0.10442&lt;/td&gt;
+        &lt;td&gt;test acc: 0.10280&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;p&gt;total time: 175.5657160282135&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 168초 걸렸다.&lt;/p&gt;
+
+&lt;p&gt;따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 &lt;strong&gt;오차역전파&lt;/strong&gt; 방법으로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.&lt;/p&gt;
 </description>
         <pubDate>Sun, 10 Dec 2017 14:06:55 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2017/12/10/numpywithnn_3.html</link>
@@ -2196,76 +2610,6 @@ def quicksort(lst):
         
         
         <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;h2 id=&quot;adding-new-posts&quot;&gt;Adding New Posts&lt;/h2&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;h3 id=&quot;tags-and-categories&quot;&gt;Tags and Categories&lt;/h3&gt;
-
-&lt;p&gt;If you list one or more categories or tags in the front matter of your post, they will be included with the post on the page as links. Clicking the link will bring you to an auto-generated archive page for the category or tag, created using the &lt;a href=&quot;https://github.com/jekyll/jekyll-archives&quot;&gt;jekyll-archive&lt;/a&gt; gem.&lt;/p&gt;
-
-&lt;h3 id=&quot;cover-images&quot;&gt;Cover Images&lt;/h3&gt;
-
-&lt;p&gt;To add a cover image to your post, set the “cover” property in the front matter with the relative URL of the image (i.e. &lt;code&gt;cover: &quot;/assets/cover_image.jpg&quot;&lt;/code&gt;).&lt;/p&gt;
-
-&lt;h3 id=&quot;code-snippets&quot;&gt;Code Snippets&lt;/h3&gt;
-
-&lt;p&gt;You can use &lt;a href=&quot;https://highlightjs.org/&quot;&gt;highlight.js&lt;/a&gt; to add syntax highlight code snippets:&lt;/p&gt;
-
-&lt;p&gt;Use the &lt;a href=&quot;https://github.com/Shopify/liquid/wiki/Liquid-for-Designers&quot;&gt;Liquid&lt;/a&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;highlight&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;language&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; tag to add syntax highlighting to code snippets.&lt;/p&gt;
-
-&lt;p&gt;For instance, this template…&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% highlight javascript %}    
-function demo(string, times) {    
-  for (var i = 0; i &lt;span class=&quot;nt&quot;&gt;&amp;lt; times&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;    
-    &lt;span class=&quot;na&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;);&lt;/span&gt;    
-  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;    
-&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;    
-&lt;span class=&quot;na&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;!&quot;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;{%&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;endhighlight&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;…will come out looking like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;demo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;hello, world!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Syntax highlighting is done using &lt;a href=&quot;https://highlightjs.org/&quot;&gt;highlight.js&lt;/a&gt;. You can change the active theme in &lt;a href=&quot;https://github.com/bencentra/centrarium/blob/2dcd73d09e104c3798202b0e14c1db9fa6e77bc7/_includes/head.html#L15&quot;&gt;head.html&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
-
-&lt;p&gt;Lightbox has been enabled for images. To create the link that’ll launch the lightbox, add &lt;code&gt;data-lightbox&lt;/code&gt; and &lt;code&gt;data-title&lt;/code&gt; attributes to an &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; tag around your &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag. The result is:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;//bencentra.com/assets/images/falcon9_large.jpg&quot; data-lightbox=&quot;falcon9-large&quot; data-title=&quot;Check out the Falcon 9 from SpaceX&quot;&gt;
-  &lt;img src=&quot;//bencentra.com/assets/images/falcon9_small.jpg&quot; title=&quot;Check out the Falcon 9 from SpaceX&quot; /&gt;
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;For more information, check out the &lt;a href=&quot;http://lokeshdhakar.com/projects/lightbox2/&quot;&gt;Lightbox&lt;/a&gt; website.&lt;/p&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
-        <link>http://simonjisu.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
-        
-        <category>jekyll</category>
-        
-        <category>welcome</category>
-        
-        
-        <category>Jekyll</category>
         
       </item>
     
