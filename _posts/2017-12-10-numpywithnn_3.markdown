@@ -263,7 +263,7 @@ $$ \sigma(A2_{(batch,\ o)}) \rightarrow Y_{(batch,\ o)}$$
     print('total time:', (end - start))
 
 > trian acc: 0.10442 | test acc: 0.10280
-> 
+>
 > total time: 175.5657160282135
 
 
