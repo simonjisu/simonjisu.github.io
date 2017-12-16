@@ -103,7 +103,7 @@ social:
     username: simonjisu
     url: https://github.com/simonjisu
     desc: Fork me on GitHub
-    share: false
+    share: true
 
 #  - name: LinkedIn
 #    icon: linkedin
