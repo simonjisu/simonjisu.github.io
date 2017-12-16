@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 15 Dec 2017 15:42:36 +0900</pubDate>
-    <lastBuildDate>Fri, 15 Dec 2017 15:42:36 +0900</lastBuildDate>
+    <pubDate>Sat, 16 Dec 2017 20:50:49 +0900</pubDate>
+    <lastBuildDate>Sat, 16 Dec 2017 20:50:49 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -647,7 +647,7 @@ print('total time:', (end - start))
   &lt;p&gt;total time: 175.5657160282135&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 168초 걸렸다.&lt;/p&gt;
+&lt;p&gt;2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 175초 걸렸다.&lt;/p&gt;
 
 &lt;p&gt;따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 &lt;strong&gt;오차역전파&lt;/strong&gt; 방법으로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.&lt;/p&gt;
 </description>

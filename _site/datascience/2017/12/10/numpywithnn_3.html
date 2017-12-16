@@ -487,7 +487,7 @@ print('total time:', (end - start))
   <p>total time: 175.5657160282135</p>
 </blockquote>
 
-<p>2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 168초 걸렸다.</p>
+<p>2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 175초 걸렸다.</p>
 
 <p>따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 <strong>오차역전파</strong> 방법으로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.</p>
 
@@ -789,8 +789,26 @@ $(document).ready(function() {
 
 </script>
 
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-102691608-1', 'auto');
+    ga('send', 'pageview');
+</script>
 
 
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-102691608-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 
   </body>
 
