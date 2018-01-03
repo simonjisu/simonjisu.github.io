@@ -206,7 +206,7 @@ Learn to estimate Likelihood of context words.
 $$-\log P(context(t_i)|t_i) = -\log \prod_{t_j\in context(t_i)}P(t_j|t_i) - \sum_{t_j\in context(t_i)}\log P(t_j|t_i)$$
 
 장점:
-* Fast: One embedding versus |C|(size of contexts) embeddings
+* Fast: One embedding versus \|C\|(size of contexts) embeddings
 * Just read off probabilities from softmax
 * Similiar variants to CBoW possible: position specific projections
 * Trade off between efficiency and more structured notion of context
