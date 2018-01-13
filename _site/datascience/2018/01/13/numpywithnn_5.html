@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NUMPY with NN - 5</title>
+  <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 5학습관련 기술 Part 1">
+  
+  <meta name="author" content="Soo">
+  <meta name="copyright" content="&copy; Soo 2018">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 5학습관련 기술 Part 1" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:site_name" content="Soo" />
+  <meta property="og:title" content="NUMPY with NN - 5" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="NUMPY with NN - 5">
+  <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 5학습관련 기술 Part 1">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/01/13/numpywithnn_5.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+
+  <!-- Latex -->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
+    MathJax.Hub.Config({
+        TeX: {
+            extensions: ["mhchem.js", "cancel.js"]
+        },
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true,
+            ignoreClass: "no-mathjax",
+        },
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        },
+        menuSettings: {
+            zoom: "Click",
+            zscale: "200%"
+        }
+    });
+  </script>
+
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Soo">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">NUMPY with NN - 5</h1>
+      <p class="info">by <strong>Soo</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">January 13, 2018</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/DataScience">Datascience</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="numpy--neural-network-basic---5">Numpy로 짜보는 Neural Network Basic - 5</h1>
+<hr />
+<h2 id="part-1">학습관련 기술 Part 1</h2>
+
+<h3 id="optimizer">Optimizer</h3>
+
+<p>손실 함수 값을 가능한 낮게 만들어 매개변수 최적값을 찾는 과정을 <strong>최적화</strong> 라고 한다. 여기서 몇가지 방법을 한번 살펴본다.</p>
+
+<h4 id="sgd--">SGD(확률적 경사 하강법)</h4>
+<p>$W \leftarrow W - \eta \dfrac{\partial L}{\partial W}$</p>
+
+<p>$\eta$ 는 학습률로 얼만큼 가중치를 업데이트 할지 정하는 하이퍼파라미터다. 즉 우리가 미리 정해줘야하는 변수다. 그러나 SGD 알고리즘에서는 이 변수에 따라서 학습되는 모양이 다르다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class SGD(object):
+    def __init__(self, lr=0.01):
+        self.lr = lr
+
+    def update(self, params, grads):
+        for key in params.keys():
+            params[key] -= self.lr * grads[key]
+</code></pre>
+</div>
+
+<p><strong>장점</strong>:</p>
+<ul>
+  <li>일부 데이터로 업데이트를 해서 진동이 심할 수도 있지만, 전체 데이터의 Gradient를 구하는 것보다 빠르다</li>
+</ul>
+
+<p><strong>단점</strong>:</p>
+<ul>
+  <li>learning rate에 따라서 global min을 찾지 못하고 local min에 갇힐 가능서 존재</li>
+  <li>Oscilation(발진 현상): 해에 접근 할 수록 수렴 속도($\dfrac{\partial L}{\partial W}$)가 느려짐, 따라서 협곡 같은 모양에서 헤매는 경우 존재한다. 그렇다고 lr을 너무 높히면 발산 할 수도 있음(loss값이 커지는 현상)</li>
+</ul>
+
+<p>아래와 같은 함수의 최적값을 찾아보자.</p>
+
+<p>$f(x, y) = \dfrac{1}{20} x^2 + y^2$</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def f(x, y):
+    return np.array((1/20)*(x**2) + (y**2))
+</code></pre>
+</div>
+
+<p>$f$ 를 미분하면 아래와 같다.</p>
+
+<p>$\dfrac{\partial f}{\partial x}, \dfrac{\partial f}{\partial y} = \dfrac{x}{10}, 2y$</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def f_prime(x, y, grads=None):
+    if grads is None:
+        grads = {}
+
+    grads['x'] = (1/10)*x
+    grads['y'] = 2*y
+    return grads
+</code></pre>
+</div>
+
+<p>시작은 <strong>(-7, 2)</strong> 점부터 시작한다고 하면 아래처럼 그림으로 표현할 수 있다.</p>
+
+<p><img src="/assets/ML/nn/fgraph.png" alt="Drawing" style="width: 400px;" /></p>
+
+<p>이 함수의 최저점은 (0, 0) 점으로 볼 수 있다.</p>
+
+<p>이제 learning rate 를 0.1 과 0.9로 각각 정해서 SGD를 적요해보자. 총 30 epoch동안 Gradient를 구하고 이를 조금씩 업데이트 하는 방식을 취했다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Video</th>
+      <th style="text-align: center">Graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><video controls="controls" style="width: 400px;" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/SGD_0.1.mp4" /> &lt;/source&gt;</video></td>
+      <td style="text-align: center"><img src="/assets/ML/nn/SGD_0.1.png" alt="Drawing" style="width: 400px;" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>learning rate 가 0.1 일때 학습이 조금씩 진행 되는 것을 볼 수 있다. 그러나 epoch 횟수가 너무 적어 최적의 값까지 도달을 못했다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Video</th>
+      <th style="text-align: center">Graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><video controls="controls" style="width: 400px;" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/SGD_0.9.mp4" /> &lt;/source&gt;</video></td>
+      <td style="text-align: center"><img src="/assets/ML/nn/SGD_0.9.png" alt="Drawing" style="width: 400px;" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>learning rate 가 0.9 일때 학습이 크게 진행 되는 것을 볼 수 있다. 그러나 변동이 심해서 크게 흔들리면서 최저점으로 가는 모습을 볼 수 있다.</p>
+
+<p>학습률이 다르다는 것은 한 번 나아갈때 폭의 길이를 보면 그 차이를 알 수 가 있다.</p>
+
+<h4 id="momentum">Momentum</h4>
+<p>$v \leftarrow \gamma v - \eta \dfrac{\partial L}{\partial W}$</p>
+
+<p>$W \leftarrow W + v$</p>
+
+<p>모멘텀 방식은 gradient 방향에 일종의 관성을 더해줘서 기존의 이동 방향에 힘들 실어줘 더 이동할 수 있게 만들어준다. $v$ 의 초기값은 0으로 설정하고 진행한다. 따라서 첫 step이 후 기존에 이동했던 방향을 저장해둔 $v$ 가 추가로 저장 되어 다음 step에 더해져 조금 더 움직이게 된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Video</th>
+      <th style="text-align: center">Graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><video controls="controls" style="width: 400px;" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/Momentum.mp4" /> &lt;/source&gt;</video></td>
+      <td style="text-align: center"><img src="/assets/ML/nn/Momentum.png" alt="Drawing" style="width: 400px;" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>learning rate가 0.1 일때 SGD보다 더 많이 가는 것을 알 수 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Video</th>
+      <th style="text-align: center">Graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><video controls="controls" style="width: 400px;" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/Momentum_0.9.mp4" /> &lt;/source&gt;</video></td>
+      <td style="text-align: center"><img src="/assets/ML/nn/Momentum_0.9.png" alt="Drawing" style="width: 400px;" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>learning rate가 0.9 일때 주변을 헤매면서 가는 모습을 볼 수 있다. 하이퍼파라미터를 잘 조정해야 학습이 빠르게 진행 된 다는 것을 알 수 있다.</p>
+
+<h4 id="adagrad">Adagrad</h4>
+<p>$h \leftarrow h + \dfrac{\partial L}{\partial W} \odot \dfrac{\partial L}{\partial W}$</p>
+
+<p>$W \leftarrow W - \eta \dfrac{1}{\sqrt{h +\epsilon}} \dfrac{\partial L}{\partial W}$</p>
+
+<p>학습률($\eta$)에 대한 고민이 많이지자 이를 해결해보기 위해 나온 알고리즘이 AdaGrad 다.</p>
+
+<p>학습률을 처음에 크게 했다 나중에 차차 줄여가는 <strong>학습률 감소(learning rate decay)</strong> 기술이 이 알고리즘의 특징이다. 각각의 매개변수에 맞춤형 학습률 값을 맞춰 줄 수가 있다.</p>
+
+<p>$\odot$ 는 여기서 dot product가 아닌 element-wise multiplication를 말한다. 수식을 보면 gradient를 제곱하여 h에 저장한다. 업데이트시 여태까지 저장해온 gradient 제곱 값을 분모로 두게 된다. 따라서 시간이 지날 수록 gradient 누적 값이 큰 것은 learning rate 가 반대로 작아지게 된서 학습률이 조정 된다. 이를 적응적으로(adaptive) 학습률을 조정한다고 한다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Adagrad(object):
+    def __init__(self, lr=0.01):
+        self.lr = lr
+        self.h = None
+        self.epsilon = 1e-6  # 0으로 나누눈 것을 방지
+
+    def update(self, params, grads):
+        if self.h is None:
+            self.h = {}
+            for key, val in params.items():
+                self.h[key] = np.zeros_like(val)
+
+        for key in params.keys():
+            self.h[key] += grads[key] * grads[key]
+            params[key] -= self.lr * grads[key] / np.sqrt(self.h[key] + self.epsilon)
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Video</th>
+      <th style="text-align: center">Graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><video controls="controls" style="width: 400px;" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/Adagrad.mp4" /> &lt;/source&gt;</video></td>
+      <td style="text-align: center"><img src="/assets/ML/nn/Adagrad.png" alt="Drawing" style="width: 400px;" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>학습률을 1.5로 크게 주었는데도 차차 감소하면서 학습되는 과정을 볼 수 가 있다.</p>
+
+<p>그러나 이렇게 좋아보이는 방법도 <strong>단점</strong> 이 있다.</p>
+
+<p>과거의 기울기 값들을 전부 누적해서 더하기 때문에 h 값이 많이 커지게 되면 학습률 부분($\dfrac{1}{\sqrt{h +\epsilon}}$)이 0에 가까워져 더 이상 학습이 진행이 안되는 상황이 발생할 수 있다.</p>
+
+<p>이를 개선하기 위해서 RMSProp과 Adadelta라는 방법이 있다. (코드는 기본 알고리즘 원리만 구현해놨다. 구체적으로 효율적인 학습을 위해서 조금씩 변형이 가해진다. 논문 참조 할 것, <del>아직 이해중</del>)</p>
+
+<p>RMSProp:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class RMSProp(object):
+    def __init__(self, lr=0.01, gamma=0.9):
+    """G는 이동평균의 개념으로 과거 1보다 작은 gamma값을 곱해서 서서히 잊게 하고 새로운 값을 조금씩 더 해준다."""
+        self.lr = lr
+        self.gamma = gamma  # decay term
+        self.G = None
+        self.epsilon = 1e-6  # 0으로 나누눈 것을 방지
+
+    def update(self, params, grads):
+        if self.G is None:
+            self.G = {}
+            for key, val in params.items():
+                self.G[key] = np.zeros_like(val)
+
+        for key in params.keys():
+            self.G[key] += self.gamma * self.G[key] + (1 - self.gamma) * (grads[key] * grads[key])
+            params[key] -= self.lr * grads[key] / np.sqrt(self.G[key] + self.epsilon)
+</code></pre>
+</div>
+
+<p>AdaDelta:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class AdaDelta(object):
+    def __init__(self, gamma=0.9):
+        """
+        https://arxiv.org/pdf/1212.5701
+        """
+        self.gamma = gamma  # decay term
+        self.G = None  # accumulated gradients
+        self.s = None  # accumulated updates
+        self.del_W = None
+        self.epsilon = 1e-6  # 0으로 나누눈 것을 방지
+        self.iter = 0
+
+    def update(self, params, grads):
+        if (self.G is None) | (self.s is None) | (self.del_W is None):
+            # Initialize accumulation variables
+            self.G = {}
+            self.s = {}  
+            self.del_W = {}
+            for key, val in params.items():
+                self.G[key] = np.zeros_like(val)
+                self.s[key] = np.zeros_like(val)
+                self.del_W[key] = np.zeros_like(val)
+
+        for key in params.keys():
+            self.G[key] += self.gamma * self.G[key] + (1 - self.gamma) * (grads[key] * grads[key])
+            self.del_W[key] = -(np.sqrt(self.s[key] + self.epsilon) / np.sqrt(self.G[key] + self.epsilon)) * grads[key]
+            self.s[key] += self.gamma * self.s[key] + (1 - self.gamma) * self.del_W[key]**2
+            params[key] += self.del_W[key]
+</code></pre>
+</div>
+
+<h4 id="adamadaptive-moment-estimation">Adam(Adaptive Moment Estimation)</h4>
+<p><strong>Adam</strong> (Adaptive Moment Estimation)은 RMSProp과 Momentum 방식을 합친 것 같은 알고리즘이다.</p>
+
+<p><img src="/assets/ML/nn/Algorithm_Adam.png" alt="Drawing" style="width: 800px;" /></p>
+
+<p>출처: <a href="https://arxiv.org/abs/1412.6980v8"><span style="color: #7d7ee8">https://arxiv.org/abs/1412.6980v8</span></a></p>
+
+<ul>
+  <li>$m_t$: the exponential moving averages of the gradient (Momentum쪽)</li>
+  <li>$v_t$: the squared gradient (RMSProp쪽)</li>
+  <li>$\beta_1$: the exponential decay rates for $m_t$, 보통 0.9 취함</li>
+  <li>$\beta_2$: the exponential decay rates for $v_t$, 보통 0.999 취함</li>
+</ul>
+
+<p>알고리즘 그대로 짜는게 아니라 조금더 효율적인 계산을 하기 위해서 아래와 같은 내용을 이해하고 보정해줘야 한다…(자세한 건 논문에 더 있음)</p>
+
+<p>The moving averages themselves are estimates of the 1st moment (the mean) and the 2nd raw moment (the uncentered variance) of the gradient.
+However, these moving averages are initialized as (vectors of) 0’s, leading to moment estimates that are biased towards zero, especially
+during the initial timesteps, and especially when the decay rates are small (i.e. the $\beta$s are close to 1).</p>
+
+<p>자세한 설명은 추후 보정하겠다. <del>아직 이해중이다</del></p>
+
+<p>아래는 다른 사람의 코드를 따왔다. 출처: <a href="https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py"><span style="color: #7d7ee8">https://github.com/WegraLee/deep-learning-from-scratch/</span></a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Adam(object):
+    """Adam (http://arxiv.org/abs/1412.6980v8)"""
+
+    def __init__(self, lr=0.001, beta1=0.9, beta2=0.999):
+        self.lr = lr
+        self.beta1 = beta1
+        self.beta2 = beta2
+        self.iter = 0
+        self.m = None
+        self.v = None
+        self.history_ = {'x':[], 'y':[]}
+
+    def update(self, params, grads):
+        if self.m is None:
+            self.m, self.v = {}, {}
+            for key, val in params.items():
+                self.m[key] = np.zeros_like(val)
+                self.v[key] = np.zeros_like(val)
+
+        self.iter += 1
+        lr_t = self.lr * np.sqrt(1.0 - self.beta2 ** self.iter) / (1.0 - self.beta1 ** self.iter)
+
+        for key in params.keys():
+            # self.m[key] = self.beta1*self.m[key] + (1-self.beta1)*grads[key]
+            # self.v[key] = self.beta2*self.v[key] + (1-self.beta2)*(grads[key]**2)
+            self.m[key] += (1 - self.beta1) * (grads[key] - self.m[key])
+            self.v[key] += (1 - self.beta2) * (grads[key] ** 2 - self.v[key])
+
+            params[key] -= lr_t * self.m[key] / (np.sqrt(self.v[key]) + 1e-7)
+
+            # unbias_m += (1 - self.beta1) * (grads[key] - self.m[key]) # correct bias
+            # unbisa_b += (1 - self.beta2) * (grads[key]*grads[key] - self.v[key]) # correct bias
+            # params[key] += self.lr * unbias_m / (np.sqrt(unbisa_b) + 1e-7)
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Video</th>
+      <th style="text-align: center">Graph</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><video controls="controls" style="width: 400px;" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/Adam.mp4" /> &lt;/source&gt;</video></td>
+      <td style="text-align: center"><img src="/assets/ML/nn/Adam.png" alt="Drawing" style="width: 400px;" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>논문 결론 부에는 Adam 알고리즘이 큰 데이터 셋이나 고차원 파라미터 공간을 학습하는데 효율적이다라고 이야기 하고 있다.</p>
+
+<p>(논문을 보려면 시계열 지식이 필요하다. ㅠㅠ)</p>
+
+<p>다음 시간에는 가중치 초기화와 배치 노말라이제이션에 대에서 이야기 해보도록 하겠다.</p>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<!-- section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+5&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F01%2F13%2Fnumpywithnn_5.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=NUMPY+with+NN+-+5&url=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F01%2F13%2Fnumpywithnn_5.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=NUMPY+with+NN+-+5&url=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F01%2F13%2Fnumpywithnn_5.html&media=http://simonjisu.github.io/assets/star.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://simonjisu.github.io/datascience/2018/01/13/numpywithnn_5.html') + '&title=NUMPY with NN - 5'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section -->
+
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Soo</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:simonjisu@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">simonjisu@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://www.facebook.com/simonjisu" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/simonjisu" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">My Blog
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+
+</script>
+
+
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-102691608-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+  </body>
+
+</html>

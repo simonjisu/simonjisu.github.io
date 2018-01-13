@@ -178,11 +178,14 @@ where it belongs? 같은 정보를 포함
 Embed context words. Add them.
 
 Project back to vocabulary size. Softmax.
+
 $$softmax(l)_i=\dfrac{e^{l_i}}{\sum_{j}e^{l_i}}$$
+
 $$\begin{eqnarray} P(t_i|context(t_i) & = & softmax(\sum_{t_j\in context(t_i)} onehot_{t_j}^{t}\cdot E\cdot W_v) \newline
 & = & softmax((\sum_{t_j\in context(t_i)} onehot_{t_j}^{t}\cdot E)\cdot W_v) \end{eqnarray}$$
 
 Minimize Negative Log Likelihood:
+
 $$L_{data} = -\sum_{t_i \in data}\log P(t_i|context(t_i))$$
 
 장점:
@@ -200,13 +203,16 @@ Target word predicts context words.
 Embed target word.
 
 Project into vocabulary. Softmax.
+
 $$P(t_j|t_i) = softmax(onehot_{t_i}^T\cdot E \cdot W_v)$$
 
 Learn to estimate Likelihood of context words.
+
 $$-\log P(context(t_i)|t_i) = -\log \prod_{t_j\in context(t_i)}P(t_j|t_i) - \sum_{t_j\in context(t_i)}\log P(t_j|t_i)$$
 
 장점:
-* Fast: One embedding versus $|C|$(size of contexts) embeddings
+
+* Fast: One embedding versus $C$ (size of contexts) embeddings
 * Just read off probabilities from softmax
 * Similiar variants to CBoW possible: position specific projections
 * Trade off between efficiency and more structured notion of context
