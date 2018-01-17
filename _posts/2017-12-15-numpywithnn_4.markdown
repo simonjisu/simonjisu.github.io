@@ -4,6 +4,7 @@ title: "NUMPY with NN - 4"
 categories: "DataScience"
 author: "Soo"
 date: "2017-12-15 12:21:48 +0900"
+comments: true
 ---
 # Numpy로 짜보는 Neural Network Basic - 4
 ---
@@ -13,7 +14,7 @@ date: "2017-12-15 12:21:48 +0900"
 ### 연쇄법칙의 원리
 합성 함수의 미분은 합성 함수를 구성하는 각 함수의 미분의 곱으로 나타낼 수 있다.
 
-$$\begin{cases} z = t^2\newline t = x + y \end{cases}$$
+$$\begin{cases} z = t^2 \\ t = x + y \end{cases}$$
 
 위 식의 미분을 나타내면
 $$ \frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}} $$
@@ -34,12 +35,12 @@ $$\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{
 
 (그림출처: ratsgo님의 블로그[[<span style="color: #7d7ee8">링크</span>](https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/)])
 
-$$\begin{cases} L(z) \newline z = x + y \end{cases}$$
+$$\begin{cases} L(z) \\ z = x + y \end{cases}$$
 
 각각 미분하게 되면
 
 $$\begin{cases}
-    \dfrac{\partial{L}}{\partial{z}} \newline
+    \dfrac{\partial{L}}{\partial{z}} \\
     \dfrac{\partial{z}}{\partial{x}} =
     \dfrac{\partial{z}}{\partial{y}} = 1
   \end{cases}$$
@@ -47,7 +48,7 @@ $$\begin{cases}
 따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면
 
 $$\begin{cases}
-    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \newline
+    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \\
     \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1
   \end{cases}$$
 
@@ -58,20 +59,20 @@ $$\begin{cases}
 
 (그림출처: ratsgo님의 블로그[[<span style="color: #7d7ee8">링크</span>](https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/)])
 
-$$\begin{cases} L(z) \newline z = x \times y \end{cases}$$
+$$\begin{cases} L(z) \\ z = x \times y \end{cases}$$
 
 각각 미분하게 되면
 
 $$\begin{cases}
-    \dfrac{\partial{L}}{\partial{z}} \newline
-    \dfrac{\partial{z}}{\partial{x}} = y \newline
+    \dfrac{\partial{L}}{\partial{z}} \\
+    \dfrac{\partial{z}}{\partial{x}} = y \\
     \dfrac{\partial{z}}{\partial{y}} = x
   \end{cases}$$
 
   따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면
 
 $$\begin{cases}
-    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \newline
+    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \\
     \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot x
   \end{cases}$$
 
@@ -113,12 +114,12 @@ $$ y = \frac{1}{1+\exp(-x)}$$
 
 <img src="/assets/ML/nn/NN_sigmoid_last.png" alt="Drawing" style="width: 400px;"/>
 
-$$\begin{eqnarray}
-&&\dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x) \\
-&=& \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
-&=& \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
-&=& \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
-\end{eqnarray}$$
+$$\begin{aligned}
+\dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x)
+&= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
+&= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
+&= \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
+\end{aligned}$$
 
 이것을 코드로 구현하게 되면
 
@@ -147,8 +148,8 @@ $A = X \cdot W + B$
 ### Backward
 
 $\begin{cases}
-    \dfrac{\partial{L}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot W^T \newline
-    \dfrac{\partial{L}}{\partial{W}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{W}} = X^T \cdot \dfrac{\partial{L}}{\partial{A}} \newline
+    \dfrac{\partial{L}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot W^T \\
+    \dfrac{\partial{L}}{\partial{W}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{W}} = X^T \cdot \dfrac{\partial{L}}{\partial{A}} \\
     \dfrac{\partial{L}}{\partial{B}} = 1
   \end{cases}$
 

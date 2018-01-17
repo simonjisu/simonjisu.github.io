@@ -188,7 +188,7 @@
 <h3 id="section">연쇄법칙의 원리</h3>
 <p>합성 함수의 미분은 합성 함수를 구성하는 각 함수의 미분의 곱으로 나타낼 수 있다.</p>
 
-<script type="math/tex; mode=display">\begin{cases} z = t^2\newline t = x + y \end{cases}</script>
+<script type="math/tex; mode=display">\begin{cases} z = t^2 \\ t = x + y \end{cases}</script>
 
 <p>위 식의 미분을 나타내면
 <script type="math/tex">\frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}}</script></p>
@@ -209,12 +209,12 @@
 
 <p>(그림출처: ratsgo님의 블로그[<a href="https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/"><span style="color: #7d7ee8">링크</span></a>])</p>
 
-<script type="math/tex; mode=display">\begin{cases} L(z) \newline z = x + y \end{cases}</script>
+<script type="math/tex; mode=display">\begin{cases} L(z) \\ z = x + y \end{cases}</script>
 
 <p>각각 미분하게 되면</p>
 
 <script type="math/tex; mode=display">\begin{cases}
-    \dfrac{\partial{L}}{\partial{z}} \newline
+    \dfrac{\partial{L}}{\partial{z}} \\
     \dfrac{\partial{z}}{\partial{x}} =
     \dfrac{\partial{z}}{\partial{y}} = 1
   \end{cases}</script>
@@ -222,7 +222,7 @@
 <p>따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면</p>
 
 <script type="math/tex; mode=display">\begin{cases}
-    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \newline
+    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \\
     \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1
   \end{cases}</script>
 
@@ -232,20 +232,20 @@
 
 <p>(그림출처: ratsgo님의 블로그[<a href="https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/"><span style="color: #7d7ee8">링크</span></a>])</p>
 
-<script type="math/tex; mode=display">\begin{cases} L(z) \newline z = x \times y \end{cases}</script>
+<script type="math/tex; mode=display">\begin{cases} L(z) \\ z = x \times y \end{cases}</script>
 
 <p>각각 미분하게 되면</p>
 
 <script type="math/tex; mode=display">\begin{cases}
-    \dfrac{\partial{L}}{\partial{z}} \newline
-    \dfrac{\partial{z}}{\partial{x}} = y \newline
+    \dfrac{\partial{L}}{\partial{z}} \\
+    \dfrac{\partial{z}}{\partial{x}} = y \\
     \dfrac{\partial{z}}{\partial{y}} = x
   \end{cases}</script>
 
 <p>따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면</p>
 
 <script type="math/tex; mode=display">\begin{cases}
-    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \newline
+    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \\
     \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot x
   \end{cases}</script>
 
@@ -290,12 +290,12 @@
 <p><img src="/assets/ML/nn/NN_sigmoid_last.png" alt="Drawing" style="width: 400px;" /></p>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{eqnarray}
-&&\dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x) \\
-&=& \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
-&=& \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
-&=& \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
-\end{eqnarray} %]]></script>
+\begin{aligned}
+\dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x)
+&= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
+&= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
+&= \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
+\end{aligned} %]]></script>
 
 <p>이것을 코드로 구현하게 되면</p>
 
@@ -326,8 +326,8 @@
 <h3 id="backward-1">Backward</h3>
 
 <p>$\begin{cases}
-    \dfrac{\partial{L}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot W^T \newline
-    \dfrac{\partial{L}}{\partial{W}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{W}} = X^T \cdot \dfrac{\partial{L}}{\partial{A}} \newline
+    \dfrac{\partial{L}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot W^T <br />
+    \dfrac{\partial{L}}{\partial{W}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{W}} = X^T \cdot \dfrac{\partial{L}}{\partial{A}} <br />
     \dfrac{\partial{L}}{\partial{B}} = 1
   \end{cases}$</p>
 

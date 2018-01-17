@@ -4,6 +4,7 @@ title: "NUMPY with NN - 2"
 categories: "DataScience"
 author: "Soo"
 date: "2017-12-08 11:52:21 +0900"
+comments: true
 ---
 # Numpy로 짜보는 Neural Network Basic - 2
 ---
@@ -59,22 +60,22 @@ $$y=3x^2$$
 $$h(x) =
   \begin{cases}
   1\ \ (x > 0) \\
-  0\ \ (x  \leq 0) \\
-  \end{cases}$$
-
-    def step_function(x):
-        y = x > 0
-        return y.astype(np.int)
-
+  0\ \ (x  \leq 0)
+\end{cases}$$
+```
+def step_function(x):
+    y = x > 0
+    return y.astype(np.int)
+```
 <img src="/assets/ML/nn/step.png" alt="Drawing" style="width: 350px;"/>
 
 #### 시그모이드 함수(Sigmoid Function)
 
 $$h(x) = \frac{1}{1+exp(-x)}$$
-
-    def sigmoid(x):
-        return 1 / (1 + np.exp(-x))
-
+```
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+```
 <img src="/assets/ML/nn/sigmoid.png" alt="Drawing" style="width: 350px;"/>
 
 #### ReLu 함수(ReLu Function)
@@ -82,12 +83,12 @@ $$h(x) = \frac{1}{1+exp(-x)}$$
 $$h(x) =
   \begin{cases}
   x\ \ (x > 0) \\
-  0\ \ (x \leq 0) \\
+  0\ \ (x \leq 0)
   \end{cases}$$
-
-    def ReLu(x):
-        return np.maximum(0, x)
-
+```
+def ReLu(x):
+    return np.maximum(0, x)
+```
 <img src="/assets/ML/nn/relu.png" alt="Drawing" style="width: 350px;"/>
 
 ## Feedforward 과정
@@ -111,35 +112,35 @@ Input에서 Hidden1 층으로 가는 과정을 행렬로 표시해볼 것이다.
 따라서 각각의 가중치 합을 구하면,
 
 $A = \begin{bmatrix}
-    a_1^{(1)} \newline
-    a_2^{(1)} \newline
+    a_1^{(1)} \\
+    a_2^{(1)} \\
     a_3^{(1)}
     \end{bmatrix} =
     \begin{bmatrix}
-    w_{11}^{(1)}x_1 + w_{12}^{(1)}x_2 + b_1^{(1)} \newline
-    w_{21}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_2^{(1)} \newline
+    w_{11}^{(1)}x_1 + w_{12}^{(1)}x_2 + b_1^{(1)} \\
+    w_{21}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_2^{(1)} \\
     w_{31}^{(1)}x_1 + w_{32}^{(1)}x_2 + b_3^{(1)}
-    \end{bmatrix}$
+\end{bmatrix}$
 
 가 되는데, 이를 다시 간단하게 쓰면
 
 $X =
   \begin{bmatrix}
-  x_1 \newline
+  x_1 \\
   x_2
-  \end{bmatrix}$
+\end{bmatrix}$
 
 $W^{(1)} =
       \begin{bmatrix}
-      w_{11}^{(1)} & w_{12}^{(1)} \newline
-      w_{21}^{(1)} & w_{22}^{(1)} \newline
+      w_{11}^{(1)} & w_{12}^{(1)} \\
+      w_{21}^{(1)} & w_{22}^{(1)} \\
       w_{31}^{(1)} & w_{32}^{(1)}
       \end{bmatrix}$
 
 $B^{(1)} =
   \begin{bmatrix}
-  b_1^{(1)} \newline
-  b_2^{(1)} \newline
+  b_1^{(1)} \\
+  b_2^{(1)} \\
   b_3^{(1)}
   \end{bmatrix}$
 
@@ -149,42 +150,42 @@ $A = W^{(1)} \cdot X + B^{(1)}$ 가 되며, 형태는 $(3, 1) = (3, 2) \times (2
 
 $Z^{(1)} =
     \begin{bmatrix}
-    z_1^{(1)} \newline
-    z_2^{(1)} \newline
+    z_1^{(1)} \\
+    z_2^{(1)} \\
     z_3^{(1)}
     \end{bmatrix} =
     \begin{bmatrix}
-    h(a_1^{(1)}) \newline
-    h(a_2^{(1)}) \newline
+    h(a_1^{(1)}) \\
+    h(a_2^{(1)}) \\
     h(a_3^{(1)})
     \end{bmatrix}$
 
 이렇게 나온 $Z^{(1)}$ 값들은 다음 층에서 입력으로 쓰이게 된다.
 
 아래 코드의 Shape도 같이 잘 살펴보자.
+```
+X = np.array([1.0, 0.5])
+W1 = np.array([[0.1, 0.2],
+               [0.3, 0.4],
+               [0.5, 0.6]])
+B1 = np.array([0.1, 0.2, 0.3])
 
-    X = np.array([1.0, 0.5])
-    W1 = np.array([[0.1, 0.2],
-                   [0.3, 0.4],
-                   [0.5, 0.6]])
-    B1 = np.array([0.1, 0.2, 0.3])
-
-    print('X:', X.shape)
-    print('W1:', W1.shape)
-    print('B1:', B1.shape)
-    # Input -> Hidden 1
-    print('=================')
-    print('Input -> Hidden1')
-    print('=================')
-    # linear sum
-    A1 = np.dot(W1, X) + B1
-    print('A1:', A1.shape)
-    print(A1)
-    # activation
-    Z1 = sigmoid(A1)
-    print('Z1:', Z1.shape)
-    print(Z1)
-
+print('X:', X.shape)
+print('W1:', W1.shape)
+print('B1:', B1.shape)
+# Input -> Hidden 1
+print('=================')
+print('Input -> Hidden1')
+print('=================')
+# linear sum
+A1 = np.dot(W1, X) + B1
+print('A1:', A1.shape)
+print(A1)
+# activation
+Z1 = sigmoid(A1)
+print('Z1:', Z1.shape)
+print(Z1)
+```
 >W1: (3, 2)
 >
 >B1: (3,)
@@ -204,27 +205,27 @@ $Z^{(1)} =
 >[ 0.57444252  0.66818777  0.75026011]
 
 ### Hidden 1 $\rightarrow$ Hidden 2
+```
+W2 = np.array([[0.1, 0.2, 0.3],
+               [0.4, 0.5, 0.6]])
+B2 = np.array([0.1, 0.2])
 
-    W2 = np.array([[0.1, 0.2, 0.3],
-                   [0.4, 0.5, 0.6]])
-    B2 = np.array([0.1, 0.2])
-
-    print('Z1:', Z1.shape)
-    print('W2:', W2.shape)
-    print('B2:', B2.shape)
-    # Hidden 1 -> Hidden 2
-    print('=================')
-    print('Hidden 1 -> Hidden 2')
-    print('=================')
-    # linear sum
-    A2 = np.dot(W2, Z1) + B2
-    print('A2:', A2.shape)
-    print(A2)
-    # activation
-    Z2 = sigmoid(A2)
-    print('Z2:', Z2.shape)
-    print(Z2)
-
+print('Z1:', Z1.shape)
+print('W2:', W2.shape)
+print('B2:', B2.shape)
+# Hidden 1 -> Hidden 2
+print('=================')
+print('Hidden 1 -> Hidden 2')
+print('=================')
+# linear sum
+A2 = np.dot(W2, Z1) + B2
+print('A2:', A2.shape)
+print(A2)
+# activation
+Z2 = sigmoid(A2)
+print('Z2:', Z2.shape)
+print(Z2)
+```
 >Z1: (3,)
 >
 >W2: (2, 3)
@@ -247,18 +248,18 @@ $Z^{(1)} =
 ### Hidden 2 $\rightarrow$ Output
 
 마지막 출력 층에서는 이전 층에 출력된 $Z$ 값들을 그대로 가져올 수 있다.
+```
+def identity_function(x):
+    return x
 
-    def identity_function(x):
-        return x
+W3 = np.array([[0.1, 0.2],
+               [0.3, 0.4]])
+B3 = np.array([0.1, 0.2])
 
-    W3 = np.array([[0.1, 0.2],
-                   [0.3, 0.4]])
-    B3 = np.array([0.1, 0.2])
-
-    A3 = np.dot(W3, Z2) + B3
-    Y = identity_function(A3)
-    print(Y)
-
+A3 = np.dot(W3, Z2) + B3
+Y = identity_function(A3)
+print(Y)
+```
 > [ 0.31682708  0.69627909]
 
 혹은 Softmax라는 함수를 써서 각 Output의 확률로서 나타낼 수 있다. 보통을 이걸 쓴다.
@@ -266,17 +267,17 @@ $Z^{(1)} =
 #### Softmax
 
 $$y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}$$
-
-    def softmax(x):
-        return np.exp(x) / np.sum(np.exp(x))
-
+```
+def softmax(x):
+    return np.exp(x) / np.sum(np.exp(x))
+```
 얼핏 잘 만든 것 같지만 컴퓨터에서 아주 큰 수를 계산시 Overflow문제가 발생한다. 오버플로우란, 사용 가능한 하드웨어(즉, 32bit 단위 워드의 하드웨어, 레지스터 등)로 연산 결과를 표현할 수 없을 때 오버플로우가 발생한다고 한다. (오버플로우 개념 출처: [[<span style="color: #7d7ee8">링크</span>](https://m.blog.naver.com/PostView.nhn?blogId=osw5144&logNo=120206206420&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)])
 
 간단히 예를 들어보면 아래의 코드를 실행해보면 금방 알 수 있다.
-
-    a = np.array([1010, 1000, 990])
-    softmax(a)
-
+```
+a = np.array([1010, 1000, 990])
+softmax(a)
+```
 > /Users/user/anaconda/lib/python3.6/site-packages/ipykernel/\_\_main__.py:2: RuntimeWarning: overflow encountered in exp
 > from ipykernel import kernelapp as app
 >
@@ -293,21 +294,21 @@ y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}
 \\ = \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}
 \\ = \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
 $$
-
-    c = np.max(a)
-    print(a - c)
-    print(softmax(a-c))
-
+```
+c = np.max(a)
+print(a - c)
+print(softmax(a-c))
+```
 > [  0 -10 -20]
 >
 > [  9.99954600e-01   4.53978686e-05   2.06106005e-09]
 
 이번에는 경고 없이 실행이 잘 된다. 이제 최종 Softmax는 아래와 같다. 이를 출력층에 적용하면 y값에 대한 확률을 볼 수 있다. 이를 0과 1사이의 값으로 만드는 이유가 있는데 향후 학습시에 필요하기 때문이다. (네트워크 학습에서 설명)
-
-    def softmax(a):
-        c = np.max(a)
-        return np.exp(a - c) / np.sum(np.exp(a - c))
-
+```
+def softmax(a):
+    c = np.max(a)
+    return np.exp(a - c) / np.sum(np.exp(a - c))
+```
 ## Feedforward 실습
 
 여태 보았던 3층 Neural Network를 만들어 보자, 어려운 것은 없고 아까 만들었던 것을 나열해보면 쉽다.
@@ -318,59 +319,59 @@ $$
 
 입력층에는 784 개의 뉴런, 은닉층1에는 50개, 은닉층2에는 100개, 마지막 층에는 10개의 뉴런으로 구성되어 있는 네트워크다. 활성화 함수는 sigmoid를 쓰고, 마지막에 Softmax로 확률을 구했다. 실행단계에서 batch라는 것이 있는데, 한번에 많은 양의 데이터를 계산하면 느리니, 조금씩 데이터를 사용해서 계산하는 방법이라고 생각하면 된다.
 
+```
+# 네트워크 만들기
+from dataset.mnist import load_mnist
+import numpy as np
 
-    # 네트워크 만들기
-    from dataset.mnist import load_mnist
-    import numpy as np
+class NN(object):
+    def __init__(self):
+        # W1(50, 784) X(784, batch_size)
+        # W2(100, 50) Z1(50, batch_size)
+        # W3(10, 100) Z2(100, batch_size)
+        # B1(50, batch_size)
+        # B2(100, batch_size)
+        # B3(10, batch_size)
+        self.W = {'W1': np.random.normal(size=(50, 784)),  
+                  'W2': np.random.normal(size=(100, 50)),  
+                  'W3': np.random.normal(size=(10, 100)),}  
+        self.B = {'B1': np.random.normal(size=(50, batch_size)),  
+                  'B2': np.random.normal(size=(100, batch_size)),  
+                  'B3': np.random.normal(size=(10, batch_size)),}  
 
-    class NN(object):
-        def __init__(self):
-            # W1(50, 784) X(784, batch_size)
-            # W2(100, 50) Z1(50, batch_size)
-            # W3(10, 100) Z2(100, batch_size)
-            # B1(50, batch_size)
-            # B2(100, batch_size)
-            # B3(10, batch_size)
-            self.W = {'W1': np.random.normal(size=(50, 784)),  
-                      'W2': np.random.normal(size=(100, 50)),  
-                      'W3': np.random.normal(size=(10, 100)),}  
-            self.B = {'B1': np.random.normal(size=(50, batch_size)),  
-                      'B2': np.random.normal(size=(100, batch_size)),  
-                      'B3': np.random.normal(size=(10, batch_size)),}  
+    def get_data(self):
+        (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True,
+                                                          normalize=True,
+                                                          one_hot_label=False)
+        return x_train, t_train, x_test, t_test
 
-        def get_data(self):
-            (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True,
-                                                              normalize=True,
-                                                              one_hot_label=False)
-            return x_train, t_train, x_test, t_test
+    def predict(self, X):
+        W1, W2, W3 = self.W['W1'], self.W['W2'], self.W['W3']
+        B1, B2, B3 = self.B['B1'], self.B['B2'], self.B['B3']
+        # Input -> Hidden 1
+        A1 = np.dot(W1, X) + B1
+        Z1 = sigmoid(A1)
+        # Hidden 1 -> Hidden 2
+        A2 = np.dot(W2, Z1) + B2
+        Z2 = sigmoid(A2)
+        # Hidden 2 -> Output
+        A3 = np.dot(W3, Z2) + B3
+        Y = softmax(A3)
 
-        def predict(self, X):
-            W1, W2, W3 = self.W['W1'], self.W['W2'], self.W['W3']
-            B1, B2, B3 = self.B['B1'], self.B['B2'], self.B['B3']
-            # Input -> Hidden 1
-            A1 = np.dot(W1, X) + B1
-            Z1 = sigmoid(A1)
-            # Hidden 1 -> Hidden 2
-            A2 = np.dot(W2, Z1) + B2
-            Z2 = sigmoid(A2)
-            # Hidden 2 -> Output
-            A3 = np.dot(W3, Z2) + B3
-            Y = softmax(A3)
+        return Y
 
-            return Y
-
-    # 실행 단계
-    model_mnist = NN()
-    x_train, t_train, x_test, t_test = model_mnist.get_data()
-    acc_count = 0
-    batch_size = 100
-    for i in range(0, len(x_train), batch_size):
-        x_batch = x_train[i:i+batch_size].T  # (784, 100)
-        y_batch = model_mnist.predict(x_batch) # (10, 100)
-        p = np.argmax(y_batch, axis=0)
-        acc_count += np.sum(p == t_train[i:i+batch_size])
-    print("accuracy:", acc_count / len(x_train))
-
+# 실행 단계
+model_mnist = NN()
+x_train, t_train, x_test, t_test = model_mnist.get_data()
+acc_count = 0
+batch_size = 100
+for i in range(0, len(x_train), batch_size):
+    x_batch = x_train[i:i+batch_size].T  # (784, 100)
+    y_batch = model_mnist.predict(x_batch) # (10, 100)
+    p = np.argmax(y_batch, axis=0)
+    acc_count += np.sum(p == t_train[i:i+batch_size])
+print("accuracy:", acc_count / len(x_train))
+```
 
 > accuracy: 0.0857833333333
 

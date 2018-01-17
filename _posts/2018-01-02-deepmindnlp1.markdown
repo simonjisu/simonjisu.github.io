@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "DeepMindNLP 강의 정리 1"
-categories: "DataScience"
+categories: "Deepnlp"
 author: "Soo"
 date: "2018-01-02 21:39:31 +0900"
+comments: true
 ---
 # Word Vectors and Lexical Semantics
 

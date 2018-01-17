@@ -3,6 +3,7 @@ layout: post
 title: "ML-DecisionTree"
 categories: "DataScience"
 date: "2017-11-28 14:48:12 +0900"
+comments: true
 ---
 # [ML] DecisionTree
 의사결정나무의 소개는 [링크](https://ko.wikipedia.org/wiki/%EA%B2%B0%EC%A0%95_%ED%8A%B8%EB%A6%AC_%ED%95%99%EC%8A%B5%EB%B2%95)로 대체하고 어떻게 진행되는지만 알아보자

@@ -4,6 +4,7 @@ title: "Text Mining Study [0]"
 date: "2017-10-22 12:59:21 +0900"
 categories: "[Study]Text_Mining"
 author: Soo
+comments: true
 ---
 **Text Mining Study [0]**
 ===

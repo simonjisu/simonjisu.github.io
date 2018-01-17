@@ -41,7 +41,7 @@ jekyll-archives:
     tag: '/tag/:name/'
 
 # Disqus comments
-# disqus_shortname: bencentra
+disqus_shortname: soopace
 
 # Google analytics
 ga_tracking_id: "UA-102691608-1"
@@ -53,6 +53,9 @@ descriptions:
 
   - cat: DataScience
     desc: "DataScience"
+
+  - cat: Deepnlp
+    desc: "Deelnlp"
 
   - cat: Library
     desc: "책을 읽고"
@@ -112,12 +115,12 @@ social:
 #    desc: Connect with me on LinkedIn
 #    share: true
 
-  - name: Google+
-    icon: google-plus
-    username:
-    url:
-    desc: Add me to your Circles
-    share: true
+  # - name: Google+
+  #   icon: google-plus
+  #   username:
+  #   url:
+  #   desc: Add me to your Circles
+  #   share: true
 
   - name: YouTube
     icon: youtube
@@ -133,68 +136,68 @@ social:
     desc: Follow me on Instagram
     share: false
 
-  - name: Pinterest
-    icon: pinterest
-    username:
-    url:
-    desc: Follow me on Pinterest
-    share: true
+  # - name: Pinterest
+  #   icon: pinterest
+  #   username:
+  #   url:
+  #   desc: Follow me on Pinterest
+  #   share: true
+  #
+  # - name: SoundCloud
+  #   icon: soundcloud
+  #   username:
+  #   url:
+  #   desc: Follow me on SoundCloud
+  #   share: false
+  #
+  # - name: Tumblr
+  #   icon: tumblr
+  #   username:
+  #   url:
+  #   desc: Follow me on Tumblr
+  #   share: false
 
-  - name: SoundCloud
-    icon: soundcloud
-    username:
-    url:
-    desc: Follow me on SoundCloud
-    share: false
-
-  - name: Tumblr
-    icon: tumblr
-    username:
-    url:
-    desc: Follow me on Tumblr
-    share: false
-
-  - name: Steam
-    icon: steam
-    username:
-    url:
-    desc: Friend me on Steam
-    share: false
-
-  - name: Dribbble
-    icon: dribbble
-    username:
-    url:
-    desc: Follow me on Dribble
-    share: false
-
-  - name: Vimeo
-    icon: vimeo-square
-    username:
-    url:
-    desc: Follow me on Vimeo
-    share: false
-
-  - name: Vine
-    icon: vine
-    username:
-    url:
-    desc: Follow me on Vine
-    share: false
-
-  - name: Reddit
-    icon: reddit
-    username:
-    url:
-    desc: Share to Reddit
-    share: true
-
-  - name: "Hacker News"
-    icon: hacker-news
-    username:
-    url:
-    desc: Share to Hacker News
-    share: false
+  # - name: Steam
+  #   icon: steam
+  #   username:
+  #   url:
+  #   desc: Friend me on Steam
+  #   share: false
+  #
+  # - name: Dribbble
+  #   icon: dribbble
+  #   username:
+  #   url:
+  #   desc: Follow me on Dribble
+  #   share: false
+  #
+  # - name: Vimeo
+  #   icon: vimeo-square
+  #   username:
+  #   url:
+  #   desc: Follow me on Vimeo
+  #   share: false
+  #
+  # - name: Vine
+  #   icon: vine
+  #   username:
+  #   url:
+  #   desc: Follow me on Vine
+  #   share: false
+  #
+  # - name: Reddit
+  #   icon: reddit
+  #   username:
+  #   url:
+  #   desc: Share to Reddit
+  #   share: true
+  #
+  # - name: "Hacker News"
+  #   icon: hacker-news
+  #   username:
+  #   url:
+  #   desc: Share to Hacker News
+  #   share: false
 
 # Social sharing protocols
 # These are for automatically generating sharing metadata for FB and Twitter
