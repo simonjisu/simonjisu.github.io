@@ -318,17 +318,18 @@ v_t &= v_{t-1} + (1-\beta_1)(g_t^2-v_{t-1}) \\
 \end{aligned}$$
 
 #### Signal-to-Noise(SNR)
-보통의 경우 $\hat{v_t}$ (gradient 제곱의 지수 평균) 이 $\hat{m_t}$ (gradient의 지수 평균) 보다 크기 때문에 $\dfrac{\hat{m_t}}{\sqrt{\hat{v_t}}} \leq 1$ ($\epsilon = 0$ 이라 가정) 가 되서 learning rate 보다 작은 값으로 업데이트 될 것이라는 점이다.
+보통의 경우 $\hat{v}_t$ (gradient 제곱의 지수 평균) 이 $\hat{m}_t$ (gradient의 지수 평균) 보다 크기 때문에 $\dfrac{\hat{m}_t}{\sqrt{\hat{v}_t}} \leq 1$ ($\epsilon = 0$ 이라 가정) 가 되서 learning rate 보다 작은 값으로 업데이트 될 것이라는 점이다.
 
-이를 논문에서는 $\dfrac{\hat{m_t}}{\sqrt{\hat{v_t}}}$ 를 **signal-to-noise ratio(SNR)** 라고 하며, SNR 값이 작아질 수록 step size($\theta_t - \theta_{t-1}$) 도 0에 근접하게 된다. 즉, learning rate 가 점점 작아져 자동적으로 수렴하게 된다는 이야기다. 지금까지 고민하던 고정 학습률의 고민을 해결해 준다.
+이를 논문에서는 $\dfrac{\hat{m}_t}{\sqrt{\hat{v}_t}}$ 를 **signal-to-noise ratio(SNR)** 라고 하며, SNR 값이 작아질 수록 step size($\theta_t - \theta_{t-1}$) 도 0에 근접하게 된다. 즉, learning rate 가 점점 작아져 자동적으로 수렴하게 된다는 이야기다. 지금까지 고민하던 고정 학습률의 고민을 해결해 준다.
 
-그러나 조금 주의할 점은 데이터가 굉장히 sparse한 데이터 경우, 대부분의 $m_{t-1}$, $v_{t-1}$ 의 값은 0이 될 것이고, epoch($t$) 가 커질수록 $\hat{m_t}$, $\hat{v_t}$ 는 그 시점에서의 gradient 로 구성되어 있게 된다. 따라서 업데이트 식은 아래와 같게 된다.
+그러나 조금 주의할 점은 데이터가 굉장히 sparse한 데이터 경우, 대부분의 $m_{t-1}$, $v_{t-1}$ 의 값은 0이 될 것이고, epoch($t$) 가 커질수록 $\hat{m}_t$, $\hat{v}_t$ 는 그 시점에서의 gradient 로 구성되어 있게 된다. 따라서 업데이트 식은 아래와 같게 된다.
 
 $$\theta_t \leftarrow \theta_{t-1} - \alpha \dfrac{1-\beta_1}{\sqrt{1-\beta_2}}$$
 
 이런 상황에서는 $\dfrac{1-\beta_1}{\sqrt{1-\beta_2}}$ 값이 1 보다 크기 때문에($beta_1 = 0.9, \beta_2 = 0.999$, 계산하면 약 3.16) 발산할 가능성이 높아진다. 이런 상황은 거의 드물다고 한다.
 
 ---
+
 |Video|Graph|
 |:-:|:-:|
 |<video controls="controls" style="width: 400px;" autoplay loop muted markdown="1"> <source type="video/mp4" src="/assets/ML/nn/Adam.mp4"  markdown="1"> </source>| <img src="/assets/ML/nn/Adam.png" alt="Drawing" style="width: 400px;"/> |
