@@ -28,11 +28,11 @@ $$\begin{aligned} \sigma(a) & = \dfrac{1}{1+e^{-a}} \\ \sigma'(a) &= \sigma(a)(1
 
 실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.
 
-$\begin{aligned} Input_{(784)}
+$$\begin{aligned} Input_{(784)}
 &\rightarrow [Affine1 \rightarrow Activation1]_{hidden1: (100)} \\
 &\rightarrow [Affine2 \rightarrow Activation2]_{hidden2: (50)} \\
 &\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]_{output:(10)_{}}
-\end{aligned}$
+\end{aligned}$$
 
 Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgoid로 했다.
 아래는 200 epoch까지 중간에 Activation 값들의 분포를 찍어본 것이다. 가중치 초기 값은 1을 곱한 것으로써 랜덤 Initialization 되었다고 생각하면 된다.(= $W$에다 1을 곱했다.)
@@ -76,7 +76,7 @@ $$ Var(W)=\dfrac{1}{n_{in}} $$
 | 학습결과 |
 |:-:|
 |<img src="/assets/ML/nn/6/sig1.png" alt="Drawing"/> |
-| $w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. <br></br>또한 매번 실행시 학습 속도가 다르다. |
+| $w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. <br> 또한 매번 실행시 학습 속도가 다르다. |
 | <img src="/assets/ML/nn/6/sig2.png" alt="Drawing"/>   |
 | $w_{std} = 0.01$: 학습이 전혀 안되는 것을 확인 할 수 있다.  |
 |  <img src="/assets/ML/nn/6/sig3.png" alt="Drawing"/> |
