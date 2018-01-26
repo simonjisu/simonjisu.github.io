@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NUMPY with NN - 6</title>
+  <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 6학습관련 기술 Part 2">
+  
+  <meta name="author" content="Soo">
+  <meta name="copyright" content="&copy; Soo 2018">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 6학습관련 기술 Part 2" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:site_name" content="Soo" />
+  <meta property="og:title" content="NUMPY with NN - 6" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="NUMPY with NN - 6">
+  <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 6학습관련 기술 Part 2">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+
+
+  <!-- <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script> -->
+
+  <!-- Latex -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
+    MathJax.Hub.Config({
+        TeX: {
+            extensions: ["mhchem.js", "cancel.js"]
+        },
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true,
+            ignoreClass: "no-mathjax",
+        },
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            // linebreaks: { automatic: true }
+        },
+        menuSettings: {
+            zoom: "Click",
+            zscale: "200%"
+        }
+    });
+  </script>
+
+
+
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Soo">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+          <li class="nav-link"><a href="/typography/">Typography</a>
+          
+        
+          
+        
+          
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">NUMPY with NN - 6</h1>
+      <p class="info">by <strong>Soo</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">January 24, 2018</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/DataScience">Datascience</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="numpy--neural-network-basic---6">Numpy로 짜보는 Neural Network Basic - 6</h1>
+<hr />
+<h2 id="part-2">학습관련 기술 Part 2</h2>
+
+<h3 id="weight-initialization">가중치 초기값 설정(Weight Initialization)</h3>
+<p>이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형 함수의 가중치 미분을 구해서 학습하고자 하는 파라미터를 업데이트 하게 된다.</p>
+
+<p>[<a href="https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html"><span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic - 2</span></a>] 참고</p>
+
+<p>그렇다면 Sigmoid를 예를 들어서 이야기 해보자, 아래 그림은 Sigmoid 함수와 미분의 그래프다.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} \sigma(a) & = \dfrac{1}{1+e^{-a}} \\ \sigma'(a) &= \sigma(a)(1 - \sigma(a))\end{aligned} %]]></script>
+
+<p><img src="/assets/ML/nn/6/sigmoid_prime.png" alt="Drawing" /></p>
+
+<p>선형결합을 통해 구해진 값 a은 뉴런을 거쳐서 Sigmoid로 활성화 된 함수는 대부분 $[0, 1]$ 사이의 값을 가지게 될 것이다. 선형결합을 통해 구해진 값이 조금만 커져도 (약 $[-5, 5]$ 이외 값) Gradient 값이 0으로 되는 경우가 많아진다. 이를 <strong>Gradient Vanishing Problem</strong>, 즉 가중치 0에 가까워져 업데이트 안되는 현상을 말한다. 따라서 가중치 초기 값이 엄청 작게 설정 했다고 해도 dot product해진 값이 커지면 이런 현상이 일어날 수가 있다.</p>
+
+<h4 id="mnist--">Mnist 데이터로 살펴보기</h4>
+
+<p>실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.</p>
+
+<p>$\begin{aligned} Input_{(784)}
+&amp;\rightarrow [Affine1 \rightarrow Activation1]<em>{hidden1: (100)} <br />
+&amp;\rightarrow [Affine2 \rightarrow Activation2]</em>{hidden2: (50)} <br />
+&amp;\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]<em>{output:(10)</em>{}}
+\end{aligned}$</p>
+
+<p>Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgoid로 했다.
+아래는 200 epoch까지 중간에 Activation 값들의 분포를 찍어본 것이다. 가중치 초기 값은 1을 곱한 것으로써 랜덤 Initialization 되었다고 생각하면 된다.(= $W$에다 1을 곱했다.)</p>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_act1.mp4" /> &lt;/source&gt; </video>
+
+<p>대부분의 값이 0과 1로 이루어져 있다는 것을 알 수 있다. 이는 즉 대부분의 값이 미분을 했을 때 0이될 가능성이 높다는 뜻이다.</p>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_back1.mp4" /> &lt;/source&gt; </video>
+
+<p>앞쪽의 Layer로 backward 할 수록 가중치 미분 값이 0에 가까워지는 것을 볼 수 있다.</p>
+
+<p>우리는 <a href="https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html"><span style="color: #7d7ee8">4편</span></a>에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?</p>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_act2.mp4" /> &lt;/source&gt; </video>
+
+<p>가중치 활성화 값이 0.5로 치우쳐져 두 레이어의 분포가 거의 비슷해졌다. 다수의 뉴런이 같은 값을 출력하고 있다는 뜻으로 우리가 비선형함수를 써서 예측 불가능하게 만드려고 한 노력을 물거품으로 만들어 버렸다. 즉, 위에서 이야기 했던 층을 여러게 쌓은 의미가 없어진다. 이를 <strong>“표현력이 제한된다”</strong> 라고 말한다.</p>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_back2.mp4" /> &lt;/source&gt; </video>
+
+<p>가중치의 미분 값들이 대부분 0 근처에 있는 것을 확인 할 수가 있다.</p>
+
+<p>따라서 초기 값을 잘 설정해주어야 하는데, Sigmoid 함수에 대해서 자주 사용하는 Xavier 초기 값이 있다.</p>
+
+<p>Paper: <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf"><span style="color: #7d7ee8">Understanding the difficulty of training deep feedforward neural networks</span></a></p>
+
+<script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
+
+<script type="math/tex; mode=display">Var(W)=\dfrac{1}{n_{in}}</script>
+
+<p>즉 가중치 초기화를 할때 각 파라미터 $W$ 에 대하여 $\dfrac{1}{\sqrt{n_{in}}}$ 를 곱해주는 것이다.</p>
+
+<p>아래는 Xavier 가중치 초기값을 설정했을 때의 Activation 분포다. 두 층이 전혀 다른 분포가 되어있는 것을 볼 수가 있다.</p>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_act3.mp4" /> &lt;/source&gt; </video>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_back3.mp4" /> &lt;/source&gt; </video>
+
+<p>각각의 가중치 초기화 값에 대한 학습 결과를 살펴보자. 총 10000번의 epochs를 돌린 결과다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">학습결과</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/ML/nn/6/sig1.png" alt="Drawing" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">$w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. <br />&lt;/br&gt;또한 매번 실행시 학습 속도가 다르다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/ML/nn/6/sig2.png" alt="Drawing" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">$w_{std} = 0.01$: 학습이 전혀 안되는 것을 확인 할 수 있다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/ML/nn/6/sig3.png" alt="Drawing" /></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">$w_{std} = \dfrac{1}{\sqrt{n}}$: test 성적이 조금 더 좋아 졌다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="relu">활성화 함수를 바꿔보자: ReLu</h4>
+<p>ReLu의 미분 값은 $x &gt; 0$ 에서 $1$ 이고 나머지는 $0$ 이다. ReLu는 <strong>He</strong> 라는 초기값을 설정하게 된다.</p>
+
+<script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
+
+<script type="math/tex; mode=display">Var(W)=\dfrac{2}{n_{in}}</script>
+
+<p>즉, 가중치 $W$ 에 $\sqrt{\dfrac{2}{n_{in}}}$ 을 곱하게 된다. 아래 동영상을 보면 0보다 큰 부분에서 꾸준히 활성화 되는 모습을 볼 수 있다.</p>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/relu_act3.mp4" /> &lt;/source&gt; </video>
+
+<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/relu_back3.mp4" /> &lt;/source&gt; </video>
+
+<p>다음 시간에는 배치 정규화에 대해서 알아보자.</p>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<!-- section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+6&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F01%2F24%2Fnumpywithnn_6.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section -->
+
+
+
+
+
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'soopace';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Soo</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+          <li class="nav-link"><a href="/typography/">Typography</a>
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:simonjisu@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">simonjisu@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://www.facebook.com/simonjisu" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/simonjisu" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">My Blog
+</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+  $("code").addClass("python")
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+$("code").addClass("python")
+</script>
+
+
+
+
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102691608-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>

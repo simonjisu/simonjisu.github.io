@@ -16,7 +16,7 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
@@ -71,8 +71,14 @@
   <link rel="canonical" href="http://simonjisu.github.io/">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
+
+  <!-- <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script> -->
+
   <!-- Latex -->
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
       MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
@@ -96,7 +102,7 @@
         displayAlign: 'center',
         "HTML-CSS": {
             styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
+            // linebreaks: { automatic: true }
         },
         menuSettings: {
             zoom: "Click",
@@ -104,6 +110,8 @@
         }
     });
   </script>
+
+
 
 </head>
 
@@ -168,6 +176,50 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/datascience/2018/01/25/numpywithnn_7.html">NUMPY with NN - 7</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Numpy로 짜보는 Neural Network Basic - 7 학습관련 기술 Part 3 배치 정규화 (Batch Normalization) 배치 정규화란 미니배치 단위로 선형합인 $a$ 값을 정규화하는 것이다. 즉, 미니배치에 한해서 데이터 분포가 평균이 0 분산이 1이 되도록 한다. 이는 데이터 분포가 덜 치우치게 하는 효과가 있어서 가중치 초기화 값의 영향을 덜 받게한다. 또한,...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">January 25, 2018</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/DataScience">Datascience</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/datascience/2018/01/24/numpywithnn_6.html">NUMPY with NN - 6</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Numpy로 짜보는 Neural Network Basic - 6 학습관련 기술 Part 2 가중치 초기값 설정(Weight Initialization) 이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">January 24, 2018</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/DataScience">Datascience</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/datascience/2018/01/13/numpywithnn_5.html">NUMPY with NN - 5</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -219,50 +271,6 @@
     </section>
     <section class="post-meta">
       <div class="post-date">December 15, 2017</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/DataScience">Datascience</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/datascience/2017/12/10/numpywithnn_3.html">NUMPY with NN - 3</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>Numpy로 짜보는 Neural Network Basic - 3 저번 시간에는 Feedforward 과정을 보았는데, 정확도가 8.578% 밖에 안됐다. 이제 Neural Network가 데이터로부터 어떻게 학습하여 정확도를 올리는지 보자. 손실 함수(Loss Function) 왜 우리의 목표인 정확도를 안쓰고 손실 함수라는 매개변수를 설정하는 걸까? 그 이유는 먼저 밝히면 신경망 학습에 미분이 사용되기 때문이다. 최적의 가중치(그리고 편향)을...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">December 10, 2017</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/DataScience">Datascience</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/datascience/2017/12/08/numpywithnn_2.html">NUMPY with NN - 2</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>Numpy로 짜보는 Neural Network Basic - 2 저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자. 활성화 함수(Activation Function) 단일 퍼셉트론의 과정을 담은 그림과 수식이다. 각 뉴런(동그라미들)에서 다음 층의 뉴런(오른쪽 큰 동그라미)로 진행하는데 우선 각 $x$ 를 가중합...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">December 8, 2017</div>
       <div class="post-categories">
       in 
         
@@ -382,19 +390,17 @@
     </div>
 
   </div>
-
 </footer>
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
   // Default syntax highlighting
   hljs.initHighlightingOnLoad();
-
+  $("code").addClass("python")
   // Header
   var menuToggle = $('#js-mobile-menu').unbind();
   $('#js-navigation-menu').removeClass("show");
@@ -407,19 +413,20 @@ $(document).ready(function() {
     });
   });
 });
-
+$("code").addClass("python")
 </script>
 
 
 
 
+
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-102691608-1', 'auto');
-    ga('send', 'pageview');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102691608-1', 'auto');
+  ga('send', 'pageview');
 </script>
 
 

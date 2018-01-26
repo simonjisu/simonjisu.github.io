@@ -17,11 +17,7 @@ comments: true
 <img src="/assets/ML/nn/NN.jpg" alt="Drawing" style="width: 350px;"/>
 
 
-$$
-a = b + w_1x_1 + w_2x_2\\
-y = h(a)
-$$
-
+$$ a = b + w_1x_1 + w_2x_2 \\ y = h(a) $$
 
 단일 퍼셉트론의 과정을 담은 그림과 수식이다. 각 뉴런(동그라미들)에서 다음 층의 뉴런(오른쪽 큰 동그라미)로 진행하는데 우선 각 $x$ 를 가중합 $a$ 를 구하고, 그 합을 다시 어떤 함수 $h$ 를 거쳐 Output인 $y$ 가 나오게 된다.
 

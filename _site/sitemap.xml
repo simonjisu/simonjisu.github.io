@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://simonjisu.github.io/datascience/2018/01/25/numpywithnn_7.html</loc>
+<lastmod>2018-01-25T12:54:15+09:00</lastmod>
+</url>
+<url>
+<loc>http://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html</loc>
+<lastmod>2018-01-24T12:31:37+09:00</lastmod>
+</url>
+<url>
 <loc>http://simonjisu.github.io/datascience/2018/01/13/numpywithnn_5.html</loc>
 <lastmod>2018-01-13T14:17:06+09:00</lastmod>
 </url>

@@ -12,7 +12,7 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/{{ site.highlightjs_theme }}.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/{{ site.highlightjs_theme }}.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
@@ -71,8 +71,14 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
 
+
+  <!-- <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script> -->
+
   <!-- Latex -->
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
       MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
@@ -96,7 +102,7 @@
         displayAlign: 'center',
         "HTML-CSS": {
             styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
+            // linebreaks: { automatic: true }
         },
         menuSettings: {
             zoom: "Click",
@@ -104,5 +110,7 @@
         }
     });
   </script>
+
+
 
 </head>

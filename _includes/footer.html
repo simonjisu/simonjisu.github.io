@@ -47,19 +47,17 @@
     </div>
 
   </div>
-
 </footer>
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
   // Default syntax highlighting
   hljs.initHighlightingOnLoad();
-
+  $("code").addClass("python")
   // Header
   var menuToggle = $('#js-mobile-menu').unbind();
   $('#js-navigation-menu').removeClass("show");
@@ -72,8 +70,9 @@ $(document).ready(function() {
     });
   });
 });
-
+$("code").addClass("python")
 </script>
+
 
 {% if page.custom_js %}
 <!-- Custom page specific js files -->

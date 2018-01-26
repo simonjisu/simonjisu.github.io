@@ -16,7 +16,7 @@
 
   <!-- External libraries -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
 
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
@@ -71,8 +71,14 @@
   <link rel="canonical" href="http://simonjisu.github.io/category/jekyll/">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
+
+  <!-- <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script> -->
+
   <!-- Latex -->
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
       MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
@@ -96,7 +102,7 @@
         displayAlign: 'center',
         "HTML-CSS": {
             styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
+            // linebreaks: { automatic: true }
         },
         menuSettings: {
             zoom: "Click",
@@ -104,6 +110,8 @@
         }
     });
   </script>
+
+
 
 </head>
 
@@ -252,19 +260,17 @@
     </div>
 
   </div>
-
 </footer>
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
   // Default syntax highlighting
   hljs.initHighlightingOnLoad();
-
+  $("code").addClass("python")
   // Header
   var menuToggle = $('#js-mobile-menu').unbind();
   $('#js-navigation-menu').removeClass("show");
@@ -277,19 +283,20 @@ $(document).ready(function() {
     });
   });
 });
-
+$("code").addClass("python")
 </script>
 
 
 
 
+
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-102691608-1', 'auto');
-    ga('send', 'pageview');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102691608-1', 'auto');
+  ga('send', 'pageview');
 </script>
 
 

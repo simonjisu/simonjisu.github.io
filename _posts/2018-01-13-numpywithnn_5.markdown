@@ -334,7 +334,7 @@ $$\theta_t \leftarrow \theta_{t-1} - \alpha \dfrac{1-\beta_1}{\sqrt{1-\beta_2}}$
 
 |Video|Graph|
 |:-:|:-:|
-|<video controls="controls" style="width: 400px;" autoplay loop muted markdown="1"> <source type="video/mp4" src="/assets/ML/nn/Adam.mp4"  markdown="1"> </source>| <img src="/assets/ML/nn/Adam.png" alt="Drawing" style="width: 400px;"/> |
+|<video controls="controls" style="width: 400px;" autoplay loop muted markdown="1"> <source type="video/mp4" src="/assets/ML/nn/Adam.mp4"  markdown="1"> </source> </video>| <img src="/assets/ML/nn/Adam.png" alt="Drawing" style="width: 400px;"/> |
 
 논문 결론 부에는 Adam 알고리즘이 큰 데이터 셋이나 고차원 파라미터 공간을 학습하는데 효율적이다라고 이야기 하고 있다.
 

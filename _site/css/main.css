@@ -450,6 +450,10 @@ pre code.hljs {
     display: block;
     margin: auto;
     width: 90%; }
+  .page-content video {
+    display: block;
+    margin: auto;
+    width: 90%; }
   .page-content .post ul {
     margin-bottom: 1em; }
   .page-content .post .post-header-container .scrim {
