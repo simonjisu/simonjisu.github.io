@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 26 Jan 2018 20:37:50 +0900</pubDate>
-    <lastBuildDate>Fri, 26 Jan 2018 20:37:50 +0900</lastBuildDate>
+    <pubDate>Fri, 26 Jan 2018 20:46:38 +0900</pubDate>
+    <lastBuildDate>Fri, 26 Jan 2018 20:46:38 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -385,11 +385,12 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 
 &lt;p&gt;실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.&lt;/p&gt;
 
-&lt;p&gt;$\begin{aligned} Input_{(784)}
-&amp;amp;\rightarrow [Affine1 \rightarrow Activation1]&lt;em&gt;{hidden1: (100)} &lt;br /&gt;
-&amp;amp;\rightarrow [Affine2 \rightarrow Activation2]&lt;/em&gt;{hidden2: (50)} &lt;br /&gt;
-&amp;amp;\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]&lt;em&gt;{output:(10)&lt;/em&gt;{}}
-\end{aligned}$&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} Input_{(784)}
+&amp;\rightarrow [Affine1 \rightarrow Activation1]_{hidden1: (100)} \\
+&amp;\rightarrow [Affine2 \rightarrow Activation2]_{hidden2: (50)} \\
+&amp;\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]_{output:(10)_{}}
+\end{aligned} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgoid로 했다.
 아래는 200 epoch까지 중간에 Activation 값들의 분포를 찍어본 것이다. 가중치 초기 값은 1을 곱한 것으로써 랜덤 Initialization 되었다고 생각하면 된다.(= $W$에다 1을 곱했다.)&lt;/p&gt;
@@ -441,7 +442,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/ML/nn/6/sig1.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;$w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. &lt;br /&gt;&amp;lt;/br&amp;gt;또한 매번 실행시 학습 속도가 다르다.&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. &lt;br /&gt; 또한 매번 실행시 학습 속도가 다르다.&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/ML/nn/6/sig2.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/td&gt;
