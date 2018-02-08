@@ -6,9 +6,122 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 03 Feb 2018 15:56:04 +0900</pubDate>
-    <lastBuildDate>Sat, 03 Feb 2018 15:56:04 +0900</lastBuildDate>
+    <pubDate>Thu, 08 Feb 2018 16:21:26 +0900</pubDate>
+    <lastBuildDate>Thu, 08 Feb 2018 16:21:26 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>NUMPY with NN - 8</title>
+        <description>&lt;h1 id=&quot;numpy--neural-network-basic---8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 8&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h2 id=&quot;section&quot;&gt;총 정리&lt;/h2&gt;
+&lt;p&gt;지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt; 모든 코드 링크&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;package-load&quot;&gt;Package Load&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from common.Multilayer import MLP
+from dataset.mnist import load_mnist
+from common.optimizer import *
+import time
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;data-load&quot;&gt;Data Load&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+print(x_train.shape)
+print(y_train.shape)
+print(x_test.shape)
+print(y_test.shape)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;(60000, 784)&lt;br /&gt;(60000, 10)&lt;br /&gt;(10000, 784)&lt;br /&gt;(10000, 10)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;network--optimizer-settings&quot;&gt;Network &amp;amp; Optimizer settings&lt;/h3&gt;
+
+&lt;p&gt;우리의 네트워크는 총 3층이며 Input Size가 784, Hidden node는 각각 100, 50개, Output 은 10(숫자 0~9까지의 손글씨 분류이기 때문)이다.&lt;/p&gt;
+
+&lt;p&gt;활성화 함수는 &lt;strong&gt;ReLu&lt;/strong&gt;, 초기값도 이에 따라 &lt;strong&gt;He&lt;/strong&gt; 를 써준다. 그리고 중간에 Batch Normalization을 써준다.&lt;/p&gt;
+
+&lt;p&gt;가중치 업데이트를 위한 옵티마이저는 &lt;strong&gt;Adam&lt;/strong&gt; 을 쓰고, Loss Function은 &lt;strong&gt;Cross Entropy&lt;/strong&gt; 를 쓰게 된다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
+         activation='relu', weight_init_std='he', use_batchnorm=True)
+optimizer = Adam()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;training--test&quot;&gt;Training &amp;amp; test&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loss_list = []
+train_acc_list = []
+test_acc_list = []
+epoch_list = []
+
+epoch_num=3000
+train_size = x_train.shape[0]
+batch_size = 100
+epsilon = 1e-6
+
+iter_per_epoch = max(train_size / batch_size, 1)
+
+start = start = time.time()
+
+for epoch in range(epoch_num):
+    # get mini batch:
+    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
+    x_batch = x_train[batch_mask]
+    y_batch = y_train[batch_mask]
+
+    grads = nn.gradient(x_batch, y_batch)
+
+    optimizer.update(nn.params, grads)
+
+    # 1에폭당 정확도 계산
+    if epoch % iter_per_epoch == 0:
+        loss = nn.loss(x_batch, y_batch)
+        train_loss_list.append(loss)
+        train_acc = nn.accuracy(x_train, y_train)
+        train_acc_list.append(train_acc)
+        test_acc = nn.accuracy(x_test, y_test)
+        test_acc_list.append(test_acc)
+        epoch_list.append(epoch)
+        print('# {0} | loss: {1:.5f} | trian acc: {2:.5f} | test acc: {3:.5f}'.format(epoch, loss, train_acc, test_acc))
+    elif epoch == (epoch_num - 1):
+        loss = nn.loss(x_batch, y_batch)
+        train_loss_list.append(loss)
+        train_acc = nn.accuracy(x_train, y_train)
+        train_acc_list.append(train_acc)
+        test_acc = nn.accuracy(x_test, y_test)
+        test_acc_list.append(test_acc)
+        epoch_list.append(epoch)
+        print('# {0} | loss: {1:.5f} | trian acc: {2:.5f} | test acc: {3:.5f}'.format(epoch, loss, train_acc, test_acc))
+
+end = time.time()
+print('total time:', (end - start))        
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;# 0 | loss: 11.06622 | trian acc: 0.11408 | test acc: 0.11910&lt;br /&gt;# 600 | loss: 0.23165 | trian acc: 0.92055 | test acc: 0.92020&lt;br /&gt;# 1200 | loss: 0.19112 | trian acc: 0.93975 | test acc: 0.94180&lt;br /&gt;# 1800 | loss: 0.08235 | trian acc: 0.95188 | test acc: 0.95040&lt;br /&gt;# 2400 | loss: 0.09155 | trian acc: 0.95898 | test acc: 0.95600&lt;br /&gt;# 2999 | loss: 0.09883 | trian acc: 0.96513 | test acc: 0.96150&lt;br /&gt;total time: 27.169809818267822&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/train_test-graph.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;시간은 3000 Epoch를 도는데 약 30초가 안걸렸으며, 테스트 결과도 우수하게 나오는 것으로 확인된다. CNN으로 하면 더 높아질 것으로 예상된다.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 08 Feb 2018 15:13:40 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/02/08/numpywithnn_8.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/02/08/numpywithnn_8.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>NUMPY with NN - 7</title>
@@ -147,7 +260,7 @@ dsq = \dfrac{\partial L}{\partial sq} = \dfrac{\partial L}{\partial var} \dfrac{
 &lt;p&gt;Forward : $xmu = x_i - \mu$&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;$dxmu = dxmu_1 + dxmu_2$ 로 정의 된다. 곱의 미분 법칙 생각해보면 된다. $h(x) = f(x) g(x)$ 를 $x$ 에 대해서 미분하면 $f’(x)g(x) + f(x)g’(x)$ 기 때문이다. &lt;br /&gt;&amp;lt;/br&amp;gt;
+  &lt;li&gt;$dxmu = dxmu_1 + dxmu_2$ 로 정의 된다. 곱의 미분 법칙 생각해보면 된다. $h(x) = f(x) g(x)$ 를 $x$ 에 대해서 미분하면 $f’(x)g(x) + f(x)g’(x)$ 기 때문이다. &lt;br /&gt;
 또한 이것도 덧셈과 마찬가지로 그대로 흘러 보내는다 밑에 쪽은 -1 을 곱해서 흘려 보낸다.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -3303,50 +3416,6 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
         
         
         <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>Text Mining Study [0]</title>
-        <description>&lt;h1 id=&quot;text-mining-study-0&quot;&gt;&lt;strong&gt;Text Mining Study [0]&lt;/strong&gt;&lt;/h1&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;1. 개요&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;텍스트 마이닝(Text Mining)&lt;/strong&gt; 혹은 &lt;strong&gt;덱스트 애널리틱스(text analytics)&lt;/strong&gt;란, 반정형 또는 비정형 텍스트 데이터의 분석과 처리를 위한 다양한 기술을 일컫는 포괄적 용어.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;텍스트 마이닝의 핵심&lt;/h3&gt;
-&lt;p&gt;텍스트 마이닝의 핵심은 비정형 혹은 반정형의 텍스트 또는 텍스트 집합으로부터 정보 가치가 있는 항목들을 추출하여 정형 텍스트, 즉 표로 구성하는 것이라고 할 수 있다. 이 과정은 대체로 정보 가치가 있는 것으로 판단되는 항목, 혹은 단위의 인식, 그리고 특정 범위 내에서의 이 단위의 출현 빈도 계수로 구성된다.&lt;/p&gt;
-
-&lt;h3 id=&quot;text-data--&quot;&gt;Text Data 분석의 어려움&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;텍스트 데이터는 항목(단위) 구분이 명시적이지 않음&lt;/li&gt;
-  &lt;li&gt;데이터 항목 구분이 중요한 이유는 Reductionism:
-    &lt;ul&gt;
-      &lt;li&gt;높은 단계의 사상이나 개념을 하위 단계의 요소로 세분화 하여 명확하게 정의 가능&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;기호의 성질: 기호의 자의성
-    &lt;ul&gt;
-      &lt;li&gt;심볼(Symbol)과 의미가 자꾸 변하거나 모든 사람들에게 항상 일치하지 않다. 또한 컴퓨터와 사람이 이해하는 언어 기호가 달라서 사람의 언어기호를 computer native하게 만들어 줘야함&lt;/li&gt;
-      &lt;li&gt;해결방안:
-        &lt;ol&gt;
-          &lt;li&gt;규칙을 만들고 그것에 따르게 한다. 그러나 만들기 힘들고, 모두가 만족할 수가 없다는 단점이 있다.&lt;/li&gt;
-          &lt;li&gt;경험, 데이터에 의해 컴퓨터에게 학습하게 한다. 최근 추세.&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;2. 텍스트 분석의 과정&lt;/h2&gt;
-&lt;p&gt;과제의 목표 설정 $\rightarrow$ 데이터 입수 $\rightarrow$ 데이터 준비 $\rightarrow$ 데이터 탐색 $\rightarrow$ 데이터 모델링&lt;/p&gt;
-</description>
-        <pubDate>Sun, 22 Oct 2017 12:59:21 +0900</pubDate>
-        <link>http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html</guid>
-        
-        
-        <category>[Study]Text_Mining</category>
         
       </item>
     

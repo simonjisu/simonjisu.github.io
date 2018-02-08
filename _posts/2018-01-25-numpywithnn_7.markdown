@@ -126,7 +126,7 @@ $$dxmu_2 = \dfrac{\partial L}{\partial xmu_2} = \dfrac{\partial L}{\partial sq} 
 
 Forward : $xmu = x_i - \mu$
 
-* $dxmu = dxmu_1 + dxmu_2$ 로 정의 된다. 곱의 미분 법칙 생각해보면 된다. $h(x) = f(x) g(x)$ 를 $x$ 에 대해서 미분하면 $f'(x)g(x) + f(x)g'(x)$ 기 때문이다. <br></br>
+* $dxmu = dxmu_1 + dxmu_2$ 로 정의 된다. 곱의 미분 법칙 생각해보면 된다. $h(x) = f(x) g(x)$ 를 $x$ 에 대해서 미분하면 $f'(x)g(x) + f(x)g'(x)$ 기 때문이다. <br>
 또한 이것도 덧셈과 마찬가지로 그대로 흘러 보내는다 밑에 쪽은 -1 을 곱해서 흘려 보낸다.
 
 $$\begin{cases}
