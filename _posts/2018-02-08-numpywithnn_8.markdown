@@ -103,3 +103,28 @@ print('total time:', (end - start))
 <img src="/assets/ML/nn/train_test-graph.png" alt="Drawing" style="width=500px"/>
 
 시간은 3000 Epoch를 도는데 약 30초가 안걸렸으며, 테스트 결과도 우수하게 나오는 것으로 확인된다. CNN으로 하면 더 높아질 것으로 예상된다.
+
+### Model Check
+
+```
+def check(x, y, model):
+    pred_y = model.predict(x)
+    if x.ndim != 2:
+        x = x.reshape(28, 28)
+
+    print('Predict Answer: {}'.format(np.argmax(pred_y)))
+    print('Real Answer: {}'.format(np.argmax(y)))
+    plt.imshow(x, cmap='binary')
+    plt.grid(False)
+    plt.axis('off')
+    plt.show()
+```
+
+테스트 데이터중 하나 골라서 실험해보자
+
+```
+check(x_test[45], y_test[45], nn)
+```
+>Predict Answer: 5<br>Real Answer: 5
+>
+> <img src="/assets/ML/nn/num5.png" alt="Drawing" height="100" width="100"/>

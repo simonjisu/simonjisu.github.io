@@ -292,6 +292,33 @@ print('total time:', (end - start))
 
 <p>시간은 3000 Epoch를 도는데 약 30초가 안걸렸으며, 테스트 결과도 우수하게 나오는 것으로 확인된다. CNN으로 하면 더 높아질 것으로 예상된다.</p>
 
+<h3 id="model-check">Model Check</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def check(x, y, model):
+    pred_y = model.predict(x)
+    if x.ndim != 2:
+        x = x.reshape(28, 28)
+
+    print('Predict Answer: {}'.format(np.argmax(pred_y)))
+    print('Real Answer: {}'.format(np.argmax(y)))
+    plt.imshow(x, cmap='binary')
+    plt.grid(False)
+    plt.axis('off')
+    plt.show()
+</code></pre>
+</div>
+
+<p>테스트 데이터중 하나 골라서 실험해보자</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>check(x_test[45], y_test[45], nn)
+</code></pre>
+</div>
+<blockquote>
+  <p>Predict Answer: 5<br />Real Answer: 5</p>
+
+  <p><img src="/assets/ML/nn/num5.png" alt="Drawing" height="100" width="100" /></p>
+</blockquote>
+
 </article>
 
 

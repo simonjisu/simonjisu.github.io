@@ -449,7 +449,7 @@ pre code.hljs {
   .page-content img {
     display: block;
     margin: auto;
-    width: 90%; }
+    width: auto; }
   .page-content video {
     display: block;
     margin: auto;

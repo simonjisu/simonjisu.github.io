@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Feb 2018 16:21:26 +0900</pubDate>
-    <lastBuildDate>Thu, 08 Feb 2018 16:21:26 +0900</lastBuildDate>
+    <pubDate>Thu, 08 Feb 2018 17:04:01 +0900</pubDate>
+    <lastBuildDate>Thu, 08 Feb 2018 17:04:01 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -113,6 +113,33 @@ print('total time:', (end - start))
 &lt;p&gt;&lt;img src=&quot;/assets/ML/nn/train_test-graph.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;시간은 3000 Epoch를 도는데 약 30초가 안걸렸으며, 테스트 결과도 우수하게 나오는 것으로 확인된다. CNN으로 하면 더 높아질 것으로 예상된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;model-check&quot;&gt;Model Check&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def check(x, y, model):
+    pred_y = model.predict(x)
+    if x.ndim != 2:
+        x = x.reshape(28, 28)
+
+    print('Predict Answer: {}'.format(np.argmax(pred_y)))
+    print('Real Answer: {}'.format(np.argmax(y)))
+    plt.imshow(x, cmap='binary')
+    plt.grid(False)
+    plt.axis('off')
+    plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;테스트 데이터중 하나 골라서 실험해보자&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;check(x_test[45], y_test[45], nn)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Predict Answer: 5&lt;br /&gt;Real Answer: 5&lt;/p&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/ML/nn/num5.png&quot; alt=&quot;Drawing&quot; height=&quot;100&quot; width=&quot;100&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         <pubDate>Thu, 08 Feb 2018 15:13:40 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2018/02/08/numpywithnn_8.html</link>
