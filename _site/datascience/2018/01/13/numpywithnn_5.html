@@ -775,6 +775,8 @@ v_t &= v_{t-1} + (1-\beta_1)(g_t^2-v_{t-1}) \\
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<!-- Mathjax -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
 <script type="text/javascript">
@@ -798,15 +800,21 @@ $("code").addClass("python")
 </script>
 
 <!--lightSlider-->
-<script src="/js/lightslider.min.js"></script>
 <script src="/js/lightslider.js"></script>
-
-<script type="text/javascript">
+<script src='/js/multi_slider.js' type="text/javascript"></script>
+<!-- <script type="text/javascript" >
   $(document).ready(function() {
-    $('#light-slider').lightSlider();
+    $('#light-slider').lightSlider({
+      item: 1,
+      keyPress: false,
+      controls: true,
+      easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+      rtl:false,
+      slideMargin: 100,
+      loop: true
+    });
   });
-</script>
-
+</script> -->
 
 
 

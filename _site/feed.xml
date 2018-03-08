@@ -6,16 +6,16 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Mar 2018 15:28:58 +0900</pubDate>
-    <lastBuildDate>Thu, 08 Mar 2018 15:28:58 +0900</lastBuildDate>
+    <pubDate>Fri, 09 Mar 2018 00:23:27 +0900</pubDate>
+    <lastBuildDate>Fri, 09 Mar 2018 00:23:27 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
         <title>RNN &amp; LSTM - 1</title>
-        <description>&lt;h1 id=&quot;rnn--lstm&quot;&gt;RNN 과 LSTM&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;rnn--lstm&quot;&gt;최대한 쉽게 설명한 RNN 과 LSTM&lt;/h1&gt;
 
 &lt;h2 id=&quot;rnnrecurrent-neural-network&quot;&gt;RNN(Recurrent Neural Network)&lt;/h2&gt;
-&lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN의 장단점과 기존 신경망과 어떻게 다른지을 한번 살펴보자.&lt;/p&gt;
+&lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.&lt;/p&gt;
 
 &lt;h2 id=&quot;rnn-&quot;&gt;RNN 구조&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
@@ -36,22 +36,61 @@
 
 &lt;p&gt;Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터와 그 다음 데이터간의 구조는 독립적이라고 할 수 있다.&lt;/p&gt;
 
-&lt;h3 id=&quot;rnn--1&quot;&gt;RNN 구조&lt;/h3&gt;
-&lt;p&gt;예시로 time step 이 3인 RNN을 살펴보자.&lt;/p&gt;
+&lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
+&lt;p&gt;예시로 time step($T$)이 3인 RNN을 살펴보자. (좌우 클릭으로 프로세스 과정 볼 수 있다)&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider&quot;&gt;
-    &lt;li data-thumb=&quot;/assets/ML/rnn/rnn_0.png&quot; data-src=&quot;/assets/ML/rnn/rnn_0.png&quot;&gt;
-      &lt;img src=&quot;/assets/ML/rnn/rnn_0.png&quot; /&gt;
-    &lt;/li&gt;
-    &lt;li data-thumb=&quot;/assets/ML/rnn/rnn_1.png&quot; data-src=&quot;/assets/ML/rnn/rnn_1.png&quot;&gt;
-      &lt;img src=&quot;/assets/ML/rnn/rnn_1.png&quot; /&gt;
-    &lt;/li&gt;
+&lt;ul id=&quot;light-slider1&quot;&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_0.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_1.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_2.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_3.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_4.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_5.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_6.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_7.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_8.png&quot; /&gt;&lt;/li&gt;
   &lt;/ul&gt;
-&lt;h2 id=&quot;rnn--2&quot;&gt;RNN 장점&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Input으로 순서가 있는 벡터를 넣을 수가 있다. 그리고 미래에도 과거에 넣었던 Input들의 특징을 기억한다.&lt;/li&gt;
-  &lt;li&gt;다양한 형태의 Input과 Output size를 도출해낼 수가 있다.&lt;/li&gt;
-&lt;/ol&gt;
+
+&lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 Initialize 하게 된다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+h_t &amp;= \tanh(aW_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
+y_t &amp;= W_{hy} h_t + b_y
+\end{aligned}
+\quad for\ t\ in\ T %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;그리고, 시간이 지날때마 위의 식 처럼 Forward가 진행된다.&lt;/p&gt;
+
+&lt;p&gt;최종 Cost는 모든 Cost Function의 평균으로 구해진다.&lt;/p&gt;
+
+&lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
+&lt;p&gt;RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 Backpropogation을 BPTT(Backpropogation Through Time)이라고 부른다.&lt;/p&gt;
+
+&lt;ul id=&quot;light-slider2&quot;&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back0.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back1.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back2.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back3.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back4.png&quot; /&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back5.png&quot; /&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;p&gt;그러나, 이러한 알고리즘은 장기기억, 즉 Time Step이 길어 질 수록 예전에 있던 정보를 기억 못한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bad.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그 이유는 우리가 업데이트 하려는 미분 식을 살펴보면 알 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+\dfrac{\partial L}{\partial W_{hh}}  
+&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial W_{hh}} + \cdots +
+\dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial W_{hh}} \\
+&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \dfrac{\partial h_T}{\partial h_{T-1}}  \cdots \dfrac{\partial h_2}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} +
+\cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} \\
+&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}} \dfrac{\partial h_1}{\partial W_{hh}} + \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}}
+\end{aligned} %]]&gt;&lt;/script&gt;
 </description>
         <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html</link>

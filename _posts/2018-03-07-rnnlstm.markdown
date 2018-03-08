@@ -6,10 +6,10 @@ categories: "DataScience"
 author: "Soo"
 comments: true
 ---
-# RNN 과 LSTM
+# 최대한 쉽게 설명한 RNN 과 LSTM
 
 ## RNN(Recurrent Neural Network)
-우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 '기억' 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 '기억'을 할 수가 있다. 그렇다면 RNN의 장단점과 기존 신경망과 어떻게 다른지을 한번 살펴보자.
+우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 '기억' 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 '기억'을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.
 
 ## RNN 구조
 <img src="/assets/ML/rnn/rnn.png" alt="Drawing" style="width=500px"/>
@@ -30,17 +30,58 @@ RNN은 중간의 Hidden 층이 순환한다고해서 순환 신경망이라고 �
 
 Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터와 그 다음 데이터간의 구조는 독립적이라고 할 수 있다.
 
-### RNN 구조
-예시로 time step 이 3인 RNN을 살펴보자.
+### Forward
+예시로 time step($T$)이 3인 RNN을 살펴보자. (좌우 클릭으로 프로세스 과정 볼 수 있다)
 
-  <ul id="light-slider">
-    <li data-thumb="/assets/ML/rnn/rnn_0.png" data-src="/assets/ML/rnn/rnn_0.png">
-      <img src="/assets/ML/rnn/rnn_0.png">
-    </li>
-    <li data-thumb="/assets/ML/rnn/rnn_1.png" data-src="/assets/ML/rnn/rnn_1.png">
-      <img src="/assets/ML/rnn/rnn_1.png">
-    </li>
+  <ul id="light-slider1">
+    <li><img src="/assets/ML/rnn/rnn_0.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_1.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_2.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_3.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_4.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_5.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_6.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_7.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_8.png"></li>
   </ul>
-## RNN 장점
-1. Input으로 순서가 있는 벡터를 넣을 수가 있다. 그리고 미래에도 과거에 넣었던 Input들의 특징을 기억한다.
-2. 다양한 형태의 Input과 Output size를 도출해낼 수가 있다.
+
+Time step = 0 일때, 각각 Layer들의 Weight를 Initialize 하게 된다.
+
+$$
+\begin{aligned}
+h_t &= \tanh(aW_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
+y_t &= W_{hy} h_t + b_y
+\end{aligned}
+\quad for\ t\ in\ T
+$$
+
+그리고, 시간이 지날때마 위의 식 처럼 Forward가 진행된다.
+
+최종 Cost는 모든 Cost Function의 평균으로 구해진다.
+
+### Backward
+RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 Backpropogation을 BPTT(Backpropogation Through Time)이라고 부른다.
+
+  <ul id="light-slider2">
+    <li><img src="/assets/ML/rnn/rnn_back0.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_back1.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_back2.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_back3.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_back4.png"></li>
+    <li><img src="/assets/ML/rnn/rnn_back5.png"></li>
+  </ul>
+
+그러나, 이러한 알고리즘은 장기기억, 즉 Time Step이 길어 질 수록 예전에 있던 정보를 기억 못한다.
+
+<img src="/assets/ML/rnn/rnn_bad.png" alt="Drawing"/>
+
+그 이유는 우리가 업데이트 하려는 미분 식을 살펴보면 알 수 있다.
+
+$$\begin{aligned}
+\dfrac{\partial L}{\partial W_{hh}}  
+&= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial W_{hh}} + \cdots +
+\dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial W_{hh}} \\
+&= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \dfrac{\partial h_T}{\partial h_{T-1}}  \cdots \dfrac{\partial h_2}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} +
+\cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} \\
+&= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}} \dfrac{\partial h_1}{\partial W_{hh}} + \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}}
+\end{aligned}$$
