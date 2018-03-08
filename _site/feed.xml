@@ -6,9 +6,61 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Feb 2018 17:04:01 +0900</pubDate>
-    <lastBuildDate>Thu, 08 Feb 2018 17:04:01 +0900</lastBuildDate>
+    <pubDate>Thu, 08 Mar 2018 15:28:58 +0900</pubDate>
+    <lastBuildDate>Thu, 08 Mar 2018 15:28:58 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>RNN &amp; LSTM - 1</title>
+        <description>&lt;h1 id=&quot;rnn--lstm&quot;&gt;RNN 과 LSTM&lt;/h1&gt;
+
+&lt;h2 id=&quot;rnnrecurrent-neural-network&quot;&gt;RNN(Recurrent Neural Network)&lt;/h2&gt;
+&lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN의 장단점과 기존 신경망과 어떻게 다른지을 한번 살펴보자.&lt;/p&gt;
+
+&lt;h2 id=&quot;rnn-&quot;&gt;RNN 구조&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;RNN은 중간의 Hidden 층이 순환한다고해서 순환 신경망이라고 한다. 왼쪽의 구조를 펼쳐서 보면, 중간의 Hidden 노드가 어떤 방향으로 계속 이어진 다는 것을 알 수 있다. 이러한 쇠사슬 같은 성격은 RNN으로 하여금 연속된 이벤트와 리스트에 적합한 구조로 만들어 준다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 보면 엄청 어렵게 느껴질 수 있다. 그렇다면 예시를 들어서 RNN이 어떻게 돌아가는지 수학적으로 살펴보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;기본 신경망 구조&lt;/h3&gt;
+
+&lt;p&gt;기존의 신경 구조를 한번 다시 되새겨보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/stick.png&quot; alt=&quot;Drawing&quot; height=&quot;200&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여러개의 노드로 구성된 작은 블럭을 하나의 층이라고 가정하자. 기존의 신경망 구조는 아래와 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/basic_nn_mnist.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터와 그 다음 데이터간의 구조는 독립적이라고 할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;rnn--1&quot;&gt;RNN 구조&lt;/h3&gt;
+&lt;p&gt;예시로 time step 이 3인 RNN을 살펴보자.&lt;/p&gt;
+
+&lt;ul id=&quot;light-slider&quot;&gt;
+    &lt;li data-thumb=&quot;/assets/ML/rnn/rnn_0.png&quot; data-src=&quot;/assets/ML/rnn/rnn_0.png&quot;&gt;
+      &lt;img src=&quot;/assets/ML/rnn/rnn_0.png&quot; /&gt;
+    &lt;/li&gt;
+    &lt;li data-thumb=&quot;/assets/ML/rnn/rnn_1.png&quot; data-src=&quot;/assets/ML/rnn/rnn_1.png&quot;&gt;
+      &lt;img src=&quot;/assets/ML/rnn/rnn_1.png&quot; /&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;h2 id=&quot;rnn--2&quot;&gt;RNN 장점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Input으로 순서가 있는 벡터를 넣을 수가 있다. 그리고 미래에도 과거에 넣었던 Input들의 특징을 기억한다.&lt;/li&gt;
+  &lt;li&gt;다양한 형태의 Input과 Output size를 도출해낼 수가 있다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>NUMPY with NN - 8</title>
@@ -3067,379 +3119,6 @@ for x in xx:
         <pubDate>Thu, 07 Dec 2017 17:54:18 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2017/12/07/numpywithnn_1.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/07/numpywithnn_1.html</guid>
-        
-        
-        <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>ML-DecisionTree</title>
-        <description>&lt;h1 id=&quot;ml-decisiontree&quot;&gt;[ML] DecisionTree&lt;/h1&gt;
-&lt;p&gt;의사결정나무의 소개는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EA%B2%B0%EC%A0%95_%ED%8A%B8%EB%A6%AC_%ED%95%99%EC%8A%B5%EB%B2%95&quot;&gt;링크&lt;/a&gt;로 대체하고 어떻게 진행되는지만 알아보자&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;의사결정나무의 장점: 어떤 변수가 분류에 영향을 끼쳤는지 사람이 보기 쉽게 되어있다. 사람 입장에서 해석에 용이하다.&lt;/li&gt;
-  &lt;li&gt;의사결정나무의 단점: 오버피팅이 심하다. 따라서 보통 랜덤 포레스트라는 앙상블 방법론을 쓴다. 초기 단계에서 랜덤 요소를 넣어서 오버피팅을 방지한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;의사 결정나무모델은 분류를 할때 책상정리에 비유한다. 더러운 책상에 있는 물건을 어떤 기준에 따라서 하나씩 정리하는 거다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/DecisionTree_Desk.jpeg&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;(사진출처: 네이버 블로그)&lt;/p&gt;
-
-&lt;p&gt;그렇다면 데이터를 분류하는 기준은 도대체 무엇인가?&lt;/p&gt;
-
-&lt;h1 id=&quot;entropy-information-gain&quot;&gt;엔트로피(Entropy)와 정보획득(Information Gain)&lt;/h1&gt;
-&lt;p&gt;데이터를 분류하는 기준은 아래와 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;어떤 기준으로 분류 후에 histogram으로부터 조건부 엔트로피를 계산 함&lt;/li&gt;
-  &lt;li&gt;이전 entropy와 새로구한 조건부 엔트로피의 차이(:=Infomation Gain)이 최대 인 것을 best feature로 선택한다&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%94%ED%8A%B8%EB%A1%9C%ED%94%BC&quot;&gt;엔트로피&lt;/a&gt;를 이해하자면 정리안된 책상의 상태를 생각하면 편할 것이다. 엔트로피가 높으면 책상이 굉장히 정리가 안된 상태(혼돈의 상태)고, 엔트로피가 적을 수록 점점 정리되어가는 책상을 생각하면 된다.&lt;/p&gt;
-
-&lt;p&gt;엔트로피의 계산 방식은 아래와 같다.&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;엔트로피: $H[Y] = -\sum_{k=1}^K p(y_k) \log_2 p(y_k)$&lt;/p&gt;
-
-  &lt;p&gt;조건부 엔트로피: $H[Y \mid X] = - \sum_i \sum_j \,p(x_i, y_j) \log_2 p(y_j \mid x_i)$&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$y_k$: $k$ 카테고리에 속하는 $y$ 의 갯수&lt;/li&gt;
-  &lt;li&gt;$p(y_k)$: 변수 $y$ 가 카테고리 $k$ 에 속할 확률&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;본격적인 계산을 위해 엔트로피를 아래와 같은 데이터가 있다고 가정하고 단계별로 진행 해보자.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f3&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;계산과정&lt;/h2&gt;
-&lt;h3 id=&quot;base-entropy----entropy&quot;&gt;[1 단계] base entropy: 분류가 안되었을 때의 entropy&lt;/h3&gt;
-&lt;p&gt;기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;기초 엔트로피를 $E_{base}$ 라고 하면,&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;class의 히스토그램을 그리고 갯수를 세어본다. 지금의 class는 $(yes, no)$ 2개로 $K=2$ 가 되고, 히스토그램에 따라서 계산하면 기초 엔트로피를 구할 수 있다.&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;$E_{base} = -[\ P(y_{=yes})\log{P(y_{=yes})} + P(y_{=no})\log{P(y_{=no})}\ ]&lt;br /&gt;
-= -(\frac{2}{6}\log{\frac{2}{6}}+\frac{4}{6}\log{\frac{4}{6}}) = 0.9182$&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;feature----infomation-gain&quot;&gt;[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함&lt;/h3&gt;
-&lt;p&gt;Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.&lt;/p&gt;
-&lt;h4 id=&quot;feature-1&quot;&gt;feature 1&lt;/h4&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x=1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x=0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;total&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;$E_1 = -[\ P(y_{=yes},x_{=1})\log{P(y_{=yes}|x_{=1})} + P(y_{=no},x_{=1})\log{P(y_{=no}|x_{=1})} +P(y_{=yes},x_{=0})\log{P(y_{=yes}|x_{=0})} + P(y_{=no},x_{=0})\log{P(y_{=no}|x_{=0})}\ ]$
-$= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{4}}+\frac{3}{6}\log{\frac{3}{4}}\ ] = 0.8741$&lt;/p&gt;
-
-  &lt;p&gt;$IG_1 = E_{base} - E_1 = 0.0441$&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;마찬가지로 feature2 와 feature3도 똑같이 구할 수 있다.&lt;/p&gt;
-&lt;h4 id=&quot;feature-2&quot;&gt;feature 2&lt;/h4&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x=1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x=0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;total&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;$E_2 = -[\ \frac{1}{6}\log{\frac{1}{4}} + \frac{3}{6}\log{\frac{3}{4}} + \frac{1}{6}\log{\frac{1}{2}} + \frac{1}{6}\log{\frac{1}{2}}] = 0.8741$&lt;/p&gt;
-
-  &lt;p&gt;$IG_2 = E_{base} - E_2 = 0.0441$&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;feature-3&quot;&gt;feature 3&lt;/h4&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f3&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=yes&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y=no&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;total&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x=1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;x=0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;total&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;6&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;$E_3 = -[\ \frac{2}{6}\log{\frac{2}{2}} + \frac{0}{6}\log{\frac{0}{2}} + \frac{2}{6}\log{\frac{2}{4}} + \frac{2}{6}\log{\frac{2}{4}}] = 0.6666$&lt;/p&gt;
-
-  &lt;p&gt;$IG_3 = E_{base} - E_3=0.2516$&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;[3단계] 결과 및 선택:&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Entropy&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;IG&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;base&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.9182&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;f1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.8742&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.0441&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;f2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.8742&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.0441&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;f3&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.6667&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.2516&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;결과에 따라 첫번째 기준으로 엔트로피가 가장 많이 줄고, IG가 가장 높은 feature3를 선택하게 된다.&lt;/p&gt;
-
-&lt;p&gt;따라서 feature3 기준으로 feature값이 1인경우 y=yes, 0인 경우 y=no로 나눠지게 된다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f3&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;0&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;no&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;1&lt;/span&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;yes&lt;/span&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;남은 데이터는 아래와 같다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f1&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;f2&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;y&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;이제 다시 위에 과정을 반복하게 된다.&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;$E_{base2} = -(0 + 1 \cdot \log{1}) =0$&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이 예제에서는 더이상 나눌 엔트로피가 없기 때문에 사실상 어떤 기준으로 선택해도 no가 나오지만 컴퓨터는 계산시 둘중 아무거나 기준으로 결과를 낼 것이다.&lt;/p&gt;
-
-&lt;p&gt;데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;코드&lt;/h2&gt;
-&lt;p&gt;모든 코드는 Github&lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/DecisionTreeModel&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;, DecisionTree.py에 공개되어 있다.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 28 Nov 2017 14:48:12 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html</guid>
         
         
         <category>DataScience</category>

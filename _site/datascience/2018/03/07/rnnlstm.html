@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Text Mining Study [0]</title>
-  <meta name="description" content="Text Mining Study [0]">
+  <title>RNN & LSTM - 1</title>
+  <meta name="description" content="RNN 과 LSTM">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Text Mining Study [0]" />
+  <meta property="og:description" content="RNN 과 LSTM" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="Text Mining Study [0]" />
+  <meta property="og:title" content="RNN & LSTM - 1" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Text Mining Study [0]">
-  <meta name="twitter:description" content="Text Mining Study [0]">
+  <meta name="twitter:title" content="RNN & LSTM - 1">
+  <meta name="twitter:description" content="RNN 과 LSTM">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/%5Bstudy%5Dtext_mining/2017/10/22/text-mining-study.html">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -108,6 +108,8 @@
     });
   </script>
 
+  <!--lightSlider-->
+  <link rel="stylesheet" href="/css/lightslider.css" />
 
 
 </head>
@@ -164,7 +166,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">Text Mining Study [0]</h1>
+      <h1 class="title">RNN & LSTM - 1</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -179,49 +181,57 @@
  
 
 <section class="post-meta">
-  <div class="post-date">October 22, 2017</div>
+  <div class="post-date">March 7, 2018</div>
   <div class="post-categories">
   in 
     
-    <a href="/category/[Study]Text_Mining">[study]text_mining</a>
+    <a href="/category/DataScience">Datascience</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <h1 id="text-mining-study-0"><strong>Text Mining Study [0]</strong></h1>
+  <h1 id="rnn--lstm">RNN 과 LSTM</h1>
 
-<h2 id="section">1. 개요</h2>
-<p><strong>텍스트 마이닝(Text Mining)</strong> 혹은 <strong>덱스트 애널리틱스(text analytics)</strong>란, 반정형 또는 비정형 텍스트 데이터의 분석과 처리를 위한 다양한 기술을 일컫는 포괄적 용어.</p>
+<h2 id="rnnrecurrent-neural-network">RNN(Recurrent Neural Network)</h2>
+<p>우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN의 장단점과 기존 신경망과 어떻게 다른지을 한번 살펴보자.</p>
 
-<h3 id="section-1">텍스트 마이닝의 핵심</h3>
-<p>텍스트 마이닝의 핵심은 비정형 혹은 반정형의 텍스트 또는 텍스트 집합으로부터 정보 가치가 있는 항목들을 추출하여 정형 텍스트, 즉 표로 구성하는 것이라고 할 수 있다. 이 과정은 대체로 정보 가치가 있는 것으로 판단되는 항목, 혹은 단위의 인식, 그리고 특정 범위 내에서의 이 단위의 출현 빈도 계수로 구성된다.</p>
+<h2 id="rnn-">RNN 구조</h2>
+<p><img src="/assets/ML/rnn/rnn.png" alt="Drawing" style="width=500px" /></p>
 
-<h3 id="text-data--">Text Data 분석의 어려움</h3>
+<p>RNN은 중간의 Hidden 층이 순환한다고해서 순환 신경망이라고 한다. 왼쪽의 구조를 펼쳐서 보면, 중간의 Hidden 노드가 어떤 방향으로 계속 이어진 다는 것을 알 수 있다. 이러한 쇠사슬 같은 성격은 RNN으로 하여금 연속된 이벤트와 리스트에 적합한 구조로 만들어 준다.</p>
 
-<ul>
-  <li>텍스트 데이터는 항목(단위) 구분이 명시적이지 않음</li>
-  <li>데이터 항목 구분이 중요한 이유는 Reductionism:
-    <ul>
-      <li>높은 단계의 사상이나 개념을 하위 단계의 요소로 세분화 하여 명확하게 정의 가능</li>
-    </ul>
-  </li>
-  <li>기호의 성질: 기호의 자의성
-    <ul>
-      <li>심볼(Symbol)과 의미가 자꾸 변하거나 모든 사람들에게 항상 일치하지 않다. 또한 컴퓨터와 사람이 이해하는 언어 기호가 달라서 사람의 언어기호를 computer native하게 만들어 줘야함</li>
-      <li>해결방안:
-        <ol>
-          <li>규칙을 만들고 그것에 따르게 한다. 그러나 만들기 힘들고, 모두가 만족할 수가 없다는 단점이 있다.</li>
-          <li>경험, 데이터에 의해 컴퓨터에게 학습하게 한다. 최근 추세.</li>
-        </ol>
-      </li>
-    </ul>
-  </li>
-</ul>
+<p>이렇게 보면 엄청 어렵게 느껴질 수 있다. 그렇다면 예시를 들어서 RNN이 어떻게 돌아가는지 수학적으로 살펴보자.</p>
 
-<h2 id="section-2">2. 텍스트 분석의 과정</h2>
-<p>과제의 목표 설정 $\rightarrow$ 데이터 입수 $\rightarrow$ 데이터 준비 $\rightarrow$ 데이터 탐색 $\rightarrow$ 데이터 모델링</p>
+<h3 id="section">기본 신경망 구조</h3>
+
+<p>기존의 신경 구조를 한번 다시 되새겨보자.</p>
+
+<p><img src="/assets/ML/rnn/stick.png" alt="Drawing" height="200" width="200" /></p>
+
+<p>여러개의 노드로 구성된 작은 블럭을 하나의 층이라고 가정하자. 기존의 신경망 구조는 아래와 같다.</p>
+
+<p><img src="/assets/ML/rnn/basic_nn_mnist.png" alt="Drawing" /></p>
+
+<p>Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터와 그 다음 데이터간의 구조는 독립적이라고 할 수 있다.</p>
+
+<h3 id="rnn--1">RNN 구조</h3>
+<p>예시로 time step 이 3인 RNN을 살펴보자.</p>
+
+<ul id="light-slider">
+    <li data-thumb="/assets/ML/rnn/rnn_0.png" data-src="/assets/ML/rnn/rnn_0.png">
+      <img src="/assets/ML/rnn/rnn_0.png" />
+    </li>
+    <li data-thumb="/assets/ML/rnn/rnn_1.png" data-src="/assets/ML/rnn/rnn_1.png">
+      <img src="/assets/ML/rnn/rnn_1.png" />
+    </li>
+  </ul>
+<h2 id="rnn--2">RNN 장점</h2>
+<ol>
+  <li>Input으로 순서가 있는 벡터를 넣을 수가 있다. 그리고 미래에도 과거에 넣었던 Input들의 특징을 기억한다.</li>
+  <li>다양한 형태의 Input과 Output size를 도출해낼 수가 있다.</li>
+</ol>
 
 </article>
 
@@ -239,7 +249,7 @@
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=Text+Mining+Study+%5B0%5D&u=http%3A%2F%2Fsimonjisu.github.io%2F%255Bstudy%255Dtext_mining%2F2017%2F10%2F22%2Ftext-mining-study.html"
+      <a href="//www.facebook.com/sharer.php?t=RNN+%26+LSTM+-+1&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F03%2F07%2Frnnlstm.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -413,6 +423,16 @@ $(document).ready(function() {
   });
 });
 $("code").addClass("python")
+</script>
+
+<!--lightSlider-->
+<script src="/js/lightslider.min.js"></script>
+<script src="/js/lightslider.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#light-slider').lightSlider();
+  });
 </script>
 
 

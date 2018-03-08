@@ -1,0 +1,46 @@
+---
+layout: post
+title: "RNN & LSTM - 1"
+date: "2018-03-07 10:46:04 +0900"
+categories: "DataScience"
+author: "Soo"
+comments: true
+---
+# RNN 과 LSTM
+
+## RNN(Recurrent Neural Network)
+우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 '기억' 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 '기억'을 할 수가 있다. 그렇다면 RNN의 장단점과 기존 신경망과 어떻게 다른지을 한번 살펴보자.
+
+## RNN 구조
+<img src="/assets/ML/rnn/rnn.png" alt="Drawing" style="width=500px"/>
+
+RNN은 중간의 Hidden 층이 순환한다고해서 순환 신경망이라고 한다. 왼쪽의 구조를 펼쳐서 보면, 중간의 Hidden 노드가 어떤 방향으로 계속 이어진 다는 것을 알 수 있다. 이러한 쇠사슬 같은 성격은 RNN으로 하여금 연속된 이벤트와 리스트에 적합한 구조로 만들어 준다.
+
+이렇게 보면 엄청 어렵게 느껴질 수 있다. 그렇다면 예시를 들어서 RNN이 어떻게 돌아가는지 수학적으로 살펴보자.
+
+### 기본 신경망 구조
+
+기존의 신경 구조를 한번 다시 되새겨보자.
+
+<img src="/assets/ML/rnn/stick.png" alt="Drawing" height="200" width="200"/>
+
+여러개의 노드로 구성된 작은 블럭을 하나의 층이라고 가정하자. 기존의 신경망 구조는 아래와 같다.
+
+<img src="/assets/ML/rnn/basic_nn_mnist.png" alt="Drawing"/>
+
+Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터와 그 다음 데이터간의 구조는 독립적이라고 할 수 있다.
+
+### RNN 구조
+예시로 time step 이 3인 RNN을 살펴보자.
+
+  <ul id="light-slider">
+    <li data-thumb="/assets/ML/rnn/rnn_0.png" data-src="/assets/ML/rnn/rnn_0.png">
+      <img src="/assets/ML/rnn/rnn_0.png">
+    </li>
+    <li data-thumb="/assets/ML/rnn/rnn_1.png" data-src="/assets/ML/rnn/rnn_1.png">
+      <img src="/assets/ML/rnn/rnn_1.png">
+    </li>
+  </ul>
+## RNN 장점
+1. Input으로 순서가 있는 벡터를 넣을 수가 있다. 그리고 미래에도 과거에 넣었던 Input들의 특징을 기억한다.
+2. 다양한 형태의 Input과 Output size를 도출해낼 수가 있다.

@@ -111,6 +111,8 @@
     });
   </script>
 
+  <!--lightSlider-->
+  <link rel="stylesheet" href="/css/lightslider.css" />
 
 
 </head>
@@ -175,6 +177,28 @@
 
 <div class="wrapper">
 <ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/datascience/2018/03/07/rnnlstm.html">RNN & LSTM - 1</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>RNN 과 LSTM RNN(Recurrent Neural Network) 우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">March 7, 2018</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/DataScience">Datascience</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
   
   <li>
     <h2>
@@ -255,28 +279,6 @@
       in 
         
         <a href="/category/DataScience">Datascience</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/deepnlp/2018/01/02/deepmindnlp1.html">DeepMindNLP 강의 정리 1</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>Word Vectors and Lexical Semantics How to represent Words Natural language text = sequences of discrete symbols 이산 기호들의 배열(시퀀스) Navie representaion: one hot vectors $\in$ $R^{vocabulary}$, one hot 인코딩된 벡터들로 표현 아주큼 words = [‘딥마인드’, ‘워드’, ‘벡터’] df = pd.DataFrame(np.eye(len(words)), index=words, dtype=np.int) df word 0 1 2 딥마인드 1...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">January 2, 2018</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/Deepnlp">Deepnlp</a>
         
       
       </div>
@@ -418,6 +420,16 @@ $(document).ready(function() {
   });
 });
 $("code").addClass("python")
+</script>
+
+<!--lightSlider-->
+<script src="/js/lightslider.min.js"></script>
+<script src="/js/lightslider.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#light-slider').lightSlider();
+  });
 </script>
 
 

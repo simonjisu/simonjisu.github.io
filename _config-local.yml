@@ -54,8 +54,8 @@ descriptions:
   - cat: DataScience
     desc: "DataScience"
 
-  - cat: Deepnlp
-    desc: "Deelnlp"
+  - cat: NLP
+    desc: "NLP 공부"
 
   - cat: Library
     desc: "책을 읽고"
