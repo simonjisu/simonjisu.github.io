@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NUMPY with NN - 1"
+title: "NUMPY with NN - 1: Perceptron"
 categories: "DataScience"
 author: "Soo"
 date: "2017-12-07 17:54:18 +0900"

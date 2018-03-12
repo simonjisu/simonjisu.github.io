@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NUMPY with NN - 5"
+title: "NUMPY with NN - 5: Optimizer"
 categories: "DataScience"
 author: "Soo"
 date: "2018-01-13 14:17:06 +0900"

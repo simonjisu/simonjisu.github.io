@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NUMPY with NN - 8"
+title: "NUMPY with NN - 8: Summary"
 categories: "DataScience"
 author: "Soo"
 date: "2018-02-08 15:13:40 +0900"

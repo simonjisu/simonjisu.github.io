@@ -180,10 +180,10 @@
   
   <li>
     <h2>
-      <a class="post-link" href="/datascience/2018/03/07/rnnlstm.html">RNN & LSTM - 1</a>
+      <a class="post-link" href="/datascience/2018/03/07/rnnlstm.html">RNN & LSTM - 1: RNN</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
-      <p>최대한 쉽게 설명한 RNN 과 LSTM RNN(Recurrent Neural Network) 우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은...</p>
+      <p>최대한 자세하게 설명한 RNN 과 LSTM RNN(Recurrent Neural Network) 우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">March 7, 2018</div>
@@ -202,7 +202,7 @@
   
   <li>
     <h2>
-      <a class="post-link" href="/datascience/2018/02/08/numpywithnn_8.html">NUMPY with NN - 8</a>
+      <a class="post-link" href="/datascience/2018/02/08/numpywithnn_8.html">NUMPY with NN - 8: Summary</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Numpy로 짜보는 Neural Network Basic - 8 총 정리 지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자. 모든 코드 링크 Package Load from common.Multilayer import MLP from dataset.mnist import load_mnist from common.optimizer import * import...</p>
@@ -224,7 +224,7 @@
   
   <li>
     <h2>
-      <a class="post-link" href="/datascience/2018/01/25/numpywithnn_7.html">NUMPY with NN - 7</a>
+      <a class="post-link" href="/datascience/2018/01/25/numpywithnn_7.html">NUMPY with NN - 7: Batch Normalization</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Numpy로 짜보는 Neural Network Basic - 7 학습관련 기술 Part 3 배치 정규화 (Batch Normalization) 배치 정규화란 미니배치 단위로 선형합인 $a$ 값을 정규화하는 것이다. 즉, 미니배치에 한해서 데이터 분포가 평균이 0 분산이 1이 되도록 한다. 이는 데이터 분포가 덜 치우치게 하는 효과가 있어서 가중치 초기화 값의 영향을 덜 받게한다. 또한,...</p>
@@ -246,7 +246,7 @@
   
   <li>
     <h2>
-      <a class="post-link" href="/datascience/2018/01/24/numpywithnn_6.html">NUMPY with NN - 6</a>
+      <a class="post-link" href="/datascience/2018/01/24/numpywithnn_6.html">NUMPY with NN - 6: Weight Initialization</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Numpy로 짜보는 Neural Network Basic - 6 학습관련 기술 Part 2 가중치 초기값 설정(Weight Initialization) 이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형...</p>
@@ -268,7 +268,7 @@
   
   <li>
     <h2>
-      <a class="post-link" href="/datascience/2018/01/13/numpywithnn_5.html">NUMPY with NN - 5</a>
+      <a class="post-link" href="/datascience/2018/01/13/numpywithnn_5.html">NUMPY with NN - 5: Optimizer</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Numpy로 짜보는 Neural Network Basic - 5 학습관련 기술 Part 1 Optimizer 손실 함수 값을 가능한 낮게 만들어 매개변수 최적값을 찾는 과정을 최적화 라고 한다. 여기서 몇가지 방법을 한번 살펴본다. SGD(확률적 경사 하강법) $W \leftarrow W - \eta \dfrac{\partial L}{\partial W}$ $\eta$ 는 학습률로 얼만큼 가중치를 업데이트 할지 정하는 하이퍼파라미터다....</p>
@@ -427,19 +427,7 @@ $("code").addClass("python")
 <!--lightSlider-->
 <script src="/js/lightslider.js"></script>
 <script src='/js/multi_slider.js' type="text/javascript"></script>
-<!-- <script type="text/javascript" >
-  $(document).ready(function() {
-    $('#light-slider').lightSlider({
-      item: 1,
-      keyPress: false,
-      controls: true,
-      easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-      rtl:false,
-      slideMargin: 100,
-      loop: true
-    });
-  });
-</script> -->
+
 
 
 

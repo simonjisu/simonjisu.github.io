@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NUMPY with NN - 2"
+title: "NUMPY with NN - 2: Activation Function"
 categories: "DataScience"
 author: "Soo"
 date: "2017-12-08 11:52:21 +0900"
@@ -286,10 +286,12 @@ softmax(a)
 경고가 뜨면서 NaN 값들만 나온다. 이를 방지하기 위해서 입력 신호 중 최대값을 이용하는게 일반적이다. 아래는 분모, 분자 변수에 어떤 상수 C'를 더해도 결국엔 Softmax가 되는 것을 증명 한 식이다.
 
 $$
-y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}
-\\ = \frac{Cexp(a_k)}{C\sum_{i=1}^{n}{exp(a_i)}}
-\\ = \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}
-\\ = \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
+\begin{aligned}
+y_k &= \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}} \\
+&= \frac{Cexp(a_k)}{C\sum_{i=1}^{n}{exp(a_i)}} \\
+&= \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}\\
+&= \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
+\end{aligned}
 $$
 ```
 c = np.max(a)

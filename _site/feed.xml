@@ -6,13 +6,13 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Mar 2018 00:23:27 +0900</pubDate>
-    <lastBuildDate>Fri, 09 Mar 2018 00:23:27 +0900</lastBuildDate>
+    <pubDate>Mon, 12 Mar 2018 16:28:17 +0900</pubDate>
+    <lastBuildDate>Mon, 12 Mar 2018 16:28:17 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
-        <title>RNN &amp; LSTM - 1</title>
-        <description>&lt;h1 id=&quot;rnn--lstm&quot;&gt;최대한 쉽게 설명한 RNN 과 LSTM&lt;/h1&gt;
+        <title>RNN &amp; LSTM - 1: RNN</title>
+        <description>&lt;h1 id=&quot;rnn--lstm&quot;&gt;최대한 자세하게 설명한 RNN 과 LSTM&lt;/h1&gt;
 
 &lt;h2 id=&quot;rnnrecurrent-neural-network&quot;&gt;RNN(Recurrent Neural Network)&lt;/h2&gt;
 &lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.&lt;/p&gt;
@@ -34,7 +34,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/basic_nn_mnist.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터와 그 다음 데이터간의 구조는 독립적이라고 할 수 있다.&lt;/p&gt;
+&lt;p&gt;Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터($x_1$)와 그 다음 데이터($x_2$ 등)간의 구조는 독립적이라고 할 수 있다.&lt;/p&gt;
 
 &lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
 &lt;p&gt;예시로 time step($T$)이 3인 RNN을 살펴보자. (좌우 클릭으로 프로세스 과정 볼 수 있다)&lt;/p&gt;
@@ -51,11 +51,12 @@
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_8.png&quot; /&gt;&lt;/li&gt;
   &lt;/ul&gt;
 
-&lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 Initialize 하게 된다.&lt;/p&gt;
+&lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다.
+(가중치 초기화를 잊어 버렸다면 &lt;a href=&quot;https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;로)&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{aligned}
-h_t &amp;= \tanh(aW_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
+h_t &amp;= \tanh(W_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
 y_t &amp;= W_{hy} h_t + b_y
 \end{aligned}
 \quad for\ t\ in\ T %]]&gt;&lt;/script&gt;
@@ -76,11 +77,14 @@ y_t &amp;= W_{hy} h_t + b_y
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back5.png&quot; /&gt;&lt;/li&gt;
   &lt;/ul&gt;
 
-&lt;p&gt;그러나, 이러한 알고리즘은 장기기억, 즉 Time Step이 길어 질 수록 예전에 있던 정보를 기억 못한다.&lt;/p&gt;
+&lt;p&gt;최종적으로 학습 될 값은 Loss Function에서 각 미분한 ${\frac{\partial L}{\partial W}}^{(1)}$, ${\frac{\partial L}{\partial W}}^{(2)}$, ${\frac{\partial L}{\partial W}}^{(3)}$ 의 합으로 구해진다.&lt;/p&gt;
+
+&lt;h3 id=&quot;long-term-dependency-&quot;&gt;장기 의존성(Long-Term Dependency) 문제&lt;/h3&gt;
+&lt;p&gt;RNN이 이론상으로는 sequence의 첫번째 항부터 끝까지(즉, $x_1 \cdots x_T$ 까지) 학습 할 수 있을 것으로 보이나, 실제로는 장기기억, 즉 Time Step이 길어 질 수록 예전에 있던 정보를 기억 못한다. 이를 &lt;strong&gt;장기 의존성(Long-Term Dependency)&lt;/strong&gt; 문제라고 한다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bad.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;그 이유는 우리가 업데이트 하려는 미분 식을 살펴보면 알 수 있다.&lt;/p&gt;
+&lt;p&gt;그 이유는 우리가 업데이트 하려는 미분 식을 살펴보면 알 수 있다. 예를 들어 $W_{hh}$ 를 업데이트 한다고 하자.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{aligned}
@@ -91,6 +95,57 @@ y_t &amp;= W_{hy} h_t + b_y
 \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} \\
 &amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}} \dfrac{\partial h_1}{\partial W_{hh}} + \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}}
 \end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;위의 식중에 $\prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}}$ 부분을 자세히 펼쳐보면 아래와 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+\prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}}
+&amp;= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} \dfrac{\partial a_{T-i+1}}{\partial h_{T-i}} \\
+&amp;= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} W_{hh}
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;여기서 $a_t=W_{hh}h_{t-1} + W_{xh}x_t + b_h$ 이다.&lt;/p&gt;
+
+&lt;p&gt;앞부분 $\frac{\partial h_{T-i+1}}{\partial a_{T-i+1}}$은 &lt;strong&gt;tanh&lt;/strong&gt; 의 미분 값이다. 아래 그림과 같이 tanh의 미분 값은 0과 1사이의 값이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/tanh.png&quot; style=&quot;width=500px&quot; /&gt;
+(그림출처: http://nn.readthedocs.io/en/latest/transfer/)&lt;/p&gt;
+
+&lt;p&gt;뒷부분인 $W_{hh}$의 값들은 세가지 경우가 있다. 1과 같게 되면 Gradient가 수렴될 가능성이 높다. 그러나 1보다 클 경우 gradient가 무한대로 발산하는 &lt;strong&gt;Exploding Gradient&lt;/strong&gt; 문제가 발생한다. 그러나 보통의 경우 $W_{hh}$ 의 값들은 1보다 작다. (아래 논문 참고)&lt;/p&gt;
+
+&lt;p&gt;0과 1사이의 작은 값을 계속 곱하게 되면 0으로 수렴한다. 따라서, 두 가지를 종합 해보았을 때, 출력값과 멀리 떨어진 Time Step일 수록 역전파가 전달 되지 않는 &lt;strong&gt;Vanishing Gradient&lt;/strong&gt; 문제가 생기게 된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://proceedings.mlr.press/v28/pascanu13.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;On the difficulty of training recurrent neural networks&lt;/span&gt;&lt;/a&gt; 논문에서는 Vanishing &amp;amp; Exploding Gradient 문제를 자세히 다루고 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 tanh을 쓰면 기울기가 0과 1사이의 값으로 고정되니 ReLU를 쓰자는 방법이 있었다. 둘째로, &lt;strong&gt;LSTM&lt;/strong&gt;, &lt;strong&gt;GRU&lt;/strong&gt; 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다.&lt;/p&gt;
+
+&lt;h2 id=&quot;rnn-forward--backward--&quot;&gt;참고) RNN Forward 와 Backward의 계산 그래프&lt;/h2&gt;
+
+&lt;h3 id=&quot;forward-1&quot;&gt;Forward&lt;/h3&gt;
+
+&lt;ul id=&quot;light-slider3&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward0.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward2.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;backward-1&quot;&gt;Backward&lt;/h3&gt;
+
+&lt;ul id=&quot;light-slider3&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward0.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward2.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward3.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward4.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward5.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $dh_{t-1}$ 가 이 다음 역전파때 $d a_{t-1}$에 더해져 계산한다는 점이다. 그 이유는 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
+
+&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html</link>
@@ -102,7 +157,7 @@ y_t &amp;= W_{hy} h_t + b_y
       </item>
     
       <item>
-        <title>NUMPY with NN - 8</title>
+        <title>NUMPY with NN - 8: Summary</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 8&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2 id=&quot;section&quot;&gt;총 정리&lt;/h2&gt;
@@ -242,7 +297,7 @@ print('total time:', (end - start))
       </item>
     
       <item>
-        <title>NUMPY with NN - 7</title>
+        <title>NUMPY with NN - 7: Batch Normalization</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---7&quot;&gt;Numpy로 짜보는 Neural Network Basic - 7&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2 id=&quot;part-3&quot;&gt;학습관련 기술 Part 3&lt;/h2&gt;
@@ -593,7 +648,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
       </item>
     
       <item>
-        <title>NUMPY with NN - 6</title>
+        <title>NUMPY with NN - 6: Weight Initialization</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---6&quot;&gt;Numpy로 짜보는 Neural Network Basic - 6&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2 id=&quot;part-2&quot;&gt;학습관련 기술 Part 2&lt;/h2&gt;
@@ -715,7 +770,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
       </item>
     
       <item>
-        <title>NUMPY with NN - 5</title>
+        <title>NUMPY with NN - 5: Optimizer</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---5&quot;&gt;Numpy로 짜보는 Neural Network Basic - 5&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2 id=&quot;part-1&quot;&gt;학습관련 기술 Part 1&lt;/h2&gt;
@@ -1777,7 +1832,7 @@ word2vec, loss_list = word2vec_train(corpus, N=N, half_window_size=half_window_s
       </item>
     
       <item>
-        <title>NUMPY with NN - 4</title>
+        <title>NUMPY with NN - 4: Backpropagation</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---4&quot;&gt;Numpy로 짜보는 Neural Network Basic - 4&lt;/h1&gt;
 &lt;hr /&gt;
 
@@ -2105,7 +2160,7 @@ print('total time:', (end - start))
       </item>
     
       <item>
-        <title>NUMPY with NN - 3</title>
+        <title>NUMPY with NN - 3: Loss Function</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---3&quot;&gt;Numpy로 짜보는 Neural Network Basic - 3&lt;/h1&gt;
 &lt;hr /&gt;
 
@@ -2409,7 +2464,7 @@ print('total time:', (end - start))
       </item>
     
       <item>
-        <title>NUMPY with NN - 2</title>
+        <title>NUMPY with NN - 2: Activation Function</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---2&quot;&gt;Numpy로 짜보는 Neural Network Basic - 2&lt;/h1&gt;
 &lt;hr /&gt;
 
@@ -2697,10 +2752,13 @@ from ipykernel import kernelapp as app&lt;/p&gt;
 
 &lt;p&gt;경고가 뜨면서 NaN 값들만 나온다. 이를 방지하기 위해서 입력 신호 중 최대값을 이용하는게 일반적이다. 아래는 분모, 분자 변수에 어떤 상수 C’를 더해도 결국엔 Softmax가 되는 것을 증명 한 식이다.&lt;/p&gt;
 
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}
-\\ = \frac{Cexp(a_k)}{C\sum_{i=1}^{n}{exp(a_i)}}
-\\ = \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}
-\\ = \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+y_k &amp;= \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}} \\
+&amp;= \frac{Cexp(a_k)}{C\sum_{i=1}^{n}{exp(a_i)}} \\
+&amp;= \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}\\
+&amp;= \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
+\end{aligned} %]]&gt;&lt;/script&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;c = np.max(a)
 print(a - c)
 print(softmax(a-c))
@@ -2798,7 +2856,7 @@ print(&quot;accuracy:&quot;, acc_count / len(x_train))
       </item>
     
       <item>
-        <title>NUMPY with NN - 1</title>
+        <title>NUMPY with NN - 1: Perceptron</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---1&quot;&gt;Numpy로 짜보는 Neural Network Basic - 1&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;p&gt;Neural Network의 역사: &lt;a href=&quot;http://solarisailab.com/archives/1206&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt; 참고&lt;/p&gt;

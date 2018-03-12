@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NUMPY with NN - 6"
+title: "NUMPY with NN - 6: Weight Initialization"
 categories: "DataScience"
 author: "Soo"
 date: "2018-01-24 12:31:37 +0900"
