@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NUMPY with NN - 3: Loss Function"
-categories: "DataScience"
+categories: "DeepLearning"
 author: "Soo"
 date: "2017-12-10 14:06:55 +0900"
 comments: true

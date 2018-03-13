@@ -2,7 +2,7 @@
 layout: post
 title: "RNN & LSTM - 1: RNN"
 date: "2018-03-07 10:46:04 +0900"
-categories: "DataScience"
+categories: "DeepLearning"
 author: "Soo"
 comments: true
 ---

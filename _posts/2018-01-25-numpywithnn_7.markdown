@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NUMPY with NN - 7: Batch Normalization"
-categories: "DataScience"
+categories: "DeepLearning"
 author: "Soo"
 date: "2018-01-25 12:54:15 +0900"
 comments: true

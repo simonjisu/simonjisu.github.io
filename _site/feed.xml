@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 12 Mar 2018 16:28:17 +0900</pubDate>
-    <lastBuildDate>Mon, 12 Mar 2018 16:28:17 +0900</lastBuildDate>
+    <pubDate>Tue, 13 Mar 2018 23:37:20 +0900</pubDate>
+    <lastBuildDate>Tue, 13 Mar 2018 23:37:20 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -148,11 +148,11 @@ y_t &amp;= W_{hy} h_t + b_y
 &lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/03/07/rnnlstm.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -288,11 +288,11 @@ print('total time:', (end - start))
 &lt;/blockquote&gt;
 </description>
         <pubDate>Thu, 08 Feb 2018 15:13:40 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/02/08/numpywithnn_8.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/02/08/numpywithnn_8.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -639,11 +639,11 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 &lt;p&gt;다음 마지막 시간에는 모든걸 종합해서 학습하는 과정을 코드로 살펴보자.&lt;/p&gt;
 </description>
         <pubDate>Thu, 25 Jan 2018 12:54:15 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/01/25/numpywithnn_7.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/01/25/numpywithnn_7.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -761,11 +761,11 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 &lt;p&gt;다음 시간에는 배치 정규화에 대해서 알아보자.&lt;/p&gt;
 </description>
         <pubDate>Wed, 24 Jan 2018 12:31:37 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2018/01/24/numpywithnn_6.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/01/24/numpywithnn_6.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -1185,11 +1185,11 @@ v_t &amp;= v_{t-1} + (1-\beta_1)(g_t^2-v_{t-1}) \\
 &lt;p&gt;다음 시간에는 가중치 초기화와 배치 노말라이제이션에 대에서 이야기 해보도록 하겠다.&lt;/p&gt;
 </description>
         <pubDate>Sat, 13 Jan 2018 14:17:06 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/01/13/numpywithnn_5.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/01/13/numpywithnn_5.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2018/01/13/numpywithnn_5.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/01/13/numpywithnn_5.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -2151,11 +2151,11 @@ print('total time:', (end - start))
 &lt;p&gt;왜 학습이 안됐을까에 대해서는 담은 시간에 이야기 하겠다.&lt;/p&gt;
 </description>
         <pubDate>Fri, 15 Dec 2017 12:21:48 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -2455,11 +2455,11 @@ print('total time:', (end - start))
 &lt;p&gt;따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 &lt;strong&gt;오차역전파&lt;/strong&gt; 방법으로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.&lt;/p&gt;
 </description>
         <pubDate>Sun, 10 Dec 2017 14:06:55 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2017/12/10/numpywithnn_3.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/10/numpywithnn_3.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2017/12/10/numpywithnn_3.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/10/numpywithnn_3.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -2847,11 +2847,11 @@ print(&quot;accuracy:&quot;, acc_count / len(x_train))
 &lt;p&gt;정확도란 데이터 중에서 얼만큼 라벨 맞췃는지 측정하는 것인데, 당연하지만 결과가 아주 형편이 없다. 이제 네트워크를 학습시키면서 이를 향상 시킬 것이니까 너무 걱정하지 말자.&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Dec 2017 11:52:21 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2017/12/08/numpywithnn_2.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/08/numpywithnn_2.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
@@ -3214,11 +3214,11 @@ for x in xx:
 &lt;p&gt;다음 시간에는 Feedforward과정을 자세히 알아본다.&lt;/p&gt;
 </description>
         <pubDate>Thu, 07 Dec 2017 17:54:18 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2017/12/07/numpywithnn_1.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2017/12/07/numpywithnn_1.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html</guid>
         
         
-        <category>DataScience</category>
+        <category>DeepLearning</category>
         
       </item>
     
