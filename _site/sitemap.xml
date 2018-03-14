@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm.html</loc>
+<lastmod>2018-03-14T22:05:37+09:00</lastmod>
+</url>
+<url>
 <loc>http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</loc>
 <lastmod>2018-03-07T10:46:04+09:00</lastmod>
 </url>

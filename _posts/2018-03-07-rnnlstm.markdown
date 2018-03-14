@@ -6,7 +6,7 @@ categories: "DeepLearning"
 author: "Soo"
 comments: true
 ---
-# 최대한 자세하게 설명한 RNN 과 LSTM
+# 최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN
 
 ## RNN(Recurrent Neural Network)
 우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 '기억' 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 '기억'을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.
@@ -61,7 +61,7 @@ $$
 최종 Cost는 모든 Cost Function의 평균으로 구해진다.
 
 ### Backward
-RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 Backpropogation을 BPTT(Backpropogation Through Time)이라고 부른다.
+RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 BackPropagation을 BPTT(BackPropagation Through Time)이라고 부른다.
 
   <ul id="light-slider2">
     <li><img src="/assets/ML/rnn/rnn_back0.png"></li>
@@ -111,29 +111,4 @@ $$\begin{aligned}
 
 * [<span style="color: #7d7ee8">On the difficulty of training recurrent neural networks</span>](http://proceedings.mlr.press/v28/pascanu13.pdf) 논문에서는 Vanishing & Exploding Gradient 문제를 자세히 다루고 있다.
 
-장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 tanh을 쓰면 기울기가 0과 1사이의 값으로 고정되니 ReLU를 쓰자는 방법이 있었다. 둘째로, **LSTM**, **GRU** 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다.
-
-## 참고) RNN Forward 와 Backward의 계산 그래프
-
-### Forward
-
-<ul id="light-slider3">
-  <li><img src="/assets/ML/rnn/graph_forward0.png"></li>
-  <li><img src="/assets/ML/rnn/graph_forward1.png"></li>
-  <li><img src="/assets/ML/rnn/graph_forward2.png"></li>
-</ul>
-
-### Backward
-
-<ul id="light-slider3">
-  <li><img src="/assets/ML/rnn/graph_backward0.png"></li>
-  <li><img src="/assets/ML/rnn/graph_backward1.png"></li>
-  <li><img src="/assets/ML/rnn/graph_backward2.png"></li>
-  <li><img src="/assets/ML/rnn/graph_backward3.png"></li>
-  <li><img src="/assets/ML/rnn/graph_backward4.png"></li>
-  <li><img src="/assets/ML/rnn/graph_backward5.png"></li>
-</ul>
-
-backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $dh_{t-1}$ 가 이 다음 역전파때 $d a_{t-1}$에 더해져 계산한다는 점이다. 그 이유는 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.
-
-위 그림은 [<span style="color: #7d7ee8">ratsgo's blog</span>](https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/) 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.
+장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 **tanh** 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 **ReLU** 를 쓰자는 방법이 있었다. 둘째로, **LSTM**, **GRU** 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.

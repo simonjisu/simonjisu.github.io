@@ -6,13 +6,172 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 14 Mar 2018 00:35:19 +0900</pubDate>
-    <lastBuildDate>Wed, 14 Mar 2018 00:35:19 +0900</lastBuildDate>
+    <pubDate>Thu, 15 Mar 2018 00:03:16 +0900</pubDate>
+    <lastBuildDate>Thu, 15 Mar 2018 00:03:16 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
+        <title>RNN &amp; LSTM - 2: Numpy with RNN</title>
+        <description>&lt;h1 id=&quot;rnn--lstm----2&quot;&gt;최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 2&lt;/h1&gt;
+
+&lt;h2 id=&quot;numpy--rnn-&quot;&gt;Numpy 로 RNN 만들어보기&lt;/h2&gt;
+&lt;p&gt;모든 코드는 Github: &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;NUMPYwithNN&lt;/span&gt;&lt;/a&gt; 에 올려져 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Jupyter Notebook 으로 전체과정 보기: &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크 &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;목적&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;“hello world! nice to meet you! i love iron-man”&lt;/strong&gt; 을 RNN 으로 학습시키기.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Input&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Output&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;h&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;e&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;e&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;o&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;y&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;o&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;o&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;u&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;rnn-forward--backward--&quot;&gt;RNN Forward 와 Backward의 계산 그래프&lt;/h2&gt;
+
+&lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
+
+&lt;ul id=&quot;light-slider3&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward0.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward2.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
+
+&lt;ul id=&quot;light-slider3&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward0.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward2.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward3.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward4.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward5.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $dh_{t-1}$ 가 이 다음 역전파때 $d a_{t-1}$에 더해져 계산한다는 점이다. 그 이유는 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
+
+&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;dht-&quot;&gt;참고) 왜 $dh_t$ 더해줘야하나?&lt;/h3&gt;
+&lt;p&gt;$h(x) = f_1(x) + f_2(x) + \cdots + f_t(x)$ 의 $x$에 대한 미분은&lt;/p&gt;
+
+&lt;p&gt;$h’(x) = f_1’(x)+ f_2’(x) + \cdots + f_t’(x)$ 이기 때문!&lt;/p&gt;
+
+&lt;p&gt;우리의 예로 들자면, $t$ 가 $T$ 부터 $1$ 까지 순환하면서,&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+dh_{t-1} = \dfrac{\partial L}{\partial h_{t-1}}  
+&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_t} \dfrac{\partial h_t}{\partial a_t} \dfrac{\partial a_t}{\partial h_{t-1}} + \cdots +
+\dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial h_1}
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;이런 식으로 계속 더해진다.&lt;/p&gt;
+
+&lt;h2 id=&quot;backpropagation-through-time-bptt-&quot;&gt;BackPropagation Through Time (BPTT) 구현&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Layer&lt;/strong&gt; 의 구현을 참고하려면 Github의 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;common/layers&lt;/span&gt;&lt;/a&gt; 참고하세요!&lt;/li&gt;
+  &lt;li&gt;혹은 &lt;a href=&quot;https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic&lt;/span&gt;&lt;/a&gt; 시리즈를 참고하세요!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def _params_summation_init(self):
+    self.params_summ = {}
+    self.params_summ['W_xh'] = np.zeros_like(self.params['W_xh'])
+    self.params_summ['W_hh'] = np.zeros_like(self.params['W_hh'])
+    self.params_summ['W_hy'] = np.zeros_like(self.params['W_hy'])
+    self.params_summ['b_h'] = np.zeros_like(self.params['b_h'])
+    self.params_summ['b_y'] = np.zeros_like(self.params['b_y'])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;또한, $dh_T$ 를 0으로 초기화 한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dht = np.zeros_like(self.h0)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그후에 총 길이 $T$의 역순으로 Layer 마다&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for t in np.arange(self.T)[::-1]:
+    dout = self.last_layers[t].backward()
+    dht_raw = self.layers['Affine_hy'][t].backward(dout)
+    dat = self.layers['Activation'][t].backward(dht_raw) + dht
+    dht = self.layers['Affine_hh'][t].backward(dat)
+    dx = self.layers['Affine_xh'][t].backward(dat)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;전체 Backward 과정&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward(self):
+    # BPTT
+    self._params_summation_init()
+    dht = np.zeros_like(self.h0)
+
+    for t in np.arange(self.T)[::-1]:
+        dout = self.last_layers[t].backward()
+        dht_raw = self.layers['Affine_hy'][t].backward(dout)
+        dat = self.layers['Activation'][t].backward(dht_raw) + dht
+        dht = self.layers['Affine_hh'][t].backward(dat)
+        dx = self.layers['Affine_xh'][t].backward(dat)
+        self._params_summation(t)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 14 Mar 2018 22:05:37 +0900</pubDate>
+        <link>http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm.html</guid>
+        
+        
+        <category>DeepLearning</category>
+        
+      </item>
+    
+      <item>
         <title>RNN &amp; LSTM - 1: RNN</title>
-        <description>&lt;h1 id=&quot;rnn--lstm&quot;&gt;최대한 자세하게 설명한 RNN 과 LSTM&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;rnn--lstm----1-rnn&quot;&gt;최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN&lt;/h1&gt;
 
 &lt;h2 id=&quot;rnnrecurrent-neural-network&quot;&gt;RNN(Recurrent Neural Network)&lt;/h2&gt;
 &lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.&lt;/p&gt;
@@ -66,7 +225,7 @@ y_t &amp;= W_{hy} h_t + b_y
 &lt;p&gt;최종 Cost는 모든 Cost Function의 평균으로 구해진다.&lt;/p&gt;
 
 &lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
-&lt;p&gt;RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 Backpropogation을 BPTT(Backpropogation Through Time)이라고 부른다.&lt;/p&gt;
+&lt;p&gt;RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 BackPropagation을 BPTT(BackPropagation Through Time)이라고 부른다.&lt;/p&gt;
 
 &lt;ul id=&quot;light-slider2&quot;&gt;
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back0.png&quot; /&gt;&lt;/li&gt;
@@ -120,32 +279,7 @@ y_t &amp;= W_{hy} h_t + b_y
   &lt;li&gt;&lt;a href=&quot;http://proceedings.mlr.press/v28/pascanu13.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;On the difficulty of training recurrent neural networks&lt;/span&gt;&lt;/a&gt; 논문에서는 Vanishing &amp;amp; Exploding Gradient 문제를 자세히 다루고 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 tanh을 쓰면 기울기가 0과 1사이의 값으로 고정되니 ReLU를 쓰자는 방법이 있었다. 둘째로, &lt;strong&gt;LSTM&lt;/strong&gt;, &lt;strong&gt;GRU&lt;/strong&gt; 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다.&lt;/p&gt;
-
-&lt;h2 id=&quot;rnn-forward--backward--&quot;&gt;참고) RNN Forward 와 Backward의 계산 그래프&lt;/h2&gt;
-
-&lt;h3 id=&quot;forward-1&quot;&gt;Forward&lt;/h3&gt;
-
-&lt;ul id=&quot;light-slider3&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward0.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward2.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;backward-1&quot;&gt;Backward&lt;/h3&gt;
-
-&lt;ul id=&quot;light-slider3&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward0.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward3.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward4.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward5.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $dh_{t-1}$ 가 이 다음 역전파때 $d a_{t-1}$에 더해져 계산한다는 점이다. 그 이유는 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
-
-&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.&lt;/p&gt;
+&lt;p&gt;장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 &lt;strong&gt;tanh&lt;/strong&gt; 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 &lt;strong&gt;ReLU&lt;/strong&gt; 를 쓰자는 방법이 있었다. 둘째로, &lt;strong&gt;LSTM&lt;/strong&gt;, &lt;strong&gt;GRU&lt;/strong&gt; 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
         <link>http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</link>
@@ -2849,373 +2983,6 @@ print(&quot;accuracy:&quot;, acc_count / len(x_train))
         <pubDate>Fri, 08 Dec 2017 11:52:21 +0900</pubDate>
         <link>http://simonjisu.github.io/deeplearning/2017/12/08/numpywithnn_2.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/08/numpywithnn_2.html</guid>
-        
-        
-        <category>DeepLearning</category>
-        
-      </item>
-    
-      <item>
-        <title>NUMPY with NN - 1: Perceptron</title>
-        <description>&lt;h1 id=&quot;numpy--neural-network-basic---1&quot;&gt;Numpy로 짜보는 Neural Network Basic - 1&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;Neural Network의 역사: &lt;a href=&quot;http://solarisailab.com/archives/1206&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt; 참고&lt;/p&gt;
-
-&lt;p&gt;Neural Network를 알려먼 퍼셉트론이란 개념을 우선 이야기 해보자&lt;/p&gt;
-&lt;h2 id=&quot;perceptron&quot;&gt;퍼셉트론(Perceptron)&lt;/h2&gt;
-&lt;p&gt;퍼셉트론(perceptron)은 인공신경망의 한 종류로서, 1957년에 코넬 항공 연구소(Cornell Aeronautical Lab)의 프랑크 로젠블라트 (Frank Rosenblatt)에 의해 고안되었다. 이것은 가장 간단한 형태의 피드포워드(Feedforward) 네트워크 - 선형분류기- 으로도 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;퍼셉트론이 동작하는 방식은 다음과 같다. 각 노드의 가중치와 입력치를 곱한 것을 모두 합한 값이 활성함수에 의해 판단되는데, 그 값이 임계치(보통 0)보다 크면 뉴런이 활성화되고 결과값으로 1을 출력한다. 뉴런이 활성화되지 않으면 결과값으로 -1을 출력한다.&lt;/p&gt;
-
-&lt;p&gt;(출처: 위키백과 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%ED%8D%BC%EC%85%89%ED%8A%B8%EB%A1%A0&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;퍼셉트론을 이야기 하면 XOR문제를 빠트릴 수가 없는데, 그 이유는 XOR문제를 푸는데 다층 퍼셉트론이 사용되며, 이게 Neural Network의 모태이기 되기 때문이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;and-or-nand&quot;&gt;AND, OR, NAND&lt;/h3&gt;
-&lt;p&gt;XOR문제를 이야기 하기 전에 AND, OR, NAND에 대해 이야기 해야한다. 어떤 이산 변수 $x_1$과 $x_2$가 있다고 생각해보자. 어떤 선형식을 통해서 아래와 같은 표를 분류하고 싶다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;어떤 선형식을 세워야 $x_1$과 $x_2$를 넣었을 때 y값이 나올까? 아래 식을 한번 보자.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;y =
-\begin{cases}
-  0\ \ (b + w_1x_1 + w_2x_2 \leq 0) \\
-  1\ \ (b + w_1x_1 + w_2x_2 &gt; 0) \\
-\end{cases}&lt;/script&gt;
-
-&lt;p&gt;만약에 $b$ 가 임의의 음수이고, $w_1$, $w_2$ 값이 $b$ 보다 작거나 같은 임의의 양수면 이 식은 항상 성립한다. 각종 변수가 이를 만족 할 때 &lt;strong&gt;AND 게이트&lt;/strong&gt; 라고 부르며 코드로 이렇게 짜볼 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def AND(x1, x2):
-  x = np.array([x1, x2])
-  w = np.array([0.5, 0.5])
-  b = -0.7
-  tmp = np.sum(x*w) + b
-  if tmp &amp;lt;= 0:
-      return 0
-  else:
-      return 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;확인해보면&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-for x in xx:
-  print('AND({0},{1}) : {2}'.format(x[0], x[1], AND(x[0], x[1])))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;AND(0,0) : 0&lt;/p&gt;
-
-  &lt;p&gt;AND(0,1) : 0&lt;/p&gt;
-
-  &lt;p&gt;AND(1,0) : 0&lt;/p&gt;
-
-  &lt;p&gt;AND(1,1) : 1&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;위에 있는 식을를 그림으로 표현하면 아래와 같은 그림이다. ($b$는 빠졌지만 위에다가 같이 더해준다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_1.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 OR 게이트와, NAND게이트도 한 번 생각해보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NAND 게이트&lt;/strong&gt; 는 아래와 같은 표로 나타낼 수 있다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def NAND(x1, x2):
-    x = np.array([x1, x2])
-    w = np.array([-0.5, -0.5])
-    b = 0.7
-    tmp = np.sum(x*w) + b
-    if tmp &amp;lt;= 0:
-        return 0
-    else:
-        return 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;결과 값을 측정해보면&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-for x in xx:
-    print('NAND({0},{1}) : {2}'.format(x[0], x[1], NAND(x[0], x[1])))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;NAND(0,0) : 1&lt;/p&gt;
-
-  &lt;p&gt;NAND(0,1) : 1&lt;/p&gt;
-
-  &lt;p&gt;NAND(1,0) : 1&lt;/p&gt;
-
-  &lt;p&gt;NAND(1,1) : 0&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;마찬가지로 &lt;strong&gt;OR 게이트&lt;/strong&gt; 는 아래와 같은 표로 나타낼 수 있다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def OR(x1, x2):
-    x = np.array([x1, x2])
-    w = np.array([0.5, 0.5])
-    b = -0.2
-    tmp = np.sum(x*w) + b
-    if tmp &amp;lt;= 0:
-        return 0
-    else:
-        return 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;결과 값을 확인해보면&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-for x in xx:
-    print('OR({0},{1}) : {2}'.format(x[0], x[1], OR(x[0], x[1])))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;OR(0,0) : 0&lt;/p&gt;
-
-  &lt;p&gt;OR(0,1) : 1&lt;/p&gt;
-
-  &lt;p&gt;OR(1,0) : 1&lt;/p&gt;
-
-  &lt;p&gt;OR(1,1) : 1&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이제 정리해서 각각의 게이트가 제대로 선형으로 분리 되었는지 확인해보자. x축과 y축은 각각 $x_1$ 과 $x_2$를 나타내며, 빨간 동그라미는 1, X로 표시된 곳은 0이라는 뜻이다. 우리의 예시 $(b=-0.7\ w_1, w_2=0.5)$ AND 게이트에서 $x_1$이 0일때 절편인 $x_2$가 1.2가 되니까 맞게 분류하는 것을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_2.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 800px;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;xor-&quot;&gt;XOR 문제&lt;/h3&gt;
-&lt;p&gt;XOR 문제란 어떤 선형식으로 이산 변수 $x_1$과 $x_2$에 대해서 둘중에 하나라도 1이 되면 결과 값으로 1를 반환하, 둘다 0이거나 1이면 0을 반환하는 식을 찾는 것이다.&lt;/p&gt;
-
-&lt;p&gt;표로 그려보면 아래와 같은 문제다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;그림으로 보면 아래와 같은 문제를 푸는 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_3.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아까와 같은 방법으로 단일 선으로 이 문제를 풀수 있을까?&lt;/p&gt;
-
-&lt;p&gt;절대 풀 수 없다. 그래서 나타난 것이 게이트를 겹쳐서 올리는 것이다. 아래 그림을 보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_4.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이런 구조로 게이트를 짜면 어떻게 될까? 예를 들어 $x_1, x_2 = 0$ 이라고 가정해보자. $x_1$과 $x_2$가 NAND 게이트를 거치면 1, OR 게이트를 거치면 0이 나온다. 1과 0이 AND 게이트를 거치면 0이 된다! 마찬가지로 해보면 XOR 문제를 풀 수가 있다! 이처럼 게이트 층을 두개 만들어 XOR문제를 풀었으며, 이것이 &lt;strong&gt;다층 퍼셉트론&lt;/strong&gt; 의 기원이라고 말 할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;표로 그려보면 아래와 같다. $s_1$ 과 $s_2$는 각각 NAND 게이트와 OR 게이트를 뜻하면 최종단에 AND 게이트를 거쳐 y 값을 구할 수 있다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_1$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$x_2$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$s_1$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$s_2$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$y$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;코드로 구현하느 것은 아까 만든 코드를 나열하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def XOR(x1, x2):
-    s1 = NAND(x1, x2)
-    s2 = OR(x1, x2)
-    y = AND(s1, s2)
-    return y
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;확인해보면&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-for x in xx:
-    print('XOR({0},{1}) : {2}'.format(x[0], x[1], XOR(x[0], x[1])))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;XOR(0,0) : 0&lt;/p&gt;
-
-  &lt;p&gt;XOR(0,1) : 1&lt;/p&gt;
-
-  &lt;p&gt;XOR(1,0) : 1&lt;/p&gt;
-
-  &lt;p&gt;XOR(1,1) : 0&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Rosenblatt이 제시한 정확한 단일 퍼셉트론은 아래의 그림과 같다. Input과 Weight를 곱해서 더한 다음에 Activation function을 적용해서 그 값이 0보다 크면 1 작으면 -1를 반환하는 Feedforward 선형 분류기의 구조다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/perceptron/perceptron_5.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이는 XOR 문제를 해결 할 수 없었고, Multi-Layer Perceptrons이 1986년에 등장 했는데 중간에 Hidden 층을 더 쌓으면서 XOR 문제를 해결하였다.&lt;/p&gt;
-
-&lt;p&gt;다음 시간에는 Feedforward과정을 자세히 알아본다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 07 Dec 2017 17:54:18 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html</guid>
         
         
         <category>DeepLearning</category>

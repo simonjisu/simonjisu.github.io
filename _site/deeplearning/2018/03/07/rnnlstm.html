@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>RNN & LSTM - 1: RNN</title>
-  <meta name="description" content="최대한 자세하게 설명한 RNN 과 LSTM">
+  <meta name="description" content="최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,7 +41,7 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="최대한 자세하게 설명한 RNN 과 LSTM" />
+  <meta property="og:description" content="최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="RNN & LSTM - 1: RNN" />
@@ -56,7 +56,7 @@
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="RNN & LSTM - 1: RNN">
-  <meta name="twitter:description" content="최대한 자세하게 설명한 RNN 과 LSTM">
+  <meta name="twitter:description" content="최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -189,7 +189,7 @@
 </section>
 
 <article class="post-content">
-  <h1 id="rnn--lstm">최대한 자세하게 설명한 RNN 과 LSTM</h1>
+  <h1 id="rnn--lstm----1-rnn">최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN</h1>
 
 <h2 id="rnnrecurrent-neural-network">RNN(Recurrent Neural Network)</h2>
 <p>우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.</p>
@@ -243,7 +243,7 @@ y_t &= W_{hy} h_t + b_y
 <p>최종 Cost는 모든 Cost Function의 평균으로 구해진다.</p>
 
 <h3 id="backward">Backward</h3>
-<p>RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 Backpropogation을 BPTT(Backpropogation Through Time)이라고 부른다.</p>
+<p>RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 BackPropagation을 BPTT(BackPropagation Through Time)이라고 부른다.</p>
 
 <ul id="light-slider2">
     <li><img src="/assets/ML/rnn/rnn_back0.png" /></li>
@@ -297,32 +297,7 @@ y_t &= W_{hy} h_t + b_y
   <li><a href="http://proceedings.mlr.press/v28/pascanu13.pdf"><span style="color: #7d7ee8">On the difficulty of training recurrent neural networks</span></a> 논문에서는 Vanishing &amp; Exploding Gradient 문제를 자세히 다루고 있다.</li>
 </ul>
 
-<p>장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 tanh을 쓰면 기울기가 0과 1사이의 값으로 고정되니 ReLU를 쓰자는 방법이 있었다. 둘째로, <strong>LSTM</strong>, <strong>GRU</strong> 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다.</p>
-
-<h2 id="rnn-forward--backward--">참고) RNN Forward 와 Backward의 계산 그래프</h2>
-
-<h3 id="forward-1">Forward</h3>
-
-<ul id="light-slider3">
-  <li><img src="/assets/ML/rnn/graph_forward0.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_forward1.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_forward2.png" /></li>
-</ul>
-
-<h3 id="backward-1">Backward</h3>
-
-<ul id="light-slider3">
-  <li><img src="/assets/ML/rnn/graph_backward0.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_backward1.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_backward2.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_backward3.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_backward4.png" /></li>
-  <li><img src="/assets/ML/rnn/graph_backward5.png" /></li>
-</ul>
-
-<p>backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $dh_{t-1}$ 가 이 다음 역전파때 $d a_{t-1}$에 더해져 계산한다는 점이다. 그 이유는 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.</p>
-
-<p>위 그림은 <a href="https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/"><span style="color: #7d7ee8">ratsgo’s blog</span></a> 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.</p>
+<p>장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 <strong>tanh</strong> 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 <strong>ReLU</strong> 를 쓰자는 방법이 있었다. 둘째로, <strong>LSTM</strong>, <strong>GRU</strong> 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.</p>
 
 </article>
 
@@ -367,11 +342,13 @@ y_t &= W_{hy} h_t + b_y
 
 
   
+
+  
     
-    <!-- <h2 id="DeepLearning">-1</h2> -->
-    <!-- <h2 id="DeepLearning">/deeplearning/2017/12/07/numpywithnn_1.html</h2> -->
+    <!-- <h2 id="DeepLearning">0</h2> -->
+    <!-- <h2 id="DeepLearning">/deeplearning/2018/03/14/rnnlstm.html</h2> -->
     
-    <!-- <h2 id="DeepLearning">1</h2> -->
+    <!-- <h2 id="DeepLearning">2</h2> -->
     <!-- <h2 id="DeepLearning">/deeplearning/2018/02/08/numpywithnn_8.html</h2> -->
     
 
@@ -391,6 +368,14 @@ y_t &= W_{hy} h_t + b_y
 			
 		</span>
 		<span class="next-post">
+			
+				<a href="/deeplearning/2018/03/14/rnnlstm.html">
+					<span class="page-number">RNN & LSTM - 2: Numpy with RNN</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
 			
 		</span>
 	</section>
