@@ -139,19 +139,6 @@ social:
     desc: Follow me on Instagram
     share: false
 
-  # - name: Pinterest
-  #   icon: pinterest
-  #   username:
-  #   url:
-  #   desc: Follow me on Pinterest
-  #   share: true
-  #
-  # - name: SoundCloud
-  #   icon: soundcloud
-  #   username:
-  #   url:
-  #   desc: Follow me on SoundCloud
-  #   share: false
   #
   # - name: Tumblr
   #   icon: tumblr
@@ -167,40 +154,7 @@ social:
   #   desc: Friend me on Steam
   #   share: false
   #
-  # - name: Dribbble
-  #   icon: dribbble
-  #   username:
-  #   url:
-  #   desc: Follow me on Dribble
-  #   share: false
-  #
-  # - name: Vimeo
-  #   icon: vimeo-square
-  #   username:
-  #   url:
-  #   desc: Follow me on Vimeo
-  #   share: false
-  #
-  # - name: Vine
-  #   icon: vine
-  #   username:
-  #   url:
-  #   desc: Follow me on Vine
-  #   share: false
-  #
-  # - name: Reddit
-  #   icon: reddit
-  #   username:
-  #   url:
-  #   desc: Share to Reddit
-  #   share: true
-  #
-  # - name: "Hacker News"
-  #   icon: hacker-news
-  #   username:
-  #   url:
-  #   desc: Share to Hacker News
-  #   share: false
+
 
 # Social sharing protocols
 # These are for automatically generating sharing metadata for FB and Twitter
