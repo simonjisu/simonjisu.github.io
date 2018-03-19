@@ -7,6 +7,7 @@ date: "2018-01-25 12:54:15 +0900"
 comments: true
 ---
 # Numpy로 짜보는 Neural Network Basic - 7
+
 ---
 ## 학습관련 기술 Part 3
 

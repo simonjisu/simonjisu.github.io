@@ -6,20 +6,201 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 15 Mar 2018 00:03:16 +0900</pubDate>
-    <lastBuildDate>Thu, 15 Mar 2018 00:03:16 +0900</lastBuildDate>
+    <pubDate>Mon, 19 Mar 2018 16:51:10 +0900</pubDate>
+    <lastBuildDate>Mon, 19 Mar 2018 16:51:10 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
         <title>RNN &amp; LSTM - 2: Numpy with RNN</title>
-        <description>&lt;h1 id=&quot;rnn--lstm----2&quot;&gt;최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 2&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;rnn--lstm----2&quot;&gt;자세하게 설명한 RNN 과 LSTM 시리즈 - 2&lt;/h1&gt;
 
 &lt;h2 id=&quot;numpy--rnn-&quot;&gt;Numpy 로 RNN 만들어보기&lt;/h2&gt;
 &lt;p&gt;모든 코드는 Github: &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;NUMPYwithNN&lt;/span&gt;&lt;/a&gt; 에 올려져 있습니다.&lt;/p&gt;
 
 &lt;p&gt;Jupyter Notebook 으로 전체과정 보기: &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크 &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;목적&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;rnn-forward--backward--&quot;&gt;RNN Forward 와 Backward의 계산 그래프&lt;/h2&gt;
+
+&lt;ul id=&quot;light-slider1&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward0.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward2.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul id=&quot;light-slider1&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward0.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward2.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward3.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward4.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward5.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $d h_{t-1}^{raw}$ 가 이 다음 역전파로 들어가기 전에 이전 단계로 부터 얻은 $dh_{t-1}$ 와 더해져 계산한다는 점이다. 그 이유는 forward 시 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
+
+&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;bptt--&quot;&gt;참고) BPTT 수식적 이해&lt;/h3&gt;
+&lt;p&gt;$tanh$의 미분을 $f(x) = 1 - tanh^2(x)$ 라고 하면,&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+dh_{0} = \dfrac{\partial L}{\partial h_{0}}
+&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_0} + \dfrac{\partial L}{\partial y_{t-1}} \dfrac{\partial y_{t-1}}{\partial h_0} \cdots + \dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_0}\\
+&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_t} \dfrac{\partial h_t}{\partial a_t} \dfrac{\partial a_t}{\partial h_{t-1}} \cdots \dfrac{\partial a_1}{\partial h_{0}} + \cdots +
+\dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial a_1} \dfrac{\partial a_1}{\partial h_0} \\
+&amp;= W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_1) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) W_{hh} f(a_1) + W_{hy} dy_1 W_{hh} f(a_1) \\
+&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;위 식을 위에 있는 그림대로 그려보자, 뒤에 $W_{hh} f(a_1)$ 부처 차근차근 묶어서 아래의 식을 얻을 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+\dfrac{\partial L}{\partial h_{0}}
+&amp;= W_{hh} f(a_1) \bigg( W_{hy} dy_t  W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_2) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) + W_{hy} dy_1 \bigg) \\
+&amp;= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_3) + \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
+&amp;= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( \cdots W_{hh} f(a_{t-1}) \big( \underbrace{W_{hh} f(a_t) (\underbrace{ W_{hy} dy_t }_{dh_t^{raw}} + 0)}_{dh_{t-1}} + \underbrace{ W_{hy} dy_{t-1} }_{dh_{t-1}^{raw}} \big) \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;위에 그림과 비교해보면 이런 식으로 계속 더해진다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;backpropagation-through-time-bptt-&quot;&gt;BackPropagation Through Time (BPTT) 구현&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Single_Layer_RNN&lt;/strong&gt; 의 코드는 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;에 있습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Layer&lt;/strong&gt; 의 구현을 참고하려면 Github의 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;common/layers&lt;/span&gt;&lt;/a&gt; 참고하세요!&lt;/li&gt;
+  &lt;li&gt;처음 Layer를 짜보시는 분은 &lt;a href=&quot;https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic&lt;/span&gt;&lt;/a&gt; 시리즈를 참고하세요!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def _params_summation_init(self):
+    self.params_summ = {}
+    self.params_summ['W_xh'] = np.zeros_like(self.params['W_xh'])
+    self.params_summ['W_hh'] = np.zeros_like(self.params['W_hh'])
+    self.params_summ['W_hy'] = np.zeros_like(self.params['W_hy'])
+    self.params_summ['b_h'] = np.zeros_like(self.params['b_h'])
+    self.params_summ['b_y'] = np.zeros_like(self.params['b_y'])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;또한, $dh_T$ 를 0으로 초기화 한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dht = np.zeros_like(self.h0)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그후에 총 길이 $T$의 역순으로 각 Layer 의 Back Propagation 을 진행한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for t in np.arange(self.T)[::-1]:
+    dout = self.last_layers[t].backward()
+    dht_raw = self.layers['Affine_hy'][t].backward(dout)
+    dat = self.layers['Activation'][t].backward(dht_raw + dht)
+    dht = self.layers['Affine_hh'][t].backward(dat)
+    dx = self.layers['Affine_xh'][t].backward(dat)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;또한, 파라미터 $W$ 와 $b$ 의 합도 같이 구해준다. 그 이유는 전편에서 설명되어 있지만, 다시 한번 이야기 하자면, 최종 Loss Function은 각 Output Loss의 평균이기 때문에, 각 Output 마다 파라미터들을 summation 하는 과정이 있다. (평균을 구할때 우선 summation을 한다는 것을 잊지 말자.)&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
+self.params_summ['W_hh'] += self.layers['Affine_hh'][t].dW
+self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
+self.params_summ['b_h'] += self.layers['Affine_hh'][t].db
+self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;전체 Backward 과정&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward(self):
+    # BPTT
+    self._params_summation_init()
+    dht = np.zeros_like(self.h0)
+
+    for t in np.arange(self.T)[::-1]:
+        dout = self.last_layers[t].backward()
+        dht_raw = self.layers['Affine_hy'][t].backward(dout)
+        dat = self.layers['Activation'][t].backward(dht_raw + dht)
+        dht = self.layers['Affine_hh'][t].backward(dat)
+        dx = self.layers['Affine_xh'][t].backward(dat)
+
+        self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
+        self.params_summ['W_hh'] += self.layers['Affine_hh'][t].dW
+        self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
+        self.params_summ['b_h'] += self.layers['Affine_hh'][t].db
+        self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;truncate-backpropagation-through-time-t-bptt&quot;&gt;Truncate BackPropagation Through Time (T-BPTT)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Truncate BackPropagation Through Time (T-BPTT)&lt;/strong&gt; 은 기존 BPTT 에서 과거 모든 미분값을 참조하는 대신 고정된 길이로 참조 할 수 있도록 만든 알고리즘이다.&lt;/p&gt;
+
+&lt;p&gt;왜 이런것을 만들었을 까? BPTT 알고리즘의 미분식을 다시 생각해보자.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+dh_{0} = \dfrac{\partial L}{\partial h_{0}}
+&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;위에서 설명했지만, BPTT 과정에서 Time-step이 길어질 수록, 많은 양의 곱셈이 이루어 진다. 계산량을 줄이기 위해서 이런 알고리즘이 나왔을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;다른 접근 방법으로, 학습하고 싶은 Sequence의 일정 길이만큼만 과거를 참조하고 싶기 때문일 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어 “I live in Seoul. (중략) I am Korean.” 이라는 문장을 생각해보자. 학습 데이터는 아래와 같을 것이다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;I&quot;, &quot;live&quot;, &quot;in&quot;, &quot;Seoul&quot;, &quot;.&quot;, (중략), &quot;I&quot;, &quot;am&quot;, &quot;Korean&quot;, &quot;.&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Forward 할때는 순차적으로 들어갈텐데, Backward 할때는 데이터의 역순으로(“.”, “Korean”) 진행될 것이다. 그러나 내가 한국인이라는 것은 내가 서울에 살고 있기 때문인데, 굳이 앞단의 “I”, “live”, “in” 까지 참조할 필요는 없는 것이다. 그렇다면 위에 식은 아래와 같이 변할 것이다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+dh_{0} = \dfrac{\partial L}{\partial h_{0}}
+&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{k} \prod_{j=k}^{t} f(a_j) \Big) \\
+where \quad k &amp;= \max(1, t - truncate)
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;h3 id=&quot;t-bptt-&quot;&gt;T-BPTT 구현&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/normal_truncate.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;r2rt.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward_truncate(self):
+    # TBPTT
+    self._params_summation_init()
+    dht = np.zeros_like(self.h0)
+
+    for t in np.arange(self.T)[::-1]:
+        dout = self.last_layers[t].backward()
+        dht_raw = self.layers['Affine_hy'][t].backward(dout)
+        self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
+        self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
+
+        for bptt_step in np.arange(max(0, t + 1 - self.bptt_truncate), t + 1)[::-1]:
+            dat = self.layers['Activation'][bptt_step].backward(dht_raw + dht)
+            dht = self.layers['Affine_hh'][bptt_step].backward(dat)  # dh_t-1
+            dx = self.layers['Affine_xh'][bptt_step].backward(dat)  # dx
+            self.params_summ['W_xh'] += self.layers['Affine_xh'][bptt_step].dW
+            self.params_summ['W_hh'] += self.layers['Affine_hh'][bptt_step].dW
+            self.params_summ['b_h'] += self.layers['Affine_hh'][bptt_step].db
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그러나 Tensorflow 에서는 아래와 같이 구현한다고 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/tensorflow_truncate.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;r2rt.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;실습&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;목적&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;“hello world! nice to meet you! i love iron-man”&lt;/strong&gt; 을 RNN 으로 학습시키기.&lt;/p&gt;
 
 &lt;table&gt;
@@ -57,112 +238,161 @@
       &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;y&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;m&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;o&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;a&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;o&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;a&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;u&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;n&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;rnn-forward--backward--&quot;&gt;RNN Forward 와 Backward의 계산 그래프&lt;/h2&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;데이터 및 우리가 만든 패키지 준비&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import numpy as np
+from common.SimpleRNN import Single_layer_RNN
+from common.optimizer import Adam
+from common.train_graph import loss_graph
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;x = 'hello world! nice to meet you! i love iron-man'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;인코딩 클래스 하나를 만들어서 문자열을 one-hot 인코딩 해준다.&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider3&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward0.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward2.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class chr_coding(object):
+    def __init__(self):
+        self._dict = None
+        self._one_hot_matrix = None
+        self._dict_reversed = None
 
-&lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
+    def fit(self, x):
+        if isinstance(x, str):
+            x = list(x)
 
-&lt;ul id=&quot;light-slider3&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward0.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward3.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward4.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward5.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
+        self._one_hot_matrix = np.eye(len(set(x)))
+        self._dict = {d: i for i, d in enumerate(list(set(x)))}
+        self._dict_reversed = {v: k for k, v in self._dict.items()}
 
-&lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $dh_{t-1}$ 가 이 다음 역전파때 $d a_{t-1}$에 더해져 계산한다는 점이다. 그 이유는 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
+    def encode(self, x):
+        encoded_data = np.array([self._one_hot_matrix[self._dict[d]] for d in x])
+        return encoded_data
 
-&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 공부에 많은 참조를 했음을 밝힙니다.&lt;/p&gt;
+    def decode(self, x, probs=None):
+        if probs is None:
+            decoded_data = self._dict_reversed[x]
+        else:
+            decoded_data = self._dict_reversed[np.argmax(probs)]
+        return decoded_data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&quot;dht-&quot;&gt;참고) 왜 $dh_t$ 더해줘야하나?&lt;/h3&gt;
-&lt;p&gt;$h(x) = f_1(x) + f_2(x) + \cdots + f_t(x)$ 의 $x$에 대한 미분은&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;encoder = chr_coding()
+encoder.fit(x)
+one_hot_data = encoder.encode(x)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;$h’(x) = f_1’(x)+ f_2’(x) + \cdots + f_t’(x)$ 이기 때문!&lt;/p&gt;
+&lt;p&gt;학습 데이터 x, y를 지정해준다.&lt;/p&gt;
 
-&lt;p&gt;우리의 예로 들자면, $t$ 가 $T$ 부터 $1$ 까지 순환하면서,&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_x = one_hot_data[:-1]
+train_y = one_hot_data[1:]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-dh_{t-1} = \dfrac{\partial L}{\partial h_{t-1}}  
-&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_t} \dfrac{\partial h_t}{\partial a_t} \dfrac{\partial a_t}{\partial h_{t-1}} + \cdots +
-\dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial h_1}
-\end{aligned} %]]&gt;&lt;/script&gt;
+&lt;h3 id=&quot;hyperparameters&quot;&gt;hyperparameters&lt;/h3&gt;
 
-&lt;p&gt;이런 식으로 계속 더해진다.&lt;/p&gt;
+&lt;p&gt;INPUT_SIZE 와 OUTPUT_SIZE 는 중복되지 않는 문자열 사전의 길이라는 것을 잊지 말자.&lt;/p&gt;
 
-&lt;h2 id=&quot;backpropagation-through-time-bptt-&quot;&gt;BackPropagation Through Time (BPTT) 구현&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NUM_EPOCHS = 600
+PRINT_EPOCH = 30
+INPUT_SIZE = one_hot_data.shape[1]
+OUTPUT_SIZE = one_hot_data.shape[1]
+HIDDEN_SIZE = 20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;accuracy--train-&quot;&gt;필요한 함수 설정: accuracy 와 train 함수&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def get_accuracy(x, test_string):
+    bool_ = np.array(list(x))[1:] == np.array(list(test_string))[1:]
+    return bool_.sum() / len(bool_)
+
+def train(rnn, optim, print_epoch=20):
+    total_loss_list = []
+    total_acc_list = []
+    for epoch in range(NUM_EPOCHS):
+        test_string = 'h'
+        # forward
+        total_loss = rnn.loss(train_x, train_y)
+
+        # backward
+        rnn.backward()
+
+        optim.update(rnn.params, rnn.params_summ)
+
+        # test string
+        predicted_idx = rnn.predict(train_x)
+        for idx in predicted_idx:
+            test_string += encoder.decode(idx)
+
+        # get accuracy
+        acc = get_accuracy(x, test_string)
+
+        if epoch % print_epoch == 0:
+            print('#{0}, Loss: {1:.6f}, Acc: {2:.6f}, Test_string: &quot;{3}&quot;'\
+                  .format(epoch, total_loss, acc, test_string))
+        elif epoch == (NUM_EPOCHS-1):
+            print('#{0}, Loss: {1:.6f}, Acc: {2:.6f}, Test_string: &quot;{3}&quot;'\
+                  .format(epoch, total_loss, acc, test_string))
+
+        total_loss_list.append(total_loss)
+        total_acc_list.append(acc)
+    return total_loss_list, total_acc_list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;학습하기&lt;/h3&gt;
+
+&lt;p&gt;rnn 모델을 만들고, 어떤 방식으로 업데이트 할 것인지 정하자. 여기서는 Adam을 썼다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Layer&lt;/strong&gt; 의 구현을 참고하려면 Github의 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;common/layers&lt;/span&gt;&lt;/a&gt; 참고하세요!&lt;/li&gt;
-  &lt;li&gt;혹은 &lt;a href=&quot;https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic&lt;/span&gt;&lt;/a&gt; 시리즈를 참고하세요!&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Optimizer&lt;/strong&gt; 의 설명은 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 5&lt;/span&gt;&lt;/a&gt;에 있습니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def _params_summation_init(self):
-    self.params_summ = {}
-    self.params_summ['W_xh'] = np.zeros_like(self.params['W_xh'])
-    self.params_summ['W_hh'] = np.zeros_like(self.params['W_hh'])
-    self.params_summ['W_hy'] = np.zeros_like(self.params['W_hy'])
-    self.params_summ['b_h'] = np.zeros_like(self.params['b_h'])
-    self.params_summ['b_y'] = np.zeros_like(self.params['b_y'])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;또한, $dh_T$ 를 0으로 초기화 한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dht = np.zeros_like(self.h0)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rnn = Single_layer_RNN(input_size=INPUT_SIZE,
+                       hidden_size=HIDDEN_SIZE,
+                       output_size=OUTPUT_SIZE)
+optim = Adam()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;그후에 총 길이 $T$의 역순으로 Layer 마다&lt;/p&gt;
+&lt;p&gt;학습시키기!&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for t in np.arange(self.T)[::-1]:
-    dout = self.last_layers[t].backward()
-    dht_raw = self.layers['Affine_hy'][t].backward(dout)
-    dat = self.layers['Activation'][t].backward(dht_raw) + dht
-    dht = self.layers['Affine_hh'][t].backward(dat)
-    dx = self.layers['Affine_xh'][t].backward(dat)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;total_loss_list, total_acc_list = train(rnn, optim, print_epoch=PRINT_EPOCH)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bptt.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Loss Graph 도 찍어보자&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loss_graph(train_loss_list=total_loss_list, train_acc_list=total_acc_list)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;전체 Backward 과정&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward(self):
-    # BPTT
-    self._params_summation_init()
-    dht = np.zeros_like(self.h0)
+&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bptt_loss.png&quot; /&gt;&lt;/p&gt;
 
-    for t in np.arange(self.T)[::-1]:
-        dout = self.last_layers[t].backward()
-        dht_raw = self.layers['Affine_hy'][t].backward(dout)
-        dat = self.layers['Activation'][t].backward(dht_raw) + dht
-        dht = self.layers['Affine_hh'][t].backward(dat)
-        dx = self.layers['Affine_xh'][t].backward(dat)
-        self._params_summation(t)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;h2 id=&quot;section-4&quot;&gt;공부에 도움 되었던 싸이트:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/karpathy/d4dee566867f8291f086&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;karpathy github RNN part&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Wed, 14 Mar 2018 22:05:37 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm.html</guid>
+        <link>http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm2.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm2.html</guid>
         
         
         <category>DeepLearning</category>
@@ -171,7 +401,7 @@ dh_{t-1} = \dfrac{\partial L}{\partial h_{t-1}}
     
       <item>
         <title>RNN &amp; LSTM - 1: RNN</title>
-        <description>&lt;h1 id=&quot;rnn--lstm----1-rnn&quot;&gt;최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;rnn--lstm----1&quot;&gt;자세하게 설명한 RNN 과 LSTM 시리즈 - 1&lt;/h1&gt;
 
 &lt;h2 id=&quot;rnnrecurrent-neural-network&quot;&gt;RNN(Recurrent Neural Network)&lt;/h2&gt;
 &lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.&lt;/p&gt;
@@ -210,7 +440,7 @@ dh_{t-1} = \dfrac{\partial L}{\partial h_{t-1}}
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_8.png&quot; /&gt;&lt;/li&gt;
   &lt;/ul&gt;
 
-&lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다.
+&lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다. 또한 각 가중치는 각각 layer에서 공유하게 된다.
 (가중치 초기화를 잊어 버렸다면 &lt;a href=&quot;https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;로)&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
@@ -227,7 +457,7 @@ y_t &amp;= W_{hy} h_t + b_y
 &lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
 &lt;p&gt;RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 BackPropagation을 BPTT(BackPropagation Through Time)이라고 부른다.&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider2&quot;&gt;
+&lt;ul id=&quot;light-slider1&quot;&gt;
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back0.png&quot; /&gt;&lt;/li&gt;
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back1.png&quot; /&gt;&lt;/li&gt;
     &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back2.png&quot; /&gt;&lt;/li&gt;
@@ -293,6 +523,7 @@ y_t &amp;= W_{hy} h_t + b_y
       <item>
         <title>NUMPY with NN - 8: Summary</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 8&lt;/h1&gt;
+
 &lt;hr /&gt;
 &lt;h2 id=&quot;section&quot;&gt;총 정리&lt;/h2&gt;
 &lt;p&gt;지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.&lt;/p&gt;
@@ -433,6 +664,7 @@ print('total time:', (end - start))
       <item>
         <title>NUMPY with NN - 7: Batch Normalization</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---7&quot;&gt;Numpy로 짜보는 Neural Network Basic - 7&lt;/h1&gt;
+
 &lt;hr /&gt;
 &lt;h2 id=&quot;part-3&quot;&gt;학습관련 기술 Part 3&lt;/h2&gt;
 
@@ -784,6 +1016,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
       <item>
         <title>NUMPY with NN - 6: Weight Initialization</title>
         <description>&lt;h1 id=&quot;numpy--neural-network-basic---6&quot;&gt;Numpy로 짜보는 Neural Network Basic - 6&lt;/h1&gt;
+
 &lt;hr /&gt;
 &lt;h2 id=&quot;part-2&quot;&gt;학습관련 기술 Part 2&lt;/h2&gt;
 

@@ -7,6 +7,7 @@ date: "2018-02-08 15:13:40 +0900"
 comments: true
 ---
 # Numpy로 짜보는 Neural Network Basic - 8
+
 ---
 ## 총 정리
 지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.

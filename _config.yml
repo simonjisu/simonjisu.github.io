@@ -28,7 +28,12 @@ markdown: kramdown
 paginate: 5
 paginate_path: "/page:num/"
 inter_post_navigation: true
-highlightjs_theme: "monokai-sublime"
+highlightjs_theme: "atom-one-light"
+# monokai-sublime
+# tomorrow-night-eighties, bright
+# atom-one-light
+
+
 
 # Archive settings (see https://github.com/jekyll/jekyll-archives/)
 jekyll-archives:

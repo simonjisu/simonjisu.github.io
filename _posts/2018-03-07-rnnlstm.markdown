@@ -6,7 +6,7 @@ categories: "DeepLearning"
 author: "Soo"
 comments: true
 ---
-# 최대한 자세하게 설명한 RNN 과 LSTM 시리즈 - 1: RNN
+# 자세하게 설명한 RNN 과 LSTM 시리즈 - 1
 
 ## RNN(Recurrent Neural Network)
 우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 '기억' 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 '기억'을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.
@@ -45,7 +45,7 @@ Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시
     <li><img src="/assets/ML/rnn/rnn_8.png"></li>
   </ul>
 
-Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다.
+Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다. 또한 각 가중치는 각각 layer에서 공유하게 된다.
 (가중치 초기화를 잊어 버렸다면 [<span style="color: #7d7ee8">여기</span>](https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html)로)
 
 $$
@@ -63,7 +63,7 @@ $$
 ### Backward
 RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 BackPropagation을 BPTT(BackPropagation Through Time)이라고 부른다.
 
-  <ul id="light-slider2">
+  <ul id="light-slider1">
     <li><img src="/assets/ML/rnn/rnn_back0.png"></li>
     <li><img src="/assets/ML/rnn/rnn_back1.png"></li>
     <li><img src="/assets/ML/rnn/rnn_back2.png"></li>
