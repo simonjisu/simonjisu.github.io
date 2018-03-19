@@ -5,6 +5,9 @@ gems:
   - jekyll-sitemap
   - jekyll-paginate
 
+plugins_dir:
+  - jekyll-archives
+
 exclude:
   - "/vendor/"
 
@@ -56,28 +59,28 @@ descriptions:
   - cat: jekyll
     desc: "Posts describing Jekyll setup techniques."
 
-  - cat: dataScience
+  - cat: DataScience
     desc: "DataScience"
 
-  - cat: deepLearning
+  - cat: DeepLearning
     desc: "딥러닝"
 
-  - cat: nlp
+  - cat: NLP
     desc: "NLP 공부"
 
-  - cat: library
+  - cat: Library
     desc: "책을 읽고"
 
-  - cat: studyanalysis
+  - cat: Study_Analysis
     desc: "공부 및 분석"
 
-  - cat: stock
+  - cat: Stock
     desc: "주식"
 
-  - cat: algorithm
+  - cat: Algorithm
     desc: "알고리즘 공부"
 
-  - cat: blabla
+  - cat: BlaBla
     desc: "잡념"
 # Social icons and sharing options
 #

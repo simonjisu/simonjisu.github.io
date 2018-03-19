@@ -2,7 +2,7 @@
 layout: post
 title: "RNN & LSTM - 2: Numpy with RNN"
 date: "2018-03-14 22:05:37 +0900"
-categories: "deeplearning"
+categories: "DeepLearning"
 author: "Soo"
 comments: true
 ---
