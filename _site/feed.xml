@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Mar 2018 20:32:23 +0900</pubDate>
-    <lastBuildDate>Mon, 19 Mar 2018 20:32:23 +0900</lastBuildDate>
+    <pubDate>Mon, 19 Mar 2018 20:34:10 +0900</pubDate>
+    <lastBuildDate>Mon, 19 Mar 2018 20:34:10 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -395,7 +395,7 @@ optim = Adam()
         <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm2.html</guid>
         
         
-        <category>DeepLearning</category>
+        <category>deeplearning</category>
         
       </item>
     
