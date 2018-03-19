@@ -56,28 +56,28 @@ descriptions:
   - cat: jekyll
     desc: "Posts describing Jekyll setup techniques."
 
-  - cat: DataScience
+  - cat: dataScience
     desc: "DataScience"
 
-  - cat: DeepLearning
+  - cat: deepLearning
     desc: "딥러닝"
 
-  - cat: NLP
+  - cat: nlp
     desc: "NLP 공부"
 
-  - cat: Library
+  - cat: library
     desc: "책을 읽고"
 
-  - cat: Study_Analysis
+  - cat: studyanalysis
     desc: "공부 및 분석"
 
-  - cat: Stock
+  - cat: stock
     desc: "주식"
 
-  - cat: Algorithm
+  - cat: algorithm
     desc: "알고리즘 공부"
 
-  - cat: BlaBla
+  - cat: blabla
     desc: "잡념"
 # Social icons and sharing options
 #
