@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="post">
-
+<!-- {% include test.html %} -->
 <div class="post-header-container {% if page.cover %}has-cover{% endif %}" {% if page.cover %}style="background-image: url({{ page.cover | prepend: site.baseurl }});"{% endif %}>
   <div class="scrim {% if page.cover %}has-cover{% endif %}">
     <header class="post-header">
@@ -21,9 +21,9 @@ layout: default
   <div class="post-categories">
   {% if page.categories.size > 0 %}in {% for cat in page.categories %}
     {% if site.jekyll-archives %}
-    <a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
+    <a href="{{ site.url }}/category/{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
     {% else %}
-    <a href="{{ site.baseurl }}/posts/#{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
+    <a href="{{ site.url }}/posts/#{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
     {% endif %}
   {% endfor %}{% endif %}
   </div>
