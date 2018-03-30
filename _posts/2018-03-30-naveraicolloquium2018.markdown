@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Naver AI Colloquium 2018"
-date: "2018-03-30 13:14:21 +0900"
+date: "2018-03-30 20:14:21 +0900"
 categories: "DataScience"
 author: "Soo"
 comments: true
