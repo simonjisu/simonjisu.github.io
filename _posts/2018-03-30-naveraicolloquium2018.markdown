@@ -31,7 +31,7 @@ comments: true
 
 ## 후기
 
-<img src="/assets/ML/naveraicol/Sungkim.jpg">
+<img src="/assets/ML/naveraicol/professorsungkim.JPG">
 
 "모두의 딥러닝"으로 유명하신 Sung Kim 교수님!! (문제가 되면 사진 내리겠습니다~ 댓글 달아주세요)
 
