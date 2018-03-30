@@ -41,23 +41,23 @@ y =
 $$
 
 만약에 $b$ 가 임의의 음수이고, $w_1$, $w_2$ 값이 $b$ 보다 작거나 같은 임의의 양수면 이 식은 항상 성립한다. 각종 변수가 이를 만족 할 때 **AND 게이트** 라고 부르며 코드로 이렇게 짜볼 수 있다.
-
-    def AND(x1, x2):
-      x = np.array([x1, x2])
-      w = np.array([0.5, 0.5])
-      b = -0.7
-      tmp = np.sum(x*w) + b
-      if tmp <= 0:
-          return 0
-      else:
-          return 1
-
+```
+def AND(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([0.5, 0.5])
+    b = -0.7
+    tmp = np.sum(x*w) + b
+    if tmp <= 0:
+        return 0
+    else:
+        return 1
+```
 확인해보면
-
-    xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    for x in xx:
-      print('AND({0},{1}) : {2}'.format(x[0], x[1], AND(x[0], x[1])))
-
+```
+xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('AND({0},{1}) : {2}'.format(x[0], x[1], AND(x[0], x[1])))
+```
 >AND(0,0) : 0
 >
 >AND(0,1) : 0
@@ -80,23 +80,23 @@ $$
 |1|0|1|
 |0|1|1|
 |1|1|0|
-
-    def NAND(x1, x2):
-        x = np.array([x1, x2])
-        w = np.array([-0.5, -0.5])
-        b = 0.7
-        tmp = np.sum(x*w) + b
-        if tmp <= 0:
-            return 0
-        else:
-            return 1
-
+```
+def NAND(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([-0.5, -0.5])
+    b = 0.7
+    tmp = np.sum(x*w) + b
+    if tmp <= 0:
+        return 0
+    else:
+        return 1
+```
 결과 값을 측정해보면
-
-    xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    for x in xx:
-        print('NAND({0},{1}) : {2}'.format(x[0], x[1], NAND(x[0], x[1])))
-
+```
+xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('NAND({0},{1}) : {2}'.format(x[0], x[1], NAND(x[0], x[1])))
+```
 >NAND(0,0) : 1
 >
 >NAND(0,1) : 1
@@ -113,23 +113,23 @@ $$
 |1|0|1|
 |0|1|1|
 |1|1|1|
-
-    def OR(x1, x2):
-        x = np.array([x1, x2])
-        w = np.array([0.5, 0.5])
-        b = -0.2
-        tmp = np.sum(x*w) + b
-        if tmp <= 0:
-            return 0
-        else:
-            return 1
-
+```
+def OR(x1, x2):
+    x = np.array([x1, x2])
+    w = np.array([0.5, 0.5])
+    b = -0.2
+    tmp = np.sum(x*w) + b
+    if tmp <= 0:
+        return 0
+    else:
+        return 1
+```
 결과 값을 확인해보면
-
-    xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    for x in xx:
-        print('OR({0},{1}) : {2}'.format(x[0], x[1], OR(x[0], x[1])))
-
+```
+xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('OR({0},{1}) : {2}'.format(x[0], x[1], OR(x[0], x[1])))
+```
 > OR(0,0) : 0
 >
 >OR(0,1) : 1
@@ -176,19 +176,19 @@ XOR 문제란 어떤 선형식으로 이산 변수 $x_1$과 $x_2$에 대해서 �
 |1|1|0|1|0|
 
 코드로 구현하느 것은 아까 만든 코드를 나열하면 된다.
-
-    def XOR(x1, x2):
-        s1 = NAND(x1, x2)
-        s2 = OR(x1, x2)
-        y = AND(s1, s2)
-        return y
-
+```
+def XOR(x1, x2):
+    s1 = NAND(x1, x2)
+    s2 = OR(x1, x2)
+    y = AND(s1, s2)
+    return y
+```
 확인해보면
-
-    xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    for x in xx:
-        print('XOR({0},{1}) : {2}'.format(x[0], x[1], XOR(x[0], x[1])))
-
+```
+xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+for x in xx:
+    print('XOR({0},{1}) : {2}'.format(x[0], x[1], XOR(x[0], x[1])))
+```
 >XOR(0,0) : 0
 >
 >XOR(0,1) : 1
