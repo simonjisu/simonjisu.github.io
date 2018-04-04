@@ -6,9 +6,62 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 31 Mar 2018 01:13:12 +0900</pubDate>
-    <lastBuildDate>Sat, 31 Mar 2018 01:13:12 +0900</lastBuildDate>
+    <pubDate>Mon, 02 Apr 2018 18:09:19 +0900</pubDate>
+    <lastBuildDate>Mon, 02 Apr 2018 18:09:19 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Semantic Matching Model</title>
+        <description>&lt;h1 id=&quot;semantic-matching-model&quot;&gt;Semantic Matching Model&lt;/h1&gt;
+
+&lt;p&gt;본 내용은 Naver AI Colloquium 에서 김선훈 님이 발표한 “시멘틱 매칭 모델”을 제 기억을 토대로 재구성한 것입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;semantic-matching--&quot;&gt;Semantic Matching 의 필요성&lt;/h2&gt;
+
+&lt;p&gt;우리가 이해하는 언어와 기계가 이해하는 언어는 확연히 다르다. 기계는 0과 1로 모든 것을 입력받는대로 인식하고, 조금이라도 틀리면 오류를 뱉어낸다. 여기서 인간의 이해와 기계의 이해 간의 차이를 &lt;strong&gt;Semantic Gap&lt;/strong&gt; 이라고 하는데, 이 Gap을 줄여나가는게, 기계가 언어를 이해할 수 있게 만드는 일이다.&lt;/p&gt;
+
+&lt;p&gt;우리는 Semantic Matching를 통해, 기존의 Text Matching 보다 조금 더 다양한 표현을 잡을 수 있고, 오타의 문제도 조금 해결 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, 어떤 문장과 유사한 뜻의 문장을 찾고 싶은 일이 생길 수 있다.&lt;/p&gt;
+
+&lt;p&gt;아래의 말과 비슷한 말은 아래 후보중에 어떤 것일까?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;Q: 오른쪽 아랫배가 아픈.. 왜 그런거죠?&lt;/span&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;1. 오른쪽 아랫무릎이 너무 아픈데.. 왜 그런거죠?&lt;/span&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;2. 우측 하복부 통증 원인 알려줘&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;기존의 단어기반 매칭(Text Matching)은 의미적으로 비슷한 2번이 아닌, “오른쪽”, “아랫”, “아픈”, “왜 그런거죠?” 가 공통적으로 들어간 &lt;strong&gt;1번&lt;/strong&gt; 을 선택할 것이다.&lt;/p&gt;
+
+&lt;p&gt;또 다른 예를 들어보자.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;Q: 인구수 재일 많은 나라가 어디야?&lt;/span&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;1. 재일교포는 어느 나라 사람이야?&lt;/span&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;2. 사람이 가장 많은 국가가 어디지?&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;의미적으로 2번이 정답이겠지만, “제일” 이 오타가 나서 &lt;strong&gt;1번&lt;/strong&gt; 과 유사하게 매칭 될 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;위에 예시만 봐도, 사람의 말을 알아 듣는 음성 스피커를 만들게 된다면, 당연히 Semantic Matching 이 필요하다고 느낄 것이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;semantic-matching-approach&quot;&gt;Semantic Matching Approach&lt;/h2&gt;
+
+&lt;h3 id=&quot;encoding-based-methods&quot;&gt;Encoding Based Methods&lt;/h3&gt;
+</description>
+        <pubDate>Mon, 02 Apr 2018 16:46:07 +0900</pubDate>
+        <link>http://simonjisu.github.io/naverai2018/2018/04/02/naveraicolsemanticmatching.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/naverai2018/2018/04/02/naveraicolsemanticmatching.html</guid>
+        
+        
+        <category>NaverAI2018</category>
+        
+      </item>
     
       <item>
         <title>Naver AI Colloquium 2018</title>
@@ -39,7 +92,7 @@
 
 &lt;h2 id=&quot;section-1&quot;&gt;후기&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/ML/naveraicol/Sungkim.jpg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/ML/naveraicol/professorsungkim.JPG&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;“모두의 딥러닝”으로 유명하신 Sung Kim 교수님!! (문제가 되면 사진 내리겠습니다~ 댓글 달아주세요)&lt;/p&gt;
 
@@ -94,12 +147,12 @@
 
 &lt;p&gt;관심 있었던 세션들을 정리하면 바로 올리겠다.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 30 Mar 2018 13:14:21 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/03/30/naveraicolloquium2018.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/03/30/naveraicolloquium2018.html</guid>
+        <pubDate>Fri, 30 Mar 2018 20:14:21 +0900</pubDate>
+        <link>http://simonjisu.github.io/naverai2018/2018/03/30/naveraicolloquium2018.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/naverai2018/2018/03/30/naveraicolloquium2018.html</guid>
         
         
-        <category>DataScience</category>
+        <category>NaverAI2018</category>
         
       </item>
     
@@ -2613,310 +2666,6 @@ print('total time:', (end - start))
         <pubDate>Fri, 15 Dec 2017 12:21:48 +0900</pubDate>
         <link>http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html</guid>
-        
-        
-        <category>DeepLearning</category>
-        
-      </item>
-    
-      <item>
-        <title>NUMPY with NN - 3: Loss Function</title>
-        <description>&lt;h1 id=&quot;numpy--neural-network-basic---3&quot;&gt;Numpy로 짜보는 Neural Network Basic - 3&lt;/h1&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;저번 시간에는 Feedforward 과정을 보았는데, 정확도가 8.578% 밖에 안됐다. 이제 Neural Network가 데이터로부터 어떻게 학습하여 정확도를 올리는지 보자.&lt;/p&gt;
-
-&lt;h2 id=&quot;loss-function&quot;&gt;손실 함수(Loss Function)&lt;/h2&gt;
-&lt;p&gt;왜 우리의 목표인 정확도를 안쓰고 손실 함수라는 매개변수를 설정하는 걸까?&lt;/p&gt;
-
-&lt;p&gt;그 이유는 먼저 밝히면 신경망 학습에 미분이 사용되기 때문이다. 최적의 가중치(그리고 편향)을 탐색할 때 손실 함수의 값을 가능한 작게하는 가중치 값을 찾는데, 이때 가중치의 미분을 계산하고, 그 미분 값을 단서로 가중치를 서서히 갱신하는 과정을 거친다. 그러나 손실함수에 정확도를 쓰면 가중치의 미분이 대부분의 장소에서 0이 되기 때문에 가중치 값을 갱신할 수가 없다.&lt;/p&gt;
-
-&lt;p&gt;mnist 데이터의 경우 최종 출력층에 나온 $y$ 값은 Softmax에 의해 $(10 \times 1)$ 행렬의 확률로 출력되고, 그에 응답하는 정답 $t$ 는 one-hot encoded된 행렬이다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;y = np.array([0.05, 0.01, 0.7, 0.14, 0.05, 0.0, 0.05, 0.0, 0.0, 0.0])
-t = np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;mse&quot;&gt;평균 제곱 오차(MSE)&lt;/h3&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;E=\frac{1}{2}\sum_{k}{(y_k - t_k)^2}&lt;/script&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def mean_squared_error(y, t):
-    return (1/2) * np.sum((y - t) ** 2)
-
-mean_squared_error(y, t)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;0.05860000000000002&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;cross-entropy&quot;&gt;교차 엔트로피 오차(Cross Entropy)&lt;/h3&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;E=-\sum_{k}{t_k\log{y_k}}&lt;/script&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def cross_entropy_error(y, t):
-    delta = 1e-7
-    return -np.sum(t * np.log(y + delta))
-
-cross_entropy_error(y, t)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;0.51082545709933802&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;여기서 delta라는 작은 값을 더해준 이유는 y값이 0이면 $\log 0= -\inf$가 되서 미분 계산이 불가능하기 때문이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;미니 배치 학습&lt;/h3&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;E=-\frac{1}{N}\sum_{n}{\sum_{k}{t_k\log{y_k}}}&lt;/script&gt;
-
-&lt;p&gt;엄청나게 많은 양의 데이터를 사용하는데 오차를 한번에 계산하려면 오랜 시간이 든다. 따라서 작은 양의 데이터를 사용해 조금씩 오차의 합을 구한다음에 그것의 평균을 내면 전체의 근사치로 사용할 수 있다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def cross_entropy_error(y, t):
-    delta = 1e-7
-    if y.ndim == 1:
-        t = t.reshape(1, t.size)
-        y = y.reshape(1, y.size)
-
-    batch_size = y.shape[0]
-    return -np.sum(t * np.log(y[np.arange(batch_size), t] + delta)) / batch_size
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;h2 id=&quot;section-1&quot;&gt;미분&lt;/h2&gt;
-
-&lt;p&gt;목적을 정했으니 이제 학습에 들어가면된다. 손실함수를 가중치에 대한 미분을 구해야 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;수치 미분과 중심 차분법&lt;/h3&gt;
-
-&lt;p&gt;수치 미분이란 변화율이라고 볼 수 있다. $x$에서 $h$만큼 변했을 때 $f(x)$의 변화량을 나타낸 것이다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{df(x)}{dx} = \lim_{h\rightarrow0}{\frac{f(x+h) - f(x)}{h}}&lt;/script&gt;
-
-&lt;p&gt;그러나 $f(x+h) - f(x)$ 는 굉장히 작은 수라 컴퓨터로 구현시 Underflow문제에 봉착하게 된다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;np.float32(1e-50)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;0.0&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;따라서 수치 미분에서 $h$는 되도록 너무 작은 값은 못쓴다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;중심 차분법&lt;/strong&gt; 을 이용하면 미분은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{df(x)}{dx} = \lim_{h\rightarrow0}{\frac{f(x+h) - f(x-h)}{2h}}&lt;/script&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def numerical_diff(f, x):
-    h = 1e-4
-    return (f(x + h) - f(x - h)) / (2*h)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;예시 함수 $y = 0.01 x^2 + 0.1 x$ 의 수치 미분을 보자&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def f1(x):
-    return 0.01 * x**2 + 0.1 * x
-
-print(numerical_diff(f1, 5))
-print(numerical_diff(f1, 10))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;0.1999999999990898&lt;/p&gt;
-
-  &lt;p&gt;0.2999999999986347&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;정확하게 0.2와 0.3이 나오지 않는 이유는 이진수 부동소수점 방식[&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%B6%80%EB%8F%99%EC%86%8C%EC%88%98%EC%A0%90&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;]의 정확도 문제니까 round 함수를 사용해 반올림하여 사용해야한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/numerical_diff.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 500px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;2차원 이상의 데이터는 어떻게 짜야할까? 아래의 코드를 참조하자&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def numerical_gradient(f, x):
-    h = 1e-4  # 0.0001
-    grad = np.zeros_like(x)
-
-    it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
-    while not it.finished:
-        idx = it.multi_index
-        tmp_val = x[idx]
-        x[idx] = float(tmp_val) + h
-        fxh1 = f(x)  # f(x+h)
-
-        x[idx] = tmp_val - h
-        fxh2 = f(x)  # f(x-h)
-        grad[idx] = (fxh1 - fxh2) / (2 * h)
-
-        x[idx] = tmp_val  # 값 복원
-        it.iternext()
-
-    return grad
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;np.nditer: iterator 객체를 만들어 준다. 행마다 원소가 iterate 된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;gradient-descent&quot;&gt;Gradient Descent&lt;/h3&gt;
-
-&lt;p&gt;경사 하강법이란 현 위치에서 기울어진 방향으로 일정 거리를 이동하고, 또 그 위치에서 기울기를 구해서 그 방향으로 계속 나아가는 방법이다. 이렇게 해서 손실함수를 점점 작게 만들어 손실함수의 최저점으로 이끌고 간다(가능하다면).&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_{new} = w_{old} - \eta \cdot \frac{\partial f}{\partial w_{old}}&lt;/script&gt;
-
-&lt;p&gt;$\eta$ 는 학습률(learning rate)라고 하며 갱신하는 양을 나타낸다.&lt;/p&gt;
-
-&lt;p&gt;아래 그림은 주변이 높고 중앙이 낮은 모양(그릇을 생각하자)을 3차원에서 2차원으로 그렸을 때, $(4, 5)$ 점에서 시작해서 경사 하강법으로 최저점을 찾는 과정이다. 함수는 $f(x) = x^2\ , x\in \mathbb{R}^3$ 다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/GDanimation.gif&quot; alt=&quot;Drawing&quot; style=&quot;width: 500px;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;학습 알고리즘&lt;/h2&gt;
-
-&lt;h3 id=&quot;nn----&quot;&gt;간단한 NN 으로 가중치의 미분 구해보기&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class simpleNet(object):
-    def __init__(self):
-        # Input size = 2
-        # Output size = 3
-        self.W = np.random.normal(size=(2,3))
-
-    def predict(self, x):
-        a = np.dot(x, self.W)
-        y = softmax(a)
-
-        return y
-
-    def loss(self, x, t):
-        y = self.predict(x)
-        loss = cross_entropy_error(y, t)
-
-        return loss
-
-x = np.array([0.6, 0.9])
-t = np.array([0, 0, 1])
-nn = simpleNet()
-
-f = lambda w: nn.loss(x, t)
-dW = numerical_gradient(f, nn.W)
-print(dW)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;[[ 0.05244267  0.24743359 -0.29987626]&lt;/p&gt;
-
-  &lt;p&gt;[ 0.07866401  0.37115039 -0.44981439]]&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;sgd&quot;&gt;확률적 경사 하강법(SGD)&lt;/h3&gt;
-&lt;p&gt;아래 방법은 데이터를 무작위로 가져와서 학습하는 것이기 때문에 확률적 경사 하강법(Stochastic Gradient Descent)이라고도 한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;1단계: 미니배치&lt;/p&gt;
-
-    &lt;p&gt;훈련 데이터 중 일부를 무작위로 가져온 데이터를 미니 배치라고 하며, 미니 배치의 손실 함수 값을 줄이는 것이 목표다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;2단계: 기울기 산출&lt;/p&gt;
-
-    &lt;p&gt;미니배치의 손실 함수 값을 줄이기 위해 각 가중치 매개변수의 기울기를 구한다. 기울기는 손실 함수의 값을 가장 작게 만든다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;3단계: 매개변수(가중치) 갱신&lt;/p&gt;
-
-    &lt;p&gt;가중치 매개변수를 기울기 방향으로 아주 조금 갱신한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;4단계: 반복&lt;/p&gt;
-
-    &lt;p&gt;1~3 단계를 반복한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;neural-network-&quot;&gt;2층 Neural Network 실습&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_3.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 350px;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Input Size: m = 3&lt;/li&gt;
-  &lt;li&gt;Hidden Size: h = 4&lt;/li&gt;
-  &lt;li&gt;Output Size: o = 3
-&lt;script type=&quot;math/tex&quot;&gt;X_{(batch,\ m)} \cdot W1_{(m,\ h)} + B1_{(batch,\ h)} \rightarrow A1_{(batch,\ h)}&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;sigmoid(A1_{(batch,\ h)}) \rightarrow Z1_{(batch,\ h)}&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;Z1_{(batch,\ h)} \cdot W1_{(h,\ o)} + B1_{(batch,\ o)} \rightarrow A2_{(batch,\ o)}&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\sigma(A2_{(batch,\ o)}) \rightarrow Y_{(batch,\ o)}&lt;/script&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [&lt;a href=&quot;https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;]서 가져왔다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
-
-train_loss_list = []
-train_acc_list = []
-test_acc_list = []
-
-#highper parameter
-epoch_num = 1
-train_size = x_train.shape[0]
-batch_size = 100
-alpha = 0.1  # learning rate
-epsilon = 1e-6
-
-# 1에폭당 반복 수
-iter_per_epoch = max(train_size / batch_size, 1)
-nn = TwoLayer(input_size=784, hidden_size=100, output_size=10)
-
-start = time.time()
-for epoch in range(epoch_num):
-    # get mini batch:
-    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
-    x_batch = x_train[batch_mask]
-    y_batch = y_train[batch_mask]
-
-    # gradient 계산
-    grad = nn.num_gradient(x_batch, y_batch)
-
-    # update
-    for key in ['W1', 'b1', 'W2', 'b2']:
-        nn.params[key] = nn.params[key] - alpha * grad[key]
-
-    # record
-    loss = nn.loss(x_batch, y_batch)
-    train_loss_list.append(loss)
-
-    # 1에폭당 정확도 계산
-    if epoch % iter_per_epoch == 0:
-        train_acc = nn.accuracy(x_train, y_train)
-        test_acc = nn.accuracy(x_test, y_test)
-        train_acc_list.append(train_acc)
-        test_acc_list.append(test_acc)
-        print('trian acc: {0:.5f} | test acc: {1:.5f}'.format(train_acc, test_acc))
-
-    # stop point
-    if epoch &amp;gt; 10:
-        stop_point = np.sum(np.diff(np.array(train_loss_list[i-11:])) &amp;lt; epsilon)
-        if stop_point == 10:
-            print(epoch)
-            break
-
-end = time.time()
-print('total time:', (end - start))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;table&gt;
-    &lt;tbody&gt;
-      &lt;tr&gt;
-        &lt;td&gt;trian acc: 0.10442&lt;/td&gt;
-        &lt;td&gt;test acc: 0.10280&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-
-  &lt;p&gt;total time: 175.5657160282135&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;2단계에서 수치미분을 구현하기는 쉬우나 업데이트 하는데 시간이 너무 오래 걸린다. 1 Epoch만 돌렸는데 175초 걸렸다.&lt;/p&gt;
-
-&lt;p&gt;따라서 가중치 매개변수의 기울기를 효율적으로 계산하는 &lt;strong&gt;오차역전파&lt;/strong&gt; 방법으로 업데이트 해야한다. 이건 다음 글에서 계속 진행하겠다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 10 Dec 2017 14:06:55 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2017/12/10/numpywithnn_3.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/10/numpywithnn_3.html</guid>
         
         
         <category>DeepLearning</category>

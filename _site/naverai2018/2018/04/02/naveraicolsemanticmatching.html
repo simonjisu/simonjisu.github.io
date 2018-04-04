@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Naver AI Colloquium 2018</title>
-  <meta name="description" content="Naver AI Colloquium 2018 참석 후기+ 클로바스피커 후기개요">
+  <title>Semantic Matching Model</title>
+  <meta name="description" content="Semantic Matching Model">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Naver AI Colloquium 2018 참석 후기+ 클로바스피커 후기개요" />
+  <meta property="og:description" content="Semantic Matching Model" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="Naver AI Colloquium 2018" />
+  <meta property="og:title" content="Semantic Matching Model" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Naver AI Colloquium 2018">
-  <meta name="twitter:description" content="Naver AI Colloquium 2018 참석 후기+ 클로바스피커 후기개요">
+  <meta name="twitter:title" content="Semantic Matching Model">
+  <meta name="twitter:description" content="Semantic Matching Model">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/03/30/naveraicolloquium2018.html">
+  <link rel="canonical" href="http://simonjisu.github.io/naverai2018/2018/04/02/naveraicolsemanticmatching.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -164,7 +164,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">Naver AI Colloquium 2018</h1>
+      <h1 class="title">Semantic Matching Model</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -179,98 +179,58 @@
  
 
 <section class="post-meta">
-  <div class="post-date">March 30, 2018</div>
+  <div class="post-date">April 2, 2018</div>
   <div class="post-categories">
    in 
     
-    <a href="/posts/#DataScience">Datascience</a>
+    <a href="/posts/#NaverAI2018">Naverai2018</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <h1 id="naver-ai-colloquium-2018--">Naver AI Colloquium 2018 참석 후기</h1>
-<p><del>+ 클로바스피커 후기</del></p>
-<h2 id="section">개요</h2>
+  <h1 id="semantic-matching-model">Semantic Matching Model</h1>
 
-<ul id="light-slider1">
-  <li><img src="/assets/ML/naveraicol/logo.png" /></li>
-  <li><img src="/assets/ML/naveraicol/ment1.png" /></li>
-  <li><img src="/assets/ML/naveraicol/ment2.png" /></li>
-  <li><img src="/assets/ML/naveraicol/ment3.png" /></li>
-</ul>
+<p>본 내용은 Naver AI Colloquium 에서 김선훈 님이 발표한 “시멘틱 매칭 모델”을 제 기억을 토대로 재구성한 것입니다.</p>
 
-<p>출처: <a href="http://naveraiconf.naver.com/"><span style="color: #7d7ee8">네이버 AI 콜로키움</span></a></p>
+<h2 id="semantic-matching--">Semantic Matching 의 필요성</h2>
 
-<p>운 좋게 기회가 되서 <a href="http://naveraiconf.naver.com/"><strong>Naver AI Colloquium 2018</strong></a> 에 다녀왔다.
-싸이트에 접속해서 프로그램 표를 자세히 보면 알겠지만, 이번 콜로키움에서는 크게 4가지 주제를 다뤘다.</p>
+<p>우리가 이해하는 언어와 기계가 이해하는 언어는 확연히 다르다. 기계는 0과 1로 모든 것을 입력받는대로 인식하고, 조금이라도 틀리면 오류를 뱉어낸다. 여기서 인간의 이해와 기계의 이해 간의 차이를 <strong>Semantic Gap</strong> 이라고 하는데, 이 Gap을 줄여나가는게, 기계가 언어를 이해할 수 있게 만드는 일이다.</p>
 
-<ul>
-  <li>언어 분야(Search &amp; Natural Language)</li>
-  <li>비전 분야(Computer Vision, Mobility&amp;Location Intelligence)</li>
-  <li>추천 분야(Recommendation)</li>
-  <li>데이터 엔지니어 분야(AI Algorithm, System&amp;Platform)</li>
-</ul>
+<p>우리는 Semantic Matching를 통해, 기존의 Text Matching 보다 조금 더 다양한 표현을 잡을 수 있고, 오타의 문제도 조금 해결 할 수 있다.</p>
 
-<p>나는 언어 분야, 즉 자연어을 다루는 쪽에 관심이 많아서 Track A 만 거의 듣고, 추천 분야 하나 정도 들었다. 각 강의에서 다루는 내용은 차후 하나씩 정리해서 올릴 예정이다.</p>
+<p>예를 들어, 어떤 문장과 유사한 뜻의 문장을 찾고 싶은 일이 생길 수 있다.</p>
 
-<h2 id="section-1">후기</h2>
+<p>아래의 말과 비슷한 말은 아래 후보중에 어떤 것일까?</p>
 
-<p><img src="/assets/ML/naveraicol/Sungkim.jpg" /></p>
+<blockquote>
+  <p><span style="color: #e87d7d">Q: 오른쪽 아랫배가 아픈.. 왜 그런거죠?</span></p>
 
-<p>“모두의 딥러닝”으로 유명하신 Sung Kim 교수님!! (문제가 되면 사진 내리겠습니다~ 댓글 달아주세요)</p>
+  <p><span style="color: #7d7ee8">1. 오른쪽 아랫무릎이 너무 아픈데.. 왜 그런거죠?</span></p>
 
-<p>인상 깊었던 세션과 그 이유를 몇개 꼽자면, <del>어쩌다보니 다 네이버 직원분들이 발표하신거네ㅎㅎ</del></p>
+  <p><span style="color: #7d7ee8">2. 우측 하복부 통증 원인 알려줘</span></p>
+</blockquote>
 
-<ol>
-  <li>Semantic Matching Model - 김선훈 (NAVER)
-시멘틱 매칭의 필요성:
-    <ul>
-      <li><strong>키워드(단어기반)</strong> 매칭보다는 <strong>시멘틱(의미기반)</strong> 매칭이 다양한 표현과 오타를 커버할 수 있는 가능성이 높다.</li>
-      <li>Sementic Gap: 인간이해와 기계이해의 차이, 이것을 줄이는게 큰 과제</li>
-    </ul>
-  </li>
-  <li>Neural Speed Reading - 서민준 (NAVER)
-    <ul>
-      <li>Skim-RNN: “속독”에서 나온 아이디어, 중요하지 않은 단어는 적게 업데이트!</li>
-      <li>Big RNN 과 Small RNN 의 결정 짓는 Decision Function</li>
-      <li>Layer를 쌓으면 중요한 정보를 캐치 (마치 글을 두번째 읽을 때는 주요 단어만 보게 되는 것과 같음)</li>
-    </ul>
-  </li>
-  <li>Hybrid Natural Language Understanding 모델 - 김경덕 (NAVER)
-    <ul>
-      <li>문제 정의의 중요성: 잘해야 문제를 해결하기 쉽고 명확하다.</li>
-      <li>팬턴 기반 검색 NLU + 데이터 통계 기반 NLU, 뭐든지 하나만 고르는 것은 아니다.</li>
-    </ul>
-  </li>
-  <li>자기학습 기반 챗봇(발표세션은 아님)
-    <ul>
-      <li>챗봇의 전체 과정:
-  Query $\rightarrow$ 언어적 특징 추출 $\rightarrow$ 쿼리 분류기(대화여부 및 도메인 인지) $\rightarrow$ 여러 모델로 부터 답변 생성 $\rightarrow$ Answer</li>
-      <li>N-hot representation: 토큰원형 + 품사태깅 + 어미</li>
-    </ul>
-  </li>
-</ol>
+<p>기존의 단어기반 매칭(Text Matching)은 의미적으로 비슷한 2번이 아닌, “오른쪽”, “아랫”, “아픈”, “왜 그런거죠?” 가 공통적으로 들어간 <strong>1번</strong> 을 선택할 것이다.</p>
 
-<p>이 정도인 것 같다.</p>
+<p>또 다른 예를 들어보자.</p>
 
-<h2 id="section-2">클로바 스피커(프렌즈) 후기</h2>
+<blockquote>
+  <p><span style="color: #e87d7d">Q: 인구수 재일 많은 나라가 어디야?</span></p>
 
-<p><img src="/assets/ML/naveraicol/speaker.jpeg" /></p>
+  <p><span style="color: #7d7ee8">1. 재일교포는 어느 나라 사람이야?</span></p>
 
-<p>어쩌다 운좋게 경품에 당첨 되서 받았다. ㅎㅎㅎ 감사합니다.
-이놈…생각보다 귀엽다. 아직까지 일본의 프렌즈보다 기능이 덜 있는 것 같다. 라인으로 메세지 보내는 기능 시도해보았는데, 안되드라…</p>
+  <p><span style="color: #7d7ee8">2. 사람이 가장 많은 국가가 어디지?</span></p>
+</blockquote>
 
-<p>영상링크: <a href="https://youtu.be/lK-9yDoHsZ8"><span style="color: #7d7ee8">【公式】Clova Friendsができること </span></a></p>
+<p>의미적으로 2번이 정답이겠지만, “제일” 이 오타가 나서 <strong>1번</strong> 과 유사하게 매칭 될 수도 있다.</p>
 
-<p>아무튼 아직 개선할 사항이 많다. 예를 들어, “레미제라블 Do you hear the people sing? 노래틀어줘”라고 말하면, 말씀하신 사항을 찾지 못했다고 대답한다.
-어떤 세션에서 들었던것 같은데, 내 생각에는 레미제라블, 노래틀어줘는 노래틀어주는 분야로 의도로 분류되고, 나머지 영어는 번역하는 의도로 분류된 것 같다. (스피커에 말한 내용을 볼 수 있는데, 음성인식을 진짜 제대로 잘 된다. 괜히 1위라고 말한게 아닌듯 ㅋㅋ)</p>
+<p>위에 예시만 봐도, 사람의 말을 알아 듣는 음성 스피커를 만들게 된다면, 당연히 Semantic Matching 이 필요하다고 느낄 것이다.</p>
 
-<hr />
-<p>내년에 또 하게되면 참가하고싶다~</p>
+<h2 id="semantic-matching-approach">Semantic Matching Approach</h2>
 
-<p>관심 있었던 세션들을 정리하면 바로 올리겠다.</p>
+<h3 id="encoding-based-methods">Encoding Based Methods</h3>
 
 </article>
 
@@ -285,7 +245,7 @@
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=Naver+AI+Colloquium+2018&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F03%2F30%2Fnaveraicolloquium2018.html"
+      <a href="//www.facebook.com/sharer.php?t=Semantic+Matching+Model&u=http%3A%2F%2Fsimonjisu.github.io%2Fnaverai2018%2F2018%2F04%2F02%2Fnaveraicolsemanticmatching.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -314,11 +274,11 @@
 
   
     
-    <!-- <h2 id="DataScience">-1</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2017/08/04/E2EMN.html</h2> -->
+    <!-- <h2 id="NaverAI2018">-1</h2> -->
+    <!-- <h2 id="NaverAI2018">/naverai2018/2018/03/30/naveraicolloquium2018.html</h2> -->
     
-    <!-- <h2 id="DataScience">1</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2017/11/28/mlstudydecisiontree.html</h2> -->
+    <!-- <h2 id="NaverAI2018">1</h2> -->
+    <!-- <h2 id="NaverAI2018">/naverai2018/2018/03/30/naveraicolloquium2018.html</h2> -->
     
 
 
@@ -327,12 +287,12 @@
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/datascience/2017/11/28/mlstudydecisiontree.html">
+				<a href="/naverai2018/2018/03/30/naveraicolloquium2018.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">ML-DecisionTree</span>
+					<span class="page-number">Naver AI Colloquium 2018</span>
 				</a>
 			
 		</span>
