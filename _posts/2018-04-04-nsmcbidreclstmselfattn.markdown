@@ -98,7 +98,7 @@ $$M=AH  \qquad\qquad (7)$$
 
 임베딩된 매트릭스 $M$ 은 $r$ hops 동안 계속해서 같은 유사도 벡터 $a$ 를 곱하게 되면 **중복 문제(redundancy problems)** 가 생길 수 있다. 즉, 같은 단어 혹은 구문만 계속해서 attention 하게 되는 문제다.
 
-<img src="/assets/ML/nsmc/Penalty.png">
+<img src="/assets/ML/nsmc/penalty.png">
 
 * 그림: 왼쪽(a)은 패널티를 안준 것, 오른쪽(b) 는 준것
 
