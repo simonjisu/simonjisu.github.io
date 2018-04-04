@@ -57,7 +57,7 @@ $$H = (h_1, h_2, \cdots, h_n) \qquad\qquad (4) $$
 
 $$a = softmax(w_{s2} \tanh (W_{s1}H^T)) \qquad\qquad (5)$$
 
-여기서 $W_{s1}$ 는 $d_a \times 2u$ 형태를 가진 매트릭스, 그리고 $w_{s2}$ 는 $d_a$ 사이즈를 가진 벡터다. $d_a$ 는 하이퍼파라미터(hyperparameter)로 우리가 정할 수 잇는 변수다. $H$ 의 크기도 $n \times u$ 이기 때문에, 벡터 $a$ 는 $n$ 의 크기를 가진다. 또한 $softmax()$ 함수는 모든 weight들의 합을 1로 만들어 준다.
+여기서 $W_{s1}$ 는 $d_a \times 2u$ 형태를 가진 매트릭스, 그리고 $w_{s2}$ 는 $d_a$ 사이즈를 가진 벡터다. $d_a$ 는 하이퍼파라미터(hyperparameter)로 우리가 정할 수 잇는 변수다. $H$ 의 크기도 $n \times 2u$ 이기 때문에, 벡터 $a$ 는 $n$ 의 크기를 가진다. 또한 $softmax()$ 함수는 모든 weight들의 합을 1로 만들어 준다.
 
 그후 우리는 LSTM 의 히든상태들의 집합인 $H$ 를 주어진 $a$ 로 곱해서 한 문장을 임베딩한 벡터 $m$ 을 얻을 수 있다.
 
