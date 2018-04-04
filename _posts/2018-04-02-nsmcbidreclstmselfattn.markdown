@@ -107,7 +107,7 @@ $$M=AH  \qquad\qquad (7)$$
 
 따라서, 논문에서는 매트릭스의 **[<span style="color: #7d7ee8">Frobenius norm</span>](http://mathworld.wolfram.com/FrobeniusNorm.html)** 을 쓰게 되는데 아래와 같다. ($Norm_2$와 비슷해 보이지만 다르다)
 
-$$P = {{\|AA^T - I\|}_{F}}^2$$
+$$P ={ {\|AA^T - I\|}_F}^2$$
 
 이 패널티 값과 기존의 Loss 와 같이 최소화 하는 방향으로 간다. 이 패널티의 뜻은 무엇일까?
 
@@ -154,4 +154,4 @@ hops 가 많아지면 긍정/부정을 판단하게 되는 근거도 많아지�
 * 김성동님: https://github.com/DSKSD
 * 같은 논문을 Tensorflow로 구현하신 flrngel님: https://github.com/flrngel/Self-Attentive-tensorflow
 
-감사합니다
+감사합니다.
