@@ -98,7 +98,7 @@ $$M=AH  \qquad\qquad (7)$$
 
 임베딩된 매트릭스 $M$ 은 $r$ hops 동안 계속해서 같은 유사도 벡터 $a$ 를 곱하게 되면 **중복 문제(redundancy problems)** 가 생길 수 있다. 즉, 같은 단어 혹은 구문만 계속해서 attention 하게 되는 문제다.
 
-<img src="/assets/ML/nsmc/penalty.png">
+<img src="/assets/ML/nsmc/penal.png">
 
 * 그림: 왼쪽(a)은 패널티를 안준 것, 오른쪽(b) 는 준것
 
@@ -154,7 +154,7 @@ hops 가 많아지면 긍정/부정을 판단하게 되는 근거도 많아지�
 
 ---
 공부에 도움 주신 분들 및 공부에 도움 되었던 싸이트:
-* 김성동님: https://github.com/DSKSD
-* 같은 논문을 Tensorflow로 구현하신 flrngel님: https://github.com/flrngel/Self-Attentive-tensorflow
+* 김성동님: <span style="color: #7d7ee8">https://github.com/DSKSD</span>
+* 같은 논문을 Tensorflow로 구현하신 flrngel님: <span style="color: #7d7ee8">https://github.com/flrngel/Self-Attentive-tensorflow</span>
 
 감사합니다.
