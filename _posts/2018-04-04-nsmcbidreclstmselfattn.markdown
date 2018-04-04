@@ -8,6 +8,8 @@ comments: true
 ---
 # Naver Sentiment Movie Corpus Classification
 
+---
+
 네이버 영화 감성분류 with Bidirectional LSTM + Self Attention
 
 ## 목표
@@ -94,6 +96,8 @@ $$M=AH  \qquad\qquad (7)$$
   <li><img src="/assets/ML/nsmc/Self_Attention9.png"></li>
 </ul>
 
+<br>
+
 ### Penalization Term
 
 임베딩된 매트릭스 $M$ 은 $r$ hops 동안 계속해서 같은 유사도 벡터 $a$ 를 곱하게 되면 **중복 문제(redundancy problems)** 가 생길 수 있다. 즉, 같은 단어 혹은 구문만 계속해서 attention 하게 되는 문제다.
@@ -123,6 +127,8 @@ $$0< a_{ij} = \sum_{k=1}^{n} a_k^i a_k^j <1$$
 여기서 $a_k^i, a_k^j$ 는 각각 $a^i, a^j$ 의 k 번째 원소다. 제일 극단적인 경우를 생각해보면, $a^i$ 와 $a^j$ 가 일치하지 않다면 (혹은 다른 분포를 나타내고 있다면) 0 이 되고, 완전이 일치해서 같은 단어 혹은 구문을 이야기 하고 있다면 (혹은 같은 분포를 나타내고 있다면) 1 에서 최대값을 가지게 될 것이다.
 
 따라서, $AA^T$ 의 대각 행렬(같은 단어 혹은 구문)을 대략 1 이 되게 강제한다. $I$ (Identity) 매트릭스를 빼줌으로써 달성하는데, 이는 자기 자신을 제외한 각기 다른 $a^i$ 간 원소들의 합인 $a_{ij}$ 들이 0 으로 최소화되게 만들어 버린다. 즉, 최대한 $a^i$ 간의 분포가 일치하지 않게 만드려고 노력하는 것이다. 이렇게 함으로써 $r$ 번의 hops 마다 각각 다른 단어에 집중하게 만드는 효과를 낼 수 있어서, 중복문제를 해결 할 수가 있다.
+
+<br>
 
 ## 네이버 영화 리뷰 테스트 결과 및 시각화
 총 150000 개의 Train Set과 50000 개의 Test Set 으로 진행했고, 모델에서는 hyperparameter가 많기 때문에 몇 가지 실험을 진행 했다.
