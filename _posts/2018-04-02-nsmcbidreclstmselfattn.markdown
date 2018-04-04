@@ -24,16 +24,6 @@ Reference Paper: [<span style="color: #7d7ee8">A STRUCTURED SELF-ATTENTIVE SENTE
 
 그림과 수식을 함께 보면 이해하기 쉽다
 
-<ul id="light-slider1">
-  <li><img src="/assets/ML/nsmc/Self_Attention0.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention1.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention2.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention3.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention4.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention5.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention6.png"></li>
-</ul>
-
 어떤 $n$ 개의 토근으로 이루어진 하나의 문장이 있다고 생각해보자.
 
 $$S = (w_1, w_2, \cdots, w_n)\qquad\qquad (1)$$
@@ -53,6 +43,14 @@ $$\begin{aligned}
 
 $$H = (h_1, h_2, \cdots, h_n) \qquad\qquad (4) $$
 
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nsmc/Self_Attention0.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention1.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention2.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention3.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention4.png"></li>
+</ul>
+
 우리의 목적은 길이가 변화하는 문장을 어떤 **고정된 크기** 의 임베딩으로 인코딩 하는 것이다. 이 목적을 달성하기 위해서 $H$ 와 attention 매커니즘이 요구되는 일종의 선형결합을 선택하게 된다. 즉, 아래와 같은 식과 $H$ 를 토대로, 어떤 벡터 $a$ 를 얻게 된다.
 
 $$a = softmax(w_{s2} \tanh (W_{s1}H^T)) \qquad\qquad (5)$$
@@ -70,9 +68,8 @@ $$a = softmax(w_{s2} \tanh (W_{s1}H^T)) \qquad\qquad (5)$$
 이 확률 $a$ 를 기존의 hidden 상태와 곱해서 의미부분을 조금더 강조하게 되는 벡터 $m$ 을 구했다고 보면 된다.
 
 <ul id="light-slider2">
-  <li><img src="/assets/ML/nsmc/Self_Attention7.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention8.png"></li>
-  <li><img src="/assets/ML/nsmc/Self_Attention9.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention5.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention6.png"></li>
 </ul>
 
 하지만 한 문장 내에서 중요한 부분 혹은 의미가 있는 부분은 여러군데 일 수가 있다. (여러 의미가 하나의 문장을 구성한다.) 특히 긴 문장일 수록 그렇다. 예를 들어 "아이언맨과 캡틴아메리카" 면 "과"로 이어진, "아이언맨", "캡틴아메리카" 두 단어는 중요한 의미가 있는 단어 일 수 있다. 따라서 한 문장에서 의미가 있는 부분을 나타내려면 $m$ 이란 벡터를 여러 번 수행해서 문장의 다른 부분까지 커버해야 한다. 이는 우리가 **attention** 을 **여러번(hops)** 하게 되는 이유다.
@@ -90,6 +87,12 @@ $$A=softmax(W_{s2}tanh(W_{s1}H^T))  \qquad\qquad (6)$$
 $$M=AH  \qquad\qquad (7)$$
 
 마지막으로 $M$을 Fully Connected MLP 에 넣어서 하고 싶은 분류를 하면 된다.
+
+<ul id="light-slider3">
+  <li><img src="/assets/ML/nsmc/Self_Attention7.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention8.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention9.png"></li>
+</ul>
 
 ### Penalization Term
 
