@@ -196,48 +196,36 @@
 <h2 id="a-single-layer">A. Single layer</h2>
 
 <p><img src="/assets/E2EMN.png" alt="" /></p>
+
 <h3 id="input">Input</h3>
 <ol>
-  <li>n 개의 단어가 포함된 한 <strong>문장 sentence i</strong> 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{in}]$ 로 표현 할 수 있으며, 하나의 <strong>단어</strong>는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. 이렇게 구성된 여러 문장들의 집합을 Context ${x_i}$라고 한다.
-    <blockquote>
-      <script type="math/tex; mode=display">x_{ij} = [0, 0, \cdots, 1 , \cdots, 0, 0]\quad for\ j^{th}\ words\ in\ sentence\ i</script>
-    </blockquote>
-  </li>
-  <li>t 개의 단어가 포함된 질문 question q도 마찬가지로 BoW방식으로 인코딩해준다.</li>
+  <li>$T_c$ 개의 단어가 포함된 한 <strong>문장 sentence i</strong> 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{iT_c}]$ 로 표현 할 수 있으며, 하나의 단어 는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. (<strong>단어 사전의 index</strong>), 이렇게 구성된 여러 문장들의 집합을 Context ${x_i}$라고 한다.</li>
 </ol>
 
-<blockquote>
-  <p>sentence $x_1$ = Mary journeyed to the den. 을 예제로 들면,</p>
+<script type="math/tex; mode=display">Context = [x_1, x_2, \cdots ,x_n]\quad (n \times T_c)</script>
 
-  <script type="math/tex; mode=display">x_{i1} = mary = [1, 0, \cdots, 0, 0]</script>
-
-  <script type="math/tex; mode=display">x_{i2} = journeyed = [0, 1, \cdots, 0, 0]</script>
-
-  <script type="math/tex; mode=display">x_{i3} = to = [0, \cdots, 1, \cdots, 0, 0]</script>
-
-  <p>이런식으로 인코딩이 된다.</p>
-</blockquote>
-
-<p>주의: Mary혹은 mary와 같이 같은 단어를 두 번 세는 것을 피하기 위해서, 모든 단어는 소문자로 바꿔준다.</p>
+<ol>
+  <li>$T_q$ 개의 단어가 포함된 질문 question q도 마찬가지로 BoW방식으로 인코딩해준다.</li>
+</ol>
 
 <h3 id="input-memory">Input Memory</h3>
 <ol>
-  <li>하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 구성된 여러개의 메모리 벡터 $m_i$들 중 일부를 사용하게 된다.
-    <blockquote>
-      <script type="math/tex; mode=display">m_i = \sum_{j}^{n} Ax_{ij} = Ax_{i1} + Ax_{i2} + \cdots + Ax_{in}</script>
-    </blockquote>
-  </li>
-  <li>Question도 마찬가지로 Embedding matrix $B$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 Internal state $u$를 구한다.
-    <blockquote>
-      <script type="math/tex; mode=display">u = \sum_{j} Bx_{ij} = Bx_{i1} + Bx_{i2} + \cdots + Bx_{in}</script>
-    </blockquote>
-  </li>
-  <li>이후 Context와 Question의 유사성(match)를 구하기 위해 inner product를 시행한 후, Softmax Function으로 출력해준다. 이러한 결과로 input에 대한 확률을 도출 해낼 수 있다.
-    <blockquote>
-      <script type="math/tex; mode=display">p_i = Softmax(u^Tm_i)</script>
-    </blockquote>
-  </li>
+  <li>하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 총 $n$개의 메모리가 만들어 진다.</li>
 </ol>
+
+<script type="math/tex; mode=display">m_i = \sum_{j}^{n} Ax_{ij} = Ax_{i1} + Ax_{i2} + \cdots + Ax_{in} \quad (1 \times d)</script>
+
+<ol>
+  <li>Question도 마찬가지로 Embedding matrix $B$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 Internal state $u$를 구한다.</li>
+</ol>
+
+<script type="math/tex; mode=display">u = \sum_{j} Bx_{ij} = Bx_{i1} + Bx_{i2} + \cdots + Bx_{in} \quad (1 \times d)</script>
+
+<ol>
+  <li>이후 Context와 Question의 유사성(match)를 구하기 위해 inner product를 시행한 후, Softmax Function으로 출력해준다. 이러한 결과로 input에 대한 확률을 도출 해낼 수 있다.</li>
+</ol>
+
+<script type="math/tex; mode=display">p_i = Softmax(u^Tm_i)</script>
 
 <p>즉 $p_i$가 높을 수록 높은 유사성을 띈다.</p>
 
@@ -245,23 +233,21 @@
 
 <h3 id="output-memory">Output Memory</h3>
 <ol>
-  <li>모든 Context 문장들 ${x_i}$ 의 각각의 단어에  다시 Embedding matrix C를 곱하고 더하여 $c_i$로 변환한다.
-    <blockquote>
-      <script type="math/tex; mode=display">c_i = \sum_{j} Cx_{ij} = Cx_{i1} + Cx_{i2} + \cdots + Cx_{in}</script>
-    </blockquote>
-  </li>
-  <li>이는 출력으로 나오는 Response vector 인$o$ 를 구하기 위해서 인데, $o$는 아래와 같이 Input Memory에서 나오는 유사성(match, $p_i$)와 가중평균합을 진행한다.
-    <blockquote>
-      <script type="math/tex; mode=display">o = \sum_{i} p_ic_i</script>
-    </blockquote>
-  </li>
+  <li>모든 Context 문장들 ${x_i}$ 의 각각의 단어에  다시 Embedding matrix C를 곱하고 더하여 $c_i$로 변환한다.</li>
 </ol>
+
+<script type="math/tex; mode=display">c_i = \sum_{j} Cx_{ij} = Cx_{i1} + Cx_{i2} + \cdots + Cx_{in} \quad (1 \times d)</script>
+
+<ol>
+  <li>이는 출력으로 나오는 Response vector 인$o$ 를 구하기 위해서 인데, $o$는 아래와 같이 Input Memory에서 나오는 유사성(match, $p_i$)와 가중평균합을 진행한다.</li>
+</ol>
+
+<script type="math/tex; mode=display">o = \sum_{i} p_i \otimes c_i</script>
 
 <h3 id="final-prediction">Final Prediction</h3>
 <p>output $o$와 질문으로부터 추출한 Internal state $u$에 가중치값 $W$를 곱하여 더한뒤에 Softmax Function을 적용하여 답 $\hat{a}$을 추론한다.</p>
-<blockquote>
-  <script type="math/tex; mode=display">\hat{a} = Softmax(W(o+u))</script>
-</blockquote>
+
+<script type="math/tex; mode=display">\hat{a} = Softmax(W(o+u))</script>
 
 <h3 id="weight-updating">Weight Updating</h3>
 <p>Loss Function은 standard cross-entropy loss를 사용하여 예측치 $\hat{a}$ 와 정답인 true 값 $a$ 간의 오차를 최소화해서 학습 시킨다.</p>
@@ -271,7 +257,6 @@
 <p>업데이트 되는 weight Matrix는 $A$, $B$, $C$ 그리고 $W$다.</p>
 
 <p><br /></p>
-<p><br /></p>
 
 <hr />
 <h2 id="b-multiple-layers">B. Multiple layers</h2>
@@ -279,36 +264,36 @@
 <p>위와 같은 Final Prediction 전 단계까지를 1 hop라고 규정하며, Multiple layers $K$ hops까지 확장 시킨다.</p>
 
 <ul>
-  <li>첫번째, k번째 layer에서 나온 output으로 나온 $o^k$과 input $u^k$ 는 합쳐져서 새로운 input $u^{k+1}$ 가 되어서 k + 1 layer로 들어가게 된다.
-    <blockquote>
-      <script type="math/tex; mode=display">u^{k+1} = u^k + o^k</script>
-    </blockquote>
+  <li>첫번째, k번째 layer에서 나온 output으로 나온 $o^k$과 input $u^k$ 는 합쳐져서 새로운 input $u^{k+1}$ 가 되어서 k + 1 layer로 들어가게 된다.</li>
+</ul>
+
+<script type="math/tex; mode=display">u^{k+1} = u^k + o^k</script>
+
+<ul>
+  <li>
+    <p>각 layer마다 input에 embed로 사용된 embedding matrices $A^k$ 와 $C^k$ 가 존재한다. 그러나 이들은 쉽게 트레이닝하고, parameter 갯수를 줄이기 위해서 제약이 존재한다.</p>
   </li>
-  <li>각 layer마다 input에 embed로 사용된 embedding matrices $A^k$ 와 $C^k$ 가 존재한다. 그러나 이들은 쉽게 트레이닝하고, parameter 갯수를 줄이기 위해서 제약이 존재한다.</li>
-  <li>Network의 마지막 부분에서만 W를 곱해서 Softmax 로 출력한다.
-    <blockquote>
-      <script type="math/tex; mode=display">\hat{a} = Softmax(Wu^{K+1}) = Softmax(W(o^K + u^K))</script>
-    </blockquote>
+  <li>
+    <p>Network의 마지막 부분에서만 W를 곱해서 Softmax 로 출력한다.</p>
   </li>
 </ul>
 
+<script type="math/tex; mode=display">\hat{a} = Softmax(Wu^{K+1})</script>
+
 <h3 id="section">두 가지 가중치 버젼</h3>
 <ol>
-  <li>Adjacent:
-    <blockquote>
-      <p>$k_{th}$ output layer embedding matrix가 다음 input layer의 embedding matrix가 된다. 예를 들면, $A^{k+1} = C^k$. 또한, 두 가지 제약 조건을 추가했는데, (a) answer prediction matrix가 최종 output embedding과 같고 ($W^T = C^K)$, (b) question embedding 과 첫번째 layer의 input embedding과 같게 했다($B = A^1$).</p>
-    </blockquote>
+  <li>
+    <p>Adjacent:
+  $k_{th}$ output layer embedding matrix가 다음 input layer의 embedding matrix가 된다. 예를 들면, $A^{k+1} = C^k$. 또한, 두 가지 제약 조건을 추가했는데, (a) answer prediction matrix가 최종 output embedding과 같고 ($W^T = C^K)$, (b) question embedding 과 첫번째 layer의 input embedding과 같게 했다($B = A^1$).</p>
   </li>
-  <li>Layer-wise (RNN - like):
-    <blockquote>
-      <p>Input 과 Output embedding들이 layer마다 다 같다. 예를 들면, $A^1 = A^2 = \cdots = A^K$ 과 $C^1 = C^2 = \cdots = C^K$ 같은 것들. 또한, hops간 u를 업데이트하기위한 linear mapping $H$ 를 추가하는 것이 도움이 된다는 것을 알아냈다. $u^{k+1} = Hu^k + o^k$.</p>
-    </blockquote>
+  <li>
+    <p>Layer-wise (RNN - like):
+  Input 과 Output embedding들이 layer마다 다 같다. 예를 들면, $A^1 = A^2 = \cdots = A^K$ 과 $C^1 = C^2 = \cdots = C^K$ 같은 것들. 또한, hops간 u를 업데이트하기위한 linear mapping $H$ 를 추가하는 것이 도움이 된다는 것을 알아냈다. $u^{k+1} = Hu^k + o^k$.</p>
   </li>
 </ol>
 
 <p>층별로 가중치를 묶는 두 번째 방법은, tranditional 한 RNN 방식으로 생각할 수가 있다. Internal output($u$)을 내보내는 것은 memory에 해당하고, external outputs($\hat{a}$)는 라벨을 예측하는 것과 같다. RNN 관점에서 보면, $u$, $u^{k+1}$ 은 hidden state고, 모델은 $A$ 를 사용하여internal output $p$ 를 생성한다. 모델은 $C$ 를 사용해서 $p$ 의 정보를 흡수하고, hidden state를 업데이트면서 이런 식으로 계속 진행한다. 여기서 표준 RNN과 다르게 output들을 $K$ hops 동안 계속 메모리에 저장하고, sampling하는 대신에 soft하게 둔다. 그렇게 하여 답변이 “진짜 세상”에 나오기 전에 여러번 계산을 거치게 된다.</p>
 
-<p><br /></p>
 <p><br /></p>
 
 <hr />

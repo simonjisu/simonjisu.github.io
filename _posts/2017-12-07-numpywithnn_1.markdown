@@ -204,3 +204,9 @@ Rosenblatt이 제시한 정확한 단일 퍼셉트론은 아래의 그림과 같
 이는 XOR 문제를 해결 할 수 없었고, Multi-Layer Perceptrons이 1986년에 등장 했는데 중간에 Hidden 층을 더 쌓으면서 XOR 문제를 해결하였다.
 
 다음 시간에는 Feedforward과정을 자세히 알아본다.
+
+---
+
+Notebook: [<span style="color: #7d7ee8">링크</span>](https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/00_Perceptron_XOR_Problem.ipynb)
+
+모든 다른 코드는 github [<span style="color: #7d7ee8">NUMPYwithNN</span>](https://github.com/simonjisu/NUMPYwithNN) 에 올라와 있습니다.

@@ -6,9 +6,24 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 04 Apr 2018 15:32:43 +0900</pubDate>
-    <lastBuildDate>Wed, 04 Apr 2018 15:32:43 +0900</lastBuildDate>
+    <pubDate>Sat, 14 Apr 2018 15:31:01 +0900</pubDate>
+    <lastBuildDate>Sat, 14 Apr 2018 15:31:01 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>RNN &amp; LSTM - 3: LSTM</title>
+        <description>&lt;h1 id=&quot;rnn--lstm----3&quot;&gt;자세하게 설명한 RNN 과 LSTM 시리즈 - 3&lt;/h1&gt;
+
+&lt;h2 id=&quot;lstmlong-short-term-memory-network&quot;&gt;LSTM(Long Short Term Memory Network)&lt;/h2&gt;
+</description>
+        <pubDate>Wed, 04 Apr 2018 17:03:06 +0900</pubDate>
+        <link>http://simonjisu.github.io/deeplearning/2018/04/04/rnnlstm3.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/04/04/rnnlstm3.html</guid>
+        
+        
+        <category>DeepLearning</category>
+        
+      </item>
     
       <item>
         <title>Bidirectional LSTM + self Attention Model</title>
@@ -66,7 +81,7 @@
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;a = softmax(w_{s2} \tanh (W_{s1}H^T)) \qquad\qquad (5)&lt;/script&gt;
 
-&lt;p&gt;여기서 $W_{s1}$ 는 $d_a \times 2u$ 형태를 가진 매트릭스, 그리고 $w_{s2}$ 는 $d_a$ 사이즈를 가진 벡터다. $d_a$ 는 하이퍼파라미터(hyperparameter)로 우리가 정할 수 잇는 변수다. $H$ 의 크기도 $n \times u$ 이기 때문에, 벡터 $a$ 는 $n$ 의 크기를 가진다. 또한 $softmax()$ 함수는 모든 weight들의 합을 1로 만들어 준다.&lt;/p&gt;
+&lt;p&gt;여기서 $W_{s1}$ 는 $d_a \times 2u$ 형태를 가진 매트릭스, 그리고 $w_{s2}$ 는 $d_a$ 사이즈를 가진 벡터다. $d_a$ 는 하이퍼파라미터(hyperparameter)로 우리가 정할 수 잇는 변수다. $H$ 의 크기도 $n \times 2u$ 이기 때문에, 벡터 $a$ 는 $n$ 의 크기를 가진다. 또한 $softmax()$ 함수는 모든 weight들의 합을 1로 만들어 준다.&lt;/p&gt;
 
 &lt;p&gt;그후 우리는 LSTM 의 히든상태들의 집합인 $H$ 를 주어진 $a$ 로 곱해서 한 문장을 임베딩한 벡터 $m$ 을 얻을 수 있다.&lt;/p&gt;
 
@@ -2468,334 +2483,6 @@ word2vec, loss_list = word2vec_train(corpus, N=N, half_window_size=half_window_s
         
         
         <category>Deepnlp</category>
-        
-      </item>
-    
-      <item>
-        <title>NUMPY with NN - 4: Backpropagation</title>
-        <description>&lt;h1 id=&quot;numpy--neural-network-basic---4&quot;&gt;Numpy로 짜보는 Neural Network Basic - 4&lt;/h1&gt;
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;backpropagation&quot;&gt;오차역전파(Backpropagation)&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;연쇄법칙의 원리&lt;/h3&gt;
-&lt;p&gt;합성 함수의 미분은 합성 함수를 구성하는 각 함수의 미분의 곱으로 나타낼 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} z = t^2 \\ t = x + y \end{cases}&lt;/script&gt;
-
-&lt;p&gt;위 식의 미분을 나타내면
-&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}}&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;따라서 $z$, $t$ 식을 미분하게 되면&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{z}}{\partial{t}} = 2t&lt;/script&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{t}}{\partial{x}}=1&lt;/script&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\therefore\  \frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}} = 2t \cdot 1 = 2(x+y)&lt;/script&gt;
-
-&lt;p&gt;우리의 목적은 $L$ 에 대해서 $W$ 를 미분하여 조금씩 업데이트 하는 것임으로 아래와 같다고 할 수 있다.
-&lt;script type=&quot;math/tex&quot;&gt;\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{\partial{Y}}{\partial{W}}&lt;/script&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;덧셈노드와 곱셈노드의 역전파&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_add.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;(그림출처: ratsgo님의 블로그[&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;])&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} L(z) \\ z = x + y \end{cases}&lt;/script&gt;
-
-&lt;p&gt;각각 미분하게 되면&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-    \dfrac{\partial{L}}{\partial{z}} \\
-    \dfrac{\partial{z}}{\partial{x}} =
-    \dfrac{\partial{z}}{\partial{y}} = 1
-  \end{cases}&lt;/script&gt;
-
-&lt;p&gt;따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \\
-    \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1
-  \end{cases}&lt;/script&gt;
-
-&lt;p&gt;따라서 &lt;strong&gt;덧셈&lt;/strong&gt; 노드는 들어온 신호($\frac{\partial{L}}{\partial{z}}$)를 &lt;strong&gt;그대로&lt;/strong&gt; 보낸다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_multiply.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;(그림출처: ratsgo님의 블로그[&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;])&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} L(z) \\ z = x \times y \end{cases}&lt;/script&gt;
-
-&lt;p&gt;각각 미분하게 되면&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-    \dfrac{\partial{L}}{\partial{z}} \\
-    \dfrac{\partial{z}}{\partial{x}} = y \\
-    \dfrac{\partial{z}}{\partial{y}} = x
-  \end{cases}&lt;/script&gt;
-
-&lt;p&gt;따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-    \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \\
-    \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot x
-  \end{cases}&lt;/script&gt;
-
-&lt;p&gt;따라서 &lt;strong&gt;곱셈&lt;/strong&gt; 노드는 들어온 신호에 서로 바뀐 입력신호 값을 &lt;strong&gt;곱해서&lt;/strong&gt; 하류로 보낸다.&lt;/p&gt;
-
-&lt;h2 id=&quot;sigmoid---&quot;&gt;Sigmoid 계층의 순전파와 역전파&lt;/h2&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;y = \frac{1}{1+\exp(-x)}&lt;/script&gt;
-
-&lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_forward.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_back.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_back2.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 600px;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h4 id=&quot;section-2&quot;&gt;역전파 1단계 ( / )&lt;/h4&gt;
-
-  &lt;p&gt;”/” 연산은 입력변수 x를 $\dfrac{1}{x}$ 로 바꿔준다. 즉 $f_1(x) = \dfrac{1}{x}$ 가 된다.&lt;/p&gt;
-
-  &lt;p&gt;미분을 하게 되면 $\dfrac{\partial{f_1}}{\partial{x}} = -\dfrac{1}{x^2} = -y^2$가 되서 입력신호를 하류로 보낸다.&lt;/p&gt;
-
-  &lt;h4 id=&quot;section-3&quot;&gt;역전파 2단계 ( + )&lt;/h4&gt;
-
-  &lt;p&gt;”+” 연산은 신호를 그대로 하류로 흘러 보낸다&lt;/p&gt;
-
-  &lt;h4 id=&quot;exp&quot;&gt;역전파 3단계 (exp)&lt;/h4&gt;
-
-  &lt;p&gt;“exp”연산은 $f_2(x) = exp(x)$ 이며, 미분도 $\dfrac{\partial{f_2}}{\partial{x}} = exp(x)$ 로 그대로 곱해서 하류로 보낸다.&lt;/p&gt;
-
-  &lt;h4 id=&quot;x-&quot;&gt;역전파 4단계 ( x )&lt;/h4&gt;
-
-  &lt;p&gt;”$\times$”연산은 서로 바뀐 입력신호의 값을 곱해서 보낸다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;따라서, 최종적으로 시그모이드의 역전파 출력값은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_sigmoid_last.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-\dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x)
-&amp;= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
-&amp;= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
-&amp;= \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;이것을 코드로 구현하게 되면&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Sigmoid(object):
-    def __init__(self):
-        self.out = None  # 역전파시 곱해야 하기 때문에 저장해둔다
-
-    def forward(self, x):
-        out = 1 / (1 + np.exp(-x))
-        self.out = out
-
-        return out
-
-    def backward(self, dout):
-        dx = dout * self.out * (1 - self.out)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;affine--affine-transform&quot;&gt;Affine 계층과 Affine Transform&lt;/h2&gt;
-&lt;p&gt;기하학에서 신경망 순전파 때 수행하는 행렬의 내적을 Affine Transform이라 하며, Affine 계층은 어파인 변환을 수행 처리하는 계층이다.&lt;/p&gt;
-
-&lt;p&gt;위키백과[&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%95%84%ED%95%80_%EB%B3%80%ED%99%98&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;&lt;/a&gt;]&lt;/p&gt;
-
-&lt;h3 id=&quot;forward-1&quot;&gt;Forward&lt;/h3&gt;
-
-&lt;p&gt;$A = X \cdot W + B$&lt;/p&gt;
-
-&lt;h3 id=&quot;backward-1&quot;&gt;Backward&lt;/h3&gt;
-
-&lt;p&gt;$\begin{cases}
-    \dfrac{\partial{L}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{X}} = \dfrac{\partial{L}}{\partial{A}} \cdot W^T &lt;br /&gt;
-    \dfrac{\partial{L}}{\partial{W}} = \dfrac{\partial{L}}{\partial{A}} \cdot \dfrac{\partial{A}}{\partial{W}} = X^T \cdot \dfrac{\partial{L}}{\partial{A}} &lt;br /&gt;
-    \dfrac{\partial{L}}{\partial{B}} = 1
-  \end{cases}$&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Affine(object):
-    def __init__(self, W, b):
-        self.W = W
-        self.b = b
-        self.x = None
-        self.dW = None
-        self.db = None
-
-    def forward(self, x):
-        self.x = x
-        out = np.dot(self.x, self.W) + self.b
-
-        return out
-
-    def backward(self, dout):
-        dx = np.dot(dout, self.W.T)
-        self.dW = np.dot(self.x.T, dout)
-        self.db = np.sum(self.b, axis=0)
-
-        return dx
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;backpropogation--&quot;&gt;Backpropogation 사용한 학습구현&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import collections
-from layers import *
-
-class TwoLayer(object):
-    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
-        self.params = {}
-        self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
-        self.params['b1'] = np.zeros(hidden_size)
-        self.params['W2'] = weight_init_std * np.random.randn(hidden_size, output_size)
-        self.params['b2'] = np.zeros(hidden_size)
-
-        # 계층 생성
-        self.layers = collections.OrderedDict()
-        self.layers['Affine1'] = Affine(self.params['W1'], self.params['b1'])
-        self.layers['ReLu1'] = ReLu()
-        self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
-
-        self.lastLayer = SoftmaxWithLoss()
-
-    def predict(self, x):
-        for layer in self.layers.values():
-            x = layer.forward(x)
-
-        return x
-
-    # x: 입력 데이터, t: 정답 데이터
-    def loss(self, x, t):
-        y = self.predict(x)
-        return self.lastLayer.forward(y, t)
-
-    def accuracy(self, x, t):
-        y = self.predict(x)
-        y = np.argmax(y, axis=1)
-        if t.ndim != 1: t = np.argmax(t, axis=1)
-
-        acc = np.sum(y == t) / float(x.shape[0])
-        return acc
-
-    def gradient(self, x, t):
-        # forward
-        self.loss(x, t)
-
-        # backward
-        dout = 1
-        dout = self.lastLayer.backward(dout)
-
-        layers = list(self.layers.values())
-        layers.reverse()
-
-        for layer in layers:
-            dout = layer.backward(dout)
-
-        # save
-        grads = {}
-        grads['W1'] = self.layers['Affine1'].dW
-        grads['b1'] = self.layers['Affine1'].db
-        grads['W2'] = self.layers['Affine2'].dW
-        grads['b2'] = self.layers['Affine2'].db
-
-        return grads
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;TwoLayer Neural Network 를 생성하는 객체는 따로 파일에 저장하고 불러내는 것이 좋다. OrderedDict은 dictionary 형태로 입력 순서를 기억해주는 좋은 함수다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from dataset.mnist import load_mnist
-from two_layer_nn import TwoLayer
-
-# data_loading
-(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
-
-train_loss_list = []
-train_acc_list = []
-test_acc_list = []
-
-#highper parameter
-epoch_num = 10000
-train_size = x_train.shape[0]
-batch_size = 100
-alpha = 0.01  # learning rate
-epsilon = 1e-6
-
-# 1에폭당 반복 수
-iter_per_epoch = max(train_size / batch_size, 1)
-
-start = time.time()
-nn = TwoLayer(input_size=784, hidden_size=100, output_size=10, weight_init_std=0.01)
-for epoch in range(epoch_num):
-    # get mini batch:
-    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
-    x_batch = x_train[batch_mask]
-    y_batch = y_train[batch_mask]
-
-    # gradient 계산
-    grad = nn.gradient(x_batch, y_batch)
-
-    # update
-    for key in ['W1', 'b1', 'W2', 'b2']:
-        nn.params[key] = nn.params[key] - alpha * grad[key]
-
-    # record
-    loss = nn.loss(x_batch, y_batch)
-    train_loss_list.append(loss)
-
-    # 1에폭당 정확도 계산
-    if epoch % iter_per_epoch == 0:
-        train_acc = nn.accuracy(x_train, y_train)
-        test_acc = nn.accuracy(x_test, y_test)
-        train_acc_list.append(train_acc)
-        test_acc_list.append(test_acc)
-        print('# {0} | trian acc: {1:.5f} | test acc: {2:.5f}'.format(epoch, train_acc, test_acc))
-
-end = time.time()
-print('total time:', (end - start))
-
-# 결과
-# 0 | trian acc: 0.10775 | test acc: 0.10700
-# 600 | trian acc: 0.10775 | test acc: 0.10700
-# 1200 | trian acc: 0.10775 | test acc: 0.10700
-# 1800 | trian acc: 0.10775 | test acc: 0.10700
-# 2400 | trian acc: 0.10775 | test acc: 0.10700
-# 3000 | trian acc: 0.10775 | test acc: 0.10700
-# 3600 | trian acc: 0.10775 | test acc: 0.10700
-# 4200 | trian acc: 0.10775 | test acc: 0.10700
-# 4800 | trian acc: 0.10775 | test acc: 0.10700
-# 5400 | trian acc: 0.10775 | test acc: 0.10700
-# 6000 | trian acc: 0.10775 | test acc: 0.10700
-# 6600 | trian acc: 0.10775 | test acc: 0.10700
-# 7200 | trian acc: 0.10775 | test acc: 0.10700
-# 7800 | trian acc: 0.10775 | test acc: 0.10700
-# 8400 | trian acc: 0.10775 | test acc: 0.10700
-# 9000 | trian acc: 0.10775 | test acc: 0.10700
-# 9600 | trian acc: 0.10775 | test acc: 0.10700
-# total time: 61.07117795944214
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;학습은 전혀 안되지만 수치 미분보다 더 빠르게 진행된다는 것을 알 수 있다.&lt;/p&gt;
-
-&lt;p&gt;왜 학습이 안됐을까에 대해서는 담은 시간에 이야기 하겠다.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 15 Dec 2017 12:21:48 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html</guid>
-        
-        
-        <category>DeepLearning</category>
         
       </item>
     
