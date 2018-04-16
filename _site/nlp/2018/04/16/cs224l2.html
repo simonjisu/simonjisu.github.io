@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>NUMPY with NN - 6: Weight Initialization</title>
-  <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 6">
+  <title>[cs224n]Lecture 2</title>
+  <meta name="description" content="[CS224n] Lecture 2 Word Vector 정리">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 6" />
+  <meta property="og:description" content="[CS224n] Lecture 2 Word Vector 정리" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="NUMPY with NN - 6: Weight Initialization" />
+  <meta property="og:title" content="[cs224n]Lecture 2" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="NUMPY with NN - 6: Weight Initialization">
-  <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 6">
+  <meta name="twitter:title" content="[cs224n]Lecture 2">
+  <meta name="twitter:description" content="[CS224n] Lecture 2 Word Vector 정리">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/01/24/numpywithnn_6.html">
+  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/04/16/cs224l2.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -166,7 +166,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">NUMPY with NN - 6: Weight Initialization</h1>
+      <h1 class="title">[cs224n]Lecture 2</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -181,128 +181,241 @@
  
 
 <section class="post-meta">
-  <div class="post-date">January 24, 2018</div>
+  <div class="post-date">April 16, 2018</div>
   <div class="post-categories">
    in 
     
-    <a href="/posts/#DeepLearning">Deeplearning</a>
+    <a href="/posts/#NLP">Nlp</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---6">Numpy로 짜보는 Neural Network Basic - 6</h1>
-
+  <h1 id="cs224n-lecture-2-word-vector-">[CS224n] Lecture 2 Word Vector 정리</h1>
 <hr />
-<h2 id="part-2">학습관련 기술 Part 2</h2>
 
-<h3 id="weight-initialization">가중치 초기값 설정(Weight Initialization)</h3>
-<p>이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형 함수의 가중치 미분을 구해서 학습하고자 하는 파라미터를 업데이트 하게 된다.</p>
+<h2 id="how-do-we-represent-the-meaning-of-a-word">How do we represent the meaning of a word?</h2>
 
-<p>[<a href="https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html"><span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic - 2</span></a>] 참고</p>
+<p>단어를 어떻게 표현하는게 좋은 것인가? 그전에 <strong>“의미”</strong> 의 정의를 찾아본다.</p>
 
-<p>그렇다면 Sigmoid를 예를 들어서 이야기 해보자, 아래 그림은 Sigmoid 함수와 미분의 그래프다.</p>
+<p>Definition: <strong>meaning</strong> (webster dictionary)</p>
+
+<ul>
+  <li>the idea that is represented by a word, phrase, etc.</li>
+  <li>the idea that a person wants to express by using words, signs, etc.</li>
+  <li>the idea that is expressed in a work of writing, art, etc.</li>
+</ul>
+
+<p>Commononest linguistic way of thinking of meaning:</p>
+<ul>
+  <li>signifier(기표) $\Longleftrightarrow$ signified(기의) (idea or thing) = denotation(표시, 명시적의미)
+    <ul>
+      <li>signifier: 시니피앙(언어가 소리와 그 소리로 표시되는 의미로 성립된다고 할 때, 소리를 가리킴)</li>
+      <li>signified: 시니피에(언어가 소리와 그 소리로 표시되는 의미로 성립된다고 할 때, 의미를 가리킴)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>즉, 텍스트 분석에서는 심볼과 그 심볼로 표시되는 의미로 생각하면 된다.</p>
+
+<p><strong>참고)</strong> 국어사전에서의 <strong>의미</strong> 정의</p>
+
+<ol>
+  <li>말이나 글의 뜻.
+    <ul>
+      <li>단어의 사전적 의미</li>
+      <li>문장의 의미</li>
+      <li>두 단어는 같은 의미로 쓰인다.</li>
+    </ul>
+  </li>
+  <li>행위나 현상이 지닌 뜻.
+    <ul>
+      <li>삶의 의미</li>
+      <li>역사적 의미</li>
+      <li>의미 있는 웃음</li>
+    </ul>
+  </li>
+  <li>사물이나 현상의 가치.
+    <ul>
+      <li>의미 있는 삶을 살다</li>
+      <li>여가를 의미 있게 보내다.</li>
+      <li>의미 없는 행동</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="how-do-we-have-usable-meaning-in-a-computer">How do we have usable meaning in a computer?</h2>
+
+<p>Common answer: Use a taxonomy(분류) like WordNet that has hypernyms(상위어)(is-a) relationships and synonym(동의어) sets</p>
+
+<p>English: wordnet</p>
+
+<h2 id="problems-with-this-discrete-representation">Problems with this discrete representation</h2>
+<ul>
+  <li>Great as a resource but missing nuances(의미・소리・색상・감정상의 미묘한 차이, 뉘앙스), e.g., <strong>synonyms</strong>: 단어간의 미묘한 차이를 넣을 수 없음
+    <ul>
+      <li>adept, expert, good, practiced, proficient, skillful</li>
+      <li>ex) i’m good (vs expert) at deeplearning</li>
+    </ul>
+  </li>
+  <li>Missing new words (impossible to keep up to date): 매일같이 업데이트 불가능(비용이 너무큼)</li>
+  <li>Subjective: 사람마다 다름, 주관적임</li>
+  <li>Requires human labor to create and adapt: 사람 손을 많이 탐</li>
+  <li>Hard to compute accurate word similarity: 유사도 계산이 어려움</li>
+</ul>
+
+<p>The vast majority of rele-based and statisical NLP work regards words as atomic symbols: <strong>one-hot-representation</strong></p>
+
+<script type="math/tex; mode=display">word = [0, 0, 0, 1, 0, 0, 0]</script>
+
+<p><strong>BAD</strong> because:</p>
+<ul>
+  <li>Dimensionality: too long when there are a lot lot of words 단어가 많아 질 수록 너무길어짐</li>
+  <li>Localist representation: Doesn’t give inherent notion, independent for each word, which means cannot calculate similarity 단어의 내적의미를 포함하지 않음, 독립적임 (즉, 사람눈에 유사한 단어라도 기계입장에서는 다른 단어일 뿐)
+    <ul>
+      <li>ex) when someone want to find “Seattle motel”, we have to match and give him “Seattle motel”</li>
+      <li><strong>orthogonal</strong></li>
+    </ul>
+  </li>
+</ul>
 
 <script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} \sigma(a) & = \dfrac{1}{1+e^{-a}} \\ \sigma'(a) &= \sigma(a)(1 - \sigma(a))\end{aligned} %]]></script>
-
-<p><img src="/assets/ML/nn/6/sigmoid_prime.png" alt="Drawing" /></p>
-
-<p>선형결합을 통해 구해진 값 a은 뉴런을 거쳐서 Sigmoid로 활성화 된 함수는 대부분 $[0, 1]$ 사이의 값을 가지게 될 것이다. 선형결합을 통해 구해진 값이 조금만 커져도 (약 $[-5, 5]$ 이외 값) Gradient 값이 0으로 되는 경우가 많아진다. 이를 <strong>Gradient Vanishing Problem</strong>, 즉 가중치 0에 가까워져 업데이트 안되는 현상을 말한다. 따라서 가중치 초기 값이 엄청 작게 설정 했다고 해도 dot product해진 값이 커지면 이런 현상이 일어날 수가 있다.</p>
-
-<h4 id="mnist--">Mnist 데이터로 살펴보기</h4>
-
-<p>실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} Input_{(784)}
-&\rightarrow [Affine1 \rightarrow Activation1]_{hidden1: (100)} \\
-&\rightarrow [Affine2 \rightarrow Activation2]_{hidden2: (50)} \\
-&\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]_{output:(10)_{}}
+\begin{aligned}
+motel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \end{bmatrix} \\
+hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 \end{aligned} %]]></script>
 
-<p>Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgoid로 했다.
-아래는 200 epoch까지 중간에 Activation 값들의 분포를 찍어본 것이다. 가중치 초기 값은 1을 곱한 것으로써 랜덤 Initialization 되었다고 생각하면 된다.(= $W$에다 1을 곱했다.)</p>
+<script type="math/tex; mode=display">hotel \cdot motel^T = 0</script>
 
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_act1.mp4" /> &lt;/source&gt; </video>
+<h2 id="word-vectors">Word Vectors</h2>
+<p>Build a dense vector for each word type, chosen so that it is good at predicting other words appearing in its context. 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터 (0이 별로없는) 를 만든다.</p>
 
-<p>대부분의 값이 0과 1로 이루어져 있다는 것을 알 수 있다. 이는 즉 대부분의 값이 미분을 했을 때 0이될 가능성이 높다는 뜻이다.</p>
+<p>그러나 이러한 word vector 가 단어의 개념을 뜻하는 것은 아님, 단지 분포상에서의 의미(distributional meaning)를 뜻함.</p>
 
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_back1.mp4" /> &lt;/source&gt; </video>
+<p><strong>Idea:</strong></p>
+<ul>
+  <li>We have a large corpus of text</li>
+  <li>Every word in a fixed vocabulary is represented by a vector</li>
+  <li>Go through each <strong>position</strong> $t$ in the text, which has a <strong>center word</strong> $c$ and <strong>context (“outside”) words</strong> $o$</li>
+  <li>Use the similarity of the word vectors for $c$ and $o$ to calculate the probability of $o$ given $c$ (or vice versa)</li>
+  <li>Keep adjusting the word vectors to maximize this probability</li>
+</ul>
 
-<p>앞쪽의 Layer로 backward 할 수록 가중치 미분 값이 0에 가까워지는 것을 볼 수 있다.</p>
+<p><strong>요약:</strong> 모든 단어를 대상으로, 중심단어 $c$ 가 주어졌을 때 그 주변 단어 $o$ 를 나오게 하는 하나의 확률분포을 최대화 시키는 방향으로 학습</p>
 
-<p>우리는 <a href="https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html"><span style="color: #7d7ee8">4편</span></a>에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?</p>
+<h2 id="propose">Propose</h2>
 
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_act2.mp4" /> &lt;/source&gt; </video>
+<p>For each position of word $c$:</p>
 
-<p>가중치 활성화 값이 0.5로 치우쳐져 두 레이어의 분포가 거의 비슷해졌다. 다수의 뉴런이 같은 값을 출력하고 있다는 뜻으로 우리가 비선형함수를 써서 예측 불가능하게 만드려고 한 노력을 물거품으로 만들어 버렸다. 즉, 위에서 이야기 했던 층을 여러게 쌓은 의미가 없어진다. 이를 <strong>“표현력이 제한된다”</strong> 라고 말한다.</p>
-
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_back2.mp4" /> &lt;/source&gt; </video>
-
-<p>가중치의 미분 값들이 대부분 0 근처에 있는 것을 확인 할 수가 있다.</p>
-
-<p>따라서 초기 값을 잘 설정해주어야 하는데, Sigmoid 함수에 대해서 자주 사용하는 Xavier 초기 값이 있다.</p>
-
-<p>Paper: <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf"><span style="color: #7d7ee8">Understanding the difficulty of training deep feedforward neural networks</span></a></p>
-
-<script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
-
-<script type="math/tex; mode=display">Var(W)=\dfrac{1}{n_{in}}</script>
-
-<p>즉 가중치 초기화를 할때 각 파라미터 $W$ 에 대하여 $\dfrac{1}{\sqrt{n_{in}}}$ 를 곱해주는 것이다.</p>
-
-<p>아래는 Xavier 가중치 초기값을 설정했을 때의 Activation 분포다. 두 층이 전혀 다른 분포가 되어있는 것을 볼 수가 있다.</p>
-
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_act3.mp4" /> &lt;/source&gt; </video>
-
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/sig_back3.mp4" /> &lt;/source&gt; </video>
-
-<p>각각의 가중치 초기화 값에 대한 학습 결과를 살펴보자. 총 10000번의 epochs를 돌린 결과다.</p>
+<script type="math/tex; mode=display">\max \quad J(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w_{t+j} | w_t; \theta)</script>
 
 <table>
-  <thead>
-    <tr>
-      <th style="text-align: center">학습결과</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
-      <td style="text-align: center"><img src="/assets/ML/nn/6/sig1.png" alt="Drawing" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">$w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. <br /> 또한 매번 실행시 학습 속도가 다르다.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"><img src="/assets/ML/nn/6/sig2.png" alt="Drawing" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">$w_{std} = 0.01$: 학습이 전혀 안되는 것을 확인 할 수 있다.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"><img src="/assets/ML/nn/6/sig3.png" alt="Drawing" /></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">$w_{std} = \dfrac{1}{\sqrt{n}}$: test 성적이 조금 더 좋아 졌다.</td>
+      <td>확률분포 $P(w_{t+j}</td>
+      <td>w_t)$ 를 최대화 한다 라는 것은, 우리가 구하려고 하는 파라미터 $\theta$ (=word vectors) 하에서, 단어 $w_t$ 가 주어졌을 때 주변단어 $w_{t+j}$ 가 나올 확률을 최대화 한다는 뜻이다.</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="relu">활성화 함수를 바꿔보자: ReLu</h4>
-<p>ReLu의 미분 값은 $x &gt; 0$ 에서 $1$ 이고 나머지는 $0$ 이다. ReLu는 <strong>He</strong> 라는 초기값을 설정하게 된다.</p>
+<p>Change it to negative log likelihood:</p>
 
-<script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\min \quad J'(\theta) &= -\dfrac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m,\ j \neq 0} \log P(w_{t+j} | w_t) \\
+P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
+\end{aligned} %]]></script>
 
-<script type="math/tex; mode=display">Var(W)=\dfrac{2}{n_{in}}</script>
+<h3 id="why-mle-is-equivalent-to-nll">Why MLE is equivalent to NLL?</h3>
 
-<p>즉, 가중치 $W$ 에 $\sqrt{\dfrac{2}{n_{in}}}$ 을 곱하게 된다. 아래 동영상을 보면 0보다 큰 부분에서 꾸준히 활성화 되는 모습을 볼 수 있다.</p>
+<p>Likelihood 의 정의:</p>
 
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/relu_act3.mp4" /> &lt;/source&gt; </video>
+<script type="math/tex; mode=display">L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)</script>
 
-<video controls="controls" autoplay="" loop="" muted=""> <source type="video/mp4" src="/assets/ML/nn/6/relu_back3.mp4" /> &lt;/source&gt; </video>
+<p>log를 취하게 되면 아래와 같다.</p>
 
-<p>다음 시간에는 배치 정규화에 대해서 알아보자.</p>
+<script type="math/tex; mode=display">\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)</script>
+
+<p>MLE(maximum likelihood estimator) 의 정의:</p>
+
+<script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)</script>
+
+<p><script type="math/tex">\underset{x}{\arg \max} (x) = \underset{x}{\arg \max}(-x)</script> 때문에 우리는 아래의 식을 얻을 수 있다.</p>
+
+<script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)</script>
+
+<ul>
+  <li>
+    <p>왜 log 로 바꾸는 것인가?
+  첫째로, 컴퓨터 연산시 곱하기 보다 더하기가 복잡도가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$) 둘째로, 언더플로우 방지. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.</p>
+  </li>
+  <li>
+    <p>참고</p>
+    <ul>
+      <li><a href="https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/"><span style="color: #7d7ee8">why minimize negative log likelihood</span></a></li>
+      <li><a href="https://ratsgo.github.io/deep%20learning/2017/09/24/loss/"><span style="color: #7d7ee8">(ratsgo 님) 손실함수</span></a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dot-product--softmax">Dot product &amp; Softmax</h2>
+
+<ul>
+  <li>Dot product: similar to calcuate similarity</li>
+</ul>
+
+<script type="math/tex; mode=display">u^Tv = u\cdot v = \sum_i u_i v_i</script>
+
+<ul>
+  <li>Softmax</li>
+</ul>
+
+<script type="math/tex; mode=display">softmax(x_i) = \dfrac{\exp(x_i)}{\sum_{j=1}\exp(x_j)}</script>
+
+<h2 id="train-compute-all-vector-gradients">Train: Compute all vector gradients</h2>
+<ul>
+  <li>define the set of all parameters in a model in terms of one long vector $\theta \in \Bbb{R}^{2dV}$</li>
+  <li>why $2dV$? Because for each word one is for center word($c$) and the other is for context word($o$).</li>
+</ul>
+
+<p><img src="/assets/ML/nlp/L2_Skipgram.png" /></p>
+
+<h2 id="update">Update?</h2>
+
+<script type="math/tex; mode=display">f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}</script>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} \dfrac{\partial f}{\partial V_c}
+&= \dfrac{\partial }{\partial V_c} \big(\log(\exp(u_o^T V_c)) - \log(\sum_{w=1}^V \exp(u_w^T V_c))\big) \\
+&= u_o - \dfrac{1}{\sum_{w=1}^V \exp(u_w^T V_c)}(\sum_{x=1}^V \exp(u_x^T V_c) u_x ) \\
+&= u_o - \sum_{x=1}^V \dfrac{\exp(u_x^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} u_x \\
+&= u_o - \sum_{x=1}^V P(x | c) u_x
+\end{aligned} %]]></script>
+
+<ul>
+  <li>$u_o$ : observed word, output context word</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$P(x</td>
+          <td>c)$: probs context word $x$ given center word $c$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>$P(x</td>
+          <td>c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ center vector</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 </article>
 
@@ -317,7 +430,7 @@
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+6%3A+Weight+Initialization&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F01%2F24%2Fnumpywithnn_6.html"
+      <a href="//www.facebook.com/sharer.php?t=%5Bcs224n%5DLecture+2&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F04%2F16%2Fcs224l2.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -345,22 +458,12 @@
 
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
     
-    <!-- <h2 id="DeepLearning">4</h2> -->
-    <!-- <h2 id="DeepLearning">/deeplearning/2018/01/25/numpywithnn_7.html</h2> -->
+    <!-- <h2 id="NLP">-1</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/04/16/cs224l2.html</h2> -->
     
-    <!-- <h2 id="DeepLearning">6</h2> -->
-    <!-- <h2 id="DeepLearning">/deeplearning/2018/01/13/numpywithnn_5.html</h2> -->
+    <!-- <h2 id="NLP">1</h2> -->
+    <!-- <h2 id="NLP"></h2> -->
     
 
 
@@ -369,24 +472,8 @@
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/deeplearning/2018/01/13/numpywithnn_5.html">
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
-					</span>
-					<span class="page-number">NUMPY with NN - 5: Optimizer</span>
-				</a>
-			
 		</span>
 		<span class="next-post">
-			
-				<a href="/deeplearning/2018/01/25/numpywithnn_7.html">
-					<span class="page-number">NUMPY with NN - 7: Batch Normalization</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>
