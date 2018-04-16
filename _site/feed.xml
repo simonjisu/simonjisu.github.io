@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Apr 2018 00:45:34 +0900</pubDate>
-    <lastBuildDate>Tue, 17 Apr 2018 00:45:34 +0900</lastBuildDate>
+    <pubDate>Tue, 17 Apr 2018 00:53:25 +0900</pubDate>
+    <lastBuildDate>Tue, 17 Apr 2018 00:53:25 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -38,6 +38,8 @@
 &lt;/ul&gt;
 
 &lt;p&gt;즉, 텍스트 분석에서는 심볼과 그 심볼로 표시되는 의미로 생각하면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;참고)&lt;/strong&gt; 국어사전에서의 &lt;strong&gt;의미&lt;/strong&gt; 정의&lt;/p&gt;
 
@@ -76,7 +78,7 @@
   &lt;li&gt;Great as a resource but missing nuances(의미・소리・색상・감정상의 미묘한 차이, 뉘앙스), e.g., &lt;strong&gt;synonyms&lt;/strong&gt;: 단어간의 미묘한 차이를 넣을 수 없음
     &lt;ul&gt;
       &lt;li&gt;adept, expert, good, practiced, proficient, skillful&lt;/li&gt;
-      &lt;li&gt;ex) i’m good (vs expert) at deeplearning&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;ex)&lt;/strong&gt; i’m good (vs expert) at deeplearning&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;Missing new words (impossible to keep up to date): 매일같이 업데이트 불가능(비용이 너무큼)&lt;/li&gt;
@@ -94,7 +96,7 @@
   &lt;li&gt;Dimensionality: too long when there are a lot lot of words 단어가 많아 질 수록 너무길어짐&lt;/li&gt;
   &lt;li&gt;Localist representation: Doesn’t give inherent notion, independent for each word, which means cannot calculate similarity 단어의 내적의미를 포함하지 않음, 독립적임 (즉, 사람눈에 유사한 단어라도 기계입장에서는 다른 단어일 뿐)
     &lt;ul&gt;
-      &lt;li&gt;ex) when someone want to find “Seattle motel”, we have to match and give him “Seattle motel”&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;ex)&lt;/strong&gt; when someone want to find “Seattle motel”, we have to match and give him “Seattle motel”&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;orthogonal&lt;/strong&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
@@ -130,14 +132,7 @@ hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\max \quad J(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w_{t+j} | w_t; \theta)&lt;/script&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;확률분포 $P(w_{t+j}&lt;/td&gt;
-      &lt;td&gt;w_t)$ 를 최대화 한다 라는 것은, 우리가 구하려고 하는 파라미터 $\theta$ (=word vectors) 하에서, 단어 $w_t$ 가 주어졌을 때 주변단어 $w_{t+j}$ 가 나올 확률을 최대화 한다는 뜻이다.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;위의 확률분포를 최대화 한다라는 것은, 우리가 구하려고 하는 파라미터 $\theta$ (= word vectors) 하에서, 단어 $w_t$ 가 주어졌을 때 주변단어 $w_{t+j}$ 가 나올 확률을 최대화 한다는 뜻이다.&lt;/p&gt;
 
 &lt;p&gt;Change it to negative log likelihood:&lt;/p&gt;
 
