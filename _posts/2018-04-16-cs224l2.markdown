@@ -1,0 +1,154 @@
+---
+layout: post
+title: "[cs224n]Lecture 2"
+date: "2018-04-16 20:54:31 +0900"
+categories: "NLP"
+author: "Soo"
+comments: true
+---
+# [CS224n] Lecture 2 Word Vector 정리
+
+## How do we represent the meaning of a word?
+
+단어를 어떻게 표현하는게 좋은 것인가? 그전에 **"의미"** 의 정의를 찾아본다.
+
+Definition: **meaning** (webster dictionary)
+
+* the idea that is represented by a word, phrase, etc.
+* the idea that a person wants to express by using words, signs, etc.
+* the idea that is expressed in a work of writing, art, etc.
+
+Commononest linguistic way of thinking of meaning:
+* signifier(기표) $\Longleftrightarrow$ signified(기의) (idea or thing) = denotation(표시, 명시적의미)
+    - signifier: 시니피앙(언어가 소리와 그 소리로 표시되는 의미로 성립된다고 할 때, 소리를 가리킴)
+    - signified: 시니피에(언어가 소리와 그 소리로 표시되는 의미로 성립된다고 할 때, 의미를 가리킴)
+
+즉, 텍스트 분석에서는 심볼과 그 심볼로 표시되는 의미로 생각하면 된다.
+
+참고) 국어사전에서의 **의미** 정의
+
+1. 말이나 글의 뜻.
+    * 단어의 사전적 의미
+    * 문장의 의미
+    * 두 단어는 같은 의미로 쓰인다.	 
+2. 행위나 현상이 지닌 뜻.
+    * 삶의 의미
+    * 역사적 의미
+    * 의미 있는 웃음	 
+3. 사물이나 현상의 가치.
+    * 의미 있는 삶을 살다
+    * 여가를 의미 있게 보내다.
+    * 의미 없는 행동
+
+## How do we have usable meaning in a computer?
+
+Common answer: Use a taxonomy(분류) like WordNet that has hypernyms(상위어)(is-a) relationships and synonym(동의어) sets
+
+English: wordnet
+
+## Problems with this discrete representation
+* Great as a resource but missing nuances(의미・소리・색상・감정상의 미묘한 차이, 뉘앙스), e.g., **synonyms**: 단어간의 미묘한 차이를 넣을 수 없음
+    * adept, expert, good, practiced, proficient, skillful
+    * ex) i'm good (vs expert) at deeplearning
+* Missing new words (impossible to keep up to date): 매일같이 업데이트 불가능(비용이 너무큼)
+* Subjective: 사람마다 다름, 주관적임
+* Requires human labor to create and adapt: 사람 손을 많이 탐
+* Hard to compute accurate word similarity: 유사도 계산이 어려움
+
+The vast majority of rele-based and statisical NLP work regards words as atomic symbols: **one-hot-representation**
+$$word = [0, 0, 0, 1, 0, 0, 0]$$
+
+**BAD** because:
+* Dimensionality: too long when there are a lot lot of words 단어가 많아 질 수록 너무길어짐
+* Localist representation: Doesn't give inherent notion, independent for each word, which means cannot calculate similarity 단어의 내적의미를 포함하지 않음, 독립적임 (즉, 사람눈에 유사한 단어라도 기계입장에서는 다른 단어일 뿐)
+    * ex) when someone want to find "Seattle motel", we have to match and give him "Seattle motel"
+    * **orthogonal**
+$$\begin{aligned}
+motel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \end{bmatrix} \\
+hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
+\end{aligned}$$ $$hotel \cdot motel^T = 0$$
+
+## Word Vectors
+Build a dense vector for each word type, chosen so that it is good at predicting other words appearing in its context. 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터 (0이 별로없는) 를 만든다.
+
+그러나 이러한 word vector 가 단어의 개념을 뜻하는 것은 아님, 단지 분포상에서의 의미(distributional meaning)를 뜻함.
+
+Idea:
+* We have a large corpus of text
+* Every word in a fixed vocabulary is represented by a vector
+* Go through each **position** $t$ in the text, which has a **center word** $c$ and **context ("outside") words** $o$
+* Use the similarity of the word vectors for $c$ and $o$ to calculate the probability of $o$ given $c$ (or vice versa)
+* Keep adjusting the word vectors to maximize this probability
+
+요약: 모든 단어를 대상으로, 중심단어 $c$ 가 주어졌을 때 그 주변 단어 $o$ 를 나오게 하는 하나의 확률분포을 최대화 시키는 방향으로 학습
+
+## Propose
+
+for each position of word $c$:
+
+$$\max \quad J(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} P(w_{t+j} | w_t; \theta)$$
+
+확률분포 $P(w_{t+j} | w_t)$ 를 최대화 한다 라는 것은, 우리가 구하려고 하는 파라미터 $\theta$ (=word vectors) 하에서, 단어 $w_t$ 가 주어졌을 때 주변단어 $w_{t+j}$ 가 나올 확률을 최대화 한다는 뜻이다.
+
+change it to negative log likelihood:
+
+$$\begin{aligned}
+\min \quad J'(\theta) &= -\dfrac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m,\ j \neq 0} \log P(w_{t+j} | w_t) \\
+P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
+\end{aligned}$$
+
+### Why MLE is equivalent to NLL?
+likelihood 의 정의:
+
+$$L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)$$
+
+log를 취하게 되면 아래와 같다.
+
+$$\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)$$
+
+MLE(maximum likelihood estimator) 의 정의:
+
+$$\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)$$
+
+$$\underset{x}{\arg \max} (x) = \underset{x}{\arg \max}(-x)$$ 때문에 우리는 아래의 식을 얻을 수 있다.
+
+$$\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)$$
+
+* 왜 log 로 바꾸는 것인가?
+    첫째로, 컴퓨터 연산시 곱하기 보다 더하기가 복잡도가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$) 둘째로, 언더플로우 방지. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.
+
+* 참고
+  - [<span style="color: #7d7ee8">why minimize negative log likelihood</span>](https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/)
+  - [<span style="color: #7d7ee8">(ratsgo 님) 손실함 수</span>](https://ratsgo.github.io/deep%20learning/2017/09/24/loss/)
+
+## Dot product & Softmax
+
+* Dot product: similar to calcuate similarity
+
+$$u^Tv = u\cdot v = \sum_i u_i v_i$$
+
+* Softmax
+
+$$softmax(x_i) = \dfrac{\exp(x_i)}{\sum_{j=1}\exp(x_j)}$$
+
+## Train: Compute all vector gradients
+* define the set of all parameters in a model in terms of one long vector $\theta \in \Bbb{R}^{2dV}$
+* why $2dV$? Because for each word there is a vector as a center word($c$) and as a context word($o$).
+
+<img src="/assets/ML/nlp/L2_Skipgram.png">
+
+
+## Update?
+
+$$f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}$$
+
+$$\begin{aligned} \dfrac{\partial f}{\partial V_c}
+&= \dfrac{\partial }{\partial V_c} \big(\log(\exp(u_o^T V_c)) - \log(\sum_{w=1}^V \exp(u_w^T V_c))\big) \\
+&= u_o - \dfrac{1}{\sum_{w=1}^V \exp(u_w^T V_c)}(\sum_{x=1}^V \exp(u_x^T V_c) u_x ) \\
+&= u_o - \sum_{x=1}^V \dfrac{\exp(u_x^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} u_x \\
+&= u_o - \sum_{x=1}^V P(x | c) u_x
+\end{aligned}$$
+
+* $u_o$ : observed word, output context word
+* $P(x|c)$: probs context word $x$ given center word $c$  
+* $P(x|c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ center vector  
