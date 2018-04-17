@@ -217,8 +217,6 @@
 
 <p>즉, 텍스트 분석에서는 심볼과 그 심볼로 표시되는 의미로 생각하면 된다.</p>
 
-<p><br /></p>
-
 <p><strong>참고)</strong> 국어사전에서의 <strong>의미</strong> 정의</p>
 
 <ol>
@@ -245,11 +243,15 @@
   </li>
 </ol>
 
+<p><br /></p>
+
 <h2 id="how-do-we-have-usable-meaning-in-a-computer">How do we have usable meaning in a computer?</h2>
 
 <p>Common answer: Use a taxonomy(분류) like WordNet that has hypernyms(상위어)(is-a) relationships and synonym(동의어) sets</p>
 
 <p>English: wordnet</p>
+
+<p><br /></p>
 
 <h2 id="problems-with-this-discrete-representation">Problems with this discrete representation</h2>
 <ul>
@@ -288,6 +290,8 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 
 <script type="math/tex; mode=display">hotel \cdot motel^T = 0</script>
 
+<p><br /></p>
+
 <h2 id="word-vectors">Word Vectors</h2>
 <p>Build a dense vector for each word type, chosen so that it is good at predicting other words appearing in its context. 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터 (0이 별로없는) 를 만든다.</p>
 
@@ -303,6 +307,8 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 </ul>
 
 <p><strong>요약:</strong> 모든 단어를 대상으로, 중심단어 $c$ 가 주어졌을 때 그 주변 단어 $o$ 를 나오게 하는 하나의 확률분포을 최대화 시키는 방향으로 학습</p>
+
+<p><br /></p>
 
 <h2 id="propose">Propose</h2>
 
@@ -320,9 +326,9 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 \end{aligned} %]]></script>
 
-<h3 id="why-mle-is-equivalent-to-nll">Why MLE is equivalent to NLL?</h3>
+<h3 id="why-mle-is-equivalent-to-minimize-nll">Why MLE is equivalent to minimize NLL?</h3>
 
-<p>Likelihood 의 정의:</p>
+<p><strong>Likelihood</strong> 의 정의:</p>
 
 <script type="math/tex; mode=display">L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)</script>
 
@@ -330,27 +336,33 @@ P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 <script type="math/tex; mode=display">\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)</script>
 
-<p>MLE(maximum likelihood estimator) 의 정의:</p>
+<p><strong>MLE(maximum likelihood estimator)</strong> 의 정의:</p>
 
 <script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)</script>
 
-<p><script type="math/tex">\underset{x}{\arg \max} (x) = \underset{x}{\arg \max}(-x)</script> 때문에 우리는 아래의 식을 얻을 수 있다.</p>
+<script type="math/tex; mode=display">\underset{x}{\arg \max} (x) = \underset{x}{\arg \min}(-x)</script>
+
+<p>때문에 우리는 아래의 식을 얻을 수 있다.</p>
 
 <script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)</script>
 
 <ul>
-  <li>
-    <p>왜 log 로 바꾸는 것인가?
-  첫째로, 컴퓨터 연산시 곱하기 보다 더하기가 복잡도가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$) 둘째로, 언더플로우 방지. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.</p>
+  <li>왜 log 로 바꾸는 것인가?
+    <ul>
+      <li>첫째로, 컴퓨터 연산시 곱하기 보다 더하기가 <strong>복잡도</strong> 가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$)</li>
+      <li>둘째로, <strong>언더플로우</strong> 를 방지할수 있다. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.</li>
+      <li>셋째로, 자연로그함수는 단조증가함수(monotonic increase function)라서 대소관계가 바뀌지 않는다. 예를 들자면, $5 &lt; 10 \Longleftrightarrow log(5) &lt; log(10)$ 의 관계가 바뀌지 않는 다는 것. 따라서 언제든지 지수를 취해서 다시 원래의 값으로 복귀 가능.</li>
+    </ul>
   </li>
-  <li>
-    <p>참고</p>
+  <li>참고
     <ul>
       <li><a href="https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/"><span style="color: #7d7ee8">why minimize negative log likelihood</span></a></li>
       <li><a href="https://ratsgo.github.io/deep%20learning/2017/09/24/loss/"><span style="color: #7d7ee8">(ratsgo 님) 손실함수</span></a></li>
     </ul>
   </li>
 </ul>
+
+<p><br /></p>
 
 <h2 id="dot-product--softmax">Dot product &amp; Softmax</h2>
 
@@ -366,6 +378,8 @@ P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 <script type="math/tex; mode=display">softmax(x_i) = \dfrac{\exp(x_i)}{\sum_{j=1}\exp(x_j)}</script>
 
+<p><br /></p>
+
 <h2 id="train-compute-all-vector-gradients">Train: Compute all vector gradients</h2>
 <ul>
   <li>define the set of all parameters in a model in terms of one long vector $\theta \in \Bbb{R}^{2dV}$</li>
@@ -374,7 +388,16 @@ P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 <p><img src="/assets/ML/nlp/L2_Skipgram.png" /></p>
 
-<h2 id="update">Update?</h2>
+<p>여기서 $W’$ 는 $W$ 의 transpose가 아니라 새로운 임베딩 매트릭스다.</p>
+
+<h3 id="embedding-example">Embedding Example:</h3>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{bmatrix} 1&4&7&10 \\ 2&5&8&11 \\ 3&6&9&12 \end{bmatrix} \begin{bmatrix} 1\\0\\0\\0 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} %]]></script>
+
+<p>It is equal to get first column of matrix.</p>
+
+<h3 id="update">Update?</h3>
 
 <script type="math/tex; mode=display">f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}</script>
 
@@ -403,7 +426,7 @@ P(o|c) &= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
       <tbody>
         <tr>
           <td>$P(x</td>
-          <td>c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ center vector</td>
+          <td>c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ context vector</td>
         </tr>
       </tbody>
     </table>

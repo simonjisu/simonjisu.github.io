@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Apr 2018 00:55:01 +0900</pubDate>
-    <lastBuildDate>Tue, 17 Apr 2018 00:55:01 +0900</lastBuildDate>
+    <pubDate>Tue, 17 Apr 2018 15:54:00 +0900</pubDate>
+    <lastBuildDate>Tue, 17 Apr 2018 15:54:00 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -39,8 +39,6 @@
 
 &lt;p&gt;즉, 텍스트 분석에서는 심볼과 그 심볼로 표시되는 의미로 생각하면 된다.&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;참고)&lt;/strong&gt; 국어사전에서의 &lt;strong&gt;의미&lt;/strong&gt; 정의&lt;/p&gt;
 
 &lt;ol&gt;
@@ -67,11 +65,15 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;how-do-we-have-usable-meaning-in-a-computer&quot;&gt;How do we have usable meaning in a computer?&lt;/h2&gt;
 
 &lt;p&gt;Common answer: Use a taxonomy(분류) like WordNet that has hypernyms(상위어)(is-a) relationships and synonym(동의어) sets&lt;/p&gt;
 
 &lt;p&gt;English: wordnet&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;problems-with-this-discrete-representation&quot;&gt;Problems with this discrete representation&lt;/h2&gt;
 &lt;ul&gt;
@@ -110,6 +112,8 @@ hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;hotel \cdot motel^T = 0&lt;/script&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;word-vectors&quot;&gt;Word Vectors&lt;/h2&gt;
 &lt;p&gt;Build a dense vector for each word type, chosen so that it is good at predicting other words appearing in its context. 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터 (0이 별로없는) 를 만든다.&lt;/p&gt;
 
@@ -125,6 +129,8 @@ hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;요약:&lt;/strong&gt; 모든 단어를 대상으로, 중심단어 $c$ 가 주어졌을 때 그 주변 단어 $o$ 를 나오게 하는 하나의 확률분포을 최대화 시키는 방향으로 학습&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;propose&quot;&gt;Propose&lt;/h2&gt;
 
@@ -142,9 +148,9 @@ hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &
 P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 \end{aligned} %]]&gt;&lt;/script&gt;
 
-&lt;h3 id=&quot;why-mle-is-equivalent-to-nll&quot;&gt;Why MLE is equivalent to NLL?&lt;/h3&gt;
+&lt;h3 id=&quot;why-mle-is-equivalent-to-minimize-nll&quot;&gt;Why MLE is equivalent to minimize NLL?&lt;/h3&gt;
 
-&lt;p&gt;Likelihood 의 정의:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Likelihood&lt;/strong&gt; 의 정의:&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)&lt;/script&gt;
 
@@ -152,27 +158,33 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)&lt;/script&gt;
 
-&lt;p&gt;MLE(maximum likelihood estimator) 의 정의:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MLE(maximum likelihood estimator)&lt;/strong&gt; 의 정의:&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)&lt;/script&gt;
 
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\underset{x}{\arg \max} (x) = \underset{x}{\arg \max}(-x)&lt;/script&gt; 때문에 우리는 아래의 식을 얻을 수 있다.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\underset{x}{\arg \max} (x) = \underset{x}{\arg \min}(-x)&lt;/script&gt;
+
+&lt;p&gt;때문에 우리는 아래의 식을 얻을 수 있다.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)&lt;/script&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;왜 log 로 바꾸는 것인가?
-  첫째로, 컴퓨터 연산시 곱하기 보다 더하기가 복잡도가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$) 둘째로, 언더플로우 방지. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.&lt;/p&gt;
+  &lt;li&gt;왜 log 로 바꾸는 것인가?
+    &lt;ul&gt;
+      &lt;li&gt;첫째로, 컴퓨터 연산시 곱하기 보다 더하기가 &lt;strong&gt;복잡도&lt;/strong&gt; 가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$)&lt;/li&gt;
+      &lt;li&gt;둘째로, &lt;strong&gt;언더플로우&lt;/strong&gt; 를 방지할수 있다. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.&lt;/li&gt;
+      &lt;li&gt;셋째로, 자연로그함수는 단조증가함수(monotonic increase function)라서 대소관계가 바뀌지 않는다. 예를 들자면, $5 &amp;lt; 10 \Longleftrightarrow log(5) &amp;lt; log(10)$ 의 관계가 바뀌지 않는 다는 것. 따라서 언제든지 지수를 취해서 다시 원래의 값으로 복귀 가능.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;참고&lt;/p&gt;
+  &lt;li&gt;참고
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;why minimize negative log likelihood&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/09/24/loss/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;(ratsgo 님) 손실함수&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;dot-product--softmax&quot;&gt;Dot product &amp;amp; Softmax&lt;/h2&gt;
 
@@ -188,6 +200,8 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;softmax(x_i) = \dfrac{\exp(x_i)}{\sum_{j=1}\exp(x_j)}&lt;/script&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;train-compute-all-vector-gradients&quot;&gt;Train: Compute all vector gradients&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;define the set of all parameters in a model in terms of one long vector $\theta \in \Bbb{R}^{2dV}$&lt;/li&gt;
@@ -196,7 +210,16 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 &lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L2_Skipgram.png&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;update&quot;&gt;Update?&lt;/h2&gt;
+&lt;p&gt;여기서 $W’$ 는 $W$ 의 transpose가 아니라 새로운 임베딩 매트릭스다.&lt;/p&gt;
+
+&lt;h3 id=&quot;embedding-example&quot;&gt;Embedding Example:&lt;/h3&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{bmatrix} 1&amp;4&amp;7&amp;10 \\ 2&amp;5&amp;8&amp;11 \\ 3&amp;6&amp;9&amp;12 \end{bmatrix} \begin{bmatrix} 1\\0\\0\\0 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;It is equal to get first column of matrix.&lt;/p&gt;
+
+&lt;h3 id=&quot;update&quot;&gt;Update?&lt;/h3&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}&lt;/script&gt;
 
@@ -225,7 +248,7 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
       &lt;tbody&gt;
         &lt;tr&gt;
           &lt;td&gt;$P(x&lt;/td&gt;
-          &lt;td&gt;c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ center vector&lt;/td&gt;
+          &lt;td&gt;c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ context vector&lt;/td&gt;
         &lt;/tr&gt;
       &lt;/tbody&gt;
     &lt;/table&gt;
