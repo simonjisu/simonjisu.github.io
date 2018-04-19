@@ -43,14 +43,14 @@ p {
 }
 
 a {
-  color: #514b52;
+  color: #0c689e;
   text-decoration: none;
   // transition: color 0.1s linear;
 
   &:active,
   &:focus,
   &:hover {
-    color: darken(#514b52/*$action-color*/, 10%);
+    color: darken(#0c689e/*$action-color*/, 10%);
     text-decoration: underline;
   }
 

@@ -100,7 +100,7 @@ print(numerical_diff(f1, 10))
 >
 > 0.2999999999986347
 
-정확하게 0.2와 0.3이 나오지 않는 이유는 이진수 부동소수점 방식[[<span style="color: #7d7ee8">링크</span>](https://ko.wikipedia.org/wiki/%EB%B6%80%EB%8F%99%EC%86%8C%EC%88%98%EC%A0%90)]의 정확도 문제니까 round 함수를 사용해 반올림하여 사용해야한다.
+정확하게 0.2와 0.3이 나오지 않는 이유는 이진수 부동소수점 방식[[링크](https://ko.wikipedia.org/wiki/%EB%B6%80%EB%8F%99%EC%86%8C%EC%88%98%EC%A0%90)]의 정확도 문제니까 round 함수를 사용해 반올림하여 사용해야한다.
 
 <img src="/assets/ML/nn/numerical_diff.png" alt="Drawing" style="width: 500px;"/>
 
@@ -208,7 +208,7 @@ $$ sigmoid(A1_{(batch,\ h)}) \rightarrow Z1_{(batch,\ h)}$$
 $$ Z1_{(batch,\ h)} \cdot W1_{(h,\ o)} + B1_{(batch,\ o)} \rightarrow A2_{(batch,\ o)} $$
 $$ \sigma(A2_{(batch,\ o)}) \rightarrow Y_{(batch,\ o)}$$
 
-이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [[<span style="color: #7d7ee8">여기</span>](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py)]서 가져왔다.
+이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [[여기](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py)]서 가져왔다.
 
 ```
 (x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)

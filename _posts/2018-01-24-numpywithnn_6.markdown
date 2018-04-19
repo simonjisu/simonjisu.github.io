@@ -14,7 +14,7 @@ comments: true
 ### 가중치 초기값 설정(Weight Initialization)
 이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형 함수의 가중치 미분을 구해서 학습하고자 하는 파라미터를 업데이트 하게 된다.
 
-[[<span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic - 2</span>](https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html)] 참고
+[[Numpy로 짜보는 Neural Network Basic - 2](https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html)] 참고
 
 그렇다면 Sigmoid를 예를 들어서 이야기 해보자, 아래 그림은 Sigmoid 함수와 미분의 그래프다.
 
@@ -46,7 +46,7 @@ Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgo
 
 앞쪽의 Layer로 backward 할 수록 가중치 미분 값이 0에 가까워지는 것을 볼 수 있다.
 
-우리는 [<span style="color: #7d7ee8">4편</span>](https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html)에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?
+우리는 [4편](https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html)에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?
 
 <video controls="controls" autoplay loop muted markdown="1"> <source type="video/mp4" src="/assets/ML/nn/6/sig_act2.mp4" markdown="1"> </source> </video>
 
@@ -58,7 +58,7 @@ Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgo
 
 따라서 초기 값을 잘 설정해주어야 하는데, Sigmoid 함수에 대해서 자주 사용하는 Xavier 초기 값이 있다.
 
-Paper: [<span style="color: #7d7ee8">Understanding the difficulty of training deep feedforward neural networks</span>](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
+Paper: [Understanding the difficulty of training deep feedforward neural networks](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
 
 $$ W \sim Uniform(n_{in}, n_{out})$$
 

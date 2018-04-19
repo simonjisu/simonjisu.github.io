@@ -198,10 +198,10 @@ p {
   margin: 0 0 14.4px; }
 
 a {
-  color: #514b52;
+  color: #0c689e;
   text-decoration: none; }
   a:active, a:focus, a:hover {
-    color: #373337;
+    color: #08496f;
     text-decoration: underline; }
   a:active, a:focus {
     outline: none; }

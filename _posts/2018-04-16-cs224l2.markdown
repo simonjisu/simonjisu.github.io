@@ -136,8 +136,8 @@ $$\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\the
     * 셋째로, 자연로그함수는 단조증가함수(monotonic increase function)라서 대소관계가 바뀌지 않는다. 예를 들자면, $5 < 10 \Longleftrightarrow log(5) < log(10)$ 의 관계가 바뀌지 않는 다는 것. 따라서 언제든지 지수를 취해서 다시 원래의 값으로 복귀 가능.
 
 * 참고
-  - [<span style="color: #7d7ee8">why minimize negative log likelihood</span>](https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/)
-  - [<span style="color: #7d7ee8">(ratsgo 님) 손실함수</span>](https://ratsgo.github.io/deep%20learning/2017/09/24/loss/)
+  - [why minimize negative log likelihood](https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/)
+  - [(ratsgo 님) 손실함수](https://ratsgo.github.io/deep%20learning/2017/09/24/loss/)
 
 <br>
 

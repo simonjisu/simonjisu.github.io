@@ -17,10 +17,10 @@ comments: true
 * 영화 리뷰를 통해 긍정인지 부정인지 분류하는 문제 (Many-to-One)
 * 사용한 모델: Bidirectional LSTM with Self Attention Model
 * 이번 글은 논문과 제가 분석한 모델의 중요 요소를 곁들여 쓴 글입니다.
-* GitHub Code Link: [<span style="color: #7d7ee8">nsmc_study</span>](https://github.com/simonjisu/nsmc_study)
+* GitHub Code Link: [nsmc_study](https://github.com/simonjisu/nsmc_study)
 * 그림이나 글은 퍼가셔도 좋지만, 출처 좀 남겨주세요~
 
-Reference Paper: [<span style="color: #7d7ee8">A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING</span>](https://arxiv.org/pdf/1703.03130.pdf)
+Reference Paper: [A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING](https://arxiv.org/pdf/1703.03130.pdf)
 
 ## 모델 핵심 부분 설명
 
@@ -108,11 +108,11 @@ $$M=AH  \qquad\qquad (7)$$
 
 따라서, $r$ hops 동안 weight 벡터들의 합을 다양성을 높히는 일종의 패널티를 줘야한다.
 
-제일 좋은 방법은 $r$ hops 안에 있는 아무 두 벡터 간의 **[<span style="color: #7d7ee8">쿨백-라이블러 발산 (Kullback–Leibler divergence)</span>](https://ko.wikipedia.org/wiki/%EC%BF%A8%EB%B0%B1-%EB%9D%BC%EC%9D%B4%EB%B8%94%EB%9F%AC_%EB%B0%9C%EC%82%B0)** 함수를 쓰는 것이다. 매트릭스 $A$ 의 각각의 행(row) 벡터들이 하나의 의미(semantic)를 가지는 단어 혹은 구문이 될 확률분포이기 때문에, 다양한 분포에서 나오는 것은 우리의 목적이 된다. (문장은 여러 단어/구문으로 구성되어 있기때문) 그러므로 KL divergence 값을 **최대** 로 만들면 중복 문제는 해결된다.
+제일 좋은 방법은 $r$ hops 안에 있는 아무 두 벡터 간의 **[쿨백-라이블러 발산 (Kullback–Leibler divergence)](https://ko.wikipedia.org/wiki/%EC%BF%A8%EB%B0%B1-%EB%9D%BC%EC%9D%B4%EB%B8%94%EB%9F%AC_%EB%B0%9C%EC%82%B0)** 함수를 쓰는 것이다. 매트릭스 $A$ 의 각각의 행(row) 벡터들이 하나의 의미(semantic)를 가지는 단어 혹은 구문이 될 확률분포이기 때문에, 다양한 분포에서 나오는 것은 우리의 목적이 된다. (문장은 여러 단어/구문으로 구성되어 있기때문) 그러므로 KL divergence 값을 **최대** 로 만들면 중복 문제는 해결된다.
 
 그러나 논문에서는 위와 같은 경우에 불안정(unstable) 한다는 것을 알아냈다. 논문 저자들은 어림짐작해 보았을 때, KL divergence 를 최대화 할때(보통의 경우 KLD를 최소화 하는 것을 한다.), 매트릭스 $A$ 구하는 단계에서 softmax 시 많은 값들이 0 이거나 아주 작은 값이라서 불안정한 학습을 야기했을 가능성이 있다는 것이다.
 
-따라서, 논문에서는 매트릭스의 **[<span style="color: #7d7ee8">Frobenius norm</span>](http://mathworld.wolfram.com/FrobeniusNorm.html)** 을 쓰게 되는데 아래와 같다. ($Norm_2$와 비슷해 보이지만 다르다)
+따라서, 논문에서는 매트릭스의 **[Frobenius norm](http://mathworld.wolfram.com/FrobeniusNorm.html)** 을 쓰게 되는데 아래와 같다. ($Norm_2$와 비슷해 보이지만 다르다)
 
 $$P ={ {\|AA^T - I\|}_F}^2$$
 
@@ -156,11 +156,11 @@ hops 가 많아지면 긍정/부정을 판단하게 되는 근거도 많아지�
 ## 향후 해볼 수 있는 과제들
 * 전처리 단계에서 임베딩시 다양한 임베딩을 해볼 수 있을 것 같다. 예를 들어 word2vec으로 미리 선학습 후에 만든다던지, 아니면 N-hot 인코딩 (단어 원형 + 품사 + 어미) 등등 시도해볼 수 있는 것은 많다.
 * LSTM Cell 로 구현
-* 이와 연관은 좀 덜하지만, CNN으로 분류하는 것과 비교해 성능이 더 잘나올지? **김윤** 님의 논문 참고 : [<span style="color: #7d7ee8">링크 </span>](http://emnlp2014.org/papers/pdf/EMNLP2014181.pdf)
+* 이와 연관은 좀 덜하지만, CNN으로 분류하는 것과 비교해 성능이 더 잘나올지? **김윤** 님의 논문 참고 : [링크 ](http://emnlp2014.org/papers/pdf/EMNLP2014181.pdf)
 
 ---
 공부에 도움 주신 분들 및 공부에 도움 되었던 싸이트:
-* 김성동님: <span style="color: #7d7ee8">https://github.com/DSKSD</span>
-* 같은 논문을 Tensorflow로 구현하신 flrngel님: <span style="color: #7d7ee8">https://github.com/flrngel/Self-Attentive-tensorflow</span>
+* 김성동님: https://github.com/DSKSD
+* 같은 논문을 Tensorflow로 구현하신 flrngel님: https://github.com/flrngel/Self-Attentive-tensorflow
 
 감사합니다.

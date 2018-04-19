@@ -198,7 +198,7 @@
 <h3 id="batch-normalization">배치 정규화 (Batch Normalization)</h3>
 <p>배치 정규화란 미니배치 단위로 선형합인 <strong>$a$</strong> 값을 정규화하는 것이다. 즉, 미니배치에 한해서 데이터 분포가 평균이 0 분산이 1이 되도록 한다. 이는 데이터 분포가 덜 치우치게 하는 효과가 있어서 가중치 초기화 값의 영향을 덜 받게한다. 또한, 학습속도를 증가시키고 regularizer 역할을 하여 Overfitting을 방지함으로 Dropout의 필요성을 줄인다. <del>자세한 내용은 논문을 참고하자!</del></p>
 
-<p>Paper: <a href="https://arxiv.org/abs/1502.03167"><span style="color: #7d7ee8">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</span></a></p>
+<p>Paper: <a href="https://arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
 
 <p>기본적인 아이디어는 아래와 같다. $D$ 차원의 미니배치 데이터 $x = (x^{(1)}, \cdots, x^{(k)}, \cdots, x^{(D)})$에 대해서 각각의 평균과 분산을 구한 후, 정규화를 통해 새로운 $x^{(k)}$ ($\hat{x}^{(k)}$) 를 구한 후에 Scaling($\gamma$) 과 Shifting($\beta$)을 거쳐 새로운 $y$ 를 기존의 선형합성 곱인 $a$ 를 대신해 활성화 함수에 넣는 것이다.</p>
 
@@ -390,7 +390,7 @@ dx = dx1 + dx2
 <h3 id="backpropogation---">첨부: Backpropogation 전체 미분 수학식</h3>
 
 <ul>
-  <li>수식의 이해는 이분의 블로그에서 많은 참조를 했다. Blog: [<a href="http://cthorey.github.io/backpropagation/"><span style="color: #7d7ee8">Clement Thorey</span></a>]</li>
+  <li>수식의 이해는 이분의 블로그에서 많은 참조를 했다. Blog: [<a href="http://cthorey.github.io/backpropagation/">Clement Thorey</a>]</li>
 </ul>
 
 <script type="math/tex; mode=display">% <![CDATA[

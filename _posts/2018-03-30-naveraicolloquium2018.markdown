@@ -17,7 +17,7 @@ comments: true
   <li><img src="/assets/ML/naveraicol/ment3.png"></li>
 </ul>
 
-출처: [<span style="color: #7d7ee8">네이버 AI 콜로키움</span>](http://naveraiconf.naver.com/)
+출처: [네이버 AI 콜로키움](http://naveraiconf.naver.com/)
 
 운 좋게 기회가 되서 [**Naver AI Colloquium 2018**](http://naveraiconf.naver.com/) 에 다녀왔다.
 싸이트에 접속해서 프로그램 표를 자세히 보면 알겠지만, 이번 콜로키움에서는 크게 4가지 주제를 다뤘다.
@@ -62,7 +62,7 @@ comments: true
 어쩌다 운좋게 경품에 당첨 되서 받았다. ㅎㅎㅎ 감사합니다.
 이놈...생각보다 귀엽다. 아직까지 일본의 프렌즈보다 기능이 덜 있는 것 같다. 라인으로 메세지 보내는 기능 시도해보았는데, 안되드라...
 
-영상링크: [<span style="color: #7d7ee8">【公式】Clova Friendsができること </span>](https://youtu.be/lK-9yDoHsZ8)
+영상링크: [【公式】Clova Friendsができること ](https://youtu.be/lK-9yDoHsZ8)
 
 아무튼 아직 개선할 사항이 많다. 예를 들어, "레미제라블 Do you hear the people sing? 노래틀어줘"라고 말하면, 말씀하신 사항을 찾지 못했다고 대답한다.
 어떤 세션에서 들었던것 같은데, 내 생각에는 레미제라블, 노래틀어줘는 노래틀어주는 분야로 의도로 분류되고, 나머지 영어는 번역하는 의도로 분류된 것 같다. (스피커에 말한 내용을 볼 수 있는데, 음성인식을 진짜 제대로 잘 된다. 괜히 1위라고 말한게 아닌듯 ㅋㅋ)

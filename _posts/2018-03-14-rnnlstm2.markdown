@@ -9,9 +9,9 @@ comments: true
 # 자세하게 설명한 RNN 과 LSTM 시리즈 - 2
 
 ## Numpy 로 RNN 만들어보기
-모든 코드는 Github: [<span style="color: #7d7ee8">NUMPYwithNN</span>](https://github.com/simonjisu/NUMPYwithNN) 에 올려져 있습니다.
+모든 코드는 Github: [NUMPYwithNN](https://github.com/simonjisu/NUMPYwithNN) 에 올려져 있습니다.
 
-Jupyter Notebook 으로 전체과정 보기: [<span style="color: #7d7ee8">링크 </span>](https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb)
+Jupyter Notebook 으로 전체과정 보기: [링크 ](https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb)
 
 ---
 
@@ -34,7 +34,7 @@ Jupyter Notebook 으로 전체과정 보기: [<span style="color: #7d7ee8">링�
 
 backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $d h_{t-1}^{raw}$ 가 이 다음 역전파로 들어가기 전에 이전 단계로 부터 얻은 $dh_{t-1}$ 와 더해져 계산한다는 점이다. 그 이유는 forward 시 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.
 
-위 그림은 [<span style="color: #7d7ee8">ratsgo's blog</span>](https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/) 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.
+위 그림은 [ratsgo's blog](https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/) 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.
 
 ### 참고) BPTT 수식적 이해
 $tanh$의 미분을 $f(x) = 1 - tanh^2(x)$ 라고 하면,
@@ -63,9 +63,9 @@ $$\begin{aligned}
 
 ### BackPropagation Through Time (BPTT) 구현
 
-* **Single_Layer_RNN** 의 코드는 [<span style="color: #7d7ee8">여기</span>](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py)에 있습니다.
-* **Layer** 의 구현을 참고하려면 Github의 [<span style="color: #7d7ee8">common/layers</span>](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py) 참고하세요!
-* 처음 Layer를 짜보시는 분은 [<span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic</span>](https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html) 시리즈를 참고하세요!
+* **Single_Layer_RNN** 의 코드는 [여기](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py)에 있습니다.
+* **Layer** 의 구현을 참고하려면 Github의 [common/layers](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py) 참고하세요!
+* 처음 Layer를 짜보시는 분은 [Numpy로 짜보는 Neural Network Basic](https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html) 시리즈를 참고하세요!
 
 우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.
 ```
@@ -158,7 +158,7 @@ where \quad k &= \max(1, t - truncate)
 ### T-BPTT 구현
 <img src="/assets/ML/rnn/normal_truncate.png">
 
-그림 출처: [<span style="color: #7d7ee8">r2rt.com</span>](https://r2rt.com/styles-of-truncated-backpropagation.html)
+그림 출처: [r2rt.com](https://r2rt.com/styles-of-truncated-backpropagation.html)
 ```
 def backward_truncate(self):
     # TBPTT
@@ -184,7 +184,7 @@ def backward_truncate(self):
 
 <img src="/assets/ML/rnn/tensorflow_truncate.png">
 
-그림 출처: [<span style="color: #7d7ee8">r2rt.com</span>](https://r2rt.com/styles-of-truncated-backpropagation.html)
+그림 출처: [r2rt.com](https://r2rt.com/styles-of-truncated-backpropagation.html)
 
 ## 실습
 
@@ -310,7 +310,7 @@ def train(rnn, optim, print_epoch=20):
 
 rnn 모델을 만들고, 어떤 방식으로 업데이트 할 것인지 정하자. 여기서는 Adam을 썼다.
 
-* **Optimizer** 의 설명은 [<span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic - 5</span>](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py)에 있습니다.
+* **Optimizer** 의 설명은 [Numpy로 짜보는 Neural Network Basic - 5](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py)에 있습니다.
 
 ```
 rnn = Single_layer_RNN(input_size=INPUT_SIZE,
@@ -335,5 +335,5 @@ loss_graph(train_loss_list=total_loss_list, train_acc_list=total_acc_list)
 
 
 ## 공부에 도움 되었던 싸이트:
-* [<span style="color: #7d7ee8">karpathy github RNN part</span>](https://gist.github.com/karpathy/d4dee566867f8291f086)
-* [<span style="color: #7d7ee8">ratsgo's blog</span>](https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/)
+* [karpathy github RNN part](https://gist.github.com/karpathy/d4dee566867f8291f086)
+* [ratsgo's blog](https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/)

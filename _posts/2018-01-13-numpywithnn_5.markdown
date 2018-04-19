@@ -189,7 +189,7 @@ class AdaDelta(object):
 
 <img src="/assets/ML/nn/Algorithm_Adam.png" alt="Drawing" style="width: 800px;"/>
 
-출처: [<span style="color: #7d7ee8">https://arxiv.org/abs/1412.6980v8</span>](https://arxiv.org/abs/1412.6980v8)
+출처: [https://arxiv.org/abs/1412.6980v8](https://arxiv.org/abs/1412.6980v8)
 
 * $m_t$: the exponential moving averages of the gradient (Momentum쪽)
 * $v_t$: the squared gradient (RMSProp쪽)
@@ -239,7 +239,7 @@ $E[g_t^2]$가 stationary 할때 $\zeta = 0$ 이 되고, 아니더라도 $\zeta$ 
 
 수식의 이해는 아래 블로그에서 도움을 조금 받았습니다.
 
-[<span style="color: #7d7ee8">http://dalpo0814.tistory.com</span>](http://dalpo0814.tistory.com/29#comment5316278)
+[http://dalpo0814.tistory.com](http://dalpo0814.tistory.com/29#comment5316278)
 
 기존 알고리즘 코드:
 ```
@@ -274,7 +274,7 @@ class Adam(object):
             params[key] -= self.lr * self.unbias_m / (np.sqrt(self.unbias_v) + 1e-7)
 ```
 
-아래는 다른 사람의 코드를 따와서 개조했다. 출처: [<span style="color: #7d7ee8">https://github.com/WegraLee/deep-learning-from-scratch/</span>](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py)
+아래는 다른 사람의 코드를 따와서 개조했다. 출처: [https://github.com/WegraLee/deep-learning-from-scratch/](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py)
 
 ```
 class Adam(object):

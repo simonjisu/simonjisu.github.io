@@ -33,7 +33,7 @@ $$\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{
 
 <img src="/assets/ML/nn/NN_add.png" alt="Drawing" style="width: 400px;"/>
 
-(그림출처: ratsgo님의 블로그[[<span style="color: #7d7ee8">링크</span>](https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/)])
+(그림출처: ratsgo님의 블로그[[링크](https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/)])
 
 $$\begin{cases} L(z) \\ z = x + y \end{cases}$$
 
@@ -57,7 +57,7 @@ $$\begin{cases}
 
 <img src="/assets/ML/nn/NN_multiply.png" alt="Drawing" style="width: 400px;"/>
 
-(그림출처: ratsgo님의 블로그[[<span style="color: #7d7ee8">링크</span>](https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/)])
+(그림출처: ratsgo님의 블로그[[링크](https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/)])
 
 $$\begin{cases} L(z) \\ z = x \times y \end{cases}$$
 
@@ -139,7 +139,7 @@ $$\begin{aligned}
 ## Affine 계층과 Affine Transform
 기하학에서 신경망 순전파 때 수행하는 행렬의 내적을 Affine Transform이라 하며, Affine 계층은 어파인 변환을 수행 처리하는 계층이다.
 
-위키백과[[<span style="color: #7d7ee8">링크</span>](https://ko.wikipedia.org/wiki/%EC%95%84%ED%95%80_%EB%B3%80%ED%99%98)]
+위키백과[[링크](https://ko.wikipedia.org/wiki/%EC%95%84%ED%95%80_%EB%B3%80%ED%99%98)]
 
 ### Forward
 

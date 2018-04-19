@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Apr 2018 15:54:00 +0900</pubDate>
-    <lastBuildDate>Tue, 17 Apr 2018 15:54:00 +0900</lastBuildDate>
+    <pubDate>Wed, 18 Apr 2018 15:35:47 +0900</pubDate>
+    <lastBuildDate>Wed, 18 Apr 2018 15:35:47 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -178,8 +178,8 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
   &lt;/li&gt;
   &lt;li&gt;참고
     &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;why minimize negative log likelihood&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/09/24/loss/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;(ratsgo 님) 손실함수&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/&quot;&gt;why minimize negative log likelihood&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/09/24/loss/&quot;&gt;(ratsgo 님) 손실함수&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -278,11 +278,11 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
   &lt;li&gt;영화 리뷰를 통해 긍정인지 부정인지 분류하는 문제 (Many-to-One)&lt;/li&gt;
   &lt;li&gt;사용한 모델: Bidirectional LSTM with Self Attention Model&lt;/li&gt;
   &lt;li&gt;이번 글은 논문과 제가 분석한 모델의 중요 요소를 곁들여 쓴 글입니다.&lt;/li&gt;
-  &lt;li&gt;GitHub Code Link: &lt;a href=&quot;https://github.com/simonjisu/nsmc_study&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;nsmc_study&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;GitHub Code Link: &lt;a href=&quot;https://github.com/simonjisu/nsmc_study&quot;&gt;nsmc_study&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;그림이나 글은 퍼가셔도 좋지만, 출처 좀 남겨주세요~&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Reference Paper: &lt;a href=&quot;https://arxiv.org/pdf/1703.03130.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Reference Paper: &lt;a href=&quot;https://arxiv.org/pdf/1703.03130.pdf&quot;&gt;A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;모델 핵심 부분 설명&lt;/h2&gt;
 
@@ -373,11 +373,11 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 &lt;p&gt;따라서, $r$ hops 동안 weight 벡터들의 합을 다양성을 높히는 일종의 패널티를 줘야한다.&lt;/p&gt;
 
-&lt;p&gt;제일 좋은 방법은 $r$ hops 안에 있는 아무 두 벡터 간의 &lt;strong&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%BF%A8%EB%B0%B1-%EB%9D%BC%EC%9D%B4%EB%B8%94%EB%9F%AC_%EB%B0%9C%EC%82%B0&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;쿨백-라이블러 발산 (Kullback–Leibler divergence)&lt;/span&gt;&lt;/a&gt;&lt;/strong&gt; 함수를 쓰는 것이다. 매트릭스 $A$ 의 각각의 행(row) 벡터들이 하나의 의미(semantic)를 가지는 단어 혹은 구문이 될 확률분포이기 때문에, 다양한 분포에서 나오는 것은 우리의 목적이 된다. (문장은 여러 단어/구문으로 구성되어 있기때문) 그러므로 KL divergence 값을 &lt;strong&gt;최대&lt;/strong&gt; 로 만들면 중복 문제는 해결된다.&lt;/p&gt;
+&lt;p&gt;제일 좋은 방법은 $r$ hops 안에 있는 아무 두 벡터 간의 &lt;strong&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%BF%A8%EB%B0%B1-%EB%9D%BC%EC%9D%B4%EB%B8%94%EB%9F%AC_%EB%B0%9C%EC%82%B0&quot;&gt;쿨백-라이블러 발산 (Kullback–Leibler divergence)&lt;/a&gt;&lt;/strong&gt; 함수를 쓰는 것이다. 매트릭스 $A$ 의 각각의 행(row) 벡터들이 하나의 의미(semantic)를 가지는 단어 혹은 구문이 될 확률분포이기 때문에, 다양한 분포에서 나오는 것은 우리의 목적이 된다. (문장은 여러 단어/구문으로 구성되어 있기때문) 그러므로 KL divergence 값을 &lt;strong&gt;최대&lt;/strong&gt; 로 만들면 중복 문제는 해결된다.&lt;/p&gt;
 
 &lt;p&gt;그러나 논문에서는 위와 같은 경우에 불안정(unstable) 한다는 것을 알아냈다. 논문 저자들은 어림짐작해 보았을 때, KL divergence 를 최대화 할때(보통의 경우 KLD를 최소화 하는 것을 한다.), 매트릭스 $A$ 구하는 단계에서 softmax 시 많은 값들이 0 이거나 아주 작은 값이라서 불안정한 학습을 야기했을 가능성이 있다는 것이다.&lt;/p&gt;
 
-&lt;p&gt;따라서, 논문에서는 매트릭스의 &lt;strong&gt;&lt;a href=&quot;http://mathworld.wolfram.com/FrobeniusNorm.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Frobenius norm&lt;/span&gt;&lt;/a&gt;&lt;/strong&gt; 을 쓰게 되는데 아래와 같다. ($Norm_2$와 비슷해 보이지만 다르다)&lt;/p&gt;
+&lt;p&gt;따라서, 논문에서는 매트릭스의 &lt;strong&gt;&lt;a href=&quot;http://mathworld.wolfram.com/FrobeniusNorm.html&quot;&gt;Frobenius norm&lt;/a&gt;&lt;/strong&gt; 을 쓰게 되는데 아래와 같다. ($Norm_2$와 비슷해 보이지만 다르다)&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P ={ {\|AA^T - I\|}_F}^2&lt;/script&gt;
 
@@ -423,14 +423,14 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 &lt;ul&gt;
   &lt;li&gt;전처리 단계에서 임베딩시 다양한 임베딩을 해볼 수 있을 것 같다. 예를 들어 word2vec으로 미리 선학습 후에 만든다던지, 아니면 N-hot 인코딩 (단어 원형 + 품사 + 어미) 등등 시도해볼 수 있는 것은 많다.&lt;/li&gt;
   &lt;li&gt;LSTM Cell 로 구현&lt;/li&gt;
-  &lt;li&gt;이와 연관은 좀 덜하지만, CNN으로 분류하는 것과 비교해 성능이 더 잘나올지? &lt;strong&gt;김윤&lt;/strong&gt; 님의 논문 참고 : &lt;a href=&quot;http://emnlp2014.org/papers/pdf/EMNLP2014181.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크 &lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;이와 연관은 좀 덜하지만, CNN으로 분류하는 것과 비교해 성능이 더 잘나올지? &lt;strong&gt;김윤&lt;/strong&gt; 님의 논문 참고 : &lt;a href=&quot;http://emnlp2014.org/papers/pdf/EMNLP2014181.pdf&quot;&gt;링크 &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;공부에 도움 주신 분들 및 공부에 도움 되었던 싸이트:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;김성동님: &lt;span style=&quot;color: #7d7ee8&quot;&gt;https://github.com/DSKSD&lt;/span&gt;&lt;/li&gt;
-  &lt;li&gt;같은 논문을 Tensorflow로 구현하신 flrngel님: &lt;span style=&quot;color: #7d7ee8&quot;&gt;https://github.com/flrngel/Self-Attentive-tensorflow&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;김성동님: https://github.com/DSKSD&lt;/li&gt;
+  &lt;li&gt;같은 논문을 Tensorflow로 구현하신 flrngel님: https://github.com/flrngel/Self-Attentive-tensorflow&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;감사합니다.&lt;/p&gt;
@@ -457,7 +457,7 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
   &lt;li&gt;&lt;img src=&quot;/assets/ML/naveraicol/ment3.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;http://naveraiconf.naver.com/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;네이버 AI 콜로키움&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;http://naveraiconf.naver.com/&quot;&gt;네이버 AI 콜로키움&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;운 좋게 기회가 되서 &lt;a href=&quot;http://naveraiconf.naver.com/&quot;&gt;&lt;strong&gt;Naver AI Colloquium 2018&lt;/strong&gt;&lt;/a&gt; 에 다녀왔다.
 싸이트에 접속해서 프로그램 표를 자세히 보면 알겠지만, 이번 콜로키움에서는 크게 4가지 주제를 다뤘다.&lt;/p&gt;
@@ -518,7 +518,7 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 &lt;p&gt;어쩌다 운좋게 경품에 당첨 되서 받았다. ㅎㅎㅎ 감사합니다.
 이놈…생각보다 귀엽다. 아직까지 일본의 프렌즈보다 기능이 덜 있는 것 같다. 라인으로 메세지 보내는 기능 시도해보았는데, 안되드라…&lt;/p&gt;
 
-&lt;p&gt;영상링크: &lt;a href=&quot;https://youtu.be/lK-9yDoHsZ8&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;【公式】Clova Friendsができること &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;영상링크: &lt;a href=&quot;https://youtu.be/lK-9yDoHsZ8&quot;&gt;【公式】Clova Friendsができること &lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;아무튼 아직 개선할 사항이 많다. 예를 들어, “레미제라블 Do you hear the people sing? 노래틀어줘”라고 말하면, 말씀하신 사항을 찾지 못했다고 대답한다.
 어떤 세션에서 들었던것 같은데, 내 생각에는 레미제라블, 노래틀어줘는 노래틀어주는 분야로 의도로 분류되고, 나머지 영어는 번역하는 의도로 분류된 것 같다. (스피커에 말한 내용을 볼 수 있는데, 음성인식을 진짜 제대로 잘 된다. 괜히 1위라고 말한게 아닌듯 ㅋㅋ)&lt;/p&gt;
@@ -542,9 +542,9 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
         <description>&lt;h1 id=&quot;rnn--lstm----2&quot;&gt;자세하게 설명한 RNN 과 LSTM 시리즈 - 2&lt;/h1&gt;
 
 &lt;h2 id=&quot;numpy--rnn-&quot;&gt;Numpy 로 RNN 만들어보기&lt;/h2&gt;
-&lt;p&gt;모든 코드는 Github: &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;NUMPYwithNN&lt;/span&gt;&lt;/a&gt; 에 올려져 있습니다.&lt;/p&gt;
+&lt;p&gt;모든 코드는 Github: &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN&quot;&gt;NUMPYwithNN&lt;/a&gt; 에 올려져 있습니다.&lt;/p&gt;
 
-&lt;p&gt;Jupyter Notebook 으로 전체과정 보기: &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크 &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Jupyter Notebook 으로 전체과정 보기: &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb&quot;&gt;링크 &lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -567,7 +567,7 @@ P(o|c) &amp;= \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}
 
 &lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $d h_{t-1}^{raw}$ 가 이 다음 역전파로 들어가기 전에 이전 단계로 부터 얻은 $dh_{t-1}$ 와 더해져 계산한다는 점이다. 그 이유는 forward 시 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
 
-&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt; 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.&lt;/p&gt;
+&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;ratsgo’s blog&lt;/a&gt; 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;bptt--&quot;&gt;참고) BPTT 수식적 이해&lt;/h3&gt;
 &lt;p&gt;$tanh$의 미분을 $f(x) = 1 - tanh^2(x)$ 라고 하면,&lt;/p&gt;
@@ -599,9 +599,9 @@ dh_{0} = \dfrac{\partial L}{\partial h_{0}}
 &lt;h3 id=&quot;backpropagation-through-time-bptt-&quot;&gt;BackPropagation Through Time (BPTT) 구현&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Single_Layer_RNN&lt;/strong&gt; 의 코드는 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;에 있습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Layer&lt;/strong&gt; 의 구현을 참고하려면 Github의 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;common/layers&lt;/span&gt;&lt;/a&gt; 참고하세요!&lt;/li&gt;
-  &lt;li&gt;처음 Layer를 짜보시는 분은 &lt;a href=&quot;https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic&lt;/span&gt;&lt;/a&gt; 시리즈를 참고하세요!&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Single_Layer_RNN&lt;/strong&gt; 의 코드는 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;여기&lt;/a&gt;에 있습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Layer&lt;/strong&gt; 의 구현을 참고하려면 Github의 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py&quot;&gt;common/layers&lt;/a&gt; 참고하세요!&lt;/li&gt;
+  &lt;li&gt;처음 Layer를 짜보시는 분은 &lt;a href=&quot;https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html&quot;&gt;Numpy로 짜보는 Neural Network Basic&lt;/a&gt; 시리즈를 참고하세요!&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.&lt;/p&gt;
@@ -697,7 +697,7 @@ where \quad k &amp;= \max(1, t - truncate)
 &lt;h3 id=&quot;t-bptt-&quot;&gt;T-BPTT 구현&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/normal_truncate.png&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;r2rt.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;r2rt.com&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward_truncate(self):
     # TBPTT
     self._params_summation_init()
@@ -723,7 +723,7 @@ where \quad k &amp;= \max(1, t - truncate)
 
 &lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/tensorflow_truncate.png&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;r2rt.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;r2rt.com&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;실습&lt;/h2&gt;
 
@@ -887,7 +887,7 @@ def train(rnn, optim, print_epoch=20):
 &lt;p&gt;rnn 모델을 만들고, 어떤 방식으로 업데이트 할 것인지 정하자. 여기서는 Adam을 썼다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Optimizer&lt;/strong&gt; 의 설명은 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 5&lt;/span&gt;&lt;/a&gt;에 있습니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Optimizer&lt;/strong&gt; 의 설명은 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;Numpy로 짜보는 Neural Network Basic - 5&lt;/a&gt;에 있습니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rnn = Single_layer_RNN(input_size=INPUT_SIZE,
@@ -913,8 +913,8 @@ optim = Adam()
 
 &lt;h2 id=&quot;section-4&quot;&gt;공부에 도움 되었던 싸이트:&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/karpathy/d4dee566867f8291f086&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;karpathy github RNN part&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;ratsgo’s blog&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/karpathy/d4dee566867f8291f086&quot;&gt;karpathy github RNN part&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;ratsgo’s blog&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Wed, 14 Mar 2018 22:05:37 +0900</pubDate>
@@ -968,7 +968,7 @@ optim = Adam()
   &lt;/ul&gt;
 
 &lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다. 또한 각 가중치는 각각 layer에서 공유하게 된다.
-(가중치 초기화를 잊어 버렸다면 &lt;a href=&quot;https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;여기&lt;/span&gt;&lt;/a&gt;로)&lt;/p&gt;
+(가중치 초기화를 잊어 버렸다면 &lt;a href=&quot;https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html&quot;&gt;여기&lt;/a&gt;로)&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{aligned}
@@ -1033,7 +1033,7 @@ y_t &amp;= W_{hy} h_t + b_y
 &lt;p&gt;0과 1사이의 작은 값을 계속 곱하게 되면 0으로 수렴한다. 따라서, 두 가지를 종합 해보았을 때, 출력값과 멀리 떨어진 Time Step일 수록 역전파가 전달 되지 않는 &lt;strong&gt;Vanishing Gradient&lt;/strong&gt; 문제가 생기게 된다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://proceedings.mlr.press/v28/pascanu13.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;On the difficulty of training recurrent neural networks&lt;/span&gt;&lt;/a&gt; 논문에서는 Vanishing &amp;amp; Exploding Gradient 문제를 자세히 다루고 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://proceedings.mlr.press/v28/pascanu13.pdf&quot;&gt;On the difficulty of training recurrent neural networks&lt;/a&gt; 논문에서는 Vanishing &amp;amp; Exploding Gradient 문제를 자세히 다루고 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 &lt;strong&gt;tanh&lt;/strong&gt; 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 &lt;strong&gt;ReLU&lt;/strong&gt; 를 쓰자는 방법이 있었다. 둘째로, &lt;strong&gt;LSTM&lt;/strong&gt;, &lt;strong&gt;GRU&lt;/strong&gt; 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.&lt;/p&gt;
@@ -1055,7 +1055,7 @@ y_t &amp;= W_{hy} h_t + b_y
 &lt;h2 id=&quot;section&quot;&gt;총 정리&lt;/h2&gt;
 &lt;p&gt;지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt; 모든 코드 링크&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common&quot;&gt; 모든 코드 링크&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;package-load&quot;&gt;Package Load&lt;/h3&gt;
 
@@ -1198,7 +1198,7 @@ print('total time:', (end - start))
 &lt;h3 id=&quot;batch-normalization&quot;&gt;배치 정규화 (Batch Normalization)&lt;/h3&gt;
 &lt;p&gt;배치 정규화란 미니배치 단위로 선형합인 &lt;strong&gt;$a$&lt;/strong&gt; 값을 정규화하는 것이다. 즉, 미니배치에 한해서 데이터 분포가 평균이 0 분산이 1이 되도록 한다. 이는 데이터 분포가 덜 치우치게 하는 효과가 있어서 가중치 초기화 값의 영향을 덜 받게한다. 또한, 학습속도를 증가시키고 regularizer 역할을 하여 Overfitting을 방지함으로 Dropout의 필요성을 줄인다. &lt;del&gt;자세한 내용은 논문을 참고하자!&lt;/del&gt;&lt;/p&gt;
 
-&lt;p&gt;Paper: &lt;a href=&quot;https://arxiv.org/abs/1502.03167&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Paper: &lt;a href=&quot;https://arxiv.org/abs/1502.03167&quot;&gt;Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;기본적인 아이디어는 아래와 같다. $D$ 차원의 미니배치 데이터 $x = (x^{(1)}, \cdots, x^{(k)}, \cdots, x^{(D)})$에 대해서 각각의 평균과 분산을 구한 후, 정규화를 통해 새로운 $x^{(k)}$ ($\hat{x}^{(k)}$) 를 구한 후에 Scaling($\gamma$) 과 Shifting($\beta$)을 거쳐 새로운 $y$ 를 기존의 선형합성 곱인 $a$ 를 대신해 활성화 함수에 넣는 것이다.&lt;/p&gt;
 
@@ -1390,7 +1390,7 @@ dx = dx1 + dx2
 &lt;h3 id=&quot;backpropogation---&quot;&gt;첨부: Backpropogation 전체 미분 수학식&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;수식의 이해는 이분의 블로그에서 많은 참조를 했다. Blog: [&lt;a href=&quot;http://cthorey.github.io/backpropagation/&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Clement Thorey&lt;/span&gt;&lt;/a&gt;]&lt;/li&gt;
+  &lt;li&gt;수식의 이해는 이분의 블로그에서 많은 참조를 했다. Blog: [&lt;a href=&quot;http://cthorey.github.io/backpropagation/&quot;&gt;Clement Thorey&lt;/a&gt;]&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
@@ -1550,7 +1550,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 &lt;h3 id=&quot;weight-initialization&quot;&gt;가중치 초기값 설정(Weight Initialization)&lt;/h3&gt;
 &lt;p&gt;이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형 함수의 가중치 미분을 구해서 학습하고자 하는 파라미터를 업데이트 하게 된다.&lt;/p&gt;
 
-&lt;p&gt;[&lt;a href=&quot;https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 2&lt;/span&gt;&lt;/a&gt;] 참고&lt;/p&gt;
+&lt;p&gt;[&lt;a href=&quot;https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html&quot;&gt;Numpy로 짜보는 Neural Network Basic - 2&lt;/a&gt;] 참고&lt;/p&gt;
 
 &lt;p&gt;그렇다면 Sigmoid를 예를 들어서 이야기 해보자, 아래 그림은 Sigmoid 함수와 미분의 그래프다.&lt;/p&gt;
 
@@ -1583,7 +1583,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 
 &lt;p&gt;앞쪽의 Layer로 backward 할 수록 가중치 미분 값이 0에 가까워지는 것을 볼 수 있다.&lt;/p&gt;
 
-&lt;p&gt;우리는 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;4편&lt;/span&gt;&lt;/a&gt;에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?&lt;/p&gt;
+&lt;p&gt;우리는 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html&quot;&gt;4편&lt;/a&gt;에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?&lt;/p&gt;
 
 &lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_act2.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
 
@@ -1595,7 +1595,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 
 &lt;p&gt;따라서 초기 값을 잘 설정해주어야 하는데, Sigmoid 함수에 대해서 자주 사용하는 Xavier 초기 값이 있다.&lt;/p&gt;
 
-&lt;p&gt;Paper: &lt;a href=&quot;http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;Understanding the difficulty of training deep feedforward neural networks&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Paper: &lt;a href=&quot;http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf&quot;&gt;Understanding the difficulty of training deep feedforward neural networks&lt;/a&gt;&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;W \sim Uniform(n_{in}, n_{out})&lt;/script&gt;
 
@@ -1909,7 +1909,7 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
 
 &lt;p&gt;&lt;img src=&quot;/assets/ML/nn/Algorithm_Adam.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 800px;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;https://arxiv.org/abs/1412.6980v8&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;https://arxiv.org/abs/1412.6980v8&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;https://arxiv.org/abs/1412.6980v8&quot;&gt;https://arxiv.org/abs/1412.6980v8&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;$m_t$: the exponential moving averages of the gradient (Momentum쪽)&lt;/li&gt;
@@ -1963,7 +1963,7 @@ E[v_t] &amp;= E[(1-\beta_2) \sum_{i=1}^{t} \beta_2^{t-i}(g_i^2 - g_t^2 + g_t^2))
 
 &lt;p&gt;수식의 이해는 아래 블로그에서 도움을 조금 받았습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://dalpo0814.tistory.com/29#comment5316278&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;http://dalpo0814.tistory.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://dalpo0814.tistory.com/29#comment5316278&quot;&gt;http://dalpo0814.tistory.com&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;기존 알고리즘 코드:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Adam(object):
@@ -1998,7 +1998,7 @@ E[v_t] &amp;= E[(1-\beta_2) \sum_{i=1}^{t} \beta_2^{t-i}(g_i^2 - g_t^2 + g_t^2))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;아래는 다른 사람의 코드를 따와서 개조했다. 출처: &lt;a href=&quot;https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;https://github.com/WegraLee/deep-learning-from-scratch/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;아래는 다른 사람의 코드를 따와서 개조했다. 출처: &lt;a href=&quot;https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py&quot;&gt;https://github.com/WegraLee/deep-learning-from-scratch/&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Adam(object):
     &quot;&quot;&quot;Adam (http://arxiv.org/abs/1412.6980v8)&quot;&quot;&quot;
@@ -2401,14 +2401,14 @@ print('cat-dog:',cosine(df['cat'], df['dog']))
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;cwcollobert-et-al-2011&quot;&gt;C&amp;amp;W(Collobert et al. 2011)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;paper&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf&quot;&gt;paper&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Interpretation: representations carry information about what neighbouring representations should look like&lt;/p&gt;
 
 &lt;p&gt;where it belongs? 같은 정보를 포함&lt;/p&gt;
 
 &lt;h4 id=&quot;cbow-mikolov-et-al-2013&quot;&gt;CBoW (Mikolov et al. 2013)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1301.3781&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;paper&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1301.3781&quot;&gt;paper&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Embed context words. Add them.&lt;/p&gt;
 
@@ -2433,7 +2433,7 @@ print('cat-dog:',cosine(df['cat'], df['dog']))
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;skip-gram-mikolov-et-al-2013&quot;&gt;Skip-gram (Mikolov et al. 2013)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1301.3781&quot;&gt;&lt;span style=&quot;color: #7d7ee8&quot;&gt;paper&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1301.3781&quot;&gt;paper&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Target word predicts context words.&lt;/p&gt;
 
@@ -2480,7 +2480,7 @@ print('cat-dog:',cosine(df['cat'], df['dog']))
   &lt;li&gt;Embedding visualisation (nearest neighbours, T-SNE projection)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;t-SNE visualize, word 2 dimension cluster: &lt;span style=&quot;color: #e87d7d&quot;&gt; http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/ &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;t-SNE visualize, word 2 dimension cluster: &lt;span style=&quot;color: #e87d7d&quot;&gt; http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;Extrinsic Evaluation:&lt;/p&gt;
 &lt;ul&gt;
@@ -2714,7 +2714,7 @@ word2vec, loss_list = word2vec_train(corpus, N=N, half_window_size=half_window_s
 
 &lt;p&gt;&lt;img src=&quot;/assets/ML/Deepnlp/lec1/vector.png&quot; alt=&quot;Drawing&quot; style=&quot;width: 300px;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;조금더 큰 데이터를 그냥 CBOW 혹은 Skip-gram으로 학습 시킬 경우 속도가 아주 느린 것을 발견 할 수 가 있다. 이는 말뭉치가 많아질 수록 단어의 수도 많아 지기 때문에, 말단에 Hierarchical Softmax와 Negative Sampling 방법을 쓴다고 한다. 김범수님의 블로그 &lt;a href=&quot;https://shuuki4.wordpress.com/2016/01/27/word2vec-%EA%B4%80%EB%A0%A8-%EC%9D%B4%EB%A1%A0-%EC%A0%95%EB%A6%AC/&quot;&gt;[&lt;span style=&quot;color: #7d7ee8&quot;&gt;링크&lt;/span&gt;]&lt;/a&gt; 참조&lt;/p&gt;
+&lt;p&gt;조금더 큰 데이터를 그냥 CBOW 혹은 Skip-gram으로 학습 시킬 경우 속도가 아주 느린 것을 발견 할 수 가 있다. 이는 말뭉치가 많아질 수록 단어의 수도 많아 지기 때문에, 말단에 Hierarchical Softmax와 Negative Sampling 방법을 쓴다고 한다. 김범수님의 블로그 &lt;a href=&quot;https://shuuki4.wordpress.com/2016/01/27/word2vec-%EA%B4%80%EB%A0%A8-%EC%9D%B4%EB%A1%A0-%EC%A0%95%EB%A6%AC/&quot;&gt;[링크]&lt;/a&gt; 참조&lt;/p&gt;
 </description>
         <pubDate>Tue, 02 Jan 2018 21:39:31 +0900</pubDate>
         <link>http://simonjisu.github.io/deepnlp/2018/01/02/deepmindnlp1.html</link>

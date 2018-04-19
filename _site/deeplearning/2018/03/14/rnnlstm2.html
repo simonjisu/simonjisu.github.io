@@ -193,9 +193,9 @@
   <h1 id="rnn--lstm----2">자세하게 설명한 RNN 과 LSTM 시리즈 - 2</h1>
 
 <h2 id="numpy--rnn-">Numpy 로 RNN 만들어보기</h2>
-<p>모든 코드는 Github: <a href="https://github.com/simonjisu/NUMPYwithNN"><span style="color: #7d7ee8">NUMPYwithNN</span></a> 에 올려져 있습니다.</p>
+<p>모든 코드는 Github: <a href="https://github.com/simonjisu/NUMPYwithNN">NUMPYwithNN</a> 에 올려져 있습니다.</p>
 
-<p>Jupyter Notebook 으로 전체과정 보기: <a href="https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb"><span style="color: #7d7ee8">링크 </span></a></p>
+<p>Jupyter Notebook 으로 전체과정 보기: <a href="https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb">링크 </a></p>
 
 <hr />
 
@@ -218,7 +218,7 @@
 
 <p>backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $d h_{t-1}^{raw}$ 가 이 다음 역전파로 들어가기 전에 이전 단계로 부터 얻은 $dh_{t-1}$ 와 더해져 계산한다는 점이다. 그 이유는 forward 시 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.</p>
 
-<p>위 그림은 <a href="https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/"><span style="color: #7d7ee8">ratsgo’s blog</span></a> 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.</p>
+<p>위 그림은 <a href="https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/">ratsgo’s blog</a> 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.</p>
 
 <h3 id="bptt--">참고) BPTT 수식적 이해</h3>
 <p>$tanh$의 미분을 $f(x) = 1 - tanh^2(x)$ 라고 하면,</p>
@@ -250,9 +250,9 @@ dh_{0} = \dfrac{\partial L}{\partial h_{0}}
 <h3 id="backpropagation-through-time-bptt-">BackPropagation Through Time (BPTT) 구현</h3>
 
 <ul>
-  <li><strong>Single_Layer_RNN</strong> 의 코드는 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py"><span style="color: #7d7ee8">여기</span></a>에 있습니다.</li>
-  <li><strong>Layer</strong> 의 구현을 참고하려면 Github의 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py"><span style="color: #7d7ee8">common/layers</span></a> 참고하세요!</li>
-  <li>처음 Layer를 짜보시는 분은 <a href="https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html"><span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic</span></a> 시리즈를 참고하세요!</li>
+  <li><strong>Single_Layer_RNN</strong> 의 코드는 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py">여기</a>에 있습니다.</li>
+  <li><strong>Layer</strong> 의 구현을 참고하려면 Github의 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py">common/layers</a> 참고하세요!</li>
+  <li>처음 Layer를 짜보시는 분은 <a href="https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html">Numpy로 짜보는 Neural Network Basic</a> 시리즈를 참고하세요!</li>
 </ul>
 
 <p>우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.</p>
@@ -348,7 +348,7 @@ where \quad k &= \max(1, t - truncate)
 <h3 id="t-bptt-">T-BPTT 구현</h3>
 <p><img src="/assets/ML/rnn/normal_truncate.png" /></p>
 
-<p>그림 출처: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html"><span style="color: #7d7ee8">r2rt.com</span></a></p>
+<p>그림 출처: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html">r2rt.com</a></p>
 <div class="highlighter-rouge"><pre class="highlight"><code>def backward_truncate(self):
     # TBPTT
     self._params_summation_init()
@@ -374,7 +374,7 @@ where \quad k &= \max(1, t - truncate)
 
 <p><img src="/assets/ML/rnn/tensorflow_truncate.png" /></p>
 
-<p>그림 출처: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html"><span style="color: #7d7ee8">r2rt.com</span></a></p>
+<p>그림 출처: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html">r2rt.com</a></p>
 
 <h2 id="section">실습</h2>
 
@@ -538,7 +538,7 @@ def train(rnn, optim, print_epoch=20):
 <p>rnn 모델을 만들고, 어떤 방식으로 업데이트 할 것인지 정하자. 여기서는 Adam을 썼다.</p>
 
 <ul>
-  <li><strong>Optimizer</strong> 의 설명은 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py"><span style="color: #7d7ee8">Numpy로 짜보는 Neural Network Basic - 5</span></a>에 있습니다.</li>
+  <li><strong>Optimizer</strong> 의 설명은 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py">Numpy로 짜보는 Neural Network Basic - 5</a>에 있습니다.</li>
 </ul>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>rnn = Single_layer_RNN(input_size=INPUT_SIZE,
@@ -564,8 +564,8 @@ optim = Adam()
 
 <h2 id="section-4">공부에 도움 되었던 싸이트:</h2>
 <ul>
-  <li><a href="https://gist.github.com/karpathy/d4dee566867f8291f086"><span style="color: #7d7ee8">karpathy github RNN part</span></a></li>
-  <li><a href="https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/"><span style="color: #7d7ee8">ratsgo’s blog</span></a></li>
+  <li><a href="https://gist.github.com/karpathy/d4dee566867f8291f086">karpathy github RNN part</a></li>
+  <li><a href="https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/">ratsgo’s blog</a></li>
 </ul>
 
 </article>

@@ -48,7 +48,7 @@ $$y=3x^2$$
 
 또 한 가지 이유를 들자면, 선형일 경우에 여러 층을 쌓는 이유가 없어진다. 만약에 $h=c\cdot a$ 가 선형인 함수 였다면 여러 층을 거치게 되면 $h(h(h(a))) = c\cdot c\cdot c\cdot a$ 인데 이는 결국 $b\cdot a=c^3\cdot a$ 라는 선형함수로 바꿀 수 있어서 여전히 예측 가능하기 때문이다.
 
-더 자세한 비선형함수와 선형함수의 차이는 링크의 블로그를 참조해보자 [[<span style="color: #7d7ee8">링크</span>](http://sdolnote.tistory.com/entry/LinearityNonlinearityFunction)]
+더 자세한 비선형함수와 선형함수의 차이는 링크의 블로그를 참조해보자 [[링크](http://sdolnote.tistory.com/entry/LinearityNonlinearityFunction)]
 
 ### 자주 쓰는 활성화 함수들
 
@@ -268,7 +268,7 @@ $$y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}$$
 def softmax(x):
     return np.exp(x) / np.sum(np.exp(x))
 ```
-얼핏 잘 만든 것 같지만 컴퓨터에서 아주 큰 수를 계산시 Overflow문제가 발생한다. 오버플로우란, 사용 가능한 하드웨어(즉, 32bit 단위 워드의 하드웨어, 레지스터 등)로 연산 결과를 표현할 수 없을 때 오버플로우가 발생한다고 한다. (오버플로우 개념 출처: [[<span style="color: #7d7ee8">링크</span>](https://m.blog.naver.com/PostView.nhn?blogId=osw5144&logNo=120206206420&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)])
+얼핏 잘 만든 것 같지만 컴퓨터에서 아주 큰 수를 계산시 Overflow문제가 발생한다. 오버플로우란, 사용 가능한 하드웨어(즉, 32bit 단위 워드의 하드웨어, 레지스터 등)로 연산 결과를 표현할 수 없을 때 오버플로우가 발생한다고 한다. (오버플로우 개념 출처: [[링크](https://m.blog.naver.com/PostView.nhn?blogId=osw5144&logNo=120206206420&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)])
 
 간단히 예를 들어보면 아래의 코드를 실행해보면 금방 알 수 있다.
 ```
@@ -314,7 +314,7 @@ def softmax(a):
 
 실습할 데이터는 mnist 데이터 이며, 아래 링크로 받을 수 있다.
 
-\<밑바닥 부터 시작하는 딥러닝\> 책의 Github: [[<span style="color: #7d7ee8">링크</span>](https://github.com/WegraLee/deep-learning-from-scratch)]
+\<밑바닥 부터 시작하는 딥러닝\> 책의 Github: [[링크](https://github.com/WegraLee/deep-learning-from-scratch)]
 
 입력층에는 784 개의 뉴런, 은닉층1에는 50개, 은닉층2에는 100개, 마지막 층에는 10개의 뉴런으로 구성되어 있는 네트워크다. 활성화 함수는 sigmoid를 쓰고, 마지막에 Softmax로 확률을 구했다. 실행단계에서 batch라는 것이 있는데, 한번에 많은 양의 데이터를 계산하면 느리니, 조금씩 데이터를 사용해서 계산하는 방법이라고 생각하면 된다.
 

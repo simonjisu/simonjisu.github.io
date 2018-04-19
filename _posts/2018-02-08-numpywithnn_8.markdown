@@ -12,7 +12,7 @@ comments: true
 ## 총 정리
 지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.
 
-[<span style="color: #7d7ee8"> 모든 코드 링크</span>](https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common)
+[ 모든 코드 링크](https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common)
 
 ### Package Load
 

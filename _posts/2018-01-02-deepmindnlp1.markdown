@@ -167,14 +167,14 @@ Ideally, scorer:
 * Produces a loss which is differentiable w.r.t. $\theta$ and $E$
 
 #### C&W(Collobert et al. 2011)
-[<span style="color: #7d7ee8">paper</span>](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf)
+[paper](http://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf)
 
 Interpretation: representations carry information about what neighbouring representations should look like
 
 where it belongs? 같은 정보를 포함
 
 #### CBoW (Mikolov et al. 2013)
-[<span style="color: #7d7ee8">paper</span>](https://arxiv.org/abs/1301.3781)
+[paper](https://arxiv.org/abs/1301.3781)
 
 Embed context words. Add them.
 
@@ -197,7 +197,7 @@ $$L_{data} = -\sum_{t_i \in data}\log P(t_i|context(t_i))$$
 
 
 #### Skip-gram (Mikolov et al. 2013)
-[<span style="color: #7d7ee8">paper</span>](https://arxiv.org/abs/1301.3781)
+[paper](https://arxiv.org/abs/1301.3781)
 
 Target word predicts context words.
 
@@ -238,7 +238,7 @@ Intrinsic Evaluation:
 * Word analogy task (Mikolov et al. 2013)
 * Embedding visualisation (nearest neighbours, T-SNE projection)
 
-t-SNE visualize, word 2 dimension cluster: <span style="color: #e87d7d"> http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/ </span>
+t-SNE visualize, word 2 dimension cluster: <span style="color: #e87d7d"> http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/
 
 Extrinsic Evaluation:
 * Simply: do your embeddings improve performance on other task(s).
@@ -464,4 +464,4 @@ Training은 아래와 같다.
 
 <img src="/assets/ML/Deepnlp/lec1/vector.png" alt="Drawing" style="width: 300px;"/>
 
-조금더 큰 데이터를 그냥 CBOW 혹은 Skip-gram으로 학습 시킬 경우 속도가 아주 느린 것을 발견 할 수 가 있다. 이는 말뭉치가 많아질 수록 단어의 수도 많아 지기 때문에, 말단에 Hierarchical Softmax와 Negative Sampling 방법을 쓴다고 한다. 김범수님의 블로그 [[<span style="color: #7d7ee8">링크</span>]](https://shuuki4.wordpress.com/2016/01/27/word2vec-%EA%B4%80%EB%A0%A8-%EC%9D%B4%EB%A1%A0-%EC%A0%95%EB%A6%AC/) 참조
+조금더 큰 데이터를 그냥 CBOW 혹은 Skip-gram으로 학습 시킬 경우 속도가 아주 느린 것을 발견 할 수 가 있다. 이는 말뭉치가 많아질 수록 단어의 수도 많아 지기 때문에, 말단에 Hierarchical Softmax와 Negative Sampling 방법을 쓴다고 한다. 김범수님의 블로그 [[링크]](https://shuuki4.wordpress.com/2016/01/27/word2vec-%EA%B4%80%EB%A0%A8-%EC%9D%B4%EB%A1%A0-%EC%A0%95%EB%A6%AC/) 참조

@@ -46,7 +46,7 @@ Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시
   </ul>
 
 Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다. 또한 각 가중치는 각각 layer에서 공유하게 된다.
-(가중치 초기화를 잊어 버렸다면 [<span style="color: #7d7ee8">여기</span>](https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html)로)
+(가중치 초기화를 잊어 버렸다면 [여기](https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html)로)
 
 $$
 \begin{aligned}
@@ -109,6 +109,6 @@ $$\begin{aligned}
 
 0과 1사이의 작은 값을 계속 곱하게 되면 0으로 수렴한다. 따라서, 두 가지를 종합 해보았을 때, 출력값과 멀리 떨어진 Time Step일 수록 역전파가 전달 되지 않는 **Vanishing Gradient** 문제가 생기게 된다.
 
-* [<span style="color: #7d7ee8">On the difficulty of training recurrent neural networks</span>](http://proceedings.mlr.press/v28/pascanu13.pdf) 논문에서는 Vanishing & Exploding Gradient 문제를 자세히 다루고 있다.
+* [On the difficulty of training recurrent neural networks](http://proceedings.mlr.press/v28/pascanu13.pdf) 논문에서는 Vanishing & Exploding Gradient 문제를 자세히 다루고 있다.
 
 장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 **tanh** 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 **ReLU** 를 쓰자는 방법이 있었다. 둘째로, **LSTM**, **GRU** 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.
