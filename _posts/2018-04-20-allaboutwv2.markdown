@@ -23,15 +23,14 @@ comments: true
 
 이번 시간에는 **Word2vec** 에 대해서 알아보려고 한다.
 
-## Word2Vec
-
 <ul id="light-slider1">
-  <li><img src="/assets/ML/nlp/L2_skipgram.png"></li>
+  <li><img src="/assets/ML/nlp/L2_skipgram1.png"></li>
   <li><img src="/assets/ML/nlp/L2_skipgram2.png"></li>
-  <li><img src="/assets/ML/nlp/L2_cbow.png"></li>
+  <li><img src="/assets/ML/nlp/L2_cbow1.png"></li>
   <li><img src="/assets/ML/nlp/L2_cbow2.png"></li>
 </ul>
 
+## Word2Vec
 
 Word2Vec은 두 가지 알고리즘이 있다.
 
