@@ -213,7 +213,7 @@
 
 <h2 id="word2vec">Word2Vec</h2>
 
-<ul id="light-slider2">
+<ul id="light-slider1">
   <li><img src="/assets/ML/nlp/L2_skipgram.png" /></li>
   <li><img src="/assets/ML/nlp/L2_skipgram2.png" /></li>
   <li><img src="/assets/ML/nlp/L2_cbow.png" /></li>
@@ -267,14 +267,14 @@ and their Compositionality</a> (Mikolov et al. 2013)</p>
 
 <p>아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단으를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 <strong>Embedding Matrix</strong> 라고 부르기로 하자</p>
 
-<ul id="light-slider1">
+<ul id="light-slider2">
   <li><img src="/assets/ML/nlp/L2_embedlookup1.png" /></li>
   <li><img src="/assets/ML/nlp/L2_embedlookup2.png" /></li>
 </ul>
 
 <p>그렇다면 어떻게 각 단어와 이 Embedding Matrix 를 매칭 시킬수 있을까? 여기서 <strong>내적</strong> 을 활용하게 된다.</p>
 
-<ul id="light-slider1">
+<ul id="light-slider3">
   <li><img src="/assets/ML/nlp/L2_embedlookup3.png" /></li>
   <li><img src="/assets/ML/nlp/L2_embedlookup4.png" /></li>
   <li><img src="/assets/ML/nlp/L2_embedlookup5.png" /></li>
@@ -282,7 +282,7 @@ and their Compositionality</a> (Mikolov et al. 2013)</p>
 
 <p>그런데 자세히 보니, one-hot vector의 숫자 $1$ 이 위치한 index 가 Embedding Matrix 의 column vector 의 index 와 같다. 따라서 중복되지 않는 단어사전을 만들고, 각 단어에 대해 index를 메긴 다음, 찾고 싶은 단어를 Embedding Matrix 에서 column vector index 만 <strong>조회(Look up)</strong> 하면 되는 것이다.</p>
 
-<ul id="light-slider1">
+<ul id="light-slider4">
   <li><img src="/assets/ML/nlp/L2_embedlookup6.png" /></li>
   <li><img src="/assets/ML/nlp/L2_embedlookup7.png" /></li>
 </ul>
@@ -386,9 +386,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 <p>다음 시간에는 <strong>Naive Softmax</strong> 로 훈련 시켰을 때의 단점과 이를 보완 해준 <strong><span style="color: #e87d7d">Negative Sampling</span></strong> 에 대해서 알아보자.</p>
 
-<p><br />
-<br />
-—</p>
+<hr />
 
 <h2 id="why-mle-is-equivalent-to-minimize-nll">참고 1: Why MLE is equivalent to minimize NLL?</h2>
 

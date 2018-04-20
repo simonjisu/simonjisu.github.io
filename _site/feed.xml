@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Apr 2018 17:50:08 +0900</pubDate>
-    <lastBuildDate>Fri, 20 Apr 2018 17:50:08 +0900</lastBuildDate>
+    <pubDate>Fri, 20 Apr 2018 17:57:17 +0900</pubDate>
+    <lastBuildDate>Fri, 20 Apr 2018 17:57:17 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -33,7 +33,7 @@
 
 &lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
 
-&lt;ul id=&quot;light-slider2&quot;&gt;
+&lt;ul id=&quot;light-slider1&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram2.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow.png&quot; /&gt;&lt;/li&gt;
@@ -87,14 +87,14 @@ and their Compositionality&lt;/a&gt; (Mikolov et al. 2013)&lt;/p&gt;
 
 &lt;p&gt;아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단으를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 &lt;strong&gt;Embedding Matrix&lt;/strong&gt; 라고 부르기로 하자&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider1&quot;&gt;
+&lt;ul id=&quot;light-slider2&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup1.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup2.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;그렇다면 어떻게 각 단어와 이 Embedding Matrix 를 매칭 시킬수 있을까? 여기서 &lt;strong&gt;내적&lt;/strong&gt; 을 활용하게 된다.&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider1&quot;&gt;
+&lt;ul id=&quot;light-slider3&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup3.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup4.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup5.png&quot; /&gt;&lt;/li&gt;
@@ -102,7 +102,7 @@ and their Compositionality&lt;/a&gt; (Mikolov et al. 2013)&lt;/p&gt;
 
 &lt;p&gt;그런데 자세히 보니, one-hot vector의 숫자 $1$ 이 위치한 index 가 Embedding Matrix 의 column vector 의 index 와 같다. 따라서 중복되지 않는 단어사전을 만들고, 각 단어에 대해 index를 메긴 다음, 찾고 싶은 단어를 Embedding Matrix 에서 column vector index 만 &lt;strong&gt;조회(Look up)&lt;/strong&gt; 하면 되는 것이다.&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider1&quot;&gt;
+&lt;ul id=&quot;light-slider4&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup6.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup7.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -206,9 +206,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 &lt;p&gt;다음 시간에는 &lt;strong&gt;Naive Softmax&lt;/strong&gt; 로 훈련 시켰을 때의 단점과 이를 보완 해준 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;Negative Sampling&lt;/span&gt;&lt;/strong&gt; 에 대해서 알아보자.&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;
-&lt;br /&gt;
-—&lt;/p&gt;
+&lt;hr /&gt;
 
 &lt;h2 id=&quot;why-mle-is-equivalent-to-minimize-nll&quot;&gt;참고 1: Why MLE is equivalent to minimize NLL?&lt;/h2&gt;
 

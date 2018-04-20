@@ -119,7 +119,7 @@ pre code.hljs {
   }
   // Nav menu
   .navigation-wrapper {
-  	@include outer-container(75%);
+  	@include outer-container;
     @include clearfix;
     position: relative;
   }
@@ -196,7 +196,7 @@ pre code.hljs {
 */
 .page-content {
 	.wrapper {
-		@include outer-container(75%);
+		@include outer-container;
 		padding: 1em;
 	}
 	/*
@@ -376,7 +376,7 @@ pre code.hljs {
 	  }
 	}
 	.wrapper {
-		@include outer-container(75%);
+		@include outer-container;
 	}
 	.footer-heading {
 
