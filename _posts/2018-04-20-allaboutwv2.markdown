@@ -25,12 +25,13 @@ comments: true
 
 ## Word2Vec
 
-<ul id="light-slider1">
+<ul id="light-slider2">
   <li><img src="/assets/ML/nlp/L2_skipgram.png"></li>
   <li><img src="/assets/ML/nlp/L2_skipgram2.png"></li>
   <li><img src="/assets/ML/nlp/L2_cbow.png"></li>
   <li><img src="/assets/ML/nlp/L2_cbow2.png"></li>
 </ul>
+
 
 Word2Vec은 두 가지 알고리즘이 있다.
 

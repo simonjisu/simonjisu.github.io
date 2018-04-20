@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Apr 2018 15:58:37 +0900</pubDate>
-    <lastBuildDate>Fri, 20 Apr 2018 15:58:37 +0900</lastBuildDate>
+    <pubDate>Fri, 20 Apr 2018 17:50:08 +0900</pubDate>
+    <lastBuildDate>Fri, 20 Apr 2018 17:50:08 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -33,7 +33,7 @@
 
 &lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
 
-&lt;ul id=&quot;light-slider1&quot;&gt;
+&lt;ul id=&quot;light-slider2&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram2.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow.png&quot; /&gt;&lt;/li&gt;
