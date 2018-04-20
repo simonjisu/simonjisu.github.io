@@ -43,14 +43,14 @@ p {
 }
 
 a {
-  color: #0c689e;
+  color: #2c93e8;
   text-decoration: none;
   // transition: color 0.1s linear;
 
   &:active,
   &:focus,
   &:hover {
-    color: darken(#0c689e/*$action-color*/, 10%);
+    color: darken(#2c93e8/*$action-color*/, 10%);
     text-decoration: underline;
   }
 
@@ -77,3 +77,9 @@ picture {
 code {
 
 }
+
+blockquote {
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 4px solid #d6d6d6;
+  }

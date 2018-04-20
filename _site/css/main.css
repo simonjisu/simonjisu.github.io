@@ -198,10 +198,10 @@ p {
   margin: 0 0 14.4px; }
 
 a {
-  color: #0c689e;
+  color: #2c93e8;
   text-decoration: none; }
   a:active, a:focus, a:hover {
-    color: #08496f;
+    color: #1679cb;
     text-decoration: underline; }
   a:active, a:focus {
     outline: none; }
@@ -217,6 +217,11 @@ img,
 picture {
   margin: 0;
   max-width: 100%; }
+
+blockquote {
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 4px solid #d6d6d6; }
 
 html {
   box-sizing: border-box; }
@@ -312,7 +317,7 @@ pre code.hljs {
       .navigation .navigation-menu-button {
         display: none; } }
   .navigation .navigation-wrapper {
-    max-width: 48em;
+    max-width: 75%;
     margin-left: auto;
     margin-right: auto;
     position: relative; }
@@ -369,6 +374,7 @@ pre code.hljs {
         text-decoration: none;
         width: auto; } }
   .navigation li.nav-link a {
+    color: #4a4a4f;
     display: inline-block; }
     @media screen and (min-width: 768px) {
       .navigation li.nav-link a {
@@ -391,7 +397,7 @@ pre code.hljs {
   *	Pages
   */ }
   .page-content .wrapper {
-    max-width: 48em;
+    max-width: 75%;
     margin-left: auto;
     margin-right: auto;
     padding: 1em; }
@@ -401,6 +407,8 @@ pre code.hljs {
       display: table; }
   .page-content .post-list {
     padding-top: 1em !important; }
+    .page-content .post-list a {
+      color: #4a4a4f; }
   .page-content .post-meta {
     max-width: 48em;
     margin-left: auto;
@@ -564,7 +572,7 @@ pre code.hljs {
     .site-footer a:active, .site-footer a:focus {
       outline: none; }
   .site-footer .wrapper {
-    max-width: 48em;
+    max-width: 75%;
     margin-left: auto;
     margin-right: auto; }
     .site-footer .wrapper::after {

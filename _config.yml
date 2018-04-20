@@ -58,10 +58,10 @@ descriptions:
     desc: "DataScience"
 
   - cat: DeepLearning
-    desc: "딥러닝"
+    desc: "Basic Deep Learning"
 
   - cat: NLP
-    desc: "NLP 공부"
+    desc: "NLP Study"
 
   - cat: Library
     desc: "책을 읽고"

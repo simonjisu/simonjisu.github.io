@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>All about Word Vectors: Word2Vec</title>
+  <meta name="description" content="All about Word Vectors: Word2Vec">
+  
+  <meta name="author" content="Soo">
+  <meta name="copyright" content="&copy; Soo 2018">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="All about Word Vectors: Word2Vec" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:site_name" content="Soo" />
+  <meta property="og:title" content="All about Word Vectors: Word2Vec" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="All about Word Vectors: Word2Vec">
+  <meta name="twitter:description" content="All about Word Vectors: Word2Vec">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+
+
+  <!-- <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script> -->
+
+  <!-- Latex -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
+    MathJax.Hub.Config({
+        TeX: {
+            extensions: ["mhchem.js", "cancel.js"]
+        },
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true,
+            ignoreClass: "no-mathjax",
+        },
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            // linebreaks: { automatic: true }
+        },
+        menuSettings: {
+            zoom: "Click",
+            zscale: "200%"
+        }
+    });
+  </script>
+
+  <!--lightSlider-->
+  <link rel="stylesheet" href="/css/lightslider.css" />
+
+
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Soo">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+<!-- <h1></h1>
+ -->
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">All about Word Vectors: Word2Vec</h1>
+      <p class="info">by <strong>Soo</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">April 20, 2018</div>
+  <div class="post-categories">
+   in 
+    
+    <a href="/posts/#NLP">Nlp</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="all-about-word-vectors-word2vec">All about Word Vectors: Word2Vec</h1>
+
+<hr />
+<p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
+
+<p>자연어 처리 공부를 해보신 분이라면 한번쯤 접한 그림이 있을 것이다.</p>
+
+<p><img src="/assets/ML/nlp/L2_linear-relationships.png" /></p>
+
+<blockquote>
+  <p>“king” - “man” + “woman” = ?</p>
+</blockquote>
+
+<p>느낌상 “왕”에서 “남자”라는 속성을 빼주고, “여자”의 속성을 더해주면?</p>
+
+<p>“queen” 이 나와야할 것 같다. Word Representation은 이런 것을 가능하게 했다.</p>
+
+<p>이번 시간에는 <strong>Word2vec</strong> 에 대해서 알아보려고 한다.</p>
+
+<h2 id="word2vec">Word2Vec</h2>
+
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nlp/L2_skipgram.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_skipgram2.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_cbow.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_cbow2.png" /></li>
+</ul>
+
+<p>Word2Vec은 두 가지 알고리즘이 있다.</p>
+
+<blockquote>
+  <ol>
+    <li>Skip-grams(SG)
+      <ul>
+        <li>target 단어를 기반으로 context 단어들을 예측한다. (position independent)</li>
+      </ul>
+    </li>
+    <li>Continuous Bag of Words (CBOW)
+      <ul>
+        <li>context 단어들 집합(bag-of-words context)으로부터 target 단어를 예측한다.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>그리고 몇 가지 효율적인 훈련 방법들이 있다.</p>
+
+<blockquote>
+  <p>Two (moderately efficient) training methods (vs Naive Softmax)</p>
+  <ol>
+    <li>Hierarchical softmax</li>
+    <li>Negative sampling</li>
+  </ol>
+</blockquote>
+
+<p>출처: <a href="http://web.stanford.edu/class/cs224n/syllabus.html">CS224n Lecture 2</a></p>
+
+<p>이번 포스팅에서는 Skip-gram 과 Negative Sampling을 메인으로 소개하겠다.</p>
+
+<hr />
+
+<h2 id="skip-gram-model-with-naive-softmax">Skip-gram model with Naive Softmax</h2>
+<p>Paper: <a href="https://arxiv.org/pdf/1310.4546.pdf">Distributed Representations of Words and Phrases
+and their Compositionality</a> (Mikolov et al. 2013)</p>
+
+<p><br /></p>
+
+<h3 id="embedding-look-up">Embedding Look up</h3>
+
+<p>모델 설명에 들어가기 앞서 <strong>Embedding Look up</strong> 이란 것을 알아보자. 이 용어는 이제 여기저기서 많이 나올텐데 알아두면 좋다.</p>
+
+<p>우리가 하고 싶은 것은 엄청나게 차원이 큰 one-hot vector 를 고정된 작은 차원으로 넣고 싶은 것이다. 어떻게 하면 단어들을 <strong>2-dimension matrix</strong> 로 표현 할 수 있을까?</p>
+
+<p>아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단으를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 <strong>Embedding Matrix</strong> 라고 부르기로 하자</p>
+
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nlp/L2_embedlookup1.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup2.png" /></li>
+</ul>
+
+<p>그렇다면 어떻게 각 단어와 이 Embedding Matrix 를 매칭 시킬수 있을까? 여기서 <strong>내적</strong> 을 활용하게 된다.</p>
+
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nlp/L2_embedlookup3.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup4.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup5.png" /></li>
+</ul>
+
+<p>그런데 자세히 보니, one-hot vector의 숫자 $1$ 이 위치한 index 가 Embedding Matrix 의 column vector 의 index 와 같다. 따라서 중복되지 않는 단어사전을 만들고, 각 단어에 대해 index를 메긴 다음, 찾고 싶은 단어를 Embedding Matrix 에서 column vector index 만 <strong>조회(Look up)</strong> 하면 되는 것이다.</p>
+
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nlp/L2_embedlookup6.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup7.png" /></li>
+</ul>
+
+<p><strong>코드 예시:</strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>import numpy as np
+sentence = "I am going to watch Avengers Infinity War".split()
+embedding_matrix = np.array([[1,2,5,1,9,10,3,4], [5,1,4,1,8,1,2,5], [7,8,1,4,1,6,2,1]])
+vocab = {w: i for i, w in enumerate(sentence)}
+word = "I"
+print(embedding_matrix)
+print("="*30)
+print("Word:", word)
+print("Index:", vocab[word])
+print("Vector:", embedding_matrix[:, vocab.get(word)])
+</code></pre>
+</div>
+<blockquote>
+  <p>[[ 1  2  5  1  9 10  3  4]</p>
+
+  <p>[ 5  1  4  1  8  1  2  5]</p>
+
+  <p>[ 7  8  1  4  1  6  2  1]]</p>
+
+  <p>==============================</p>
+
+  <p>Word: I</p>
+
+  <p>Index: 0</p>
+
+  <p>Vector: [1 5 7]</p>
+</blockquote>
+
+<p>이해가 됐으면 이제 모델로 들어가보자.</p>
+
+<p><br /></p>
+
+<p><img src="/assets/ML/nlp/L2_model_train.png" /></p>
+
+<h3 id="section">목적</h3>
+
+<p>각 중심단어 $c$ 에 대해서 아래의 <strong>가능도/우도 (Likelihood)</strong> 를 구해본다.</p>
+
+<script type="math/tex; mode=display">L(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} p(w_{t+j} | w_t; \theta) \quad \cdots\cdots \quad (1)</script>
+
+<p>수식을 말로 풀어보자. 각 포지션 $(\prod_{t=1}^{T})$ 의 중심단어 $c$ = $w_t$ 에 대해서, $w_t$ 가 주어졌을 때 다른 문맥단어 $o$ = $w_{t+j}$ 가 나오는 확률 $\big( p (w_{t+j} \vert w_t; \theta) \big)$ 을 가능하게 만드는 $\theta$ 를 구하는 것이다. 단 $j$ 는 윈도우 크기 $m$ 을 넘지 않으며, $0$ 이 될 수 없다.</p>
+
+<p>따라서 <strong>Likelihood</strong> 를 <strong>최대화</strong> 하는 것이 우리의 목적이 되겠다.</p>
+
+<p>그러나 여기서는 우리가 좋아하는 Gradient Descent 를 사용하기 위해서 이 식을 <strong>Negative Log Likelihood</strong> 로 변형해서 쓰기로한다.</p>
+
+<script type="math/tex; mode=display">\min J(\theta) = -\dfrac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m,\ j \neq 0} \log p(w_{t+j} | w_t) \quad \cdots\cdots \quad (2)</script>
+
+<ul>
+  <li>$(1)$ 식과 $(2)$ 식이 왜 동등한지는 밑에 <strong><span style="color: #e87d7d">참고 1</span></strong> 을 확인하길 바란다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>그렇다면 단어가 등장할 확률 $p(w_{t+j} \vert w_t)$ 는 어떻게 구할 것인가?</p>
+
+<p><strong>Softmax</strong> 라는 input 값을 0과 1 사이로 만들어 주는 친근한 함수가 있다.</p>
+
+<script type="math/tex; mode=display">p(o|c) = \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} \quad \cdots\cdots \quad (3)</script>
+
+<p>따라서 모델에 있는 모든 파라미터를 $\theta \in \Bbb{R}^{2dV}$ 로 두고, $(2)$ 식을 최적화 한다.</p>
+
+<ul>
+  <li>왜 $\theta \in \Bbb{R}^{2dV}$ 인가?
+Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ 두개를 학습 시켜야하기 때문이다.</li>
+  <li><strong><span style="color: #e87d7d">주의 )</span></strong> $W’$ 는 $W$ 의 전치 행렬이 아니라 완전히 새로운 Embedding Matrix 다.</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="update">Update</h3>
+
+<p>Gradient를 통해서 각 파라미터들을 업데이트 하게 된다. $(3)$ 식의 $\log$ 를 취하게 되면 아래와 같다.</p>
+
+<script type="math/tex; mode=display">f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}</script>
+
+<p>이제 $f$ 의 Gradient 를 구해보자.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} \dfrac{\partial f}{\partial V_c}
+&= \dfrac{\partial }{\partial V_c} \big(\log(\exp(u_o^T V_c)) - \log(\sum_{w=1}^V \exp(u_w^T V_c))\big) \\
+&= u_o - \dfrac{1}{\sum_{w=1}^V \exp(u_w^T V_c)}(\sum_{x=1}^V \exp(u_x^T V_c) u_x ) \\
+&= u_o - \sum_{x=1}^V \dfrac{\exp(u_x^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} u_x \\
+&= u_o - \sum_{x=1}^V P(x | c) u_x
+\end{aligned} %]]></script>
+
+<ul>
+  <li>$u_o$ : observed word, output context word</li>
+  <li>$P(x\vert c)$: probs context word $x$ given center word $c$</li>
+  <li>$P(x\vert c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ context vector</li>
+</ul>
+
+<p>흥미로운 점: <strong>미분 값</strong> 은 관측된 context word 벡터 $u_o$ 에서 center word $c$ 가 주어졌을 때 나올 수 있는 모든 단어의 기대치를 빼준 다는 것이다.</p>
+
+<p><br /></p>
+
+<p>다음 시간에는 <strong>Naive Softmax</strong> 로 훈련 시켰을 때의 단점과 이를 보완 해준 <strong><span style="color: #e87d7d">Negative Sampling</span></strong> 에 대해서 알아보자.</p>
+
+<p><br />
+<br />
+—</p>
+
+<h2 id="why-mle-is-equivalent-to-minimize-nll">참고 1: Why MLE is equivalent to minimize NLL?</h2>
+
+<p><strong>Likelihood</strong> 의 정의:</p>
+
+<script type="math/tex; mode=display">L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)</script>
+
+<p>log를 취하게 되면 아래와 같다.</p>
+
+<script type="math/tex; mode=display">\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)</script>
+
+<p><strong>MLE(maximum likelihood estimator)</strong> 의 정의:</p>
+
+<script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)</script>
+
+<script type="math/tex; mode=display">\underset{x}{\arg \max} (x) = \underset{x}{\arg \min}(-x)</script>
+
+<p>때문에 우리는 아래의 식을 얻을 수 있다.</p>
+
+<script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)</script>
+
+<ul>
+  <li>왜 log 로 바꾸는 것인가?
+    <ol>
+      <li>컴퓨터 연산시 곱하기 보다 더하기를 쓰면 <strong>복잡도</strong> 가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$)</li>
+      <li><strong>언더플로우</strong> 를 방지할수 있다. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.</li>
+      <li>자연로그함수는 <strong>단조증가함수(monotonic increase function)</strong> 라서 대소관계가 바뀌지 않는다. 예를 들자면, $5 &lt; 10 \Longleftrightarrow log(5) &lt; log(10)$ 의 관계가 바뀌지 않는 다는 것. 따라서 언제든지 지수를 취해서 다시 원래의 값으로 복귀 가능.</li>
+    </ol>
+  </li>
+  <li>참고
+    <ul>
+      <li><a href="https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/">why minimize negative log likelihood</a></li>
+      <li><a href="https://ratsgo.github.io/deep%20learning/2017/09/24/loss/">(ratsgo 님) 손실함수</a></li>
+    </ul>
+  </li>
+</ul>
+
+</article>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Word2Vec&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F04%2F20%2Fallaboutwv2.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+</section>
+
+
+
+  
+    
+    <!-- <h2 id="NLP">-1</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/04/19/allaboutwv1.html</h2> -->
+    
+    <!-- <h2 id="NLP">1</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/04/19/allaboutwv1.html</h2> -->
+    
+
+
+
+  
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/nlp/2018/04/19/allaboutwv1.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">All about Word Vectors: Intro</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+  
+  <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'soopace';
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+  
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Soo</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:simonjisu@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">simonjisu@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://www.facebook.com/simonjisu" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/simonjisu" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">My Blog
+</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<!-- Mathjax -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+  $("code").addClass("python")
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+$("code").addClass("python")
+</script>
+
+<!--lightSlider-->
+<script src="/js/lightslider.js"></script>
+<script src='/js/multi_slider.js' type="text/javascript"></script>
+
+
+
+
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102691608-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>
