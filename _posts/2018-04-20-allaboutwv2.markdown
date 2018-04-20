@@ -23,13 +23,6 @@ comments: true
 
 이번 시간에는 **Word2vec** 에 대해서 알아보려고 한다.
 
-<ul id="light-slider1">
-  <li><img src="/assets/ML/nlp/L2_skipgram1.png"></li>
-  <li><img src="/assets/ML/nlp/L2_skipgram2.png"></li>
-  <li><img src="/assets/ML/nlp/L2_cbow1.png"></li>
-  <li><img src="/assets/ML/nlp/L2_cbow2.png"></li>
-</ul>
-
 ## Word2Vec
 
 Word2Vec은 두 가지 알고리즘이 있다.
@@ -38,6 +31,13 @@ Word2Vec은 두 가지 알고리즘이 있다.
 >     * target 단어를 기반으로 context 단어들을 예측한다. (position independent)
 > 2. Continuous Bag of Words (CBOW)
 >     * context 단어들 집합(bag-of-words context)으로부터 target 단어를 예측한다.
+
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nlp/L2_skipgram1.png"></li>
+  <li><img src="/assets/ML/nlp/L2_skipgram2.png"></li>
+  <li><img src="/assets/ML/nlp/L2_cbow1.png"></li>
+  <li><img src="/assets/ML/nlp/L2_cbow2.png"></li>
+</ul>
 
 그리고 몇 가지 효율적인 훈련 방법들이 있다.
 

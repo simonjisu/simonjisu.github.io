@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Apr 2018 19:04:30 +0900</pubDate>
-    <lastBuildDate>Fri, 20 Apr 2018 19:04:30 +0900</lastBuildDate>
+    <pubDate>Fri, 20 Apr 2018 19:08:23 +0900</pubDate>
+    <lastBuildDate>Fri, 20 Apr 2018 19:08:23 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -31,13 +31,6 @@
 
 &lt;p&gt;이번 시간에는 &lt;strong&gt;Word2vec&lt;/strong&gt; 에 대해서 알아보려고 한다.&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider1&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow2.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
 &lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
 
 &lt;p&gt;Word2Vec은 두 가지 알고리즘이 있다.&lt;/p&gt;
@@ -56,6 +49,13 @@
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/blockquote&gt;
+
+&lt;ul id=&quot;light-slider1&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram2.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow2.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;그리고 몇 가지 효율적인 훈련 방법들이 있다.&lt;/p&gt;
 
