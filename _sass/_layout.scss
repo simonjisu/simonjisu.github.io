@@ -213,6 +213,10 @@ pre code.hljs {
 		@include outer-container(100%);
 		// padding: 1em 0;
 		color: $medium-gray;
+		margin: {
+	    left: 0;
+	    right: 0;
+	  }
 		.post-date {
 			@include span-columns(6);
 			text-align: left;
