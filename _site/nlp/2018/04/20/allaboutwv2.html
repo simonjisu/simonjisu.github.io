@@ -322,7 +322,11 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <p><img src="/assets/ML/nlp/L2_model_train.png" /></p>
 
-<h3 id="section">목적</h3>
+<h3 id="section">요약</h3>
+
+<p>Skip-gram 모델을 한 마디로 설명하자면, 문장의 모든 단어가 한번 씩 중심단어 $c$ 가 되어, $c$ 주변 문맥 단어 $o$ 가 나올 확률을 최대화 하는 것이다.</p>
+
+<h3 id="section-1">목적</h3>
 
 <p>각 중심단어 $c$ 에 대해서 아래의 <strong>가능도/우도 (Likelihood)</strong> 를 구해본다.</p>
 

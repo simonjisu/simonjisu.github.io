@@ -118,6 +118,9 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <img src="/assets/ML/nlp/L2_model_train.png">
 
+### 요약
+
+Skip-gram 모델을 한 마디로 설명하자면, 문장의 모든 단어가 한번 씩 중심단어 $c$ 가 되어, $c$ 주변 문맥 단어 $o$ 가 나올 확률을 최대화 하는 것이다.
 
 ### 목적
 

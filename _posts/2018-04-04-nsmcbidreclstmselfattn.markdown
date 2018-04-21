@@ -18,7 +18,6 @@ comments: true
 * 사용한 모델: Bidirectional LSTM with Self Attention Model
 * 이번 글은 논문과 제가 분석한 모델의 중요 요소를 곁들여 쓴 글입니다.
 * GitHub Code Link: [nsmc_study](https://github.com/simonjisu/nsmc_study)
-* 그림이나 글은 퍼가셔도 좋지만, 출처 좀 남겨주세요~
 
 Reference Paper: [A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING](https://arxiv.org/pdf/1703.03130.pdf)
 
