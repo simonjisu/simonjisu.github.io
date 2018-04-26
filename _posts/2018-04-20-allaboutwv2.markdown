@@ -175,13 +175,9 @@ $$\begin{aligned} \dfrac{\partial f}{\partial V_c}
 
 흥미로운 점: **미분 값** 은 관측된 context word 벡터 $u_o$ 에서 center word $c$ 가 주어졌을 때 나올 수 있는 모든 단어의 기대치를 빼준 다는 것이다.
 
-<br>
-
-다음 시간에는 **Naive Softmax** 로 훈련 시켰을 때의 단점과 이를 보완 해준 **<span style="color: #e87d7d">Negative Sampling</span>** 에 대해서 알아보자.
-
 ---
 
-## 참고 1: Why MLE is equivalent to minimize NLL?
+### 참고 1: Why MLE is equivalent to minimize NLL?
 
 **Likelihood** 의 정의:
 
@@ -209,3 +205,9 @@ $$\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\the
 * 참고
   - [why minimize negative log likelihood](https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/)
   - [(ratsgo 님) 손실함수](https://ratsgo.github.io/deep%20learning/2017/09/24/loss/)
+
+---
+
+<br>
+
+다음 시간에는 **Naive Softmax** 로 훈련 시켰을 때의 단점과 이를 보완 해준 **<span style="color: #e87d7d">Negative Sampling</span>** 에 대해서 알아보자.

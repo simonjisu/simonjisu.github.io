@@ -6,9 +6,233 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 21 Apr 2018 18:05:25 +0900</pubDate>
-    <lastBuildDate>Sat, 21 Apr 2018 18:05:25 +0900</lastBuildDate>
+    <pubDate>Fri, 27 Apr 2018 00:55:48 +0900</pubDate>
+    <lastBuildDate>Fri, 27 Apr 2018 00:55:48 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>All about Word Vectors: Negative Sampling</title>
+        <description>&lt;h1 id=&quot;all-about-word-vectors-negative-sampling&quot;&gt;All about Word Vectors: Negative Sampling&lt;/h1&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;본 포스팅은 &lt;a href=&quot;http://web.stanford.edu/class/cs224n/&quot;&gt;CS224n&lt;/a&gt; Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L2_model_train.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;navie-softmax--&quot;&gt;Navie Softmax 의 단점&lt;/h2&gt;
+
+&lt;p&gt;Navie Softmax 를 최종단에 출력으로 두고 Backpropagation 할때는 큰 단점이 있다.&lt;/p&gt;
+
+&lt;p&gt;사실 Softmax가 그리 값싼 연산은 아니다. 우리가 학습하고 싶은 단어 벡터 1000개가 있다고 가정해보자. 그렇다면 매 window size=2 마다, 다시 말해 총 업데이트 할 5개의 단어 (중심단어 1 + 주변 단어 2 x 2) 를 위해서, $W, W’$ 안에 파라미터를 업데이트 해야하는데, 그 갯수가 최소 $(2 \times d \times 1000)$ 만큼된다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\triangledown_\theta J_t(\theta) \in \Bbb{R}^{2dV}&lt;/script&gt;
+
+&lt;p&gt;많은 양의 단어에 비해 업데이트 하는 파라미터수는 적기 때문에 gradient matrix $\triangledown_\theta J_t(\theta)$ 가 굉장히 sparse 해질 수 있다 (0이 많다는 소리). Adam 같은 알고리즘은 sparse 한 matrix 에 취약하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://simonjisu.github.io/deeplearning/2018/01/13/numpywithnn_5.html&quot;&gt;Numpy with NN: Optimizer 편 참고&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;그래서 &lt;strong&gt;“window에 실제로 등장하는 단어들만 업데이트 하면 좋지 않을까?”&lt;/strong&gt; 라는 생각을 하게 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;negative-sampling&quot;&gt;Negative Sampling&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;paper 1: &lt;a href=&quot;https://arxiv.org/abs/1310.4546&quot;&gt;Distributed representaions of Words and Phrases and their Compositionality (Mikolov et al. 2013)&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;paper 2: &lt;a href=&quot;https://arxiv.org/abs/1402.3722&quot;&gt;word2vec Explained: deriving Mikolov et al.’s negative-sampling word-embedding method&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;요약하면 아래와 같은 목적함수를 최대화 하는 것이다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+J(\theta) &amp;= \dfrac{1}{T}\sum_{t=1}^{T} J_t(\theta)\\
+J_t(\theta) &amp;= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_c)]}_{(2)}
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$T$: total num of words&lt;/li&gt;
+  &lt;li&gt;$\sigma$: sigmoid function&lt;/li&gt;
+  &lt;li&gt;$P(w) = {U(w)^{3/4}} / {Z}$: unigram distribution U(w) raised to the 3/4 power
+    &lt;ul&gt;
+      &lt;li&gt;The power makes less frequent words be sampled more often&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;말로 풀어보자면, 모든 단어 $T$ 에 대해서 중심단어 $c$ 와 그 주변단어 $o$ 가 같이 나올 확률 &lt;strong&gt;[수식 (1)]&lt;/strong&gt; 을 최대화 하고, 그 주변단어가 아닌 집합에서 sampling 하여 나온 $k$ 개의 단어의 확률 &lt;strong&gt;[수식 (2)]&lt;/strong&gt; 을 최소화 시키는 것이다. (음수가 붙기 때문에 최소하하게 되면 최대화가 된다.)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;상세 논문 설명&lt;/h3&gt;
+
+&lt;p&gt;논문 기준으로 위에 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;표기법&lt;/span&gt;&lt;/strong&gt; 이 조금 다르다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;여기서 &lt;strong&gt;$w$ = center word, $c$ = context&lt;/strong&gt; 다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;출발점은 아래와 같다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$(w, c)$ 세트가 정말로 corpus data로 부터 왔는가?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;라고 생각하고 아래와 같은 &lt;strong&gt;정의&lt;/strong&gt; 를 하게 된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$P(D = 1 \vert w, c)$ : $(w, c)$ 가 corpus data로 부터 왔을 확률&lt;/li&gt;
+  &lt;li&gt;$P(D = 0 \vert w, c) = 1 - P(D = 1 \vert w, c)$ : $(w, c)$ 가 corpus data로부터 오지 않았을 확률&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;따라서, 우리의 목적은 확률 $P(D = 1\vert\ w, c)$ 를 최대화하는 parameter $\theta$를 찾는 것이기 때문에 아래와 같은 목적함수를 세울 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} &amp;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
+= &amp;\arg \underset{\theta}{\max} \log \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
+= &amp;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta)
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;파라미터 $\theta$ 는 단어들의 벡터라고 생각할 수 있다. 즉, 위의 식을 만족하는 어떤 최적의 단어 벡터를 찾는것이다.&lt;/p&gt;
+
+&lt;p&gt;또한, 확률 $P(D=1\vert\ w,c;\theta)$ 은 sigmoid로 아래와 같이 정의 할 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(D=1\vert\ w,c;\theta) = \dfrac{1}{1+e^{-v_c v_w}}&lt;/script&gt;
+
+&lt;p&gt;따라서 우리의 목적함수는 아래와 같이 다시 고쳐 쓸수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} }&lt;/script&gt;
+
+&lt;p&gt;그러나 우리의 목적 함수는 매 $(w, c)$ 세트마다 $P(D=1\vert\ w,c;\theta)=1$ 를 만족하는 trivial solution이 존재한다. $v_c = v_w$ 이며, $\forall v_c,\ v_w$ 에 대해 $v_c \cdot v_w = K$ 를 만족하는 $\theta$ (보통 $K$ 가 40이 넘어가면 위 방정식의 값이 0에 가까워짐) 는 모든 값을 똑같이 0으로 만들어 버리기 때문에, 같은 값을 갖지 못하게 하는 매커니즘이 필요하다. ($\theta$ 에 뭘 넣어도 0이 되면 최대값을 찾는 의미가 없어진다, 자세한건 밑에 &lt;span style=&quot;color: #e87d7d&quot;&gt;참고 1&lt;/span&gt; 를 참조) 여기서 “같은 값을 같는다” 라는 말은 단어 벡터가 같은 값을 갖는 것이다.&lt;/p&gt;
+
+&lt;p&gt;따라서, 하나의 방법으로 랜덤 $(w, c)$ 조합을 생성하는 집합 $D’$를 만들어 corpus data 로부터 올 확률 $P(D=1\vert \ w,c;\theta)$ 를 낮게 강제하는 것이다. 즉, $D’$ 에서 생성된 $(w, c)$ 조합은 &lt;strong&gt;corpus data 로부터 오지 않게&lt;/strong&gt; 하는 확률 $P(D=0\vert\ w,c;\theta)$ 을 최대화 하는 것.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+&amp; \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} P(D=0\vert\ w,c;\theta) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} \big(1- P(D=1\vert\ w,c;\theta) \big) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta) + \underset{(w,c) \in D'}{\sum} \log \big(1- P(D=1\vert\ w,c;\theta) \big) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \big(1- \dfrac{1}{1+e^{-v_c v_w} } \big) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} }
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;$\sigma(x) = \dfrac{1}{1+e^{-x} }$ 시그모이드 함수로 정의 하면, 아래와 같이 정리 할 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned}
+&amp; \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} } \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \sigma(v_c v_w) + \underset{(w,c) \in D'}{\sum} \log \sigma(- v_c v_w) \quad \cdots (3)
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;이는 &lt;span style=&quot;color: #e87d7d&quot;&gt;paper 1&lt;/span&gt; 의 (4) 번 식과 같아지는다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\log \sigma(u_c^T v_w) + \sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_w)]&lt;/script&gt;
+
+&lt;p&gt;다른 점이라면, 우리가 만든 (3)식에서는 전체 corpus ($D \cup D’$) 을 포함하지만, Mikolov 논문의 식은 $D$ 에 속하는 $(w, c)$ 조합 하나와 $k$ 개의 다른 $(w, c_j)$ 의 조합을 들었다는 것이다. 구체적으로, $k$ 번의 negative sampling 에서 Mikolov 는 $D’$ 를 $k \times D$ 보다 크게 설정했고, k개의 샘플 $(w, c_1), (w, c_2), \cdots, (w, c_k)$ 에 대해서 $c_j$ 는 &lt;strong&gt;unigram distribution&lt;/strong&gt; 에 &lt;strong&gt;3/4&lt;/strong&gt; 승으로 부터 도출된다. 이는 아래의 분포에서 $(w, c)$ 조합을 추출 하는 것과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p_{words}(w) = \dfrac{p_{contexts} (c)^{3/4} }{Z}&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$p_{words}(w)$, $p_{contexts} (c)$ 는 각각 words and contexts 의 unigram distribution 이다.&lt;/li&gt;
+  &lt;li&gt;$Z$ 는 normalization constant&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Unigram distribution 은 단어가 등장하는 비율에 비례하게 확률을 설정하는 분포다. 예를 들어 “I have a pen. I have an apple. I have a pineapple.” 라는 문장이 있다면, 아래와 같은 분포를 만들 수 있다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;I&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;have&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;a&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;pen&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;an&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;apple&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;pineapple&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;.&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3/15&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;여기서 3/4 승을 해주면, 가끔 등장하는 단어는 확률을 높혀주는 효과가 있다. 물론 자주 나오는 단어의 확률도 올라가지만 가끔 등장하는 단어의 상승폭 보다 적다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;a&lt;/th&gt;
+      &lt;th&gt;$a^{\frac{3}{4} }$&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;apple&lt;/td&gt;
+      &lt;td&gt;$\frac{1}{15}=0.067$&lt;/td&gt;
+      &lt;td&gt;${\frac{1}{15} }^{\frac{3}{4} }=0.131$&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;have&lt;/td&gt;
+      &lt;td&gt;$\frac{3}{15}=0.020$&lt;/td&gt;
+      &lt;td&gt;${\frac{3}{15} }^{\frac{3}{4} }=0.299$&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Mikolov 논문에서는 context는 하나의 단어이기 때문에 $p_{words}(w)$ 는 아래와 동일하다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p_{words}(w) = p_{contexts} (c) = \dfrac{count(x)}{ \vert text \vert }&lt;/script&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;trivial-solution&quot;&gt;참고 1. Trivial Solution&lt;/h3&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} L(\theta;w,c) &amp;= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
+&amp;= \underset{(w,c) \in D}{\sum} \log(1) - \log(1+e^{-v_c v_w}) \\
+&amp;= \underset{(w,c) \in D}{\sum} - \log(1+e^{-v_c v_w})
+\end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;같은 두 벡터의 내적을 하게 되면 값은 최대가 된다. $\cos$ 값이 1이 되기 때문이다. (여기서는 최대 값이 중요한건 아니지만 값이 커진다는데 의의가 있다.)
+&lt;script type=&quot;math/tex&quot;&gt;a\cdot a=\vert a \vert \vert a \vert \cos \theta&lt;/script&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = np.array([1,2,3,4,5,6,7])
+b = np.array([.1,.2,.3,.4,.5,.6,.7])
+print(np.dot(a, a))
+print(np.dot(a, b))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;140&lt;/p&gt;
+
+  &lt;p&gt;14.0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;즉, $v_c = v_w$ 이며, $\forall v_c,\ v_w$ 에 대해 $v_c \cdot v_w = K$ 를 만족하는 모든 값들이 $e^{-v_c v_w}$ 를 0으로 만든다면, $L(\theta; w, c)$ 값은 0이 될것이다. 이때 $v_c, v_w$ 가 무수히 많은 해가 존재하는데 이것을 &lt;strong&gt;trivial solution&lt;/strong&gt; 이라고 한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 시간에는 말뭉치의 공기정보(co-occurance)를 고려해 단어를 벡터화 시킨 &lt;strong&gt;GloVe&lt;/strong&gt; 에 대해 알아보자.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 Apr 2018 16:14:13 +0900</pubDate>
+        <link>http://simonjisu.github.io/nlp/2018/04/24/allaboutwv3.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/04/24/allaboutwv3.html</guid>
+        
+        
+        <category>NLP</category>
+        
+      </item>
     
       <item>
         <title>Big Little Data 참석후기</title>
@@ -181,7 +405,7 @@
 
 &lt;h3 id=&quot;section-4&quot;&gt;바닥부터 시작하는 데이터 인프라&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;(전) 레트리카, 변성윤 님&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(전) 레트리카, 변성윤 님&lt;/strong&gt; &lt;a href=&quot;https://zzsza.github.io/&quot;&gt;(블로그)&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;1. 대시보드 만들기&lt;/strong&gt;&lt;/p&gt;
 
@@ -460,13 +684,9 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 &lt;p&gt;흥미로운 점: &lt;strong&gt;미분 값&lt;/strong&gt; 은 관측된 context word 벡터 $u_o$ 에서 center word $c$ 가 주어졌을 때 나올 수 있는 모든 단어의 기대치를 빼준 다는 것이다.&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 시간에는 &lt;strong&gt;Naive Softmax&lt;/strong&gt; 로 훈련 시켰을 때의 단점과 이를 보완 해준 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;Negative Sampling&lt;/span&gt;&lt;/strong&gt; 에 대해서 알아보자.&lt;/p&gt;
-
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;why-mle-is-equivalent-to-minimize-nll&quot;&gt;참고 1: Why MLE is equivalent to minimize NLL?&lt;/h2&gt;
+&lt;h3 id=&quot;why-mle-is-equivalent-to-minimize-nll&quot;&gt;참고 1: Why MLE is equivalent to minimize NLL?&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;Likelihood&lt;/strong&gt; 의 정의:&lt;/p&gt;
 
@@ -501,6 +721,12 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 시간에는 &lt;strong&gt;Naive Softmax&lt;/strong&gt; 로 훈련 시켰을 때의 단점과 이를 보완 해준 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;Negative Sampling&lt;/span&gt;&lt;/strong&gt; 에 대해서 알아보자.&lt;/p&gt;
 </description>
         <pubDate>Fri, 20 Apr 2018 10:19:06 +0900</pubDate>
         <link>http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html</link>
@@ -1916,129 +2142,6 @@ y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
         <pubDate>Thu, 25 Jan 2018 12:54:15 +0900</pubDate>
         <link>http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html</guid>
-        
-        
-        <category>DeepLearning</category>
-        
-      </item>
-    
-      <item>
-        <title>NUMPY with NN - 6: Weight Initialization</title>
-        <description>&lt;h1 id=&quot;numpy--neural-network-basic---6&quot;&gt;Numpy로 짜보는 Neural Network Basic - 6&lt;/h1&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;part-2&quot;&gt;학습관련 기술 Part 2&lt;/h2&gt;
-
-&lt;h3 id=&quot;weight-initialization&quot;&gt;가중치 초기값 설정(Weight Initialization)&lt;/h3&gt;
-&lt;p&gt;이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형 함수의 가중치 미분을 구해서 학습하고자 하는 파라미터를 업데이트 하게 된다.&lt;/p&gt;
-
-&lt;p&gt;[&lt;a href=&quot;https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html&quot;&gt;Numpy로 짜보는 Neural Network Basic - 2&lt;/a&gt;] 참고&lt;/p&gt;
-
-&lt;p&gt;그렇다면 Sigmoid를 예를 들어서 이야기 해보자, 아래 그림은 Sigmoid 함수와 미분의 그래프다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \sigma(a) &amp; = \dfrac{1}{1+e^{-a}} \\ \sigma'(a) &amp;= \sigma(a)(1 - \sigma(a))\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/6/sigmoid_prime.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;선형결합을 통해 구해진 값 a은 뉴런을 거쳐서 Sigmoid로 활성화 된 함수는 대부분 $[0, 1]$ 사이의 값을 가지게 될 것이다. 선형결합을 통해 구해진 값이 조금만 커져도 (약 $[-5, 5]$ 이외 값) Gradient 값이 0으로 되는 경우가 많아진다. 이를 &lt;strong&gt;Gradient Vanishing Problem&lt;/strong&gt;, 즉 가중치 0에 가까워져 업데이트 안되는 현상을 말한다. 따라서 가중치 초기 값이 엄청 작게 설정 했다고 해도 dot product해진 값이 커지면 이런 현상이 일어날 수가 있다.&lt;/p&gt;
-
-&lt;h4 id=&quot;mnist--&quot;&gt;Mnist 데이터로 살펴보기&lt;/h4&gt;
-
-&lt;p&gt;실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} Input_{(784)}
-&amp;\rightarrow [Affine1 \rightarrow Activation1]_{hidden1: (100)} \\
-&amp;\rightarrow [Affine2 \rightarrow Activation2]_{hidden2: (50)} \\
-&amp;\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]_{output:(10)_{}}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgoid로 했다.
-아래는 200 epoch까지 중간에 Activation 값들의 분포를 찍어본 것이다. 가중치 초기 값은 1을 곱한 것으로써 랜덤 Initialization 되었다고 생각하면 된다.(= $W$에다 1을 곱했다.)&lt;/p&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_act1.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;p&gt;대부분의 값이 0과 1로 이루어져 있다는 것을 알 수 있다. 이는 즉 대부분의 값이 미분을 했을 때 0이될 가능성이 높다는 뜻이다.&lt;/p&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_back1.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;p&gt;앞쪽의 Layer로 backward 할 수록 가중치 미분 값이 0에 가까워지는 것을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;우리는 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/12/15/numpywithnn_4.html&quot;&gt;4편&lt;/a&gt;에서 가중치 값을 0.01 초기화 시켰더니 학습이 전혀 안된 모습을 볼 수 있었다. 그렇다면 0.01로 가중치 값을 초기화 하면 어떻게 될까?&lt;/p&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_act2.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;p&gt;가중치 활성화 값이 0.5로 치우쳐져 두 레이어의 분포가 거의 비슷해졌다. 다수의 뉴런이 같은 값을 출력하고 있다는 뜻으로 우리가 비선형함수를 써서 예측 불가능하게 만드려고 한 노력을 물거품으로 만들어 버렸다. 즉, 위에서 이야기 했던 층을 여러게 쌓은 의미가 없어진다. 이를 &lt;strong&gt;“표현력이 제한된다”&lt;/strong&gt; 라고 말한다.&lt;/p&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_back2.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;p&gt;가중치의 미분 값들이 대부분 0 근처에 있는 것을 확인 할 수가 있다.&lt;/p&gt;
-
-&lt;p&gt;따라서 초기 값을 잘 설정해주어야 하는데, Sigmoid 함수에 대해서 자주 사용하는 Xavier 초기 값이 있다.&lt;/p&gt;
-
-&lt;p&gt;Paper: &lt;a href=&quot;http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf&quot;&gt;Understanding the difficulty of training deep feedforward neural networks&lt;/a&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;W \sim Uniform(n_{in}, n_{out})&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Var(W)=\dfrac{1}{n_{in}}&lt;/script&gt;
-
-&lt;p&gt;즉 가중치 초기화를 할때 각 파라미터 $W$ 에 대하여 $\dfrac{1}{\sqrt{n_{in}}}$ 를 곱해주는 것이다.&lt;/p&gt;
-
-&lt;p&gt;아래는 Xavier 가중치 초기값을 설정했을 때의 Activation 분포다. 두 층이 전혀 다른 분포가 되어있는 것을 볼 수가 있다.&lt;/p&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_act3.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/sig_back3.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;p&gt;각각의 가중치 초기화 값에 대한 학습 결과를 살펴보자. 총 10000번의 epochs를 돌린 결과다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;학습결과&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/ML/nn/6/sig1.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;$w_{std} = 1$: 처음에 빠른것 같지만 나중에 굉장히 천천히 학습 되는 것을 확인 할 수 있다. &lt;br /&gt; 또한 매번 실행시 학습 속도가 다르다.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/ML/nn/6/sig2.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;$w_{std} = 0.01$: 학습이 전혀 안되는 것을 확인 할 수 있다.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/ML/nn/6/sig3.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;$w_{std} = \dfrac{1}{\sqrt{n}}$: test 성적이 조금 더 좋아 졌다.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&quot;relu&quot;&gt;활성화 함수를 바꿔보자: ReLu&lt;/h4&gt;
-&lt;p&gt;ReLu의 미분 값은 $x &amp;gt; 0$ 에서 $1$ 이고 나머지는 $0$ 이다. ReLu는 &lt;strong&gt;He&lt;/strong&gt; 라는 초기값을 설정하게 된다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;W \sim Uniform(n_{in}, n_{out})&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Var(W)=\dfrac{2}{n_{in}}&lt;/script&gt;
-
-&lt;p&gt;즉, 가중치 $W$ 에 $\sqrt{\dfrac{2}{n_{in}}}$ 을 곱하게 된다. 아래 동영상을 보면 0보다 큰 부분에서 꾸준히 활성화 되는 모습을 볼 수 있다.&lt;/p&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/relu_act3.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;video controls=&quot;controls&quot; autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot;&gt; &lt;source type=&quot;video/mp4&quot; src=&quot;/assets/ML/nn/6/relu_back3.mp4&quot; /&gt; &amp;lt;/source&amp;gt; &lt;/video&gt;
-
-&lt;p&gt;다음 시간에는 배치 정규화에 대해서 알아보자.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 24 Jan 2018 12:31:37 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2018/01/24/numpywithnn_6.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/01/24/numpywithnn_6.html</guid>
         
         
         <category>DeepLearning</category>

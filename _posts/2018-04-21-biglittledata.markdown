@@ -130,7 +130,7 @@ Feature engineering: feature selection
 
 ### 바닥부터 시작하는 데이터 인프라
 
-**(전) 레트리카, 변성윤 님**
+**(전) 레트리카, 변성윤 님** [(블로그)](https://zzsza.github.io/)
 
 **1. 대시보드 만들기**
 
