@@ -28,4 +28,20 @@ button {
     cursor: not-allowed;
     opacity: 0.5;
   }
+  .is-expanded {
+    display: block;
+    padding-bottom: 0;
+  }
 }
+// #{$all-buttons} {
+//      background-color: #f00;
+//    }
+//
+// #{$all-buttons-focus},
+// #{$all-buttons-hover} {
+//      background-color: #0f0;
+//    }
+//
+// #{$all-buttons-active} {
+//  background-color: #00f;
+// }

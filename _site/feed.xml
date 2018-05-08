@@ -6,9 +6,174 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 27 Apr 2018 00:55:48 +0900</pubDate>
-    <lastBuildDate>Fri, 27 Apr 2018 00:55:48 +0900</lastBuildDate>
+    <pubDate>Fri, 04 May 2018 17:56:47 +0900</pubDate>
+    <lastBuildDate>Fri, 04 May 2018 17:56:47 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>All about Word Vectors: GloVe</title>
+        <description>&lt;h1 id=&quot;all-about-word-vectors-glove&quot;&gt;All about Word Vectors: GloVe&lt;/h1&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;본 포스팅은 &lt;a href=&quot;http://web.stanford.edu/class/cs224n/&quot;&gt;CS224n&lt;/a&gt; Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;co-occurrence&quot;&gt;Co-occurrence&lt;/h2&gt;
+
+&lt;p&gt;공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다. 여기서 어휘는 단어 뿐만 아니라 형태소, 합성어 등의 단위로 의미를 부여할 수 있는 언어 단위다. 그렇다면 왜 &lt;strong&gt;공기 관계&lt;/strong&gt; 를 살피는 것일까?&lt;/p&gt;
+
+&lt;p&gt;공기 관계를 통해 문서나 문장으로 부터 &lt;strong&gt;추상화된 정보&lt;/strong&gt; 를 얻기 위해서다. 이는 자연어처리의 가정을 생각해보면 이해할 수 있을 것이다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;비슷한 맥락에 등장하는 단어들은 유사한 의미를 지니는 경향이 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;때문에, 두 단어가 같이 등장한 횟수가 많아지면 &lt;strong&gt;유사한 의미&lt;/strong&gt; 를 가졌다고 볼 수도 있다는 것이다. 이런 유사한 의미를 추상화된 정보로 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;공기(Co-occurrence) 정보를 수집하는 방법은 두 가지다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;window 기반: 품사와 의미(semantic) 정보를 캡쳐할 수 있다.&lt;/li&gt;
+  &lt;li&gt;word-document co-occurrence matrix 기반: 조금 더 일반적인 토픽을 추출 할 수 있고, 이는 Latent Semantic Analysis 와 연결 된다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;example-window-based-co-occurrence-matrix&quot;&gt;Example: Window based co-occurrence matrix&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I like deep learning.&lt;/p&gt;
+
+  &lt;p&gt;I like NLP.&lt;/p&gt;
+
+  &lt;p&gt;I enjoy flying.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위 3 문장을 사용해서, window size = 1 로 지정하는 co-occurrence matrix 를 만들어보자. 무슨 뜻인지는 아래 코드를 실행한 표를 살펴보자.&lt;/p&gt;
+
+&lt;p&gt;단, 한 단어에 대해서 좌측에서 등장했는지 우측에서 등장했는 지는 상관없다(이는 co-occurrence matrix 가 대각을 기준으로 대칭하는 결과를 불러옴)&lt;/p&gt;
+
+&lt;p&gt;복잡하게 만들었지만, 코드를 실행하면 아래와 같은 표가 나온다. window size 가 1이니까 “I” 주변 한칸에 동시 등장 단어는 “like” 가 2번 “enjoy” 가 1번이다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;counts&lt;/th&gt;
+      &lt;th&gt;I&lt;/th&gt;
+      &lt;th&gt;like&lt;/th&gt;
+      &lt;th&gt;enjoy&lt;/th&gt;
+      &lt;th&gt;deep&lt;/th&gt;
+      &lt;th&gt;learning&lt;/th&gt;
+      &lt;th&gt;NLP&lt;/th&gt;
+      &lt;th&gt;flying&lt;/th&gt;
+      &lt;th&gt;.&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;I&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;like&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;enjoy&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;deep&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;learning&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NLP&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;flying&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;.&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;co-occurrence matrix 이러한 단어 벡터는 어떤 문제점이 있을까?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;그렇다면 꼭 하나의 단어로 해야만 하는가? 문서 전체의 단어의 공기 정보를 추출 하는 것은 안되는가?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이와 같은 생각이 GloVe 를 탄생시켰다. 그 전에&lt;/p&gt;
+</description>
+        <pubDate>Wed, 02 May 2018 23:22:05 +0900</pubDate>
+        <link>http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html</guid>
+        
+        
+        <category>NLP</category>
+        
+      </item>
     
       <item>
         <title>All about Word Vectors: Negative Sampling</title>
@@ -766,7 +931,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 &lt;p&gt;또한, 1980년대까지 대부분의 자연어 처리 시스템은 손으로 쓴 복잡한 규칙 세트를 기반으로 했다. 그러나 점차 통계 기반의 자연어 처리 기법이 복잡한 자연어를 모델링 하는데 부상했다. (Reference: &lt;a href=&quot;https://en.wikipedia.org/wiki/Natural-language_processing&quot;&gt;NLP wikipedia&lt;/a&gt;)&lt;/p&gt;
 
-&lt;p&gt;따라서, 자연어 처리의 기본 가정을 항상 염두하고 공부해야 할 것이다. 내가 생각하는 기본 가정은 &lt;strong&gt;“상호연관이 있는 단어의 분포와 모양은 비슷하다.”&lt;/strong&gt; 이지만, 아래 더 좋은 소개글을 링크로 걸어 두었으니 참고하길 바란다.&lt;/p&gt;
+&lt;p&gt;또한, 자연어 처리의 기본 가정을 항상 염두하고 공부해야 할 것이다. 좋은 소개글을 링크로 걸어 두었으니 참고하길 바란다.&lt;/p&gt;
 
 &lt;p&gt;참고: ratsgo 님의 블로그 - &lt;a href=&quot;https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/10/frequency/&quot;&gt;idea of statistical semantics&lt;/a&gt;&lt;/p&gt;
 
@@ -1790,358 +1955,6 @@ print('total time:', (end - start))
         <pubDate>Thu, 08 Feb 2018 15:13:40 +0900</pubDate>
         <link>http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html</guid>
-        
-        
-        <category>DeepLearning</category>
-        
-      </item>
-    
-      <item>
-        <title>NUMPY with NN - 7: Batch Normalization</title>
-        <description>&lt;h1 id=&quot;numpy--neural-network-basic---7&quot;&gt;Numpy로 짜보는 Neural Network Basic - 7&lt;/h1&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;part-3&quot;&gt;학습관련 기술 Part 3&lt;/h2&gt;
-
-&lt;h3 id=&quot;batch-normalization&quot;&gt;배치 정규화 (Batch Normalization)&lt;/h3&gt;
-&lt;p&gt;배치 정규화란 미니배치 단위로 선형합인 &lt;strong&gt;$a$&lt;/strong&gt; 값을 정규화하는 것이다. 즉, 미니배치에 한해서 데이터 분포가 평균이 0 분산이 1이 되도록 한다. 이는 데이터 분포가 덜 치우치게 하는 효과가 있어서 가중치 초기화 값의 영향을 덜 받게한다. 또한, 학습속도를 증가시키고 regularizer 역할을 하여 Overfitting을 방지함으로 Dropout의 필요성을 줄인다. &lt;del&gt;자세한 내용은 논문을 참고하자!&lt;/del&gt;&lt;/p&gt;
-
-&lt;p&gt;Paper: &lt;a href=&quot;https://arxiv.org/abs/1502.03167&quot;&gt;Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;기본적인 아이디어는 아래와 같다. $D$ 차원의 미니배치 데이터 $x = (x^{(1)}, \cdots, x^{(k)}, \cdots, x^{(D)})$에 대해서 각각의 평균과 분산을 구한 후, 정규화를 통해 새로운 $x^{(k)}$ ($\hat{x}^{(k)}$) 를 구한 후에 Scaling($\gamma$) 과 Shifting($\beta$)을 거쳐 새로운 $y$ 를 기존의 선형합성 곱인 $a$ 를 대신해 활성화 함수에 넣는 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/6/batch_norm_idea.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;따라서, 하나의 Hidden Layer 는 $Affine \rightarrow BatchNorm \rightarrow Activation$ 으로 구성된다.&lt;/p&gt;
-
-&lt;h3 id=&quot;backpropogation-&quot;&gt;배치 정규화의 BackPropogation 이해하기&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/NN_batchnorm.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;forward&quot;&gt;Forward:&lt;/h4&gt;
-
-&lt;p&gt;x 부터 out 까지 차근차근 진행해보자. 헷갈리지 말아야할 점은 위에 공식에서 $i$ 는 batch를 iteration 한 것이라는 점이다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## Forward Process
-# step-1: mu (D,)
-mu = x.mean(axis=0)
-# step-2: xmu (N, D)
-xmu = x - mu
-# step-3: sq (N, D)
-sq = xmu**2
-# step-4: var (D,)
-var = np.mean(sq, axis=0)
-# step-5: std (D,)
-std = np.sqrt(var + 1e-6)
-# step-6: invstd (D,)
-invstd = 1.0 / std
-# step-7: xhat (N, D)
-xhat = xmu * invstd
-# step-8: scale (N, D)
-scale = gamma * xhat
-# step-9: out (N, D)
-out = scale + beta
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;backward&quot;&gt;Backward:&lt;/h4&gt;
-
-&lt;p&gt;우리의 목표는 $\dfrac{\partial L}{\partial x}, \dfrac{\partial L}{\partial \gamma}, \dfrac{\partial L}{\partial \beta}$ 를 구해서, $\dfrac{\partial L}{\partial x}$ 는 Affine Layer로 역전파 시키고 $\gamma, \beta$ 는 학습 시키는 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-9:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $out(scale, \beta) = scale + \beta$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;더하기 노드의 역전파는 그대로 흘러간다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases} dscale = \dfrac{\partial L}{\partial scale} = \dfrac{\partial L}{\partial out} \dfrac{\partial out}{\partial scale} = 1 * dout \\
-\\
-d\beta = \dfrac{\partial L}{\partial \beta} = \dfrac{\partial L}{\partial out} \dfrac{\partial out}{\partial \beta} = 1 * \sum_i^N dout \end{cases}&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-8:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $scale(\gamma, \hat{x}_i) = \gamma \ * \ \hat{x}_i$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;곱의 노드의 역전파는 들어왔던 신호를 역으로 곱해서 흘려 보낸다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-d\hat{x}_i = \dfrac{\partial L}{\partial \hat{x}_i} = \dfrac{\partial L}{\partial scale} \dfrac{\partial scale}{\partial \hat{x}_i} = 1 * \sum_i^N dout \\
-\\
-d\gamma = \dfrac{\partial L}{\partial \gamma} = \dfrac{\partial L}{\partial scale} \dfrac{\partial scale}{\partial \gamma} = \sum_i^N dout \ * \ \hat{x}_i
-\end{cases}&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-7:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $\hat{x}_i(xmu, invstd) = xmu \ * \ invstd$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$xmu$는 윗쪽(step-7 $\rightarrow$ step-2)과 아래쪽(step-3 $\rightarrow$ step-2) 으로 두 번 돌아가기 때문에 첨자를 단다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-dxmu_1= \dfrac{\partial L}{\partial xmu_1} = \dfrac{\partial L}{\partial \hat{x}_i} \dfrac{\partial \hat{x}_i}{\partial xmu_1} = d\hat{x}_i \ * \ invstd \\
-\\
-dinvstd = \dfrac{\partial L}{\partial \hat{x}_i} = \dfrac{\partial L}{\partial \hat{x}_i} \dfrac{\partial \hat{x}_i}{\partial invstd} = d\hat{x}_i \ * \ xmu
-\end{cases}&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-6:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $invstd(\sigma) = \dfrac{1}{\sigma}$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$f(x) = \dfrac{1}{x}$ 의 미분은 $f’(x) = -\dfrac{1}{x^2} = -f(x)^2$ 이기 때문에 아래와 같다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;d\sigma = \dfrac{\partial L}{\partial \sigma} = \dfrac{\partial L}{\partial invstd} \dfrac{\partial invstd}{\partial \sigma} = dinvstd \ * \ (-invstd^2)&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-5:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $\sigma(var) = \sqrt{var + \epsilon}$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$f(x) = \sqrt{x + \epsilon}$ 의 미분은 $f’(x) = -\dfrac{1}{2}(x+\epsilon)^{-\frac{1}{2}}$ 이기 때문에 아래와 같다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;dvar = \dfrac{\partial L}{\partial var} = \dfrac{\partial L}{\partial \sigma} \dfrac{\partial \sigma}{\partial var} = d\sigma \ * \ (-\dfrac{1}{2}(var+\epsilon)^{-\frac{1}{2}})&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-4:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $var(sq) = \dfrac{1}{N} \sum_i^N sq$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$f(x) = \dfrac{1}{N} \sum_i^N x_i$ 의 미분은 $f’(x) = \dfrac{1}{N} \sum_i^N 1$ 이기 때문에 아래와 같다. 단, x의 형상(shape)이 같아야한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-dsq = \dfrac{\partial L}{\partial sq} = \dfrac{\partial L}{\partial var} \dfrac{\partial var}{\partial sq} = \dfrac{1}{N} dvar \ * \ \begin{bmatrix} 1 &amp; \cdots &amp; 1 \\ \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; \cdots &amp; 1 \end{bmatrix}_{(N, D)} = \dfrac{1}{N} dvar \ * \ ones(N, D) %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-3:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $sq = xmu^2$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$f(x) = x^2$ 의 미분은 $f’(x) = 2x$ 이기 때문에 아래와 같다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;dxmu_2 = \dfrac{\partial L}{\partial xmu_2} = \dfrac{\partial L}{\partial sq} \dfrac{\partial sq}{\partial xmu_2} = dsq \ * \ 2 \ xmu&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-2:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $xmu = x_i - \mu$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$dxmu = dxmu_1 + dxmu_2$ 로 정의 된다. 곱의 미분 법칙 생각해보면 된다. $h(x) = f(x) g(x)$ 를 $x$ 에 대해서 미분하면 $f’(x)g(x) + f(x)g’(x)$ 기 때문이다. &lt;br /&gt;
-또한 이것도 덧셈과 마찬가지로 그대로 흘러 보내는다 밑에 쪽은 -1 을 곱해서 흘려 보낸다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{cases}
-dx_1= \dfrac{\partial L}{\partial x_1} = \dfrac{\partial L}{\partial xmu} \dfrac{\partial xmu}{\partial x_1} = dmu \ * \ 1 \\
-\\
-d\mu = \dfrac{\partial L}{\partial \mu} = \dfrac{\partial L}{\partial xmu} \dfrac{\partial xmu}{\partial \mu} = \sum_i^N dxmu \ * \ (-1)
-\end{cases}&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-1:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Forward : $\mu = \dfrac{1}{N} \sum_i^N x_i$&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;step-4에서 설명했다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-dx_2 = \dfrac{\partial L}{\partial x_2} = \dfrac{\partial L}{\partial \mu} \dfrac{\partial \mu}{\partial x_2} = \dfrac{1}{N} d\mu \ * \ \begin{bmatrix} 1 &amp; \cdots &amp; 1 \\ \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; \cdots &amp; 1 \end{bmatrix}_{(N, D)} = \dfrac{1}{N} d\mu \ * \ ones(N, D) %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Step-0:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;최종적으로 구하는 $dx = \dfrac{\partial L}{\partial x} = dx_1 + dx_2$ 로 정의 된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## Backward Process
-# step-9: out = scale + beta
-dbeta = dout.sum(axis=0)
-dscale = dout
-# step-8: scale = gamma * xhat
-dgamma = np.sum(xhat * dout, axis=0)
-dxhat = gamma * dscale
-# step-7: xhat = xmu * invstd
-dxmu1 = dxhat * invstd
-dinvstd = np.sum(dxhat * xmu, axis=0)
-# step-6: invstd = 1 / std
-dstd = dinvstd * (-invstd**2)
-# step-5: std = np.sqrt(var + 1e-6)
-dvar = -0.5 * dstd * (1 / np.sqrt(var + 1e-6))
-# step-4: var = sum(sq)
-dsq = (1.0 / batch_size) * np.ones(input_shape) * dvar
-# step-3: sq = xmu**2
-dxmu2 = dsq * 2 * xmu
-# step-2: xmu = x - mu
-dxmu = dxmu1 + dxmu2
-dmu = -1 * np.sum(dxmu, axis=0)
-dx1 = dxmu * 1
-# step-1: mu = mean(x)
-dx2 = (1.0 / batch_size) * np.ones(input_shape) * dmu
-# step-0:
-dx = dx1 + dx2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;section&quot;&gt;실제 구현&lt;/h4&gt;
-&lt;p&gt;그러나 실제 구현 시에는 training 과 testing을 나눠서 아래와 같이 진행된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/6/batch_norm_al.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h3 id=&quot;backpropogation---&quot;&gt;첨부: Backpropogation 전체 미분 수학식&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;수식의 이해는 이분의 블로그에서 많은 참조를 했다. Blog: [&lt;a href=&quot;http://cthorey.github.io/backpropagation/&quot;&gt;Clement Thorey&lt;/a&gt;]&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-Y &amp;= \gamma \hat{X} + \beta \\
-\hat{X} &amp;= (X - \mu)(\sigma^2+\epsilon)^{-1/2}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;size:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-Y, \hat{X}, X &amp;= (N, D) \\
-\mu, \sigma, \gamma, \beta &amp;= (D,)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;$N$은 미니 배치 싸이즈고, $D$는 데이터의 차원 수다.&lt;/p&gt;
-
-&lt;p&gt;Matrix 로 정의한 수식을 다시 원소별로 표기를 정의 해보자. 매트릭스 $Y, X, \hat{X}$ 와 벡터 $\gamma, \beta$ 그리고 위에 수식은 아래와 같이 다시 정의 해볼 수 있다. (왜 매트릭스와 벡터인지는 Forward 과정에 나와있다. 각 차원별로 평균과 분산을 구하는걸 잊지말자)&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-y_{kl} &amp;= \gamma_l \hat{x}_{kl} + \beta_l \\
-\hat{x}_{kl} &amp;= (x_{kl} - \mu_l)(\sigma_l^2+\epsilon)^{-1/2}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;where\quad \mu_l = \dfrac{1}{N} \sum_{p=1}^{N} x_{pl} , \quad \sigma_l^2 = \dfrac{1}{N} \sum_{p=1}^{N} (x_{pl}-\mu_l)^2&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;with\quad k = [1, \cdots, N] \ ,\  l = [1, \cdots, D]&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 우리고 구하려고 하는 미분 값들$(\dfrac{\partial L}{\partial x}, \dfrac{\partial L}{\partial \gamma}, \dfrac{\partial L}{\partial \beta})$을 하나씩 구해보자.&lt;/p&gt;
-
-&lt;h4 id=&quot;xij---&quot;&gt;$x_{ij}$ 에 대한 미분&lt;/h4&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}\dfrac{\partial L}{\partial x_{ij}}
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \dfrac{\partial y_{kl}}{\partial x_{ij}} \\
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \dfrac{\partial y_{kl}}{\partial \hat{x}_{kl}} \dfrac{\partial \hat{x}_{kl}}{\partial {x}_{ij}} \\
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \cdot \gamma_l \cdot \dfrac{\partial \hat{x}_{kl}}{\partial {x}_{ij}} \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\dfrac{\partial \hat{x}_{kl}}{\partial {x}_{ij}} = \dfrac{\partial f}{\partial {x}_{ij}} g + f \dfrac{\partial g}{\partial {x}_{ij}} \quad where \quad \begin{cases} f = (x_{kl} - \mu_l) \\ g = (\sigma_l^2+\epsilon)^{-1/2} \end{cases}&lt;/script&gt; 에 대한 미분을 구해보자.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;우선 분자 $f = (x_{kl} - \mu_l)$ 에 대한 미분을 하면 아래와 같다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial f}{\partial {x}_{ij}} = \delta_{ik} \delta_{jl} - \frac{1}{N} \delta_{jl}&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\delta_{m,n} = \begin{cases} 1 \quad where \quad m = n \\ 0 \quad otherwise \end{cases}&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;$\delta_{m,n}$ 은 앞첨자 $m$ 이 뒷첨자 $n$과 같다면 1이 된다는 뜻이다.&lt;/p&gt;
-
-&lt;p&gt;즉, 여기서 $i$ 가 $[1 \cdots k \cdots D]$ 까지, $j$ 가 $[1 \cdots l \cdots D]$ 까지 iteration 할 것인데, 오직 $i=k, j=l$ 일때만 앞 항인 $\delta_{il} \delta_{jl} = 1$ 이 될 것이고, $j=l$ 일때만 뒷항인 $\frac{1}{N} \delta_{jl} = \frac{1}{N}$ 이 될 것이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;분모 $g = (\sigma_l^2+\epsilon)^{-1/2}$ 에 대한 미분은 아래와 같다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\dfrac{\partial g}{\partial {x}_{ij}} = -\dfrac{1}{2}(\sigma_l^2 + \epsilon)^{-3/2} \dfrac{\partial \sigma_l^2}{\partial x_{ij}}&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} where \quad \sigma_l^2
-&amp;= \dfrac{1}{N} \sum_{p=1}^{N} (x_{pl}-\mu_l)^2 \\
-\dfrac{\partial \sigma_l^2}{\partial x_{ij}}
-&amp;= \dfrac{1}{N} \sum_{p=1}^{N} 2(x_{pl}-\mu_l)(\delta_{ip} \delta_{jl} - \frac{1}{N} \delta_{jl}) \\
-&amp;= \dfrac{2}{N} (x_{il}-\mu_l) \delta_{jl} - \dfrac{2}{N^2} \sum_{p=1}^N (x_{pl}-\mu_l) \delta_{jl} \\
-&amp; = \dfrac{2}{N} (x_{il}-\mu_l) \delta_{jl} - \dfrac{2}{N} \delta_{jl} (\dfrac{1}{N}  \sum_{p=1}^N  (x_{pl}-\mu_l)) \cdots (1) \\
-&amp; = \dfrac{2}{N} (x_{il}-\mu_l) \delta_{jl}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;(1) 번 식을 잠깐 이야기 하면 $\dfrac{1}{N} \sum_{p=1}^N  (x_{pl}-\mu_l) = 0$ 인것은 어떤 값들을 평균을 빼고 다시 평균 시키면 0이 된다.&lt;/p&gt;
-
-&lt;p&gt;$e.g)\quad \frac{(1-2)+(2-2)+(3-2)}{3}=0$&lt;/p&gt;
-
-&lt;p&gt;이제 드디어 &lt;script type=&quot;math/tex&quot;&gt;\dfrac{\hat{x}_{kl}}{\partial {x}_{ij}}&lt;/script&gt; 에 대해 구할수 있다. 곱의 미분 법칙을 사용하면 아래와 같이 전개 된다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \dfrac{\hat{x}_{kl}}{\partial {x}_{ij}}
-&amp;= (\delta_{ik} \delta_{jl} - \frac{1}{N} \delta_{jl})(\sigma_l^2+\epsilon)^{-1/2}  -\dfrac{1}{N} (x_{kl} - \mu_l)(\sigma_l^2 + \epsilon)^{-3/2} (x_{il}-\mu_l) \delta_{jl} \\
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;최종적으로 우리의 목적 &lt;script type=&quot;math/tex&quot;&gt;\dfrac{\partial L}{\partial x_{ij}}&lt;/script&gt; 를 구해보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}\dfrac{\partial L}{\partial x_{ij}}
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \cdot \gamma_l \cdot [(\delta_{ik} \delta_{jl} - \frac{1}{N} \delta_{jl})(\sigma_l^2+\epsilon)^{-1/2} - \dfrac{1}{N} (x_{kl} - \mu_l)(\sigma_l^2 + \epsilon)^{-3/2} (x_{il}-\mu_l) \delta_{jl}] \\
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \gamma_l [(\delta_{ik} \delta_{jl} - \frac{1}{N} \delta_{jl})(\sigma_l^2+\epsilon)^{-1/2}] - \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \gamma_l [\dfrac{1}{N} (x_{kl} - \mu_l)(\sigma_l^2 + \epsilon)^{-3/2} (x_{il}-\mu_l) \delta_{jl}] \\
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \gamma_l (\delta_{ik} \delta_{jl})(\sigma_l^2+\epsilon)^{-1/2} - \frac{1}{N} \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \gamma_l \delta_{jl}(\sigma_l^2+\epsilon)^{-1/2} - \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \gamma_l [\dfrac{1}{N} (x_{kl} - \mu_l)(\sigma_l^2 + \epsilon)^{-3/2} (x_{il}-\mu_l) \delta_{jl}] \\
-&amp;= \dfrac{\partial L}{\partial y_{ij}} \gamma_l \delta_{ii} \delta_{jj} (\sigma_l^2+\epsilon)^{-1/2} - \frac{1}{N} \sum_k \dfrac{\partial L}{\partial y_{kj}} \gamma_l \delta_{jj}(\sigma_j^2+\epsilon)^{-1/2} - \dfrac{1}{N} \sum_{k} \dfrac{\partial L}{\partial y_{kj}} \gamma_l [ (x_{kj} - \mu_j)(\sigma_j^2 + \epsilon)^{-3/2} (x_{ij}-\mu_j) \delta_{jj}] \cdots (2) \\
-&amp;= \dfrac{\partial L}{\partial y_{ij}} \gamma_l (\sigma_l^2+\epsilon)^{-1/2} - \frac{1}{N} \sum_k \dfrac{\partial L}{\partial y_{kj}} \gamma_l (\sigma_j^2+\epsilon)^{-1/2} - \dfrac{1}{N} \sum_{k} \dfrac{\partial L}{\partial y_{kj}} \gamma_l (x_{kj} - \mu_j)(\sigma_j^2 + \epsilon)^{-3/2} (x_{ij}-\mu_j) \\
-&amp;= \dfrac{1}{N} \gamma_l (\sigma_l^2+\epsilon)^{-1/2} [N \dfrac{\partial L}{\partial y_{ij}} - \sum_k \dfrac{\partial L}{\partial y_{kj}} - (x_{ij}-\mu_j)(\sigma_j^2 + \epsilon)^{-1} \sum_{k} \dfrac{\partial L}{\partial y_{kj}}(x_{kj} - \mu_j)]
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;(2) 번 식으로 도출 되는 과정을 잘 살펴보면, 각 항마다 곱으로 구성되어 있다. 첫번째 항은 $\sum_{k, l}$ 에서 오직 $k=i, l=j$ 일때 남아 있고 나머지는 전부다 0 이고, 두번째 항은 오직 $l=j$ 일때 남아있고 나머지는 전부다 0 이다. 그리고 마지막도 마친가지로 $l=j$ 일때만 남아있는다.&lt;/p&gt;
-
-&lt;h4 id=&quot;gammaj---&quot;&gt;$\gamma_j$ 에 대한 미분&lt;/h4&gt;
-
-&lt;p&gt;위에 까지 이해했으면 $\gamma_l$ 에 대한 미분은 간단하다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}\dfrac{\partial L}{\partial \gamma_j}
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \dfrac{\partial y_{kl}}{\partial \gamma_j} \\
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \hat{x}_{kl} \delta_{jl} \\
-&amp;= \sum_k \dfrac{\partial L}{\partial y_{kj}} \hat{x}_{kj} \\
-&amp;= \sum_k \dfrac{\partial L}{\partial y_{kj}} (x_{kj} - \mu_j)(\sigma_j^2+\epsilon)^{-1/2}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;h4 id=&quot;betaj---&quot;&gt;$\beta_j$ 에 대한 미분&lt;/h4&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}\dfrac{\partial L}{\partial \beta_j}
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \dfrac{\partial y_{kl}}{\partial \gamma_j} \\
-&amp;= \sum_{k,l} \dfrac{\partial L}{\partial y_{kl}} \delta_{jl} \\
-&amp;= \sum_k \dfrac{\partial L}{\partial y_{kj}}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;여기서 우리는 왜 위에 step-9, 8 코드 구현에서 dgamma와 dbeta를 summation 하는지 알 수 있다.&lt;/p&gt;
-
-&lt;p&gt;다음 마지막 시간에는 모든걸 종합해서 학습하는 과정을 코드로 살펴보자.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 25 Jan 2018 12:54:15 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html</guid>
         
         
         <category>DeepLearning</category>

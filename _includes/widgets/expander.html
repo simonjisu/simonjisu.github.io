@@ -1,0 +1,8 @@
+<div class="expander">
+  <a href="#{{include.toggle-name}}" class="expander-trigger expander-hidden">
+    {% if include.button-text %} {{include.button-text}} {% else %} Codes {% endif %}
+  </a>
+  <div id="{{include.toggle-name}}" class="expander-content">
+      {{include.toggle-text | markdownify }}
+  </div>
+</div>

@@ -31,6 +31,10 @@ button {
   button:disabled {
     cursor: not-allowed;
     opacity: 0.5; }
+  button .is-expanded, input[type="button"] .is-expanded, input[type="reset"] .is-expanded, input[type="submit"] .is-expanded,
+  button .is-expanded {
+    display: block;
+    padding-bottom: 0; }
 
 fieldset {
   background-color: #f7f7f7;
@@ -222,6 +226,32 @@ blockquote {
   margin-left: 16px;
   padding-left: 16px;
   border-left: 4px solid #d6d6d6; }
+
+.expander {
+  width: 60%;
+  font-family: "Varela Round", sans-serif; }
+  .expander .expander-trigger {
+    border-bottom: 1px solid #ddd;
+    color: #2980b9;
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.25em;
+    text-decoration: none;
+    user-select: none; }
+    .expander .expander-trigger::before {
+      content: "\25BC";
+      font-size: 0.7em;
+      margin-right: 0.5em; }
+  .expander .expander-content p {
+    color: #333;
+    line-height: 1.8; }
+  .expander .expander-hidden::before {
+    content: "\25BA";
+    font-size: 0.7em; }
+  .expander .expander-hidden + .expander-content {
+    display: none; }
 
 html {
   box-sizing: border-box; }

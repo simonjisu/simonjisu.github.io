@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>All about Word Vectors: GloVe</title>
+  <meta name="description" content="All about Word Vectors: GloVe">
+  
+  <meta name="author" content="Soo">
+  <meta name="copyright" content="&copy; Soo 2018">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="All about Word Vectors: GloVe" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:site_name" content="Soo" />
+  <meta property="og:title" content="All about Word Vectors: GloVe" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="All about Word Vectors: GloVe">
+  <meta name="twitter:description" content="All about Word Vectors: GloVe">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+
+
+  <!-- <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script> -->
+
+  <!-- Latex -->
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+      MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+        cancel: ["Extension","cancel"],
+        bcancel: ["Extension","cancel"],
+        xcancel: ["Extension","cancel"],
+        cancelto: ["Extension","cancel"]
+      });
+    });
+    MathJax.Hub.Config({
+        TeX: {
+            extensions: ["mhchem.js", "cancel.js"]
+        },
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true,
+            ignoreClass: "no-mathjax",
+        },
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            // linebreaks: { automatic: true }
+        },
+        menuSettings: {
+            zoom: "Click",
+            zscale: "200%"
+        }
+    });
+  </script>
+
+  <!--lightSlider-->
+  <link rel="stylesheet" href="/css/lightslider.css" />
+
+
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Soo">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+          
+          <li class="nav-link"><a href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+          <li class="nav-link"><a href="/posts/">Posts</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+<!-- <h1></h1>
+ -->
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">All about Word Vectors: GloVe</h1>
+      <p class="info">by <strong>Soo</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">May 2, 2018</div>
+  <div class="post-categories">
+   in 
+    
+    <a href="/posts/#NLP">Nlp</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="all-about-word-vectors-glove">All about Word Vectors: GloVe</h1>
+
+<hr />
+<p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
+
+<h2 id="co-occurrence">Co-occurrence</h2>
+
+<p>공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다. 여기서 어휘는 단어 뿐만 아니라 형태소, 합성어 등의 단위로 의미를 부여할 수 있는 언어 단위다. 그렇다면 왜 <strong>공기 관계</strong> 를 살피는 것일까?</p>
+
+<p>공기 관계를 통해 문서나 문장으로 부터 <strong>추상화된 정보</strong> 를 얻기 위해서다. 이는 자연어처리의 가정을 생각해보면 이해할 수 있을 것이다.</p>
+
+<blockquote>
+  <p>비슷한 맥락에 등장하는 단어들은 유사한 의미를 지니는 경향이 있다.</p>
+</blockquote>
+
+<p>때문에, 두 단어가 같이 등장한 횟수가 많아지면 <strong>유사한 의미</strong> 를 가졌다고 볼 수도 있다는 것이다. 이런 유사한 의미를 추상화된 정보로 볼 수 있다.</p>
+
+<p>공기(Co-occurrence) 정보를 수집하는 방법은 두 가지다.</p>
+
+<ol>
+  <li>window 기반: 품사와 의미(semantic) 정보를 캡쳐할 수 있다.</li>
+  <li>word-document co-occurrence matrix 기반: 조금 더 일반적인 토픽을 추출 할 수 있고, 이는 Latent Semantic Analysis 와 연결 된다.</li>
+</ol>
+
+<h2 id="example-window-based-co-occurrence-matrix">Example: Window based co-occurrence matrix</h2>
+
+<blockquote>
+  <p>I like deep learning.</p>
+
+  <p>I like NLP.</p>
+
+  <p>I enjoy flying.</p>
+</blockquote>
+
+<p>위 3 문장을 사용해서, window size = 1 로 지정하는 co-occurrence matrix 를 만들어보자. 무슨 뜻인지는 아래 코드를 실행한 표를 살펴보자.</p>
+
+<p>단, 한 단어에 대해서 좌측에서 등장했는지 우측에서 등장했는 지는 상관없다(이는 co-occurrence matrix 가 대각을 기준으로 대칭하는 결과를 불러옴)</p>
+
+<p>복잡하게 만들었지만, 코드를 실행하면 아래와 같은 표가 나온다. window size 가 1이니까 “I” 주변 한칸에 동시 등장 단어는 “like” 가 2번 “enjoy” 가 1번이다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>counts</th>
+      <th>I</th>
+      <th>like</th>
+      <th>enjoy</th>
+      <th>deep</th>
+      <th>learning</th>
+      <th>NLP</th>
+      <th>flying</th>
+      <th>.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>I</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>like</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>enjoy</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>deep</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>learning</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>NLP</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>flying</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>.</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>co-occurrence matrix 이러한 단어 벡터는 어떤 문제점이 있을까?</p>
+
+<blockquote>
+  <p>그렇다면 꼭 하나의 단어로 해야만 하는가? 문서 전체의 단어의 공기 정보를 추출 하는 것은 안되는가?</p>
+</blockquote>
+
+<p>이와 같은 생각이 GloVe 를 탄생시켰다. 그 전에</p>
+
+</article>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+GloVe&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F05%2F02%2Fallaboutwv4.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+</section>
+
+
+
+  
+    
+    <!-- <h2 id="NLP">-1</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/04/19/allaboutwv1.html</h2> -->
+    
+    <!-- <h2 id="NLP">1</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/04/24/allaboutwv3.html</h2> -->
+    
+
+
+
+  
+	<section class="post-navigation">
+		<span class="prev-post">
+			
+				<a href="/nlp/2018/04/24/allaboutwv3.html">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+					</span>
+					<span class="page-number">All about Word Vectors: Negative Sampling</span>
+				</a>
+			
+		</span>
+		<span class="next-post">
+			
+		</span>
+	</section>
+
+
+
+
+  
+  <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'soopace';
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+  
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Soo</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+        
+        
+          <li class="nav-link"><a href="/about/">About</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:simonjisu@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">simonjisu@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+          <li>
+            <a href="https://www.facebook.com/simonjisu" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/simonjisu" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">simonjisu</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">My Blog
+</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<!-- Mathjax -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+  $("code").addClass("python")
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+});
+$("code").addClass("python")
+</script>
+
+<!--lightSlider-->
+<script src="/js/lightslider.js"></script>
+<script src='/js/multi_slider.js' type="text/javascript"></script>
+
+
+
+
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-102691608-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>
