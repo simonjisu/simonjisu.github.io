@@ -114,7 +114,7 @@ Define notation:
 * $X$: 단어간의 공기 매트릭스 (matrix of word-word co-occurrence counts)
 * $X_{ij}$: 단어 $j$ 와 문맥 단어 $i$ 가 같이 등장한 횟수 (the number of times that word $j$ occurs in the context word $i$)
 * $X_i = \sum_k X_{ik}$: 어떤 단어든 문맥 단어 $i$ 와 등장한 횟수 (the number of times any word appears in the context of word $i$)
-* $P_{ij} = P(j | i) = X_{ij} / X_i$: 단어 $j$ 와 문맥 단어 $i$ 동시 등장할 확률, 문맥 단어 $i$ 가 주어졌을 때 $j$ 가 등장할 확률 (probability that word $j$ appear in the context word $i$)
+* $P_{ij} = P(j \vert i) = X_{ij} / X_i$: 단어 $j$ 와 문맥 단어 $i$ 동시 등장할 확률, 문맥 단어 $i$ 가 주어졌을 때 $j$ 가 등장할 확률 (probability that word $j$ appear in the context word $i$)
 
 아래의 예시를 보자.
 
@@ -197,6 +197,7 @@ $$f(x) =
 
 $$\hat{J} = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j - \log X_{ij})^2$$
 
+이는 연구팀이 도출한 $(7)$ 식과 같은 식이다.
 
 ---
 ### 참고 1: Homomorphism
