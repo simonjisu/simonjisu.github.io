@@ -458,7 +458,9 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
   <li>$\tilde{w} \in \Bbb{R}^d$: separate context word vectors</li>
 </ul>
 
-<p>$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}<em>k$ 를 input으로 넣었을 때, $\dfrac{P</em>{ik} }{P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.</p>
+<p>$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}_k$ 를 input으로 넣었을 때,</p>
+
+<p>$\dfrac{ P_{ik} }{ P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.</p>
 
 <script type="math/tex; mode=display">F((w_i - w_j)^T \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (2)</script>
 

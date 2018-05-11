@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 May 2018 23:24:28 +0900</pubDate>
-    <lastBuildDate>Tue, 08 May 2018 23:24:28 +0900</lastBuildDate>
+    <pubDate>Fri, 11 May 2018 17:00:22 +0900</pubDate>
+    <lastBuildDate>Fri, 11 May 2018 17:00:22 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -278,7 +278,9 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
   &lt;li&gt;$\tilde{w} \in \Bbb{R}^d$: separate context word vectors&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}&lt;em&gt;k$ 를 input으로 넣었을 때, $\dfrac{P&lt;/em&gt;{ik} }{P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.&lt;/p&gt;
+&lt;p&gt;$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}_k$ 를 input으로 넣었을 때,&lt;/p&gt;
+
+&lt;p&gt;$\dfrac{ P_{ik} }{ P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;F((w_i - w_j)^T \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (2)&lt;/script&gt;
 
@@ -939,7 +941,7 @@ and their Compositionality&lt;/a&gt; (Mikolov et al. 2013)&lt;/p&gt;
 
 &lt;p&gt;우리가 하고 싶은 것은 엄청나게 차원이 큰 one-hot vector 를 고정된 작은 차원으로 넣고 싶은 것이다. 어떻게 하면 단어들을 &lt;strong&gt;2-dimension matrix&lt;/strong&gt; 로 표현 할 수 있을까?&lt;/p&gt;
 
-&lt;p&gt;아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단으를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 &lt;strong&gt;Embedding Matrix&lt;/strong&gt; 라고 부르기로 하자&lt;/p&gt;
+&lt;p&gt;아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단어를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 &lt;strong&gt;Embedding Matrix&lt;/strong&gt; 라고 부르기로 하자&lt;/p&gt;
 
 &lt;ul id=&quot;light-slider2&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup1.png&quot; /&gt;&lt;/li&gt;

@@ -137,7 +137,9 @@ $$F(w_i, w_j, \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (1)$$
 * $w \in \Bbb{R}^d$: word vectors
 * $\tilde{w} \in \Bbb{R}^d$: separate context word vectors
 
-$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}_k$ 를 input으로 넣었을 때, $\dfrac{P_{ik} }{P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.
+$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}_k$ 를 input으로 넣었을 때,
+
+$\dfrac{ P_{ik} }{ P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.
 
 $$F((w_i - w_j)^T \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (2)$$
 
