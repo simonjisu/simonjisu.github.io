@@ -5,11 +5,12 @@ date: "2017-08-04 22:09:05"
 author: Soo
 categories: DataScience
 ---
-**End-to-End Memory Network 논문 요약 및 정리**
-===
+# End-to-End Memory Network 논문 요약 및 정리
 
-* Pytorch 구현 코드:
+* Pytorch 구현 코드: [https://github.com/simonjisu/E2EMN](https://github.com/simonjisu/E2EMN)
 
+memN2N 검색하면 다른 패키지로 구현한 repo 들이 많음으로 한번 찾아 볼것
+facebook: [https://github.com/facebook/MemNN](https://github.com/facebook/MemNN)
 
 ---
 ## A. Single layer
@@ -17,14 +18,14 @@ categories: DataScience
 ![](/assets/E2EMN.png)
 
 ### Input
-1. $T_c$ 개의 단어가 포함된 한 **문장 sentence i** 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{iT_c}]$ 로 표현 할 수 있으며, 하나의 단어 는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. (**단어 사전의 index**), 이렇게 구성된 여러 문장들의 집합을 Context $\{x_i\}$라고 한다.
+1. $T_c$ 개의 단어가 포함된 한 **문장 sentence i** 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{iT_c}]$ 로 표현 할 수 있으며, 하나의 단어 는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. (**단어 사전의 index**), 이렇게 구성된 여러 문장들의 집합을 Context(Sentences) $\{x_i\}$라고 한다. 실제 구현 시, 길이를 맞추기 위해서 batch 에서 최대 문장의 길이를 $T_c$ 로 기억한 다음에 $T_c$ 보다 짧은 문장의 뒷 부분은 $0$ 으로 패딩(padding)해준다.
 
 $$Context = [x_1, x_2, \cdots ,x_n]\quad (n \times T_c)$$
 
 2. $T_q$ 개의 단어가 포함된 질문 question q도 마찬가지로 BoW방식으로 인코딩해준다.
 
 ### Input Memory
-1. 하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 총 $n$개의 메모리가 만들어 진다.
+1. 하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 총 $n$개의 메모리가 만들어 진다. 조금 더 설명 하자면, 임베딩 후 $Ax_{ij}$ 의 사이즈는 $(T_c \times d)$ 가 되고 이를 $T_c$ 차원으로 summation 하게 되면 문장 하나에 대한 메모리 $m_i$ 의 사이즈는 $(1\times d)$ 가 된다.
 
 $$m_i = \sum_{j}^{n} Ax_{ij} = Ax_{i1} + Ax_{i2} + \cdots + Ax_{in} \quad (1 \times d)$$
 
@@ -169,9 +170,7 @@ bAbI training set중 10%는 Validation용으로 쓴다. 이는 optimal model arc
 
 결과는 논문 참조. 퍼포먼스는 supervised models이 제일 좋게 나왔으나, MemN2N with position encoding + linear start + random noise, jointly trained 도 근접하게 나옴
 
-<p><br /></p>
-<p><br /></p>
-
+<br>
 ---
 ## D.참고문헌
 
