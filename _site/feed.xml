@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Jun 2018 23:57:42 +0900</pubDate>
-    <lastBuildDate>Sat, 02 Jun 2018 23:57:42 +0900</lastBuildDate>
+    <pubDate>Sun, 03 Jun 2018 00:02:29 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Jun 2018 00:02:29 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -97,6 +97,18 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;ul id=&quot;light-slider1&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/1.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/2.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/3.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/4.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/5.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/6.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/7.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/8.jpeg&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/9.jpeg&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.&lt;/p&gt;
 
 &lt;h2 id=&quot;ubuntu-server-&quot;&gt;Ubuntu Server 설치&lt;/h2&gt;
@@ -148,7 +160,7 @@
 
 &lt;p&gt;사실 간단하다. 아까 구운 &lt;code class=&quot;highlighter-rouge&quot;&gt;시동 디스크&lt;/code&gt;를 꼽아주고 부팅을 하면 된다.&lt;/p&gt;
 
-&lt;ul id=&quot;light-slider1&quot;&gt;
+&lt;ul id=&quot;light-slider2&quot;&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u1.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u2.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u3.png&quot; /&gt;&lt;/li&gt;
