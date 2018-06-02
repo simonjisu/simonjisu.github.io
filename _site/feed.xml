@@ -6,9 +6,188 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 May 2018 23:40:38 +0900</pubDate>
-    <lastBuildDate>Thu, 17 May 2018 23:40:38 +0900</lastBuildDate>
+    <pubDate>Sat, 02 Jun 2018 23:57:42 +0900</pubDate>
+    <lastBuildDate>Sat, 02 Jun 2018 23:57:42 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</title>
+        <description>&lt;h1 id=&quot;install-ubuntu-1804-gpu-server-for-deeplearning---1&quot;&gt;Install Ubuntu 18.04 GPU Server For DeepLearning - 1&lt;/h1&gt;
+
+&lt;p&gt;개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;컴퓨터 사양 상세&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;항목&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;상품코드&lt;/th&gt;
+      &lt;th&gt;제품명&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;금액&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;수량&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;최종금액&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;CPU&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;399920&lt;/td&gt;
+      &lt;td&gt;[INTEL] 코어7세대 i5-7600 정품박스 (카비레이크/3.5GHz/6MB/쿨러포함)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;258,000원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;258,000원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;MAIN&lt;br /&gt;BOARD&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;408703&lt;/td&gt;
+      &lt;td&gt;[GIGABYTE] GA-H110M-M.2 듀러블에디션 피씨디렉트 (인텔H110/M-ATX)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;71,100원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;71,100원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;메모리&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;390790&lt;/td&gt;
+      &lt;td&gt;[삼성전자] 삼성 DDR4 16GB PC4-19200&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;183,000원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;366,000원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;HDD&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;347917&lt;/td&gt;
+      &lt;td&gt;[WD] BLUE 2TB WD20EZRZ (3.5HDD/SATA3/5400rpm/64M)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;67,730원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;67,730원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;GPU&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;373864&lt;/td&gt;
+      &lt;td&gt;[MSI] GeForce GTX1060 OC D5 6GB 윈드스톰&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;389,000원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;389,000원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;POWER&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;420859&lt;/td&gt;
+      &lt;td&gt;[CORSAIR] CX750 NEW 80PLUS BRONZE (ATX/750W)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;94,370원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;94,370원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;BOX&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;365393&lt;/td&gt;
+      &lt;td&gt;[COX] RC 170T USB3.0 (미들타워)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;13,500원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;13,500원&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;OTHER&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3877&lt;/td&gt;
+      &lt;td&gt;[컴퓨존] 일반조립비 (하드웨어조립/OS는 설치되지않습니다)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;20,000원&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;20,000원&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.&lt;/p&gt;
+
+&lt;h2 id=&quot;ubuntu-server-&quot;&gt;Ubuntu Server 설치&lt;/h2&gt;
+
+&lt;p&gt;5월 30일 저녁, 우분투를 설치하려고 하니 버전이 마음에 걸렸다. NVIDIA CUDA TOOLKIT을 보니 리눅스 17.04 버전 까지 지원하는듯 했기 때문이다. 16.04를 설치해야하나? 싶은 찰나에 그냥 최신으로 한번 도전해보기로 했다. 안되면 다시 갈지머..&lt;/p&gt;
+
+&lt;h3 id=&quot;making-a-bootable-ubuntu-usb-disk-tutorial-at-mac-os&quot;&gt;Making a bootable Ubuntu USB disk Tutorial at Mac OS&lt;/h3&gt;
+
+&lt;p&gt;맥에서 부팅 디스크 만들기, 정말 간단하다. &lt;a href=&quot;https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0&quot;&gt;tutorials.ubuntu.com&lt;/a&gt; 튜토리얼을 따라가면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;준비물&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;2GB 이상의 USB Driver&lt;/li&gt;
+    &lt;li&gt;Mac OS 컴퓨터&lt;/li&gt;
+    &lt;li&gt;우분투 서버 ISO 다운로드 &lt;a href=&quot;https://www.ubuntu.com/download/server&quot;&gt;우분투 서버 다운로드&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;format&quot;&gt;구동 디스크 FORMAT&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;응용프로그램 &amp;gt; 유틸리티 &amp;gt; 디스크 유틸리티 선택&lt;/li&gt;
+  &lt;li&gt;MAC OS에 꼽은 USB 를 선택한 다음에 &lt;code class=&quot;highlighter-rouge&quot;&gt;지우기&lt;/code&gt; 를 선택한다.&lt;/li&gt;
+  &lt;li&gt;이름을 짓고, &lt;code class=&quot;highlighter-rouge&quot;&gt;MS-DOS(FAT)&lt;/code&gt; 선택한다. (그림에는 Scheme가 있지만 Serria 이후에는 없다는 말이 있음)&lt;/li&gt;
+  &lt;li&gt;포맷한다. 지운다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/format_disk.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;etcher-----&quot;&gt;Etcher 를 사용한 시동 디스크 생성&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://etcher.io/&quot;&gt;Etcher&lt;/a&gt; 먼저 받는다. 그후에는 정말 간단하다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Select image&lt;/code&gt; 에 다운 받은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ubuntu Server 18.04 ISO&lt;/code&gt; 를 고른다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Select drive&lt;/code&gt; 에 포맷한 디스크를 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Flash!&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/etcher.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 설치 준비 완료되었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-ubuntu-server-1804&quot;&gt;Install Ubuntu Server 18.04&lt;/h3&gt;
+
+&lt;p&gt;이제 설치릃 해보자. 설치를 하려면, 최소 한번은 모니터에 연결해서 설치해야한다. 나는 정말 서버만을 생각해서 모니터를 않샀기에… HDMI 케이블로 티비화면으로 연결했다… 덕분에 고생이 두배!&lt;/p&gt;
+
+&lt;p&gt;사실 간단하다. 아까 구운 &lt;code class=&quot;highlighter-rouge&quot;&gt;시동 디스크&lt;/code&gt;를 꼽아주고 부팅을 하면 된다.&lt;/p&gt;
+
+&lt;ul id=&quot;light-slider1&quot;&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u1.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u2.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u3.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u4.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u5.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u6.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u7.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u8.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u9.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u10.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u11.png&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u12.png&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;언어선택: 왠만하면 영어로 하자&lt;/li&gt;
+  &lt;li&gt;키보드선택: 왠만하면 영어로 가자&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Install Ubuntu&lt;/code&gt; 선택&lt;/li&gt;
+  &lt;li&gt;다음&lt;/li&gt;
+  &lt;li&gt;특별한 주소가 있으면 작성 아니면, 다음&lt;/li&gt;
+  &lt;li&gt;디스크 포맷: 디스크 통째로 포맷한 후에 설치할 것이니 1번&lt;/li&gt;
+  &lt;li&gt;디스크 선택&lt;/li&gt;
+  &lt;li&gt;마지막 확인&lt;/li&gt;
+  &lt;li&gt;정말루?&lt;/li&gt;
+  &lt;li&gt;당신의 이름 / 서버 이름 / 유저이름(로그인용) / 패스워드(로그인용) 등&lt;/li&gt;
+  &lt;li&gt;설치중… 리붓!&lt;/li&gt;
+  &lt;li&gt;완료&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;다음 장에는 설치후에 내가 했던 작업들: &lt;code class=&quot;highlighter-rouge&quot;&gt;원격 부팅과 접속&lt;/code&gt; 을 주로 이야기 하겠다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 02 Jun 2018 22:26:58 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>All about Word Vectors: GloVe</title>
@@ -2027,147 +2206,6 @@ y_t &amp;= W_{hy} h_t + b_y
         <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
         <link>http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</guid>
-        
-        
-        <category>DeepLearning</category>
-        
-      </item>
-    
-      <item>
-        <title>NUMPY with NN - 8: Summary</title>
-        <description>&lt;h1 id=&quot;numpy--neural-network-basic---8&quot;&gt;Numpy로 짜보는 Neural Network Basic - 8&lt;/h1&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;section&quot;&gt;총 정리&lt;/h2&gt;
-&lt;p&gt;지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common&quot;&gt; 모든 코드 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;package-load&quot;&gt;Package Load&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from common.Multilayer import MLP
-from dataset.mnist import load_mnist
-from common.optimizer import *
-import time
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;data-load&quot;&gt;Data Load&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
-print(x_train.shape)
-print(y_train.shape)
-print(x_test.shape)
-print(y_test.shape)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;(60000, 784)&lt;br /&gt;(60000, 10)&lt;br /&gt;(10000, 784)&lt;br /&gt;(10000, 10)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;network--optimizer-settings&quot;&gt;Network &amp;amp; Optimizer settings&lt;/h3&gt;
-
-&lt;p&gt;우리의 네트워크는 총 3층이며 Input Size가 784, Hidden node는 각각 100, 50개, Output 은 10(숫자 0~9까지의 손글씨 분류이기 때문)이다.&lt;/p&gt;
-
-&lt;p&gt;활성화 함수는 &lt;strong&gt;ReLu&lt;/strong&gt;, 초기값도 이에 따라 &lt;strong&gt;He&lt;/strong&gt; 를 써준다. 그리고 중간에 Batch Normalization을 써준다.&lt;/p&gt;
-
-&lt;p&gt;가중치 업데이트를 위한 옵티마이저는 &lt;strong&gt;Adam&lt;/strong&gt; 을 쓰고, Loss Function은 &lt;strong&gt;Cross Entropy&lt;/strong&gt; 를 쓰게 된다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
-         activation='relu', weight_init_std='he', use_batchnorm=True)
-optimizer = Adam()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;training--test&quot;&gt;Training &amp;amp; test&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loss_list = []
-train_acc_list = []
-test_acc_list = []
-epoch_list = []
-
-epoch_num=3000
-train_size = x_train.shape[0]
-batch_size = 100
-epsilon = 1e-6
-
-iter_per_epoch = max(train_size / batch_size, 1)
-
-start = start = time.time()
-
-for epoch in range(epoch_num):
-    # get mini batch:
-    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
-    x_batch = x_train[batch_mask]
-    y_batch = y_train[batch_mask]
-
-    grads = nn.gradient(x_batch, y_batch)
-
-    optimizer.update(nn.params, grads)
-
-    # 1에폭당 정확도 계산
-    if epoch % iter_per_epoch == 0:
-        loss = nn.loss(x_batch, y_batch)
-        train_loss_list.append(loss)
-        train_acc = nn.accuracy(x_train, y_train)
-        train_acc_list.append(train_acc)
-        test_acc = nn.accuracy(x_test, y_test)
-        test_acc_list.append(test_acc)
-        epoch_list.append(epoch)
-        print('# {0} | loss: {1:.5f} | trian acc: {2:.5f} | test acc: {3:.5f}'.format(epoch, loss, train_acc, test_acc))
-    elif epoch == (epoch_num - 1):
-        loss = nn.loss(x_batch, y_batch)
-        train_loss_list.append(loss)
-        train_acc = nn.accuracy(x_train, y_train)
-        train_acc_list.append(train_acc)
-        test_acc = nn.accuracy(x_test, y_test)
-        test_acc_list.append(test_acc)
-        epoch_list.append(epoch)
-        print('# {0} | loss: {1:.5f} | trian acc: {2:.5f} | test acc: {3:.5f}'.format(epoch, loss, train_acc, test_acc))
-
-end = time.time()
-print('total time:', (end - start))        
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;# 0 | loss: 11.06622 | trian acc: 0.11408 | test acc: 0.11910&lt;br /&gt;# 600 | loss: 0.23165 | trian acc: 0.92055 | test acc: 0.92020&lt;br /&gt;# 1200 | loss: 0.19112 | trian acc: 0.93975 | test acc: 0.94180&lt;br /&gt;# 1800 | loss: 0.08235 | trian acc: 0.95188 | test acc: 0.95040&lt;br /&gt;# 2400 | loss: 0.09155 | trian acc: 0.95898 | test acc: 0.95600&lt;br /&gt;# 2999 | loss: 0.09883 | trian acc: 0.96513 | test acc: 0.96150&lt;br /&gt;total time: 27.169809818267822&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nn/train_test-graph.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;시간은 3000 Epoch를 도는데 약 30초가 안걸렸으며, 테스트 결과도 우수하게 나오는 것으로 확인된다. CNN으로 하면 더 높아질 것으로 예상된다.&lt;/p&gt;
-
-&lt;h3 id=&quot;model-check&quot;&gt;Model Check&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def check(x, y, model):
-    pred_y = model.predict(x)
-    if x.ndim != 2:
-        x = x.reshape(28, 28)
-
-    print('Predict Answer: {}'.format(np.argmax(pred_y)))
-    print('Real Answer: {}'.format(np.argmax(y)))
-    plt.imshow(x, cmap='binary')
-    plt.grid(False)
-    plt.axis('off')
-    plt.show()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;테스트 데이터중 하나 골라서 실험해보자&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;check(x_test[45], y_test[45], nn)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Predict Answer: 5&lt;br /&gt;Real Answer: 5&lt;/p&gt;
-
-  &lt;p&gt;&lt;img src=&quot;/assets/ML/nn/num5.png&quot; alt=&quot;Drawing&quot; height=&quot;100&quot; width=&quot;100&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Thu, 08 Feb 2018 15:13:40 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html</guid>
         
         
         <category>DeepLearning</category>
