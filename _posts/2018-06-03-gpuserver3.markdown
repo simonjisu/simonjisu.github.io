@@ -1,0 +1,143 @@
+---
+layout: post
+title: "개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA"
+date: "2018-06-03 21:08:24 +0900"
+categories: "DataScience"
+author: "Soo"
+comments: true
+---
+# Install Ubuntu 18.04 GPU Server For DeepLearning - 3
+
+개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.
+
+---
+
+## Install PYTHON
+
+아나콘다를 통하지 않고 소스를 통해 파이썬을 설치하기로 했다. 일단 용량이 작고, 다른 부가 spyder 등 프로그램을 설치하기 싫어서 소스에서 직접 설치하기로 했다.
+
+1. [https://www.python.org/](https://www.python.org/) 에서 `Download > Soruce code > Python 3.6.5 - 2018-03-28` 로 들어가서 `Gzipped source tarball` 의 링크를 복사한 후 아래와 같이 쳐주자.
+```
+wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
+```
+2. 압축을 헤제시켜주자
+```
+sudo -zxvf Python-3.6.5.tgz
+```
+3. 설치해보자
+```
+./configure
+make
+make test
+sudo make install
+```
+
+기본적으로 이렇게 진행하면 설치가 완료 된다. (중간에 실패하면 어떤 패키지가 없는지 확인하고 apt-get으로 설치해준다.)
+
+하지만 `sudo pip3 install numpy` 하게 되면 아래와 같이 "TLS/SSL ~" 이라며 에러가 뜰 수도 있다. 자세히 뭔지는 모르겠지만, 구글링을 통해서 해결했다.
+
+```
+pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
+Collecting
+  Could not fetch URL https://pypi.python.org/simple//: There was a problem confirming the ssl certificate: Can't connect to HTTPS URL because the SSL module is not available. - skipping
+  Could not find a version that satisfies the requirement (from versions: )
+No matching distribution found for
+```
+
+### 해결책
+
+1. 필수 패키지를 설치한다
+```
+sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+```
+2. 소스폴더로 돌아가서 다시 설치해준다.
+```
+sudo make
+sudo make install
+```
+3. 마지막으로, pip 를 업그레이드 해준다.
+```
+sudo pip3 install --upgrade pip
+```
+
+이제 설치가 잘 될 것이다.
+
+<br>
+
+## Install CUDA 9.0
+
+CUDA-Toolkit 를 설치하면 드라이버를 설치할 필요는 없다고하나 만약에 먼저 설치해야하면 아래와 같이 설치(업데이트) 해주자
+
+```
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-390
+```
+
+### 1. CUDA-Toolkit
+
+[https://developer.nvidia.com/cuda-90-download-archive](https://developer.nvidia.com/cuda-90-download-archive) 에서 자신에 버젼에 맞는 CUDA-Toolkit 을 받자.
+
+나는 우분투이기에 `Linux > x86_64 > Ubuntu > 17.04 > del[local]` 를 골랐다.
+
+> Base Installer
+>
+> Patch 1 (Released Jan 25, 2018)
+>
+> Patch 2 (Released Mar 5, 2018)
+
+세개의 다운로드 링크를 복사한 뒤 `wget` 메서드로 받아준다.
+
+**Base Installer** 설치
+```
+sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
+sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+sudo apt-get update
+sudo apt-get install cuda
+```
+**Patch 1** 설치
+```
+sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+sudo apt-get update
+sudo apt-get upgrade cuda
+```
+**Patch 2** 설치
+```
+sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+sudo apt-get update
+sudo apt-get upgrade cuda
+```
+
+만약에 쿠다 드라이버 명령어인 `nvcc` 를 쓰고 싶다면 `./profile` 파일 밑에다 아래 항목을 추가해주면 된다.
+```
+export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
+아래 둘중에 하나를 한번 시도해보면 된다.
+```
+nvcc -V
+nvidia-smi
+```
+
+### 2. CuDNN 설치
+
+CuDNN 을 설치하려면 NVIDIA 회원 가입을 해야한다. 그리고 아래 싸이트에서 받아서 `scp` 명령어로 서버로 옮기자.
+
+* [https://developer.nvidia.com/rdp/cudnn-download](https://developer.nvidia.com/rdp/cudnn-download)
+
+압축을 해제하고, 파일들을 옮겨주면 된다.
+
+```
+tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+```
+
+## Pytorch 설치한 후 테스트
+
+<img src="/assets/ds/gpuserver/torch.png">
+
+이로써 설치 과정을 마치겠다. 컴퓨터 설치는 처음이라 3일 걸렸지만 앞으로는 더 짧아 지겠지...
+
+만약 오류가 나면 또 업데이트 하겠다.

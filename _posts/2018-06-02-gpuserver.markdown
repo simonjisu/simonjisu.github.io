@@ -10,6 +10,8 @@ comments: true
 
 개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.
 
+---
+
 ## 컴퓨터 사양 상세
 
 |항목|상품코드|제품명|금액|수량|최종금액|
@@ -93,6 +95,8 @@ comments: true
   <li><img src="/assets/ds/gpuserver/u11.png"></li>
   <li><img src="/assets/ds/gpuserver/u12.png"></li>
 </ul>
+
+사진출처: [https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/](https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/)
 
 1. 언어선택: 왠만하면 영어로 하자
 2. 키보드선택: 왠만하면 영어로 가자

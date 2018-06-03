@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html</loc>
+<lastmod>2018-06-03T21:08:24+09:00</lastmod>
+</url>
+<url>
+<loc>http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</loc>
+<lastmod>2018-06-03T10:09:54+09:00</lastmod>
+</url>
+<url>
 <loc>http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html</loc>
 <lastmod>2018-06-02T22:26:58+09:00</lastmod>
 </url>

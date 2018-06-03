@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</title>
-  <meta name="description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1">
+  <title>개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</title>
+  <meta name="description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 2">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1" />
+  <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 2" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치" />
+  <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치">
-  <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1">
+  <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속">
+  <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 2">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -168,7 +168,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</h1>
+      <h1 class="title">개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -183,7 +183,7 @@
  
 
 <section class="post-meta">
-  <div class="post-date">June 2, 2018</div>
+  <div class="post-date">June 3, 2018</div>
   <div class="post-categories">
    in 
     
@@ -194,189 +194,123 @@
 </section>
 
 <article class="post-content">
-  <h1 id="install-ubuntu-1804-gpu-server-for-deeplearning---1">Install Ubuntu 18.04 GPU Server For DeepLearning - 1</h1>
+  <h1 id="install-ubuntu-1804-gpu-server-for-deeplearning---2">Install Ubuntu 18.04 GPU Server For DeepLearning - 2</h1>
 
 <p>개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.</p>
 
 <hr />
 
-<h2 id="section">컴퓨터 사양 상세</h2>
+<h2 id="after-install">After Install</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">항목</th>
-      <th style="text-align: center">상품코드</th>
-      <th>제품명</th>
-      <th style="text-align: center">금액</th>
-      <th style="text-align: center">수량</th>
-      <th style="text-align: center">최종금액</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">CPU</td>
-      <td style="text-align: center">399920</td>
-      <td>[INTEL] 코어7세대 i5-7600 정품박스 (카비레이크/3.5GHz/6MB/쿨러포함)</td>
-      <td style="text-align: center">258,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">258,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">MAIN<br />BOARD</td>
-      <td style="text-align: center">408703</td>
-      <td>[GIGABYTE] GA-H110M-M.2 듀러블에디션 피씨디렉트 (인텔H110/M-ATX)</td>
-      <td style="text-align: center">71,100원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">71,100원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">메모리</td>
-      <td style="text-align: center">390790</td>
-      <td>[삼성전자] 삼성 DDR4 16GB PC4-19200</td>
-      <td style="text-align: center">183,000원</td>
-      <td style="text-align: center">2</td>
-      <td style="text-align: center">366,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">HDD</td>
-      <td style="text-align: center">347917</td>
-      <td>[WD] BLUE 2TB WD20EZRZ (3.5HDD/SATA3/5400rpm/64M)</td>
-      <td style="text-align: center">67,730원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">67,730원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">GPU</td>
-      <td style="text-align: center">373864</td>
-      <td>[MSI] GeForce GTX1060 OC D5 6GB 윈드스톰</td>
-      <td style="text-align: center">389,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">389,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">POWER</td>
-      <td style="text-align: center">420859</td>
-      <td>[CORSAIR] CX750 NEW 80PLUS BRONZE (ATX/750W)</td>
-      <td style="text-align: center">94,370원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">94,370원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">BOX</td>
-      <td style="text-align: center">365393</td>
-      <td>[COX] RC 170T USB3.0 (미들타워)</td>
-      <td style="text-align: center">13,500원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">13,500원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">OTHER</td>
-      <td style="text-align: center">3877</td>
-      <td>[컴퓨존] 일반조립비 (하드웨어조립/OS는 설치되지않습니다)</td>
-      <td style="text-align: center">20,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">20,000원</td>
-    </tr>
-  </tbody>
-</table>
+<p>설치후에 아래 명령어들을 쳐준다.</p>
 
-<ul id="light-slider1">
-  <li><img src="/assets/ds/gpuserver/1.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/2.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/3.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/4.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/5.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/6.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/7.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/8.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/9.jpeg" /></li>
+<ol>
+  <li>apt-get(Advanced Packaging Tool) 패키지 명령어 업데이트 및 설치되어 있는 패키지 업그레이드. 설치된 파일은 <code class="highlighter-rouge">/var/cache/apt/archive/</code> 에 저장됨</li>
+  <li>gcc(GNU Compiler Collection) 패키지 설치. 파이썬 설치에 필요</li>
+  <li>make(GNU Make) 패키지 설치. 파이썬 설치시 필요</li>
+  <li>zlib1g-dev 설치. 파이썬 설치시 필요</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt update &amp;&amp; sudo apt upgrade
+sudo apt install gcc
+sudo apt install make
+sudo apt install zlib1g-dev
+</code></pre>
+</div>
+
+<h2 id="sshsecure-shell-">SSH(SECURE SHELL) 접속</h2>
+
+<h3 id="section"><code class="highlighter-rouge">서버</code> 컴퓨터에서 아래의 사항을 수정:</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo vi /etc/ssh/sshd_config
+</code></pre>
+</div>
+
+<ul>
+  <li>ClientAliveInterval 60 : 클라이언트 살아있는지 확인하는 간격</li>
+  <li>ClientAliveCountMax 10 : 클라이언트 응답 없어도 접속 유지하는 횟수</li>
+  <li>PubkeyAuthentication yes : 활성화 시켜야 ssh를 통해서 접속 가능</li>
+  <li>PasswordAuthentication yes : 원격 서버 비밀번호로 로그인 가능하게 것, 나중에 ssh 로만 접속 가능케 하려면 바꿔줘야한다.</li>
+  <li>PermitEmptyPasswords no : 로그인시 빈 비밀번호를 가능케하는 옵션 기본으로 no로 되어 있다. 비밀번호 없이 로그인하게 하려면 yes로 바꿔줄 것, 권장은 안함</li>
 </ul>
 
-<p>2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.</p>
-
-<h2 id="ubuntu-server-">Ubuntu Server 설치</h2>
-
-<p>5월 30일 저녁, 우분투를 설치하려고 하니 버전이 마음에 걸렸다. NVIDIA CUDA TOOLKIT을 보니 리눅스 17.04 버전 까지 지원하는듯 했기 때문이다. 16.04를 설치해야하나? 싶은 찰나에 그냥 최신으로 한번 도전해보기로 했다. 안되면 다시 갈지머..</p>
-
-<h3 id="making-a-bootable-ubuntu-usb-disk-tutorial-at-mac-os">Making a bootable Ubuntu USB disk Tutorial at Mac OS</h3>
-
-<p>맥에서 부팅 디스크 만들기, 정말 간단하다. <a href="https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0">tutorials.ubuntu.com</a> 튜토리얼을 따라가면 된다.</p>
-
-<p><strong>준비물</strong></p>
-
-<blockquote>
-  <ul>
-    <li>2GB 이상의 USB Driver</li>
-    <li>Mac OS 컴퓨터</li>
-    <li>우분투 서버 ISO 다운로드 <a href="https://www.ubuntu.com/download/server">우분투 서버 다운로드</a></li>
-  </ul>
-</blockquote>
-
-<h4 id="format">구동 디스크 FORMAT</h4>
+<h3 id="ssh-key----"><code class="highlighter-rouge">로컬</code> 컴퓨터에서 SSH KEY 생성하고 <code class="highlighter-rouge">서버</code> 컴퓨터로 보내기:</h3>
 
 <ol>
-  <li>응용프로그램 &gt; 유틸리티 &gt; 디스크 유틸리티 선택</li>
-  <li>MAC OS에 꼽은 USB 를 선택한 다음에 <code class="highlighter-rouge">지우기</code> 를 선택한다.</li>
-  <li>이름을 짓고, <code class="highlighter-rouge">MS-DOS(FAT)</code> 선택한다. (그림에는 Scheme가 있지만 Serria 이후에는 없다는 말이 있음)</li>
-  <li>포맷한다. 지운다.</li>
+  <li><strong>ssh-keygen:</strong> SSH 키를 생성한다. 경로 지정을 안할 때 보통 <code class="highlighter-rouge">~/.ssh</code> 폴더 안에 <code class="highlighter-rouge">id_rsa</code> 라는 이름으로 생성한다.</li>
+  <li><strong>ssh-copy-id:</strong> SSH 키를 서버로 보낸다. 옵션으로 포트번, 키 디렉토리 등등 설정 가능하다</li>
 </ol>
 
-<p><img src="/assets/ds/gpuserver/format_disk.png" /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>ssh-keygen -f [filepath]
+ssh-copy-id -i [key_directory] -p [port] [user]@[ip_address]
+</code></pre>
+</div>
 
-<h4 id="etcher-----">Etcher 를 사용한 시동 디스크 생성</h4>
-
-<p><a href="https://etcher.io/">Etcher</a> 먼저 받는다. 그후에는 정말 간단하다.</p>
-
-<ol>
-  <li><code class="highlighter-rouge">Select image</code> 에 다운 받은 <code class="highlighter-rouge">Ubuntu Server 18.04 ISO</code> 를 고른다.</li>
-  <li><code class="highlighter-rouge">Select drive</code> 에 포맷한 디스크를 선택</li>
-  <li><code class="highlighter-rouge">Flash!</code></li>
-</ol>
-
-<p><img src="/assets/ds/gpuserver/etcher.png" /></p>
-
-<p>이제 설치 준비 완료되었다.</p>
-
-<h3 id="install-ubuntu-server-1804">Install Ubuntu Server 18.04</h3>
-
-<p>이제 설치릃 해보자. 설치를 하려면, 최소 한번은 모니터에 연결해서 설치해야한다. 나는 정말 서버만을 생각해서 모니터를 않샀기에… HDMI 케이블로 티비화면으로 연결했다… 덕분에 고생이 두배!</p>
-
-<p>사실 간단하다. 아까 구운 <code class="highlighter-rouge">시동 디스크</code>를 꼽아주고 부팅을 하면 된다.</p>
-
-<ul id="light-slider2">
-  <li><img src="/assets/ds/gpuserver/u1.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u2.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u3.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u4.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u5.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u6.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u7.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u8.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u9.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u10.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u11.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u12.png" /></li>
+<h3 id="scp-">파일전송 명령어 SCP 사용하기</h3>
+<ul>
+  <li>서버 &gt; 로컬
+    <div class="highlighter-rouge"><pre class="highlight"><code>scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]
+</code></pre>
+    </div>
+  </li>
+  <li>로컬 &gt; 서버
+    <div class="highlighter-rouge"><pre class="highlight"><code>scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송받을 위치]
+</code></pre>
+    </div>
+  </li>
 </ul>
 
-<p>사진출처: <a href="https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/">https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/</a></p>
+<p>다만 주의 해야할 것은 <code class="highlighter-rouge">[옵션]</code> 에다가 로그인 옵션 다 넣어줘야 보내진다는 점을 잊지 말자.</p>
+
+<p><strong>옵션:</strong></p>
+
+<ul>
+  <li>P: 포트</li>
+  <li>i: key</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="wolwake-on-lan">WOL(Wake-On-Lan)</h2>
+
+<p>전기세 때문에 원격으로 컴퓨터를 껐다 켯다 하고 싶었다. 찾아보니 WOL 라는 방법이 있었다. 우선 자신의 컴퓨터의 메인보드가 이 기능을 지원해주고, 공유기도 이 기능을 지원해줘야 사용할 수 있다.
+컴퓨터 부팅전 <code class="highlighter-rouge">BIOS</code> (내경우는 DEL 키를 눌렀음) 에 들어가서 <code class="highlighter-rouge">Wake-On-Lan</code> 이라는 글귀가 있는지 찾아보고, 있다면 enable 로 바꿔주자. 그리고 아래 명령어를 통해 내컴퓨터의 <code class="highlighter-rouge">이더넷 포트(Ethernet port)</code> 알아보자</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ifconfig
+</code></pre>
+</div>
+
+<p>이더넷 포트는 첫째줄 제일 왼쪽에 있을 것이다. 보통 en~~ 로 시작하는 번호다</p>
+
+<p>그 후, 컴퓨터 내 컴퓨터가 <code class="highlighter-rouge">WOL</code> 기능이 켜졌나 확인 하기 위해, 부팅후 커맨드 라인에 아래와 같이 쳐주자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install ethtool
+sudo ethtool [Ethernet port]
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">Wake-on</code> 이라는 곳에 <code class="highlighter-rouge">g</code> 라고 적혀져 있으면 켜진 것이다. 안되있다면 아래의 명령어를 통해 켜주자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo ethtool -s [Ethernet port] wol g
+</code></pre>
+</div>
+
+<p>그 다음에 자신의 집의 공유기에 들어가서, WOL 설정을 해주자. NETIS 기준으로 설명 하겠다. IPTIME 은 다른 글들이 많으니 한번 찾아 보길 바란다.</p>
 
 <ol>
-  <li>언어선택: 왠만하면 영어로 하자</li>
-  <li>키보드선택: 왠만하면 영어로 가자</li>
-  <li><code class="highlighter-rouge">Install Ubuntu</code> 선택</li>
-  <li>다음</li>
-  <li>특별한 주소가 있으면 작성 아니면, 다음</li>
-  <li>디스크 포맷: 디스크 통째로 포맷한 후에 설치할 것이니 1번</li>
-  <li>디스크 선택</li>
-  <li>마지막 확인</li>
-  <li>정말루?</li>
-  <li>당신의 이름 / 서버 이름 / 유저이름(로그인용) / 패스워드(로그인용) 등</li>
-  <li>설치중… 리붓!</li>
-  <li>완료</li>
+  <li><strong>원격 부팅(WOL)</strong>: <code class="highlighter-rouge">사용 IP 목록에서 등록</code> 누른후, 자신의 컴퓨터 IP 를 선택하고 이름을 지어준 다음 <code class="highlighter-rouge">등록</code> 하게 되면 밑에 하나 등록 될 것이다.</li>
+  <li><strong>외부 연결 포트</strong>: <code class="highlighter-rouge">포트 번호</code>는 내 컴퓨터의 접속 포트로 했다. (이건 꼭 TCP 통신으로 하는 포트로 해야하는지 모르겠다. 다른 번호를 따로 지정해줄 수 있는지를 확인 못해봄)</li>
 </ol>
 
-<p>다음 장에는 설치후에 내가 했던 작업들: <code class="highlighter-rouge">원격 부팅과 접속</code> 을 주로 이야기 하겠다.</p>
+<p><img src="/assets/ds/gpuserver/WOL.png" /></p>
+
+<p>마지막으로 DDNS 서비스 신청한다. 그러면 집 밖에서도 집 공유기에 접속해서 컴퓨터를 킬 수 있다.</p>
+
+<ul>
+  <li>참고자료: <a href="http://blog.daum.net/peace20/16779844">http://blog.daum.net/peace20/16779844</a></li>
+</ul>
+
+<p>다음 시간에는 <code class="highlighter-rouge">Python</code> 설치와 <code class="highlighter-rouge">CUDA</code> 설치를 다뤄보겠다.</p>
 
 </article>
 
@@ -391,7 +325,7 @@
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+1+%EC%82%AC%EC%96%91+%EB%B0%8F+%EC%9A%B0%EB%B6%84%ED%88%AC+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F02%2Fgpuserver.html"
+      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+2+%EC%9B%90%EA%B2%A9+%EB%B6%80%ED%8C%85+%EC%A0%91%EC%86%8D&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F03%2Fgpuserver2.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -421,14 +355,12 @@
   
 
   
-
-  
     
-    <!-- <h2 id="DataScience">1</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver2.html</h2> -->
+    <!-- <h2 id="DataScience">0</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver3.html</h2> -->
     
-    <!-- <h2 id="DataScience">3</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/04/21/biglittledata.html</h2> -->
+    <!-- <h2 id="DataScience">2</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2018/06/02/gpuserver.html</h2> -->
     
 
 
@@ -437,19 +369,19 @@
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/datascience/2018/04/21/biglittledata.html">
+				<a href="/datascience/2018/06/02/gpuserver.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Big Little Data 참석후기</span>
+					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
 			
-				<a href="/datascience/2018/06/03/gpuserver2.html">
-					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</span>
+				<a href="/datascience/2018/06/03/gpuserver3.html">
+					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA</span>
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>

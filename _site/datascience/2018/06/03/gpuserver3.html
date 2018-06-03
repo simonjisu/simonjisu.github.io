@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</title>
-  <meta name="description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1">
+  <title>개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA</title>
+  <meta name="description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 3">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1" />
+  <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 3" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치" />
+  <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치">
-  <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1">
+  <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA">
+  <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 3">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -168,7 +168,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</h1>
+      <h1 class="title">개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -183,7 +183,7 @@
  
 
 <section class="post-meta">
-  <div class="post-date">June 2, 2018</div>
+  <div class="post-date">June 3, 2018</div>
   <div class="post-categories">
    in 
     
@@ -194,189 +194,155 @@
 </section>
 
 <article class="post-content">
-  <h1 id="install-ubuntu-1804-gpu-server-for-deeplearning---1">Install Ubuntu 18.04 GPU Server For DeepLearning - 1</h1>
+  <h1 id="install-ubuntu-1804-gpu-server-for-deeplearning---3">Install Ubuntu 18.04 GPU Server For DeepLearning - 3</h1>
 
 <p>개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.</p>
 
 <hr />
 
-<h2 id="section">컴퓨터 사양 상세</h2>
+<h2 id="install-python">Install PYTHON</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">항목</th>
-      <th style="text-align: center">상품코드</th>
-      <th>제품명</th>
-      <th style="text-align: center">금액</th>
-      <th style="text-align: center">수량</th>
-      <th style="text-align: center">최종금액</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">CPU</td>
-      <td style="text-align: center">399920</td>
-      <td>[INTEL] 코어7세대 i5-7600 정품박스 (카비레이크/3.5GHz/6MB/쿨러포함)</td>
-      <td style="text-align: center">258,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">258,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">MAIN<br />BOARD</td>
-      <td style="text-align: center">408703</td>
-      <td>[GIGABYTE] GA-H110M-M.2 듀러블에디션 피씨디렉트 (인텔H110/M-ATX)</td>
-      <td style="text-align: center">71,100원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">71,100원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">메모리</td>
-      <td style="text-align: center">390790</td>
-      <td>[삼성전자] 삼성 DDR4 16GB PC4-19200</td>
-      <td style="text-align: center">183,000원</td>
-      <td style="text-align: center">2</td>
-      <td style="text-align: center">366,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">HDD</td>
-      <td style="text-align: center">347917</td>
-      <td>[WD] BLUE 2TB WD20EZRZ (3.5HDD/SATA3/5400rpm/64M)</td>
-      <td style="text-align: center">67,730원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">67,730원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">GPU</td>
-      <td style="text-align: center">373864</td>
-      <td>[MSI] GeForce GTX1060 OC D5 6GB 윈드스톰</td>
-      <td style="text-align: center">389,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">389,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">POWER</td>
-      <td style="text-align: center">420859</td>
-      <td>[CORSAIR] CX750 NEW 80PLUS BRONZE (ATX/750W)</td>
-      <td style="text-align: center">94,370원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">94,370원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">BOX</td>
-      <td style="text-align: center">365393</td>
-      <td>[COX] RC 170T USB3.0 (미들타워)</td>
-      <td style="text-align: center">13,500원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">13,500원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">OTHER</td>
-      <td style="text-align: center">3877</td>
-      <td>[컴퓨존] 일반조립비 (하드웨어조립/OS는 설치되지않습니다)</td>
-      <td style="text-align: center">20,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">20,000원</td>
-    </tr>
-  </tbody>
-</table>
+<p>아나콘다를 통하지 않고 소스를 통해 파이썬을 설치하기로 했다. 일단 용량이 작고, 다른 부가 spyder 등 프로그램을 설치하기 싫어서 소스에서 직접 설치하기로 했다.</p>
 
-<ul id="light-slider1">
-  <li><img src="/assets/ds/gpuserver/1.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/2.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/3.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/4.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/5.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/6.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/7.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/8.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/9.jpeg" /></li>
-</ul>
+<ol>
+  <li><a href="https://www.python.org/">https://www.python.org/</a> 에서 <code class="highlighter-rouge">Download &gt; Soruce code &gt; Python 3.6.5 - 2018-03-28</code> 로 들어가서 <code class="highlighter-rouge">Gzipped source tarball</code> 의 링크를 복사한 후 아래와 같이 쳐주자.
+    <div class="highlighter-rouge"><pre class="highlight"><code>wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
+</code></pre>
+    </div>
+  </li>
+  <li>압축을 헤제시켜주자
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo -zxvf Python-3.6.5.tgz
+</code></pre>
+    </div>
+  </li>
+  <li>설치해보자
+    <div class="highlighter-rouge"><pre class="highlight"><code>./configure
+make
+make test
+sudo make install
+</code></pre>
+    </div>
+  </li>
+</ol>
 
-<p>2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.</p>
+<p>기본적으로 이렇게 진행하면 설치가 완료 된다. (중간에 실패하면 어떤 패키지가 없는지 확인하고 apt-get으로 설치해준다.)</p>
 
-<h2 id="ubuntu-server-">Ubuntu Server 설치</h2>
+<p>하지만 <code class="highlighter-rouge">sudo pip3 install numpy</code> 하게 되면 아래와 같이 “TLS/SSL ~” 이라며 에러가 뜰 수도 있다. 자세히 뭔지는 모르겠지만, 구글링을 통해서 해결했다.</p>
 
-<p>5월 30일 저녁, 우분투를 설치하려고 하니 버전이 마음에 걸렸다. NVIDIA CUDA TOOLKIT을 보니 리눅스 17.04 버전 까지 지원하는듯 했기 때문이다. 16.04를 설치해야하나? 싶은 찰나에 그냥 최신으로 한번 도전해보기로 했다. 안되면 다시 갈지머..</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
+Collecting
+  Could not fetch URL https://pypi.python.org/simple//: There was a problem confirming the ssl certificate: Can't connect to HTTPS URL because the SSL module is not available. - skipping
+  Could not find a version that satisfies the requirement (from versions: )
+No matching distribution found for
+</code></pre>
+</div>
 
-<h3 id="making-a-bootable-ubuntu-usb-disk-tutorial-at-mac-os">Making a bootable Ubuntu USB disk Tutorial at Mac OS</h3>
+<h3 id="section">해결책</h3>
 
-<p>맥에서 부팅 디스크 만들기, 정말 간단하다. <a href="https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0">tutorials.ubuntu.com</a> 튜토리얼을 따라가면 된다.</p>
+<ol>
+  <li>필수 패키지를 설치한다
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+</code></pre>
+    </div>
+  </li>
+  <li>소스폴더로 돌아가서 다시 설치해준다.
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo make
+sudo make install
+</code></pre>
+    </div>
+  </li>
+  <li>마지막으로, pip 를 업그레이드 해준다.
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo pip3 install --upgrade pip
+</code></pre>
+    </div>
+  </li>
+</ol>
 
-<p><strong>준비물</strong></p>
+<p>이제 설치가 잘 될 것이다.</p>
+
+<p><br /></p>
+
+<h2 id="install-cuda-90">Install CUDA 9.0</h2>
+
+<p>CUDA-Toolkit 를 설치하면 드라이버를 설치할 필요는 없다고하나 만약에 먼저 설치해야하면 아래와 같이 설치(업데이트) 해주자</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-390
+</code></pre>
+</div>
+
+<h3 id="cuda-toolkit">1. CUDA-Toolkit</h3>
+
+<p><a href="https://developer.nvidia.com/cuda-90-download-archive">https://developer.nvidia.com/cuda-90-download-archive</a> 에서 자신에 버젼에 맞는 CUDA-Toolkit 을 받자.</p>
+
+<p>나는 우분투이기에 <code class="highlighter-rouge">Linux &gt; x86_64 &gt; Ubuntu &gt; 17.04 &gt; del[local]</code> 를 골랐다.</p>
 
 <blockquote>
-  <ul>
-    <li>2GB 이상의 USB Driver</li>
-    <li>Mac OS 컴퓨터</li>
-    <li>우분투 서버 ISO 다운로드 <a href="https://www.ubuntu.com/download/server">우분투 서버 다운로드</a></li>
-  </ul>
+  <p>Base Installer</p>
+
+  <p>Patch 1 (Released Jan 25, 2018)</p>
+
+  <p>Patch 2 (Released Mar 5, 2018)</p>
 </blockquote>
 
-<h4 id="format">구동 디스크 FORMAT</h4>
+<p>세개의 다운로드 링크를 복사한 뒤 <code class="highlighter-rouge">wget</code> 메서드로 받아준다.</p>
 
-<ol>
-  <li>응용프로그램 &gt; 유틸리티 &gt; 디스크 유틸리티 선택</li>
-  <li>MAC OS에 꼽은 USB 를 선택한 다음에 <code class="highlighter-rouge">지우기</code> 를 선택한다.</li>
-  <li>이름을 짓고, <code class="highlighter-rouge">MS-DOS(FAT)</code> 선택한다. (그림에는 Scheme가 있지만 Serria 이후에는 없다는 말이 있음)</li>
-  <li>포맷한다. 지운다.</li>
-</ol>
+<p><strong>Base Installer</strong> 설치</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
+sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+sudo apt-get update
+sudo apt-get install cuda
+</code></pre>
+</div>
+<p><strong>Patch 1</strong> 설치</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+sudo apt-get update
+sudo apt-get upgrade cuda
+</code></pre>
+</div>
+<p><strong>Patch 2</strong> 설치</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+sudo apt-get update
+sudo apt-get upgrade cuda
+</code></pre>
+</div>
 
-<p><img src="/assets/ds/gpuserver/format_disk.png" /></p>
+<p>만약에 쿠다 드라이버 명령어인 <code class="highlighter-rouge">nvcc</code> 를 쓰고 싶다면 <code class="highlighter-rouge">./profile</code> 파일 밑에다 아래 항목을 추가해주면 된다.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+</code></pre>
+</div>
+<p>아래 둘중에 하나를 한번 시도해보면 된다.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>nvcc -V
+nvidia-smi
+</code></pre>
+</div>
 
-<h4 id="etcher-----">Etcher 를 사용한 시동 디스크 생성</h4>
+<h3 id="cudnn-">2. CuDNN 설치</h3>
 
-<p><a href="https://etcher.io/">Etcher</a> 먼저 받는다. 그후에는 정말 간단하다.</p>
+<p>CuDNN 을 설치하려면 NVIDIA 회원 가입을 해야한다. 그리고 아래 싸이트에서 받아서 <code class="highlighter-rouge">scp</code> 명령어로 서버로 옮기자.</p>
 
-<ol>
-  <li><code class="highlighter-rouge">Select image</code> 에 다운 받은 <code class="highlighter-rouge">Ubuntu Server 18.04 ISO</code> 를 고른다.</li>
-  <li><code class="highlighter-rouge">Select drive</code> 에 포맷한 디스크를 선택</li>
-  <li><code class="highlighter-rouge">Flash!</code></li>
-</ol>
-
-<p><img src="/assets/ds/gpuserver/etcher.png" /></p>
-
-<p>이제 설치 준비 완료되었다.</p>
-
-<h3 id="install-ubuntu-server-1804">Install Ubuntu Server 18.04</h3>
-
-<p>이제 설치릃 해보자. 설치를 하려면, 최소 한번은 모니터에 연결해서 설치해야한다. 나는 정말 서버만을 생각해서 모니터를 않샀기에… HDMI 케이블로 티비화면으로 연결했다… 덕분에 고생이 두배!</p>
-
-<p>사실 간단하다. 아까 구운 <code class="highlighter-rouge">시동 디스크</code>를 꼽아주고 부팅을 하면 된다.</p>
-
-<ul id="light-slider2">
-  <li><img src="/assets/ds/gpuserver/u1.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u2.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u3.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u4.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u5.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u6.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u7.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u8.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u9.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u10.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u11.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u12.png" /></li>
+<ul>
+  <li><a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></li>
 </ul>
 
-<p>사진출처: <a href="https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/">https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/</a></p>
+<p>압축을 해제하고, 파일들을 옮겨주면 된다.</p>
 
-<ol>
-  <li>언어선택: 왠만하면 영어로 하자</li>
-  <li>키보드선택: 왠만하면 영어로 가자</li>
-  <li><code class="highlighter-rouge">Install Ubuntu</code> 선택</li>
-  <li>다음</li>
-  <li>특별한 주소가 있으면 작성 아니면, 다음</li>
-  <li>디스크 포맷: 디스크 통째로 포맷한 후에 설치할 것이니 1번</li>
-  <li>디스크 선택</li>
-  <li>마지막 확인</li>
-  <li>정말루?</li>
-  <li>당신의 이름 / 서버 이름 / 유저이름(로그인용) / 패스워드(로그인용) 등</li>
-  <li>설치중… 리붓!</li>
-  <li>완료</li>
-</ol>
+<div class="highlighter-rouge"><pre class="highlight"><code>tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+</code></pre>
+</div>
 
-<p>다음 장에는 설치후에 내가 했던 작업들: <code class="highlighter-rouge">원격 부팅과 접속</code> 을 주로 이야기 하겠다.</p>
+<h2 id="pytorch---">Pytorch 설치한 후 테스트</h2>
+
+<p><img src="/assets/ds/gpuserver/torch.png" /></p>
+
+<p>이로써 설치 과정을 마치겠다. 컴퓨터 설치는 처음이라 3일 걸렸지만 앞으로는 더 짧아 지겠지…</p>
+
+<p>만약 오류가 나면 또 업데이트 하겠다.</p>
 
 </article>
 
@@ -391,7 +357,7 @@
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+1+%EC%82%AC%EC%96%91+%EB%B0%8F+%EC%9A%B0%EB%B6%84%ED%88%AC+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F02%2Fgpuserver.html"
+      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+3+PYTHON+%26+CUDA&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F03%2Fgpuserver3.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -419,16 +385,12 @@
 
 
   
-
-  
-
-  
+    
+    <!-- <h2 id="DataScience">-1</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2017/08/04/E2EMN.html</h2> -->
     
     <!-- <h2 id="DataScience">1</h2> -->
     <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver2.html</h2> -->
-    
-    <!-- <h2 id="DataScience">3</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/04/21/biglittledata.html</h2> -->
     
 
 
@@ -437,24 +399,16 @@
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/datascience/2018/04/21/biglittledata.html">
+				<a href="/datascience/2018/06/03/gpuserver2.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Big Little Data 참석후기</span>
+					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
-			
-				<a href="/datascience/2018/06/03/gpuserver2.html">
-					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>

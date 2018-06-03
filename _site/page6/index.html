@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>NUMPY with NN - 8: Summary</title>
-  <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 8">
+  <title>Soo</title>
+  <meta name="description" content="My Blog
+">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +42,11 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 8" />
+  <meta property="og:description" content="My Blog
+" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="NUMPY with NN - 8: Summary" />
+  <meta property="og:title" content="Soo" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +57,9 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="NUMPY with NN - 8: Summary">
-  <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 8">
+  <meta name="twitter:title" content="Soo">
+  <meta name="twitter:description" content="My Blog
+">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +68,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html">
+  <link rel="canonical" href="http://simonjisu.github.io/page6/">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -162,270 +165,85 @@
 
 
     <div class="page-content">
-        <div class="post">
-<!-- <h1></h1>
- -->
-<div class="post-header-container " >
-  <div class="scrim ">
-    <header class="post-header">
-      <h1 class="title">NUMPY with NN - 8: Summary</h1>
-      <p class="info">by <strong>Soo</strong></p>
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/star.jpg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">Soo</h1>
+      <p class="subtitle">Soopace</p>
     </header>
   </div>
 </div>
 
 <div class="wrapper">
-
- <span class="page-divider">
-  <span class="one"></span>
-  <span class="two"></span>
-</span>
- 
-
-<section class="post-meta">
-  <div class="post-date">February 8, 2018</div>
-  <div class="post-categories">
-   in 
-    
-    <a href="/posts/#DeepLearning">Deeplearning</a>
-    
+<ul class="post-list">
   
-  </div>
-</section>
-
-<article class="post-content">
-  <h1 id="numpy--neural-network-basic---8">Numpy로 짜보는 Neural Network Basic - 8</h1>
-
-<hr />
-<h2 id="section">총 정리</h2>
-<p>지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.</p>
-
-<p><a href="https://github.com/simonjisu/ML/tree/master/NeuralNetwork/common"> 모든 코드 링크</a></p>
-
-<h3 id="package-load">Package Load</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>from common.Multilayer import MLP
-from dataset.mnist import load_mnist
-from common.optimizer import *
-import time
-</code></pre>
-</div>
-
-<h3 id="data-load">Data Load</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
-print(x_train.shape)
-print(y_train.shape)
-print(x_test.shape)
-print(y_test.shape)
-</code></pre>
-</div>
-<blockquote>
-  <p>(60000, 784)<br />(60000, 10)<br />(10000, 784)<br />(10000, 10)</p>
-</blockquote>
-
-<h3 id="network--optimizer-settings">Network &amp; Optimizer settings</h3>
-
-<p>우리의 네트워크는 총 3층이며 Input Size가 784, Hidden node는 각각 100, 50개, Output 은 10(숫자 0~9까지의 손글씨 분류이기 때문)이다.</p>
-
-<p>활성화 함수는 <strong>ReLu</strong>, 초기값도 이에 따라 <strong>He</strong> 를 써준다. 그리고 중간에 Batch Normalization을 써준다.</p>
-
-<p>가중치 업데이트를 위한 옵티마이저는 <strong>Adam</strong> 을 쓰고, Loss Function은 <strong>Cross Entropy</strong> 를 쓰게 된다.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
-         activation='relu', weight_init_std='he', use_batchnorm=True)
-optimizer = Adam()
-</code></pre>
-</div>
-
-<h3 id="training--test">Training &amp; test</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>train_loss_list = []
-train_acc_list = []
-test_acc_list = []
-epoch_list = []
-
-epoch_num=3000
-train_size = x_train.shape[0]
-batch_size = 100
-epsilon = 1e-6
-
-iter_per_epoch = max(train_size / batch_size, 1)
-
-start = start = time.time()
-
-for epoch in range(epoch_num):
-    # get mini batch:
-    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
-    x_batch = x_train[batch_mask]
-    y_batch = y_train[batch_mask]
-
-    grads = nn.gradient(x_batch, y_batch)
-
-    optimizer.update(nn.params, grads)
-
-    # 1에폭당 정확도 계산
-    if epoch % iter_per_epoch == 0:
-        loss = nn.loss(x_batch, y_batch)
-        train_loss_list.append(loss)
-        train_acc = nn.accuracy(x_train, y_train)
-        train_acc_list.append(train_acc)
-        test_acc = nn.accuracy(x_test, y_test)
-        test_acc_list.append(test_acc)
-        epoch_list.append(epoch)
-        print('# {0} | loss: {1:.5f} | trian acc: {2:.5f} | test acc: {3:.5f}'.format(epoch, loss, train_acc, test_acc))
-    elif epoch == (epoch_num - 1):
-        loss = nn.loss(x_batch, y_batch)
-        train_loss_list.append(loss)
-        train_acc = nn.accuracy(x_train, y_train)
-        train_acc_list.append(train_acc)
-        test_acc = nn.accuracy(x_test, y_test)
-        test_acc_list.append(test_acc)
-        epoch_list.append(epoch)
-        print('# {0} | loss: {1:.5f} | trian acc: {2:.5f} | test acc: {3:.5f}'.format(epoch, loss, train_acc, test_acc))
-
-end = time.time()
-print('total time:', (end - start))        
-</code></pre>
-</div>
-
-<blockquote>
-  <p># 0 | loss: 11.06622 | trian acc: 0.11408 | test acc: 0.11910<br /># 600 | loss: 0.23165 | trian acc: 0.92055 | test acc: 0.92020<br /># 1200 | loss: 0.19112 | trian acc: 0.93975 | test acc: 0.94180<br /># 1800 | loss: 0.08235 | trian acc: 0.95188 | test acc: 0.95040<br /># 2400 | loss: 0.09155 | trian acc: 0.95898 | test acc: 0.95600<br /># 2999 | loss: 0.09883 | trian acc: 0.96513 | test acc: 0.96150<br />total time: 27.169809818267822</p>
-</blockquote>
-
-<p><img src="/assets/ML/nn/train_test-graph.png" alt="Drawing" style="width=500px" /></p>
-
-<p>시간은 3000 Epoch를 도는데 약 30초가 안걸렸으며, 테스트 결과도 우수하게 나오는 것으로 확인된다. CNN으로 하면 더 높아질 것으로 예상된다.</p>
-
-<h3 id="model-check">Model Check</h3>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>def check(x, y, model):
-    pred_y = model.predict(x)
-    if x.ndim != 2:
-        x = x.reshape(28, 28)
-
-    print('Predict Answer: {}'.format(np.argmax(pred_y)))
-    print('Real Answer: {}'.format(np.argmax(y)))
-    plt.imshow(x, cmap='binary')
-    plt.grid(False)
-    plt.axis('off')
-    plt.show()
-</code></pre>
-</div>
-
-<p>테스트 데이터중 하나 골라서 실험해보자</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>check(x_test[45], y_test[45], nn)
-</code></pre>
-</div>
-<blockquote>
-  <p>Predict Answer: 5<br />Real Answer: 5</p>
-
-  <p><img src="/assets/ML/nn/num5.png" alt="Drawing" height="100" width="100" /></p>
-</blockquote>
-
-</article>
-
-
-
-<section class="rss">
-  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
-</section>
-
-<section class="share">
-  <span>Share: </span>
+  <li>
+    <h2>
+      <a class="post-link" href="/datascience/2017/08/04/E2EMN.html">End-to-End Memory Network 논문 요약 및 정리</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>End-to-End Memory Network 논문 요약 및 정리 Pytorch 구현 코드: https://github.com/simonjisu/E2EMN memN2N 검색하면 다른 패키지로 구현한 repo 들이 많음으로 한번 찾아 볼것 facebook: https://github.com/facebook/MemNN A. Single layer Input $T_c$ 개의 단어가 포함된 한 문장 sentence i 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{iT_c}]$ 로 표현 할 수 있으며, 하나의 단어...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">August 4, 2017</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/posts/#DataScience">Datascience</a>
+        
+      
+      </div>
+    </section>
+  </li>
   
-    
-    
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+8%3A+Summary&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F02%2F08%2Fnumpywithnn_8.html"
-        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
-        <i class="fa fa-facebook-square fa-lg"></i>
-      </a>
-    
-    
-    
+  <hr>
   
-    
-    
-    
-    
   
-    
-    
-    
-    
+  <li>
+    <h2>
+      <a class="post-link" href="/jekyll/2015/04/18/welcome-to-jekyll.html">Welcome to Jekyll!</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">April 18, 2015</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/posts/#Jekyll">Jekyll</a>
+        
+      
+      </div>
+    </section>
+  </li>
   
-    
-    
-    
-    
   
-</section>
+</ul>
 
-
-
-  
-
-  
-
-  
+<nav class="pagination" role="navigation">
+	<p>
     
-    <!-- <h2 id="DeepLearning">1</h2> -->
-    <!-- <h2 id="DeepLearning">/deeplearning/2018/03/07/rnnlstm.html</h2> -->
-    
-    <!-- <h2 id="DeepLearning">3</h2> -->
-    <!-- <h2 id="DeepLearning">/deeplearning/2018/01/25/numpywithnn_7.html</h2> -->
-    
-
-
-
-  
-	<section class="post-navigation">
-		<span class="prev-post">
 			
-				<a href="/deeplearning/2018/01/25/numpywithnn_7.html">
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
-					</span>
-					<span class="page-number">NUMPY with NN - 7: Batch Normalization</span>
-				</a>
+			<a class="newer-posts" href="/page5">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-square fa-stack-2x"></i>
+					<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+				</span>
+			</a>
 			
-		</span>
-		<span class="next-post">
-			
-				<a href="/deeplearning/2018/03/07/rnnlstm.html">
-					<span class="page-number">RNN & LSTM - 1: RNN</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
-			
-		</span>
-	</section>
-
-
-
-
-  
-  <section class="disqus">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'soopace';
-
-      /* * * DON'T EDIT BELOW THIS LINE * * */
-      (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  </section>
-  
-
+		
+		<span class="page-number">Page 6 of 6</span>
+		
+		<span class="fa-stack fa-lg">
+      <i class="fa fa-square fa-stack-2x"></i>
+      <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+    </span>
+		
+	</p>
+</nav>
 
 </div>
 </div>

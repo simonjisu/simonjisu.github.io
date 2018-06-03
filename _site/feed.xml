@@ -6,15 +6,307 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Jun 2018 00:13:24 +0900</pubDate>
-    <lastBuildDate>Sun, 03 Jun 2018 00:13:24 +0900</lastBuildDate>
+    <pubDate>Sun, 03 Jun 2018 22:34:07 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Jun 2018 22:34:07 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>개인 딥러닝용 서버 설치 과정기 - 3 PYTHON &amp; CUDA</title>
+        <description>&lt;h1 id=&quot;install-ubuntu-1804-gpu-server-for-deeplearning---3&quot;&gt;Install Ubuntu 18.04 GPU Server For DeepLearning - 3&lt;/h1&gt;
+
+&lt;p&gt;개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;install-python&quot;&gt;Install PYTHON&lt;/h2&gt;
+
+&lt;p&gt;아나콘다를 통하지 않고 소스를 통해 파이썬을 설치하기로 했다. 일단 용량이 작고, 다른 부가 spyder 등 프로그램을 설치하기 싫어서 소스에서 직접 설치하기로 했다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.python.org/&quot;&gt;https://www.python.org/&lt;/a&gt; 에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Download &amp;gt; Soruce code &amp;gt; Python 3.6.5 - 2018-03-28&lt;/code&gt; 로 들어가서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Gzipped source tarball&lt;/code&gt; 의 링크를 복사한 후 아래와 같이 쳐주자.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;압축을 헤제시켜주자
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo -zxvf Python-3.6.5.tgz
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;설치해보자
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./configure
+make
+make test
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;기본적으로 이렇게 진행하면 설치가 완료 된다. (중간에 실패하면 어떤 패키지가 없는지 확인하고 apt-get으로 설치해준다.)&lt;/p&gt;
+
+&lt;p&gt;하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo pip3 install numpy&lt;/code&gt; 하게 되면 아래와 같이 “TLS/SSL ~” 이라며 에러가 뜰 수도 있다. 자세히 뭔지는 모르겠지만, 구글링을 통해서 해결했다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
+Collecting
+  Could not fetch URL https://pypi.python.org/simple//: There was a problem confirming the ssl certificate: Can't connect to HTTPS URL because the SSL module is not available. - skipping
+  Could not find a version that satisfies the requirement (from versions: )
+No matching distribution found for
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;해결책&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;필수 패키지를 설치한다
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;소스폴더로 돌아가서 다시 설치해준다.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo make
+sudo make install
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;마지막으로, pip 를 업그레이드 해준다.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip3 install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;이제 설치가 잘 될 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;install-cuda-90&quot;&gt;Install CUDA 9.0&lt;/h2&gt;
+
+&lt;p&gt;CUDA-Toolkit 를 설치하면 드라이버를 설치할 필요는 없다고하나 만약에 먼저 설치해야하면 아래와 같이 설치(업데이트) 해주자&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-390
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;cuda-toolkit&quot;&gt;1. CUDA-Toolkit&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/cuda-90-download-archive&quot;&gt;https://developer.nvidia.com/cuda-90-download-archive&lt;/a&gt; 에서 자신에 버젼에 맞는 CUDA-Toolkit 을 받자.&lt;/p&gt;
+
+&lt;p&gt;나는 우분투이기에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Linux &amp;gt; x86_64 &amp;gt; Ubuntu &amp;gt; 17.04 &amp;gt; del[local]&lt;/code&gt; 를 골랐다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Base Installer&lt;/p&gt;
+
+  &lt;p&gt;Patch 1 (Released Jan 25, 2018)&lt;/p&gt;
+
+  &lt;p&gt;Patch 2 (Released Mar 5, 2018)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;세개의 다운로드 링크를 복사한 뒤 &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt; 메서드로 받아준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Base Installer&lt;/strong&gt; 설치&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
+sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
+sudo apt-get update
+sudo apt-get install cuda
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Patch 1&lt;/strong&gt; 설치&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+sudo apt-get update
+sudo apt-get upgrade cuda
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Patch 2&lt;/strong&gt; 설치&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+sudo apt-get update
+sudo apt-get upgrade cuda
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;만약에 쿠다 드라이버 명령어인 &lt;code class=&quot;highlighter-rouge&quot;&gt;nvcc&lt;/code&gt; 를 쓰고 싶다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;./profile&lt;/code&gt; 파일 밑에다 아래 항목을 추가해주면 된다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;아래 둘중에 하나를 한번 시도해보면 된다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvcc -V
+nvidia-smi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;cudnn-&quot;&gt;2. CuDNN 설치&lt;/h3&gt;
+
+&lt;p&gt;CuDNN 을 설치하려면 NVIDIA 회원 가입을 해야한다. 그리고 아래 싸이트에서 받아서 &lt;code class=&quot;highlighter-rouge&quot;&gt;scp&lt;/code&gt; 명령어로 서버로 옮기자.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.nvidia.com/rdp/cudnn-download&quot;&gt;https://developer.nvidia.com/rdp/cudnn-download&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;압축을 해제하고, 파일들을 옮겨주면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;pytorch---&quot;&gt;Pytorch 설치한 후 테스트&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/torch.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이로써 설치 과정을 마치겠다. 컴퓨터 설치는 처음이라 3일 걸렸지만 앞으로는 더 짧아 지겠지…&lt;/p&gt;
+
+&lt;p&gt;만약 오류가 나면 또 업데이트 하겠다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 03 Jun 2018 21:08:24 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
+    
+      <item>
+        <title>개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</title>
+        <description>&lt;h1 id=&quot;install-ubuntu-1804-gpu-server-for-deeplearning---2&quot;&gt;Install Ubuntu 18.04 GPU Server For DeepLearning - 2&lt;/h1&gt;
+
+&lt;p&gt;개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;after-install&quot;&gt;After Install&lt;/h2&gt;
+
+&lt;p&gt;설치후에 아래 명령어들을 쳐준다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;apt-get(Advanced Packaging Tool) 패키지 명령어 업데이트 및 설치되어 있는 패키지 업그레이드. 설치된 파일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/cache/apt/archive/&lt;/code&gt; 에 저장됨&lt;/li&gt;
+  &lt;li&gt;gcc(GNU Compiler Collection) 패키지 설치. 파이썬 설치에 필요&lt;/li&gt;
+  &lt;li&gt;make(GNU Make) 패키지 설치. 파이썬 설치시 필요&lt;/li&gt;
+  &lt;li&gt;zlib1g-dev 설치. 파이썬 설치시 필요&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade
+sudo apt install gcc
+sudo apt install make
+sudo apt install zlib1g-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;sshsecure-shell-&quot;&gt;SSH(SECURE SHELL) 접속&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;서버&lt;/code&gt; 컴퓨터에서 아래의 사항을 수정:&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vi /etc/ssh/sshd_config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ClientAliveInterval 60 : 클라이언트 살아있는지 확인하는 간격&lt;/li&gt;
+  &lt;li&gt;ClientAliveCountMax 10 : 클라이언트 응답 없어도 접속 유지하는 횟수&lt;/li&gt;
+  &lt;li&gt;PubkeyAuthentication yes : 활성화 시켜야 ssh를 통해서 접속 가능&lt;/li&gt;
+  &lt;li&gt;PasswordAuthentication yes : 원격 서버 비밀번호로 로그인 가능하게 것, 나중에 ssh 로만 접속 가능케 하려면 바꿔줘야한다.&lt;/li&gt;
+  &lt;li&gt;PermitEmptyPasswords no : 로그인시 빈 비밀번호를 가능케하는 옵션 기본으로 no로 되어 있다. 비밀번호 없이 로그인하게 하려면 yes로 바꿔줄 것, 권장은 안함&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ssh-key----&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;로컬&lt;/code&gt; 컴퓨터에서 SSH KEY 생성하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;서버&lt;/code&gt; 컴퓨터로 보내기:&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;ssh-keygen:&lt;/strong&gt; SSH 키를 생성한다. 경로 지정을 안할 때 보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.ssh&lt;/code&gt; 폴더 안에 &lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa&lt;/code&gt; 라는 이름으로 생성한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ssh-copy-id:&lt;/strong&gt; SSH 키를 서버로 보낸다. 옵션으로 포트번, 키 디렉토리 등등 설정 가능하다&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -f [filepath]
+ssh-copy-id -i [key_directory] -p [port] [user]@[ip_address]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;scp-&quot;&gt;파일전송 명령어 SCP 사용하기&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;서버 &amp;gt; 로컬
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;로컬 &amp;gt; 서버
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송받을 위치]
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다만 주의 해야할 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;[옵션]&lt;/code&gt; 에다가 로그인 옵션 다 넣어줘야 보내진다는 점을 잊지 말자.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;옵션:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;P: 포트&lt;/li&gt;
+  &lt;li&gt;i: key&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;wolwake-on-lan&quot;&gt;WOL(Wake-On-Lan)&lt;/h2&gt;
+
+&lt;p&gt;전기세 때문에 원격으로 컴퓨터를 껐다 켯다 하고 싶었다. 찾아보니 WOL 라는 방법이 있었다. 우선 자신의 컴퓨터의 메인보드가 이 기능을 지원해주고, 공유기도 이 기능을 지원해줘야 사용할 수 있다.
+컴퓨터 부팅전 &lt;code class=&quot;highlighter-rouge&quot;&gt;BIOS&lt;/code&gt; (내경우는 DEL 키를 눌렀음) 에 들어가서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Wake-On-Lan&lt;/code&gt; 이라는 글귀가 있는지 찾아보고, 있다면 enable 로 바꿔주자. 그리고 아래 명령어를 통해 내컴퓨터의 &lt;code class=&quot;highlighter-rouge&quot;&gt;이더넷 포트(Ethernet port)&lt;/code&gt; 알아보자&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ifconfig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;이더넷 포트는 첫째줄 제일 왼쪽에 있을 것이다. 보통 en~~ 로 시작하는 번호다&lt;/p&gt;
+
+&lt;p&gt;그 후, 컴퓨터 내 컴퓨터가 &lt;code class=&quot;highlighter-rouge&quot;&gt;WOL&lt;/code&gt; 기능이 켜졌나 확인 하기 위해, 부팅후 커맨드 라인에 아래와 같이 쳐주자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install ethtool
+sudo ethtool [Ethernet port]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Wake-on&lt;/code&gt; 이라는 곳에 &lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt; 라고 적혀져 있으면 켜진 것이다. 안되있다면 아래의 명령어를 통해 켜주자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ethtool -s [Ethernet port] wol g
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그 다음에 자신의 집의 공유기에 들어가서, WOL 설정을 해주자. NETIS 기준으로 설명 하겠다. IPTIME 은 다른 글들이 많으니 한번 찾아 보길 바란다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;원격 부팅(WOL)&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;사용 IP 목록에서 등록&lt;/code&gt; 누른후, 자신의 컴퓨터 IP 를 선택하고 이름을 지어준 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;등록&lt;/code&gt; 하게 되면 밑에 하나 등록 될 것이다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;외부 연결 포트&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;포트 번호&lt;/code&gt;는 내 컴퓨터의 접속 포트로 했다. (이건 꼭 TCP 통신으로 하는 포트로 해야하는지 모르겠다. 다른 번호를 따로 지정해줄 수 있는지를 확인 못해봄)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/WOL.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;마지막으로 DDNS 서비스 신청한다. 그러면 집 밖에서도 집 공유기에 접속해서 컴퓨터를 킬 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;참고자료: &lt;a href=&quot;http://blog.daum.net/peace20/16779844&quot;&gt;http://blog.daum.net/peace20/16779844&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다음 시간에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Python&lt;/code&gt; 설치와 &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA&lt;/code&gt; 설치를 다뤄보겠다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 03 Jun 2018 10:09:54 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</title>
         <description>&lt;h1 id=&quot;install-ubuntu-1804-gpu-server-for-deeplearning---1&quot;&gt;Install Ubuntu 18.04 GPU Server For DeepLearning - 1&lt;/h1&gt;
 
 &lt;p&gt;개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;컴퓨터 사양 상세&lt;/h2&gt;
 
@@ -174,6 +466,8 @@
   &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u11.png&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u12.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;사진출처: &lt;a href=&quot;https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/&quot;&gt;https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/&lt;/a&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;언어선택: 왠만하면 영어로 하자&lt;/li&gt;
@@ -1711,516 +2005,6 @@ hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &
         
         
         <category>NaverAI2018</category>
-        
-      </item>
-    
-      <item>
-        <title>RNN &amp; LSTM - 2: Numpy with RNN</title>
-        <description>&lt;h1 id=&quot;rnn--lstm----2&quot;&gt;자세하게 설명한 RNN 과 LSTM 시리즈 - 2&lt;/h1&gt;
-
-&lt;h2 id=&quot;numpy--rnn-&quot;&gt;Numpy 로 RNN 만들어보기&lt;/h2&gt;
-&lt;p&gt;모든 코드는 Github: &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN&quot;&gt;NUMPYwithNN&lt;/a&gt; 에 올려져 있습니다.&lt;/p&gt;
-
-&lt;p&gt;Jupyter Notebook 으로 전체과정 보기: &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/NUMPYwithNN/blob/master/Notebook/Character_Predicting_RNN.ipynb&quot;&gt;링크 &lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;rnn-forward--backward--&quot;&gt;RNN Forward 와 Backward의 계산 그래프&lt;/h2&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward0.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_forward2.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward0.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward3.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward4.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/graph_backward5.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;backward에서 잊지 말아야 할 부분은 $t=T$일 때(마지막 Step일 때) $d h_T$는 0으로 초기화 되며, 구해진 $d h_{t-1}^{raw}$ 가 이 다음 역전파로 들어가기 전에 이전 단계로 부터 얻은 $dh_{t-1}$ 와 더해져 계산한다는 점이다. 그 이유는 forward 시 다음 step으로 hidden 값($h_t$)을 전파하기 때문이라는 것을 잊지 말자.&lt;/p&gt;
-
-&lt;p&gt;위 그림은 &lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;ratsgo’s blog&lt;/a&gt; 님의 포스트에서 많은 참조를 하고 새로 만들었음을 밝힙니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;bptt--&quot;&gt;참고) BPTT 수식적 이해&lt;/h3&gt;
-&lt;p&gt;$tanh$의 미분을 $f(x) = 1 - tanh^2(x)$ 라고 하면,&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-dh_{0} = \dfrac{\partial L}{\partial h_{0}}
-&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_0} + \dfrac{\partial L}{\partial y_{t-1}} \dfrac{\partial y_{t-1}}{\partial h_0} \cdots + \dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_0}\\
-&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_t} \dfrac{\partial h_t}{\partial a_t} \dfrac{\partial a_t}{\partial h_{t-1}} \cdots \dfrac{\partial a_1}{\partial h_{0}} + \cdots +
-\dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial a_1} \dfrac{\partial a_1}{\partial h_0} \\
-&amp;= W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_1) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) W_{hh} f(a_1) + W_{hy} dy_1 W_{hh} f(a_1) \\
-&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;위 식을 위에 있는 그림대로 그려보자, 뒤에 $W_{hh} f(a_1)$ 부처 차근차근 묶어서 아래의 식을 얻을 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-\dfrac{\partial L}{\partial h_{0}}
-&amp;= W_{hh} f(a_1) \bigg( W_{hy} dy_t  W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_2) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) + W_{hy} dy_1 \bigg) \\
-&amp;= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_3) + \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
-&amp;= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( \cdots W_{hh} f(a_{t-1}) \big( \underbrace{W_{hh} f(a_t) (\underbrace{ W_{hy} dy_t }_{dh_t^{raw}} + 0)}_{dh_{t-1}} + \underbrace{ W_{hy} dy_{t-1} }_{dh_{t-1}^{raw}} \big) \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;위에 그림과 비교해보면 이런 식으로 계속 더해진다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;backpropagation-through-time-bptt-&quot;&gt;BackPropagation Through Time (BPTT) 구현&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Single_Layer_RNN&lt;/strong&gt; 의 코드는 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;여기&lt;/a&gt;에 있습니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Layer&lt;/strong&gt; 의 구현을 참고하려면 Github의 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/layers.py&quot;&gt;common/layers&lt;/a&gt; 참고하세요!&lt;/li&gt;
-  &lt;li&gt;처음 Layer를 짜보시는 분은 &lt;a href=&quot;https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html&quot;&gt;Numpy로 짜보는 Neural Network Basic&lt;/a&gt; 시리즈를 참고하세요!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def _params_summation_init(self):
-    self.params_summ = {}
-    self.params_summ['W_xh'] = np.zeros_like(self.params['W_xh'])
-    self.params_summ['W_hh'] = np.zeros_like(self.params['W_hh'])
-    self.params_summ['W_hy'] = np.zeros_like(self.params['W_hy'])
-    self.params_summ['b_h'] = np.zeros_like(self.params['b_h'])
-    self.params_summ['b_y'] = np.zeros_like(self.params['b_y'])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;또한, $dh_T$ 를 0으로 초기화 한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dht = np.zeros_like(self.h0)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;그후에 총 길이 $T$의 역순으로 각 Layer 의 Back Propagation 을 진행한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for t in np.arange(self.T)[::-1]:
-    dout = self.last_layers[t].backward()
-    dht_raw = self.layers['Affine_hy'][t].backward(dout)
-    dat = self.layers['Activation'][t].backward(dht_raw + dht)
-    dht = self.layers['Affine_hh'][t].backward(dat)
-    dx = self.layers['Affine_xh'][t].backward(dat)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;또한, 파라미터 $W$ 와 $b$ 의 합도 같이 구해준다. 그 이유는 전편에서 설명되어 있지만, 다시 한번 이야기 하자면, 최종 Loss Function은 각 Output Loss의 평균이기 때문에, 각 Output 마다 파라미터들을 summation 하는 과정이 있다. (평균을 구할때 우선 summation을 한다는 것을 잊지 말자.)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
-self.params_summ['W_hh'] += self.layers['Affine_hh'][t].dW
-self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
-self.params_summ['b_h'] += self.layers['Affine_hh'][t].db
-self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;전체 Backward 과정&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward(self):
-    # BPTT
-    self._params_summation_init()
-    dht = np.zeros_like(self.h0)
-
-    for t in np.arange(self.T)[::-1]:
-        dout = self.last_layers[t].backward()
-        dht_raw = self.layers['Affine_hy'][t].backward(dout)
-        dat = self.layers['Activation'][t].backward(dht_raw + dht)
-        dht = self.layers['Affine_hh'][t].backward(dat)
-        dx = self.layers['Affine_xh'][t].backward(dat)
-
-        self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
-        self.params_summ['W_hh'] += self.layers['Affine_hh'][t].dW
-        self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
-        self.params_summ['b_h'] += self.layers['Affine_hh'][t].db
-        self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;truncate-backpropagation-through-time-t-bptt&quot;&gt;Truncate BackPropagation Through Time (T-BPTT)&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Truncate BackPropagation Through Time (T-BPTT)&lt;/strong&gt; 은 기존 BPTT 에서 과거 모든 미분값을 참조하는 대신 고정된 길이로 참조 할 수 있도록 만든 알고리즘이다.&lt;/p&gt;
-
-&lt;p&gt;왜 이런것을 만들었을 까? BPTT 알고리즘의 미분식을 다시 생각해보자.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-dh_{0} = \dfrac{\partial L}{\partial h_{0}}
-&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;위에서 설명했지만, BPTT 과정에서 Time-step이 길어질 수록, 많은 양의 곱셈이 이루어 진다. 계산량을 줄이기 위해서 이런 알고리즘이 나왔을 수 있다.&lt;/p&gt;
-
-&lt;p&gt;다른 접근 방법으로, 학습하고 싶은 Sequence의 일정 길이만큼만 과거를 참조하고 싶기 때문일 수도 있다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어 “I live in Seoul. (중략) I am Korean.” 이라는 문장을 생각해보자. 학습 데이터는 아래와 같을 것이다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;I&quot;, &quot;live&quot;, &quot;in&quot;, &quot;Seoul&quot;, &quot;.&quot;, (중략), &quot;I&quot;, &quot;am&quot;, &quot;Korean&quot;, &quot;.&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Forward 할때는 순차적으로 들어갈텐데, Backward 할때는 데이터의 역순으로(“.”, “Korean”) 진행될 것이다. 그러나 내가 한국인이라는 것은 내가 서울에 살고 있기 때문인데, 굳이 앞단의 “I”, “live”, “in” 까지 참조할 필요는 없는 것이다. 그렇다면 위에 식은 아래와 같이 변할 것이다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-dh_{0} = \dfrac{\partial L}{\partial h_{0}}
-&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{k} \prod_{j=k}^{t} f(a_j) \Big) \\
-where \quad k &amp;= \max(1, t - truncate)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;h3 id=&quot;t-bptt-&quot;&gt;T-BPTT 구현&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/normal_truncate.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;r2rt.com&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def backward_truncate(self):
-    # TBPTT
-    self._params_summation_init()
-    dht = np.zeros_like(self.h0)
-
-    for t in np.arange(self.T)[::-1]:
-        dout = self.last_layers[t].backward()
-        dht_raw = self.layers['Affine_hy'][t].backward(dout)
-        self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
-        self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
-
-        for bptt_step in np.arange(max(0, t + 1 - self.bptt_truncate), t + 1)[::-1]:
-            dat = self.layers['Activation'][bptt_step].backward(dht_raw + dht)
-            dht = self.layers['Affine_hh'][bptt_step].backward(dat)  # dh_t-1
-            dx = self.layers['Affine_xh'][bptt_step].backward(dat)  # dx
-            self.params_summ['W_xh'] += self.layers['Affine_xh'][bptt_step].dW
-            self.params_summ['W_hh'] += self.layers['Affine_hh'][bptt_step].dW
-            self.params_summ['b_h'] += self.layers['Affine_hh'][bptt_step].db
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;그러나 Tensorflow 에서는 아래와 같이 구현한다고 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/tensorflow_truncate.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그림 출처: &lt;a href=&quot;https://r2rt.com/styles-of-truncated-backpropagation.html&quot;&gt;r2rt.com&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;실습&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;목적&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;“hello world! nice to meet you! i love iron-man”&lt;/strong&gt; 을 RNN 으로 학습시키기.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Input&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Output&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;h&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;e&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;e&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;l&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;o&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;⋮&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;m&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;a&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;→&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;n&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;데이터 및 우리가 만든 패키지 준비&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import numpy as np
-from common.SimpleRNN import Single_layer_RNN
-from common.optimizer import Adam
-from common.train_graph import loss_graph
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;x = 'hello world! nice to meet you! i love iron-man'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;인코딩 클래스 하나를 만들어서 문자열을 one-hot 인코딩 해준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class chr_coding(object):
-    def __init__(self):
-        self._dict = None
-        self._one_hot_matrix = None
-        self._dict_reversed = None
-
-    def fit(self, x):
-        if isinstance(x, str):
-            x = list(x)
-
-        self._one_hot_matrix = np.eye(len(set(x)))
-        self._dict = {d: i for i, d in enumerate(list(set(x)))}
-        self._dict_reversed = {v: k for k, v in self._dict.items()}
-
-    def encode(self, x):
-        encoded_data = np.array([self._one_hot_matrix[self._dict[d]] for d in x])
-        return encoded_data
-
-    def decode(self, x, probs=None):
-        if probs is None:
-            decoded_data = self._dict_reversed[x]
-        else:
-            decoded_data = self._dict_reversed[np.argmax(probs)]
-        return decoded_data
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;encoder = chr_coding()
-encoder.fit(x)
-one_hot_data = encoder.encode(x)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;학습 데이터 x, y를 지정해준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_x = one_hot_data[:-1]
-train_y = one_hot_data[1:]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;hyperparameters&quot;&gt;hyperparameters&lt;/h3&gt;
-
-&lt;p&gt;INPUT_SIZE 와 OUTPUT_SIZE 는 중복되지 않는 문자열 사전의 길이라는 것을 잊지 말자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NUM_EPOCHS = 600
-PRINT_EPOCH = 30
-INPUT_SIZE = one_hot_data.shape[1]
-OUTPUT_SIZE = one_hot_data.shape[1]
-HIDDEN_SIZE = 20
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;accuracy--train-&quot;&gt;필요한 함수 설정: accuracy 와 train 함수&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def get_accuracy(x, test_string):
-    bool_ = np.array(list(x))[1:] == np.array(list(test_string))[1:]
-    return bool_.sum() / len(bool_)
-
-def train(rnn, optim, print_epoch=20):
-    total_loss_list = []
-    total_acc_list = []
-    for epoch in range(NUM_EPOCHS):
-        test_string = 'h'
-        # forward
-        total_loss = rnn.loss(train_x, train_y)
-
-        # backward
-        rnn.backward()
-
-        optim.update(rnn.params, rnn.params_summ)
-
-        # test string
-        predicted_idx = rnn.predict(train_x)
-        for idx in predicted_idx:
-            test_string += encoder.decode(idx)
-
-        # get accuracy
-        acc = get_accuracy(x, test_string)
-
-        if epoch % print_epoch == 0:
-            print('#{0}, Loss: {1:.6f}, Acc: {2:.6f}, Test_string: &quot;{3}&quot;'\
-                  .format(epoch, total_loss, acc, test_string))
-        elif epoch == (NUM_EPOCHS-1):
-            print('#{0}, Loss: {1:.6f}, Acc: {2:.6f}, Test_string: &quot;{3}&quot;'\
-                  .format(epoch, total_loss, acc, test_string))
-
-        total_loss_list.append(total_loss)
-        total_acc_list.append(acc)
-    return total_loss_list, total_acc_list
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;학습하기&lt;/h3&gt;
-
-&lt;p&gt;rnn 모델을 만들고, 어떤 방식으로 업데이트 할 것인지 정하자. 여기서는 Adam을 썼다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Optimizer&lt;/strong&gt; 의 설명은 &lt;a href=&quot;https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py&quot;&gt;Numpy로 짜보는 Neural Network Basic - 5&lt;/a&gt;에 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rnn = Single_layer_RNN(input_size=INPUT_SIZE,
-                       hidden_size=HIDDEN_SIZE,
-                       output_size=OUTPUT_SIZE)
-optim = Adam()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;학습시키기!&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;total_loss_list, total_acc_list = train(rnn, optim, print_epoch=PRINT_EPOCH)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bptt.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Loss Graph 도 찍어보자&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loss_graph(train_loss_list=total_loss_list, train_acc_list=total_acc_list)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bptt_loss.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;공부에 도움 되었던 싸이트:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/karpathy/d4dee566867f8291f086&quot;&gt;karpathy github RNN part&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/natural%20language%20processing/2017/03/09/rnnlstm/&quot;&gt;ratsgo’s blog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 14 Mar 2018 22:05:37 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm2.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/14/rnnlstm2.html</guid>
-        
-        
-        <category>DeepLearning</category>
-        
-      </item>
-    
-      <item>
-        <title>RNN &amp; LSTM - 1: RNN</title>
-        <description>&lt;h1 id=&quot;rnn--lstm----1&quot;&gt;자세하게 설명한 RNN 과 LSTM 시리즈 - 1&lt;/h1&gt;
-
-&lt;h2 id=&quot;rnnrecurrent-neural-network&quot;&gt;RNN(Recurrent Neural Network)&lt;/h2&gt;
-&lt;p&gt;우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.&lt;/p&gt;
-
-&lt;h2 id=&quot;rnn-&quot;&gt;RNN 구조&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn.png&quot; alt=&quot;Drawing&quot; style=&quot;width=500px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;RNN은 중간의 Hidden 층이 순환한다고해서 순환 신경망이라고 한다. 왼쪽의 구조를 펼쳐서 보면, 중간의 Hidden 노드가 어떤 방향으로 계속 이어진 다는 것을 알 수 있다. 이러한 쇠사슬 같은 성격은 RNN으로 하여금 연속된 이벤트와 리스트에 적합한 구조로 만들어 준다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 보면 엄청 어렵게 느껴질 수 있다. 그렇다면 예시를 들어서 RNN이 어떻게 돌아가는지 수학적으로 살펴보자.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;기본 신경망 구조&lt;/h3&gt;
-
-&lt;p&gt;기존의 신경 구조를 한번 다시 되새겨보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/stick.png&quot; alt=&quot;Drawing&quot; height=&quot;200&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;여러개의 노드로 구성된 작은 블럭을 하나의 층이라고 가정하자. 기존의 신경망 구조는 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/basic_nn_mnist.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Input $x$ 가 선형 결합 후, Hidden 에 Activation function을 거쳐 다시 선형결합을 통해 Output $y$를 구해 예측하는 알고리즘이다. 여기서 첫번째 데이터($x_1$)와 그 다음 데이터($x_2$ 등)간의 구조는 독립적이라고 할 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;forward&quot;&gt;Forward&lt;/h3&gt;
-&lt;p&gt;예시로 time step($T$)이 3인 RNN을 살펴보자. (좌우 클릭으로 프로세스 과정 볼 수 있다)&lt;/p&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_0.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_1.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_2.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_3.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_4.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_5.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_6.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_7.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_8.png&quot; /&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-
-&lt;p&gt;Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다. 또한 각 가중치는 각각 layer에서 공유하게 된다.
-(가중치 초기화를 잊어 버렸다면 &lt;a href=&quot;https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html&quot;&gt;여기&lt;/a&gt;로)&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-h_t &amp;= \tanh(W_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
-y_t &amp;= W_{hy} h_t + b_y
-\end{aligned}
-\quad for\ t\ in\ T %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;그리고, 시간이 지날때마 위의 식 처럼 Forward가 진행된다.&lt;/p&gt;
-
-&lt;p&gt;최종 Cost는 모든 Cost Function의 평균으로 구해진다.&lt;/p&gt;
-
-&lt;h3 id=&quot;backward&quot;&gt;Backward&lt;/h3&gt;
-&lt;p&gt;RNN에서는 일반적인 신경망과 다른 Backward 알고리즘을 쓴다. 시간 경과에 따른 BackPropagation을 BPTT(BackPropagation Through Time)이라고 부른다.&lt;/p&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back0.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back1.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back2.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back3.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back4.png&quot; /&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_back5.png&quot; /&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-
-&lt;p&gt;최종적으로 학습 될 값은 Loss Function에서 각 미분한 ${\frac{\partial L}{\partial W}}^{(1)}$, ${\frac{\partial L}{\partial W}}^{(2)}$, ${\frac{\partial L}{\partial W}}^{(3)}$ 의 합으로 구해진다.&lt;/p&gt;
-
-&lt;h3 id=&quot;long-term-dependency-&quot;&gt;장기 의존성(Long-Term Dependency) 문제&lt;/h3&gt;
-&lt;p&gt;RNN이 이론상으로는 sequence의 첫번째 항부터 끝까지(즉, $x_1 \cdots x_T$ 까지) 학습 할 수 있을 것으로 보이나, 실제로는 장기기억, 즉 Time Step이 길어 질 수록 예전에 있던 정보를 기억 못한다. 이를 &lt;strong&gt;장기 의존성(Long-Term Dependency)&lt;/strong&gt; 문제라고 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/rnn_bad.png&quot; alt=&quot;Drawing&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그 이유는 우리가 업데이트 하려는 미분 식을 살펴보면 알 수 있다. 예를 들어 $W_{hh}$ 를 업데이트 한다고 하자.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-\dfrac{\partial L}{\partial W_{hh}}  
-&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial W_{hh}} + \cdots +
-\dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial W_{hh}} \\
-&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \dfrac{\partial h_T}{\partial h_{T-1}}  \cdots \dfrac{\partial h_2}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} +
-\cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} \\
-&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}} \dfrac{\partial h_1}{\partial W_{hh}} + \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;위의 식중에 $\prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}}$ 부분을 자세히 펼쳐보면 아래와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-\prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}}
-&amp;= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} \dfrac{\partial a_{T-i+1}}{\partial h_{T-i}} \\
-&amp;= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} W_{hh}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;여기서 $a_t=W_{hh}h_{t-1} + W_{xh}x_t + b_h$ 이다.&lt;/p&gt;
-
-&lt;p&gt;앞부분 $\frac{\partial h_{T-i+1}}{\partial a_{T-i+1}}$은 &lt;strong&gt;tanh&lt;/strong&gt; 의 미분 값이다. 아래 그림과 같이 tanh의 미분 값은 0과 1사이의 값이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/rnn/tanh.png&quot; style=&quot;width=500px&quot; /&gt;
-(그림출처: http://nn.readthedocs.io/en/latest/transfer/)&lt;/p&gt;
-
-&lt;p&gt;뒷부분인 $W_{hh}$의 값들은 세가지 경우가 있다. 1과 같게 되면 Gradient가 수렴될 가능성이 높다. 그러나 1보다 클 경우 gradient가 무한대로 발산하는 &lt;strong&gt;Exploding Gradient&lt;/strong&gt; 문제가 발생한다. 그러나 보통의 경우 $W_{hh}$ 의 값들은 1보다 작다. (아래 논문 참고)&lt;/p&gt;
-
-&lt;p&gt;0과 1사이의 작은 값을 계속 곱하게 되면 0으로 수렴한다. 따라서, 두 가지를 종합 해보았을 때, 출력값과 멀리 떨어진 Time Step일 수록 역전파가 전달 되지 않는 &lt;strong&gt;Vanishing Gradient&lt;/strong&gt; 문제가 생기게 된다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://proceedings.mlr.press/v28/pascanu13.pdf&quot;&gt;On the difficulty of training recurrent neural networks&lt;/a&gt; 논문에서는 Vanishing &amp;amp; Exploding Gradient 문제를 자세히 다루고 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 &lt;strong&gt;tanh&lt;/strong&gt; 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 &lt;strong&gt;ReLU&lt;/strong&gt; 를 쓰자는 방법이 있었다. 둘째로, &lt;strong&gt;LSTM&lt;/strong&gt;, &lt;strong&gt;GRU&lt;/strong&gt; 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 07 Mar 2018 10:46:04 +0900</pubDate>
-        <link>http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html</guid>
-        
-        
-        <category>DeepLearning</category>
         
       </item>
     
