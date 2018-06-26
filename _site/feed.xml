@@ -6,9 +6,173 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jun 2018 08:53:28 +0900</pubDate>
-    <lastBuildDate>Thu, 21 Jun 2018 08:53:28 +0900</lastBuildDate>
+    <pubDate>Wed, 27 Jun 2018 00:35:49 +0900</pubDate>
+    <lastBuildDate>Wed, 27 Jun 2018 00:35:49 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>PyCharm SSH 연결하기</title>
+        <description>&lt;h1 id=&quot;pycharm-ssh-&quot;&gt;PyCharm SSH 연결하기&lt;/h1&gt;
+
+&lt;p&gt;최근 딥러닝서버를 만들고 나서 Jupyter Notebook 만 사용했다. 그런데 오늘 파이참에서는 학생들을 위해 매 1년 마다 프로 버젼을 제공해주고 있다는 것을 들었다. 이를 사용해 보기로 했다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;PyCharm For Student: &lt;a href=&quot;https://www.jetbrains.com/student/&quot;&gt;https://www.jetbrains.com/student/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;PyCharm Pro를 쓰면 &lt;strong&gt;Run On Remote Server&lt;/strong&gt; 기능을 쓸 수 가 있는데, 현재 운영체제인 Mac OS 에서 코드를 실행하면, 서버 Ubuntu 18.04 LTS 에서 실행 된다는 것이다. 게다가 PyCharm의 디버깅 툴도 사용할수 있다.&lt;/p&gt;
+
+&lt;p&gt;그러나 이를 실행하는 과정이 쉬운 것은 아니었다. 아래 3개의 과정으로 설명하려고 한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Interpreter 설정&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Deployment 설정&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;프로젝트 연결 설정&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;interpreter&quot;&gt;Interpreter&lt;/h2&gt;
+
+&lt;p&gt;많은 블로그에서 우선 Interpreter 설정을 진행하라고 해서 나도 따라했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/4kqy5xwpdz7qe26/0625_interpreter.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;파이참 시작화면에서 오른쪽 아래 &lt;code class=&quot;highlighter-rouge&quot;&gt;Configure &amp;gt; Preferences&lt;/code&gt; 혹은 새로운 프로젝트를 만든 뒤, &lt;code class=&quot;highlighter-rouge&quot;&gt;⌘,&lt;/code&gt;를 누르자. 그러면 위와 같은 화면이 나오는데, &lt;code class=&quot;highlighter-rouge&quot;&gt;Project Interpreter&lt;/code&gt; 를 선택하자.&lt;/p&gt;
+
+&lt;p&gt;처음에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;No interpreter&amp;gt;&lt;/code&gt; 라고 나올텐데, 옆에 &lt;code class=&quot;highlighter-rouge&quot;&gt;톱니바퀴 &amp;gt; add&lt;/code&gt; 를 눌러주자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/mewttyzbf7btzqs/0625_add_interpreter.png&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; : IP&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Port&lt;/code&gt; : 포트번호&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Username&lt;/code&gt; : 사용자 이름&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위 세가지 사항을 차례대로 입력한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/r29aktz21vy5e9g/0625_sshkey.png&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Private Key file&lt;/code&gt; : SSH 에서 Private key 의 위치를 써준다. 보통은 &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.ssh&lt;/code&gt; 폴더 안에 있다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Passphrase&lt;/code&gt; : Private Key 의 비밀번호를 넣는다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이렇게 쉽게 성공했으면 얼마나 좋았을까?&lt;/p&gt;
+
+&lt;p&gt;그런데 여기서 아무리 연결을 하려고해도 &lt;span style=&quot;color: #e87d7d&quot;&gt;Authentication Fail&lt;/span&gt; 이라는 빨간 글씨만 보였다.&lt;/p&gt;
+
+&lt;p&gt;구글링 결과 나와 같은 오류를 가진 사람들이 올린글이 하나 있었는데(&lt;a href=&quot;https://bit.ly/2Im44VD&quot;&gt;링크&lt;/a&gt;), 요약하면, &lt;strong&gt;“아무리 패스워드를 정확하게 입력해도 연결이 안된다. 내가 뭘 놓치고 있는거냐?”&lt;/strong&gt; 라는 글이었다.&lt;/p&gt;
+
+&lt;p&gt;나는 아래 댓글의 방안으로 해결 했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/hu4h1mlmsuaxezh/0625_solution.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;요약하면, &lt;strong&gt;deployment server&lt;/strong&gt; 를 먼저 설정한 후에 하라는 말이었다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;deployment&quot;&gt;Deployment&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Deployment&lt;/code&gt; 는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Build, Execution, Deployment&lt;/code&gt; 속성에 있었다. 아무것도 없다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; 눌러서 새로 만들자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/u59u4f4qcte59dv/0625_deployment.png&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SFTP&lt;/code&gt; 를 선택한 후&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SFTP host&lt;/code&gt; : IP&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Port&lt;/code&gt; : 포트번호&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Root path&lt;/code&gt; : 루트 패스인데 $HOME 위치를 설정한다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;User name&lt;/code&gt; : 사용자 이름&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Auth type&lt;/code&gt; : 패스워드 혹은 Key Pair(나는 ssh 키를 쓰기 때문에 이것을 선택)&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Private key&lt;/code&gt; : 키위치&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Key passphrase&lt;/code&gt; : 키 비밀번호&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위 정보를 다 입력하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Test SFTP connection&lt;/code&gt; 을 눌러봐서 테스트 해본다. 만약 통과가 되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Apply&lt;/code&gt; 를 누르자!&lt;/p&gt;
+
+&lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Interpreter&lt;/code&gt; 에 돌아가서 다시 설정해준다.&lt;/p&gt;
+
+&lt;p&gt;접속후 파이썬을 연결 해야하는데, 따로 python을 설치한게 없다면, 기본적으로 2.7 버전인 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/python&lt;/code&gt; 패스가 설정 될 것이다.&lt;/p&gt;
+
+&lt;p&gt;만약에 자신의 서버에서 Python3 을 따로 설치했다면 서버 terminal 에서 아래와 같이 쳐준다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ which python3
+/usr/local/bin/python3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;이 위치를 복사해서 쓰자.&lt;/p&gt;
+
+&lt;p&gt;모든게 정상적으로 작동하면, &lt;strong&gt;Connection Sucessfully&lt;/strong&gt; 를 확인 할 수 가 있다.&lt;/p&gt;
+
+&lt;p&gt;아까 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;No interpreter&amp;gt;&lt;/code&gt; 칸에 &lt;code class=&quot;highlighter-rouge&quot;&gt;remote Python 3.6.5 (sftp://[유저이름]@[IP]:[포트]/[파이썬위치])&lt;/code&gt; 가 뜨면 성공한 것이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;프로젝트 연결 설정 확인&lt;/h2&gt;
+
+&lt;p&gt;자신의 프로젝트와 잘 연결 되었는지 확인 해보는 작업을 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/k04w9sa9qplxr1m/0625_openproject.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Pycharm에서 새로운 프로젝트를 시작하거나 이미 존재하는 프로젝트를 오픈한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/h8ac2hnryxs9t23/0625_mappings.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;첫째, &lt;code class=&quot;highlighter-rouge&quot;&gt;⌘,&lt;/code&gt; 를 눌러서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Deployment&lt;/code&gt; 설정에 들어가서 아래의 설정을 해준다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Local Path&lt;/code&gt; : 로컬 PC 의 프로젝트 위치&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Deployment path on Server ***&lt;/code&gt; : 서버의 프로젝트 위치, 이때 앞단에 설정했던 홈 디렉토리 &lt;code class=&quot;highlighter-rouge&quot;&gt;Root Path&lt;/code&gt; 를 빼고 설정해줘야 한다. $HOME/프로젝트위치&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;둘째, 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;Project Interpreter&lt;/code&gt; 에 접속해서 서버에 있는 파이썬과 연결 됐는지 확인한다.&lt;/p&gt;
+
+&lt;p&gt;셋째, 파일 실행을위해 주 실행파일 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.py&lt;/code&gt;을 선택 후 (없다면 실행할 파일을 선택), 메뉴에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Run &amp;gt; Edit Configuration&lt;/code&gt; 을 선택한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/gl4kjtjep5qjgjg/0625_remotepython.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위에 &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; 버튼을 눌러서 새로운 파이썬 실행파일을 연결하자.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Script path&lt;/code&gt;: 스크립트 실행 파일 루트&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Python Interpreter&lt;/code&gt; : Remote Python 으로 설정 됐는지 확인&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Environment Variables&lt;/code&gt; : 딥러닝에서 GPU를 쓰려면 환경을 인식해줘야한다. ㅠㅠ&lt;/p&gt;
+
+  &lt;p&gt;아래 그림과 같이 설정해주자. (그전에 cuda 설치를 못했다면? &lt;a href=&quot;https://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html&quot;&gt;링크&lt;/a&gt;)&lt;/p&gt;
+
+  &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/ere9ckvmt23x343/0625_env.png&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;꿀팁&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;SSH 터미널을 사용하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Tools &amp;gt; Start SSH session...&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;로컬에서 변경사항을 자동 업로드 하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Tools &amp;gt; Deployment &amp;gt; Automatic uploads(always)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 24 Jun 2018 18:41:07 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/06/24/pycharmssh.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/24/pycharmssh.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>개인 딥러닝용 서버 설치 과정기 - 3 PYTHON &amp; CUDA</title>
@@ -1912,99 +2076,6 @@ hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &
         
         
         <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>Naver AI Colloquium 2018</title>
-        <description>&lt;h1 id=&quot;naver-ai-colloquium-2018--&quot;&gt;Naver AI Colloquium 2018 참석 후기&lt;/h1&gt;
-&lt;p&gt;&lt;del&gt;+ 클로바스피커 후기&lt;/del&gt;&lt;/p&gt;
-&lt;h2 id=&quot;section&quot;&gt;개요&lt;/h2&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/naveraicol/logo.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/naveraicol/ment1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/naveraicol/ment2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/naveraicol/ment3.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;http://naveraiconf.naver.com/&quot;&gt;네이버 AI 콜로키움&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;운 좋게 기회가 되서 &lt;a href=&quot;http://naveraiconf.naver.com/&quot;&gt;&lt;strong&gt;Naver AI Colloquium 2018&lt;/strong&gt;&lt;/a&gt; 에 다녀왔다.
-싸이트에 접속해서 프로그램 표를 자세히 보면 알겠지만, 이번 콜로키움에서는 크게 4가지 주제를 다뤘다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;언어 분야(Search &amp;amp; Natural Language)&lt;/li&gt;
-  &lt;li&gt;비전 분야(Computer Vision, Mobility&amp;amp;Location Intelligence)&lt;/li&gt;
-  &lt;li&gt;추천 분야(Recommendation)&lt;/li&gt;
-  &lt;li&gt;데이터 엔지니어 분야(AI Algorithm, System&amp;amp;Platform)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;나는 언어 분야, 즉 자연어을 다루는 쪽에 관심이 많아서 Track A 만 거의 듣고, 추천 분야 하나 정도 들었다. 각 강의에서 다루는 내용은 차후 하나씩 정리해서 올릴 예정이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;후기&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/naveraicol/professorsungkim.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;“모두의 딥러닝”으로 유명하신 Sung Kim 교수님!! (문제가 되면 사진 내리겠습니다~ 댓글 달아주세요)&lt;/p&gt;
-
-&lt;p&gt;인상 깊었던 세션과 그 이유를 몇개 꼽자면, &lt;del&gt;어쩌다보니 다 네이버 직원분들이 발표하신거네ㅎㅎ&lt;/del&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Semantic Matching Model - 김선훈 (NAVER)
-시멘틱 매칭의 필요성:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;키워드(단어기반)&lt;/strong&gt; 매칭보다는 &lt;strong&gt;시멘틱(의미기반)&lt;/strong&gt; 매칭이 다양한 표현과 오타를 커버할 수 있는 가능성이 높다.&lt;/li&gt;
-      &lt;li&gt;Sementic Gap: 인간이해와 기계이해의 차이, 이것을 줄이는게 큰 과제&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Neural Speed Reading - 서민준 (NAVER)
-    &lt;ul&gt;
-      &lt;li&gt;Skim-RNN: “속독”에서 나온 아이디어, 중요하지 않은 단어는 적게 업데이트!&lt;/li&gt;
-      &lt;li&gt;Big RNN 과 Small RNN 의 결정 짓는 Decision Function&lt;/li&gt;
-      &lt;li&gt;Layer를 쌓으면 중요한 정보를 캐치 (마치 글을 두번째 읽을 때는 주요 단어만 보게 되는 것과 같음)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Hybrid Natural Language Understanding 모델 - 김경덕 (NAVER)
-    &lt;ul&gt;
-      &lt;li&gt;문제 정의의 중요성: 잘해야 문제를 해결하기 쉽고 명확하다.&lt;/li&gt;
-      &lt;li&gt;팬턴 기반 검색 NLU + 데이터 통계 기반 NLU, 뭐든지 하나만 고르는 것은 아니다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자기학습 기반 챗봇(발표세션은 아님)
-    &lt;ul&gt;
-      &lt;li&gt;챗봇의 전체 과정:
-  Query $\rightarrow$ 언어적 특징 추출 $\rightarrow$ 쿼리 분류기(대화여부 및 도메인 인지) $\rightarrow$ 여러 모델로 부터 답변 생성 $\rightarrow$ Answer&lt;/li&gt;
-      &lt;li&gt;N-hot representation: 토큰원형 + 품사태깅 + 어미&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이 정도인 것 같다.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;클로바 스피커(프렌즈) 후기&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/naveraicol/speaker.jpeg&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;어쩌다 운좋게 경품에 당첨 되서 받았다. ㅎㅎㅎ 감사합니다.
-이놈…생각보다 귀엽다. 아직까지 일본의 프렌즈보다 기능이 덜 있는 것 같다. 라인으로 메세지 보내는 기능 시도해보았는데, 안되드라…&lt;/p&gt;
-
-&lt;p&gt;영상링크: &lt;a href=&quot;https://youtu.be/lK-9yDoHsZ8&quot;&gt;【公式】Clova Friendsができること &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;아무튼 아직 개선할 사항이 많다. 예를 들어, “레미제라블 Do you hear the people sing? 노래틀어줘”라고 말하면, 말씀하신 사항을 찾지 못했다고 대답한다.
-어떤 세션에서 들었던것 같은데, 내 생각에는 레미제라블, 노래틀어줘는 노래틀어주는 분야로 의도로 분류되고, 나머지 영어는 번역하는 의도로 분류된 것 같다. (스피커에 말한 내용을 볼 수 있는데, 음성인식을 진짜 제대로 잘 된다. 괜히 1위라고 말한게 아닌듯 ㅋㅋ)&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;내년에 또 하게되면 참가하고싶다~&lt;/p&gt;
-
-&lt;p&gt;관심 있었던 세션들을 정리하면 바로 올리겠다.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 30 Mar 2018 20:14:21 +0900</pubDate>
-        <link>http://simonjisu.github.io/naverai2018/2018/03/30/naveraicolloquium2018.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/naverai2018/2018/03/30/naveraicolloquium2018.html</guid>
-        
-        
-        <category>NaverAI2018</category>
         
       </item>
     

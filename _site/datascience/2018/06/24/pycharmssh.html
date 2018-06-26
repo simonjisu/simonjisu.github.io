@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</title>
-  <meta name="description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1">
+  <title>PyCharm SSH 연결하기</title>
+  <meta name="description" content="PyCharm SSH 연결하기">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1" />
+  <meta property="og:description" content="PyCharm SSH 연결하기" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치" />
+  <meta property="og:title" content="PyCharm SSH 연결하기" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치">
-  <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 1">
+  <meta name="twitter:title" content="PyCharm SSH 연결하기">
+  <meta name="twitter:description" content="PyCharm SSH 연결하기">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/24/pycharmssh.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -168,7 +168,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</h1>
+      <h1 class="title">PyCharm SSH 연결하기</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -183,7 +183,7 @@
  
 
 <section class="post-meta">
-  <div class="post-date">June 2, 2018</div>
+  <div class="post-date">June 24, 2018</div>
   <div class="post-categories">
    in 
     
@@ -194,189 +194,158 @@
 </section>
 
 <article class="post-content">
-  <h1 id="install-ubuntu-1804-gpu-server-for-deeplearning---1">Install Ubuntu 18.04 GPU Server For DeepLearning - 1</h1>
+  <h1 id="pycharm-ssh-">PyCharm SSH 연결하기</h1>
 
-<p>개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.</p>
+<p>최근 딥러닝서버를 만들고 나서 Jupyter Notebook 만 사용했다. 그런데 오늘 파이참에서는 학생들을 위해 매 1년 마다 프로 버젼을 제공해주고 있다는 것을 들었다. 이를 사용해 보기로 했다.</p>
+
+<blockquote>
+  <p>PyCharm For Student: <a href="https://www.jetbrains.com/student/">https://www.jetbrains.com/student/</a></p>
+</blockquote>
+
+<p>PyCharm Pro를 쓰면 <strong>Run On Remote Server</strong> 기능을 쓸 수 가 있는데, 현재 운영체제인 Mac OS 에서 코드를 실행하면, 서버 Ubuntu 18.04 LTS 에서 실행 된다는 것이다. 게다가 PyCharm의 디버깅 툴도 사용할수 있다.</p>
+
+<p>그러나 이를 실행하는 과정이 쉬운 것은 아니었다. 아래 3개의 과정으로 설명하려고 한다.</p>
+
+<ol>
+  <li><strong>Interpreter 설정</strong></li>
+  <li><strong>Deployment 설정</strong></li>
+  <li><strong>프로젝트 연결 설정</strong></li>
+</ol>
 
 <hr />
 
-<h2 id="section">컴퓨터 사양 상세</h2>
+<h2 id="interpreter">Interpreter</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">항목</th>
-      <th style="text-align: center">상품코드</th>
-      <th>제품명</th>
-      <th style="text-align: center">금액</th>
-      <th style="text-align: center">수량</th>
-      <th style="text-align: center">최종금액</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">CPU</td>
-      <td style="text-align: center">399920</td>
-      <td>[INTEL] 코어7세대 i5-7600 정품박스 (카비레이크/3.5GHz/6MB/쿨러포함)</td>
-      <td style="text-align: center">258,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">258,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">MAIN<br />BOARD</td>
-      <td style="text-align: center">408703</td>
-      <td>[GIGABYTE] GA-H110M-M.2 듀러블에디션 피씨디렉트 (인텔H110/M-ATX)</td>
-      <td style="text-align: center">71,100원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">71,100원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">메모리</td>
-      <td style="text-align: center">390790</td>
-      <td>[삼성전자] 삼성 DDR4 16GB PC4-19200</td>
-      <td style="text-align: center">183,000원</td>
-      <td style="text-align: center">2</td>
-      <td style="text-align: center">366,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">HDD</td>
-      <td style="text-align: center">347917</td>
-      <td>[WD] BLUE 2TB WD20EZRZ (3.5HDD/SATA3/5400rpm/64M)</td>
-      <td style="text-align: center">67,730원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">67,730원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">GPU</td>
-      <td style="text-align: center">373864</td>
-      <td>[MSI] GeForce GTX1060 OC D5 6GB 윈드스톰</td>
-      <td style="text-align: center">389,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">389,000원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">POWER</td>
-      <td style="text-align: center">420859</td>
-      <td>[CORSAIR] CX750 NEW 80PLUS BRONZE (ATX/750W)</td>
-      <td style="text-align: center">94,370원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">94,370원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">BOX</td>
-      <td style="text-align: center">365393</td>
-      <td>[COX] RC 170T USB3.0 (미들타워)</td>
-      <td style="text-align: center">13,500원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">13,500원</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">OTHER</td>
-      <td style="text-align: center">3877</td>
-      <td>[컴퓨존] 일반조립비 (하드웨어조립/OS는 설치되지않습니다)</td>
-      <td style="text-align: center">20,000원</td>
-      <td style="text-align: center">1</td>
-      <td style="text-align: center">20,000원</td>
-    </tr>
-  </tbody>
-</table>
+<p>많은 블로그에서 우선 Interpreter 설정을 진행하라고 해서 나도 따라했다.</p>
 
-<ul id="light-slider1">
-  <li><img src="/assets/ds/gpuserver/1.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/2.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/3.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/4.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/5.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/6.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/7.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/8.jpeg" /></li>
-  <li><img src="/assets/ds/gpuserver/9.jpeg" /></li>
-</ul>
+<p><img src="https://dl.dropbox.com/s/4kqy5xwpdz7qe26/0625_interpreter.png" /></p>
 
-<p>2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.</p>
+<p>파이참 시작화면에서 오른쪽 아래 <code class="highlighter-rouge">Configure &gt; Preferences</code> 혹은 새로운 프로젝트를 만든 뒤, <code class="highlighter-rouge">⌘,</code>를 누르자. 그러면 위와 같은 화면이 나오는데, <code class="highlighter-rouge">Project Interpreter</code> 를 선택하자.</p>
 
-<h2 id="ubuntu-server-">Ubuntu Server 설치</h2>
+<p>처음에는 <code class="highlighter-rouge">&lt;No interpreter&gt;</code> 라고 나올텐데, 옆에 <code class="highlighter-rouge">톱니바퀴 &gt; add</code> 를 눌러주자.</p>
 
-<p>5월 30일 저녁, 우분투를 설치하려고 하니 버전이 마음에 걸렸다. NVIDIA CUDA TOOLKIT을 보니 리눅스 17.04 버전 까지 지원하는듯 했기 때문이다. 16.04를 설치해야하나? 싶은 찰나에 그냥 최신으로 한번 도전해보기로 했다. 안되면 다시 갈지머..</p>
-
-<h3 id="making-a-bootable-ubuntu-usb-disk-tutorial-at-mac-os">Making a bootable Ubuntu USB disk Tutorial at Mac OS</h3>
-
-<p>맥에서 부팅 디스크 만들기, 정말 간단하다. <a href="https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0">tutorials.ubuntu.com</a> 튜토리얼을 따라가면 된다.</p>
-
-<p><strong>준비물</strong></p>
+<p><img src="https://dl.dropbox.com/s/mewttyzbf7btzqs/0625_add_interpreter.png" /></p>
 
 <blockquote>
-  <ul>
-    <li>2GB 이상의 USB Driver</li>
-    <li>Mac OS 컴퓨터</li>
-    <li>우분투 서버 ISO 다운로드 <a href="https://www.ubuntu.com/download/server">우분투 서버 다운로드</a></li>
-  </ul>
+  <p><code class="highlighter-rouge">Host</code> : IP</p>
+
+  <p><code class="highlighter-rouge">Port</code> : 포트번호</p>
+
+  <p><code class="highlighter-rouge">Username</code> : 사용자 이름</p>
 </blockquote>
 
-<h4 id="format">구동 디스크 FORMAT</h4>
+<p>위 세가지 사항을 차례대로 입력한다.</p>
+
+<p><img src="https://dl.dropbox.com/s/r29aktz21vy5e9g/0625_sshkey.png" /></p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Private Key file</code> : SSH 에서 Private key 의 위치를 써준다. 보통은 <code class="highlighter-rouge">~/.ssh</code> 폴더 안에 있다.</p>
+
+  <p><code class="highlighter-rouge">Passphrase</code> : Private Key 의 비밀번호를 넣는다.</p>
+</blockquote>
+
+<p>이렇게 쉽게 성공했으면 얼마나 좋았을까?</p>
+
+<p>그런데 여기서 아무리 연결을 하려고해도 <span style="color: #e87d7d">Authentication Fail</span> 이라는 빨간 글씨만 보였다.</p>
+
+<p>구글링 결과 나와 같은 오류를 가진 사람들이 올린글이 하나 있었는데(<a href="https://bit.ly/2Im44VD">링크</a>), 요약하면, <strong>“아무리 패스워드를 정확하게 입력해도 연결이 안된다. 내가 뭘 놓치고 있는거냐?”</strong> 라는 글이었다.</p>
+
+<p>나는 아래 댓글의 방안으로 해결 했다.</p>
+
+<p><img src="https://dl.dropbox.com/s/hu4h1mlmsuaxezh/0625_solution.png" /></p>
+
+<p>요약하면, <strong>deployment server</strong> 를 먼저 설정한 후에 하라는 말이었다.</p>
+
+<hr />
+
+<h2 id="deployment">Deployment</h2>
+
+<p><code class="highlighter-rouge">Deployment</code> 는 <code class="highlighter-rouge">Build, Execution, Deployment</code> 속성에 있었다. 아무것도 없다면 <code class="highlighter-rouge">+</code> 눌러서 새로 만들자.</p>
+
+<p><img src="https://dl.dropbox.com/s/u59u4f4qcte59dv/0625_deployment.png" /></p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">SFTP</code> 를 선택한 후</p>
+
+  <p><code class="highlighter-rouge">SFTP host</code> : IP</p>
+
+  <p><code class="highlighter-rouge">Port</code> : 포트번호</p>
+
+  <p><code class="highlighter-rouge">Root path</code> : 루트 패스인데 $HOME 위치를 설정한다.</p>
+
+  <p><code class="highlighter-rouge">User name</code> : 사용자 이름</p>
+
+  <p><code class="highlighter-rouge">Auth type</code> : 패스워드 혹은 Key Pair(나는 ssh 키를 쓰기 때문에 이것을 선택)</p>
+
+  <p><code class="highlighter-rouge">Private key</code> : 키위치</p>
+
+  <p><code class="highlighter-rouge">Key passphrase</code> : 키 비밀번호</p>
+</blockquote>
+
+<p>위 정보를 다 입력하면 <code class="highlighter-rouge">Test SFTP connection</code> 을 눌러봐서 테스트 해본다. 만약 통과가 되면 <code class="highlighter-rouge">Apply</code> 를 누르자!</p>
+
+<p>그리고 <code class="highlighter-rouge">Interpreter</code> 에 돌아가서 다시 설정해준다.</p>
+
+<p>접속후 파이썬을 연결 해야하는데, 따로 python을 설치한게 없다면, 기본적으로 2.7 버전인 <code class="highlighter-rouge">/usr/bin/python</code> 패스가 설정 될 것이다.</p>
+
+<p>만약에 자신의 서버에서 Python3 을 따로 설치했다면 서버 terminal 에서 아래와 같이 쳐준다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ which python3
+/usr/local/bin/python3
+</code></pre>
+</div>
+<p>이 위치를 복사해서 쓰자.</p>
+
+<p>모든게 정상적으로 작동하면, <strong>Connection Sucessfully</strong> 를 확인 할 수 가 있다.</p>
+
+<p>아까 <code class="highlighter-rouge">&lt;No interpreter&gt;</code> 칸에 <code class="highlighter-rouge">remote Python 3.6.5 (sftp://[유저이름]@[IP]:[포트]/[파이썬위치])</code> 가 뜨면 성공한 것이다.</p>
+
+<hr />
+
+<h2 id="section">프로젝트 연결 설정 확인</h2>
+
+<p>자신의 프로젝트와 잘 연결 되었는지 확인 해보는 작업을 한다.</p>
+
+<p><img src="https://dl.dropbox.com/s/k04w9sa9qplxr1m/0625_openproject.png" /></p>
+
+<p>Pycharm에서 새로운 프로젝트를 시작하거나 이미 존재하는 프로젝트를 오픈한다.</p>
+
+<p><img src="https://dl.dropbox.com/s/h8ac2hnryxs9t23/0625_mappings.png" /></p>
+
+<p>첫째, <code class="highlighter-rouge">⌘,</code> 를 눌러서 <code class="highlighter-rouge">Deployment</code> 설정에 들어가서 아래의 설정을 해준다.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Local Path</code> : 로컬 PC 의 프로젝트 위치</p>
+
+  <p><code class="highlighter-rouge">Deployment path on Server ***</code> : 서버의 프로젝트 위치, 이때 앞단에 설정했던 홈 디렉토리 <code class="highlighter-rouge">Root Path</code> 를 빼고 설정해줘야 한다. $HOME/프로젝트위치</p>
+</blockquote>
+
+<p>둘째, 다시 <code class="highlighter-rouge">Project Interpreter</code> 에 접속해서 서버에 있는 파이썬과 연결 됐는지 확인한다.</p>
+
+<p>셋째, 파일 실행을위해 주 실행파일 <code class="highlighter-rouge">main.py</code>을 선택 후 (없다면 실행할 파일을 선택), 메뉴에서 <code class="highlighter-rouge">Run &gt; Edit Configuration</code> 을 선택한다.</p>
+
+<p><img src="https://dl.dropbox.com/s/gl4kjtjep5qjgjg/0625_remotepython.png" /></p>
+
+<p>위에 <code class="highlighter-rouge">+</code> 버튼을 눌러서 새로운 파이썬 실행파일을 연결하자.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Script path</code>: 스크립트 실행 파일 루트</p>
+
+  <p><code class="highlighter-rouge">Python Interpreter</code> : Remote Python 으로 설정 됐는지 확인</p>
+
+  <p><code class="highlighter-rouge">Environment Variables</code> : 딥러닝에서 GPU를 쓰려면 환경을 인식해줘야한다. ㅠㅠ</p>
+
+  <p>아래 그림과 같이 설정해주자. (그전에 cuda 설치를 못했다면? <a href="https://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html">링크</a>)</p>
+
+  <p><img src="https://dl.dropbox.com/s/ere9ckvmt23x343/0625_env.png" style="width: 400px;" /></p>
+</blockquote>
+
+<h2 id="section-1">꿀팁</h2>
 
 <ol>
-  <li>응용프로그램 &gt; 유틸리티 &gt; 디스크 유틸리티 선택</li>
-  <li>MAC OS에 꼽은 USB 를 선택한 다음에 <code class="highlighter-rouge">지우기</code> 를 선택한다.</li>
-  <li>이름을 짓고, <code class="highlighter-rouge">MS-DOS(FAT)</code> 선택한다. (그림에는 Scheme가 있지만 Serria 이후에는 없다는 말이 있음)</li>
-  <li>포맷한다. 지운다.</li>
+  <li>SSH 터미널을 사용하려면 <code class="highlighter-rouge">Tools &gt; Start SSH session...</code></li>
+  <li>로컬에서 변경사항을 자동 업로드 하려면 <code class="highlighter-rouge">Tools &gt; Deployment &gt; Automatic uploads(always)</code></li>
 </ol>
-
-<p><img src="/assets/ds/gpuserver/format_disk.png" /></p>
-
-<h4 id="etcher-----">Etcher 를 사용한 시동 디스크 생성</h4>
-
-<p><a href="https://etcher.io/">Etcher</a> 먼저 받는다. 그후에는 정말 간단하다.</p>
-
-<ol>
-  <li><code class="highlighter-rouge">Select image</code> 에 다운 받은 <code class="highlighter-rouge">Ubuntu Server 18.04 ISO</code> 를 고른다.</li>
-  <li><code class="highlighter-rouge">Select drive</code> 에 포맷한 디스크를 선택</li>
-  <li><code class="highlighter-rouge">Flash!</code></li>
-</ol>
-
-<p><img src="/assets/ds/gpuserver/etcher.png" /></p>
-
-<p>이제 설치 준비 완료되었다.</p>
-
-<h3 id="install-ubuntu-server-1804">Install Ubuntu Server 18.04</h3>
-
-<p>이제 설치릃 해보자. 설치를 하려면, 최소 한번은 모니터에 연결해서 설치해야한다. 나는 정말 서버만을 생각해서 모니터를 않샀기에… HDMI 케이블로 티비화면으로 연결했다… 덕분에 고생이 두배!</p>
-
-<p>사실 간단하다. 아까 구운 <code class="highlighter-rouge">시동 디스크</code>를 꼽아주고 부팅을 하면 된다.</p>
-
-<ul id="light-slider2">
-  <li><img src="/assets/ds/gpuserver/u1.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u2.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u3.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u4.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u5.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u6.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u7.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u8.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u9.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u10.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u11.png" /></li>
-  <li><img src="/assets/ds/gpuserver/u12.png" /></li>
-</ul>
-
-<p>사진출처: <a href="https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/">https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/</a></p>
-
-<ol>
-  <li>언어선택: 왠만하면 영어로 하자</li>
-  <li>키보드선택: 왠만하면 영어로 가자</li>
-  <li><code class="highlighter-rouge">Install Ubuntu</code> 선택</li>
-  <li>다음</li>
-  <li>특별한 주소가 있으면 작성 아니면, 다음</li>
-  <li>디스크 포맷: 디스크 통째로 포맷한 후에 설치할 것이니 1번</li>
-  <li>디스크 선택</li>
-  <li>마지막 확인</li>
-  <li>정말루?</li>
-  <li>당신의 이름 / 서버 이름 / 유저이름(로그인용) / 패스워드(로그인용) 등</li>
-  <li>설치중… 리붓!</li>
-  <li>완료</li>
-</ol>
-
-<p>다음 장에는 설치후에 내가 했던 작업들: <code class="highlighter-rouge">원격 부팅과 접속</code> 을 주로 이야기 하겠다.</p>
 
 </article>
 
@@ -391,7 +360,7 @@
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+1+%EC%82%AC%EC%96%91+%EB%B0%8F+%EC%9A%B0%EB%B6%84%ED%88%AC+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F02%2Fgpuserver.html"
+      <a href="//www.facebook.com/sharer.php?t=PyCharm+SSH+%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F24%2Fpycharmssh.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -419,18 +388,12 @@
 
 
   
-
-  
-
-  
-
-  
     
-    <!-- <h2 id="DataScience">2</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver2.html</h2> -->
+    <!-- <h2 id="DataScience">-1</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2017/08/04/E2EMN.html</h2> -->
     
-    <!-- <h2 id="DataScience">4</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/04/21/biglittledata.html</h2> -->
+    <!-- <h2 id="DataScience">1</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver3.html</h2> -->
     
 
 
@@ -439,24 +402,16 @@
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/datascience/2018/04/21/biglittledata.html">
+				<a href="/datascience/2018/06/03/gpuserver3.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">Big Little Data 참석후기</span>
+					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
-			
-				<a href="/datascience/2018/06/03/gpuserver2.html">
-					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>
