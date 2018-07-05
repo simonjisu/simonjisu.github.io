@@ -28,7 +28,7 @@ markdown: kramdown
 paginate: 5
 paginate_path: "/page:num/"
 inter_post_navigation: true
-highlightjs_theme: "atom-one-light"
+highlightjs_theme: "atom-one-dark"
 # monokai-sublime
 # tomorrow-night-eighties, bright
 # atom-one-light
