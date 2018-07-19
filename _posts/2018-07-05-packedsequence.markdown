@@ -2,7 +2,7 @@
 layout: post
 title: "Pytorch 의 PackedSequence object 알아보기"
 date: "2018-07-05 09:45:37 +0900"
-categories: "DataScience"
+categories: "NLP"
 author: "Soo"
 comments: true
 ---
@@ -48,7 +48,7 @@ NLP 에서 매 배치(batch)마다 고정된 문장의 길이로 만들어주기
 
 ## Pytorch - PackedSequence
 
-Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 [nbviewer](https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic/PackedSequence/PackedSequence_Tutorial.ipynb) 혹은 [github](https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic/PackedSequence/PackedSequence_Tutorial.ipynb)에 있다.
+Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 [nbviewer](https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb) 혹은 [github](https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb)에 있다.
 
 
 ### 과정
@@ -146,4 +146,4 @@ output.size(), output_lengths
 
 <img src="https://dl.dropbox.com/s/e1kjq4jsehbixiq/0705img5.png">
 
-참고자료: [https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183](참고자료 https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183)
+참고자료: [https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183]( https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183)

@@ -6,9 +6,22 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 06 Jul 2018 01:06:24 +0900</pubDate>
-    <lastBuildDate>Fri, 06 Jul 2018 01:06:24 +0900</lastBuildDate>
+    <pubDate>Thu, 19 Jul 2018 18:06:56 +0900</pubDate>
+    <lastBuildDate>Thu, 19 Jul 2018 18:06:56 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Torchtext 알아보기</title>
+        <description>
+</description>
+        <pubDate>Thu, 19 Jul 2018 00:18:29 +0900</pubDate>
+        <link>http://simonjisu.github.io/nlp/2018/07/19/torchtext.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/07/19/torchtext.html</guid>
+        
+        
+        <category>NLP</category>
+        
+      </item>
     
       <item>
         <title>Pytorch 의 PackedSequence object 알아보기</title>
@@ -42,7 +55,7 @@
 
 &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/3ze3svhdz05aakk/0705img3.gif&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;즉, 컴퓨터로 하여금 각 &lt;strong&gt;타임스텝&lt;/strong&gt;(=배치내에서 문장의 최대 길이) 마다 일련의 단어를 처리해야한다는 뜻이다.&lt;/p&gt;
+&lt;p&gt;즉, 컴퓨터로 하여금 각 &lt;strong&gt;타임스텝&lt;/strong&gt;(T=배치내에서 문장의 최대 길이) 마다 일련의 단어를 처리해야한다는 뜻이다.&lt;/p&gt;
 
 &lt;p&gt;하지만 $T=2, 3$ 인 부분은 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt;이 끼어 있어서 어쩔수 없이 연산을 하게 되는데, 이를 방지하기 위해서, 아래의 그림같이 각 배치내에 문장의 길이를 기준으로 &lt;span style=&quot;color: #e87d7d&quot;&gt;정렬(sorting)&lt;/span&gt; 후, 하나의 통합된 배치로 만들어준다.&lt;/p&gt;
 
@@ -63,7 +76,7 @@
 
 &lt;h2 id=&quot;pytorch---packedsequence&quot;&gt;Pytorch - PackedSequence&lt;/h2&gt;
 
-&lt;p&gt;Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/PackedSequence/PackedSequence_Tutorial.ipynb&quot;&gt;여기&lt;/a&gt;에 있다.&lt;/p&gt;
+&lt;p&gt;Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb&quot;&gt;nbviewer&lt;/a&gt; 혹은 &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb&quot;&gt;github&lt;/a&gt;에 있다.&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;과정&lt;/h3&gt;
 
@@ -96,7 +109,7 @@ tensor([[  1,  16,   7,  11,  13,   2],
         [  5,  14,   3,  17,   0,   0],
         [ 12,   9,   0,   0,   0,   0],
         [ 10,   0,   0,   0,   0,   0]])
-        
+
 tensor([ 6,  5,  4,  2,  1])
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -160,14 +173,14 @@ output.size(), output_lengths
 
 &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/e1kjq4jsehbixiq/0705img5.png&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;참고자료: &lt;a href=&quot;참고자료 https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&quot;&gt;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;참고자료: &lt;a href=&quot;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&quot;&gt;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 05 Jul 2018 09:45:37 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/07/05/packedsequence.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/07/05/packedsequence.html</guid>
+        <link>http://simonjisu.github.io/nlp/2018/07/05/packedsequence.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/07/05/packedsequence.html</guid>
         
         
-        <category>DataScience</category>
+        <category>NLP</category>
         
       </item>
     
@@ -1919,142 +1932,6 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
         <pubDate>Fri, 20 Apr 2018 10:19:06 +0900</pubDate>
         <link>http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html</guid>
-        
-        
-        <category>NLP</category>
-        
-      </item>
-    
-      <item>
-        <title>All about Word Vectors: Intro</title>
-        <description>&lt;h1 id=&quot;all-about-word-vectors-intro&quot;&gt;All about Word Vectors: Intro&lt;/h1&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;본 포스팅은 &lt;a href=&quot;http://web.stanford.edu/class/cs224n/&quot;&gt;CS224n&lt;/a&gt; Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;natural-language-processing&quot;&gt;자연어 처리 (Natural Language Processing)&lt;/h2&gt;
-&lt;p&gt;이야기를 하기 앞서서, “언어”를 살펴보자. &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%96%B8%EC%96%B4&quot;&gt;위키백과&lt;/a&gt; 에 따르면 아래와 같다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;언어(言語)에 대한 정의는 여러가지 시도가 있었다. 아래는 그러한 예의 일부이다.&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;사람들이 자신의 머리 속에 있는 생각을 다른 사람에게 나타내는 체계.&lt;/li&gt;
-    &lt;li&gt;사물, 행동, 생각, 그리고 상태를 나타내는 체계.&lt;/li&gt;
-    &lt;li&gt;사람들이 자신이 가지고 있는 생각을 다른 사람들에게 전달하는 데 사용하는 방법.&lt;/li&gt;
-    &lt;li&gt;사람들 사이에 공유되는 의미들의 체계.&lt;/li&gt;
-    &lt;li&gt;문법적으로 맞는 말의 집합(절대적이 아님).&lt;/li&gt;
-    &lt;li&gt;언어 공동체 내에서 이해될 수 있는 말의 집합.&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;위의 예시를 추려내보면 어떤 추상적인 내용을 사람들간의 공통된 약속으로 규정했다는 것이다. 기계한테 어떻게 언어를 처리하도록 알려줘야하나? &lt;strong&gt;자연어 처리&lt;/strong&gt; 는 생각보다 오래된 역사를 가지고 있었다.&lt;/p&gt;
-
-&lt;p&gt;1950년도 이전 부터 자연어를 처리하려는 시도가 꽤 많았던 모양이다. 1954년 조지 타운 실험은 60 개 이상의 러시아어 문장을 영어로 완전 자동 번역하는 작업을 진행했다. 그는 3-5년 안으로 해결 가능하다고 주장했지만 1966 년 ALPAC 보고서에 따르면 실제로 진전이 엄청느려서 연구 자금이 크게 줄었다고 한다. 그리고 최초의 통계 기계 번역 시스템이 개발 된 1980 년대 말까지 기계 번역에 대한 연구는 거의 이루어지지 않았다고 한다. (지금은 너두나두 번역기 만들 수 있지만…)&lt;/p&gt;
-
-&lt;p&gt;또한, 1980년대까지 대부분의 자연어 처리 시스템은 손으로 쓴 복잡한 규칙 세트를 기반으로 했다. 그러나 점차 통계 기반의 자연어 처리 기법이 복잡한 자연어를 모델링 하는데 부상했다. (Reference: &lt;a href=&quot;https://en.wikipedia.org/wiki/Natural-language_processing&quot;&gt;NLP wikipedia&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;또한, 자연어 처리의 기본 가정을 항상 염두하고 공부해야 할 것이다. 좋은 소개글을 링크로 걸어 두었으니 참고하길 바란다.&lt;/p&gt;
-
-&lt;p&gt;참고: ratsgo 님의 블로그 - &lt;a href=&quot;https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/10/frequency/&quot;&gt;idea of statistical semantics&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;word-representation&quot;&gt;단어의 표현(Word Representation)&lt;/h2&gt;
-
-&lt;p&gt;어떻게 하면 단어의 “의미”를 표현할 수 있을까?&lt;/p&gt;
-
-&lt;p&gt;가장 간단한 방법은 단어를 종류별로 분류(taxonomy) 하는 것이다.&lt;/p&gt;
-
-&lt;p&gt;영어에는 유명한 &lt;strong&gt;WordNet&lt;/strong&gt; 이라는 프로젝트가 있다. 이는 1985년부터 심리학 교수인 조지 A. 밀러가 지도하는 프린스턴 대학의 인지 과학 연구소에 의해 만들어졌고 유지되고 있다. 기본적으로 상위어(hypernyms) 밑에 동의어(synonym) 세트를 여러개 구성하는 것이다.&lt;/p&gt;
-
-&lt;p&gt;좋긴한데 몇 가지 단점이 있다.&lt;/p&gt;
-
-&lt;p&gt;첫째로, 단어간의 미묘한 차이, 뉘앙스(nuances)를 표현 할 수가 수 없다. 아래의 예를 보자.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from nltk.corpus import wordnet as wn
-for synset in wn.synsets(&quot;adept&quot;):
-    print(&quot;({})&quot;.format(synset.pos()) + &quot;, &quot;.join([l.name() for l in synset.lemmas()]))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;(n) ace, adept, champion, sensation, maven, mavin, virtuoso, genius, hotshot, star, superstar, whiz, whizz, wizard, wiz
-(s) adept, expert, good, practiced, proficient, skillful, skilful&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;“I’m good at deep learning” VS “I’m expert at deep learning” 이 두 문장은 확연히 다른 느낌의 문장이다. 잘하는 것과 전문가의 차이는 사람이 느끼기엔 다르다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;둘째로, 업데이트 비용이 많이 든다. 새로운 단어가 계속 나오면 업데이트 해줘야한다, 즉 구축비용이 쎄다는 것이다.&lt;/p&gt;
-
-&lt;p&gt;셋째로, 사람마다 주관적이기 때문에 명쾌한 기준이 없다.&lt;/p&gt;
-
-&lt;p&gt;마지막으로, 유사도 계산이 어렵다는 점이다. 즉, 같은 상위어에 속해 있는 하위어는 비슷한 것은 알겠는데, 정량적으로 이를 계산할 방법이 없다는 것이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;bag-of-words-representation&quot;&gt;Bag of words representation&lt;/h3&gt;
-
-&lt;p&gt;또다른 방법으로 discrete 된 심볼로 단어를 표현했는데 이를 &lt;strong&gt;one-hot representation&lt;/strong&gt; 라고 하며, 아래와 같이 표현했다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;word = [0, 0, 0, 1, 0, 0, 0]&lt;/script&gt;
-
-&lt;p&gt;이러한 방법론을 &lt;strong&gt;Bag of words representation&lt;/strong&gt; 이라 한다. 그러나 이는 두 가지 단점이 있다.&lt;/p&gt;
-
-&lt;p&gt;첫째로, 차원(Dimensionality)의 문제. 단어가 많아 질 수록 벡터가 엄청 길어진다.&lt;/p&gt;
-
-&lt;p&gt;둘째로, 제한적 표현(Localist representation)의 문제. 즉, 단어의 내적의미를 포함하지 않고, 각 단어들이 독립적이다. 예를 들면, “hotel” 과 “motel” 의 유사성을 계산하려고 하면, 0 이 나올 수 밖에 없다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-motel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \end{bmatrix} \\
-hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \end{bmatrix} \\
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;hotel \cdot motel^T = 0&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;distributional-similarity-based-representations&quot;&gt;분포 유사성 기반 표현 (Distributional similarity based representations)&lt;/h2&gt;
-
-&lt;p&gt;연구자들은 one-hot vector 와 다른 어떤 유사도를 계산할 수 있는 벡터를 만들고 싶어했다. 따라서 유사도의 정보를 어디서 얻을 수 있을까를 찾기 시작했다. 그리고 어떤 핵심 아이디어를 생각해냈다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;어떤 단어의 “의미”는 그 단어 근처에 자주 출현하는 단어로부터 얻을 수 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L2_context.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;http://web.stanford.edu/class/cs224n/syllabus.html&quot;&gt;CS224n Lecture 2&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;그들은 주변 단어의 정보로 어떤 단어의 의미를 규정하는 시도를 하였고, 이는 modern statistical NLP 에서 많은 각광을 받기 시작했다. 그리고 어떤 단어 $w$ 에 대해서 주변에 나타나는 단어의 집합을 &lt;strong&gt;맥락/문맥(context)&lt;/strong&gt; 이라고 했다.&lt;/p&gt;
-
-&lt;h3 id=&quot;word-vectors&quot;&gt;Word Vectors&lt;/h3&gt;
-
-&lt;p&gt;이전에 0과 1로 채워진 one-hot vector 와 달리 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터(dense vector)를 만든다. 핵심 아이디어는 아래와 같다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Idea:&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;We have a large corpus of text&lt;/li&gt;
-    &lt;li&gt;Every word in a fixed vocabulary is represented by a vector&lt;/li&gt;
-    &lt;li&gt;Go through each &lt;strong&gt;position&lt;/strong&gt; $t$ in the text, which has a &lt;strong&gt;center word&lt;/strong&gt; $c$ and &lt;strong&gt;context (“outside”) words&lt;/strong&gt; $o$&lt;/li&gt;
-    &lt;li&gt;Use the similarity of the word vectors for $c$ and $o$ to calculate the probability of $o$ given $c$ (or vice versa)&lt;/li&gt;
-    &lt;li&gt;Keep adjusting the word vectors to maximize this probability&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;http://web.stanford.edu/class/cs224n/syllabus.html&quot;&gt;CS224n Lecture 2&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;요약하면 방대한 텍스트 데이터를 기반으로, 중심단어 $c$ 가 주어졌을 때, 그 주변단어 $o$ 가 나올 확률 분포를 최대화 하는 것을 구하는 것이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Word vectors 는 때때로 Word Embeddings, Word Representation 이라고 불린다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이렇게 해서 나온 알고리즘이 &lt;span style=&quot;color: #e87d7d&quot;&gt;“Word2Vec”&lt;/span&gt; 이며, 여기서 잠깐 끊고 다음 글에서 소개하도록 한다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 19 Apr 2018 16:41:36 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/04/19/allaboutwv1.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/04/19/allaboutwv1.html</guid>
         
         
         <category>NLP</category>

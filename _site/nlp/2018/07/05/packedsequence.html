@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/07/05/packedsequence.html">
+  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/07/05/packedsequence.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -202,7 +202,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="post-categories">
    in 
     
-    <a href="/posts/#DataScience">Datascience</a>
+    <a href="/posts/#NLP">Nlp</a>
     
   
   </div>
@@ -239,7 +239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><img src="https://dl.dropbox.com/s/3ze3svhdz05aakk/0705img3.gif" /></p>
 
-<p>즉, 컴퓨터로 하여금 각 <strong>타임스텝</strong>(=배치내에서 문장의 최대 길이) 마다 일련의 단어를 처리해야한다는 뜻이다.</p>
+<p>즉, 컴퓨터로 하여금 각 <strong>타임스텝</strong>(T=배치내에서 문장의 최대 길이) 마다 일련의 단어를 처리해야한다는 뜻이다.</p>
 
 <p>하지만 $T=2, 3$ 인 부분은 중간에 <code class="highlighter-rouge">&lt;pad&gt;</code>이 끼어 있어서 어쩔수 없이 연산을 하게 되는데, 이를 방지하기 위해서, 아래의 그림같이 각 배치내에 문장의 길이를 기준으로 <span style="color: #e87d7d">정렬(sorting)</span> 후, 하나의 통합된 배치로 만들어준다.</p>
 
@@ -260,7 +260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h2 id="pytorch---packedsequence">Pytorch - PackedSequence</h2>
 
-<p>Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/PackedSequence/PackedSequence_Tutorial.ipynb">여기</a>에 있다.</p>
+<p>Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb">nbviewer</a> 혹은 <a href="https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb">github</a>에 있다.</p>
 
 <h3 id="section">과정</h3>
 
@@ -293,7 +293,7 @@ tensor([[  1,  16,   7,  11,  13,   2],
         [  5,  14,   3,  17,   0,   0],
         [ 12,   9,   0,   0,   0,   0],
         [ 10,   0,   0,   0,   0,   0]])
-        
+
 tensor([ 6,  5,  4,  2,  1])
 </code></pre>
 </div>
@@ -357,7 +357,7 @@ output.size(), output_lengths
 
 <p><img src="https://dl.dropbox.com/s/e1kjq4jsehbixiq/0705img5.png" /></p>
 
-<p>참고자료: <a href="참고자료 https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183">https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183</a></p>
+<p>참고자료: <a href="https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183">https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183</a></p>
 
 </article>
 
@@ -372,7 +372,7 @@ output.size(), output_lengths
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=Pytorch+%EC%9D%98+PackedSequence+object+%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F07%2F05%2Fpackedsequence.html"
+      <a href="//www.facebook.com/sharer.php?t=Pytorch+%EC%9D%98+PackedSequence+object+%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F07%2F05%2Fpackedsequence.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -400,12 +400,14 @@ output.size(), output_lengths
 
 
   
+
+  
     
-    <!-- <h2 id="DataScience">-1</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2017/08/04/E2EMN.html</h2> -->
+    <!-- <h2 id="NLP">0</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/07/19/torchtext.html</h2> -->
     
-    <!-- <h2 id="DataScience">1</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/06/24/pycharmssh.html</h2> -->
+    <!-- <h2 id="NLP">2</h2> -->
+    <!-- <h2 id="NLP">/nlp/2018/05/02/allaboutwv4.html</h2> -->
     
 
 
@@ -414,16 +416,24 @@ output.size(), output_lengths
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/datascience/2018/06/24/pycharmssh.html">
+				<a href="/nlp/2018/05/02/allaboutwv4.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">PyCharm SSH 연결하기</span>
+					<span class="page-number">All about Word Vectors: GloVe</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
+			
+				<a href="/nlp/2018/07/19/torchtext.html">
+					<span class="page-number">Torchtext 알아보기</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
 			
 		</span>
 	</section>
