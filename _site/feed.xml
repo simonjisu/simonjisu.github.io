@@ -6,13 +6,203 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 19 Jul 2018 18:06:56 +0900</pubDate>
-    <lastBuildDate>Thu, 19 Jul 2018 18:06:56 +0900</lastBuildDate>
+    <pubDate>Fri, 20 Jul 2018 01:17:11 +0900</pubDate>
+    <lastBuildDate>Fri, 20 Jul 2018 01:17:11 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
-        <title>Torchtext 알아보기</title>
-        <description>
+        <title>Torchtext Tutorial</title>
+        <description>&lt;h1 id=&quot;pytorch-torchtext-tutorial&quot;&gt;Pytorch TorchText Tutorial&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;튜토리얼 Notebook: &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;github&lt;/a&gt;, &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;nbviewer&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;자연어 처리에서 전처리시 자주 사용하는 패키지 하나를 소개하려고 한다.&lt;/p&gt;
+
+&lt;p&gt;Pytorch 는 데이터를 불러오는 강력한 &lt;a href=&quot;https://pytorch.org/docs/stable/data.html&quot;&gt;Data Loader&lt;/a&gt; 라는 유틸이 있는데, TorchText 는 NLP 분야만을 위한 Data Loader 이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;documentation:&lt;/strong&gt; &lt;a href=&quot;http://torchtext.readthedocs.io/en/latest/index.html&quot;&gt;http://torchtext.readthedocs.io/en/latest/index.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;설치:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torchtext
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;토크나이징(Tokenization)&lt;/li&gt;
+  &lt;li&gt;단어장 생성(Build Vocabulary)&lt;/li&gt;
+  &lt;li&gt;토큰의 수치화(Numericalize all tokens)&lt;/li&gt;
+  &lt;li&gt;데이터 로더 생성(Create Data Loader)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;사용방법&lt;/h2&gt;
+
+&lt;h3 id=&quot;create-field&quot;&gt;1. 필드지정(Create Field)&lt;/h3&gt;
+
+&lt;p&gt;필드란 텐서로 표현 될 수 있는 텍스트 데이터 타입을 처리한다. 각 토큰을 숫자 인덱으로 맵핑시켜주는 단어장(Vocabulary) 객체가 있다. 또한 토큰화 하는 함수, 전처리 등을 지정할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations&quot;, 
+'3']
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;텍스트를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TEXT&lt;/code&gt;, 해당 문장의 sentiment 를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;LABEL&lt;/code&gt; 필드객체 두 개를 만든다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Field
+
+TEXT = Field(sequential=True,
+             use_vocab=True,
+             tokenize=str.split,
+             lower=True, 
+             batch_first=True)  
+LABEL = Field(sequential=False,  
+              use_vocab=False,   
+              preprocessing = lambda x: int(x),  
+              batch_first=True)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Arguments:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;sequential:&lt;/strong&gt; TEXT 는 순서가 있는 (sequential) 데이터기 때문에 인자를 True 로 두고, LABEL 데이터는 순서가 필요없기 때문에 False 로 둔다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;use_vocab:&lt;/strong&gt; 단어장(Vocab) 객체를 사용할지의 여부. 텍스트 데이터있는 TEXT 에만 True 로 인자를 전달한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;tokenize:&lt;/strong&gt; 단어의 토크나이징을 맡아줄 함수다. 여기선 “공백”을 기준으로 나누는 함수를 사용했습니다. 한국어의 경우 보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;konlpy&lt;/code&gt; 의 토크나이징 함수들을 사용한다. 혹은 개인이 만든 함수도 사용할 수 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;lower:&lt;/strong&gt; 소문자 전환 여부 입니다. 보통 True 로 두며, 단어가 많아질수록 나중에 더 많은 차원에 임베딩해야하기 때문에, 왠만하면 영어는 소문자로 만들어준다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;batch_first:&lt;/strong&gt; 배치를 우선시 하게 되면, tensor 의 크기는 (B, 문장의 최대 길이) 로 만들어진다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;preprocessing:&lt;/strong&gt; 전처리는 토큰화 후, 수치화하기 전 사이에서 작동한다. 여기서는 Label 데이터가 string 타입이기 때문에 int 타입으로 만들어준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;더 자세한 것은 문서를 참조하시길 바란다.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-datasets&quot;&gt;2. 데이터 세트 만들기(Create Datasets)&lt;/h3&gt;
+
+&lt;p&gt;데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용해서 아래와 같이 만들어준다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import TabularDataset
+
+train_data = TabularDataset.splits(path='./data/',
+					train='train_path',
+					valid='valid_path',
+					test='test_path',
+					format='tsv', 
+					fields=[('text', TEXT), ('label', LABEL)])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_data = TabularDataset(path='./data/examples.tsv', 
+				format='tsv', 
+				fields=[('text', TEXT), ('label', LABEL)])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;fields:&lt;/strong&gt; 아까 만들어준 필드는 리스트 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]&lt;/code&gt; 로 넣어준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;build-vocabulary&quot;&gt;3. 단어장 생성(Build vocabulary)&lt;/h3&gt;
+
+&lt;p&gt;토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;unk&amp;gt;&lt;/code&gt; 토큰을 0, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.&lt;/p&gt;
+
+&lt;p&gt;훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TEXT.build_vocab(train_data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;create-data-loader&quot;&gt;4. 데이터 로더 만들기(Create Data Loader)&lt;/h3&gt;
+
+&lt;p&gt;마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Iterator
+
+train_loader, valid_loader, test_loader = \
+	TabularDataset.splits((train_data, valid_data, test_data), 
+				batch_size=3, 
+				device=None,  # gpu 사용시 &quot;cuda&quot; 입력
+				repeat=False)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;만약에 없다면? 아래와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterator&lt;/code&gt; 객체에 그냥 넣어준다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loader = Iterator(train_data, 
+			batch_size=3, 
+			device=None,  # gpu 사용시 &quot;cuda&quot; 입력
+			repeat=False)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;테스트&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for batch in train_loader:
+    break
+print(batch.text)
+print(batch.label)
+=======================================================
+tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
+              7,    207,    892,    107,     43,     85,    408,      3,
+            376,     17,      5,   6447,  11035,     37,     98,     43,
+            199,   5859,      2,      1,      1,      1,      1,      1,
+              1,      1,      1],
+        [     3,   4515,     51,    444,      4,   3738,     30,     94,
+            957,   3498,     59,    700,  13967,      6,   2287,   4435,
+              4,    431,     40,      3,   1201,      7,    486,   1134,
+           4120,     59,      5,    166,   1749,    547,      6,   1339,
+            144,  14759,      2],
+        [    29,      7,    195,    568,    192,     63,    229,     60,
+             17,     21,    202,    334,     18,      5,    535,     20,
+              4,     15,    628,    231,     52,      9,    303,    195,
+           6910,      8,  10136,      8,      3,   2204,   4340,      2,
+              1,      1,      1]])
+tensor([ 0,  3,  1])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.&lt;/p&gt;
+
+&lt;p&gt;이처럼 거의 5 줄이면 이 모든 과정을 처리해주는 강력크한 도구다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;만약에 사용하지 않겠다면?&lt;/h2&gt;
+
+&lt;p&gt;노트북: &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;github&lt;/a&gt;, &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;nbviewer&lt;/a&gt; 에 상세하게 나만의 데이터 로더를 커스터마이징 하는 방법 또한 적어 두었다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;순수 파이썬 만 사용한 코드&lt;/li&gt;
+  &lt;li&gt;파이토치의 Custom Dataset 를 활용한 Data Loader 만들기&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;하지만, 여기서는 소개하지 않겠다. 한 번 TorchText를 사용하게 되면 위 두 가지 방법은 왠만하면 생각도 안날 것이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;다양한 데이터 세트&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;torchtext.datasets&lt;/code&gt; 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.&lt;/p&gt;
+
+&lt;p&gt;Documentation 참고: &lt;a href=&quot;http://torchtext.readthedocs.io/en/latest/datasets.html#&quot;&gt;http://torchtext.readthedocs.io/en/latest/datasets.html#&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sentiment Analysis&lt;/li&gt;
+  &lt;li&gt;Question Classification&lt;/li&gt;
+  &lt;li&gt;Entailment&lt;/li&gt;
+  &lt;li&gt;Language Modeling&lt;/li&gt;
+  &lt;li&gt;Machine Translation&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Thu, 19 Jul 2018 00:18:29 +0900</pubDate>
         <link>http://simonjisu.github.io/nlp/2018/07/19/torchtext.html</link>
