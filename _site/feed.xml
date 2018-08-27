@@ -6,9 +6,262 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Jul 2018 01:17:11 +0900</pubDate>
-    <lastBuildDate>Fri, 20 Jul 2018 01:17:11 +0900</lastBuildDate>
+    <pubDate>Mon, 27 Aug 2018 23:31:41 +0900</pubDate>
+    <lastBuildDate>Mon, 27 Aug 2018 23:31:41 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>A Neural Probabilistic Language Model</title>
+        <description>&lt;h1 id=&quot;paper-a-neural-probabilistic-language-model&quot;&gt;[PAPER] A Neural Probabilistic Language Model&lt;/h1&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;클릭하면 링크를 따라갑니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;paper: &lt;a href=&quot;http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf&quot;&gt;A Neural Probabilistic Language Model&lt;/a&gt; - Yoshua Bengio, 2003&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bit.ly/2OkYFkY&quot;&gt;Slide Share&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bit.ly/2PsEPpg&quot;&gt;Code Repo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/deepnlp_study/blob/master/notebook/01_NNLM.ipynb&quot;&gt;Notebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;메인 아이디어&lt;/h2&gt;
+
+&lt;p&gt;기존의 통계 기반의 Language Modeling 은 N-Gram 을 기반으로, 이전 토큰의 나오는 단어를 기반으로 다음 단어의 확률을 극대화 작업이었다. 처음부터 끝까지 보지 않고 N-Gram으로 잘라서 예측하게된 이유는 예측해야할 단어와 아주 오래된 단어간의 상관관계가 적다(혹은 분포가 다르다)라고 생각했기 때문이다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(w_t \vert w_1, w_2, \cdots, w_{t-1}) \approx P(w_t \vert t_{t-(n-1)}, \cdots t_{t-1})&lt;/script&gt;
+
+&lt;p&gt;확률을 정의 할때는 Counting 을 사용했다. 예를 들어, “New York” 뒤에 “University” 가 나올  확률을 예측한다고 해보자. 데이터에서 “New York University” 가 등장한 횟수를 세고, “New York” 뒤에 올 수있는 다른 모든 단어의 등장 횟수를 다 Count 한다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(University \vert New, York) = \dfrac{Count(New, York, University)}{\sum_w Count(New, York, w)}&lt;/script&gt;
+
+&lt;p&gt;해당 방법은 간단하나 문제점이 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;첫째, 훈련데이터에서 보지 못한 새로운 단어 조합이 등장하게 되면 확률이 0 이 된다.&lt;/li&gt;
+  &lt;li&gt;둘째, N-Gram 의 N 은 작은 수로 적을 수 밖에 없다. 1만개의 단어가 있으면 1-Gram 은 1만, 2-Gram 은 약 5천만 ($&lt;em&gt;{10000}C&lt;/em&gt;{2}$), 3-Gram 은 약 1700억 ($&lt;em&gt;{10000}C&lt;/em&gt;{3}$) 이 된다. 즉, N 이 커질수록 계산을 하기 위한 더 많은 컴퓨터 자원이 필요하다. (논문이 나온 2003년때 쯤에는 요즘같이 계산을 하기 위한 GPU 도 없었을 것이다.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;따라서 논문에는 위 두가지 문제점을 해결하기 위해 N 을 더 늘리고, 새로 등장한 단어에 대해서도 예측가능한 모델을 만들고자 했다.&lt;/p&gt;
+
+&lt;p&gt;Yoshua Bengio 교수님이 제안한 모델의 특징은 3 가지로 요약 할 수 있다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;단어를 m 차원에 벡터와 연관 짓는다.&lt;/li&gt;
+    &lt;li&gt;m 차원 벡터로 표현된 단어들의 조건부 확률을 표현한다.&lt;/li&gt;
+    &lt;li&gt;조건부 확률과 m 차원의 벡터를 동시에 학습한다.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;아래에서 더 풀어서 설명한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;모델 설명&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/8thdipjnc7bl95f/0826_nnlm.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;두 가지 단계로 모델이 구성되 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;distributed-feature-vectors&quot;&gt;1 단계: Distributed feature vectors&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;각 단어를 $C$ 행렬을 통해 $m$ 차원 벡터로 표현한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;단어를 $m$ 차원 실수 벡터로 연관 지어야 한다. 최근에는 이 방법을 임베딩 (Embedding)이라고 하는데 논문에서는 분산된 특징 벡터 (Distributed feature vectors) 라고 했다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;C(i) \in \Bbb{R}^m&lt;/script&gt;
+
+&lt;p&gt;$C$ 행렬의 $i$ 번째 행을, $i$ 번째 단어의 벡터라고 규정 지었으며, $C$ 의 형태는 $\vert V \vert \times m$ 다.&lt;/p&gt;
+
+&lt;h3 id=&quot;probability-functions&quot;&gt;2 단계: Probability functions&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;$m$ 차원으로 표현된 벡터를 2 층의 신경망을 사용해서 조건부 확률을 구성한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;우선 임베딩된 $m$ 차원의 벡터들을 concatenate 하여 하나의 벡터로 만든다. 이를 context 라고 한다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x = \big( C(w_{t-n+1}), \cdots, C(w_{t-2}), C(w_{t-1}) \big)&lt;/script&gt;
+
+&lt;p&gt;그 후 2층의 신경망에 통과시켜 Softmax 로 최종적인 확률을 구한다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y = U \tanh(d + Hx)&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(w_i = i \vert context) = \dfrac{\exp(y_{w_t})}{\sum_i \exp(y_i)}&lt;/script&gt;
+
+&lt;h3 id=&quot;direct-connection&quot;&gt;기타: direct connection&lt;/h3&gt;
+
+&lt;p&gt;논문에서는 실험적으로 선형적인 관계식을 하나 더 넣어서 context 와 y 사이의 선형관계를 알아내고자 했다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y = \underbrace{b + Wx}_{\text{direct connection}} +U \tanh(d + Hx)&lt;/script&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;실험결과&lt;/h2&gt;
+
+&lt;h3 id=&quot;perplexity&quot;&gt;Perplexity&lt;/h3&gt;
+
+&lt;p&gt;Test Measurement 로 &lt;strong&gt;Perplexity&lt;/strong&gt; 를 선택했다. 정의는 아래와 같다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A measurement of how well a probability distribution or probability model (q) predicts a sample&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;PP = \exp(-\dfrac{1}{N} \sum_{i=1}^N \log_e q(x_i))&lt;/script&gt;
+
+&lt;p&gt;자세히 보면 지수안에 엔트로피 함수가 들어가 있는 것을 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;해당 수식을 말로 풀어보면, 모든 테스트 세트에서 확률 모델 $q$ 의 불확실 정도가 어떻게 되는지를 측정한다. 즉, 이 값이 높을 수록 모델이 예측을 잘 못하며, 낮을 수록 해당테스트 토큰을 확실하게 측정한다는 뜻이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;time&quot;&gt;Time&lt;/h3&gt;
+
+&lt;p&gt;시간을 측정한 이유는 학습할 파라미터 숫자가 생각보다 많기 때문이다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\theta = (b, d, W, U, H, C)&lt;/script&gt;
+
+&lt;p&gt;총 학습해야할 파라미터 수는 $\vert V \vert(1+mn+h)+h(1+(n-1)m)$ 로 계산된다.&lt;/p&gt;
+
+&lt;p&gt;각 행렬의 크기를 아래에 표시해 두었다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} b &amp;= \vert V \vert \\
+d &amp;= h \\
+U &amp;= \vert V \vert \times h \\
+W &amp;= \vert V \vert \times (n-1)m \\
+H &amp;= h \times (n-1)m \\
+C &amp;= \vert V \vert \times m
+\end{aligned} %]]&gt;&lt;/script&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/c975f2j26kzj715/0826_nnlmresult.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;영어 단어 Brown corpus (약 16000개의 단어)에 대해서, 은닉층 유닛수를 100, 임베딩 차원을 30, direct connection이 없고, 5-Gram 을 사용했을 때 결과는 Perplexity 가 제일 낮았다.&lt;/p&gt;
+
+&lt;p&gt;개인적인 실험으로 네이버 영화 corpus [&lt;a href=&quot;https://github.com/e9t/nsmc&quot;&gt;링크&lt;/a&gt;]를 사용하여 평균 perplexity 측정해보았다. [&lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/deepnlp_study/blob/master/notebook/01_NNLM.ipynb&quot;&gt;노트북링크&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;한글 데이터를 사용해 최대한 단어갯수를 줄이려고 문장당 부호 및 단일 한글자음모음을 하나로 제약했다. 따라서 총 약 6만개의 단어가 사용됐다. 10 번의 epoch를 훈련 시킨 결과 Perplexity는 계속 떨어지지만 accuracy 는 20% 이후 상승이 멈췄다. 또한 훈련시간이 34 분 가량 걸렸다. 그만큼 학습할 파라미터가 많다는 뜻이다.&lt;/p&gt;
+
+&lt;p&gt;아래 문장으로 언어모델링을 해보았다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;요즘 나오는 어린이 영화보다 수준 낮은 시나리오 거기다 우리가 아는 윌스미스 보다 어린 윌스미스에 발연기는 보너스&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;input&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;predict&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;target&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;요즘/Noun 나오는/Verb 어린이/Noun 영화/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;보다/Josa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;나오는/Verb 어린이/Noun 영화/Noun 보다/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;더/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;수준/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;어린이/Noun 영화/Noun 보다/Josa 수준/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;이/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;낮은/Adjective&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;영화/Noun 보다/Josa 수준/Noun 낮은/Adjective&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;영화/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;시나리오/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;보다/Josa 수준/Noun 낮은/Adjective 시나리오/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;거기/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;수준/Noun 낮은/Adjective 시나리오/Noun 거기/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;에/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;다/Josa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;낮은/Adjective 시나리오/Noun 거기/Noun 다/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;./Punctuation&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;우리/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;시나리오/Noun 거기/Noun 다/Josa 우리/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;는/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가/Josa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;거기/Noun 다/Josa 우리/Noun 가/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;뭐/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;아는/Verb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;다/Josa 우리/Noun 가/Josa 아는/Verb&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;사람/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;윌스미스/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;우리/Noun 가/Josa 아는/Verb 윌스미스/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;인데/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;보다/Verb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가/Josa 아는/Verb 윌스미스/Noun 보다/Verb&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가/Eomi&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;어린/Verb&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;아는/Verb 윌스미스/Noun 보다/Verb 어린/Verb&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;애/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;윌스미스/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;윌스미스/Noun 보다/Verb 어린/Verb 윌스미스/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;에/Josa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;보다/Verb 어린/Verb 윌스미스/Noun 에/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;대한/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;발연기/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;어린/Verb 윌스미스/Noun 에/Josa 발연기/Noun&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;에/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;는/Josa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;윌스미스/Noun 에/Josa 발연기/Noun 는/Josa&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;좋/Adjective&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;보너스/Noun&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;결과를 살펴보면 문맥은 상당히 못맞추었으나 문장의 구조는 잘 학습한 것을 알 수 있다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 22 Aug 2018 23:26:14 +0900</pubDate>
+        <link>http://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html</guid>
+        
+        
+        <category>NLP</category>
+        
+      </item>
     
       <item>
         <title>Torchtext Tutorial</title>
@@ -1876,255 +2129,6 @@ print(np.dot(a, b))
         
         
         <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>All about Word Vectors: Word2Vec</title>
-        <description>&lt;h1 id=&quot;all-about-word-vectors-word2vec&quot;&gt;All about Word Vectors: Word2Vec&lt;/h1&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;본 포스팅은 &lt;a href=&quot;http://web.stanford.edu/class/cs224n/&quot;&gt;CS224n&lt;/a&gt; Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.&lt;/p&gt;
-
-&lt;p&gt;자연어 처리 공부를 해보신 분이라면 한번쯤 접한 그림이 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L2_linear-relationships.png&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“king” - “man” + “woman” = ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;느낌상 “왕”에서 “남자”라는 속성을 빼주고, “여자”의 속성을 더해주면?&lt;/p&gt;
-
-&lt;p&gt;“queen” 이 나와야할 것 같다. Word Representation은 이런 것을 가능하게 했다.&lt;/p&gt;
-
-&lt;p&gt;이번 시간에는 &lt;strong&gt;Word2vec&lt;/strong&gt; 에 대해서 알아보려고 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;word2vec&quot;&gt;Word2Vec&lt;/h2&gt;
-
-&lt;p&gt;Word2Vec은 두 가지 알고리즘이 있다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;Skip-grams(SG)
-      &lt;ul&gt;
-        &lt;li&gt;target 단어를 기반으로 context 단어들을 예측한다. (position independent)&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;Continuous Bag of Words (CBOW)
-      &lt;ul&gt;
-        &lt;li&gt;context 단어들 집합(bag-of-words context)으로부터 target 단어를 예측한다.&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_skipgram2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_cbow2.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;그리고 몇 가지 효율적인 훈련 방법들이 있다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Two (moderately efficient) training methods (vs Naive Softmax)&lt;/p&gt;
-  &lt;ol&gt;
-    &lt;li&gt;Hierarchical softmax&lt;/li&gt;
-    &lt;li&gt;Negative sampling&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;http://web.stanford.edu/class/cs224n/syllabus.html&quot;&gt;CS224n Lecture 2&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;이번 포스팅에서는 Skip-gram 과 Negative Sampling을 메인으로 소개하겠다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;skip-gram-model-with-naive-softmax&quot;&gt;Skip-gram model with Naive Softmax&lt;/h2&gt;
-&lt;p&gt;Paper: &lt;a href=&quot;https://arxiv.org/pdf/1310.4546.pdf&quot;&gt;Distributed Representations of Words and Phrases
-and their Compositionality&lt;/a&gt; (Mikolov et al. 2013)&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;embedding-look-up&quot;&gt;Embedding Look up&lt;/h3&gt;
-
-&lt;p&gt;모델 설명에 들어가기 앞서 &lt;strong&gt;Embedding Look up&lt;/strong&gt; 이란 것을 알아보자. 이 용어는 이제 여기저기서 많이 나올텐데 알아두면 좋다.&lt;/p&gt;
-
-&lt;p&gt;우리가 하고 싶은 것은 엄청나게 차원이 큰 one-hot vector 를 고정된 작은 차원으로 넣고 싶은 것이다. 어떻게 하면 단어들을 &lt;strong&gt;2-dimension matrix&lt;/strong&gt; 로 표현 할 수 있을까?&lt;/p&gt;
-
-&lt;p&gt;아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단어를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 &lt;strong&gt;Embedding Matrix&lt;/strong&gt; 라고 부르기로 하자&lt;/p&gt;
-
-&lt;ul id=&quot;light-slider2&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup2.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;그렇다면 어떻게 각 단어와 이 Embedding Matrix 를 매칭 시킬수 있을까? 여기서 &lt;strong&gt;내적&lt;/strong&gt; 을 활용하게 된다.&lt;/p&gt;
-
-&lt;ul id=&quot;light-slider3&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup3.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup4.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup5.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;그런데 자세히 보니, one-hot vector의 숫자 $1$ 이 위치한 index 가 Embedding Matrix 의 column vector 의 index 와 같다. 따라서 중복되지 않는 단어사전을 만들고, 각 단어에 대해 index를 메긴 다음, 찾고 싶은 단어를 Embedding Matrix 에서 column vector index 만 &lt;strong&gt;조회(Look up)&lt;/strong&gt; 하면 되는 것이다.&lt;/p&gt;
-
-&lt;ul id=&quot;light-slider4&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup6.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ML/nlp/L2_embedlookup7.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;코드 예시:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import numpy as np
-sentence = &quot;I am going to watch Avengers Infinity War&quot;.split()
-embedding_matrix = np.array([[1,2,5,1,9,10,3,4], [5,1,4,1,8,1,2,5], [7,8,1,4,1,6,2,1]])
-vocab = {w: i for i, w in enumerate(sentence)}
-word = &quot;I&quot;
-print(embedding_matrix)
-print(&quot;=&quot;*30)
-print(&quot;Word:&quot;, word)
-print(&quot;Index:&quot;, vocab[word])
-print(&quot;Vector:&quot;, embedding_matrix[:, vocab.get(word)])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;[[ 1  2  5  1  9 10  3  4]&lt;/p&gt;
-
-  &lt;p&gt;[ 5  1  4  1  8  1  2  5]&lt;/p&gt;
-
-  &lt;p&gt;[ 7  8  1  4  1  6  2  1]]&lt;/p&gt;
-
-  &lt;p&gt;==============================&lt;/p&gt;
-
-  &lt;p&gt;Word: I&lt;/p&gt;
-
-  &lt;p&gt;Index: 0&lt;/p&gt;
-
-  &lt;p&gt;Vector: [1 5 7]&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이해가 됐으면 이제 모델로 들어가보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L2_model_train.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;요약&lt;/h3&gt;
-
-&lt;p&gt;Skip-gram 모델을 한 마디로 설명하자면, 문장의 모든 단어가 한번 씩 중심단어 $c$ 가 되어, $c$ 주변 문맥 단어 $o$ 가 나올 확률을 최대화 하는 것이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;목적&lt;/h3&gt;
-
-&lt;p&gt;각 중심단어 $c$ 에 대해서 아래의 &lt;strong&gt;가능도/우도 (Likelihood)&lt;/strong&gt; 를 구해본다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;L(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} p(w_{t+j} | w_t; \theta) \quad \cdots\cdots \quad (1)&lt;/script&gt;
-
-&lt;p&gt;수식을 말로 풀어보자. 각 포지션 $(\prod_{t=1}^{T})$ 의 중심단어 $c$ = $w_t$ 에 대해서, $w_t$ 가 주어졌을 때 다른 문맥단어 $o$ = $w_{t+j}$ 가 나오는 확률 $\big( p (w_{t+j} \vert w_t; \theta) \big)$ 을 가능하게 만드는 $\theta$ 를 구하는 것이다. 단 $j$ 는 윈도우 크기 $m$ 을 넘지 않으며, $0$ 이 될 수 없다.&lt;/p&gt;
-
-&lt;p&gt;따라서 &lt;strong&gt;Likelihood&lt;/strong&gt; 를 &lt;strong&gt;최대화&lt;/strong&gt; 하는 것이 우리의 목적이 되겠다.&lt;/p&gt;
-
-&lt;p&gt;그러나 여기서는 우리가 좋아하는 Gradient Descent 를 사용하기 위해서 이 식을 &lt;strong&gt;Negative Log Likelihood&lt;/strong&gt; 로 변형해서 쓰기로한다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\min J(\theta) = -\dfrac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m,\ j \neq 0} \log p(w_{t+j} | w_t) \quad \cdots\cdots \quad (2)&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$(1)$ 식과 $(2)$ 식이 왜 동등한지는 밑에 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;참고 1&lt;/span&gt;&lt;/strong&gt; 을 확인하길 바란다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;그렇다면 단어가 등장할 확률 $p(w_{t+j} \vert w_t)$ 는 어떻게 구할 것인가?&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Softmax&lt;/strong&gt; 라는 input 값을 0과 1 사이로 만들어 주는 친근한 함수가 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(o|c) = \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} \quad \cdots\cdots \quad (3)&lt;/script&gt;
-
-&lt;p&gt;따라서 모델에 있는 모든 파라미터를 $\theta \in \Bbb{R}^{2dV}$ 로 두고, $(2)$ 식을 최적화 한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;왜 $\theta \in \Bbb{R}^{2dV}$ 인가?
-Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ 두개를 학습 시켜야하기 때문이다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;주의 )&lt;/span&gt;&lt;/strong&gt; $W’$ 는 $W$ 의 전치 행렬이 아니라 완전히 새로운 Embedding Matrix 다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;update&quot;&gt;Update&lt;/h3&gt;
-
-&lt;p&gt;Gradient를 통해서 각 파라미터들을 업데이트 하게 된다. $(3)$ 식의 $\log$ 를 취하게 되면 아래와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}&lt;/script&gt;
-
-&lt;p&gt;이제 $f$ 의 Gradient 를 구해보자.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \dfrac{\partial f}{\partial V_c}
-&amp;= \dfrac{\partial }{\partial V_c} \big(\log(\exp(u_o^T V_c)) - \log(\sum_{w=1}^V \exp(u_w^T V_c))\big) \\
-&amp;= u_o - \dfrac{1}{\sum_{w=1}^V \exp(u_w^T V_c)}(\sum_{x=1}^V \exp(u_x^T V_c) u_x ) \\
-&amp;= u_o - \sum_{x=1}^V \dfrac{\exp(u_x^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} u_x \\
-&amp;= u_o - \sum_{x=1}^V P(x | c) u_x
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$u_o$ : observed word, output context word&lt;/li&gt;
-  &lt;li&gt;$P(x\vert c)$: probs context word $x$ given center word $c$&lt;/li&gt;
-  &lt;li&gt;$P(x\vert c)u_x$: Expectation of all the context words: likelihood occurance probs $\times$ context vector&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;흥미로운 점: &lt;strong&gt;미분 값&lt;/strong&gt; 은 관측된 context word 벡터 $u_o$ 에서 center word $c$ 가 주어졌을 때 나올 수 있는 모든 단어의 기대치를 빼준 다는 것이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;why-mle-is-equivalent-to-minimize-nll&quot;&gt;참고 1: Why MLE is equivalent to minimize NLL?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Likelihood&lt;/strong&gt; 의 정의:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)&lt;/script&gt;
-
-&lt;p&gt;log를 취하게 되면 아래와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;MLE(maximum likelihood estimator)&lt;/strong&gt; 의 정의:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)&lt;/script&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\underset{x}{\arg \max} (x) = \underset{x}{\arg \min}(-x)&lt;/script&gt;
-
-&lt;p&gt;때문에 우리는 아래의 식을 얻을 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;왜 log 로 바꾸는 것인가?
-    &lt;ol&gt;
-      &lt;li&gt;컴퓨터 연산시 곱하기 보다 더하기를 쓰면 &lt;strong&gt;복잡도&lt;/strong&gt; 가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$)&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;언더플로우&lt;/strong&gt; 를 방지할수 있다. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.&lt;/li&gt;
-      &lt;li&gt;자연로그함수는 &lt;strong&gt;단조증가함수(monotonic increase function)&lt;/strong&gt; 라서 대소관계가 바뀌지 않는다. 예를 들자면, $5 &amp;lt; 10 \Longleftrightarrow log(5) &amp;lt; log(10)$ 의 관계가 바뀌지 않는 다는 것. 따라서 언제든지 지수를 취해서 다시 원래의 값으로 복귀 가능.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;참고
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://quantivity.wordpress.com/2011/05/23/why-minimize-negative-log-likelihood/&quot;&gt;why minimize negative log likelihood&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://ratsgo.github.io/deep%20learning/2017/09/24/loss/&quot;&gt;(ratsgo 님) 손실함수&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 시간에는 &lt;strong&gt;Naive Softmax&lt;/strong&gt; 로 훈련 시켰을 때의 단점과 이를 보완 해준 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;Negative Sampling&lt;/span&gt;&lt;/strong&gt; 에 대해서 알아보자.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 20 Apr 2018 10:19:06 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html</guid>
-        
-        
-        <category>NLP</category>
         
       </item>
     
