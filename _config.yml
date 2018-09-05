@@ -51,17 +51,15 @@ ga_tracking_id: "UA-102691608-1"
 
 # Category descriptions (for archive pages)
 descriptions:
-  - cat: jekyll
-    desc: "Posts describing Jekyll setup techniques."
 
-  - cat: DataScience
-    desc: "DataScience"
+  - cat: NLP
+    desc: "NLP Study"
 
   - cat: DeepLearning
     desc: "Basic Deep Learning"
 
-  - cat: NLP
-    desc: "NLP Study"
+  - cat: DataScience
+    desc: "DataScience"
 
   - cat: Library
     desc: "책을 읽고"
@@ -69,14 +67,15 @@ descriptions:
   - cat: NaverAI2018
     desc: "Naver AI Colloquium 2018"
 
-  - cat: Stock
-    desc: "주식"
-
   - cat: Algorithm
     desc: "알고리즘 공부"
 
+  - cat: jekyll
+    desc: "Posts describing Jekyll setup techniques."
+
   - cat: BlaBla
     desc: "잡념"
+
 # Social icons and sharing options
 #
 # Social settings are used in two places:
