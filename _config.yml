@@ -70,8 +70,8 @@ descriptions:
   - cat: Algorithm
     desc: "알고리즘 공부"
 
-  - cat: jekyll
-    desc: "Posts describing Jekyll setup techniques."
+  - cat: Flask
+    desc: "flask 공부"
 
   - cat: BlaBla
     desc: "잡념"
