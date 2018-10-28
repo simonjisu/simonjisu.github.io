@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "[Flask] 0 설치하기"
+title: "[Flask-0] 설치하기"
 date: "2018-10-28 19:22:40 +0900"
 categories: "Flask"
 author: "Soo"
 comments: true
 ---
 
-# [Flask] 0 설치하기
+# [Flask-0] 설치하기
 
 python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버에 웹 데모 프로그램 만드려고 한다. 나중에 app 만들때 활용할 수 있을 것 같다.
 
@@ -62,6 +62,8 @@ $ . nmt/bin/activate
 ```
 
 ### PyTorch
+
+PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.
 
 만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 `pip install torch torchvision torchtext` 을 써준다.
 

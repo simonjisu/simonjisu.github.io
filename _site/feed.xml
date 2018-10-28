@@ -6,13 +6,13 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Oct 2018 22:21:21 +0900</pubDate>
-    <lastBuildDate>Sun, 28 Oct 2018 22:21:21 +0900</lastBuildDate>
+    <pubDate>Sun, 28 Oct 2018 22:37:08 +0900</pubDate>
+    <lastBuildDate>Sun, 28 Oct 2018 22:37:08 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
-        <title>[Flask] 0 설치하기</title>
-        <description>&lt;h1 id=&quot;flask-0-&quot;&gt;[Flask] 0 설치하기&lt;/h1&gt;
+        <title>[Flask-0] 설치하기</title>
+        <description>&lt;h1 id=&quot;flask-0-&quot;&gt;[Flask-0] 설치하기&lt;/h1&gt;
 
 &lt;p&gt;python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버에 웹 데모 프로그램 만드려고 한다. 나중에 app 만들때 활용할 수 있을 것 같다.&lt;/p&gt;
 
@@ -69,6 +69,8 @@ $ virtualenv nmt
 &lt;/div&gt;
 
 &lt;h3 id=&quot;pytorch&quot;&gt;PyTorch&lt;/h3&gt;
+
+&lt;p&gt;PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.&lt;/p&gt;
 
 &lt;p&gt;만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install torch torchvision torchtext&lt;/code&gt; 을 써준다.&lt;/p&gt;
 
