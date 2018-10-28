@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Oct 2018 22:37:08 +0900</pubDate>
-    <lastBuildDate>Sun, 28 Oct 2018 22:37:08 +0900</lastBuildDate>
+    <pubDate>Sun, 28 Oct 2018 23:00:32 +0900</pubDate>
+    <lastBuildDate>Sun, 28 Oct 2018 23:00:32 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -107,6 +107,12 @@ m4 libblas-dev python3-dev cmake python3-yaml
 &lt;p&gt;에러가 없을 경우 아래를 계속 진행한다. “-E” 는 여기서 중요한데, 아까 설정한 환경변수를 포함해서 실행하게 만드는 것이다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ sudo -E python3 setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ nohup python3 setup.py build &amp;gt; ../build.log &amp;amp;&amp;amp; sudo -E python3 setup.py install &amp;gt; ../installation.log &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

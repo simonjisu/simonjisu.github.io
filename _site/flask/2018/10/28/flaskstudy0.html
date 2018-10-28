@@ -305,6 +305,12 @@ m4 libblas-dev python3-dev cmake python3-yaml
 </code></pre>
 </div>
 
+<p>시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ nohup python3 setup.py build &gt; ../build.log &amp;&amp; sudo -E python3 setup.py install &gt; ../installation.log &amp;
+</code></pre>
+</div>
+
 <p>다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.</p>
 
 <h2 id="reference">Reference</h2>

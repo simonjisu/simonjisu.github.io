@@ -103,6 +103,12 @@ PyTorch 를 빌드한다. 약 2~3시간 걸린다. [영화](https://ko.wikipedia
 (nmt) $ sudo -E python3 setup.py install
 ```
 
+시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라.
+
+```
+(nmt) $ nohup python3 setup.py build > ../build.log && sudo -E python3 setup.py install > ../installation.log &
+```
+
 다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.
 
 ## Reference
