@@ -129,7 +129,7 @@ PyTorch 를 빌드한다. 약 2~3시간 걸린다. [영화](https://ko.wikipedia
 
 설치 종료후 잘 설치가 됐는지, 확인해보자
 
-<img src=https://dl.dropbox.com/s/hgire0dsh32x2j0/1030_testtorch.png>
+<img src="https://dl.dropbox.com/s/hgire0dsh32x2j0/1030_testtorch.png">
 
 
 다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.

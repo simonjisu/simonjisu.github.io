@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 30 Oct 2018 22:39:47 +0900</pubDate>
-    <lastBuildDate>Tue, 30 Oct 2018 22:39:47 +0900</lastBuildDate>
+    <pubDate>Tue, 30 Oct 2018 22:44:26 +0900</pubDate>
+    <lastBuildDate>Tue, 30 Oct 2018 22:44:26 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -241,7 +241,7 @@ export NO_DISTRIBUTED=1
 
 &lt;p&gt;설치 종료후 잘 설치가 됐는지, 확인해보자&lt;/p&gt;
 
-&lt;p&gt;&amp;lt;img src=https://dl.dropbox.com/s/hgire0dsh32x2j0/1030_testtorch.png&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/hgire0dsh32x2j0/1030_testtorch.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.&lt;/p&gt;
 
