@@ -6,13 +6,120 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 30 Oct 2018 21:13:29 +0900</pubDate>
-    <lastBuildDate>Tue, 30 Oct 2018 21:13:29 +0900</lastBuildDate>
+    <pubDate>Tue, 30 Oct 2018 22:39:47 +0900</pubDate>
+    <lastBuildDate>Tue, 30 Oct 2018 22:39:47 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
-        <title>[Flask-0] 설치하기</title>
-        <description>&lt;h1 id=&quot;flask-0-&quot;&gt;[Flask-0] 설치하기&lt;/h1&gt;
+        <title>[비전공자의 Flask-1] 첫 앱 만들어보기</title>
+        <description>&lt;h1 id=&quot;flask-1---&quot;&gt;[비전공자의 Flask-1] 첫 앱 만들어보기&lt;/h1&gt;
+
+&lt;p&gt;설치가 완료 되었으니 빠르게 첫 앱을 만들어보자.&lt;/p&gt;
+
+&lt;h2 id=&quot;hello-world-&quot;&gt;Hello World 찍기&lt;/h2&gt;
+
+&lt;p&gt;컴퓨터 책에 보면 꼭 해보라는 문구가 있다. 그 말을 찍어 볼 것이다.&lt;/p&gt;
+
+&lt;p&gt;hello.py 파일을 하나 만들어 아래와 같이 작성하자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;hello.py 를 실행하자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ python hello.py
+ * Serving Flask app &quot;hello&quot; (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;일단 &lt;strong&gt;WARNING&lt;/strong&gt; 이 뜨는데 어떻게 해결하는지는 나중에 살펴보고 통신이 어떻게 되는지 살펴보자.&lt;/p&gt;
+
+&lt;p&gt;특별히 &lt;code class=&quot;highlighter-rouge&quot;&gt;app.run()&lt;/code&gt; 에 host 를 지정하지 않으면 &lt;strong&gt;http://127.0.0.1:5000/&lt;/strong&gt; 내부 주소(localhost) 로 앱이 실행이 된다.&lt;/p&gt;
+
+&lt;p&gt;문제는 라즈베리파이 내부에 인터넷 익스플로어 같은 어플리케이션이(혹은 글쓴이가 찾지를 못한거 일수도, 설령 찾았다 해도 모니터가 없어서 볼수가 없음) 없기 때문에 내부 주소를 통해 해당 페이지에 접속하지 말고 외부 주소로 접속해서 결과를 봐야한다.&lt;/p&gt;
+
+&lt;p&gt;우선 app.run 부분을 아래와 같이 바꿔주고 다시 실행해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.run(host='0.0.0.0')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그리고 추가로 라즈베리파이를 현재 어떻게 접속하고 있는지를 이해해야한다.&lt;/p&gt;
+
+&lt;p&gt;현재 글쓴이는 &lt;strong&gt;노트북&lt;/strong&gt;을 통해 라즈베리파이의 리눅스 터미널로 접속하고 있는데 이게 어떻게 진행되는 지 알아보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;포트포워딩을 이해보자&lt;/h3&gt;
+
+&lt;p&gt;개인별로 사정이 다르지만, 집에서 라즈베리파이 서버를 사용한다고 가정하고 진행하겠다.&lt;/p&gt;
+
+&lt;p&gt;우선 자신의 집의 외부로 연결되는 IP(Internet Protocol) 를 알아야 한다. 인터넷에 “&lt;a href=&quot;http://www.findip.kr/&quot;&gt;IP 확인&lt;/a&gt;” 만 쳐봐도 자신이 접속한 컴퓨터의 IP 를 알수 있다. 보통 해당 고유의 IP 를 통해 집안 곳곳 공유기를 통해 통신한다.&lt;/p&gt;
+
+&lt;p&gt;공유기나 내부 네트워크를 사용해서 인터넷에 접속할 경우 사설 IP(Private IP)라고 하는 특정 주소 범위(192.168.0.1 ~ 192.168.255.254)가 내부적으로 사용되고, 공인 IP 주소를 찾기 힘든 경우가 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/exbbawgg64w0b75/1030_networkmap.png&quot; height=&quot;480&quot; width=&quot;520&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;비전공자라 용어가 정확하지는 않을 수도 있지만, 위 그림처럼 &lt;strong&gt;외부 &amp;gt; 우리집&lt;/strong&gt; 으로 오는 신호는 IP 고, 집 &lt;strong&gt;내부 &amp;gt; 내부&lt;/strong&gt; 로 이동하는 신호는 사설 IP 라고 생각 하면 될것이다. 라즈베리파이가 외부에서 받는 신호는 빨간색 포트를 통과하게 된다. 이정도만 이해하고 넘어가자.&lt;/p&gt;
+
+&lt;p&gt;어쨋든 공유기 홈페이지에서 포트포워딩 작업을 진행해야한다. 공유기 홈페이지를 접속해서 “&lt;strong&gt;포트포워드&lt;/strong&gt;” 라는 단어가 들어간 항목을 찾아가보자. 그리고 자신의 라즈베리 파이가 연결된 &lt;strong&gt;내부 IP 주소&lt;/strong&gt; 를 찾아서 포트를 열어주자, 테스트를 위해 5000 번을 포트로 쓴다. 위 그림의 예시로 들자면 아래와 같다. (물론 예시로 든거기 때문에 똑같이 따라하면 안된다.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;공유기(벽장) &amp;gt; 거실공유기 : 192.168.54.245, TCP 포트번호(내부/외부)를 5000 으로 설정&lt;/p&gt;
+
+  &lt;p&gt;거실공유기 &amp;gt; 라즈베리파이 : 192.168.0.64, TCP 포트번호(내부/외부)를 5000 으로 설정&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위와 같이 설정시, 내 노트북 크롬에 &lt;code class=&quot;highlighter-rouge&quot;&gt;[외부 IP 주소]:5000&lt;/code&gt; 라고 치면, 해당 통신이 외부신호를 거쳐고, 내부에서 192.168.54.245 &amp;gt; 192.168.0.64 를 거쳐서 라즈베리파이에게 닿게 되고, 아까 실행한 flask app의 결과인 “Hello World!”를 받을 수 있게 된다.&lt;/p&gt;
+
+&lt;p&gt;자세한 포트포워딩 설정 방법은 인터넷에 많으니 잘 찾아보시길 바란다. &lt;a href=&quot;http://studyforus.tistory.com/35&quot;&gt;예시&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;실행하기&lt;/h2&gt;
+
+&lt;p&gt;자, 설정을 마쳤다면 실행하고 있는 노트북의 인터넷 창에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;[외부 IP 주소]:5000&lt;/code&gt; 를 쳐보자. 그리고 라즈베리파이 터미널을 확인하면&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.6.34 - - [30/Oct/2018 21:23:18] &quot;GET / HTTP/1.1&quot; 200 -
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;표시가 뜰텐데, &lt;strong&gt;“정상적으로 신호를 주고 받아서 ‘Hello World!’ 를 보냈어!”&lt;/strong&gt; 라는 뜻이다.&lt;/p&gt;
+
+&lt;p&gt;인터넷 창을 확인해보면 Hello World! 문구가 떠있을 것이다. 야호!&lt;/p&gt;
+
+&lt;p&gt;기본 어플리케이션인 “Hello World!” 를 성공시켰으니 충분히 고생했다고 생각한다. 다음 시간에는 본격적으로 튜토리얼을 따라서 시작해보도록 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/installation.html&quot;&gt;flask 한글 튜토리얼&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
+        <link>http://simonjisu.github.io/flask/2018/10/30/flaskstudy1.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/flask/2018/10/30/flaskstudy1.html</guid>
+        
+        
+        <category>Flask</category>
+        
+      </item>
+    
+      <item>
+        <title>[비전공자의 Flask-0] 설치하기</title>
+        <description>&lt;h1 id=&quot;flask-0-&quot;&gt;[비전공자의 Flask-0] 설치하기&lt;/h1&gt;
 
 &lt;p&gt;python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버에 웹 데모 프로그램 만드려고 한다. 나중에 app 만들때 활용할 수 있을 것 같다.&lt;/p&gt;
 
@@ -72,7 +179,7 @@ $ virtualenv nmt
 
 &lt;p&gt;PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.&lt;/p&gt;
 
-&lt;p&gt;설치전 필요한 패키지&lt;/p&gt;
+&lt;p&gt;설치전 필요한 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;pip list&lt;/code&gt; 를 통해서 없는 패키지라면 설치해주자.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
 numpy
@@ -1793,230 +1900,6 @@ f(x) =
         <pubDate>Wed, 02 May 2018 23:22:05 +0900</pubDate>
         <link>http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html</guid>
-        
-        
-        <category>NLP</category>
-        
-      </item>
-    
-      <item>
-        <title>All about Word Vectors: Negative Sampling</title>
-        <description>&lt;h1 id=&quot;all-about-word-vectors-negative-sampling&quot;&gt;All about Word Vectors: Negative Sampling&lt;/h1&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;본 포스팅은 &lt;a href=&quot;http://web.stanford.edu/class/cs224n/&quot;&gt;CS224n&lt;/a&gt; Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L2_model_train.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;navie-softmax--&quot;&gt;Navie Softmax 의 단점&lt;/h2&gt;
-
-&lt;p&gt;Navie Softmax 를 최종단에 출력으로 두고 Backpropagation 할때는 큰 단점이 있다.&lt;/p&gt;
-
-&lt;p&gt;사실 Softmax가 그리 값싼 연산은 아니다. 우리가 학습하고 싶은 단어 벡터 1000개가 있다고 가정해보자. 그렇다면 매 window size=2 마다, 다시 말해 총 업데이트 할 5개의 단어 (중심단어 1 + 주변 단어 2 x 2) 를 위해서, $W, W’$ 안에 파라미터를 업데이트 해야하는데, 그 갯수가 최소 $(2 \times d \times 1000)$ 만큼된다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\triangledown_\theta J_t(\theta) \in \Bbb{R}^{2dV}&lt;/script&gt;
-
-&lt;p&gt;많은 양의 단어에 비해 업데이트 하는 파라미터수는 적기 때문에 gradient matrix $\triangledown_\theta J_t(\theta)$ 가 굉장히 sparse 해질 수 있다 (0이 많다는 소리). Adam 같은 알고리즘은 sparse 한 matrix 에 취약하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://simonjisu.github.io/deeplearning/2018/01/13/numpywithnn_5.html&quot;&gt;Numpy with NN: Optimizer 편 참고&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;그래서 &lt;strong&gt;“window에 실제로 등장하는 단어들만 업데이트 하면 좋지 않을까?”&lt;/strong&gt; 라는 생각을 하게 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;negative-sampling&quot;&gt;Negative Sampling&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;paper 1: &lt;a href=&quot;https://arxiv.org/abs/1310.4546&quot;&gt;Distributed representaions of Words and Phrases and their Compositionality (Mikolov et al. 2013)&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;paper 2: &lt;a href=&quot;https://arxiv.org/abs/1402.3722&quot;&gt;word2vec Explained: deriving Mikolov et al.’s negative-sampling word-embedding method&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;요약하면 아래와 같은 목적함수를 최대화 하는 것이다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-J(\theta) &amp;= \dfrac{1}{T}\sum_{t=1}^{T} J_t(\theta)\\
-J_t(\theta) &amp;= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_c)]}_{(2)}
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$T$: total num of words&lt;/li&gt;
-  &lt;li&gt;$\sigma$: sigmoid function&lt;/li&gt;
-  &lt;li&gt;$P(w) = {U(w)^{3/4}} / {Z}$: unigram distribution U(w) raised to the 3/4 power
-    &lt;ul&gt;
-      &lt;li&gt;The power makes less frequent words be sampled more often&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;말로 풀어보자면, 모든 단어 $T$ 에 대해서 중심단어 $c$ 와 그 주변단어 $o$ 가 같이 나올 확률 &lt;strong&gt;[수식 (1)]&lt;/strong&gt; 을 최대화 하고, 그 주변단어가 아닌 집합에서 sampling 하여 나온 $k$ 개의 단어의 확률 &lt;strong&gt;[수식 (2)]&lt;/strong&gt; 을 최소화 시키는 것이다. (음수가 붙기 때문에 최소하하게 되면 최대화가 된다.)&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;상세 논문 설명&lt;/h3&gt;
-
-&lt;p&gt;논문 기준으로 위에 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;표기법&lt;/span&gt;&lt;/strong&gt; 이 조금 다르다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;여기서 &lt;strong&gt;$w$ = center word, $c$ = context&lt;/strong&gt; 다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;출발점은 아래와 같다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;$(w, c)$ 세트가 정말로 corpus data로 부터 왔는가?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;라고 생각하고 아래와 같은 &lt;strong&gt;정의&lt;/strong&gt; 를 하게 된다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$P(D = 1 \vert w, c)$ : $(w, c)$ 가 corpus data로 부터 왔을 확률&lt;/li&gt;
-  &lt;li&gt;$P(D = 0 \vert w, c) = 1 - P(D = 1 \vert w, c)$ : $(w, c)$ 가 corpus data로부터 오지 않았을 확률&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;따라서, 우리의 목적은 확률 $P(D = 1\vert\ w, c)$ 를 최대화하는 parameter $\theta$를 찾는 것이기 때문에 아래와 같은 목적함수를 세울 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} &amp;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
-= &amp;\arg \underset{\theta}{\max} \log \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
-= &amp;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;파라미터 $\theta$ 는 단어들의 벡터라고 생각할 수 있다. 즉, 위의 식을 만족하는 어떤 최적의 단어 벡터를 찾는것이다.&lt;/p&gt;
-
-&lt;p&gt;또한, 확률 $P(D=1\vert\ w,c;\theta)$ 은 sigmoid로 아래와 같이 정의 할 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;P(D=1\vert\ w,c;\theta) = \dfrac{1}{1+e^{-v_c v_w}}&lt;/script&gt;
-
-&lt;p&gt;따라서 우리의 목적함수는 아래와 같이 다시 고쳐 쓸수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} }&lt;/script&gt;
-
-&lt;p&gt;그러나 우리의 목적 함수는 매 $(w, c)$ 세트마다 $P(D=1\vert\ w,c;\theta)=1$ 를 만족하는 trivial solution이 존재한다. $v_c = v_w$ 이며, $\forall v_c,\ v_w$ 에 대해 $v_c \cdot v_w = K$ 를 만족하는 $\theta$ (보통 $K$ 가 40이 넘어가면 위 방정식의 값이 0에 가까워짐) 는 모든 값을 똑같이 0으로 만들어 버리기 때문에, 같은 값을 갖지 못하게 하는 매커니즘이 필요하다. ($\theta$ 에 뭘 넣어도 0이 되면 최대값을 찾는 의미가 없어진다, 자세한건 밑에 &lt;span style=&quot;color: #e87d7d&quot;&gt;참고 1&lt;/span&gt; 를 참조) 여기서 “같은 값을 같는다” 라는 말은 단어 벡터가 같은 값을 갖는 것이다.&lt;/p&gt;
-
-&lt;p&gt;따라서, 하나의 방법으로 랜덤 $(w, c)$ 조합을 생성하는 집합 $D’$를 만들어 corpus data 로부터 올 확률 $P(D=1\vert \ w,c;\theta)$ 를 낮게 강제하는 것이다. 즉, $D’$ 에서 생성된 $(w, c)$ 조합은 &lt;strong&gt;corpus data 로부터 오지 않게&lt;/strong&gt; 하는 확률 $P(D=0\vert\ w,c;\theta)$ 을 최대화 하는 것.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-&amp; \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} P(D=0\vert\ w,c;\theta) \\
-&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} \big(1- P(D=1\vert\ w,c;\theta) \big) \\
-&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta) + \underset{(w,c) \in D'}{\sum} \log \big(1- P(D=1\vert\ w,c;\theta) \big) \\
-&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \big(1- \dfrac{1}{1+e^{-v_c v_w} } \big) \\
-&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} }
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;$\sigma(x) = \dfrac{1}{1+e^{-x} }$ 시그모이드 함수로 정의 하면, 아래와 같이 정리 할 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-&amp; \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} } \\
-&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \sigma(v_c v_w) + \underset{(w,c) \in D'}{\sum} \log \sigma(- v_c v_w) \quad \cdots (3)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;이는 &lt;span style=&quot;color: #e87d7d&quot;&gt;paper 1&lt;/span&gt; 의 (4) 번 식과 같아지는다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\log \sigma(u_c^T v_w) + \sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_w)]&lt;/script&gt;
-
-&lt;p&gt;다른 점이라면, 우리가 만든 (3)식에서는 전체 corpus ($D \cup D’$) 을 포함하지만, Mikolov 논문의 식은 $D$ 에 속하는 $(w, c)$ 조합 하나와 $k$ 개의 다른 $(w, c_j)$ 의 조합을 들었다는 것이다. 구체적으로, $k$ 번의 negative sampling 에서 Mikolov 는 $D’$ 를 $k \times D$ 보다 크게 설정했고, k개의 샘플 $(w, c_1), (w, c_2), \cdots, (w, c_k)$ 에 대해서 $c_j$ 는 &lt;strong&gt;unigram distribution&lt;/strong&gt; 에 &lt;strong&gt;3/4&lt;/strong&gt; 승으로 부터 도출된다. 이는 아래의 분포에서 $(w, c)$ 조합을 추출 하는 것과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;p_{words}(w) = \dfrac{p_{contexts} (c)^{3/4} }{Z}&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$p_{words}(w)$, $p_{contexts} (c)$ 는 각각 words and contexts 의 unigram distribution 이다.&lt;/li&gt;
-  &lt;li&gt;$Z$ 는 normalization constant&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Unigram distribution 은 단어가 등장하는 비율에 비례하게 확률을 설정하는 분포다. 예를 들어 “I have a pen. I have an apple. I have a pineapple.” 라는 문장이 있다면, 아래와 같은 분포를 만들 수 있다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;I&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;have&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;a&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;pen&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;an&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;apple&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;pineapple&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;.&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3/15&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;여기서 3/4 승을 해주면, 가끔 등장하는 단어는 확률을 높혀주는 효과가 있다. 물론 자주 나오는 단어의 확률도 올라가지만 가끔 등장하는 단어의 상승폭 보다 적다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt; &lt;/th&gt;
-      &lt;th&gt;a&lt;/th&gt;
-      &lt;th&gt;$a^{\frac{3}{4} }$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;apple&lt;/td&gt;
-      &lt;td&gt;$\frac{1}{15}=0.067$&lt;/td&gt;
-      &lt;td&gt;${\frac{1}{15} }^{\frac{3}{4} }=0.131$&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;have&lt;/td&gt;
-      &lt;td&gt;$\frac{3}{15}=0.020$&lt;/td&gt;
-      &lt;td&gt;${\frac{3}{15} }^{\frac{3}{4} }=0.299$&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Mikolov 논문에서는 context는 하나의 단어이기 때문에 $p_{words}(w)$ 는 아래와 동일하다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;p_{words}(w) = p_{contexts} (c) = \dfrac{count(x)}{ \vert text \vert }&lt;/script&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;trivial-solution&quot;&gt;참고 1. Trivial Solution&lt;/h3&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} L(\theta;w,c) &amp;= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
-&amp;= \underset{(w,c) \in D}{\sum} \log(1) - \log(1+e^{-v_c v_w}) \\
-&amp;= \underset{(w,c) \in D}{\sum} - \log(1+e^{-v_c v_w})
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;같은 두 벡터의 내적을 하게 되면 값은 최대가 된다. $\cos$ 값이 1이 되기 때문이다. (여기서는 최대 값이 중요한건 아니지만 값이 커진다는데 의의가 있다.)
-&lt;script type=&quot;math/tex&quot;&gt;a\cdot a=\vert a \vert \vert a \vert \cos \theta&lt;/script&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a = np.array([1,2,3,4,5,6,7])
-b = np.array([.1,.2,.3,.4,.5,.6,.7])
-print(np.dot(a, a))
-print(np.dot(a, b))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;140&lt;/p&gt;
-
-  &lt;p&gt;14.0&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;즉, $v_c = v_w$ 이며, $\forall v_c,\ v_w$ 에 대해 $v_c \cdot v_w = K$ 를 만족하는 모든 값들이 $e^{-v_c v_w}$ 를 0으로 만든다면, $L(\theta; w, c)$ 값은 0이 될것이다. 보통 $K$ 가 40 이 상이면, $L(\theta;w,c)$ 의 해는 모두 0 일 것이며 이것을 &lt;strong&gt;trivial solution&lt;/strong&gt; 이라고 한다. 우리의 목적은 단어 벡터 $v_c$ 와 $v_w$ 의 구별이기 때문에, $v_c \not = v_w$ 으로 만들어야한다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 시간에는 말뭉치의 공기정보(co-occurance)를 고려해 단어를 벡터화 시킨 &lt;strong&gt;GloVe&lt;/strong&gt; 에 대해 알아보자.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 24 Apr 2018 16:14:13 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/04/24/allaboutwv3.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/04/24/allaboutwv3.html</guid>
         
         
         <category>NLP</category>
