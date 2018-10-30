@@ -267,6 +267,17 @@ $ virtualenv nmt
 
 <p>PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.</p>
 
+<p>설치전 필요한 패키지</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>future
+numpy
+pyyaml
+setuptools
+six
+typing
+</code></pre>
+</div>
+
 <p>만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 <code class="highlighter-rouge">pip install torch torchvision torchtext</code> 을 써준다.</p>
 
 <p>하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. “<a href="https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754">라즈베리파이에 파이토치 설치하기</a>” 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.</p>
@@ -277,10 +288,15 @@ m4 libblas-dev python3-dev cmake python3-yaml
 </code></pre>
 </div>
 
-<p>pytorch 설치전 리눅스 환경변수를 만들어준다. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)</p>
+<p>pytorch 설치전 리눅스 환경변수를 만들어준다. <code class="highlighter-rouge">.profile</code> 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ export NO_CUDA=1
-(nmt) $ export NO_DISTRIBUTED=1
+<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ vi ~/.profile
+아래 내용을 밑단에 추가한다.
+export NO_CUDA=1
+export NO_DISTRIBUTED=1
+
+설정후, 터미널 재시작한다.
+(nmt) $ source ~/.bashrc
 </code></pre>
 </div>
 
@@ -299,15 +315,15 @@ m4 libblas-dev python3-dev cmake python3-yaml
 </code></pre>
 </div>
 
-<p>에러가 없을 경우 아래를 계속 진행한다. “-E” 는 여기서 중요한데, 아까 설정한 환경변수를 포함해서 실행하게 만드는 것이다.</p>
+<p>에러가 없을 경우 아래를 계속 진행한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ sudo -E python3 setup.py install
+<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ python3 setup.py install
 </code></pre>
 </div>
 
-<p>시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라.</p>
+<p>시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종요하면 안된다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ nohup python3 setup.py build &gt; ../build.log &amp;&amp; sudo -E python3 setup.py install &gt; ../installation.log &amp;
+<div class="highlighter-rouge"><pre class="highlight"><code>(nmt) $ nohup python3 setup.py build &gt; ../build.log &amp;&amp; python3 setup.py install &gt; ../installation.log &amp;
 </code></pre>
 </div>
 

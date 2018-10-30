@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 28 Oct 2018 23:03:53 +0900</pubDate>
-    <lastBuildDate>Sun, 28 Oct 2018 23:03:53 +0900</lastBuildDate>
+    <pubDate>Tue, 30 Oct 2018 21:06:07 +0900</pubDate>
+    <lastBuildDate>Tue, 30 Oct 2018 21:06:07 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -72,6 +72,17 @@ $ virtualenv nmt
 
 &lt;p&gt;PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.&lt;/p&gt;
 
+&lt;p&gt;설치전 필요한 패키지&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
+numpy
+pyyaml
+setuptools
+six
+typing
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
 &lt;p&gt;만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install torch torchvision torchtext&lt;/code&gt; 을 써준다.&lt;/p&gt;
 
 &lt;p&gt;하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. “&lt;a href=&quot;https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754&quot;&gt;라즈베리파이에 파이토치 설치하기&lt;/a&gt;” 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.&lt;/p&gt;
@@ -82,10 +93,15 @@ m4 libblas-dev python3-dev cmake python3-yaml
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;pytorch 설치전 리눅스 환경변수를 만들어준다. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)&lt;/p&gt;
+&lt;p&gt;pytorch 설치전 리눅스 환경변수를 만들어준다. &lt;code class=&quot;highlighter-rouge&quot;&gt;.profile&lt;/code&gt; 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ export NO_CUDA=1
-(nmt) $ export NO_DISTRIBUTED=1
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ vi ~/.profile
+아래 내용을 밑단에 추가한다.
+export NO_CUDA=1
+export NO_DISTRIBUTED=1
+
+설정후, 터미널 재시작한다.
+(nmt) $ source ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -104,15 +120,15 @@ m4 libblas-dev python3-dev cmake python3-yaml
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;에러가 없을 경우 아래를 계속 진행한다. “-E” 는 여기서 중요한데, 아까 설정한 환경변수를 포함해서 실행하게 만드는 것이다.&lt;/p&gt;
+&lt;p&gt;에러가 없을 경우 아래를 계속 진행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ sudo -E python3 setup.py install
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ python3 setup.py install
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라.&lt;/p&gt;
+&lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종요하면 안된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ nohup python3 setup.py build &amp;gt; ../build.log &amp;amp;&amp;amp; sudo -E python3 setup.py install &amp;gt; ../installation.log &amp;amp;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ nohup python3 setup.py build &amp;gt; ../build.log &amp;amp;&amp;amp; python3 setup.py install &amp;gt; ../installation.log &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

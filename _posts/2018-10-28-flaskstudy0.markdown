@@ -61,9 +61,21 @@ $ . nmt/bin/activate
 (nmt) $ pip install Flask
 ```
 
+
 ### PyTorch
 
 PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.
+
+설치전 필요한 패키지
+
+```
+future
+numpy
+pyyaml
+setuptools
+six
+typing
+```
 
 만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 `pip install torch torchvision torchtext` 을 써준다.
 
@@ -75,11 +87,17 @@ m4 libblas-dev python3-dev cmake python3-yaml
 (nmt) $ pip install pyyaml  # 설치가 안됐을 수도 있으니까 따로 한번 설치해준다.
 ```
 
-pytorch 설치전 리눅스 환경변수를 만들어준다. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. "NO\_CUDA" 변수를 1로 설정한다. "NO\_DISTRIBUTED" 는 뭔지 모르겠다. (알려주세요)
+pytorch 설치전 리눅스 환경변수를 만들어준다. `.profile` 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. "NO\_CUDA" 변수를 1로 설정한다. "NO\_DISTRIBUTED" 는 뭔지 모르겠다. (알려주세요)
+
 
 ```
-(nmt) $ export NO_CUDA=1
-(nmt) $ export NO_DISTRIBUTED=1
+(nmt) $ vi ~/.profile
+아래 내용을 밑단에 추가한다.
+export NO_CUDA=1
+export NO_DISTRIBUTED=1
+
+설정후, 터미널 재시작한다.
+(nmt) $ source ~/.bashrc
 ```
 
 download 폴더를 만들어서 안에 PyTorch 를 clone 한다.
@@ -97,16 +115,16 @@ PyTorch 를 빌드한다. 약 2~3시간 걸린다. [영화](https://ko.wikipedia
 (nmt) $ python3 setup.py build
 ```
 
-에러가 없을 경우 아래를 계속 진행한다. "-E" 는 여기서 중요한데, 아까 설정한 환경변수를 포함해서 실행하게 만드는 것이다.
+에러가 없을 경우 아래를 계속 진행한다. 
 
 ```
-(nmt) $ sudo -E python3 setup.py install
+(nmt) $ python3 setup.py install
 ```
 
-시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라.
+시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종요하면 안된다.
 
 ```
-(nmt) $ nohup python3 setup.py build > ../build.log && sudo -E python3 setup.py install > ../installation.log &
+(nmt) $ nohup python3 setup.py build > ../build.log && python3 setup.py install > ../installation.log &
 ```
 
 다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.
