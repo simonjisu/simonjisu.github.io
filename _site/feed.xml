@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 30 Oct 2018 21:06:07 +0900</pubDate>
-    <lastBuildDate>Tue, 30 Oct 2018 21:06:07 +0900</lastBuildDate>
+    <pubDate>Tue, 30 Oct 2018 21:13:29 +0900</pubDate>
+    <lastBuildDate>Tue, 30 Oct 2018 21:13:29 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -131,6 +131,10 @@ export NO_DISTRIBUTED=1
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ nohup python3 setup.py build &amp;gt; ../build.log &amp;amp;&amp;amp; python3 setup.py install &amp;gt; ../installation.log &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+
+&lt;p&gt;설치 종료후 잘 설치가 됐는지, 확인해보자&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;img src=https://dl.dropbox.com/s/hgire0dsh32x2j0/1030_testtorch.png&amp;gt;&lt;/p&gt;
 
 &lt;p&gt;다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.&lt;/p&gt;
 
