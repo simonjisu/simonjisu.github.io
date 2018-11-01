@@ -687,3 +687,8 @@ pre code.hljs {
           margin-right: 0; } }
     .site-footer .site-signature a {
       text-decoration: underline; }
+
+.advertisement {
+  text-align: center;
+  width: auto;
+  height: 100px; }
