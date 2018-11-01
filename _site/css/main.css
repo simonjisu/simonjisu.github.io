@@ -689,6 +689,5 @@ pre code.hljs {
       text-decoration: underline; }
 
 .advertisement {
-  text-align: center;
   width: auto;
-  height: 100px; }
+  height: auto; }
