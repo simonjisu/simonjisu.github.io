@@ -34,21 +34,21 @@ $ sudo pip install virtualenv
 자신의 폴더로 들어가서 가상환경을 만든다.
 
 ```
-$ mkdir NMT_demo
-$ cd NMT_demo
-$ virtualenv nmt
+$ mkdir demo
+$ cd demo
+$ virtualenv venv
 ```
 
 가상환경으로 접속한다
 
 ```
-$ . nmt/bin/activate
+$ . venv/bin/activate
 ```
 
 앞에 괄호에 만든 가상환경이 뜨면, 성공한것이다. 만약에 가상환경을 빠져나오려면 아래와 같이 실행한다.
 
 ```
-(nmt) $ deactivate
+(venv) $ deactivate
 ```
 
 ---
@@ -58,7 +58,7 @@ $ . nmt/bin/activate
 ### Flask
 
 ```
-(nmt) $ pip install Flask
+(venv) $ pip install Flask
 ```
 
 
@@ -82,49 +82,55 @@ typing
 하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. "[라즈베리파이에 파이토치 설치하기](https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754)" 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.
 
 ```
-(nmt) $ sudo apt-get install libopenblas-dev cython libatlas-dev \
-m4 libblas-dev python3-dev cmake python3-yaml
-(nmt) $ pip install pyyaml  # 설치가 안됐을 수도 있으니까 따로 한번 설치해준다.
+$ sudo apt-get install libopenblas-dev cython libatlas-dev \
+m4 libblas-dev python3-dev cmake
+# 가상환경에서 설치해준다.
+(venv) $ pip install numpy  
+(venv) $ pip install pyyaml 
+(venv) $ pip install setuptools
+(venv) $ pip install six
+(venv) $ pip install typing
+(venv) $ pip install future
 ```
 
 pytorch 설치전 리눅스 환경변수를 만들어준다. `.profile` 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. "NO\_CUDA" 변수를 1로 설정한다. "NO\_DISTRIBUTED" 는 뭔지 모르겠다. (알려주세요)
 
 
 ```
-(nmt) $ vi ~/.profile
+(venv) $ vi ~/.profile
 아래 내용을 밑단에 추가한다.
 export NO_CUDA=1
 export NO_DISTRIBUTED=1
 
 설정후, 터미널 재시작한다.
-(nmt) $ source ~/.bashrc
+(venv) $ source ~/.bashrc
 ```
 
 download 폴더를 만들어서 안에 PyTorch 를 clone 한다.
 
 ```
-(nmt) $ mkdir downloads
-(nmt) $ cd downloads
-(nmt) $ git clone --recursive https://github.com/pytorch/pytorch
-(nmt) $ cd pytorch
+(venv) $ mkdir downloads
+(venv) $ cd downloads
+(venv) $ git clone --recursive https://github.com/pytorch/pytorch
+(venv) $ cd pytorch
 ```
 
 PyTorch 를 빌드한다. 약 2~3시간 걸린다. [영화](https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%85%89%EC%85%98) 한 편을 보고 오면 딱이다.
 
 ```
-(nmt) $ python3 setup.py build
+(venv) $ python3 setup.py build
 ```
 
 에러가 없을 경우 아래를 계속 진행한다.
 
 ```
-(nmt) $ python3 setup.py install
+(venv) $ python3 setup.py install
 ```
 
 시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종요하면 안된다.
 
 ```
-(nmt) $ nohup python3 setup.py build > ../build.log && python3 setup.py install > ../installation.log &
+(venv) $ nohup python3 setup.py build > ../build.log && python3 setup.py install > ../installation.log &
 ```
 
 설치 종료후 잘 설치가 됐는지, 확인해보자

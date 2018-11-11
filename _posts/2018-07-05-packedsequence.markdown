@@ -48,7 +48,7 @@ NLP 에서 매 배치(batch)마다 고정된 문장의 길이로 만들어주기
 
 ## Pytorch - PackedSequence
 
-Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 [nbviewer](https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb) 혹은 [github](https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb)에 있다.
+Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 [nbviewer](https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb) 혹은 [github](https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb)에 있다.
 
 
 ### 과정

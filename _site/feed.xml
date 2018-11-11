@@ -6,9 +6,190 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Nov 2018 23:29:23 +0900</pubDate>
-    <lastBuildDate>Thu, 01 Nov 2018 23:29:23 +0900</lastBuildDate>
+    <pubDate>Mon, 12 Nov 2018 00:46:06 +0900</pubDate>
+    <lastBuildDate>Mon, 12 Nov 2018 00:46:06 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>[비전공자의 Flask-2] 본격 앱 만들기 1</title>
+        <description>&lt;h1 id=&quot;flask-2----1&quot;&gt;[비전공자의 Flask-2] 본격 앱 만들기 1&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;폴더 생성부터 데이터베이스 만들기&lt;/h2&gt;
+
+&lt;p&gt;내가 만드려고 하는 앱은 사용자가 어떤 query 를 날리면 이를 모델을 거쳐서 결과를 웹에서 보여주는 간단한 앱이다. 예를 들어, 번역기 같은 앱의 경우를 생각해보자.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;사용자 (웹페이지 방문자)는 번역하고자 하는 글을 쓴고 “번역” 버튼을 클릭한다.&lt;/li&gt;
+  &lt;li&gt;번역 클릭 후, 해당 string이 flask를 통해 전송 받으면 이를 모델에 넣어서 결과를 뱉는다.&lt;/li&gt;
+  &lt;li&gt;결과를 다시 flask 앱을 통해 사용자에게 보여준다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;구체적으로 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/08/04/E2EMN.html&quot;&gt;End to End Memory Network&lt;/a&gt; 모델을 활용해서 스토리 내용을 사용자가 선택해서 질문을 던지면 그에 대한 결과를 받는 앱을 만들 것이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-0--&quot;&gt;Step 0: 폴더 생성하기&lt;/h2&gt;
+
+&lt;p&gt;어플리케이션 개발을 시작하기전에, 어플리케이션에서 사용할 폴더를 만들자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
+    /static
+    /templates
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;앞으로 이 &lt;strong&gt;“nmtapp”&lt;/strong&gt; 폴더 안에 우리가 사용할 것들을 넣는다. &lt;strong&gt;“static”&lt;/strong&gt; 은 사용자들을 위한 폴더, 이 폴더는 css와 javascript 파일들이 저장되는 곳이다. Flasks는 templates 폴더에서 &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja2&lt;/a&gt; 템플릿을 찾을 것이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-1--&quot;&gt;Step 1: 데이터베이스 스키마&lt;/h2&gt;
+
+&lt;p&gt;데이터베이스 스키마를 생성해야 한다. 우리의 어플리케이션은 단지 하나의 테이블만 필요하며 사용이 매우 쉬운 SQLite를 쓸것이다. 다음의 내용을 schema.sql 이라는 이름의 파일로 방금 생성한 nmtapp 폴더에 저장한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drop table if exists nmtmain;
+create table nmtmain (
+  id integer primary key autoincrement,
+   question string not null
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;해당 테이블의 이름은 “nmtmain” 이며, 간략하게 칼럼을 소개하자면, 아래와같다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;id: 자동으로 증가되는 정수이며 프라이머리 키(primary key) 이다.&lt;/li&gt;
+  &lt;li&gt;query: 사용자들이 입력한 질문.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;데이터베이스 스키마(database schema)란 데이터베이스에서 자료의 구조, 자료의 표현 방법, 자료 간의 관계를 형식 언어로 정의한 구조이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;step-2---&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
+    /static
+    /templates
+    /schema.sql
+    /nmtstart.py
+    /settings.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;settingspy&quot;&gt;settings.py&lt;/h3&gt;
+
+&lt;p&gt;추가로 앱을 실행하기 위한 파일들을 만든다. 중요한 정보 혹은 환경변수가 있는 파일은 &lt;strong&gt;“settings.py”&lt;/strong&gt; 에 넣기로 한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## settings.py
+# configuration
+DATABASE = '../data/nmtmain.db'
+DEBUG = True
+SECRET_KEY = 'development key'
+USERNAME = 'admin'
+PASSWORD = 'password'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;클라이언트에서의 세션을 안전하게 보장하기 위해서는 secret_key 가 필요하다. secret_key는 추측이 어렵도록 가능한 복잡하게 선택하여야 한다. 디버그(DEBUG) 플래그는 인터랙티브 디버거를 활성화 시키거나 비활성화 시키는 일을 한다. 운영시스템에서는 디버그 모드를 절대로 활성화 시키지 말아야 한다. 왜냐하면 디버그 모드에서는 사용자가 서버의 코드를 실행할수가 있기 때문이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;nmtstartpy&quot;&gt;nmtstart.py&lt;/h3&gt;
+
+&lt;p&gt;앱을 실행하는 &lt;strong&gt;“nmtstart.py”&lt;/strong&gt; 파일을 만든다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# all the imports
+import sqlite3
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+
+# create application
+app = Flask(__name__)
+app.config.from_pyfile(&quot;./settings.py&quot;, silent=True)
+
+def connect_db():
+    return sqlite3.connect(app.config['DATABASE'])
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;아직 모르는 import 가 많지만, 차차 배울테니 우선 앱을 만들고 실행하는 부분을 알아보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;환경설정 불러오기:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.from_pyfile(&quot;./settings.py&quot;, silent=True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;만약에 현재 파일 위치에 환경변수 객체(settings.py 의 내용)를 작성하였으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;from_object(__name__)&lt;/code&gt; 라는 명령어를 쓰면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;실행&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ python3 nmtstart.py  
+...
+192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET / HTTP/1.1&quot; 404 -
+192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;지금은 어떤 뷰(view)를 만들지 않았기 때문에, 브라우저에서 페이지를 찾을 수 없다는 404에러를 볼 수 있을 것이다. 이건 나중에 살펴보고, 우선 데이터베이스를 만들고 진행하도록 하자.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-3--&quot;&gt;Step 3: 데이터베이스 생성하기&lt;/h2&gt;
+
+&lt;p&gt;현재 만들고자 하는 앱은 관계형 데이터베이스 시스템에 의해 구동되는 어플리케이션이다. 이러한 시스템은 어떻게 데이터를 저장할지에 대한 정보를 가지고 있는 스키마가 필요하다. 그래서 처음으로 서버를 실행하기 전에 스키마를 생성하는 것이 중요하다.&lt;/p&gt;
+
+&lt;p&gt;우선 데이터를 어디다 저장할지 정해보자. 데이터는 앱 밖에 있는 &lt;strong&gt;data&lt;/strong&gt; 폴더를 생성해서 저장하기로 한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/demo
+	/venv
+	/e2eapp
+	/data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;아까 만들어둔 &lt;strong&gt;“schema.sql”&lt;/strong&gt; 파일을 이용하여 sqlite3 명령어를 사용하여 다음과 같이 만들 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ sqlite3 ../data/nmtmain.db &amp;lt; schema.sql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Sqlite3 가 설치 안됐을 수도 있다. 아래 명령어를 쳐서 (가상환경 빠져나와서) sqlite3 를 설치하자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install sqlite3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;데이터베이스를 초기화하는 함수를 만들고 싶다면 contextlib 의 closing 함수를 import 한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# import 에 추가
+from contextlib import closing
+
+def init_db():
+    with closing(connect_db()) as db:
+        with app.open_resource('schema.sql') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;함수설명&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;closing:&lt;/strong&gt; with 블럭안에서 연결한 커넥션을 유지하도록 도와준다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;app객체의 open_resource:&lt;/strong&gt; 리소스 경로(nmtapp 의 폴더)의 파일을 열고 그 값을 읽을 수 있다. 우리는 이것을 이용하여 데이터베이스에 연결하는 스크립트를 실행시킬 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다음 시간에는 데이터베이스와 연결하고, 뷰함수 및 템플릿을 만들어보자.&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/installation.html&quot;&gt;flask 한글 튜토리얼&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wikidocs.net/book/1530&quot;&gt;SQLite로 가볍게 배우는 데이터베이스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
+        <link>http://simonjisu.github.io/flask/2018/11/11/flaskstudy2.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/flask/2018/11/11/flaskstudy2.html</guid>
+        
+        
+        <category>Flask</category>
+        
+      </item>
     
       <item>
         <title>[비전공자의 Flask-1] 첫 앱 만들어보기</title>
@@ -36,7 +217,7 @@ if __name__ == '__main__':
 
 &lt;p&gt;hello.py 를 실행하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ python hello.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 hello.py
  * Serving Flask app &quot;hello&quot; (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
@@ -147,21 +328,21 @@ if __name__ == '__main__':
 
 &lt;p&gt;자신의 폴더로 들어가서 가상환경을 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir NMT_demo
-$ cd NMT_demo
-$ virtualenv nmt
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir demo
+$ cd demo
+$ virtualenv venv
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;가상환경으로 접속한다&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . nmt/bin/activate
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . venv/bin/activate
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;앞에 괄호에 만든 가상환경이 뜨면, 성공한것이다. 만약에 가상환경을 빠져나오려면 아래와 같이 실행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ deactivate
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ deactivate
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -171,7 +352,7 @@ $ virtualenv nmt
 
 &lt;h3 id=&quot;flask&quot;&gt;Flask&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ pip install Flask
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install Flask
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -194,48 +375,54 @@ typing
 
 &lt;p&gt;하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. “&lt;a href=&quot;https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754&quot;&gt;라즈베리파이에 파이토치 설치하기&lt;/a&gt;” 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ sudo apt-get install libopenblas-dev cython libatlas-dev \
-m4 libblas-dev python3-dev cmake python3-yaml
-(nmt) $ pip install pyyaml  # 설치가 안됐을 수도 있으니까 따로 한번 설치해준다.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libopenblas-dev cython libatlas-dev \
+m4 libblas-dev python3-dev cmake
+# 가상환경에서 설치해준다.
+(venv) $ pip install numpy  
+(venv) $ pip install pyyaml 
+(venv) $ pip install setuptools
+(venv) $ pip install six
+(venv) $ pip install typing
+(venv) $ pip install future
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;pytorch 설치전 리눅스 환경변수를 만들어준다. &lt;code class=&quot;highlighter-rouge&quot;&gt;.profile&lt;/code&gt; 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ vi ~/.profile
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ vi ~/.profile
 아래 내용을 밑단에 추가한다.
 export NO_CUDA=1
 export NO_DISTRIBUTED=1
 
 설정후, 터미널 재시작한다.
-(nmt) $ source ~/.bashrc
+(venv) $ source ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;download 폴더를 만들어서 안에 PyTorch 를 clone 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ mkdir downloads
-(nmt) $ cd downloads
-(nmt) $ git clone --recursive https://github.com/pytorch/pytorch
-(nmt) $ cd pytorch
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ mkdir downloads
+(venv) $ cd downloads
+(venv) $ git clone --recursive https://github.com/pytorch/pytorch
+(venv) $ cd pytorch
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;PyTorch 를 빌드한다. 약 2~3시간 걸린다. &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%85%89%EC%85%98&quot;&gt;영화&lt;/a&gt; 한 편을 보고 오면 딱이다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ python3 setup.py build
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py build
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;에러가 없을 경우 아래를 계속 진행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ python3 setup.py install
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py install
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종요하면 안된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(nmt) $ nohup python3 setup.py build &amp;gt; ../build.log &amp;amp;&amp;amp; python3 setup.py install &amp;gt; ../installation.log &amp;amp;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ nohup python3 setup.py build &amp;gt; ../build.log &amp;amp;&amp;amp; python3 setup.py install &amp;gt; ../installation.log &amp;amp;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -771,7 +958,7 @@ tensor([ 0,  3,  1])
 
 &lt;h2 id=&quot;pytorch---packedsequence&quot;&gt;Pytorch - PackedSequence&lt;/h2&gt;
 
-&lt;p&gt;Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb&quot;&gt;nbviewer&lt;/a&gt; 혹은 &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic/02_PackedSequence.ipynb&quot;&gt;github&lt;/a&gt;에 있다.&lt;/p&gt;
+&lt;p&gt;Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb&quot;&gt;nbviewer&lt;/a&gt; 혹은 &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb&quot;&gt;github&lt;/a&gt;에 있다.&lt;/p&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;과정&lt;/h3&gt;
 
@@ -1525,384 +1712,6 @@ sudo ethtool [Ethernet port]
         
         
         <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>All about Word Vectors: GloVe</title>
-        <description>&lt;h1 id=&quot;all-about-word-vectors-glove&quot;&gt;All about Word Vectors: GloVe&lt;/h1&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;본 포스팅은 &lt;a href=&quot;http://web.stanford.edu/class/cs224n/&quot;&gt;CS224n&lt;/a&gt; Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;co-occurrence&quot;&gt;Co-occurrence&lt;/h2&gt;
-
-&lt;p&gt;공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다. 여기서 어휘는 단어 뿐만 아니라 형태소, 합성어 등의 단위로 의미를 부여할 수 있는 언어 단위다. 그렇다면 왜 &lt;strong&gt;공기 관계&lt;/strong&gt; 를 살피는 것일까?&lt;/p&gt;
-
-&lt;p&gt;공기 관계를 통해 문서나 문장으로 부터 &lt;strong&gt;추상화된 정보&lt;/strong&gt; 를 얻기 위해서다. 이는 자연어처리의 가정을 생각해보면 이해할 수 있을 것이다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;비슷한 맥락에 등장하는 단어들은 유사한 의미를 지니는 경향이 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;때문에, 두 단어가 같이 등장한 횟수가 많아지면 &lt;strong&gt;유사한 의미&lt;/strong&gt; 를 가졌다고 볼 수도 있다는 것이다. 이런 유사한 의미를 추상화된 정보로 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;공기(Co-occurrence) 정보를 수집하는 방법은 두 가지다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;window 기반: 품사와 의미(semantic) 정보를 캡쳐할 수 있다.&lt;/li&gt;
-  &lt;li&gt;word-document co-occurrence matrix 기반: 조금 더 일반적인 토픽을 추출 할 수 있고, 이는 Latent Semantic Analysis 와 연결 된다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;example-window-based-co-occurrence-matrix&quot;&gt;Example: Window based co-occurrence matrix&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I like deep learning.&lt;/p&gt;
-
-  &lt;p&gt;I like NLP.&lt;/p&gt;
-
-  &lt;p&gt;I enjoy flying.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;위 3 문장을 사용해서, window size = 1 로 지정하는 co-occurrence matrix 를 만들어보자. 무슨 뜻인지는 아래 코드를 실행한 표를 살펴보자.&lt;/p&gt;
-
-&lt;p&gt;단, 한 단어에 대해서 좌측에서 등장했는지 우측에서 등장했는 지는 상관없다(이는 co-occurrence matrix 가 대각을 기준으로 대칭하는 결과를 불러옴)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import pandas as pd
-import numpy as np
-from collections import deque, Counter
-from itertools import islice
-from scipy.sparse import coo_matrix
-
-flatten = lambda t: [tuple(j) for i in t for j in i]
-window = 1
-
-def get_cooccur_list(sentence, window):
-    s_len = len(sentence)
-    ngram_list = [deque(islice(sentence, i), window+1) for i in range(s_len+1)][2:]
-    return ngram_list
-
-sentences = ['I like deep learning .', 'I like NLP .', 'I enjoy flying .']
-tokens = [s.split() for s in sentences]
-vocab = list(set([w for s in tokens for w in s]))
-# print(vocab)
-vocab = ['I', 'like', 'enjoy', 'deep', 'learning', 'NLP', 'flying', '.'] # 표와 같은 모양을 만들어주기 위해 다시 지정
-vocab2idx = {w: i for i, w in enumerate(vocab)}
-tokens_idx = [[vocab2idx.get(w) for w in s] for s in tokens]
-co_occurs = [get_cooccur_list(s, window) for s in tokens_idx]
-
-d = Counter()
-d.update(flatten(co_occurs))
-row, col, data = list(zip(*[[r, c, v] for (r, c), v in d.items()]))
-temp = coo_matrix((data, (row, col)), shape=(len(vocab), len(vocab))).toarray()
-co_mat = temp.T + temp
-
-pd.DataFrame(co_mat, index=vocab, columns=vocab)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;코드를 실행하면 아래와 같은 표가 나온다. window size 가 1이니까 “I” 주변 한칸에 동시 등장 단어는 “like” 가 2번 “enjoy” 가 1번이다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;counts&lt;/th&gt;
-      &lt;th&gt;I&lt;/th&gt;
-      &lt;th&gt;like&lt;/th&gt;
-      &lt;th&gt;enjoy&lt;/th&gt;
-      &lt;th&gt;deep&lt;/th&gt;
-      &lt;th&gt;learning&lt;/th&gt;
-      &lt;th&gt;NLP&lt;/th&gt;
-      &lt;th&gt;flying&lt;/th&gt;
-      &lt;th&gt;.&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;I&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;like&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;enjoy&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;deep&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;learning&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NLP&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;flying&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;.&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;co-occurrence matrix와 같은 단어 벡터는 어떤 문제점이 있을까?&lt;/p&gt;
-
-&lt;p&gt;첫째로, 단어가 많아지면 벡터가 엄청 길어진다(데이터 차원이 커진)는 것이다. 이에 따른 많은 저장 비용이 들어갈 것이다. 둘째로, sparsity issues가 있을 수 있다(models are less robust).&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;그렇다면 꼭 하나의 단어로 해야만 하는가? 문서 전체의 단어의 공기 정보를 추출 하는 것은 안되는가?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이와 같은 생각이 GloVe 를 탄생시켰다.&lt;/p&gt;
-
-&lt;h2 id=&quot;glove&quot;&gt;GloVe&lt;/h2&gt;
-
-&lt;p&gt;Paper: &lt;a href=&quot;https://www.aclweb.org/anthology/D14-1162&quot;&gt;GloVe: Global Vectors for Word Representation&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;GloVe 의 학습방법은 아래와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(P_{ij})(u_i^T v_j - \log P_{ij})^2&lt;/script&gt;
-
-&lt;p&gt;논문해설을 통해서 자세히 보자.&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h3 id=&quot;section&quot;&gt;논문 해설&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;GloVe:&lt;/strong&gt; Global Vectors라고 명칭을 지은 이유는 모델에서 직접적으로 문서 전체의 코퍼스 통계량을 포착할 수있기 때문이다. (the global corpus statistics are captured directly by the model)&lt;/p&gt;
-
-&lt;p&gt;그전에 notation 을 정의해보자.&lt;/p&gt;
-
-&lt;p&gt;Define notation:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;$X$: 단어간의 공기 매트릭스 (matrix of word-word co-occurrence counts)&lt;/li&gt;
-  &lt;li&gt;$X_{ij}$: 단어 $j$ 와 문맥 단어 $i$ 가 같이 등장한 횟수 (the number of times that word $j$ occurs in the context word $i$)&lt;/li&gt;
-  &lt;li&gt;$X_i = \sum_k X_{ik}$: 어떤 단어든 문맥 단어 $i$ 와 등장한 횟수 (the number of times any word appears in the context of word $i$)&lt;/li&gt;
-  &lt;li&gt;$P_{ij} = P(j \vert i) = X_{ij} / X_i$: 단어 $j$ 와 문맥 단어 $i$ 동시 등장할 확률, 문맥 단어 $i$ 가 주어졌을 때 $j$ 가 등장할 확률 (probability that word $j$ appear in the context word $i$)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;아래의 예시를 보자.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Probability and Ratio&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$k=solid$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$k=gas$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$k=water$&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;$k=fashion$&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;$P(k\vert ice)$&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.00019&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.000066&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.003&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.000017&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;$P(k\vert steam)$&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.000022&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.00078&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.0022&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.000018&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;$P(k\vert ice)/P(k\vert steam)$&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;8.9&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.085&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1.36&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;0.96&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;위의 표에 따르면 $i=ice, j=steam$ 일때 $solid$ 와 동시 등장 확률이 높은 단어는 $ice$ 다. 직관적으로 생각해도, 단단한 $ice$ 가 $solid$ 와 연관될 확률이 더 높다. 따러서, 우리는 $P(k\vert ice)/P(k\vert steam)$ 를 구해서, 연관이 있는 단어일 경우 이 비율이 크게 높으며, 아니면 그 반대다. &lt;strong&gt;(엄청 크거나 혹은 엄청 작거나)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이처럼 직접적으로 단어간의 동시등장 확률을 비교하는 것보다. 확률간의 비율을 구하는 것이 &lt;strong&gt;연관성이 없는&lt;/strong&gt; 단어(water &amp;amp; fashion)들로 부터 관련된 단어(solid &amp;amp; gas)를 구별하기 좋으며, &lt;strong&gt;관련성 있는&lt;/strong&gt; 단어(solid &amp;amp; gas)들을 차별화 하기에도 좋다.&lt;/p&gt;
-
-&lt;p&gt;따라서 &lt;strong&gt;&lt;span style=&quot;color: #e87d7d&quot;&gt;동시 등장 확률의 비율(ratios of co-occurrence probabilities)&lt;/span&gt;&lt;/strong&gt; 을 모델이 학습하게 하는 것이 바람직 해보인다.&lt;/p&gt;
-
-&lt;p&gt;중요한 것은 이 비율은 3개의 단어 $i, j, k$ 와 연관이 있다. 따라서 아래의 함수를 구성할 수가 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(w_i, w_j, \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (1)&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$w \in \Bbb{R}^d$: word vectors&lt;/li&gt;
-  &lt;li&gt;$\tilde{w} \in \Bbb{R}^d$: separate context word vectors&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$(1)$ 식과 같이, 단어 벡터 공간에서 $w_i, w_j, \tilde{w}_k$ 를 input으로 넣었을 때,&lt;/p&gt;
-
-&lt;p&gt;$\dfrac{ P_{ik} }{ P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;F((w_i - w_j)^T \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (2)&lt;/script&gt;
-
-&lt;p&gt;이로써 선형적인 관계를 포착하고, 양변 모두 스칼라 값으로 정해진 함수가 만들어 졌다. 그러나 단어 $i, j$ 와 $k$ 동시 등장 비율의 &lt;strong&gt;임의적인 차별화&lt;/strong&gt; 를 위해서 어떤 조건들을 만족해야한다. 그 조건들이란 단어 벡터 $w$ 와 문맥 단어 벡터 $\tilde{w}$ 간 서로 자유롭게 교환 될 수가 있어야 한다. 즉, 단어간 공기 매트릭스 $X$의 대칭(symmetric) 특성을 보존해야 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;임의적인 차별화&lt;/strong&gt; 가 무슨 말이냐면, 단어 $k$ 와 $i, j$ 단어 간의 비율을 확인 할때, $i$ 와 $k, j$ (혹은 $j$ 와 $i, k$) 의 관계도 확인 할 수 있어야 된다는 말이다.&lt;/p&gt;
-
-&lt;p&gt;대칭(symmetric) 을 만족하려면 2 단계로 진행 된다. 우선, 두 그룹 $(\Bbb{R}, +)$ 과 $(\Bbb{R}_{&amp;gt;0}, \times)$ 에 대해서 함수 $F$ 가 &lt;strong&gt;homomorphism&lt;/strong&gt; 이어야 한다. (homomorphism 해설: 밑에 &lt;span style=&quot;color: #e87d7d&quot;&gt;참고 1&lt;/span&gt;를 보라), 예를 들어 아래와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(w_i, w_j, \tilde{w}_k) = \dfrac{F(w_i^T \tilde{w}_k) }{F(w_j^T \tilde{w}_k) } \cdots (3)&lt;/script&gt;
-
-&lt;p&gt;$(2)$ 식에 의해서, 아래와 같이 풀 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;F(w_i^T \tilde{w}_k) = P_{ik} = \dfrac{X_{ik} }{X_i} \cdots (4)&lt;/script&gt;
-
-&lt;p&gt;$(3)$ 식에 만족하는 해답은 $F = \exp$ 임으로, 아래의 식을 도출 해낼 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_i^T \tilde{w}_k = \log(P_{ik}) = \log(X_{ik}) - \log(X_i) \cdots (5)&lt;/script&gt;
-
-&lt;p&gt;다음으로, $(5)$ 식은 $\log(X_i)$ 만 아니였다면 대칭이었을 것이다. $\log(P_{ik})=\log(P_{ki})$ 를 만족하는지 한번 보자.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-\log(P_{ik}) &amp;= \log(X_{ik}) - \log(X_i) \\
-\log(P_{ki}) &amp;= \log(X_{ki}) - \log(X_k)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;당연하게도, $\log(X_i) \neq \log(X_k)$ 이기 때문에 $\log(P_{ik}) \neq \log(P_{ki})$ 이다.&lt;/p&gt;
-
-&lt;p&gt;하지만 $\log(X_i)$ 부분은 $k$ 에 대해서 독립적(independent) 이기 때문에, $w_i$ 의 bias $b_i$ 항으로 들어갈 수 있다. 그리고 대칭성을 유지하기 위해서 $\tilde{w}_k$ 의 bias $\tilde{b}_k$ 항도 더해준다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;w_i^T \tilde{w}_k + b_i + \tilde{b}_k = \log(X_{ik}) \cdots (6)&lt;/script&gt;
-
-&lt;p&gt;$(6)$ 식이 우리의 제일 간단한 선형관계인 solution 이라고 해도 되지만 이는 문제가 좀 있다. $X_{ik} = 0$ 에서 명확하게 정의 되지 않는다. 이를 해결하기 위해서 $X_{ik}+1$ 하는 방법도 있지만, sparsity issue 를 벗어나기 힘들다. 그리고 하나의 큰 약점이 있다면 거의 등장하지 않는 단어들에게 동시 등장 비율이 모두 같을 수 있다는 점이다. 이게 왜 문제가 되냐면, co-occurrence 가 적을 수록 많이 등장하는 단어들 보다 정보 함량이 적고 데이터도 noisy 하기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;연구팀은 새로운 weighted least squares regression model 을 제시하여 문제를 풀고자 했다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2 \cdots (7)&lt;/script&gt;
-
-&lt;p&gt;가중치 함수 (Weighting function) $f(X_{ij})$ 는 아래의 특성을 따라야 한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;$f(0) = 0$. 만약 $f$ 가 연속함수(continuous function) 라면, $x \rightarrow 0$ 으로 갈때 $\lim_{x\rightarrow 0} f(x) log^2x$ 도 빠르게 수렴한다. 단, 유한한 값이여야 한다.&lt;/li&gt;
-  &lt;li&gt;$f(x)$ 는 감소함수가 되면 안된다. (non-decreasing) 이유는 동시 등장이 희박한 단어들의 가중치가 많아져서는 안되기 때문이다.&lt;/li&gt;
-  &lt;li&gt;$f(x)$ 는 큰 $x$ 값에 대해서 상대적으로 작은 값이어야 한다. 그 이유는 공기 횟수가 큰 단어들의 가중치가 너무 높게 설정하지 않기 위해서다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;연구팀은 이에 적합한 함수를 찾았다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-f(x) =
-\begin{cases} (x/x_{max})^{\alpha} \quad if\ x &lt; x_{max} \\
-1 \quad otherwise
-\end{cases} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ML/nlp/L3_weight_f.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그림: $f(x)$ with $\alpha = 3/4$ 일때 좋은 성과를 얻었다. 재밌는 것은 Mikolov 논문에서 나온 unigram distribution 에 3/4 승을 해주는 것과 같다는 것을 발견했다.&lt;/p&gt;
-
-&lt;p&gt;조금더 general 한 weighting function 은 아래와 같다. (자세한건 논문 3.1 참고)&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{J} = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j - \log X_{ij})^2&lt;/script&gt;
-
-&lt;p&gt;이는 연구팀이 도출한 $(7)$ 식과 같은 식이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h3 id=&quot;homomorphism&quot;&gt;참고 1: Homomorphism&lt;/h3&gt;
-
-&lt;p&gt;혹시나 틀렸으면 댓글로 이야기 해주세요.&lt;/p&gt;
-
-&lt;p&gt;우선 Group &lt;a href=&quot;https://en.wikipedia.org/wiki/Group_(mathematics)&quot;&gt;(위키 링크)&lt;/a&gt; 이란 것을 알아야한다. 내가 이해한 바로는 &lt;strong&gt;Group $(G, * )$&lt;/strong&gt; 이란, 집합 $G$ 와 연산 $* $ 로 구성되어 있다. 이 연산을 “the Group Law of $G$” 라고 부른다. 집합 $G$ 에 속한 원소 $a, b$ 의 연산을 $a * b$ 라고 표현한다. 또한 아래의 조건들을 만족해야한다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Closure: $* $ 연산은 $G$ 에 대해 닫혀 있어야한다. 즉, $a * b$ 연산도 집합 $G$ 에 속해야한다.&lt;/li&gt;
-  &lt;li&gt;Associativity: 교환 법칙이 성립해야한다. $(a * b) * c = a * (b * c)$&lt;/li&gt;
-  &lt;li&gt;Identity element: 항등원이 존재해야 한다. $a * e = a = e * a$&lt;/li&gt;
-  &lt;li&gt;Inverse element: 역원이 존재해야 한다. $a * x = e = x * a$&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Group 를 이해 했으면 이제 Homomorphism 을 이해해보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;정의:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;두 그룹 &lt;span style=&quot;color: #15b23c&quot;&gt;$(G, * )$&lt;/span&gt; 과 &lt;span style=&quot;color: #9013b2&quot;&gt;$(H, @)$&lt;/span&gt; 가 있으면, 모든 &lt;span style=&quot;color: #15b23c&quot;&gt;$x, y \in G$&lt;/span&gt; 에 대해서 $f:$ &lt;span style=&quot;color: #15b23c&quot;&gt;$G$&lt;/span&gt; $\rightarrow$ &lt;span style=&quot;color: #9013b2&quot;&gt;$H$&lt;/span&gt;, &lt;span style=&quot;color: #15b23c&quot;&gt;$f(x * y)$&lt;/span&gt; $=$ &lt;span style=&quot;color: #9013b2&quot;&gt;$f(x) @ f(y)$&lt;/span&gt; 를 만족하는 map 을 말한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;예시)&lt;/strong&gt;
-두 그룹 &lt;span style=&quot;color: #15b23c&quot;&gt;$(\Bbb{R}, + )$&lt;/span&gt; 와 &lt;span style=&quot;color: #9013b2&quot;&gt;$(\Bbb{R}_{&amp;gt;0}, \times )$&lt;/span&gt; 사이에 어떤 map $f:$ &lt;span style=&quot;color: #15b23c&quot;&gt;$\Bbb{R}$&lt;/span&gt; $\rightarrow$ &lt;span style=&quot;color: #9013b2&quot;&gt;$\Bbb{R}_{&amp;gt;0}$&lt;/span&gt;, $f(x)=e^x$ 가 있다면, $f$ 가 Homomorphism 인지를 밝혀라.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;for any &lt;span style=&quot;color: #15b23c&quot;&gt;$x, y \in \Bbb{R}$&lt;/span&gt;,&lt;/p&gt;
-
-  &lt;p&gt;&lt;span style=&quot;color: #15b23c&quot;&gt;$f(x + y)$&lt;/span&gt; $=$ &lt;span style=&quot;color: #9013b2&quot;&gt;$e^{x+y}$&lt;/span&gt; $=$ &lt;span style=&quot;color: #9013b2&quot;&gt;$e^x \times e^y$&lt;/span&gt; $=$ &lt;span style=&quot;color: #9013b2&quot;&gt;$f(x) \times f(y)$&lt;/span&gt; 임으로&lt;/p&gt;
-
-  &lt;p&gt;Homomorphism 을 만족한다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;word2vec 과 glove 관련 포스팅은 &lt;strong&gt;“All about word vectors”&lt;/strong&gt; 시리즈로 마치겠다. 기회가 되면 gensim 의 사용법과, 데이터 차원 축소와 시각화 방법인 t-SNE 을 포스팅 하도록 하겠다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 02 May 2018 23:22:05 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html</guid>
-        
-        
-        <category>NLP</category>
         
       </item>
     

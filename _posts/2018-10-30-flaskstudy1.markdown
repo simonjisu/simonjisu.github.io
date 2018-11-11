@@ -32,7 +32,7 @@ if __name__ == '__main__':
 hello.py 를 실행하자.
 
 ```
-(nmt) $ python hello.py
+(venv) $ python3 hello.py
  * Serving Flask app "hello" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
