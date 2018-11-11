@@ -271,7 +271,7 @@ create table nmtmain (
     /static
     /templates
     /schema.sql
-    /nmtstart.py
+    /e2estart.py
     /settings.py
 </code></pre>
 </div>
@@ -282,7 +282,7 @@ create table nmtmain (
 
 <div class="highlighter-rouge"><pre class="highlight"><code>## settings.py
 # configuration
-DATABASE = '../data/nmtmain.db'
+DATABASE = '../data/e2e.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -294,7 +294,7 @@ PASSWORD = 'password'
 
 <h3 id="nmtstartpy">nmtstart.py</h3>
 
-<p>앱을 실행하는 <strong>“nmtstart.py”</strong> 파일을 만든다.</p>
+<p>앱을 실행하는 <strong>“e2estart.py”</strong> 파일을 만든다.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code># all the imports
 import sqlite3
@@ -323,7 +323,7 @@ if __name__ == '__main__':
 
 <p><strong>실행</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(venv) /e2eapp $ python3 nmtstart.py  
+<div class="highlighter-rouge"><pre class="highlight"><code>(venv) /e2eapp $ python3 e2estart.py  
 ...
 192.168.6.34 - - [11/Nov/2018 19:08:40] "GET / HTTP/1.1" 404 -
 192.168.6.34 - - [11/Nov/2018 19:08:40] "GET /favicon.ico HTTP/1.1" 404 -
@@ -347,7 +347,7 @@ if __name__ == '__main__':
 
 <p>아까 만들어둔 <strong>“schema.sql”</strong> 파일을 이용하여 sqlite3 명령어를 사용하여 다음과 같이 만들 수 있다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(venv) /e2eapp $ sqlite3 ../data/nmtmain.db &lt; schema.sql
+<div class="highlighter-rouge"><pre class="highlight"><code>(venv) /e2eapp $ sqlite3 ../data/e2e.db &lt; schema.sql
 </code></pre>
 </div>
 

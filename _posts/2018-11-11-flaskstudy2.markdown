@@ -57,7 +57,7 @@ create table nmtmain (
     /static
     /templates
     /schema.sql
-    /nmtstart.py
+    /e2estart.py
     /settings.py
 ```
 
@@ -68,7 +68,7 @@ create table nmtmain (
 ```
 ## settings.py
 # configuration
-DATABASE = '../data/nmtmain.db'
+DATABASE = '../data/e2e.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -79,7 +79,7 @@ PASSWORD = 'password'
 
 ### nmtstart.py
 
-앱을 실행하는 **"nmtstart.py"** 파일을 만든다.
+앱을 실행하는 **"e2estart.py"** 파일을 만든다.
 
 ```
 # all the imports
@@ -109,7 +109,7 @@ config.from_pyfile("./settings.py", silent=True)
 **실행**
 
 ```
-(venv) /e2eapp $ python3 nmtstart.py  
+(venv) /e2eapp $ python3 e2estart.py  
 ...
 192.168.6.34 - - [11/Nov/2018 19:08:40] "GET / HTTP/1.1" 404 -
 192.168.6.34 - - [11/Nov/2018 19:08:40] "GET /favicon.ico HTTP/1.1" 404 -
@@ -133,7 +133,7 @@ config.from_pyfile("./settings.py", silent=True)
 아까 만들어둔 **"schema.sql"** 파일을 이용하여 sqlite3 명령어를 사용하여 다음과 같이 만들 수 있다. 
 
 ```
-(venv) /e2eapp $ sqlite3 ../data/nmtmain.db < schema.sql
+(venv) /e2eapp $ sqlite3 ../data/e2e.db < schema.sql
 ```
 
 Sqlite3 가 설치 안됐을 수도 있다. 아래 명령어를 쳐서 (가상환경 빠져나와서) sqlite3 를 설치하자.
