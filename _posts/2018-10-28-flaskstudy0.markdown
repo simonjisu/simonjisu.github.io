@@ -62,7 +62,7 @@ $ . venv/bin/activate
 ```
 
 
-### PyTorch
+### PyTorch (11.15 수정)
 
 PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.
 
@@ -84,58 +84,82 @@ typing
 ```
 $ sudo apt-get install libopenblas-dev cython libatlas-dev \
 m4 libblas-dev python3-dev cmake
-# 가상환경에서 설치해준다.
-(venv) $ pip install numpy  
-(venv) $ pip install pyyaml 
-(venv) $ pip install setuptools
-(venv) $ pip install six
-(venv) $ pip install typing
-(venv) $ pip install future
+# 필수로 먼저 설치해주자
+(venv) $ pip install pyyaml numpy 
 ```
 
 pytorch 설치전 리눅스 환경변수를 만들어준다. `.profile` 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. "NO\_CUDA" 변수를 1로 설정한다. "NO\_DISTRIBUTED" 는 뭔지 모르겠다. (알려주세요)
 
 
 ```
-(venv) $ vi ~/.profile
-아래 내용을 밑단에 추가한다.
+$ vi ~/.profile
+# 아래 내용을 밑단에 추가한다.
 export NO_CUDA=1
 export NO_DISTRIBUTED=1
 
-설정후, 터미널 재시작한다.
-(venv) $ source ~/.bashrc
+# 설정후, 터미널 재시작한다.
+$ source ~/.bashrc
 ```
 
 download 폴더를 만들어서 안에 PyTorch 를 clone 한다.
 
 ```
-(venv) $ mkdir downloads
-(venv) $ cd downloads
+(venv) $ mkdir downloads && cd downloads
 (venv) $ git clone --recursive https://github.com/pytorch/pytorch
 (venv) $ cd pytorch
+(venv) $ git checkout tags/v0.4.1 -b build
+(venv) $ git submodule update --init --recursive
 ```
 
-PyTorch 를 빌드한다. 약 2~3시간 걸린다. [영화](https://ko.wikipedia.org/wiki/%EC%9D%B8%EC%85%89%EC%85%98) 한 편을 보고 오면 딱이다.
+PyTorch 를 빌드한다. 한숨 자고 오는게 마음 편하다..
 
 ```
 (venv) $ python3 setup.py build
 ```
 
-에러가 없을 경우 아래를 계속 진행한다.
+시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종료하면 안된다.
+
+```
+(venv) $ date && python3 setup.py build && date && python3 setup.py install &> message-build &
+(venv) $ 2018. 11. 14. (수) 17:46:27 KST
+(venv) $ ...설치내용 주르륵...
+```
+
+아래 명령어를 쳐서 date 함수가 잘 출력됐으면, 빌드는 성공적으로 진행된 것이다.
+
+```
+(venv) $ tail -l message-build
+(venv) $ 2018. 11. 15. (목) 05:54:24 KST
+```
+
+거의 열두시간 걸렸다... ㅋㅋ 에러가 없을 경우 아래를 계속 진행한다.
 
 ```
 (venv) $ python3 setup.py install
 ```
 
-시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종요하면 안된다.
+위에 방법도 좋지만 향후에 재설치를 할수 있게 아래처럼 해준다.
 
 ```
-(venv) $ nohup python3 setup.py build > ../build.log && python3 setup.py install > ../installation.log &
+(venv) $ export NO_CUDA=1
+(venv) $ export NO_DISTRIBUTED=1
+(venv) $ pip install wheel
+(venv) $ python3 setup.py bdist_wheel
+(venv) $ cd dist
+(venv) $ pip install [dist 폴더 안에 있는 wheel 파일]
+```
+
+<img src="https://dl.dropbox.com/s/0sm9i9ajhp5y5kw/1115_installtorch.png">
+
+해당 wheel 파일을 어딘가 다른 곳에 저장 해두었다가 나중에 설치할 일이 생기면 다시 아래처럼만 하면 된다.
+
+```
+(venv) $ pip install [pytorch wheel 파일]
 ```
 
 설치 종료후 잘 설치가 됐는지, 확인해보자
 
-<img src="https://dl.dropbox.com/s/hgire0dsh32x2j0/1030_testtorch.png">
+<img src="https://dl.dropbox.com/s/s5h0s5lc187a2ek/1115_testtorch.png">
 
 
 다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.
@@ -144,4 +168,4 @@ PyTorch 를 빌드한다. 약 2~3시간 걸린다. [영화](https://ko.wikipedia
 
 * [flask 한글 튜토리얼](https://flask-docs-kr.readthedocs.io/ko/latest/installation.html)
 * [리눅스 환경변수 확인하기](http://onecellboy.tistory.com/220)
-* [라즈베리파이에 파이토치 설치하기](https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754)
+* [라즈베리파이에 파이토치 설치하기](https://wormtooth.com/20180617-pytorch-on-raspberrypi/)
