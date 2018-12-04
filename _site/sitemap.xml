@@ -2,6 +2,22 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
     <url>
+      <loc>http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html</loc>
+      
+        <lastmod>2018-12-04T22:04:38+09:00</lastmod>
+      
+
+      
+        <changefreq>weekly</changefreq>
+      
+
+      
+          <priority>0.5</priority>
+      
+
+    </url>
+  
+    <url>
       <loc>http://simonjisu.github.io/flask/2018/11/11/flaskstudy2.html</loc>
       
         <lastmod>2018-11-11T17:39:48+09:00</lastmod>

@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</title>
-  <meta name="description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 2">
+  <title>Github pages 로 프로젝트 문서화</title>
+  <meta name="description" content="Github pages 로 프로젝트 문서화">
   
   <meta name="author" content="Soo">
   <meta name="copyright" content="&copy; Soo 2018">
@@ -41,10 +41,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 2" />
+  <meta property="og:description" content="Github pages 로 프로젝트 문서화" />
   <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
-  <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속" />
+  <meta property="og:title" content="Github pages 로 프로젝트 문서화" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -55,8 +55,8 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속">
-  <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 2">
+  <meta name="twitter:title" content="Github pages 로 프로젝트 문서화">
+  <meta name="twitter:description" content="Github pages 로 프로젝트 문서화">
   <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
   <meta name="twitter:url" content="http://simonjisu.github.io">
   
@@ -65,7 +65,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html">
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html">
   <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
@@ -190,7 +190,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</h1>
+      <h1 class="title">Github pages 로 프로젝트 문서화</h1>
       <p class="info">by <strong>Soo</strong></p>
     </header>
   </div>
@@ -205,7 +205,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  
 
 <section class="post-meta">
-  <div class="post-date">June 3, 2018</div>
+  <div class="post-date">December 4, 2018</div>
   <div class="post-categories">
    in 
     
@@ -216,123 +216,248 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="install-ubuntu-1804-gpu-server-for-deeplearning---2">Install Ubuntu 18.04 GPU Server For DeepLearning - 2</h1>
+  <h1 id="github-pages---">Github pages 로 프로젝트 문서화</h1>
 
-<p>개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.</p>
+<p>잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.</p>
+
+<h2 id="section">실습환경</h2>
+
+<ul>
+  <li>Ubuntu Server 18.04 LTS</li>
+</ul>
 
 <hr />
 
-<h2 id="after-install">After Install</h2>
+<h2 id="section-1">준비과정</h2>
 
-<p>설치후에 아래 명령어들을 쳐준다.</p>
+<h3 id="install-nodejs--npm">Install nodejs &amp; npm</h3>
 
-<ol>
-  <li>apt-get(Advanced Packaging Tool) 패키지 명령어 업데이트 및 설치되어 있는 패키지 업그레이드. 설치된 파일은 <code class="highlighter-rouge">/var/cache/apt/archive/</code> 에 저장됨</li>
-  <li>gcc(GNU Compiler Collection) 패키지 설치. 파이썬 설치에 필요</li>
-  <li>make(GNU Make) 패키지 설치. 파이썬 설치시 필요</li>
-  <li>zlib1g-dev 설치. 파이썬 설치시 필요</li>
-</ol>
+<p>사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt update &amp;&amp; sudo apt upgrade
-sudo apt install gcc
-sudo apt install make
-sudo apt install zlib1g-dev
+<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
 </code></pre>
 </div>
 
-<h2 id="sshsecure-shell-">SSH(SECURE SHELL) 접속</h2>
+<p>패키지 버전을 체크해보자.</p>
 
-<h3 id="section"><code class="highlighter-rouge">서버</code> 컴퓨터에서 아래의 사항을 수정:</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ nodejs --version
+v10.14.1
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo vi /etc/ssh/sshd_config
+$ npm --version
+6.4.1
 </code></pre>
 </div>
+
+<h3 id="install-gitbook-client">Install gitbook client</h3>
+
+<p>gitbook client 를 설치해야한다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ npm install gitbook-cli -g
+</code></pre>
+</div>
+
+<h3 id="initialize-gitbook">Initialize gitbook</h3>
+
+<p>이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 <code class="highlighter-rouge">posts</code> 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.
+\README.md
+\SUMMARY.md
+\book.json
+\notebooks  # 내 프로젝트 쥬피터 노트북
+\posts  # 내 프로젝트 관련 포스터
+	\chapter-1
+		\README.md
+		\01_helloworld.md
+\docs  # github page 로 가는 html 파일들 등
+	\...
+		
+</code></pre>
+</div>
+
+<p>그럼 우선 프로젝트 디렉토리를 만들어보자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir [프로젝트 디렉토리] &amp;&amp; cd [프로젝트 디렉토리]
+</code></pre>
+</div>
+
+<p>그리고 <code class="highlighter-rouge">posts</code> 디렉토리를 만들자. 이 <code class="highlighter-rouge">posts</code> 안에 있는 모든 내용이 향후에 웹페이지로 갈것이다. 만들고 아래 명령어를 시작해보자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ gitbook init
+Installing GitBook 3.2.3
+...
+warn: no summary file in this book 
+info: create README.md 
+info: create SUMMARY.md 
+info: initialization is finished 
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ ls
+README.md  SUMMARY.md
+</code></pre>
+</div>
+
+<p><strong>README.md</strong> 파일은 gitbook 의 첫번째 페이지, <strong>SUMMARY.md</strong> 는 gitbook 의 목차 역할을 한다. <code class="highlighter-rouge">posts</code> 폴더 안에 첫번째 챕터를 만들어보자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ mkdir posts &amp;&amp; cd posts
+[./posts] $ mkdir chapter-1 &amp;&amp; cd chapter-1
+[./posts/chapter-1] $ vi README.md  # 아무거나 쓰고 저장하자
+[./posts/chapter-1] $ vi 01_helloworld.md  # 아무거나 쓰고 저장하자
+</code></pre>
+</div>
+
+<p>이제 SUMMARY.md 에서 목차를 수정해보자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[./posts/chapter-1] $ cd ../..
+[.] $ vi SUMMARY.md
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Summary
+  
+* [Introduction](README.md)
+* [Chapter-1](post/chapter-1/README.md)
+	* [01 hello world](post/chapter-1/01_helloworld.md)
+</code></pre>
+</div>
+
+<p>여기까지 왔으면 기본적인 설정은 완료된것이다. <code class="highlighter-rouge">gitbook serve</code> 명령어를 통해 한번 살펴보자.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ gitbook serve
+Live reload server started on port: 35729
+Press CTRL+C to quit ...
+
+info: 7 plugins are installed 
+info: loading plugin "livereload"... OK 
+info: loading plugin "highlight"... OK 
+info: loading plugin "search"... OK 
+info: loading plugin "lunr"... OK 
+info: loading plugin "sharing"... OK 
+info: loading plugin "fontsettings"... OK 
+info: loading plugin "theme-default"... OK 
+info: found 3 pages 
+info: found 0 asset files 
+info: &gt;&gt; generation finished with success in 0.3s ! 
+
+Starting server ...
+Serving book on http://localhost:4000
+</code></pre>
+</div>
+
+<p><strong>http://localhost:4000</strong> 로 접속을 시도해보자. 아래와 같은 화면이 나오면 성공이다.</p>
+
+<p><img src="https://dl.dropbox.com/s/77u9dksoz4tio2x/1204_gitbook.png" /></p>
+
+<p><strong>CTRL+C</strong> 를 눌러서 꺼주자.</p>
+
+<h3 id="initialize-git">Initialize git</h3>
+
+<p>테스트 후, 프로젝트 디렉토리에 <code class="highlighter-rouge">_book</code> 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ vi .gitignore
+</code></pre>
+</div>
+
+<p>아래 코드를 넣어주자. <strong>node_modules</strong> 는 plugin 에 필요한 패키지들을 설치하는 디렉토리인데 올리지 않는다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Book build output
+_book
+# Dependency packages
+node_modules
+# Jupyter Notebook checkpoint
+.ipynb_checkpoints
+</code></pre>
+</div>
+
+<p>이제 github 에 올려보도록 한다. 우선 자신의 github 에 [프로젝트 디렉토리]와 같은 이름의 github 저장소를 생성하자. 그리고 git 을 사용하기 위해, 다시 돌아와서 해당 프로젝트 디렉토리를 git 저장소로 만들어준다. (애당초에 repository 를 만들어서 clone 하는 상태에서 시작해도 좋다.)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ git init
+[.](master) $ git remote add origin git@github.com:[사용자이름]/[프로젝트 디렉토리].git
+</code></pre>
+</div>
+
+<p>완료되었으면 저장소에 올려보도록 한다. <code class="highlighter-rouge">publish-gitbook.sh</code> 라는 쉘 스크립트를 만들어준다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[.](master) $ vi publish-gitbook.sh
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># remove gitbook old things</span>
+rm -rf _book
+rm -rf docs
+
+<span class="c"># gitbook init</span>
+gitbook install <span class="o">&amp;&amp;</span> gitbook build
+
+<span class="c"># build pages</span>
+mkdir docs
+cp -R _book/<span class="k">*</span> docs/
+
+<span class="c"># delete things</span>
+git clean -fx _book
+
+<span class="c"># upload</span>
+git add .
+git commit -a -m <span class="s2">"update docs"</span>
+git push -u origin master
+</code></pre>
+</div>
+
+<h3 id="section-2">저장소에서 활성화 하기</h3>
+
+<p>자신의 github 저장소의 <strong>Settings</strong> 에 가서 <strong>Github Pages</strong> 항목의 <strong>master branch /docs folder</strong> 를 누르고 <strong>Save</strong> 를 누르자.</p>
+
+<p><img src="https://dl.dropbox.com/s/n4kcz94j5z77ia4/1204_repo1.png" /></p>
+
+<p><img src="https://dl.dropbox.com/s/4s8rsdyl71ph1hd/1204_repo2.png" /></p>
+
+<p>이제 인터넷 주소창에 <strong>https://[사용자이름].github.io/[프로젝트 디렉토리]</strong> 에 접속하면 아까 보았던 gitbook 모습을 볼 수 있다.</p>
+
+<hr />
+
+<h2 id="customizing">Customizing</h2>
+
+<h3 id="bookjson">book.json</h3>
+
+<p>프로젝트 디렉토리에서 <code class="highlighter-rouge">book.json</code> 파일을 생성하여 커스터마이징이 가능하다. 사실 쓰는건 플러그인과 변수 정도이지만, book.json의 기본 설정을 <a href="https://toolchain.gitbook.com/config.html">여기</a>서 참고할 수 있다.</p>
+
+<h3 id="plugins">plugins</h3>
+
+<p>gitbook 에 다양한 플러그인을 설치 할 수 있는데, <a href="https://plugins.gitbook.com/">https://plugins.gitbook.com/</a> 사이트에서 확인 할 수 있다.</p>
+
+<p>주로 사용하는것은 수식편집이 가능한 “katex”, 방문자 분석을 위한 구글 애널릭틱스 “ga”, 댓글을 달수 있는 “disqus” (회원가입 필요함) 정도다.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+		</span><span class="s2">"katex"</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"disqus"</span><span class="p">,</span><span class="w">
+		</span><span class="s2">"ga"</span><span class="w">
+		</span><span class="p">],</span><span class="w">
+	</span><span class="nt">"pluginsConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"disqus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"shortName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXXXXX"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"ga"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UA-XXXX-Y"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<hr />
+
+<h2 id="references">References</h2>
 
 <ul>
-  <li>ClientAliveInterval 60 : 클라이언트 살아있는지 확인하는 간격</li>
-  <li>ClientAliveCountMax 10 : 클라이언트 응답 없어도 접속 유지하는 횟수</li>
-  <li>PubkeyAuthentication yes : 활성화 시켜야 ssh를 통해서 접속 가능</li>
-  <li>PasswordAuthentication yes : 원격 서버 비밀번호로 로그인 가능하게 것, 나중에 ssh 로만 접속 가능케 하려면 바꿔줘야한다.</li>
-  <li>PermitEmptyPasswords no : 로그인시 빈 비밀번호를 가능케하는 옵션 기본으로 no로 되어 있다. 비밀번호 없이 로그인하게 하려면 yes로 바꿔줄 것, 권장은 안함</li>
+  <li><a href="https://tinydew4.gitbooks.io/gitbook/ko/structure.html">GitBook Toolchain Documentation for Multi-Languages</a></li>
+  <li><a href="https://blog.psangwoo.com/coding/2018/01/31/gitbook-on-windows.html">윈도우에서 깃북 제작 및 깃헙 페이지로 호스팅하기</a></li>
+  <li><a href="https://book.zhlzzz.com/gitbook/">GitBook完整教程</a></li>
+  <li><a href="https://beomi.github.io/2017/11/20/Deploy-Gitbook-to-Github-Pages/">깃헙 Pages에 깃북 배포하기</a></li>
 </ul>
-
-<h3 id="ssh-key----"><code class="highlighter-rouge">로컬</code> 컴퓨터에서 SSH KEY 생성하고 <code class="highlighter-rouge">서버</code> 컴퓨터로 보내기:</h3>
-
-<ol>
-  <li><strong>ssh-keygen:</strong> SSH 키를 생성한다. 경로 지정을 안할 때 보통 <code class="highlighter-rouge">~/.ssh</code> 폴더 안에 <code class="highlighter-rouge">id_rsa</code> 라는 이름으로 생성한다.</li>
-  <li><strong>ssh-copy-id:</strong> SSH 키를 서버로 보낸다. 옵션으로 포트번, 키 디렉토리 등등 설정 가능하다</li>
-</ol>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>ssh-keygen -f [filepath]
-ssh-copy-id -i [key_directory] -p [port] [user]@[ip_address]
-</code></pre>
-</div>
-
-<h3 id="scp-">파일전송 명령어 SCP 사용하기</h3>
-<ul>
-  <li>서버 &gt; 로컬
-    <div class="highlighter-rouge"><pre class="highlight"><code>scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]
-</code></pre>
-    </div>
-  </li>
-  <li>로컬 &gt; 서버
-    <div class="highlighter-rouge"><pre class="highlight"><code>scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송받을 위치]
-</code></pre>
-    </div>
-  </li>
-</ul>
-
-<p>다만 주의 해야할 것은 <code class="highlighter-rouge">[옵션]</code> 에다가 로그인 옵션 다 넣어줘야 보내진다는 점을 잊지 말자.</p>
-
-<p><strong>옵션:</strong></p>
-
-<ul>
-  <li>P: 포트</li>
-  <li>i: key</li>
-</ul>
-
-<p><br /></p>
-
-<h2 id="wolwake-on-lan">WOL(Wake-On-Lan)</h2>
-
-<p>전기세 때문에 원격으로 컴퓨터를 껐다 켯다 하고 싶었다. 찾아보니 WOL 라는 방법이 있었다. 우선 자신의 컴퓨터의 메인보드가 이 기능을 지원해주고, 공유기도 이 기능을 지원해줘야 사용할 수 있다.
-컴퓨터 부팅전 <code class="highlighter-rouge">BIOS</code> (내경우는 DEL 키를 눌렀음) 에 들어가서 <code class="highlighter-rouge">Wake-On-Lan</code> 이라는 글귀가 있는지 찾아보고, 있다면 enable 로 바꿔주자. 그리고 아래 명령어를 통해 내컴퓨터의 <code class="highlighter-rouge">이더넷 포트(Ethernet port)</code> 알아보자</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>ifconfig
-</code></pre>
-</div>
-
-<p>이더넷 포트는 첫째줄 제일 왼쪽에 있을 것이다. 보통 en~~ 로 시작하는 번호다</p>
-
-<p>그 후, 컴퓨터 내 컴퓨터가 <code class="highlighter-rouge">WOL</code> 기능이 켜졌나 확인 하기 위해, 부팅후 커맨드 라인에 아래와 같이 쳐주자.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install ethtool
-sudo ethtool [Ethernet port]
-</code></pre>
-</div>
-
-<p><code class="highlighter-rouge">Wake-on</code> 이라는 곳에 <code class="highlighter-rouge">g</code> 라고 적혀져 있으면 켜진 것이다. 안되있다면 아래의 명령어를 통해 켜주자.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo ethtool -s [Ethernet port] wol g
-</code></pre>
-</div>
-
-<p>그 다음에 자신의 집의 공유기에 들어가서, WOL 설정을 해주자. NETIS 기준으로 설명 하겠다. IPTIME 은 다른 글들이 많으니 한번 찾아 보길 바란다.</p>
-
-<ol>
-  <li><strong>원격 부팅(WOL)</strong>: <code class="highlighter-rouge">사용 IP 목록에서 등록</code> 누른후, 자신의 컴퓨터 IP 를 선택하고 이름을 지어준 다음 <code class="highlighter-rouge">등록</code> 하게 되면 밑에 하나 등록 될 것이다.</li>
-  <li><strong>외부 연결 포트</strong>: <code class="highlighter-rouge">포트 번호</code>는 내 컴퓨터의 접속 포트로 했다. (이건 꼭 TCP 통신으로 하는 포트로 해야하는지 모르겠다. 다른 번호를 따로 지정해줄 수 있는지를 확인 못해봄)</li>
-</ol>
-
-<p><img src="/assets/ds/gpuserver/WOL.png" /></p>
-
-<p>마지막으로 DDNS 서비스 신청한다. 그러면 집 밖에서도 집 공유기에 접속해서 컴퓨터를 킬 수 있다.</p>
-
-<ul>
-  <li>참고자료: <a href="http://blog.daum.net/peace20/16779844">http://blog.daum.net/peace20/16779844</a></li>
-</ul>
-
-<p>다음 시간에는 <code class="highlighter-rouge">Python</code> 설치와 <code class="highlighter-rouge">CUDA</code> 설치를 다뤄보겠다.</p>
 
   <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 <br>
@@ -360,7 +485,7 @@ sudo ethtool [Ethernet port]
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+2+%EC%9B%90%EA%B2%A9+%EB%B6%80%ED%8C%85+%EC%A0%91%EC%86%8D&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F03%2Fgpuserver2.html"
+      <a href="//www.facebook.com/sharer.php?t=Github+pages+%EB%A1%9C+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8+%EB%AC%B8%EC%84%9C%ED%99%94&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F12%2F04%2Fbuildgithubpages.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -388,18 +513,12 @@ sudo ethtool [Ethernet port]
 
 
   
-
-  
-
-  
-
-  
     
-    <!-- <h2 id="DataScience">2</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver3.html</h2> -->
+    <!-- <h2 id="DataScience">-1</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2017/08/04/E2EMN.html</h2> -->
     
-    <!-- <h2 id="DataScience">4</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2018/06/02/gpuserver.html</h2> -->
+    <!-- <h2 id="DataScience">1</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2018/06/24/pycharmssh.html</h2> -->
     
 
 
@@ -408,24 +527,16 @@ sudo ethtool [Ethernet port]
 	<section class="post-navigation">
 		<span class="prev-post">
 			
-				<a href="/datascience/2018/06/02/gpuserver.html">
+				<a href="/datascience/2018/06/24/pycharmssh.html">
 					<span class="fa-stack fa-lg">
 						<i class="fa fa-square fa-stack-2x"></i>
 						<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
 					</span>
-					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</span>
+					<span class="page-number">PyCharm SSH 연결하기</span>
 				</a>
 			
 		</span>
 		<span class="next-post">
-			
-				<a href="/datascience/2018/06/03/gpuserver3.html">
-					<span class="page-number">개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA</span>
-					<span class="fa-stack fa-lg">
-						<i class="fa fa-square fa-stack-2x"></i>
-						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
-					</span>
-				</a>
 			
 		</span>
 	</section>

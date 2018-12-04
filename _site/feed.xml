@@ -6,9 +6,263 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 15 Nov 2018 10:06:43 +0900</pubDate>
-    <lastBuildDate>Thu, 15 Nov 2018 10:06:43 +0900</lastBuildDate>
+    <pubDate>Wed, 05 Dec 2018 00:58:16 +0900</pubDate>
+    <lastBuildDate>Wed, 05 Dec 2018 00:58:16 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Github pages 로 프로젝트 문서화</title>
+        <description>&lt;h1 id=&quot;github-pages---&quot;&gt;Github pages 로 프로젝트 문서화&lt;/h1&gt;
+
+&lt;p&gt;잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;실습환경&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu Server 18.04 LTS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;준비과정&lt;/h2&gt;
+
+&lt;h3 id=&quot;install-nodejs--npm&quot;&gt;Install nodejs &amp;amp; npm&lt;/h3&gt;
+
+&lt;p&gt;사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;패키지 버전을 체크해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nodejs --version
+v10.14.1
+
+$ npm --version
+6.4.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;install-gitbook-client&quot;&gt;Install gitbook client&lt;/h3&gt;
+
+&lt;p&gt;gitbook client 를 설치해야한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;initialize-gitbook&quot;&gt;Initialize gitbook&lt;/h3&gt;
+
+&lt;p&gt;이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+\README.md
+\SUMMARY.md
+\book.json
+\notebooks  # 내 프로젝트 쥬피터 노트북
+\posts  # 내 프로젝트 관련 포스터
+	\chapter-1
+		\README.md
+		\01_helloworld.md
+\docs  # github page 로 가는 html 파일들 등
+	\...
+		
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그럼 우선 프로젝트 디렉토리를 만들어보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [프로젝트 디렉토리] &amp;amp;&amp;amp; cd [프로젝트 디렉토리]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 디렉토리를 만들자. 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 안에 있는 모든 내용이 향후에 웹페이지로 갈것이다. 만들고 아래 명령어를 시작해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook init
+Installing GitBook 3.2.3
+...
+warn: no summary file in this book 
+info: create README.md 
+info: create SUMMARY.md 
+info: initialization is finished 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ ls
+README.md  SUMMARY.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;README.md&lt;/strong&gt; 파일은 gitbook 의 첫번째 페이지, &lt;strong&gt;SUMMARY.md&lt;/strong&gt; 는 gitbook 의 목차 역할을 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 폴더 안에 첫번째 챕터를 만들어보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ mkdir posts &amp;amp;&amp;amp; cd posts
+[./posts] $ mkdir chapter-1 &amp;amp;&amp;amp; cd chapter-1
+[./posts/chapter-1] $ vi README.md  # 아무거나 쓰고 저장하자
+[./posts/chapter-1] $ vi 01_helloworld.md  # 아무거나 쓰고 저장하자
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;이제 SUMMARY.md 에서 목차를 수정해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[./posts/chapter-1] $ cd ../..
+[.] $ vi SUMMARY.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Summary
+  
+* [Introduction](README.md)
+* [Chapter-1](post/chapter-1/README.md)
+	* [01 hello world](post/chapter-1/01_helloworld.md)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;여기까지 왔으면 기본적인 설정은 완료된것이다. &lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook serve&lt;/code&gt; 명령어를 통해 한번 살펴보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook serve
+Live reload server started on port: 35729
+Press CTRL+C to quit ...
+
+info: 7 plugins are installed 
+info: loading plugin &quot;livereload&quot;... OK 
+info: loading plugin &quot;highlight&quot;... OK 
+info: loading plugin &quot;search&quot;... OK 
+info: loading plugin &quot;lunr&quot;... OK 
+info: loading plugin &quot;sharing&quot;... OK 
+info: loading plugin &quot;fontsettings&quot;... OK 
+info: loading plugin &quot;theme-default&quot;... OK 
+info: found 3 pages 
+info: found 0 asset files 
+info: &amp;gt;&amp;gt; generation finished with success in 0.3s ! 
+
+Starting server ...
+Serving book on http://localhost:4000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;http://localhost:4000&lt;/strong&gt; 로 접속을 시도해보자. 아래와 같은 화면이 나오면 성공이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/77u9dksoz4tio2x/1204_gitbook.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CTRL+C&lt;/strong&gt; 를 눌러서 꺼주자.&lt;/p&gt;
+
+&lt;h3 id=&quot;initialize-git&quot;&gt;Initialize git&lt;/h3&gt;
+
+&lt;p&gt;테스트 후, 프로젝트 디렉토리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt; 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ vi .gitignore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;아래 코드를 넣어주자. &lt;strong&gt;node_modules&lt;/strong&gt; 는 plugin 에 필요한 패키지들을 설치하는 디렉토리인데 올리지 않는다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Book build output
+_book
+# Dependency packages
+node_modules
+# Jupyter Notebook checkpoint
+.ipynb_checkpoints
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;이제 github 에 올려보도록 한다. 우선 자신의 github 에 [프로젝트 디렉토리]와 같은 이름의 github 저장소를 생성하자. 그리고 git 을 사용하기 위해, 다시 돌아와서 해당 프로젝트 디렉토리를 git 저장소로 만들어준다. (애당초에 repository 를 만들어서 clone 하는 상태에서 시작해도 좋다.)&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ git init
+[.](master) $ git remote add origin git@github.com:[사용자이름]/[프로젝트 디렉토리].git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;완료되었으면 저장소에 올려보도록 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;publish-gitbook.sh&lt;/code&gt; 라는 쉘 스크립트를 만들어준다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.](master) $ vi publish-gitbook.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# remove gitbook old things&lt;/span&gt;
+rm -rf _book
+rm -rf docs
+
+&lt;span class=&quot;c&quot;&gt;# gitbook init&lt;/span&gt;
+gitbook install &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gitbook build
+
+&lt;span class=&quot;c&quot;&gt;# build pages&lt;/span&gt;
+mkdir docs
+cp -R _book/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; docs/
+
+&lt;span class=&quot;c&quot;&gt;# delete things&lt;/span&gt;
+git clean -fx _book
+
+&lt;span class=&quot;c&quot;&gt;# upload&lt;/span&gt;
+git add .
+git commit -a -m &lt;span class=&quot;s2&quot;&gt;&quot;update docs&quot;&lt;/span&gt;
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;저장소에서 활성화 하기&lt;/h3&gt;
+
+&lt;p&gt;자신의 github 저장소의 &lt;strong&gt;Settings&lt;/strong&gt; 에 가서 &lt;strong&gt;Github Pages&lt;/strong&gt; 항목의 &lt;strong&gt;master branch /docs folder&lt;/strong&gt; 를 누르고 &lt;strong&gt;Save&lt;/strong&gt; 를 누르자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/n4kcz94j5z77ia4/1204_repo1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/4s8rsdyl71ph1hd/1204_repo2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 인터넷 주소창에 &lt;strong&gt;https://[사용자이름].github.io/[프로젝트 디렉토리]&lt;/strong&gt; 에 접속하면 아까 보았던 gitbook 모습을 볼 수 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;customizing&quot;&gt;Customizing&lt;/h2&gt;
+
+&lt;h3 id=&quot;bookjson&quot;&gt;book.json&lt;/h3&gt;
+
+&lt;p&gt;프로젝트 디렉토리에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;book.json&lt;/code&gt; 파일을 생성하여 커스터마이징이 가능하다. 사실 쓰는건 플러그인과 변수 정도이지만, book.json의 기본 설정을 &lt;a href=&quot;https://toolchain.gitbook.com/config.html&quot;&gt;여기&lt;/a&gt;서 참고할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;plugins&quot;&gt;plugins&lt;/h3&gt;
+
+&lt;p&gt;gitbook 에 다양한 플러그인을 설치 할 수 있는데, &lt;a href=&quot;https://plugins.gitbook.com/&quot;&gt;https://plugins.gitbook.com/&lt;/a&gt; 사이트에서 확인 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;주로 사용하는것은 수식편집이 가능한 “katex”, 방문자 분석을 위한 구글 애널릭틱스 “ga”, 댓글을 달수 있는 “disqus” (회원가입 필요함) 정도다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;katex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;disqus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ga&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pluginsConfig&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;disqus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;shortName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;XXXXXXX&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;ga&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UA-XXXX-Y&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tinydew4.gitbooks.io/gitbook/ko/structure.html&quot;&gt;GitBook Toolchain Documentation for Multi-Languages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.psangwoo.com/coding/2018/01/31/gitbook-on-windows.html&quot;&gt;윈도우에서 깃북 제작 및 깃헙 페이지로 호스팅하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://book.zhlzzz.com/gitbook/&quot;&gt;GitBook完整教程&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://beomi.github.io/2017/11/20/Deploy-Gitbook-to-Github-Pages/&quot;&gt;깃헙 Pages에 깃북 배포하기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
+        <link>http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html</link>
+        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>[비전공자의 Flask-2] 본격 앱 만들기 1</title>
@@ -1538,201 +1792,6 @@ sudo ethtool [Ethernet port]
         <pubDate>Sun, 03 Jun 2018 10:09:54 +0900</pubDate>
         <link>http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</link>
         <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</guid>
-        
-        
-        <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치</title>
-        <description>&lt;h1 id=&quot;install-ubuntu-1804-gpu-server-for-deeplearning---1&quot;&gt;Install Ubuntu 18.04 GPU Server For DeepLearning - 1&lt;/h1&gt;
-
-&lt;p&gt;개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;컴퓨터 사양 상세&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;항목&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;상품코드&lt;/th&gt;
-      &lt;th&gt;제품명&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;금액&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;수량&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;최종금액&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;CPU&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;399920&lt;/td&gt;
-      &lt;td&gt;[INTEL] 코어7세대 i5-7600 정품박스 (카비레이크/3.5GHz/6MB/쿨러포함)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;258,000원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;258,000원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;MAIN&lt;br /&gt;BOARD&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;408703&lt;/td&gt;
-      &lt;td&gt;[GIGABYTE] GA-H110M-M.2 듀러블에디션 피씨디렉트 (인텔H110/M-ATX)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;71,100원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;71,100원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;메모리&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;390790&lt;/td&gt;
-      &lt;td&gt;[삼성전자] 삼성 DDR4 16GB PC4-19200&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;183,000원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;366,000원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;HDD&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;347917&lt;/td&gt;
-      &lt;td&gt;[WD] BLUE 2TB WD20EZRZ (3.5HDD/SATA3/5400rpm/64M)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;67,730원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;67,730원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;GPU&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;373864&lt;/td&gt;
-      &lt;td&gt;[MSI] GeForce GTX1060 OC D5 6GB 윈드스톰&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;389,000원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;389,000원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;POWER&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;420859&lt;/td&gt;
-      &lt;td&gt;[CORSAIR] CX750 NEW 80PLUS BRONZE (ATX/750W)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;94,370원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;94,370원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;BOX&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;365393&lt;/td&gt;
-      &lt;td&gt;[COX] RC 170T USB3.0 (미들타워)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;13,500원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;13,500원&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;OTHER&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3877&lt;/td&gt;
-      &lt;td&gt;[컴퓨존] 일반조립비 (하드웨어조립/OS는 설치되지않습니다)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;20,000원&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;20,000원&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ul id=&quot;light-slider1&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/1.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/2.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/3.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/4.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/5.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/6.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/7.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/8.jpeg&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/9.jpeg&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.&lt;/p&gt;
-
-&lt;h2 id=&quot;ubuntu-server-&quot;&gt;Ubuntu Server 설치&lt;/h2&gt;
-
-&lt;p&gt;5월 30일 저녁, 우분투를 설치하려고 하니 버전이 마음에 걸렸다. NVIDIA CUDA TOOLKIT을 보니 리눅스 17.04 버전 까지 지원하는듯 했기 때문이다. 16.04를 설치해야하나? 싶은 찰나에 그냥 최신으로 한번 도전해보기로 했다. 안되면 다시 갈지머..&lt;/p&gt;
-
-&lt;h3 id=&quot;making-a-bootable-ubuntu-usb-disk-tutorial-at-mac-os&quot;&gt;Making a bootable Ubuntu USB disk Tutorial at Mac OS&lt;/h3&gt;
-
-&lt;p&gt;맥에서 부팅 디스크 만들기, 정말 간단하다. &lt;a href=&quot;https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0&quot;&gt;tutorials.ubuntu.com&lt;/a&gt; 튜토리얼을 따라가면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;준비물&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;2GB 이상의 USB Driver&lt;/li&gt;
-    &lt;li&gt;Mac OS 컴퓨터&lt;/li&gt;
-    &lt;li&gt;우분투 서버 ISO 다운로드 &lt;a href=&quot;https://www.ubuntu.com/download/server&quot;&gt;우분투 서버 다운로드&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;format&quot;&gt;구동 디스크 FORMAT&lt;/h4&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;응용프로그램 &amp;gt; 유틸리티 &amp;gt; 디스크 유틸리티 선택&lt;/li&gt;
-  &lt;li&gt;MAC OS에 꼽은 USB 를 선택한 다음에 &lt;code class=&quot;highlighter-rouge&quot;&gt;지우기&lt;/code&gt; 를 선택한다.&lt;/li&gt;
-  &lt;li&gt;이름을 짓고, &lt;code class=&quot;highlighter-rouge&quot;&gt;MS-DOS(FAT)&lt;/code&gt; 선택한다. (그림에는 Scheme가 있지만 Serria 이후에는 없다는 말이 있음)&lt;/li&gt;
-  &lt;li&gt;포맷한다. 지운다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/format_disk.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;etcher-----&quot;&gt;Etcher 를 사용한 시동 디스크 생성&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://etcher.io/&quot;&gt;Etcher&lt;/a&gt; 먼저 받는다. 그후에는 정말 간단하다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Select image&lt;/code&gt; 에 다운 받은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ubuntu Server 18.04 ISO&lt;/code&gt; 를 고른다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Select drive&lt;/code&gt; 에 포맷한 디스크를 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Flash!&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/etcher.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 설치 준비 완료되었다.&lt;/p&gt;
-
-&lt;h3 id=&quot;install-ubuntu-server-1804&quot;&gt;Install Ubuntu Server 18.04&lt;/h3&gt;
-
-&lt;p&gt;이제 설치릃 해보자. 설치를 하려면, 최소 한번은 모니터에 연결해서 설치해야한다. 나는 정말 서버만을 생각해서 모니터를 않샀기에… HDMI 케이블로 티비화면으로 연결했다… 덕분에 고생이 두배!&lt;/p&gt;
-
-&lt;p&gt;사실 간단하다. 아까 구운 &lt;code class=&quot;highlighter-rouge&quot;&gt;시동 디스크&lt;/code&gt;를 꼽아주고 부팅을 하면 된다.&lt;/p&gt;
-
-&lt;ul id=&quot;light-slider2&quot;&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u1.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u2.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u3.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u4.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u5.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u6.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u7.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u8.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u9.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u10.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u11.png&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/assets/ds/gpuserver/u12.png&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;사진출처: &lt;a href=&quot;https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/&quot;&gt;https://websiteforstudents.com/install-ubuntu-18-04-lts-server-screenshots/&lt;/a&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;언어선택: 왠만하면 영어로 하자&lt;/li&gt;
-  &lt;li&gt;키보드선택: 왠만하면 영어로 가자&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Install Ubuntu&lt;/code&gt; 선택&lt;/li&gt;
-  &lt;li&gt;다음&lt;/li&gt;
-  &lt;li&gt;특별한 주소가 있으면 작성 아니면, 다음&lt;/li&gt;
-  &lt;li&gt;디스크 포맷: 디스크 통째로 포맷한 후에 설치할 것이니 1번&lt;/li&gt;
-  &lt;li&gt;디스크 선택&lt;/li&gt;
-  &lt;li&gt;마지막 확인&lt;/li&gt;
-  &lt;li&gt;정말루?&lt;/li&gt;
-  &lt;li&gt;당신의 이름 / 서버 이름 / 유저이름(로그인용) / 패스워드(로그인용) 등&lt;/li&gt;
-  &lt;li&gt;설치중… 리붓!&lt;/li&gt;
-  &lt;li&gt;완료&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;다음 장에는 설치후에 내가 했던 작업들: &lt;code class=&quot;highlighter-rouge&quot;&gt;원격 부팅과 접속&lt;/code&gt; 을 주로 이야기 하겠다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 02 Jun 2018 22:26:58 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/02/gpuserver.html</guid>
         
         
         <category>DataScience</category>
