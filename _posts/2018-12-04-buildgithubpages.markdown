@@ -246,3 +246,4 @@ gitbook 에 다양한 플러그인을 설치 할 수 있는데, [https://plugins
 * [윈도우에서 깃북 제작 및 깃헙 페이지로 호스팅하기](https://blog.psangwoo.com/coding/2018/01/31/gitbook-on-windows.html)
 * [GitBook完整教程](https://book.zhlzzz.com/gitbook/)
 * [깃헙 Pages에 깃북 배포하기](https://beomi.github.io/2017/11/20/Deploy-Gitbook-to-Github-Pages/)
+* [github plugin 설명(중국어)](https://gitbook.zhangjikai.com/plugins.html)

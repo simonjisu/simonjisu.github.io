@@ -6,8 +6,8 @@
 </description>
     <link>http://simonjisu.github.io/</link>
     <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Dec 2018 00:58:16 +0900</pubDate>
-    <lastBuildDate>Wed, 05 Dec 2018 00:58:16 +0900</lastBuildDate>
+    <pubDate>Wed, 05 Dec 2018 01:19:12 +0900</pubDate>
+    <lastBuildDate>Wed, 05 Dec 2018 01:19:12 +0900</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -253,6 +253,7 @@ git push -u origin master
   &lt;li&gt;&lt;a href=&quot;https://blog.psangwoo.com/coding/2018/01/31/gitbook-on-windows.html&quot;&gt;윈도우에서 깃북 제작 및 깃헙 페이지로 호스팅하기&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://book.zhlzzz.com/gitbook/&quot;&gt;GitBook完整教程&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://beomi.github.io/2017/11/20/Deploy-Gitbook-to-Github-Pages/&quot;&gt;깃헙 Pages에 깃북 배포하기&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gitbook.zhangjikai.com/plugins.html&quot;&gt;github plugin 설명(중국어)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
