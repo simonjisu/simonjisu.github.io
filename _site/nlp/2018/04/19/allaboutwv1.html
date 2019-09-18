@@ -10,7 +10,7 @@
   <meta name="description" content="All about Word Vectors: Intro">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="All about Word Vectors: Intro" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="All about Word Vectors: Intro" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="All about Word Vectors: Intro">
   <meta name="twitter:description" content="All about Word Vectors: Intro">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/04/19/allaboutwv1.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/04/19/allaboutwv1.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -222,7 +224,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
-<h2 id="natural-language-processing">자연어 처리 (Natural Language Processing)</h2>
+<h2 id="자연어-처리-natural-language-processing">자연어 처리 (Natural Language Processing)</h2>
 <p>이야기를 하기 앞서서, “언어”를 살펴보자. <a href="https://ko.wikipedia.org/wiki/%EC%96%B8%EC%96%B4">위키백과</a> 에 따르면 아래와 같다.</p>
 
 <blockquote>
@@ -249,7 +251,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><br /></p>
 
-<h2 id="word-representation">단어의 표현(Word Representation)</h2>
+<h2 id="단어의-표현word-representation">단어의 표현(Word Representation)</h2>
 
 <p>어떻게 하면 단어의 “의미”를 표현할 수 있을까?</p>
 
@@ -260,11 +262,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>좋긴한데 몇 가지 단점이 있다.</p>
 
 <p>첫째로, 단어간의 미묘한 차이, 뉘앙스(nuances)를 표현 할 수가 수 없다. 아래의 예를 보자.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>from nltk.corpus import wordnet as wn
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from nltk.corpus import wordnet as wn
 for synset in wn.synsets("adept"):
     print("({})".format(synset.pos()) + ", ".join([l.name() for l in synset.lemmas()]))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>(n) ace, adept, champion, sensation, maven, mavin, virtuoso, genius, hotshot, star, superstar, whiz, whizz, wizard, wiz
 (s) adept, expert, good, practiced, proficient, skillful, skilful</p>
@@ -302,7 +303,7 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 
 <p><br /></p>
 
-<h2 id="distributional-similarity-based-representations">분포 유사성 기반 표현 (Distributional similarity based representations)</h2>
+<h2 id="분포-유사성-기반-표현-distributional-similarity-based-representations">분포 유사성 기반 표현 (Distributional similarity based representations)</h2>
 
 <p>연구자들은 one-hot vector 와 다른 어떤 유사도를 계산할 수 있는 벡터를 만들고 싶어했다. 따라서 유사도의 정보를 어디서 얻을 수 있을까를 찾기 시작했다. 그리고 어떤 핵심 아이디어를 생각해냈다.</p>
 
@@ -367,7 +368,7 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Intro&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F04%2F19%2Fallaboutwv1.html"
+      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Intro&u=http%3A%2F%2Flocalhost%3A4000%2Fnlp%2F2018%2F04%2F19%2Fallaboutwv1.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -481,6 +482,8 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

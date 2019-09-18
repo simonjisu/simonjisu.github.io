@@ -10,7 +10,7 @@
   <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 8">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 8" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 8: Summary" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 8: Summary">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 8">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/02/08/numpywithnn_8.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2018/02/08/numpywithnn_8.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -216,32 +218,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---8">Numpy로 짜보는 Neural Network Basic - 8</h1>
+  <h1 id="numpy로-짜보는-neural-network-basic---8">Numpy로 짜보는 Neural Network Basic - 8</h1>
 
 <hr />
-<h2 id="section">총 정리</h2>
+<h2 id="총-정리">총 정리</h2>
 <p>지금까지 우리는 Neural Network의 기원부터 Feedforward 과정, BackPropogation 과정, 그리고 다양한 학습 관련 기술을 배웠다. 이들을 총 정리해서 Mnist 데이터를 다시 학습 시켜보자.</p>
 
 <p><a href="https://github.com/simonjisu/NUMPYwithNN/tree/master/common"> 모든 코드 링크</a></p>
 
 <h3 id="package-load">Package Load</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from common.Multilayer import MLP
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from common.Multilayer import MLP
 from dataset.mnist import load_mnist
 from common.optimizer import *
 import time
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="data-load">Data Load</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
 print(x_train.shape)
 print(y_train.shape)
 print(x_test.shape)
 print(y_test.shape)
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>(60000, 784)<br />(60000, 10)<br />(10000, 784)<br />(10000, 10)</p>
 </blockquote>
@@ -254,15 +254,14 @@ print(y_test.shape)
 
 <p>가중치 업데이트를 위한 옵티마이저는 <strong>Adam</strong> 을 쓰고, Loss Function은 <strong>Cross Entropy</strong> 를 쓰게 된다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
          activation='relu', weight_init_std='he', use_batchnorm=True)
 optimizer = Adam()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="training--test">Training &amp; test</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>train_loss_list = []
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_loss_list = []
 train_acc_list = []
 test_acc_list = []
 epoch_list = []
@@ -308,8 +307,7 @@ for epoch in range(epoch_num):
 
 end = time.time()
 print('total time:', (end - start))        
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p># 0 | loss: 11.06622 | trian acc: 0.11408 | test acc: 0.11910<br /># 600 | loss: 0.23165 | trian acc: 0.92055 | test acc: 0.92020<br /># 1200 | loss: 0.19112 | trian acc: 0.93975 | test acc: 0.94180<br /># 1800 | loss: 0.08235 | trian acc: 0.95188 | test acc: 0.95040<br /># 2400 | loss: 0.09155 | trian acc: 0.95898 | test acc: 0.95600<br /># 2999 | loss: 0.09883 | trian acc: 0.96513 | test acc: 0.96150<br />total time: 27.169809818267822</p>
@@ -321,7 +319,7 @@ print('total time:', (end - start))
 
 <h3 id="model-check">Model Check</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def check(x, y, model):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def check(x, y, model):
     pred_y = model.predict(x)
     if x.ndim != 2:
         x = x.reshape(28, 28)
@@ -332,14 +330,12 @@ print('total time:', (end - start))
     plt.grid(False)
     plt.axis('off')
     plt.show()
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>테스트 데이터중 하나 골라서 실험해보자</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>check(x_test[45], y_test[45], nn)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>check(x_test[45], y_test[45], nn)
+</code></pre></div></div>
 <blockquote>
   <p>Predict Answer: 5<br />Real Answer: 5</p>
 
@@ -372,7 +368,7 @@ print('total time:', (end - start))
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+8%3A+Summary&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F02%2F08%2Fnumpywithnn_8.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+8%3A+Summary&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2018%2F02%2F08%2Fnumpywithnn_8.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -486,6 +482,8 @@ print('total time:', (end - start))
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

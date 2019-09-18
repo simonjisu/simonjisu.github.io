@@ -10,7 +10,7 @@
   <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 4">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 4" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 4: Backpropagation" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 4: Backpropagation">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 4">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2017/12/15/numpywithnn_4.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2017/12/15/numpywithnn_4.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -216,12 +218,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---4">Numpy로 짜보는 Neural Network Basic - 4</h1>
+  <h1 id="numpy로-짜보는-neural-network-basic---4">Numpy로 짜보는 Neural Network Basic - 4</h1>
 <hr />
 
-<h2 id="backpropagation">오차역전파(Backpropagation)</h2>
+<h2 id="오차역전파backpropagation">오차역전파(Backpropagation)</h2>
 
-<h3 id="section">연쇄법칙의 원리</h3>
+<h3 id="연쇄법칙의-원리">연쇄법칙의 원리</h3>
 <p>합성 함수의 미분은 합성 함수를 구성하는 각 함수의 미분의 곱으로 나타낼 수 있다.</p>
 
 <script type="math/tex; mode=display">\begin{cases} z = t^2 \\ t = x + y \end{cases}</script>
@@ -239,7 +241,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>우리의 목적은 $L$ 에 대해서 $W$ 를 미분하여 조금씩 업데이트 하는 것임으로 아래와 같다고 할 수 있다.
 <script type="math/tex">\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{\partial{Y}}{\partial{W}}</script></p>
 
-<h3 id="section-1">덧셈노드와 곱셈노드의 역전파</h3>
+<h3 id="덧셈노드와-곱셈노드의-역전파">덧셈노드와 곱셈노드의 역전파</h3>
 
 <p><img src="/assets/ML/nn/NN_add.png" alt="Drawing" style="width: 400px;" /></p>
 
@@ -287,7 +289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>따라서 <strong>곱셈</strong> 노드는 들어온 신호에 서로 바뀐 입력신호 값을 <strong>곱해서</strong> 하류로 보낸다.</p>
 
-<h2 id="sigmoid---">Sigmoid 계층의 순전파와 역전파</h2>
+<h2 id="sigmoid-계층의-순전파와-역전파">Sigmoid 계층의 순전파와 역전파</h2>
 
 <script type="math/tex; mode=display">y = \frac{1}{1+\exp(-x)}</script>
 
@@ -302,21 +304,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><img src="/assets/ML/nn/NN_sigmoid_back2.png" alt="Drawing" style="width: 600px;" /></p>
 
 <blockquote>
-  <h4 id="section-2">역전파 1단계 ( / )</h4>
+  <h4 id="역전파-1단계---">역전파 1단계 ( / )</h4>
 
   <p>”/” 연산은 입력변수 x를 $\dfrac{1}{x}$ 로 바꿔준다. 즉 $f_1(x) = \dfrac{1}{x}$ 가 된다.</p>
 
   <p>미분을 하게 되면 $\dfrac{\partial{f_1}}{\partial{x}} = -\dfrac{1}{x^2} = -y^2$가 되서 입력신호를 하류로 보낸다.</p>
 
-  <h4 id="section-3">역전파 2단계 ( + )</h4>
+  <h4 id="역전파-2단계---">역전파 2단계 ( + )</h4>
 
   <p>”+” 연산은 신호를 그대로 하류로 흘러 보낸다</p>
 
-  <h4 id="exp">역전파 3단계 (exp)</h4>
+  <h4 id="역전파-3단계-exp">역전파 3단계 (exp)</h4>
 
   <p>“exp”연산은 $f_2(x) = exp(x)$ 이며, 미분도 $\dfrac{\partial{f_2}}{\partial{x}} = exp(x)$ 로 그대로 곱해서 하류로 보낸다.</p>
 
-  <h4 id="x-">역전파 4단계 ( x )</h4>
+  <h4 id="역전파-4단계--x-">역전파 4단계 ( x )</h4>
 
   <p>”$\times$”연산은 서로 바뀐 입력신호의 값을 곱해서 보낸다.</p>
 </blockquote>
@@ -335,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>이것을 코드로 구현하게 되면</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Sigmoid(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Sigmoid(object):
     def __init__(self):
         self.out = None  # 역전파시 곱해야 하기 때문에 저장해둔다
 
@@ -347,10 +349,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     def backward(self, dout):
         dx = dout * self.out * (1 - self.out)
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h2 id="affine--affine-transform">Affine 계층과 Affine Transform</h2>
+<h2 id="affine-계층과-affine-transform">Affine 계층과 Affine Transform</h2>
 <p>기하학에서 신경망 순전파 때 수행하는 행렬의 내적을 Affine Transform이라 하며, Affine 계층은 어파인 변환을 수행 처리하는 계층이다.</p>
 
 <p>위키백과[<a href="https://ko.wikipedia.org/wiki/%EC%95%84%ED%95%80_%EB%B3%80%ED%99%98">링크</a>]</p>
@@ -367,7 +368,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     \dfrac{\partial{L}}{\partial{B}} = 1
   \end{cases}$</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Affine(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Affine(object):
     def __init__(self, W, b):
         self.W = W
         self.b = b
@@ -387,12 +388,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         self.db = np.sum(self.b, axis=0)
 
         return dx
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h2 id="backpropogation--">Backpropogation 사용한 학습구현</h2>
+<h2 id="backpropogation-사용한-학습구현">Backpropogation 사용한 학습구현</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import collections
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collections
 from layers import *
 
 class TwoLayer(object):
@@ -452,12 +452,11 @@ class TwoLayer(object):
         grads['b2'] = self.layers['Affine2'].db
 
         return grads
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>TwoLayer Neural Network 를 생성하는 객체는 따로 파일에 저장하고 불러내는 것이 좋다. OrderedDict은 dictionary 형태로 입력 순서를 기억해주는 좋은 함수다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from dataset.mnist import load_mnist
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from dataset.mnist import load_mnist
 from two_layer_nn import TwoLayer
 
 # data_loading
@@ -526,8 +525,7 @@ print('total time:', (end - start))
 # 9000 | trian acc: 0.10775 | test acc: 0.10700
 # 9600 | trian acc: 0.10775 | test acc: 0.10700
 # total time: 61.07117795944214
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>학습은 전혀 안되지만 수치 미분보다 더 빠르게 진행된다는 것을 알 수 있다.</p>
 
@@ -559,7 +557,7 @@ print('total time:', (end - start))
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+4%3A+Backpropagation&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2017%2F12%2F15%2Fnumpywithnn_4.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+4%3A+Backpropagation&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2017%2F12%2F15%2Fnumpywithnn_4.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -681,6 +679,8 @@ print('total time:', (end - start))
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

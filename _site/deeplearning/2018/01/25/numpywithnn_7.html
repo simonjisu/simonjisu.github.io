@@ -10,7 +10,7 @@
   <meta name="description" content="Numpy로 짜보는 Neural Network Basic - 7">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 7" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 7: Batch Normalization" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 7: Batch Normalization">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 7">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/01/25/numpywithnn_7.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2018/01/25/numpywithnn_7.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -216,12 +218,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---7">Numpy로 짜보는 Neural Network Basic - 7</h1>
+  <h1 id="numpy로-짜보는-neural-network-basic---7">Numpy로 짜보는 Neural Network Basic - 7</h1>
 
 <hr />
-<h2 id="part-3">학습관련 기술 Part 3</h2>
+<h2 id="학습관련-기술-part-3">학습관련 기술 Part 3</h2>
 
-<h3 id="batch-normalization">배치 정규화 (Batch Normalization)</h3>
+<h3 id="배치-정규화-batch-normalization">배치 정규화 (Batch Normalization)</h3>
 <p>배치 정규화란 미니배치 단위로 선형합인 <strong>$a$</strong> 값을 정규화하는 것이다. 즉, 미니배치에 한해서 데이터 분포가 평균이 0 분산이 1이 되도록 한다. 이는 데이터 분포가 덜 치우치게 하는 효과가 있어서 가중치 초기화 값의 영향을 덜 받게한다. 또한, 학습속도를 증가시키고 regularizer 역할을 하여 Overfitting을 방지함으로 Dropout의 필요성을 줄인다. <del>자세한 내용은 논문을 참고하자!</del></p>
 
 <p>Paper: <a href="https://arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a></p>
@@ -232,7 +234,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>따라서, 하나의 Hidden Layer 는 $Affine \rightarrow BatchNorm \rightarrow Activation$ 으로 구성된다.</p>
 
-<h3 id="backpropogation-">배치 정규화의 BackPropogation 이해하기</h3>
+<h3 id="배치-정규화의-backpropogation-이해하기">배치 정규화의 BackPropogation 이해하기</h3>
 
 <p><img src="/assets/ML/nn/NN_batchnorm.png" alt="Drawing" /></p>
 
@@ -240,7 +242,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>x 부터 out 까지 차근차근 진행해보자. 헷갈리지 말아야할 점은 위에 공식에서 $i$ 는 batch를 iteration 한 것이라는 점이다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>## Forward Process
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Forward Process
 # step-1: mu (D,)
 mu = x.mean(axis=0)
 # step-2: xmu (N, D)
@@ -259,8 +261,7 @@ xhat = xmu * invstd
 scale = gamma * xhat
 # step-9: out (N, D)
 out = scale + beta
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="backward">Backward:</h4>
 
@@ -378,7 +379,7 @@ dx_2 = \dfrac{\partial L}{\partial x_2} = \dfrac{\partial L}{\partial \mu} \dfra
   <li>최종적으로 구하는 $dx = \dfrac{\partial L}{\partial x} = dx_1 + dx_2$ 로 정의 된다.</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>## Backward Process
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Backward Process
 # step-9: out = scale + beta
 dbeta = dout.sum(axis=0)
 dscale = dout
@@ -404,16 +405,15 @@ dx1 = dxmu * 1
 dx2 = (1.0 / batch_size) * np.ones(input_shape) * dmu
 # step-0:
 dx = dx1 + dx2
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h4 id="section">실제 구현</h4>
+<h4 id="실제-구현">실제 구현</h4>
 <p>그러나 실제 구현 시에는 training 과 testing을 나눠서 아래와 같이 진행된다.</p>
 
 <p><img src="/assets/ML/nn/6/batch_norm_al.png" alt="Drawing" style="width=500px" /></p>
 
 <hr />
-<h3 id="backpropogation---">첨부: Backpropogation 전체 미분 수학식</h3>
+<h3 id="첨부-backpropogation-전체-미분-수학식">첨부: Backpropogation 전체 미분 수학식</h3>
 
 <ul>
   <li>수식의 이해는 이분의 블로그에서 많은 참조를 했다. Blog: [<a href="http://cthorey.github.io/backpropagation/">Clement Thorey</a>]</li>
@@ -453,7 +453,7 @@ y_{kl} &= \gamma_l \hat{x}_{kl} + \beta_l \\
 
 <p>이제 우리고 구하려고 하는 미분 값들$(\dfrac{\partial L}{\partial x}, \dfrac{\partial L}{\partial \gamma}, \dfrac{\partial L}{\partial \beta})$을 하나씩 구해보자.</p>
 
-<h4 id="xij---">$x_{ij}$ 에 대한 미분</h4>
+<h4 id="x_ij-에-대한-미분">$x_{ij}$ 에 대한 미분</h4>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned}\dfrac{\partial L}{\partial x_{ij}}
@@ -530,7 +530,7 @@ y_{kl} &= \gamma_l \hat{x}_{kl} + \beta_l \\
 
 <p>(2) 번 식으로 도출 되는 과정을 잘 살펴보면, 각 항마다 곱으로 구성되어 있다. 첫번째 항은 $\sum_{k, l}$ 에서 오직 $k=i, l=j$ 일때 남아 있고 나머지는 전부다 0 이고, 두번째 항은 오직 $l=j$ 일때 남아있고 나머지는 전부다 0 이다. 그리고 마지막도 마친가지로 $l=j$ 일때만 남아있는다.</p>
 
-<h4 id="gammaj---">$\gamma_j$ 에 대한 미분</h4>
+<h4 id="gamma_j-에-대한-미분">$\gamma_j$ 에 대한 미분</h4>
 
 <p>위에 까지 이해했으면 $\gamma_l$ 에 대한 미분은 간단하다.</p>
 
@@ -542,7 +542,7 @@ y_{kl} &= \gamma_l \hat{x}_{kl} + \beta_l \\
 &= \sum_k \dfrac{\partial L}{\partial y_{kj}} (x_{kj} - \mu_j)(\sigma_j^2+\epsilon)^{-1/2}
 \end{aligned} %]]></script>
 
-<h4 id="betaj---">$\beta_j$ 에 대한 미분</h4>
+<h4 id="beta_j-에-대한-미분">$\beta_j$ 에 대한 미분</h4>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned}\dfrac{\partial L}{\partial \beta_j}
@@ -583,7 +583,7 @@ y_{kl} &= \gamma_l \hat{x}_{kl} + \beta_l \\
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+7%3A+Batch+Normalization&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F01%2F25%2Fnumpywithnn_7.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+7%3A+Batch+Normalization&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2018%2F01%2F25%2Fnumpywithnn_7.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -699,6 +699,8 @@ y_{kl} &= \gamma_l \hat{x}_{kl} + \beta_l \\
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

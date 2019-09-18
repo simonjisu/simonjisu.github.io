@@ -10,7 +10,7 @@
   <meta name="description" content="Github pages 로 프로젝트 문서화">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Github pages 로 프로젝트 문서화" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="Github pages 로 프로젝트 문서화" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Github pages 로 프로젝트 문서화">
   <meta name="twitter:description" content="Github pages 로 프로젝트 문서화">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/datascience/2018/12/04/buildgithubpages.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -216,11 +218,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="github-pages---">Github pages 로 프로젝트 문서화</h1>
+  <h1 id="github-pages-로-프로젝트-문서화">Github pages 로 프로젝트 문서화</h1>
 
 <p>잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.</p>
 
-<h2 id="section">실습환경</h2>
+<h2 id="실습환경">실습환경</h2>
 
 <ul>
   <li>Ubuntu Server 18.04 LTS</li>
@@ -228,40 +230,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <hr />
 
-<h2 id="section-1">준비과정</h2>
+<h2 id="준비과정">준비과정</h2>
 
 <h3 id="install-nodejs--npm">Install nodejs &amp; npm</h3>
 
 <p>사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>패키지 버전을 체크해보자.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ nodejs --version
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ nodejs --version
 v10.14.1
 
 $ npm --version
 6.4.1
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="install-gitbook-client">Install gitbook client</h3>
 
 <p>gitbook client 를 설치해야한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ npm install gitbook-cli -g
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ npm install gitbook-cli -g
+</code></pre></div></div>
 
 <h3 id="initialize-gitbook">Initialize gitbook</h3>
 
 <p>이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 <code class="highlighter-rouge">posts</code> 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 \README.md
 \SUMMARY.md
 \book.json
@@ -273,59 +272,52 @@ $ npm --version
 \docs  # github page 로 가는 html 파일들 등
 	\...
 		
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>그럼 우선 프로젝트 디렉토리를 만들어보자.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir [프로젝트 디렉토리] &amp;&amp; cd [프로젝트 디렉토리]
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir [프로젝트 디렉토리] &amp;&amp; cd [프로젝트 디렉토리]
+</code></pre></div></div>
 
 <p>그리고 <code class="highlighter-rouge">posts</code> 디렉토리를 만들자. 이 <code class="highlighter-rouge">posts</code> 안에 있는 모든 내용이 향후에 웹페이지로 갈것이다. 만들고 아래 명령어를 시작해보자.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ gitbook init
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.] $ gitbook init
 Installing GitBook 3.2.3
 ...
 warn: no summary file in this book 
 info: create README.md 
 info: create SUMMARY.md 
 info: initialization is finished 
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ ls
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.] $ ls
 README.md  SUMMARY.md
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>README.md</strong> 파일은 gitbook 의 첫번째 페이지, <strong>SUMMARY.md</strong> 는 gitbook 의 목차 역할을 한다. <code class="highlighter-rouge">posts</code> 폴더 안에 첫번째 챕터를 만들어보자.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ mkdir posts &amp;&amp; cd posts
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.] $ mkdir posts &amp;&amp; cd posts
 [./posts] $ mkdir chapter-1 &amp;&amp; cd chapter-1
 [./posts/chapter-1] $ vi README.md  # 아무거나 쓰고 저장하자
 [./posts/chapter-1] $ vi 01_helloworld.md  # 아무거나 쓰고 저장하자
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>이제 SUMMARY.md 에서 목차를 수정해보자.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[./posts/chapter-1] $ cd ../..
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[./posts/chapter-1] $ cd ../..
 [.] $ vi SUMMARY.md
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Summary
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Summary
   
 * [Introduction](README.md)
 * [Chapter-1](post/chapter-1/README.md)
 	* [01 hello world](post/chapter-1/01_helloworld.md)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>여기까지 왔으면 기본적인 설정은 완료된것이다. <code class="highlighter-rouge">gitbook serve</code> 명령어를 통해 한번 살펴보자.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ gitbook serve
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.] $ gitbook serve
 Live reload server started on port: 35729
 Press CTRL+C to quit ...
 
@@ -343,8 +335,7 @@ info: &gt;&gt; generation finished with success in 0.3s !
 
 Starting server ...
 Serving book on http://localhost:4000
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>http://localhost:4000</strong> 로 접속을 시도해보자. 아래와 같은 화면이 나오면 성공이다.</p>
 
@@ -356,58 +347,53 @@ Serving book on http://localhost:4000
 
 <p>테스트 후, 프로젝트 디렉토리에 <code class="highlighter-rouge">_book</code> 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ vi .gitignore
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.] $ vi .gitignore
+</code></pre></div></div>
 
 <p>아래 코드를 넣어주자. <strong>node_modules</strong> 는 plugin 에 필요한 패키지들을 설치하는 디렉토리인데 올리지 않는다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Book build output
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Book build output
 _book
 # Dependency packages
 node_modules
 # Jupyter Notebook checkpoint
 .ipynb_checkpoints
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>이제 github 에 올려보도록 한다. 우선 자신의 github 에 [프로젝트 디렉토리]와 같은 이름의 github 저장소를 생성하자. 그리고 git 을 사용하기 위해, 다시 돌아와서 해당 프로젝트 디렉토리를 git 저장소로 만들어준다. (애당초에 repository 를 만들어서 clone 하는 상태에서 시작해도 좋다.)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.] $ git init
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.] $ git init
 [.](master) $ git remote add origin git@github.com:[사용자이름]/[프로젝트 디렉토리].git
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>완료되었으면 저장소에 올려보도록 한다. <code class="highlighter-rouge">publish-gitbook.sh</code> 라는 쉘 스크립트를 만들어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[.](master) $ vi publish-gitbook.sh
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[.](master) $ vi publish-gitbook.sh
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
 <span class="c"># remove gitbook old things</span>
-rm -rf _book
-rm -rf docs
+<span class="nb">rm</span> <span class="nt">-rf</span> _book
+<span class="nb">rm</span> <span class="nt">-rf</span> docs
 
 <span class="c"># gitbook init</span>
-gitbook install <span class="o">&amp;&amp;</span> gitbook build
+gitbook <span class="nb">install</span> <span class="o">&amp;&amp;</span> gitbook build
 
 <span class="c"># build pages</span>
-mkdir docs
-cp -R _book/<span class="k">*</span> docs/
+<span class="nb">mkdir </span>docs
+<span class="nb">cp</span> <span class="nt">-R</span> _book/<span class="k">*</span> docs/
 
 <span class="c"># delete things</span>
-git clean -fx _book
+git clean <span class="nt">-fx</span> _book
 
 <span class="c"># upload</span>
-git add .
-git commit -a -m <span class="s2">"update docs"</span>
-git push -u origin master
-</code></pre>
-</div>
+git add <span class="nb">.</span>
+git commit <span class="nt">-a</span> <span class="nt">-m</span> <span class="s2">"update docs"</span>
+git push <span class="nt">-u</span> origin master
+</code></pre></div></div>
 
-<h3 id="section-2">저장소에서 활성화 하기</h3>
+<h3 id="저장소에서-활성화-하기">저장소에서 활성화 하기</h3>
 
 <p>자신의 github 저장소의 <strong>Settings</strong> 에 가서 <strong>Github Pages</strong> 항목의 <strong>master branch /docs folder</strong> 를 누르고 <strong>Save</strong> 를 누르자.</p>
 
@@ -431,22 +417,21 @@ git push -u origin master
 
 <p>주로 사용하는것은 수식편집이 가능한 “katex”, 방문자 분석을 위한 구글 애널릭틱스 “ga”, 댓글을 달수 있는 “disqus” (회원가입 필요함) 정도다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="nt">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-		</span><span class="s2">"katex"</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"disqus"</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"ga"</span><span class="w">
-		</span><span class="p">],</span><span class="w">
-	</span><span class="nt">"pluginsConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"disqus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"shortName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXXXXX"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"ga"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UA-XXXX-Y"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+	"plugins": [
+		"katex",
+		"disqus",
+		"ga"
+		],
+	"pluginsConfig": {
+        "disqus": {
+            "shortName": "XXXXXXX"
+        },
+        "ga": {
+            "token": "UA-XXXX-Y"
+        }
+}
+</code></pre></div></div>
 
 <hr />
 
@@ -486,7 +471,7 @@ git push -u origin master
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=Github+pages+%EB%A1%9C+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8+%EB%AC%B8%EC%84%9C%ED%99%94&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F12%2F04%2Fbuildgithubpages.html"
+      <a href="//www.facebook.com/sharer.php?t=Github+pages+%EB%A1%9C+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8+%EB%AC%B8%EC%84%9C%ED%99%94&u=http%3A%2F%2Flocalhost%3A4000%2Fdatascience%2F2018%2F12%2F04%2Fbuildgithubpages.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -514,11 +499,13 @@ git push -u origin master
 
 
   
+
+  
     
-    <!-- <h2 id="DataScience">-1</h2> -->
-    <!-- <h2 id="DataScience">/datascience/2017/08/04/E2EMN.html</h2> -->
+    <!-- <h2 id="DataScience">0</h2> -->
+    <!-- <h2 id="DataScience">/datascience/2019/09/18/introxai.html</h2> -->
     
-    <!-- <h2 id="DataScience">1</h2> -->
+    <!-- <h2 id="DataScience">2</h2> -->
     <!-- <h2 id="DataScience">/datascience/2018/06/24/pycharmssh.html</h2> -->
     
 
@@ -538,6 +525,14 @@ git push -u origin master
 			
 		</span>
 		<span class="next-post">
+			
+				<a href="/datascience/2019/09/18/introxai.html">
+					<span class="page-number">[논문 리뷰] XAI Introduction</span>
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-square fa-stack-2x"></i>
+						<i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+					</span>
+				</a>
 			
 		</span>
 	</section>
@@ -588,6 +583,8 @@ git push -u origin master
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

@@ -10,7 +10,7 @@
   <meta name="description" content="Pytorch TorchText Tutorial">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Pytorch TorchText Tutorial" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="Torchtext Tutorial" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Torchtext Tutorial">
   <meta name="twitter:description" content="Pytorch TorchText Tutorial">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/07/19/torchtext.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/07/19/torchtext.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -230,9 +232,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><strong>설치:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install torchtext
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install torchtext
+</code></pre></div></div>
 
 <p>TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.</p>
 
@@ -245,22 +246,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><br /></p>
 
-<h2 id="section">사용방법</h2>
+<h2 id="사용방법">사용방법</h2>
 
-<h3 id="create-field">1. 필드지정(Create Field)</h3>
+<h3 id="1-필드지정create-field">1. 필드지정(Create Field)</h3>
 
 <p>필드란 텐서로 표현 될 수 있는 텍스트 데이터 타입을 처리한다. 각 토큰을 숫자 인덱으로 맵핑시켜주는 단어장(Vocabulary) 객체가 있다. 또한 토큰화 하는 함수, 전처리 등을 지정할 수 있다.</p>
 
 <p>아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>["The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations", 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations", 
 '3']
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>텍스트를 뜻하는 <code class="highlighter-rouge">TEXT</code>, 해당 문장의 sentiment 를 뜻하는 <code class="highlighter-rouge">LABEL</code> 필드객체 두 개를 만든다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from torchtext.data import Field
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from torchtext.data import Field
 
 TEXT = Field(sequential=True,
              use_vocab=True,
@@ -272,8 +272,7 @@ LABEL = Field(sequential=False,
               preprocessing = lambda x: int(x),  
               batch_first=True)
 
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><strong>Arguments:</strong></p>
 
 <ul>
@@ -287,11 +286,11 @@ LABEL = Field(sequential=False,
 
 <p>더 자세한 것은 문서를 참조하시길 바란다.</p>
 
-<h3 id="create-datasets">2. 데이터 세트 만들기(Create Datasets)</h3>
+<h3 id="2-데이터-세트-만들기create-datasets">2. 데이터 세트 만들기(Create Datasets)</h3>
 
 <p>데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 <code class="highlighter-rouge">splits</code> 메서드를 사용해서 아래와 같이 만들어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from torchtext.data import TabularDataset
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from torchtext.data import TabularDataset
 
 train_data = TabularDataset.splits(path='./data/',
 					train='train_path',
@@ -299,59 +298,54 @@ train_data = TabularDataset.splits(path='./data/',
 					test='test_path',
 					format='tsv', 
 					fields=[('text', TEXT), ('label', LABEL)])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>train_data = TabularDataset(path='./data/examples.tsv', 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_data = TabularDataset(path='./data/examples.tsv', 
 				format='tsv', 
 				fields=[('text', TEXT), ('label', LABEL)])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>fields:</strong> 아까 만들어준 필드는 리스트 형태로 <code class="highlighter-rouge">[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]</code> 로 넣어준다.</li>
 </ul>
 
-<h3 id="build-vocabulary">3. 단어장 생성(Build vocabulary)</h3>
+<h3 id="3-단어장-생성build-vocabulary">3. 단어장 생성(Build vocabulary)</h3>
 
 <p>토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 <code class="highlighter-rouge">&lt;unk&gt;</code> 토큰을 0, <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.</p>
 
 <p>훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TEXT.build_vocab(train_data)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TEXT.build_vocab(train_data)
+</code></pre></div></div>
 
-<h3 id="create-data-loader">4. 데이터 로더 만들기(Create Data Loader)</h3>
+<h3 id="4-데이터-로더-만들기create-data-loader">4. 데이터 로더 만들기(Create Data Loader)</h3>
 
 <p>마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, <code class="highlighter-rouge">splits</code> 메서드를 사용한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from torchtext.data import Iterator
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from torchtext.data import Iterator
 
 train_loader, valid_loader, test_loader = \
 	TabularDataset.splits((train_data, valid_data, test_data), 
 				batch_size=3, 
 				device=None,  # gpu 사용시 "cuda" 입력
 				repeat=False)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>만약에 없다면? 아래와 같이 <code class="highlighter-rouge">Iterator</code> 객체에 그냥 넣어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>train_loader = Iterator(train_data, 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_loader = Iterator(train_data, 
 			batch_size=3, 
 			device=None,  # gpu 사용시 "cuda" 입력
 			repeat=False)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 <code class="highlighter-rouge">&lt;pad&gt;</code> 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.</p>
 
-<h3 id="section-1">테스트</h3>
+<h3 id="테스트">테스트</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>for batch in train_loader:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for batch in train_loader:
     break
 print(batch.text)
 print(batch.label)
@@ -372,8 +366,7 @@ tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
            6910,      8,  10136,      8,      3,   2204,   4340,      2,
               1,      1,      1]])
 tensor([ 0,  3,  1])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.</p>
 
@@ -381,7 +374,7 @@ tensor([ 0,  3,  1])
 
 <hr />
 
-<h2 id="section-2">만약에 사용하지 않겠다면?</h2>
+<h2 id="만약에-사용하지-않겠다면">만약에 사용하지 않겠다면?</h2>
 
 <p>노트북: <a href="https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb">github</a>, <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb">nbviewer</a> 에 상세하게 나만의 데이터 로더를 커스터마이징 하는 방법 또한 적어 두었다.</p>
 
@@ -394,7 +387,7 @@ tensor([ 0,  3,  1])
 
 <hr />
 
-<h2 id="section-3">다양한 데이터 세트</h2>
+<h2 id="다양한-데이터-세트">다양한 데이터 세트</h2>
 
 <p><code class="highlighter-rouge">torchtext.datasets</code> 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.</p>
 
@@ -434,7 +427,7 @@ tensor([ 0,  3,  1])
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=Torchtext+Tutorial&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F07%2F19%2Ftorchtext.html"
+      <a href="//www.facebook.com/sharer.php?t=Torchtext+Tutorial&u=http%3A%2F%2Flocalhost%3A4000%2Fnlp%2F2018%2F07%2F19%2Ftorchtext.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -546,6 +539,8 @@ tensor([ 0,  3,  1])
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

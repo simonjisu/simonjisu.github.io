@@ -10,7 +10,7 @@
   <meta name="description" content="알고리즘 공부">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="알고리즘 공부" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="algorithm study" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="algorithm study">
   <meta name="twitter:description" content="알고리즘 공부">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/algorithm/2017/08/27/algorithm-study.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/algorithm/2017/08/27/algorithm-study.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -216,19 +218,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="section"><strong>알고리즘 공부</strong></h1>
+  <h1 id="알고리즘-공부"><strong>알고리즘 공부</strong></h1>
 
 <p><strong>&lt;Hello Coding 그림으로 개념을 이해하는 알고리즘&gt;</strong> 책을 요약 정리한 것입니다.</p>
 
-<h2 id="chapter-1--">Chapter 1. 알고리즘의 소개</h2>
+<h2 id="chapter-1-알고리즘의-소개">Chapter 1. 알고리즘의 소개</h2>
 <hr />
-<h4 id="simple-search">단순탐색 simple search</h4>
+<h4 id="단순탐색-simple-search">단순탐색 simple search</h4>
 <p>단순히 순서대로 추측을 하는 것</p>
 
-<h4 id="binary-search">이진탐색 binary search</h4>
+<h4 id="이진탐색-binary-search">이진탐색 binary search</h4>
 <p><span style="color: #e87d7d">정렬된</span> 원소 리스트를 입력으로 받고, 리스트에 원하는 원소가 있으면 그 원소의 위치를 반환, 아니면 null 반환</p>
 <p><br /></p>
-<h4 id="running-time---big-o-notation">running time 그리고 빅오 표기법(Big O notation)</h4>
+<h4 id="running-time-그리고-빅오-표기법big-o-notation">running time 그리고 빅오 표기법(Big O notation)</h4>
 <p>알고리즘의 시간은 어떻게 증가하는가로 측정함</p>
 
 <ul>
@@ -280,9 +282,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><br /></p>
 <p><br /></p>
 
-<h2 id="chapter-2--">Chapter 2. 선택 정렬</h2>
+<h2 id="chapter-2-선택-정렬">Chapter 2. 선택 정렬</h2>
 <hr />
-<h4 id="section-1">배열과 연결 리스트</h4>
+<h4 id="배열과-연결-리스트">배열과 연결 리스트</h4>
 
 <p><strong>리스트</strong>: 원소를 메모리 아무 곳에다 저장해두고, 각 원소에는 목록의 다음 원소에 대한 주소가 저장되어있음, 특정 원소의 위치를 알려면 앞단의 원소의 위치를 알아야함, 그러나 메모리 공간을 예약 요청해서 저장할 필요가 없음</p>
 
@@ -324,7 +326,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>순차 접근(sequential access): 원소를 첫 번째 부터 하나씩 읽는 것, ex) 연결리스트</li>
 </ul>
 
-<h4 id="section-2">선택 정렬</h4>
+<h4 id="선택-정렬">선택 정렬</h4>
 <p>리스트에에서 모든 항목을 살펴보고 최대값을 찾아서 새로운 리스트에 정렬</p>
 
 <p>걸리는 시간: $O(n^2)$</p>
@@ -340,9 +342,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><br /></p>
 <p><br /></p>
 
-<h2 id="chapter-3--recursion">Chapter 3. 재귀 Recursion</h2>
+<h2 id="chapter-3-재귀-recursion">Chapter 3. 재귀 Recursion</h2>
 <hr />
-<h3 id="section-3">재귀</h3>
+<h3 id="재귀">재귀</h3>
 <p>함수가 자기 자신을 호출하는 것</p>
 
 <ul>
@@ -354,15 +356,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def countdown(i):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def countdown(i):
     print i
     if i &lt;= 1:  # 기본 단계
         return
     else:  # 재귀 단계
         countdown(i-1)
-</code></pre>
-</div>
-<h3 id="section-4">스택</h3>
+</code></pre></div></div>
+<h3 id="스택">스택</h3>
 <p>아래와 같은 자료구조를 <strong>스택</strong>이라고 함</p>
 
 <ul>
@@ -376,13 +377,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><strong>호출 스택(call stack)</strong>: 여러 개의 함수를 호출하면서 함수에 사용되는 변수를 저장하는 스택을 호출 스택이라함</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def fact(x):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fact(x):
     if x == 1:
         return 1
     else:
         return x * fact(x-1)
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>호출 할때 마치 레고블럭을 쌓고 떼듯이 호출함,</p>
 
 <p>예를 들어, factorial 함수를 들자면</p>
@@ -476,9 +476,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>단점: 모든 정보를 저장해두어야 하기 때문에 메모리를 많이 소비한다.</li>
 </ul>
 
-<h2 id="chapter-4--">Chapter 4. 분할 정복</h2>
+<h2 id="chapter-4-분할-정복">Chapter 4. 분할 정복</h2>
 <hr />
-<h3 id="divide-and-conquer">분할 정복(divide-and-conquer)</h3>
+<h3 id="분할-정복divide-and-conquer">분할 정복(divide-and-conquer)</h3>
 <p>단계:</p>
 
 <ol>
@@ -487,20 +487,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </ol>
 
 <p>예제: summation</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def sum(arr):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def sum(arr):
     total = 0
     for x in arr:
         total += x
     return total
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>분할 정복 전략으로 재귀 함수를 이요해서 합계를 구하려면?</p>
 <ol>
   <li>기본 단계: 간단하게 원소 갯수가 0 혹은 1이면 기본 단계가 됨</li>
   <li>재귀 함수 호출: sum([2,3,4]) 가 아닌 2 + sum([3,4]) 로 문제를 줄임, 즉 이 함수는 리스트를 받으면, 리스트가 비어 있을 시 0을 반환하고, 아니면 총합 = 리스트의 첫번째 숫자와 나머지 리스트의 총합을 더한 값으로 출력한다.</li>
 </ol>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def newsum(lst):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def newsum(lst):
     summ = 0
     if not lst:
         return 0
@@ -511,13 +510,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return summ
 
 print(newsum([2,3,4]))
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h3 id="quick-sort">퀵 정렬(quick sort)</h3>
+<h3 id="퀵-정렬quick-sort">퀵 정렬(quick sort)</h3>
 <p>기준을 정해서 그것보다 작은 것과 큰 것을 나눠서 재귀함수를 호출하는 방법</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># ascending
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ascending
 def quicksort(lst):
     if len(lst) &lt; 2:
         return lst
@@ -526,8 +524,7 @@ def quicksort(lst):
         less = [i for i in lst[1:] if i &lt;= pivot]
         greater = [i for i in lst[1:] if i &gt; pivot]
         return quicksort(less) + [pivot] + quicksort(greater)
-</code></pre>
-</div>
+</code></pre></div></div>
 
   <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 <br>
@@ -555,7 +552,7 @@ def quicksort(lst):
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=algorithm+study&u=http%3A%2F%2Fsimonjisu.github.io%2Falgorithm%2F2017%2F08%2F27%2Falgorithm-study.html"
+      <a href="//www.facebook.com/sharer.php?t=algorithm+study&u=http%3A%2F%2Flocalhost%3A4000%2Falgorithm%2F2017%2F08%2F27%2Falgorithm-study.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -649,6 +646,8 @@ def quicksort(lst):
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

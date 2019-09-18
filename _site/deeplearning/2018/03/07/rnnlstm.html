@@ -10,7 +10,7 @@
   <meta name="description" content="자세하게 설명한 RNN 과 LSTM 시리즈 - 1">
   
   <meta name="author" content="Soo">
-  <meta name="copyright" content="&copy; Soo 2018">
+  <meta name="copyright" content="&copy; Soo 2019">
   
 
   <!-- External libraries -->
@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="자세하게 설명한 RNN 과 LSTM 시리즈 - 1" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="RNN & LSTM - 1: RNN" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="RNN & LSTM - 1: RNN">
   <meta name="twitter:description" content="자세하게 설명한 RNN 과 LSTM 시리즈 - 1">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/03/07/rnnlstm.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2018/03/07/rnnlstm.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -171,6 +171,8 @@
         
           
         
+          
+        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -216,19 +218,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="rnn--lstm----1">자세하게 설명한 RNN 과 LSTM 시리즈 - 1</h1>
+  <h1 id="자세하게-설명한-rnn-과-lstm-시리즈---1">자세하게 설명한 RNN 과 LSTM 시리즈 - 1</h1>
 
 <h2 id="rnnrecurrent-neural-network">RNN(Recurrent Neural Network)</h2>
 <p>우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 ‘기억’ 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 ‘기억’을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.</p>
 
-<h2 id="rnn-">RNN 구조</h2>
+<h2 id="rnn-구조">RNN 구조</h2>
 <p><img src="/assets/ML/rnn/rnn.png" alt="Drawing" style="width=500px" /></p>
 
 <p>RNN은 중간의 Hidden 층이 순환한다고해서 순환 신경망이라고 한다. 왼쪽의 구조를 펼쳐서 보면, 중간의 Hidden 노드가 어떤 방향으로 계속 이어진 다는 것을 알 수 있다. 이러한 쇠사슬 같은 성격은 RNN으로 하여금 연속된 이벤트와 리스트에 적합한 구조로 만들어 준다.</p>
 
 <p>이렇게 보면 엄청 어렵게 느껴질 수 있다. 그렇다면 예시를 들어서 RNN이 어떻게 돌아가는지 수학적으로 살펴보자.</p>
 
-<h3 id="section">기본 신경망 구조</h3>
+<h3 id="기본-신경망-구조">기본 신경망 구조</h3>
 
 <p>기존의 신경 구조를 한번 다시 되새겨보자.</p>
 
@@ -283,7 +285,7 @@ y_t &= W_{hy} h_t + b_y
 
 <p>최종적으로 학습 될 값은 Loss Function에서 각 미분한 ${\frac{\partial L}{\partial W}}^{(1)}$, ${\frac{\partial L}{\partial W}}^{(2)}$, ${\frac{\partial L}{\partial W}}^{(3)}$ 의 합으로 구해진다.</p>
 
-<h3 id="long-term-dependency-">장기 의존성(Long-Term Dependency) 문제</h3>
+<h3 id="장기-의존성long-term-dependency-문제">장기 의존성(Long-Term Dependency) 문제</h3>
 <p>RNN이 이론상으로는 sequence의 첫번째 항부터 끝까지(즉, $x_1 \cdots x_T$ 까지) 학습 할 수 있을 것으로 보이나, 실제로는 장기기억, 즉 Time Step이 길어 질 수록 예전에 있던 정보를 기억 못한다. 이를 <strong>장기 의존성(Long-Term Dependency)</strong> 문제라고 한다.</p>
 
 <p><img src="/assets/ML/rnn/rnn_bad.png" alt="Drawing" /></p>
@@ -352,7 +354,7 @@ y_t &= W_{hy} h_t + b_y
   
     
     
-      <a href="//www.facebook.com/sharer.php?t=RNN+%26+LSTM+-+1%3A+RNN&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F03%2F07%2Frnnlstm.html"
+      <a href="//www.facebook.com/sharer.php?t=RNN+%26+LSTM+-+1%3A+RNN&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2018%2F03%2F07%2Frnnlstm.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -464,6 +466,8 @@ y_t &= W_{hy} h_t + b_y
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
+        
+        
         
         
         

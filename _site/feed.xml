@@ -4,19 +4,640 @@
     <title>Soo</title>
     <description>My Blog
 </description>
-    <link>http://simonjisu.github.io/</link>
-    <atom:link href="http://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Dec 2018 01:19:12 +0900</pubDate>
-    <lastBuildDate>Wed, 05 Dec 2018 01:19:12 +0900</lastBuildDate>
-    <generator>Jekyll v3.2.1</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 18 Sep 2019 12:19:32 +0900</pubDate>
+    <lastBuildDate>Wed, 18 Sep 2019 12:19:32 +0900</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>[논문 리뷰] XAI Introduction</title>
+        <description>&lt;h1 id=&quot;explaining-explanations-an-overview-of-interpretability-of-machine-learning&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/h1&gt;
+
+&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1806.00069&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;설명가능한(explainable)&lt;/strong&gt; 모델은 &lt;strong&gt;해석(interpretable)&lt;/strong&gt; 이 가능하지만 그 반대는 아니다.&lt;/li&gt;
+  &lt;li&gt;설명가능한 시스템(explanatory system)는 머신러닝, 인간과 컴퓨터 상호 작용(Human-computer interaction), 크라우드 소싱, 교육분야, AI 윤리, 기술정책 등 다양한 분야에서 연구되고 적용되고 있다.&lt;/li&gt;
+  &lt;li&gt;이 논문에서는 explainable AI 시스템의 전반적인 정의와 분류법을 소개한다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Section 2&lt;/code&gt;: explanation, interpretability, explainability 에 대해서 정의한다.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Section 3&lt;/code&gt;: 고전적인 AI 접근 방법(causal modeling, constraint reasoning, intelligent user interfaces, planning)을 복습하지만 설명 가능한 딥러닝 모델에 집중할 것이다.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Section 4&lt;/code&gt;: explanation, interpretability, explainability 의 중요한 차이점에 대해서 이야기 한다.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Section 5&lt;/code&gt;: 이 설명들을 통해 무엇이 설명되고 있는가(what is explained by these explanations)에 대한 새로운 분류법을 제시한다. (해석이 잘 안됨…)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;2-background-and-foundational-concepts&quot;&gt;2. Background and Foundational Concepts&lt;/h2&gt;
+
+&lt;h3 id=&quot;a-what-is-an-explanation&quot;&gt;A. What is an Explanation?&lt;/h3&gt;
+
+&lt;p&gt;철학적인 문헌에서 “설명을 구성하는 것은 무엇인가”에 대해 많은 논쟁이 있었다. 그중 관심있는 부분은 “어떤 설명이 좋은 설명인가” 혹은 “설명의 진짜 정의는 무엇인가”다. 어떤 사람들은 좋은 설명은 질문에 달려있다고 말한다. 많은 논문이 설명의 기원, 이론 그리고 언어의 토대를 다루고 있다. 그러나 우리의 연구에서 대부분 중요하고 관심있었던 작업은 “왜”라는 질문(Why Questions)이다. 특별히 “어떤 알고리즘에서 알고싶은 것이 무언인가”를 “왜”라는 질문으로 했을 때, 더 이상 질문을 할 수 없을 때까지 질문에 답변을 받을 수 있는 특정 시기를 정량적으로 표현할 수 있다. “왜”라는 질문에는 두 의미가 있는데, “왜(why)” 그리고 “왜 그래야하는가(why should)”이다. 다른 Explainable planning 문헌과 마찬가지로, 철학자들은 “왜 그렇게 하지 말아야 하는지(why-shouldn’t)” 질문과 “왜 그렇게 해야 하는지(why-should)” 질문이 실제로 우리가 원하는 “설명성 요건(explainability requirements)”을 제공할 수 있지에 대해 궁금해 한다.&lt;/p&gt;
+
+&lt;p&gt;어떤 설명이 가장 좋은 설명인지도 철학자들 사이에서 많은 논쟁이 있다. 많은 사람이 말하기를 그것은 추론(inference)이라고 하는데, 학자들 사이에서 많은 논쟁이 있다. 많은 사람이 말하기를 그것은 추론(inference)이라고 하는데, 귀추법(abductive reasoning)을 사용해서 모든 가능성있는 결과에 대해 설명하는 것과 비슷한 관점이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;b-interpretability-vs-completeness&quot;&gt;B. Interpretability vs. Completeness&lt;/h3&gt;
+
+&lt;p&gt;설명(explanation)은 두 가지 방식으로 평가될 수 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;해석가능성(Interpretability)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;해석가능성의 목표는 내적 시스템이 사람이 알 수 있는 방법으로 구성되는 것이다. 이 목표의 키 요소는 인지, 지식, 인간의 편향이다. 해석가능한 시스템은 사람이 유저에게 이해가능한 쉬운 언어로 구성되고 의미있는 설명(descriptions)을 제공해야한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;완전무결성(completeness)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;완전무결성의 목표는 시스템의 동작을 정확하게 묘사하는 것이다. 설명(explanation)은 시스템의 행동이 더 많은 상황에서 예측 가능해야 완전성이 생긴다. 딥 뉴럴 네트워크를 장착한 컴퓨터 프로그램을 설명할 때, 시스템에서 모든 수학적 연산과 파라미터를 볼 수 있어야 가장 완벽하고 완전한 설명이라고 할 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;설명가능한 AI 가 직면한 문제는 완전무결성과 해석가능성을 동시에 만족하는 설명을 만드는 것이 어렵다는 것이다. 정확한 설명은 사람에게 쉽게 해석가능하지 않고, 반대로 해석가능한 설명은 가끔 정확한 예측 파워를 내지 못한다.&lt;/p&gt;
+
+&lt;p&gt;Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가하는 것을 경계해야한다고 했다. 그 이유는 사람의 평가는 설명을 조금더 간단하게 만들려는 강력하고 구체적인 편향을 불러일으키기 때문이다. 그는 사람 평가에 의존하면, 연구자들이 투명한 시스템 보다는 설득력 있는 시스템을 만들려고 할 것이라 우려했다. 그는 해석가능한 시스템을 만들때 다음과 같은 윤리적인 딜레마를 제기했다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;비윤리적으로 유저에게 더 좋은 설득력을 보이기위해서 설명을  조작하는 경우는 언제인가?&lt;/li&gt;
+  &lt;li&gt;“투명성 및 윤리”와 “해석가능성에 대한 욕망” 사이의 밸런스를 어떻게 조절할 것인가?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;단순화된 설명의 한계를 유저가 이해하지 못함을 이용해 복잡한 시스템에 단순화된 설명을 제시함으로써 신뢰를 얻으려는 행위은 비윤리적이라고 생각하며, 바람직하지 않은 속성을 숨기도록 그 설명이 최적화되어 있다면 더 나쁘다고 보고 있다. 이러한 설명은 본질적으로 오해의 소지가 있으며,유저에게 위험하고 근거없는 결론을 내리는 결과를 초래할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이러한 함정을 피하기 위해서 설명(explanations)은 해석가능성과 완전무결함 사이의 트레이드 오프를 허용해야 한다. 단순한 묘사(descriptions)만을 제공하는 것보다 약간의 해석가능성을 대가로 시스템이 자세하고 완전무결한 묘사를 할수 있게 해야한다. 설명 방법은 트레이드 오프의 하나의 점으로 평가될 것이 아니라, 최대 해석가능성부터 최대 완전무결함의 곡선상에서 어떻게 변화하는 가를 봐야한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;c-explainability-of-deep-networks&quot;&gt;C. Explainability of Deep Networks&lt;/h3&gt;
+
+&lt;p&gt;딥 네트워크의 연산에 대한 설명은 네트워크의 데이터 &lt;strong&gt;처리(processing)&lt;/strong&gt; 를 설명하거나, 네트워크 내부에서 데이터의 &lt;strong&gt;표상(representation)&lt;/strong&gt; 을 설명하는 것이다. 처리(processing)에 관한 설명은 “왜 해당 입력이 특정 출력으로 이어지는가?”을 대답하는 것이고 프로그램의 실행 추적을 설명하는 것과 같다. 표상(representation)에 관한 설명은 “네트워크가 어떤 정보를 포함하고 있는가?”를 대답하는 것이고, 프로그램의 내부 데이터 구조를 설명하는 것과 같다.&lt;/p&gt;
+
+&lt;p&gt;해석가능성에 대한 세번째 접근방법은 자신의 행동에 대한 해석을 단순화하도록 설계된 구조를 가진 &lt;strong&gt;설명-생산(explanation-producing) 시스템&lt;/strong&gt; 을 만드는 것이다. 이런 구조는 데이터의 처리, 표상 혹은 사람이 시스템을 쉽게 이해하는 관점에서 설계될 수 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;3-review&quot;&gt;3. Review&lt;/h2&gt;
+
+&lt;p&gt;급격한 하위 분야의 확장 그리고 불투명한(opaque) 시스템의 정책 및 법적 파장 때문에, 해석가능성에 대한 연구가 급격이 늘어나고 있다. 모든 분야의 논문을 다루기 어렵기 때문에, 심층 신경망 아키텍처에 대해 집중하고, 다른 분야의 논문를 간단히 강조하려한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-explanations-of-deep-network-processing&quot;&gt;A. Explanations of Deep Network Processing&lt;/h3&gt;
+
+&lt;p&gt;보통 심층 네트워크에서는 큰 숫자의 연산을 통해서 결론을 내린다. 예를 들어, 이미지 분류에서 유명한 구조인 ResNet 에서는 이미지 한장을 분류하기 위해 대략 5천만개의 학습된 파라미터와 100억 회의 부동소수점 연산(floating point operations)을 실행한다. 따라서 이러한 프로세스를 설명하기 위해 직면하는 근본적인 문제는 복잡한 연산들을 줄이는 방법을 찾아야한다는 것이다. 이는 기존 모델과 비슷하게 행동하는 &lt;strong&gt;프록시(proxy) 모델&lt;/strong&gt; 을 만들거나, 가장 연관있는 연산을 강조하는 &lt;strong&gt;돌출 맵(salience/saliency map)&lt;/strong&gt; 을 만드는 것이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1512.03385&quot;&gt;Deep Residual Learning for Image Recognition&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;선형 프록시 모델(Linear Proxy Models, LIME)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;프록시 모델 접근 법은 Ribeiro에 의해 잘 설명되어 있다. LIME 을 통해 블랙박스 시스템은 입력의 작은 변화로 인한 행동이 추적되어 설명이 가능하며, 그런 다음 데이터는 전체 모델을 위한 단순 프록시 역할을 하는 지역적 선형 모델(local linear model)을 구성하기 위해 사용된다.  Ribeiro는 다양한 모델 유형과 문제 영역을 거쳐 의사결정에 가장 큰 영향 미치는 입력 영역(regions)을 식별하는데 사용될 수 있음을 보여주고 있다. LIME과 같은 프록시 모델은 예측가능(predictive)하다. 오리지널 시스템에 대한 충성도(faithfulness)에 따라 실행되고 평가될 수 있기 때문이다. 예를 들어, LIME 모델에서 0이 아닌 차원의 개수를 세는 것처럼 모델의 복잡도에 따라서 측정될 수 있다. 프록시 모델은 복잡성(complexity)과 충성도(faithfulness)의 사이를 정량화된 관계를 제공하기 때문에, 방법들은 서로 벤치마킹될 수 있어서 프록시 모델 접근법을 더 매력적으로 만드는 요소다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;의사결정 나무(Decision Trees)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;프록시 모델의 다른 대안 방법으로써 의사결정 나무가 있다. 신경망을 의사결정 나무로 분해하려는 시도는 1990년대부터 최근까지 많은 확장을 거쳤다. 주로 shallow networks에 집중하고, 심층 신경망의 프로세스를 생성하는 것을 목표로 하고있다. CRED 알고리즘의 히든 층을 많이 확장시킨 DeepRED가 그 예시다. DeepRED는 의사결정 나무를 간략화하기 위해 여러 전략을 사용했다. RxREN을 사용해서 불필요한 입력을 다듬고, 트리(a parsimonious decision tree)를 생성하기 위한 통계적 방법인 C4.5 알고리즘을 적용했다. 비록 DeepRED는 원래 네트워크와 비슷한 트리를 생성해냈지만, 그 구조가 꽤나 크고 시행 또한 상당한 시간과 메모리를 차지하기 때문에 확장성이 떨어졌다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://link.springer.com/article/10.1007/s11063-011-9207-8&quot;&gt;Reverse Engineering the Neural Networks for Rule Extraction in Classification Problems&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1810.01965&quot;&gt;CRED: A Deep Residual Network of Convolutional and Recurrent Units for Earthquake Signal Detection&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.ke.tu-darmstadt.de/publications/papers/DS16DeepRED.pdf&quot;&gt;DeepRED&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://books.google.co.kr/books/about/C4_5.html?id=b3ujBQAAQBAJ&amp;amp;redir_esc=y&quot;&gt;C4.5&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;또 다른 의사결정 나무 방법은 ANN-DT 인데 샘플링 기법을 사용해서 트리를 만든다. 최근접이웃 방법을 사용한 트리 확장 훈련에 샘플링 기법이 사용되는 것이 키 아이디어다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/document/809084&quot;&gt;ANN-DT: an algorithm for extraction of decision trees from artificial neural networks - IEEE Journals &amp;amp; Magazine&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;자동 규칙 추출(Automatic-Rule Extraction)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;자동 규칙 추출은 의사결정을 요약하기 위한 잘 연구된 또 다른 접근 방법이다. Andrews 는 기존의 규칙 추출 기술을 정리하고 각 규칙에 대한 힘, 반투명성 그리고 퀄리티와 함께 다섯개 차원의 규칙 추출방법에 대한 분류법을 제시했다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.researchgate.net/publication/222239090_Survey_and_critique_of_techniques_for_extracting_rules_from_trained_artificial_neural_networks&quot;&gt;Survey_and_critique_of_techniques_for_extracting_rules_from_trained_artificial_neural_networks&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;(하단 원문 생략)&lt;/p&gt;
+
+        &lt;p&gt;Decompositional approaches work on the neuron-level to extract rules to mimic the behavior of individual units. The KT method [28] goes through each neuron, layer-by-layer and applies an if-then rule by finding a threshold. Similar to DeepRED, there is a merging step which creates rules in terms of the inputs rather than the outputs of the preceding layer. This is an exponential approach which is not tangible for deep neural networks. However, a similar approach proposed by Tsukimoto [29] achieves  polynomial-time complexity, and may be more tangible. There has also been work on transforming neural network to fuzzy rules [30], by transforming each neuron into an approximate rule.&lt;/p&gt;
+
+        &lt;p&gt;Pedagogical approaches aim to extract rules by directly mapping inputs to outputs rather than considering the inner workings of a neural network. These treat the network as a black box, and find trends and functions from the inputs to the outputs. Validity Interval Analysis is a type of sensitivity analysis to mimic neural network behavior [31]. This method finds stable intervals, where there is some correlation between the input and the predicted class. Another way to extract rules using sampling methods [32], [33]. Some of these sampling approaches only work on binary input [34] or use genetic algorithms to produce new training examples [35]. Other  approaches aim to reverse engineer the neural network, notably, the RxREN algorithm, which is used in DeepRED[21].&lt;/p&gt;
+
+        &lt;p&gt;Other notable rule-extraction techniques include the MofN algorithm [36], which tries to find rules that explain single neurons by clustering and ignoring insignificant neurons. Similarly, The FERNN [37] algorithm uses the C4.5 algorithm [24]
+  and tries to identify the meaningful hidden neurons and inputs to a particular network.
+  Although rule-extraction techniques increase the transparency of neural networks, they may not be truly faithful to the model. With that, there are other methods that are focused on creating trust between the user and the model, even if the model is not “sophisicated.”&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;비록 규칙 추출 기술은 신경망의 투명성을 증가시켰으나, 그 규칙이 완전히 모델과 일치하지는 않았다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;돌출 맵(Salience Mapping)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;돌출 맵 접근법은 occlusion procedure 로 예시를 많이 드는데, 네트워크에서 돌출 맵 접근법은 occlusion procedure 로 예시를 많이 드는데, 네트워크에서 입력을 반복적으로 넣으면서 네트워크 출력에 어느 부분이 영향을 줬는지 맵을 만든다. 입력 경사(gradient)를 계산하면서 자연스럽게 돌출 맵을 효율적으로 만들 수 있다. 그러나 이런 미분값들은 중요한 정보를 놓칠 수 있기 때문에, 경사 이외에 다른 정보도 전달할 수 있는 다른 접근 방법도 고려한다. 그 예로써 LRP, DeepLIFT, CAM, Grad-CAM, Integrated gradients, SmoothGrad 를 들수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1807.01696&quot;&gt;Localization Recall Precision (LRP): A New Performance Metric for Object Detection&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1704.02685&quot;&gt;Learning Important Features Through Propagating Activation Differences&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1512.04150&quot;&gt;Learning Deep Features for Discriminative Localization&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1610.02391&quot;&gt;Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1703.01365&quot;&gt;Axiomatic Attribution for Deep Networks&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1706.03825&quot;&gt;SmoothGrad: removing noise by adding noise&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;각 기술은 네트워크에서 뉴런들이 강력하게 활성화 되는 활성화 구역과 출력에 가장 많은 영향을 끼치는 민감도 구역 사이에서 균형을 맞추고 있다. 위 방법들을 비교한 것은 Ancona의 문헌에서 확인 할 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1711.06104&quot;&gt;Towards better understanding of gradient-based attribution methods for Deep Neural Networks&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;b-explanations-of-deep-network-representations&quot;&gt;B. Explanations of Deep Network Representations&lt;/h3&gt;
+
+&lt;p&gt;비록 네트워크의 개별 연산숫자는 방대하나, 심층 신경망의 구조는 작은 서브컴포넌트로 잘 정리할 수 있다. ResNet 에서는 100개의 층으로 구성되어 있고 각 픽셀 정보를 64개에서 2048개의 채널로 연산한다. 심층 신경망 표상의 설명 목적은 이런 병목 현상(bottlenecks)을 통해 데이터 흐름의 구조와 역할를 이해하는 것이다. 이는 세밀하게 나눔으로써 달성할 수 있다. 표상(representations)은 &lt;strong&gt;레이어(layer)&lt;/strong&gt;, &lt;strong&gt;유닛(unit)&lt;/strong&gt;, &lt;strong&gt;벡터(vector)&lt;/strong&gt; 로 나눠서 이해할수가 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;레이어(Layers)의 역할&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;레이어는 원래 학습된 네트워크의 문제로부터 다른 문제를 해결하는 능력을 테스트함으로써 이해할 수 있다. 예를 들어, Razavian은 ImageNet 데이터를 이용해 학습한 이미지 객체 분류 네트워크의 내부 레이어가 특정 피쳐 벡터(feature vectors)가 다른 어려운 이미지 프로세싱 문제에 재사용할 수 있다는 것을 확인했다. 심지어 심층 벡터(deep representations, 학습된 피쳐벡터를 가르킴)를 SVM과 같은 간단한 모델에 적용하여 전체 네트워크를 훈련 시키지 않고 SOTA(State Of The Art)를 달성했다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1403.6382&quot;&gt;CNN Features off-the-shelf: an Astounding Baseline for Recognition&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;이렇게 네트워크로부터 한 층을 사용하여 새로운 문제를 해결하는 방법을 &lt;strong&gt;전이 학습(transfer learning)&lt;/strong&gt;이라고 한다. 이는 어마어마한 실용적인 시사점을 주는데, 새로운 데이터 세트와 네트워크의 개발없이 다른 새로운 문제들을 해결할 수 있다는 점이다. Yosinksi는 다른 맥락에서 전달 학습 능력을 정량화하기 위한 프레임워크를 설명했다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1411.1792&quot;&gt;How transferable are features in deep neural networks?&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;개별 유닛(Individual Units)의 역할&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;레이어에 포함된 정보는 더 깊에 개별 뉴런과 개별 합성곱 필터로 나눌 수 있다. 개별 유닛의 역할은 개별 유닛의 반응을 최대화 하는 입력 패턴을 시각화(visualization) 함으로써 질적으로 이해할 수 있고, 개별 유닛이 전이 문제를 해결하는 능력을 테스트 함으로써 양적으로도 이해할 수 있다. 시각화는 경사를 이용한 입력 이미지 최적화, 최대 활성화 되는 이미지를 샘플링, 혹은 같은 이미지를 만드는 생성 네트워크를 훈련 시킴으로써 만들 수 있다. 예시로 개별 유닛들이 분할(segmentation) 문제(넓은 범위의 라벨링된 시각화 개념구역을 분할)를 해결하는 능력을 측정하는 &lt;strong&gt;네트워크 해부(network dissection)&lt;/strong&gt; 방법이 있다. 개별 유닛의 새로운 개념을 포착하는 능력을 정량화 함으로써, 네트워크 해부 방법은 네트워크의 개별 유닛이 담긴 정보를 특징지을 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1704.05796&quot;&gt;Network Dissection: Quantifying Interpretability of Deep Visual Representations&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;CNN 시각화에서 유닛 표상(unit representations)에 대한 이해를 도울 수 있는 문헌이 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1802.00614&quot;&gt;Visual Interpretability for Deep Learning: a Survey&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;(하단 원문 생략)&lt;/p&gt;
+
+        &lt;p&gt;A review of explanatory methods focused on understanding unit representations used by visual CNNs can be found in [52], which examines methods for visualization of CNN representations in intermediate network layers, diagnosis of these representations, disentanglement representation units, the creation of explainable models, and semantic middle-to-end learning via human-computer interaction.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;네트워크 가지치기(pruning of networks) 또한 개별 뉴런의 역할을 이해하는 방법 중 하나다. 특별히 큰 네트워크는 최적화에 도움이 되는 초기화(initializations)과 함께 작은 서브네트워크로 구성되어 성공적으로 훈련 시킨다. 해당 문헌은 설명이 용이한 더 작은 네트워크로 같은 문제를 훈련 시킬 수 있는 전략이 존재한다는 것을 증명했다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1803.03635&quot;&gt;The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;표상된 벡터(Representation Vectors)의 역할&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;개별 유닛을 특징 짓는 것과 유사하게 개별 유닛의 선형 결합(linear combination)으로 구성된 벡터 공간에서 다른 방향들을 특징 짓고 있다. CAVs(Concept Activation Vectors)는 사람이 해석할 수 있는 개념과 일치하는 방향을 식별하고 탐색하는 신경망 표상의 해석을 위한 프레임워크다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1711.11279&quot;&gt;Interpretability Beyond Feature Attribution: Quantitative Testing with Concept Activation Vectors (TCAV)&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;c-explanation-producing-systems&quot;&gt;C. Explanation-Producing Systems&lt;/h3&gt;
+
+&lt;p&gt;훈련 가능한 네트워크 아키텍처의 일부로 명시적 &lt;strong&gt;어텐션(attention)&lt;/strong&gt;을 포함시키는 방법과 같이, 용이한 설명을 위한 네트워크를 만드는 접근법도 있다. 어텐션은 &lt;strong&gt;분리된 표상(disentangled representations)&lt;/strong&gt;을 학습을 하도록 훈련 시키거나, 직접 &lt;strong&gt;생성가능한 설명(generative explanations)&lt;/strong&gt;을 만들도록 훈련 시킬수도 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;어텐션 네트워크(Attention Networks)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;어텐션 기반의 네트워크는 특정 함수를 학습하는데, 함수는 입력 혹은 내부 피쳐가 네트워크 다른 부분의 정보를 조정하는 것을 볼 수 있게 가중치를 제공한다. 어텐션 기반의 접근법은 비연속적인 순서로 된 문장을 처리하는 기계번역 모델에서 주목할 만한 성공을 거두었다. 그리고 세분화된 이미지(fine-grained image) 분류 분야, VQA(visual question answering) 분야에서도 적용할 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1411.6447&quot;&gt;The Application of Two-level Attention Models in Deep Convolutional Neural Network for Fine-grained Image Classification&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1606.03556&quot;&gt;Human Attention in Visual Question Answering: Do Humans and Deep Networks Look at the Same Regions?&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;비록 어텐션을 컨트롤 하는 유닛들이 사람이 읽을 수 있는 해석을 만드는 것을 목적으로 훈련하는 것은 아니지만, 어떤 네트워크를 통과하는 정보맵을 확실히 보여준다. 이는 설명의 일종의 형태로 사용될 수 있다는 뜻이다. 사람의 어텐션 데이터 세트가 만들어지기도 했는데 이는 어텐션 시스템이 얼마나 사람의 어텐션과 유사한지 평가할 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1606.03556&quot;&gt;Human Attention in Visual Question Answering: Do Humans and Deep Networks Look at the Same Regions?&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1802.08129&quot;&gt;Multimodal Explanations: Justifying Decisions and Pointing to the Evidence&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;어텐션뿐만 아니라 다른 흥미로운 설명을 추출 하는 접근 방법도 있다. 어떤 행동에 부합한 설명을 가지는 네트워크를 만드는 목적으로 어텐션을 명시적으로 훈련 시키는 것이다. Ross 에 의해 제시한 이 기술은 네트워크의 입력에 대한 민감도가 “right for the right reasons”에 부합하는 네트워크를 만들도록 적용 및 측정된다. 이 방법은 네트워크가 내부 추론을 학습할 수 있게 사용될 수 있다. 또한, 이전 사례(instances)에서 발견하지 못한 문제를 새로운 방법으로 스스로 해결하는 일련의 모델 학습에 사용될 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;분리된 표상(Disentangled Representations)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;분리된 표상 속에는 의미있고 다양한 독립적인 요소를 설명하는 개별 차원이 있다. &lt;strong&gt;잠재 요소(latent factor)&lt;/strong&gt; 를 분리하는 문제는 PCA(Principal Component Analysis), ICA(Independent Component Analysis), NMF(Nonnegative Matrix Factorization) 방법으로 해결해왔다. 심층 신경망으로 분리된 표상 학습 시킬수 있다. 그중 하나는 정보이론적 측도(information-theoretic measures)로 입력 확률분포를 네트워크로 학습하는 VAE(Variational Autoencoding)가 있다. Beta-VAE 또한 분리된 요소를 잘 볼수 있는 요소중에 하나다. InfoGAN 은 잠재 요소를 최대한 분리되는 목적으로 학습한다. 순방향 네트워크가 유닛의 분리를 유도하도록 특별한 손실 함수를 제안하고 있다. 이는 CNN에서 개별 유닛들이 해석하기 어려운 패턴의 혼합물 대신 일관성있는 유의미한 패치들을 찾는데 사용될 수 있다. 분리된 유닛으로 네트워크의 추론을 해명할 수 있는 그래프와 의사결정 나무를 만들 수 있다. 캡슐 네트워크(capsule networks)와 같은 아키텍처는 네트워크의 정보를 분리되고 높은 레벨의 개념을 나타내는 조각으로 정리할 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1312.6114&quot;&gt;Auto-Encoding Variational Bayes&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://openreview.net/forum?id=Sy2fzU9gl&quot;&gt;beta-VAE: Learning Basic Visual Concepts with a Constrained…&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1710.00935&quot;&gt;Interpretable Convolutional Neural Networks&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1611.04246&quot;&gt;Growing Interpretable Part Graphs on ConvNets via Multi-Shot Learning&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1805.07468&quot;&gt;Unsupervised Learning of Neural Networks to Explain Neural Networks&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1710.09829&quot;&gt;Dynamic Routing Between Capsules&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;설명 생성(Generated Explanations)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;마지막으로, 심층 네트워크는 시스템의 훈련 일부로 포함해서 인간이 이해가능한 설명을 생성하도록 설계할 수 있다. 설명 생성은 VQA 분야와 세분화된 이미지 분류 문제에서 시스템의 일부로 많이 시연됐다. 두 문제의 시스템에서 “왜냐면(because)”이 들어간 문장을 합성 하면서 자연어로 된 결정(decision)을 설명했다. 해당 설명의 생성기(generator)는 사람이 쓴 설명이 포함된 큰 데이터 셋을 학습했고, 사람이 사용하는 언어로 결정들을 설명했다.&lt;/p&gt;
+
+    &lt;p&gt;시각적 관점과 텍스트 설명이 동시에 포함된 복합적 설명(multimodal explanations)을 생성할 수도 있다. 이 시스템은 2016 VQA 챌린지에서 우승한 모델에 기반해서 일부를 추가하고 단순화 해서 만들었다. QA문제와 내부 어텐션 지도 이외에 시스템은 추가로 설명에 대한 시각적 포인트를 최적화 시킨 두번째 어텐션 맵 그리고 긴 형태의 설명 생성기를 함께 훈련 시켰다. 두 설명 점수 모두 훌륭하게 작동했다. 흥미로운 것은 가독성 있는 설명의 생성은 네트워크의 출력 결과에 의존한다는 것이다. 즉, 네트워크가 이미 결정을 내린 후에 설명이 생성된다는 점이다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1802.08129&quot;&gt;Multimodal Explanations: Justifying Decisions and Pointing to the Evidence&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1606.01847&quot;&gt;Multimodal Compact Bilinear Pooling for Visual Question Answering and Visual Grounding&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;4-related-work&quot;&gt;4. Related Work&lt;/h2&gt;
+
+&lt;h3 id=&quot;a-interpretability&quot;&gt;A. Interpretability&lt;/h3&gt;
+
+&lt;p&gt;이전에 해석가능성에 대해서 분류법과 모범 사례를 정의해보려는 시도가 있었다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1702.08608&quot;&gt;Towards A Rigorous Science of Interpretable Machine Learning&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;해당 논문의 동기도 본 논문과 비슷하게 해석가능성 분야의 수요가 급격하게 커졌기 때문이다. 그리고 해석가능성에 대한 명확한 정의와 평가기준이 없었다. 저자는 해석가능성을 “사람에게 이해가능한 형태로 설명하는(표현하는) 능력” 으로 정의하고, 다양한 설명가능성에 대한 정의를 제안했다. 그리고 “해석은 설명의 평가를 발견하는 행동이다”라는 개념에 수렴하게 된다. 저자들은 일종의 해석가능한 머신러닝의 정의와 이를 측정할 방법에 합의했다.  해당 논문에 영감을 받아서 해석가능성보다는 설명가능성 관점에서 분류법을 다뤄보기로 한다.&lt;/p&gt;
+
+&lt;p&gt;이 논문의 주요 공헌은 해석가능성 평가를 위한 모드의 분류법(a taxonomy of modes)을 제안한 것이다. &lt;strong&gt;응용 프로그램 기반(application-grounded)&lt;/strong&gt;, &lt;strong&gt;사람 기반(human-grounded)&lt;/strong&gt; 그리고 &lt;strong&gt;기능 기반(functionally grounded)&lt;/strong&gt; 이다. 저자들은 불완전한 문제제기 혹은 최적화 과정에서 평가가 제외 됐을 때 해석가능성이 요구된다고 말하고있다. 그들의 문제제기는 유저와 최적화 문제 사이를 단절 시키는 모델의 불완전성이기 때문에 평가의 접근법들이 중요하다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;응용 프로그램 기반(application-grounded)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;첫 번째 접근법인 응용 프로그램 기반 방법은 실제 작업과 실제 사람을 포함하는 것이다. 이 평가는 인간이 만들어낸 설명이 특정 작업에서 다른 인간에게 얼마나 도움이 될 수 있는지를 측정한다. 의사가 진단 시스템을 평가하는 경우를 예시로 들 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;사람 기반(human-grounded)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;두 번째 접근법인 사람 기반 방법은 간단한 문제에 적용되는 사람의 평가 방식을 사용하는 것이다. 이 방법은 응용 프로그램을 테스트할 타겟 커뮤니티를 찾기 어려울 때 주로 사용한다. 또는, 특별한 최종 목표가 실현되기 어려운 경우, 예를 들어 안전 이슈가 중요한 문제에서 오류를 찾아내는 것 등 문제에서도 사용될 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;기능 기반(functionally grounded)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;마지막 방법인 기능 기반 방법은 인간의 주체없이 평가된다. 이 실험 설정에서는 해석가능성에 대한 어떤 공식적인 정의를 증명하기 위해 프록시 또는 단순화된 작업을 사용한다. 저자들은 프록시의 선택이 이 접근법에서 내재된 도전이라는 것을 인정한다. 해석 가능한 모델을 선택하는 것과 모델 행동을 더 잘 표현할 수 있는 덜 해석가능한 프록시 방법을 선택하는 것 사이에는 미묘한 트레이드-오프가 있다. 저자들은 이 점을 인정하고 의사결정 나무를 좋은 해석 가능한 모델로 간략하게 언급한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;그런 다음 저자들은 해석가능성 연구에서 개방된 문제, 모범 사례 및 향후 작업에 대해 논의하고, 해석가능성의 발견을 위한 데이터 중심 접근법을 크게 권장했다. 해석가능성의 정의에 대한 이러한 공헌이 있음에도 불구하고, 우리는 모델이 제공하는 설명에 각기 다른 초점을 맞춰 정의하고, 각 설명들이 어떻게 평가되어야 하는지를 포함하여 우리만의 분류법을 구별했다.&lt;/p&gt;
+
+&lt;h3 id=&quot;b-explainable-ai-for-hci&quot;&gt;B. Explainable AI for HCI&lt;/h3&gt;
+
+&lt;p&gt;이전에 설명가능한 AI에 관련된 어떤 논문은 설명가능한 시스템에 관해 상당한 데이터 중심 문헌 분석을 수행했다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.brianlim.net/wordpress/wp-content/uploads/2018/01/chi2018-intelligibility%20final.pdf&quot;&gt;chi2018-intelligibility&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 논문에서 저자들은 기존의 AI 해석가능성 주장을 뛰어넘어, 대신 실제 사용자들에게 효과적이고 실용적인 시스템을 만드는 방법에 초점을 맞췄다. 저자들은 AI 시스템은 “디자인에 따라서 설명가능하다.”라고 주장하면서 세 가지 기여로 이를 제시하고 있다. 설명가능한 AI 연구와 관련된 289 개의 핵심 논문과 12,412 개의 인용 논문에 대한 데이터 중심 네트워크 분석(data-driven network analysis), 네트워크 분석을 이용한 동향 관찰, 그리고 설명가능성과 관련된 HCI 연구의 모범 사례 및 향후 연구에 대한 제안이 그 3 가지다.&lt;/p&gt;
+
+&lt;p&gt;논문은 대부분 문헌 분석에 중점을 두기 때문에, 저자들은 관련 연구분야에서 설명가능한 인공지능(XAI), HCI의 명료성(intelligibility) 및 해석가능성(interpretability), 연구주제의 동향 분석 방법 등 크게 세 가지 분야만 부각시킨다.&lt;/p&gt;
+
+&lt;p&gt;이 논문의 주요 기여는 저자들이 만든 인용 네트워크가 포함된 설명가능한 연구의 상당한 문헌 분석이다. “intelligible”, “interpretable”, “transparency”, “glass box”, “black box”, “scrutable”, “counterfacutals” 그리고 “explainable” 등 키워드의 변형을 문헌에서 검색 및 취합하고, 289 개의 핵심 논문과 12,412 개의 인용 논문을 정리했다. 네트워크 분석을 통해 저자들은 28개의 중요한 클러스터와 9개의 연구 커뮤니티를 발견했다. 이와는 대조적으로, 우리의 연구는 해석가능한 머신러닝과 설명 할 수 있는 딥러닝을 이용한 분류기 연구에 초점을 맞추고 있다.&lt;/p&gt;
+
+&lt;p&gt;같은 코어 논문과 인용 논문의 요약(abstracts) 데이터를 사용하여 LDA 기반의 토픽모델링을 시행한 결과, 저자들은 가장 크고, 중심적이며, 잘 연구된 네트워크가 지능과 주변 시스템(intelligence and ambient systems)이라는 것을 발견했다. 우리의 연구에서 가장 중요한 서브 네트워크는 설명가능한 AI 다. FAT(Fair, Accountable and Transparent) 알고리즘과 iML(Interpretable Machine Learning) 서브 네트워크 그리고 설명 서브 네트워크에 관한 이론들이 이에 해당한다.&lt;/p&gt;
+
+&lt;p&gt;특히, 저자들은 FATML과 해석가능성의 차이점을 이야기하고 있다. FATML은 사회적 이슈에 초점을 맞추고 있는 반면, 해석가능성은 방법에 초점을 맞춘다. 설명의 이론은 인과 관계(causality)와 인지 심리학(cognitive psychology)을 반사실적 추론(conterfactual reasoning)과 인과 설명(causal explanations)의 공통 부분으로 결합시킨다. 이 두 가지는 우리의 분류 분석에서 중요한 요소들이다.&lt;/p&gt;
+
+&lt;p&gt;우리는 이들의 논문 마지막에서 언급한 두 가지 동향이 흥미로웠다(머신러닝 생산 규칙(ML production rules)과 엄격하고 사용 가능한 지식에 대한 로드맵). 저자들은 해석가능성이 적용된 고전적인 AI 방법들의 부족을 지적하며, 현재의 연구에서는 그러한 방법들의 광범위한 적용을 장려한다. 본 논문은 주로 설명가능성에서 HCI 연구 어젠다를 정하는 데 초점을 맞췄지만, 우리 연구와 관련된 많은 논점을 제기한다. 특히, 문헌 분석은 심리학 및 사회과학에서 하위 주제와 하위 학문을 발견했는데, 아직 우리의 분석과 관련이 있는 것으로 확인되지는 않았다.&lt;/p&gt;
+
+&lt;h3 id=&quot;c-explanations-for-black-box-models&quot;&gt;C. Explanations for Black-Box Models&lt;/h3&gt;
+
+&lt;p&gt;최근 블랙박스(black-box) 모델을 설명하는 조사에서는 이해하기 힘든(opaque) 알고리즘을 사용한 주요 문제의 분류를 제공하기 위한 분류법을 소개했다. 조사된 대부분의 방법은 신경망을 기반으로한 알고리즘 이기 때문에 우리의 연구와 연관이 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1802.01933&quot;&gt;A Survey Of Methods For Explaining Black Box Models&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;저자들은 이해하기 힘든 머신러닝 모델에 기초한 의사결정 시스템을 설명하는 방법에 대해 개요를 제공한다. 그들의 분류법은 세세하고, 설명 접근법에 근거해 작은 구성요로 구별된다. 그들은 각 설명 방법에 대해 네 가지 특징을 이야기 했다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;당면한 문제의 종류&lt;/li&gt;
+  &lt;li&gt;블랙박스를 여는 데 사용되는 설명 능력(The explanatory capability used to open the black box)&lt;/li&gt;
+  &lt;li&gt;설명되는 블랙박스 모델의 유형&lt;/li&gt;
+  &lt;li&gt;블랙박스 모델에 전달된 입력 데이터의 종류&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;그들은 주로 직면하는 문제의 유형에 따라 설명 방법을 나누고, 다음과 같은 네 가지 설명 방법 그룹을 식별한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;블랙박스 모델 설명 방법&lt;/li&gt;
+  &lt;li&gt;블랙박스 결과 설명 방법&lt;/li&gt;
+  &lt;li&gt;블랙박스 검사 방법&lt;/li&gt;
+  &lt;li&gt;투명박스 설계 방법&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그들의 분류 특징과 문제 정의를 사용하여, 그들은 채택된 설명 기능의 유형, 블랙 박스 모델 “개방여부” 및 입력 데이터에 따라 방법을 토론하고 추가로 분류했다. 이들의 목표는 주요 블랙박스 설명 아키텍처를 검토하고 분류하는 것이다. 따라서 이들의 분류는 유사한 문제와 접근방식을 식별하는 지침이 될 수 있다. 우리는 이 연구가 설명 방법의 설계 공간을 탐색하는 데 유용하고 의미있는 기여를 하고 있다는 것을 발견했다. 우리의 분류는 덜 세분화되어 있다. 구현 기법을 세분화하기 보다는 설명 능력의 초점과 각 접근방식이 설명할 수 있는 것을 조사하며, 다양한 유형의 설명가능성(explainability) 방법이 어떻게 평가될 수 있는지를 이해하는 데 중점을 둔다.&lt;/p&gt;
+
+&lt;h3 id=&quot;d-explainability-in-other-domains&quot;&gt;D. Explainability in Other Domains&lt;/h3&gt;
+
+&lt;p&gt;설명가능한 계획법(Explainable Planning)은 planning 커뮤니티에 있던 모델 기반 표상을 활용하는 새로운 학문이다. 수년 전 몇가지 핵심 아이디어가 계획 인식 분야에서 제안됐다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1709.10256&quot;&gt;Explainable Planning&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://pdfs.semanticscholar.org/adc7/13f0787f9fdef701d63615acd4aad61165a6.pdf&quot;&gt;Generalized plan recognition&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;설명가능한 계획법은 계획 알고리즘과 인간의 문제-해결력 사이의 차이를 인정하면서, 사용자와의 의사소통을 위한 친숙하고 일반적인 기반을 촉구한다. 이 논문에서, 저자들은 설명이 대답할 수 있는 다양한 유형의 질문의 개요와 예를 제공한다. 예를 들어, “ 왜 A 행동을 했니?” 혹은 “왜 B 행동을 하지 않았니(DIDN’T)?”, “왜 C 행동을 하지 못했니(CAN’T)?” 등등. 또한 저자들은 계획을 자연어로 표현하는 것은 계획을 설명하는 것과 같지 않다고 강조한다. 설명 요청은 “질문자가 시스템에서 사용할 수 있어야 하며 질문자가 가지지 않았다고 믿는 지식의 일부를 밝혀내기 위한 시도”이다. 이 질문은 결론에서 이야기한다.&lt;/p&gt;
+
+&lt;p&gt;설명 자동 생성(Automatic explanation generation)은 스토리를 이야기 할 수 있는 컴퓨터와 기계와 밀접해 있다. John Reeves의 논문에 따르면, 그는 이야기를 읽고, 특징을 요약하고, 믿음을 추론하며 그리고 갈등과 해결을 이해하기 위해 THUNDER 프로그램을 만들었다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.semanticscholar.org/paper/Computational-morality%3A-a-process-model-of-belief-Reeves-Dyer/9a25a7794fc25ab039bf6d0662955b3ad84f2e49&quot;&gt;Computational morality: a process model of belief conflict and resolution for story understanding - Semantic Scholar&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다른 연구에서는 스토리 이해를 하는 데 필요한 구조를 나타내는 방법을 검토한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://pdfs.semanticscholar.org/7763/bd20e69a9b9ef7994adf9aae94aca6ffad0f.pdf&quot;&gt;Story understanding - E. T. Mueller&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Genesis Story-Understanding 시스템은 상위 개념 패턴(higher-level concept patterns)과 상식 규칙(commonsense rules)을 이용하여 스토리를 이해하고, 사용하고, 구성하는 작업 시스템이다. 설명 규칙은 누락된 원인 또는 논리적 연결을 제공하는 데 사용된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://courses.csail.mit.edu/6.803/pdf/manifesto.pdf&quot;&gt;The genesis manifesto: Story understanding and human intelligence&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;인간-로봇 상호작용과 스토리텔링의 교차점에는 언어화(verbalization)가 있다. 즉, 인간과 로봇의 상호작용에 대한 설명을 생성한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.ijcai.org/Proceedings/16/Papers/127.pdf&quot;&gt;Verbalization: Narration of autonomous robot experience&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;유사한 접근방식은 사례 기반 모델 또는 설명 일관성을 사용하는 유괴 추론에서 찾을 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.ijcai.org/Proceedings/93-1/Papers/004.pdf&quot;&gt;Focusing construction and selection of abductive hypotheses&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://pdfs.semanticscholar.org/f391/61c2bc142d4258dc76d329f47f17f6aeddcf.pdf&quot;&gt;The role of coherence in constructing and evaluating abductive explanations&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;설명 자동 생성은 새로운 사상을 상상하거나 통계적 접근법을 통한 지식의 격차를 메우는 방법으로 뇌와 인지과학에서도 잘 연구된 분야다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S0885201414000744&quot;&gt;Imagination and the generation of new ideas&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4041537/&quot;&gt;Theory of Mind: A Neural Prediction Problem&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;5-taxonomy&quot;&gt;5. Taxonomy&lt;/h2&gt;
+
+&lt;p&gt;3가지 다른 카테고리로 접근법을 나눌 수 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;비록 의사결정 프로세스를 대표 하지는 않지만, 어떤 논문은 방출된 선택에도 적용할 수 있는 정당성의 척도(degree of justification)를 제공하는 설명을 제안한다. 이는 사람이 믿을 만한 정확하고 합리적 시스템의 구축을 위한 설명 요구에 대한 응답(근거)로 사용될 수 있다. 이런 시스템은 보통 데이터의 처리를 모방(emulate)하여 시스템의 입력과 출력 사이의 연결관계 이끌어 낸다.&lt;/li&gt;
+  &lt;li&gt;설명의 두 번째 목적은 네트워크 내부의 데이터 표현을 설명하는 것이다. 이것들은 네트워크의 내부 작동에 대한 통찰력을 제공하며, 네트워크 내에서 활성화된 데이터에 대한 설명이나 해석을 용이하게 하는데 사용될 수 있다. 이는 프로그램의 내부 구조를 설명하는 것과 달리, 특정 중간 표현(intermediate representations)이 왜 특정 선택으로 이어졌는 지에 대한 정보를 얻을 수 있다.&lt;/li&gt;
+  &lt;li&gt;마지막 설명의 유형은 설명-생성 네트워크다. 이런 네트워크는 스스로 설명을 할 수 있게 구축하며, 불투명한 서브시스템의 해석을 단순화하도록 설계되었다. 처리 및 표현, 혹은 다른 부분이 정당하고 이해하기 쉬운 부분은 서브시스템의 투명성을 높이는 방법은 두 가지 단계다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;우리가 제시하는 분류법은 광범위한 기존 접근법 집합이 주어졌을 때, 머신러닝 시스템의 해석가능성 및 완전무결성의 다양한 척도를 달성하려고 할 때 유용하다. 그러나 동일한 문제를 해결한다고 주장하는 두 가지 뚜렷한 방법이 실제로 매우 다른 질문에 답하고 있을 수 있다. 우리의 분류법은 기존 접근법에 근거하여 문제 공간을 세분화하여 기존 분류보다 더 세밀하게 하려고 한다.&lt;/p&gt;
+
+&lt;p&gt;우리는 다음 표에 리뷰한 방법들에 대한 카테고리를 분류했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1dyldd53JbfefIvlrNH34qqVMgWRdRK95&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;주목할 점은 처리(processing)과 해설을 만들어내는(explanation-producing) 역할이 표현(representation)보다 더 많다는 것이다. 우리는 이러한 차이가 “표현에 기반한 모델(representation-based models)은 평가하기 어렵다”라는 사실에 기인한다고 믿는다. 유저-스터디 기반 평가가 항상 적절한 것은 아니다. 특정 표현을 추가하고 제거하는 방법으로 더 좋은 퍼포먼스를 측정하는 수치적 방법은 사용하기 힘들다.&lt;/p&gt;
+
+&lt;p&gt;우리의 분류법의 역할은 여러 카테고리를 걸쳐 연구와 평가를 촉진하는 것이다. 해석의 목적[74]과 유저와의 연결[75]을 평가하는 다른 설명적, 해석적 분류법 대신에, 우리는 집중적으로 방법에 대한 평가를 하려고 한다. 이 방법이 네트워크의 데이터 처리를 설명하는지, 네트워크 내부의 데이터 표현을 설명하는지, 혹은 그 방법을 스스로 설명하는 아키텍쳐인지를 볼 것이다. 이를 통해 그 방법에 대한 추가적인 메타 예측과 통찰력를 얻으려고 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1702.08608&quot;&gt;74-Towards A Rigorous Science of Interpretable Machine Learning&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.brianlim.net/wordpress/wp-content/uploads/2018/01/chi2018-intelligibility%20final.pdf&quot;&gt;75-chi2018-intelligibility&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;우리는 하위범주를 생성하는 설명 분류법을 신경망 아키텍쳐와 시스템을 디자인하는 하나의 방법으로써 제시하려고한다. 또한 표준화된 평가 지표의 부족을 강조하고, 향후 분류학의 영역 교차 연구를 제안하려고 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;6-evaluation&quot;&gt;6. Evaluation&lt;/h2&gt;
+
+&lt;p&gt;비록 심층 신경망을 위한 설명을 3 가지로 나눴지만, 셋다 같은 평가기준을 가지지 않는다. 조사된 작업의 대부분은 다음 유형의 설명 중 하나라고 할 수 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;원래 모델과의 완전무결성 비교. 프록시 모델은 설명된 원래 모델에 얼마나 근접했는지에 따러 직접 평가할 수 있다.&lt;/li&gt;
+  &lt;li&gt;대체 문제(task)에서 측정했을 때의 완전무결성. 어떤 설명은 모델의 의사결정을 직접적으로 설명하지 않는다. 하지만 다른 어떤 속성을 대신 측정할 수 있다. 예를 들어 모델 민감도는 무차별 측정 보다는 모델의 민감도를 잘 보여주는 돌출 설명(salience explanation)으로 평가할 수 있다.&lt;/li&gt;
+  &lt;li&gt;편향(bias)이 있는 모델을 탐지하는 능력. 특정 현상의 민감도(예를 들어, 입력에 대한 특정패턴의 존재 등)를 나타내는 설명은 모델관련 편향의 존재여부를 나타내는 능력을 통해 검증 될 수 있다.&lt;/li&gt;
+  &lt;li&gt;사람의 평가. 사람은 설명이 사람의 기대와 얼만큼 일치하는지를 판단하여, 설명을 평가할 수 있다. 사람의 평가는 “인간이 원래 모델의 행동예측을 할 수 있다”라는 관점 혹은 “사람에게 모델의 편향이 들어나면서 도움이 된다”라는 점에서 완전무결성 혹은 대체-작업의 완전무결성을 평가할 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;따라서 두 번째 테이블에서 볼 수 있듯이, 해석가능성과 완전무결성 사이의 트레이드 오프가 프록시 모델의 단순성과 정확성 사이의 균형을 뜻하지는 않는다. 중요한 모델의 편향을 찾아내는 능력 측면에서 다른 작업에 대한 설명 혹은 설명의 평가를 통해서 트레이트 오프를 절충할 수 있다. 각 세 가지 유형의 설명 방법은 완전무결성을 평가할 수 있는 설명을 제공할 뿐만 아니라 모델의 모든 세부 결정을 설명하는 것 보다 더 쉽다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1eXbhIESzWl7pqu8Yf5CEPYa5NstGhDi2&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Processing&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;처리 모델(Processing models)은 에뮬레이션 기반 방법이라고 볼 수 있다. 프록시 방법은 기존 모델을 향한 충실도(faithfulness, 기존 모델에 얼마나 비슷한지)를 통해 평가 된다. 이러한 지표중 몇 개는 다음 논문에 소개되어 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1602.04938&quot;&gt;“Why Should I Trust You?”: Explaining the Predictions of Any Classifier&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;이 논문의 주요 꼭지는 모델의 완전무결성 평가는 지역적이여야 한다는 것이다. 만약 모델이 전역적으로(globally) 복잡한 심층 신경망이더라도 일부 행동을 근사함으로써(approximating) 지역적 설명을 할 수 있다. 그러므로 처리 모델 설면은 &lt;strong&gt;설명의 “복잡성(complexity)”&lt;/strong&gt;(근본적으로 길이를 최소화)과 &lt;strong&gt;“지역적 완전무결성(local completeness)”&lt;/strong&gt;(실제 분류기와 관련된 해석가능한 표현의 오류)을 최소화 하려는 것이다.&lt;/p&gt;
+
+    &lt;p&gt;민감한 지역을 강조하는 돌출 방법(Salience methods)도 정성적으로 평가된다. 비록 이들은 기존 방법의 출력을 직접적으로 예측하지 않지만, 원래 의도는 모델 민감도를 설명하기 위한 것이기 때문에 충실성(faithfulness)을 평가할 수 있다. 예를 들어 다음 논문에서는 다양한 버전의 일부가 가려진 입력 이미지를 모델에 전달하고 테스트하는 폐쇄(occlusion) 실험을 진리로 둔다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://pdfs.semanticscholar.org/7a56/72796aeca8605b2e370d8a756a7a311fd171.pdf&quot;&gt;A unified view of gradient-based attribution methods for Deep Neural Networks&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;이 실험은 입력의 어느 부분이 모델의 출력 결과를 가장 많이 변화시키는지에 대해 강력하지만 연산적으로 비효율적인 방법으로 결정한다. 폐쇄성 기반 민감도(occlusion-based sensitivity)와 상관관계가 있는 돌출 맵을 얼마나 밀접하게 만들어 냈는가를 통해 각 돌출 방법(Salience methods)을 평가된다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Representation&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;표현 기반 방법은 다른 전이학습과 관련된 작업의 테스트를 통해 표상(representation) 일부의 역할을 특징화(characterize)할 수 있다. 예를 들어 전이 문제(transfer problem)에서 입력 피쳐의 역할을 할 수 있는 표상 층이 있다. 그리고 Network Dissection representation 와 CAV(Concept Activation Vectors) 두 방법은 모두 사람이 이해할 수 있는 특정 개념으로 감지하거나 상호 연관 짓는 능력에 따라 측정된다.&lt;/p&gt;
+
+    &lt;p&gt;개별 표상의 일부가 특징화 되면 설명력을 테스트 할 수 있다. 그들의 활성화 값이 얼만큼 충실하게 특정 네트워크의 편향을 보여주는지를 평가하면서 실행할 수 있다. 예를 들어 CAV(Concept Activation Vectors)는 클래스를 결정짓는 두 가지 다른 유형의 시그널을 담은 데이터로 여러 버전의 구조가 같은 네트워크를 훈련시키면서 이를 평가하게 된다(데이터: 이미지와 다양한 신뢰도를 이름으로 한 클래스 텍스트). CAV의 네트워크 충실도는 두 가지 방법을 통해 식별될 수 있다. 하나는 텍스트 라벨에 의존하는 분류기가 텍스트와 연관되어 높은 CAV 벡터 활성화 값을 보이는가, 다른 하나는 텍스트 라벨에 의존하지 않는 분류기가 낮은 CAV 벡터값을 보이는 것이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Explanation Producing&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;설명 생산 시스템은 얼마나 유저의 기대와 잘 부합되는 지에 따라 평가된다. 예를 들어 네트워크 어텐션은 사람의 어텐션과 비교할 수 있다. 그리고 분리된 표상(disentangled representations)은 잠재된 변수를 가지고 있는 합성된 데이터를 통해 잠재 변수가 복구되었는 지를 확인함으로써 테스트 할 수 있다. 마지막으로 시스템은 명시적으로 사람이 읽을 수 있는 설명을 생성함으로써 테스트 세트 혹은 사람의 평가에서도 똑같이 동작 하는지 확인한다.&lt;/p&gt;
+
+    &lt;p&gt;설명 생산 시스템에서 설명력을 평가하기 어려운 점중에 하나는 시스템 자체가 설명을 만들어 내야 하기 때문에, 반드시 설명의 평가와 함께 시스템에 대한 평가를 병행해야 한다는 것이다. 불합리해 보이는 설명은 시스템이 정보를 합리적인 방법으로 처리하지 못했거나, 설명 생성기가 합리적인 설명을 작성하지 못했음을 통해 나타낼 수 있다. 반대로, 비록 시스템이 불합리한 규칙을 이용해 의사결정을 내리더라도 의사결정 과정에 충실하지 못한 설명 체계는 합리적인 설명을 생산할 수 있다. 합리성에만 의존하는 설명의 평가는 이러한 차별점을 놓칠 수도 있다. 모델과 사용자간의 공백을 메우도록 돕는 여러 유저-학습 디자인을 요약한 논문이 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Paper Links]&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1702.08608&quot;&gt;Towards A Rigorous Science of Interpretable Machine Learning&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;7-conclusions&quot;&gt;7. Conclusions&lt;/h1&gt;
+
+&lt;p&gt;심층 신경망 커뮤니티에서 보여진 공통적인 관점은 대형 DNN 모델의 완전한(투명한) 설명을 위해 필요한 해석가능성과 이론적 이해 수준이 여전히 부족하다는 점이다. 예를 들어서, Yann LeCunn은 NIPS에서 Ali Rahimi의 “Test of Time” 발표에 대한 대답으로, “엔지니어링의 산물은 항상 이론적인 이해보다 선행되어 왔다.” 라고 이야기했다. 그러나, 우리는 기계 학습 시스템이 회의적인 대중들 사이에서 더 넓은 수용을 얻기 위해서는, 그러한 시스템이 그들의 결정에 대해 만족스러운 설명을 제공하거나 허용할 수 있는 것이 중요하다고 주장한다. 심층 네트워크 처리(deep network processing)의 설명, 심층적인 네트워크 표현(deep network representation)에 대한 설명, 시스템 수준의 설명 생산에 대한 노력으로 이루어진 발전은 유망한 결과를 낳았다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Talk Link]&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://youtu.be/Qi1Yry33TQE&quot;&gt;Ali Rahimi’s talk at NIPS(NIPS 2017 Test-of-time award presentation)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그러나 우리는 설명가능성의 다른 측면을 다루기 위해 취해진 다양한 접근방식이 고립되어 있다는 것을 발견했다. 더 효율적인 설명을 달성하기 위해 다른 범주의 기술을 합병하는 접근 방법과 같은 설명가능성 공간에 대한 작업은 상대적으로 적은 주의를 주고도 특정 범주의 기술의 발전을 야기했다. 설명의 목적과 유형이 주어졌을 때, 어떤 설명 측정기준이 제일 좋은 것인지 알기가 명확하지 않다. 우리는 표적 설명(the targeted explanation)의 목적과 완전무결성에 맞는 다양한 측정기준을 사용하길 권장한다. 커뮤니티에서 다양한 분야의 여러 아이디어를 합치고 함께 작업하고 배우면서, 시스템 설명의 전반적인 상태 눈에 띄게 향상될 것이다. 그 결과로 행동 추정(behavioral extrapolation)을 제공하고, 딥러닝 시스템의 신뢰를 구축하고, 심층 네트워크 연산의 유용한 인사이트 등 시스템 행동의 이해와 증진을 가능케한다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 18 Sep 2019 11:04:38 +0900</pubDate>
+        <link>http://localhost:4000/datascience/2019/09/18/introxai.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2019/09/18/introxai.html</guid>
+        
+        
+        <category>DataScience</category>
+        
+      </item>
     
       <item>
         <title>Github pages 로 프로젝트 문서화</title>
-        <description>&lt;h1 id=&quot;github-pages---&quot;&gt;Github pages 로 프로젝트 문서화&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;github-pages-로-프로젝트-문서화&quot;&gt;Github pages 로 프로젝트 문서화&lt;/h1&gt;
 
 &lt;p&gt;잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;실습환경&lt;/h2&gt;
+&lt;h2 id=&quot;실습환경&quot;&gt;실습환경&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Ubuntu Server 18.04 LTS&lt;/li&gt;
@@ -24,40 +645,37 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;준비과정&lt;/h2&gt;
+&lt;h2 id=&quot;준비과정&quot;&gt;준비과정&lt;/h2&gt;
 
 &lt;h3 id=&quot;install-nodejs--npm&quot;&gt;Install nodejs &amp;amp; npm&lt;/h3&gt;
 
 &lt;p&gt;사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;패키지 버전을 체크해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nodejs --version
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nodejs --version
 v10.14.1
 
 $ npm --version
 6.4.1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;install-gitbook-client&quot;&gt;Install gitbook client&lt;/h3&gt;
 
 &lt;p&gt;gitbook client 를 설치해야한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;initialize-gitbook&quot;&gt;Initialize gitbook&lt;/h3&gt;
 
 &lt;p&gt;이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
 \README.md
 \SUMMARY.md
 \book.json
@@ -69,59 +687,52 @@ $ npm --version
 \docs  # github page 로 가는 html 파일들 등
 	\...
 		
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;그럼 우선 프로젝트 디렉토리를 만들어보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [프로젝트 디렉토리] &amp;amp;&amp;amp; cd [프로젝트 디렉토리]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [프로젝트 디렉토리] &amp;amp;&amp;amp; cd [프로젝트 디렉토리]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 디렉토리를 만들자. 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 안에 있는 모든 내용이 향후에 웹페이지로 갈것이다. 만들고 아래 명령어를 시작해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook init
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook init
 Installing GitBook 3.2.3
 ...
 warn: no summary file in this book 
 info: create README.md 
 info: create SUMMARY.md 
 info: initialization is finished 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ ls
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ ls
 README.md  SUMMARY.md
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;README.md&lt;/strong&gt; 파일은 gitbook 의 첫번째 페이지, &lt;strong&gt;SUMMARY.md&lt;/strong&gt; 는 gitbook 의 목차 역할을 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 폴더 안에 첫번째 챕터를 만들어보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ mkdir posts &amp;amp;&amp;amp; cd posts
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ mkdir posts &amp;amp;&amp;amp; cd posts
 [./posts] $ mkdir chapter-1 &amp;amp;&amp;amp; cd chapter-1
 [./posts/chapter-1] $ vi README.md  # 아무거나 쓰고 저장하자
 [./posts/chapter-1] $ vi 01_helloworld.md  # 아무거나 쓰고 저장하자
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;이제 SUMMARY.md 에서 목차를 수정해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[./posts/chapter-1] $ cd ../..
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[./posts/chapter-1] $ cd ../..
 [.] $ vi SUMMARY.md
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Summary
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Summary
   
 * [Introduction](README.md)
 * [Chapter-1](post/chapter-1/README.md)
 	* [01 hello world](post/chapter-1/01_helloworld.md)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;여기까지 왔으면 기본적인 설정은 완료된것이다. &lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook serve&lt;/code&gt; 명령어를 통해 한번 살펴보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook serve
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook serve
 Live reload server started on port: 35729
 Press CTRL+C to quit ...
 
@@ -139,8 +750,7 @@ info: &amp;gt;&amp;gt; generation finished with success in 0.3s !
 
 Starting server ...
 Serving book on http://localhost:4000
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;http://localhost:4000&lt;/strong&gt; 로 접속을 시도해보자. 아래와 같은 화면이 나오면 성공이다.&lt;/p&gt;
 
@@ -152,58 +762,53 @@ Serving book on http://localhost:4000
 
 &lt;p&gt;테스트 후, 프로젝트 디렉토리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt; 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ vi .gitignore
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ vi .gitignore
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;아래 코드를 넣어주자. &lt;strong&gt;node_modules&lt;/strong&gt; 는 plugin 에 필요한 패키지들을 설치하는 디렉토리인데 올리지 않는다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Book build output
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Book build output
 _book
 # Dependency packages
 node_modules
 # Jupyter Notebook checkpoint
 .ipynb_checkpoints
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;이제 github 에 올려보도록 한다. 우선 자신의 github 에 [프로젝트 디렉토리]와 같은 이름의 github 저장소를 생성하자. 그리고 git 을 사용하기 위해, 다시 돌아와서 해당 프로젝트 디렉토리를 git 저장소로 만들어준다. (애당초에 repository 를 만들어서 clone 하는 상태에서 시작해도 좋다.)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ git init
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ git init
 [.](master) $ git remote add origin git@github.com:[사용자이름]/[프로젝트 디렉토리].git
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;완료되었으면 저장소에 올려보도록 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;publish-gitbook.sh&lt;/code&gt; 라는 쉘 스크립트를 만들어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.](master) $ vi publish-gitbook.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.](master) $ vi publish-gitbook.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# remove gitbook old things&lt;/span&gt;
-rm -rf _book
-rm -rf docs
+&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; _book
+&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; docs
 
 &lt;span class=&quot;c&quot;&gt;# gitbook init&lt;/span&gt;
-gitbook install &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gitbook build
+gitbook &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gitbook build
 
 &lt;span class=&quot;c&quot;&gt;# build pages&lt;/span&gt;
-mkdir docs
-cp -R _book/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; docs/
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;docs
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; _book/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; docs/
 
 &lt;span class=&quot;c&quot;&gt;# delete things&lt;/span&gt;
-git clean -fx _book
+git clean &lt;span class=&quot;nt&quot;&gt;-fx&lt;/span&gt; _book
 
 &lt;span class=&quot;c&quot;&gt;# upload&lt;/span&gt;
-git add .
-git commit -a -m &lt;span class=&quot;s2&quot;&gt;&quot;update docs&quot;&lt;/span&gt;
-git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;update docs&quot;&lt;/span&gt;
+git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;저장소에서 활성화 하기&lt;/h3&gt;
+&lt;h3 id=&quot;저장소에서-활성화-하기&quot;&gt;저장소에서 활성화 하기&lt;/h3&gt;
 
 &lt;p&gt;자신의 github 저장소의 &lt;strong&gt;Settings&lt;/strong&gt; 에 가서 &lt;strong&gt;Github Pages&lt;/strong&gt; 항목의 &lt;strong&gt;master branch /docs folder&lt;/strong&gt; 를 누르고 &lt;strong&gt;Save&lt;/strong&gt; 를 누르자.&lt;/p&gt;
 
@@ -227,22 +832,21 @@ git push -u origin master
 
 &lt;p&gt;주로 사용하는것은 수식편집이 가능한 “katex”, 방문자 분석을 위한 구글 애널릭틱스 “ga”, 댓글을 달수 있는 “disqus” (회원가입 필요함) 정도다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;katex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;disqus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ga&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-		&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pluginsConfig&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;disqus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;shortName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;XXXXXXX&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;ga&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UA-XXXX-Y&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+	&quot;plugins&quot;: [
+		&quot;katex&quot;,
+		&quot;disqus&quot;,
+		&quot;ga&quot;
+		],
+	&quot;pluginsConfig&quot;: {
+        &quot;disqus&quot;: {
+            &quot;shortName&quot;: &quot;XXXXXXX&quot;
+        },
+        &quot;ga&quot;: {
+            &quot;token&quot;: &quot;UA-XXXX-Y&quot;
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;hr /&gt;
 
@@ -257,8 +861,8 @@ git push -u origin master
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/12/04/buildgithubpages.html</guid>
+        <link>http://localhost:4000/datascience/2018/12/04/buildgithubpages.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2018/12/04/buildgithubpages.html</guid>
         
         
         <category>DataScience</category>
@@ -267,9 +871,9 @@ git push -u origin master
     
       <item>
         <title>[비전공자의 Flask-2] 본격 앱 만들기 1</title>
-        <description>&lt;h1 id=&quot;flask-2----1&quot;&gt;[비전공자의 Flask-2] 본격 앱 만들기 1&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;비전공자의-flask-2-본격-앱-만들기-1&quot;&gt;[비전공자의 Flask-2] 본격 앱 만들기 1&lt;/h1&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;폴더 생성부터 데이터베이스 만들기&lt;/h2&gt;
+&lt;h2 id=&quot;폴더-생성부터-데이터베이스-만들기&quot;&gt;폴더 생성부터 데이터베이스 만들기&lt;/h2&gt;
 
 &lt;p&gt;내가 만드려고 하는 앱은 사용자가 어떤 query 를 날리면 이를 모델을 거쳐서 결과를 웹에서 보여주는 간단한 앱이다. 예를 들어, 번역기 같은 앱의 경우를 생각해보자.&lt;/p&gt;
 
@@ -281,29 +885,27 @@ git push -u origin master
 
 &lt;p&gt;구체적으로 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/08/04/E2EMN.html&quot;&gt;End to End Memory Network&lt;/a&gt; 모델을 활용해서 스토리 내용을 사용자가 선택해서 질문을 던지면 그에 대한 결과를 받는 앱을 만들 것이다.&lt;/p&gt;
 
-&lt;h2 id=&quot;step-0--&quot;&gt;Step 0: 폴더 생성하기&lt;/h2&gt;
+&lt;h2 id=&quot;step-0-폴더-생성하기&quot;&gt;Step 0: 폴더 생성하기&lt;/h2&gt;
 
 &lt;p&gt;어플리케이션 개발을 시작하기전에, 어플리케이션에서 사용할 폴더를 만들자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
     /static
     /templates
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;앞으로 이 &lt;strong&gt;“nmtapp”&lt;/strong&gt; 폴더 안에 우리가 사용할 것들을 넣는다. &lt;strong&gt;“static”&lt;/strong&gt; 은 사용자들을 위한 폴더, 이 폴더는 css와 javascript 파일들이 저장되는 곳이다. Flasks는 templates 폴더에서 &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja2&lt;/a&gt; 템플릿을 찾을 것이다.&lt;/p&gt;
 
-&lt;h2 id=&quot;step-1--&quot;&gt;Step 1: 데이터베이스 스키마&lt;/h2&gt;
+&lt;h2 id=&quot;step-1-데이터베이스-스키마&quot;&gt;Step 1: 데이터베이스 스키마&lt;/h2&gt;
 
 &lt;p&gt;데이터베이스 스키마를 생성해야 한다. 우리의 어플리케이션은 단지 하나의 테이블만 필요하며 사용이 매우 쉬운 SQLite를 쓸것이다. 다음의 내용을 schema.sql 이라는 이름의 파일로 방금 생성한 nmtapp 폴더에 저장한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drop table if exists nmtmain;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drop table if exists nmtmain;
 create table nmtmain (
   id integer primary key autoincrement,
    question string not null
 );
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;해당 테이블의 이름은 “nmtmain” 이며, 간략하게 칼럼을 소개하자면, 아래와같다.&lt;/p&gt;
 
@@ -316,30 +918,28 @@ create table nmtmain (
   &lt;p&gt;데이터베이스 스키마(database schema)란 데이터베이스에서 자료의 구조, 자료의 표현 방법, 자료 간의 관계를 형식 언어로 정의한 구조이다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;step-2---&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h2&gt;
+&lt;h2 id=&quot;step-2-어플리케이션-셋업-코드&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
     /static
     /templates
     /schema.sql
     /e2estart.py
     /settings.py
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;settingspy&quot;&gt;settings.py&lt;/h3&gt;
 
 &lt;p&gt;추가로 앱을 실행하기 위한 파일들을 만든다. 중요한 정보 혹은 환경변수가 있는 파일은 &lt;strong&gt;“settings.py”&lt;/strong&gt; 에 넣기로 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## settings.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## settings.py
 # configuration
 DATABASE = '../data/e2e.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'password'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;클라이언트에서의 세션을 안전하게 보장하기 위해서는 secret_key 가 필요하다. secret_key는 추측이 어렵도록 가능한 복잡하게 선택하여야 한다. 디버그(DEBUG) 플래그는 인터랙티브 디버거를 활성화 시키거나 비활성화 시키는 일을 한다. 운영시스템에서는 디버그 모드를 절대로 활성화 시키지 말아야 한다. 왜냐하면 디버그 모드에서는 사용자가 서버의 코드를 실행할수가 있기 때문이다.&lt;/p&gt;
 
@@ -347,7 +947,7 @@ PASSWORD = 'password'
 
 &lt;p&gt;앱을 실행하는 &lt;strong&gt;“e2estart.py”&lt;/strong&gt; 파일을 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# all the imports
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# all the imports
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
@@ -360,57 +960,51 @@ def connect_db():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;아직 모르는 import 가 많지만, 차차 배울테니 우선 앱을 만들고 실행하는 부분을 알아보자.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;환경설정 불러오기:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.from_pyfile(&quot;./settings.py&quot;, silent=True)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.from_pyfile(&quot;./settings.py&quot;, silent=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;만약에 현재 파일 위치에 환경변수 객체(settings.py 의 내용)를 작성하였으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;from_object(__name__)&lt;/code&gt; 라는 명령어를 쓰면 된다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;실행&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ python3 e2estart.py  
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ python3 e2estart.py  
 ...
 192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET / HTTP/1.1&quot; 404 -
 192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;지금은 어떤 뷰(view)를 만들지 않았기 때문에, 브라우저에서 페이지를 찾을 수 없다는 404에러를 볼 수 있을 것이다. 이건 나중에 살펴보고, 우선 데이터베이스를 만들고 진행하도록 하자.&lt;/p&gt;
 
-&lt;h2 id=&quot;step-3--&quot;&gt;Step 3: 데이터베이스 생성하기&lt;/h2&gt;
+&lt;h2 id=&quot;step-3-데이터베이스-생성하기&quot;&gt;Step 3: 데이터베이스 생성하기&lt;/h2&gt;
 
 &lt;p&gt;현재 만들고자 하는 앱은 관계형 데이터베이스 시스템에 의해 구동되는 어플리케이션이다. 이러한 시스템은 어떻게 데이터를 저장할지에 대한 정보를 가지고 있는 스키마가 필요하다. 그래서 처음으로 서버를 실행하기 전에 스키마를 생성하는 것이 중요하다.&lt;/p&gt;
 
 &lt;p&gt;우선 데이터를 어디다 저장할지 정해보자. 데이터는 앱 밖에 있는 &lt;strong&gt;data&lt;/strong&gt; 폴더를 생성해서 저장하기로 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/demo
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/demo
 	/venv
 	/e2eapp
 	/data
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;아까 만들어둔 &lt;strong&gt;“schema.sql”&lt;/strong&gt; 파일을 이용하여 sqlite3 명령어를 사용하여 다음과 같이 만들 수 있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ sqlite3 ../data/e2e.db &amp;lt; schema.sql
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ sqlite3 ../data/e2e.db &amp;lt; schema.sql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Sqlite3 가 설치 안됐을 수도 있다. 아래 명령어를 쳐서 (가상환경 빠져나와서) sqlite3 를 설치하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install sqlite3
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install sqlite3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;데이터베이스를 초기화하는 함수를 만들고 싶다면 contextlib 의 closing 함수를 import 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# import 에 추가
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# import 에 추가
 from contextlib import closing
 
 def init_db():
@@ -418,8 +1012,7 @@ def init_db():
         with app.open_resource('schema.sql') as f:
             db.cursor().executescript(f.read())
         db.commit()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;함수설명&lt;/strong&gt;&lt;/p&gt;
 
@@ -438,8 +1031,8 @@ def init_db():
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
-        <link>http://simonjisu.github.io/flask/2018/11/11/flaskstudy2.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/flask/2018/11/11/flaskstudy2.html</guid>
+        <link>http://localhost:4000/flask/2018/11/11/flaskstudy2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flask/2018/11/11/flaskstudy2.html</guid>
         
         
         <category>Flask</category>
@@ -448,17 +1041,17 @@ def init_db():
     
       <item>
         <title>[비전공자의 Flask-1] 첫 앱 만들어보기</title>
-        <description>&lt;h1 id=&quot;flask-1---&quot;&gt;[비전공자의 Flask-1] 첫 앱 만들어보기&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;비전공자의-flask-1-첫-앱-만들어보기&quot;&gt;[비전공자의 Flask-1] 첫 앱 만들어보기&lt;/h1&gt;
 
 &lt;p&gt;설치가 완료 되었으니 빠르게 첫 앱을 만들어보자.&lt;/p&gt;
 
-&lt;h2 id=&quot;hello-world-&quot;&gt;Hello World 찍기&lt;/h2&gt;
+&lt;h2 id=&quot;hello-world-찍기&quot;&gt;Hello World 찍기&lt;/h2&gt;
 
 &lt;p&gt;컴퓨터 책에 보면 꼭 해보라는 문구가 있다. 그 말을 찍어 볼 것이다.&lt;/p&gt;
 
 &lt;p&gt;hello.py 파일을 하나 만들어 아래와 같이 작성하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from flask import Flask
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
@@ -467,20 +1060,18 @@ def hello_world():
 
 if __name__ == '__main__':
     app.run()
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;hello.py 를 실행하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 hello.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 hello.py
  * Serving Flask app &quot;hello&quot; (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
    Use a production WSGI server instead.
  * Debug mode: off
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;일단 &lt;strong&gt;WARNING&lt;/strong&gt; 이 뜨는데 어떻게 해결하는지는 나중에 살펴보고 통신이 어떻게 되는지 살펴보자.&lt;/p&gt;
 
@@ -490,15 +1081,14 @@ if __name__ == '__main__':
 
 &lt;p&gt;우선 app.run 부분을 아래와 같이 바꿔주고 다시 실행해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.run(host='0.0.0.0')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.run(host='0.0.0.0')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;그리고 추가로 라즈베리파이를 현재 어떻게 접속하고 있는지를 이해해야한다.&lt;/p&gt;
 
 &lt;p&gt;현재 글쓴이는 &lt;strong&gt;노트북&lt;/strong&gt;을 통해 라즈베리파이의 리눅스 터미널로 접속하고 있는데 이게 어떻게 진행되는 지 알아보자.&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;포트포워딩을 이해보자&lt;/h3&gt;
+&lt;h3 id=&quot;포트포워딩을-이해보자&quot;&gt;포트포워딩을 이해보자&lt;/h3&gt;
 
 &lt;p&gt;개인별로 사정이 다르지만, 집에서 라즈베리파이 서버를 사용한다고 가정하고 진행하겠다.&lt;/p&gt;
 
@@ -524,13 +1114,12 @@ if __name__ == '__main__':
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;실행하기&lt;/h2&gt;
+&lt;h2 id=&quot;실행하기&quot;&gt;실행하기&lt;/h2&gt;
 
 &lt;p&gt;자, 설정을 마쳤다면 실행하고 있는 노트북의 인터넷 창에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;[외부 IP 주소]:5000&lt;/code&gt; 를 쳐보자. 그리고 라즈베리파이 터미널을 확인하면&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.6.34 - - [30/Oct/2018 21:23:18] &quot;GET / HTTP/1.1&quot; 200 -
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.6.34 - - [30/Oct/2018 21:23:18] &quot;GET / HTTP/1.1&quot; 200 -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;표시가 뜰텐데, &lt;strong&gt;“정상적으로 신호를 주고 받아서 ‘Hello World!’ 를 보냈어!”&lt;/strong&gt; 라는 뜻이다.&lt;/p&gt;
 
@@ -545,8 +1134,8 @@ if __name__ == '__main__':
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
-        <link>http://simonjisu.github.io/flask/2018/10/30/flaskstudy1.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/flask/2018/10/30/flaskstudy1.html</guid>
+        <link>http://localhost:4000/flask/2018/10/30/flaskstudy1.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flask/2018/10/30/flaskstudy1.html</guid>
         
         
         <category>Flask</category>
@@ -555,7 +1144,7 @@ if __name__ == '__main__':
     
       <item>
         <title>[비전공자의 Flask-0] 설치하기</title>
-        <description>&lt;h1 id=&quot;flask-0-&quot;&gt;[비전공자의 Flask-0] 설치하기&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;비전공자의-flask-0-설치하기&quot;&gt;[비전공자의 Flask-0] 설치하기&lt;/h1&gt;
 
 &lt;p&gt;python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버에 웹 데모 프로그램 만드려고 한다. 나중에 app 만들때 활용할 수 있을 것 같다.&lt;/p&gt;
 
@@ -571,139 +1160,124 @@ if __name__ == '__main__':
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;가상환경 설치&lt;/h2&gt;
+&lt;h2 id=&quot;가상환경-설치&quot;&gt;가상환경 설치&lt;/h2&gt;
 
 &lt;p&gt;가상환경으로 작업하는 이유는 구글한테 물어보면 잘 대답해준다. 개인적으로는 &lt;strong&gt;“지우기 편하다”&lt;/strong&gt; 가 제일 큰 장점인것 같다.&lt;/p&gt;
 
 &lt;p&gt;virtualenv 패키지를 받는다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install virtualenv
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install virtualenv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;자신의 폴더로 들어가서 가상환경을 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir demo
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir demo
 $ cd demo
 $ virtualenv venv
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;가상환경으로 접속한다&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . venv/bin/activate
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;앞에 괄호에 만든 가상환경이 뜨면, 성공한것이다. 만약에 가상환경을 빠져나오려면 아래와 같이 실행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ deactivate
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ deactivate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;필요한 패키지 설치하기&lt;/h2&gt;
+&lt;h2 id=&quot;필요한-패키지-설치하기&quot;&gt;필요한 패키지 설치하기&lt;/h2&gt;
 
 &lt;h3 id=&quot;flask&quot;&gt;Flask&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install Flask
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install Flask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;pytorch-1115-&quot;&gt;PyTorch (11.15 수정)&lt;/h3&gt;
+&lt;h3 id=&quot;pytorch-1115-수정&quot;&gt;PyTorch (11.15 수정)&lt;/h3&gt;
 
 &lt;p&gt;PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.&lt;/p&gt;
 
 &lt;p&gt;설치전 필요한 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;pip list&lt;/code&gt; 를 통해서 없는 패키지라면 설치해주자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
 numpy
 pyyaml
 setuptools
 six
 typing
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install torch torchvision torchtext&lt;/code&gt; 을 써준다.&lt;/p&gt;
 
 &lt;p&gt;하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. “&lt;a href=&quot;https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754&quot;&gt;라즈베리파이에 파이토치 설치하기&lt;/a&gt;” 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libopenblas-dev cython libatlas-dev \
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libopenblas-dev cython libatlas-dev \
 m4 libblas-dev python3-dev cmake
 # 필수로 먼저 설치해주자
 (venv) $ pip install pyyaml numpy 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;pytorch 설치전 리눅스 환경변수를 만들어준다. &lt;code class=&quot;highlighter-rouge&quot;&gt;.profile&lt;/code&gt; 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi ~/.profile
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi ~/.profile
 # 아래 내용을 밑단에 추가한다.
 export NO_CUDA=1
 export NO_DISTRIBUTED=1
 
 # 설정후, 터미널 재시작한다.
 $ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;download 폴더를 만들어서 안에 PyTorch 를 clone 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ mkdir downloads &amp;amp;&amp;amp; cd downloads
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ mkdir downloads &amp;amp;&amp;amp; cd downloads
 (venv) $ git clone --recursive https://github.com/pytorch/pytorch
 (venv) $ cd pytorch
 (venv) $ git checkout tags/v0.4.1 -b build
 (venv) $ git submodule update --init --recursive
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;PyTorch 를 빌드한다. 한숨 자고 오는게 마음 편하다..&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py build
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종료하면 안된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ date &amp;amp;&amp;amp; python3 setup.py build &amp;amp;&amp;amp; date &amp;amp;&amp;amp; python3 setup.py install &amp;amp;&amp;gt; message-build &amp;amp;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ date &amp;amp;&amp;amp; python3 setup.py build &amp;amp;&amp;amp; date &amp;amp;&amp;amp; python3 setup.py install &amp;amp;&amp;gt; message-build &amp;amp;
 (venv) $ 2018. 11. 14. (수) 17:46:27 KST
 (venv) $ ...설치내용 주르륵...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;아래 명령어를 쳐서 date 함수가 잘 출력됐으면, 빌드는 성공적으로 진행된 것이다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ tail -l message-build
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ tail -l message-build
 (venv) $ 2018. 11. 15. (목) 05:54:24 KST
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;거의 열두시간 걸렸다… ㅋㅋ 에러가 없을 경우 아래를 계속 진행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py install
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;위에 방법도 좋지만 향후에 재설치를 할수 있게 아래처럼 해준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ export NO_CUDA=1
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ export NO_CUDA=1
 (venv) $ export NO_DISTRIBUTED=1
 (venv) $ pip install wheel
 (venv) $ python3 setup.py bdist_wheel
 (venv) $ cd dist
 (venv) $ pip install [dist 폴더 안에 있는 wheel 파일]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/0sm9i9ajhp5y5kw/1115_installtorch.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;해당 wheel 파일을 어딘가 다른 곳에 저장 해두었다가 나중에 설치할 일이 생기면 다시 아래처럼만 하면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install [pytorch wheel 파일]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install [pytorch wheel 파일]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;설치 종료후 잘 설치가 됐는지, 확인해보자&lt;/p&gt;
 
@@ -720,8 +1294,8 @@ $ source ~/.bashrc
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 28 Oct 2018 19:22:40 +0900</pubDate>
-        <link>http://simonjisu.github.io/flask/2018/10/28/flaskstudy0.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/flask/2018/10/28/flaskstudy0.html</guid>
+        <link>http://localhost:4000/flask/2018/10/28/flaskstudy0.html</link>
+        <guid isPermaLink="true">http://localhost:4000/flask/2018/10/28/flaskstudy0.html</guid>
         
         
         <category>Flask</category>
@@ -745,7 +1319,7 @@ $ source ~/.bashrc
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;메인 아이디어&lt;/h2&gt;
+&lt;h2 id=&quot;메인-아이디어&quot;&gt;메인 아이디어&lt;/h2&gt;
 
 &lt;p&gt;기존의 통계 기반의 Language Modeling 은 N-Gram 을 기반으로, 이전 토큰의 나오는 단어를 기반으로 다음 단어의 확률을 극대화 작업이었다. 처음부터 끝까지 보지 않고 N-Gram으로 잘라서 예측하게된 이유는 예측해야할 단어와 아주 오래된 단어간의 상관관계가 적다(혹은 분포가 다르다)라고 생각했기 때문이다.&lt;/p&gt;
 
@@ -778,13 +1352,13 @@ $ source ~/.bashrc
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;모델 설명&lt;/h2&gt;
+&lt;h2 id=&quot;모델-설명&quot;&gt;모델 설명&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/8thdipjnc7bl95f/0826_nnlm.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;두 가지 단계로 모델이 구성되 있다.&lt;/p&gt;
 
-&lt;h3 id=&quot;distributed-feature-vectors&quot;&gt;1 단계: Distributed feature vectors&lt;/h3&gt;
+&lt;h3 id=&quot;1-단계-distributed-feature-vectors&quot;&gt;1 단계: Distributed feature vectors&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;각 단어를 $C$ 행렬을 통해 $m$ 차원 벡터로 표현한다.&lt;/p&gt;
@@ -796,7 +1370,7 @@ $ source ~/.bashrc
 
 &lt;p&gt;$C$ 행렬의 $i$ 번째 행을, $i$ 번째 단어의 벡터라고 규정 지었으며, $C$ 의 형태는 $\vert V \vert \times m$ 다.&lt;/p&gt;
 
-&lt;h3 id=&quot;probability-functions&quot;&gt;2 단계: Probability functions&lt;/h3&gt;
+&lt;h3 id=&quot;2-단계-probability-functions&quot;&gt;2 단계: Probability functions&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;$m$ 차원으로 표현된 벡터를 2 층의 신경망을 사용해서 조건부 확률을 구성한다.&lt;/p&gt;
@@ -812,7 +1386,7 @@ $ source ~/.bashrc
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P(w_i = i \vert context) = \dfrac{\exp(y_{w_t})}{\sum_i \exp(y_i)}&lt;/script&gt;
 
-&lt;h3 id=&quot;direct-connection&quot;&gt;기타: direct connection&lt;/h3&gt;
+&lt;h3 id=&quot;기타-direct-connection&quot;&gt;기타: direct connection&lt;/h3&gt;
 
 &lt;p&gt;논문에서는 실험적으로 선형적인 관계식을 하나 더 넣어서 context 와 y 사이의 선형관계를 알아내고자 했다.&lt;/p&gt;
 
@@ -820,7 +1394,7 @@ $ source ~/.bashrc
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;실험결과&lt;/h2&gt;
+&lt;h2 id=&quot;실험결과&quot;&gt;실험결과&lt;/h2&gt;
 
 &lt;h3 id=&quot;perplexity&quot;&gt;Perplexity&lt;/h3&gt;
 
@@ -973,8 +1547,8 @@ C &amp;= \vert V \vert \times m
 &lt;p&gt;결과를 살펴보면 문맥은 상당히 못맞추었으나 문장의 구조는 잘 학습한 것을 알 수 있다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 22 Aug 2018 23:26:14 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html</guid>
+        <link>http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html</guid>
         
         
         <category>NLP</category>
@@ -997,9 +1571,8 @@ C &amp;= \vert V \vert \times m
 
 &lt;p&gt;&lt;strong&gt;설치:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torchtext
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torchtext
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.&lt;/p&gt;
 
@@ -1012,22 +1585,21 @@ C &amp;= \vert V \vert \times m
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;사용방법&lt;/h2&gt;
+&lt;h2 id=&quot;사용방법&quot;&gt;사용방법&lt;/h2&gt;
 
-&lt;h3 id=&quot;create-field&quot;&gt;1. 필드지정(Create Field)&lt;/h3&gt;
+&lt;h3 id=&quot;1-필드지정create-field&quot;&gt;1. 필드지정(Create Field)&lt;/h3&gt;
 
 &lt;p&gt;필드란 텐서로 표현 될 수 있는 텍스트 데이터 타입을 처리한다. 각 토큰을 숫자 인덱으로 맵핑시켜주는 단어장(Vocabulary) 객체가 있다. 또한 토큰화 하는 함수, 전처리 등을 지정할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations&quot;, 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations&quot;, 
 '3']
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;텍스트를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TEXT&lt;/code&gt;, 해당 문장의 sentiment 를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;LABEL&lt;/code&gt; 필드객체 두 개를 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Field
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Field
 
 TEXT = Field(sequential=True,
              use_vocab=True,
@@ -1039,8 +1611,7 @@ LABEL = Field(sequential=False,
               preprocessing = lambda x: int(x),  
               batch_first=True)
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Arguments:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1054,11 +1625,11 @@ LABEL = Field(sequential=False,
 
 &lt;p&gt;더 자세한 것은 문서를 참조하시길 바란다.&lt;/p&gt;
 
-&lt;h3 id=&quot;create-datasets&quot;&gt;2. 데이터 세트 만들기(Create Datasets)&lt;/h3&gt;
+&lt;h3 id=&quot;2-데이터-세트-만들기create-datasets&quot;&gt;2. 데이터 세트 만들기(Create Datasets)&lt;/h3&gt;
 
 &lt;p&gt;데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용해서 아래와 같이 만들어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import TabularDataset
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import TabularDataset
 
 train_data = TabularDataset.splits(path='./data/',
 					train='train_path',
@@ -1066,59 +1637,54 @@ train_data = TabularDataset.splits(path='./data/',
 					test='test_path',
 					format='tsv', 
 					fields=[('text', TEXT), ('label', LABEL)])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_data = TabularDataset(path='./data/examples.tsv', 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_data = TabularDataset(path='./data/examples.tsv', 
 				format='tsv', 
 				fields=[('text', TEXT), ('label', LABEL)])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;fields:&lt;/strong&gt; 아까 만들어준 필드는 리스트 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]&lt;/code&gt; 로 넣어준다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;build-vocabulary&quot;&gt;3. 단어장 생성(Build vocabulary)&lt;/h3&gt;
+&lt;h3 id=&quot;3-단어장-생성build-vocabulary&quot;&gt;3. 단어장 생성(Build vocabulary)&lt;/h3&gt;
 
 &lt;p&gt;토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;unk&amp;gt;&lt;/code&gt; 토큰을 0, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.&lt;/p&gt;
 
 &lt;p&gt;훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TEXT.build_vocab(train_data)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TEXT.build_vocab(train_data)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;create-data-loader&quot;&gt;4. 데이터 로더 만들기(Create Data Loader)&lt;/h3&gt;
+&lt;h3 id=&quot;4-데이터-로더-만들기create-data-loader&quot;&gt;4. 데이터 로더 만들기(Create Data Loader)&lt;/h3&gt;
 
 &lt;p&gt;마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Iterator
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Iterator
 
 train_loader, valid_loader, test_loader = \
 	TabularDataset.splits((train_data, valid_data, test_data), 
 				batch_size=3, 
 				device=None,  # gpu 사용시 &quot;cuda&quot; 입력
 				repeat=False)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;만약에 없다면? 아래와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterator&lt;/code&gt; 객체에 그냥 넣어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loader = Iterator(train_data, 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loader = Iterator(train_data, 
 			batch_size=3, 
 			device=None,  # gpu 사용시 &quot;cuda&quot; 입력
 			repeat=False)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.&lt;/p&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;테스트&lt;/h3&gt;
+&lt;h3 id=&quot;테스트&quot;&gt;테스트&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for batch in train_loader:
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for batch in train_loader:
     break
 print(batch.text)
 print(batch.label)
@@ -1139,8 +1705,7 @@ tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
            6910,      8,  10136,      8,      3,   2204,   4340,      2,
               1,      1,      1]])
 tensor([ 0,  3,  1])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.&lt;/p&gt;
 
@@ -1148,7 +1713,7 @@ tensor([ 0,  3,  1])
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;만약에 사용하지 않겠다면?&lt;/h2&gt;
+&lt;h2 id=&quot;만약에-사용하지-않겠다면&quot;&gt;만약에 사용하지 않겠다면?&lt;/h2&gt;
 
 &lt;p&gt;노트북: &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;github&lt;/a&gt;, &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;nbviewer&lt;/a&gt; 에 상세하게 나만의 데이터 로더를 커스터마이징 하는 방법 또한 적어 두었다.&lt;/p&gt;
 
@@ -1161,7 +1726,7 @@ tensor([ 0,  3,  1])
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section-3&quot;&gt;다양한 데이터 세트&lt;/h2&gt;
+&lt;h2 id=&quot;다양한-데이터-세트&quot;&gt;다양한 데이터 세트&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;torchtext.datasets&lt;/code&gt; 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.&lt;/p&gt;
 
@@ -1176,8 +1741,8 @@ tensor([ 0,  3,  1])
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 19 Jul 2018 00:18:29 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/07/19/torchtext.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/07/19/torchtext.html</guid>
+        <link>http://localhost:4000/nlp/2018/07/19/torchtext.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nlp/2018/07/19/torchtext.html</guid>
         
         
         <category>NLP</category>
@@ -1186,11 +1751,11 @@ tensor([ 0,  3,  1])
     
       <item>
         <title>Pytorch 의 PackedSequence object 알아보기</title>
-        <description>&lt;h1 id=&quot;pytorch--packedsequence-object-&quot;&gt;Pytorch 의 PackedSequence object 알아보기&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;pytorch-의-packedsequence-object-알아보기&quot;&gt;Pytorch 의 PackedSequence object 알아보기&lt;/h1&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;packedsequence-&quot;&gt;PackedSequence 란?&lt;/h2&gt;
+&lt;h2 id=&quot;packedsequence-란&quot;&gt;PackedSequence 란?&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;아래의 일련의 과정을 PackedSequence 라고 할 수 있다.&lt;/p&gt;
@@ -1239,31 +1804,29 @@ tensor([ 0,  3,  1])
 
 &lt;p&gt;Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb&quot;&gt;nbviewer&lt;/a&gt; 혹은 &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb&quot;&gt;github&lt;/a&gt;에 있다.&lt;/p&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;과정&lt;/h3&gt;
+&lt;h3 id=&quot;과정&quot;&gt;과정&lt;/h3&gt;
 
 &lt;p&gt;전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
         [ 12,   9,   0,   0,   0,   0],
         [  5,  14,   3,  17,   0,   0],
         [ 10,   0,   0,   0,   0,   0]])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;하단의 코드를 통해서 정렬을 해주고, 각 문장의 길이를 담은 list를 만들어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
 input_lengths, sorted_idx = input_lengths.sort(0, descending=True)
 input_seq2idx = input_seq2idx[sorted_idx]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;모든 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰의 인덱스인 0 이 밑으로 내려간 것을 알 수 있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx, input_lengths
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx, input_lengths
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
@@ -1272,53 +1835,48 @@ tensor([[  1,  16,   7,  11,  13,   2],
         [ 10,   0,   0,   0,   0,   0]])
 
 tensor([ 6,  5,  4,  2,  1])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;torch.nn.utils.rnn&lt;/strong&gt; 에서 &lt;strong&gt;pack_padded_sequence&lt;/strong&gt; 를 사용하면 PackedSequence object를 얻을 수 있다. packed_input 에는 위에서 말한 합병된 데이터와 각 타임스텝의 배치사이즈들이 담겨있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;rnn---&quot;&gt;RNN 에서의 사용 방법&lt;/h3&gt;
+&lt;h3 id=&quot;rnn-에서의-사용-방법&quot;&gt;RNN 에서의 사용 방법&lt;/h3&gt;
 
 &lt;p&gt;실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
 gru = nn.RNN(input_size=embedding_size, hidden_size=hidden_size, num_layers=num_layers, bidirectional=False, batch_first=True)
 
 embeded = embed(input_seq2idx)
 packed_input = pack_padded_sequence(embeded, input_lengths.tolist(), batch_first=True)
 packed_output, hidden = gru(packed_input)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;packed_output 에는 합병된 output 과 batch_sizes 가 포함되어 있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_output[0].size(), packed_output[1]
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_output[0].size(), packed_output[1]
 =========================================================
 (torch.Size([18, 2]), tensor([ 5,  4,  3,  3,  2,  1]))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;이를 다시 원래 형태의 &lt;strong&gt;(배치크기, 문장의 최대 길이, 히든크기)&lt;/strong&gt; 로 바꾸려면 &lt;strong&gt;pad_packed_sequence&lt;/strong&gt; 를 사용하면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
 output.size(), output_lengths
 =========================================================
 (torch.Size([5, 6, 2]), tensor([ 6,  5,  4,  2,  1]))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;실습코드에서 출력 결과를 살펴보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰과 연관된 행은 모드 0으로 채워져 있다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;rnn-backend--&quot;&gt;RNN Backend 작동 방식&lt;/h2&gt;
+&lt;h2 id=&quot;rnn-backend-작동-방식&quot;&gt;RNN Backend 작동 방식&lt;/h2&gt;
 
-&lt;h3 id=&quot;rnn-----&quot;&gt;RNN 안에서 어떤 방법으로 실행되는 것일까?&lt;/h3&gt;
+&lt;h3 id=&quot;rnn-안에서-어떤-방법으로-실행되는-것일까&quot;&gt;RNN 안에서 어떤 방법으로 실행되는 것일까?&lt;/h3&gt;
 
 &lt;p&gt;아래의 그림을 살펴보자&lt;/p&gt;
 
@@ -1328,7 +1886,7 @@ output.size(), output_lengths
 
 &lt;p&gt;기존의 RNN 이라면, &lt;strong&gt;(배치크기 $\times$ 문장의 최대 길이 $\times$ 층의 갯수)&lt;/strong&gt; 만큼 연산을 해야하지만, &lt;strong&gt;(실제 토큰의 갯수 $\times$ 층의 갯수)&lt;/strong&gt; 만큼 계산하면 된다. 이 예제로 말하면 $(5 \times 6 \times 1)=30 \rightarrow (18 \times 1)=18$ 로 크게 줄었다.&lt;/p&gt;
 
-&lt;h3 id=&quot;hidden---&quot;&gt;그렇다면 Hidden 어떻게 출력 되는가?&lt;/h3&gt;
+&lt;h3 id=&quot;그렇다면-hidden-어떻게-출력-되는가&quot;&gt;그렇다면 Hidden 어떻게 출력 되는가?&lt;/h3&gt;
 
 &lt;p&gt;기존의 RNN 이라면 마지막 타임스텝 때 hidden vector 만 출력하지만, packed sequence 는 아래의 그림 처럼 골라서 출력하게 된다.&lt;/p&gt;
 
@@ -1337,8 +1895,8 @@ output.size(), output_lengths
 &lt;p&gt;참고자료: &lt;a href=&quot;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&quot;&gt;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 05 Jul 2018 09:45:37 +0900</pubDate>
-        <link>http://simonjisu.github.io/nlp/2018/07/05/packedsequence.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/nlp/2018/07/05/packedsequence.html</guid>
+        <link>http://localhost:4000/nlp/2018/07/05/packedsequence.html</link>
+        <guid isPermaLink="true">http://localhost:4000/nlp/2018/07/05/packedsequence.html</guid>
         
         
         <category>NLP</category>
@@ -1347,7 +1905,7 @@ output.size(), output_lengths
     
       <item>
         <title>PyCharm SSH 연결하기</title>
-        <description>&lt;h1 id=&quot;pycharm-ssh-&quot;&gt;PyCharm SSH 연결하기&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;pycharm-ssh-연결하기&quot;&gt;PyCharm SSH 연결하기&lt;/h1&gt;
 
 &lt;p&gt;최근 딥러닝서버를 만들고 나서 Jupyter Notebook 만 사용했다. 그런데 오늘 파이참에서는 학생들을 위해 매 1년 마다 프로 버젼을 제공해주고 있다는 것을 들었다. 이를 사용해 보기로 했다.&lt;/p&gt;
 
@@ -1443,10 +2001,9 @@ output.size(), output_lengths
 
 &lt;p&gt;만약에 자신의 서버에서 Python3 을 따로 설치했다면 서버 terminal 에서 아래와 같이 쳐준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ which python3
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ which python3
 /usr/local/bin/python3
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;이 위치를 복사해서 쓰자.&lt;/p&gt;
 
 &lt;p&gt;모든게 정상적으로 작동하면, &lt;strong&gt;Connection Sucessfully&lt;/strong&gt; 를 확인 할 수 가 있다.&lt;/p&gt;
@@ -1455,7 +2012,7 @@ output.size(), output_lengths
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;프로젝트 연결 설정 확인&lt;/h2&gt;
+&lt;h2 id=&quot;프로젝트-연결-설정-확인&quot;&gt;프로젝트 연결 설정 확인&lt;/h2&gt;
 
 &lt;p&gt;자신의 프로젝트와 잘 연결 되었는지 확인 해보는 작업을 한다.&lt;/p&gt;
 
@@ -1493,7 +2050,7 @@ output.size(), output_lengths
   &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/ere9ckvmt23x343/0625_env.png&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;꿀팁&lt;/h2&gt;
+&lt;h2 id=&quot;꿀팁&quot;&gt;꿀팁&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;SSH 터미널을 사용하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Tools &amp;gt; Start SSH session...&lt;/code&gt;&lt;/li&gt;
@@ -1501,8 +2058,8 @@ output.size(), output_lengths
 &lt;/ol&gt;
 </description>
         <pubDate>Sun, 24 Jun 2018 18:41:07 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/06/24/pycharmssh.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/24/pycharmssh.html</guid>
+        <link>http://localhost:4000/datascience/2018/06/24/pycharmssh.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2018/06/24/pycharmssh.html</guid>
         
         
         <category>DataScience</category>
@@ -1523,22 +2080,19 @@ output.size(), output_lengths
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.python.org/&quot;&gt;https://www.python.org/&lt;/a&gt; 에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Download &amp;gt; Soruce code &amp;gt; Python 3.6.5 - 2018-03-28&lt;/code&gt; 로 들어가서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Gzipped source tarball&lt;/code&gt; 의 링크를 복사한 후 아래와 같이 쳐주자.
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;압축을 헤제시켜주자
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo -zxvf Python-3.6.5.tgz
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo -zxvf Python-3.6.5.tgz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;설치해보자
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./configure
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./configure
 make
 make test
 sudo make install
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1546,32 +2100,28 @@ sudo make install
 
 &lt;p&gt;하지만 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo pip3 install numpy&lt;/code&gt; 하게 되면 아래와 같이 “TLS/SSL ~” 이라며 에러가 뜰 수도 있다. 자세히 뭔지는 모르겠지만, 구글링을 통해서 해결했다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
 Collecting
   Could not fetch URL https://pypi.python.org/simple//: There was a problem confirming the ssl certificate: Can't connect to HTTPS URL because the SSL module is not available. - skipping
   Could not find a version that satisfies the requirement (from versions: )
 No matching distribution found for
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;해결책&lt;/h3&gt;
+&lt;h3 id=&quot;해결책&quot;&gt;해결책&lt;/h3&gt;
 
 &lt;ol&gt;
   &lt;li&gt;필수 패키지를 설치한다
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;소스폴더로 돌아가서 다시 설치해준다.
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo make
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo make
 sudo make install
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;마지막으로, pip 를 업그레이드 해준다.
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip3 install --upgrade pip
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip3 install --upgrade pip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1583,13 +2133,12 @@ sudo make install
 
 &lt;p&gt;CUDA-Toolkit 를 설치하면 드라이버를 설치할 필요는 없다고하나 만약에 먼저 설치해야하면 아래와 같이 설치(업데이트) 해주자&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo add-apt-repository ppa:graphics-drivers/ppa
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
 sudo apt install nvidia-390
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;cuda-toolkit&quot;&gt;1. CUDA-Toolkit&lt;/h3&gt;
+&lt;h3 id=&quot;1-cuda-toolkit&quot;&gt;1. CUDA-Toolkit&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://developer.nvidia.com/cuda-90-download-archive&quot;&gt;https://developer.nvidia.com/cuda-90-download-archive&lt;/a&gt; 에서 자신에 버젼에 맞는 CUDA-Toolkit 을 받자.&lt;/p&gt;
 
@@ -1606,37 +2155,32 @@ sudo apt install nvidia-390
 &lt;p&gt;세개의 다운로드 링크를 복사한 뒤 &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt; 메서드로 받아준다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Base Installer&lt;/strong&gt; 설치&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
 sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 sudo apt-get update
 sudo apt-get install cuda
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Patch 1&lt;/strong&gt; 설치&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
 sudo apt-get update
 sudo apt-get upgrade cuda
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Patch 2&lt;/strong&gt; 설치&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
 sudo apt-get update
 sudo apt-get upgrade cuda
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;만약에 쿠다 드라이버 명령어인 &lt;code class=&quot;highlighter-rouge&quot;&gt;nvcc&lt;/code&gt; 를 쓰고 싶다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;./profile&lt;/code&gt; 파일 밑에다 아래 항목을 추가해주면 된다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;아래 둘중에 하나를 한번 시도해보면 된다.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvcc -V
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvcc -V
 nvidia-smi
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;cudnn-&quot;&gt;2. CuDNN 설치&lt;/h3&gt;
+&lt;h3 id=&quot;2-cudnn-설치&quot;&gt;2. CuDNN 설치&lt;/h3&gt;
 
 &lt;p&gt;CuDNN 을 설치하려면 NVIDIA 회원 가입을 해야한다. 그리고 아래 싸이트에서 받아서 &lt;code class=&quot;highlighter-rouge&quot;&gt;scp&lt;/code&gt; 명령어로 서버로 옮기자.&lt;/p&gt;
 
@@ -1646,14 +2190,13 @@ nvidia-smi
 
 &lt;p&gt;압축을 해제하고, 파일들을 옮겨주면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar -xzvf cudnn-9.0-linux-x64-v7.tgz
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;pytorch---&quot;&gt;Pytorch 설치한 후 테스트&lt;/h2&gt;
+&lt;h2 id=&quot;pytorch-설치한-후-테스트&quot;&gt;Pytorch 설치한 후 테스트&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/torch.png&quot; /&gt;&lt;/p&gt;
 
@@ -1662,137 +2205,8 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 &lt;p&gt;만약 오류가 나면 또 업데이트 하겠다.&lt;/p&gt;
 </description>
         <pubDate>Sun, 03 Jun 2018 21:08:24 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html</guid>
-        
-        
-        <category>DataScience</category>
-        
-      </item>
-    
-      <item>
-        <title>개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속</title>
-        <description>&lt;h1 id=&quot;install-ubuntu-1804-gpu-server-for-deeplearning---2&quot;&gt;Install Ubuntu 18.04 GPU Server For DeepLearning - 2&lt;/h1&gt;
-
-&lt;p&gt;개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;after-install&quot;&gt;After Install&lt;/h2&gt;
-
-&lt;p&gt;설치후에 아래 명령어들을 쳐준다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;apt-get(Advanced Packaging Tool) 패키지 명령어 업데이트 및 설치되어 있는 패키지 업그레이드. 설치된 파일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/cache/apt/archive/&lt;/code&gt; 에 저장됨&lt;/li&gt;
-  &lt;li&gt;gcc(GNU Compiler Collection) 패키지 설치. 파이썬 설치에 필요&lt;/li&gt;
-  &lt;li&gt;make(GNU Make) 패키지 설치. 파이썬 설치시 필요&lt;/li&gt;
-  &lt;li&gt;zlib1g-dev 설치. 파이썬 설치시 필요&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt upgrade
-sudo apt install gcc
-sudo apt install make
-sudo apt install zlib1g-dev
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;sshsecure-shell-&quot;&gt;SSH(SECURE SHELL) 접속&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;서버&lt;/code&gt; 컴퓨터에서 아래의 사항을 수정:&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vi /etc/ssh/sshd_config
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ClientAliveInterval 60 : 클라이언트 살아있는지 확인하는 간격&lt;/li&gt;
-  &lt;li&gt;ClientAliveCountMax 10 : 클라이언트 응답 없어도 접속 유지하는 횟수&lt;/li&gt;
-  &lt;li&gt;PubkeyAuthentication yes : 활성화 시켜야 ssh를 통해서 접속 가능&lt;/li&gt;
-  &lt;li&gt;PasswordAuthentication yes : 원격 서버 비밀번호로 로그인 가능하게 것, 나중에 ssh 로만 접속 가능케 하려면 바꿔줘야한다.&lt;/li&gt;
-  &lt;li&gt;PermitEmptyPasswords no : 로그인시 빈 비밀번호를 가능케하는 옵션 기본으로 no로 되어 있다. 비밀번호 없이 로그인하게 하려면 yes로 바꿔줄 것, 권장은 안함&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;ssh-key----&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;로컬&lt;/code&gt; 컴퓨터에서 SSH KEY 생성하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;서버&lt;/code&gt; 컴퓨터로 보내기:&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;ssh-keygen:&lt;/strong&gt; SSH 키를 생성한다. 경로 지정을 안할 때 보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.ssh&lt;/code&gt; 폴더 안에 &lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa&lt;/code&gt; 라는 이름으로 생성한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ssh-copy-id:&lt;/strong&gt; SSH 키를 서버로 보낸다. 옵션으로 포트번, 키 디렉토리 등등 설정 가능하다&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -f [filepath]
-ssh-copy-id -i [key_directory] -p [port] [user]@[ip_address]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;scp-&quot;&gt;파일전송 명령어 SCP 사용하기&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;서버 &amp;gt; 로컬
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;로컬 &amp;gt; 서버
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송받을 위치]
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;다만 주의 해야할 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;[옵션]&lt;/code&gt; 에다가 로그인 옵션 다 넣어줘야 보내진다는 점을 잊지 말자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;옵션:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;P: 포트&lt;/li&gt;
-  &lt;li&gt;i: key&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;wolwake-on-lan&quot;&gt;WOL(Wake-On-Lan)&lt;/h2&gt;
-
-&lt;p&gt;전기세 때문에 원격으로 컴퓨터를 껐다 켯다 하고 싶었다. 찾아보니 WOL 라는 방법이 있었다. 우선 자신의 컴퓨터의 메인보드가 이 기능을 지원해주고, 공유기도 이 기능을 지원해줘야 사용할 수 있다.
-컴퓨터 부팅전 &lt;code class=&quot;highlighter-rouge&quot;&gt;BIOS&lt;/code&gt; (내경우는 DEL 키를 눌렀음) 에 들어가서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Wake-On-Lan&lt;/code&gt; 이라는 글귀가 있는지 찾아보고, 있다면 enable 로 바꿔주자. 그리고 아래 명령어를 통해 내컴퓨터의 &lt;code class=&quot;highlighter-rouge&quot;&gt;이더넷 포트(Ethernet port)&lt;/code&gt; 알아보자&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ifconfig
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;이더넷 포트는 첫째줄 제일 왼쪽에 있을 것이다. 보통 en~~ 로 시작하는 번호다&lt;/p&gt;
-
-&lt;p&gt;그 후, 컴퓨터 내 컴퓨터가 &lt;code class=&quot;highlighter-rouge&quot;&gt;WOL&lt;/code&gt; 기능이 켜졌나 확인 하기 위해, 부팅후 커맨드 라인에 아래와 같이 쳐주자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install ethtool
-sudo ethtool [Ethernet port]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Wake-on&lt;/code&gt; 이라는 곳에 &lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt; 라고 적혀져 있으면 켜진 것이다. 안되있다면 아래의 명령어를 통해 켜주자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ethtool -s [Ethernet port] wol g
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;그 다음에 자신의 집의 공유기에 들어가서, WOL 설정을 해주자. NETIS 기준으로 설명 하겠다. IPTIME 은 다른 글들이 많으니 한번 찾아 보길 바란다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;원격 부팅(WOL)&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;사용 IP 목록에서 등록&lt;/code&gt; 누른후, 자신의 컴퓨터 IP 를 선택하고 이름을 지어준 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;등록&lt;/code&gt; 하게 되면 밑에 하나 등록 될 것이다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;외부 연결 포트&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;포트 번호&lt;/code&gt;는 내 컴퓨터의 접속 포트로 했다. (이건 꼭 TCP 통신으로 하는 포트로 해야하는지 모르겠다. 다른 번호를 따로 지정해줄 수 있는지를 확인 못해봄)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ds/gpuserver/WOL.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;마지막으로 DDNS 서비스 신청한다. 그러면 집 밖에서도 집 공유기에 접속해서 컴퓨터를 킬 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;참고자료: &lt;a href=&quot;http://blog.daum.net/peace20/16779844&quot;&gt;http://blog.daum.net/peace20/16779844&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;다음 시간에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Python&lt;/code&gt; 설치와 &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA&lt;/code&gt; 설치를 다뤄보겠다.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 03 Jun 2018 10:09:54 +0900</pubDate>
-        <link>http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</link>
-        <guid isPermaLink="true">http://simonjisu.github.io/datascience/2018/06/03/gpuserver2.html</guid>
+        <link>http://localhost:4000/datascience/2018/06/03/gpuserver3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2018/06/03/gpuserver3.html</guid>
         
         
         <category>DataScience</category>
