@@ -127,13 +127,17 @@
       enable_page_level_ads: true
     });
   </script>
+
+  <script async custom-element="amp-auto-ads"
+    src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+  </script>
+  
   <!-- End Google Ad -->
 
 </head>
 
 
   <body>
-
     <header class="navigation" role="banner">
   <div class="navigation-wrapper">
     <a href="/" class="logo">
@@ -328,19 +332,6 @@ y_t &= W_{hy} h_t + b_y
 
 <p>장기기억을 하지 못한다는 문제가 생기면서, 이를 해결하기 위해서 몇 가지 방법이 나왔다. 첫째로, Activation Function을 <strong>tanh</strong> 을 쓰면 기울기가 0과 1사이의 값으로 고정되니 <strong>ReLU</strong> 를 쓰자는 방법이 있었다. 둘째로, <strong>LSTM</strong>, <strong>GRU</strong> 등 새로운 방법들이 등장했다. 이 방법은 다음 시간에 설명하겠다. 더불어 Backward 의 계산 그래프도 같이 첨부하겠다.</p>
 
-  <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-<br>
-<br>
-<!-- google_ad -->
-<ins class="adsbygoogle"
-     style="display: block; text-align: center; width: 100%; height: auto;"
-     data-ad-client="ca-pub-5855917513482122"
-     data-ad-slot="9197714545"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 </article>
 
 
@@ -350,8 +341,14 @@ y_t &= W_{hy} h_t + b_y
 </section>
 
 <section class="share">
-  <span>Share: </span>
-  
+  <span>이 글이 도움이 되었다면? </span>
+  <style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFDD00 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing:0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}</style>
+<link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+<a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/ZWoFwrh">
+    <img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/BMC-btn-logo.svg" alt="Buy me a coffee">
+    <span style="margin-left:5px">Buy me a coffee</span>
+</a>
+  <!-- 
     
     
       <a href="//www.facebook.com/sharer.php?t=RNN+%26+LSTM+-+1%3A+RNN&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2018%2F03%2F07%2Frnnlstm.html"
@@ -376,7 +373,7 @@ y_t &= W_{hy} h_t + b_y
     
     
     
-  
+   -->
 </section>
 
 
@@ -442,6 +439,10 @@ y_t &= W_{hy} h_t + b_y
   
 
 
+<!-- AMP -->
+<amp-auto-ads type="adsense"
+    data-ad-client="ca-pub-5855917513482122">
+</amp-auto-ads>
 </div>
 </div>
 
@@ -576,7 +577,6 @@ $("code").addClass("python")
   ga('create', 'UA-102691608-1', 'auto');
   ga('send', 'pageview');
 </script>
-
 
   </body>
 
