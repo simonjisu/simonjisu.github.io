@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 3" />
-  <meta property="og:url" content="http://localhost:4000" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA">
   <meta name="twitter:description" content="Install Ubuntu 18.04 GPU Server For DeepLearning - 3">
-  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
-  <meta name="twitter:url" content="http://localhost:4000">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/datascience/2018/06/03/gpuserver3.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
+  <link rel="canonical" href="http://simonjisu.github.io/datascience/2018/06/03/gpuserver3.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -163,20 +163,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -234,19 +220,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <ol>
   <li><a href="https://www.python.org/">https://www.python.org/</a> 에서 <code class="highlighter-rouge">Download &gt; Soruce code &gt; Python 3.6.5 - 2018-03-28</code> 로 들어가서 <code class="highlighter-rouge">Gzipped source tarball</code> 의 링크를 복사한 후 아래와 같이 쳐주자.
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
-</code></pre></div>    </div>
+    <div class="highlighter-rouge"><pre class="highlight"><code>wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz
+</code></pre>
+    </div>
   </li>
   <li>압축을 헤제시켜주자
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo -zxvf Python-3.6.5.tgz
-</code></pre></div>    </div>
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo -zxvf Python-3.6.5.tgz
+</code></pre>
+    </div>
   </li>
   <li>설치해보자
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure
+    <div class="highlighter-rouge"><pre class="highlight"><code>./configure
 make
 make test
 sudo make install
-</code></pre></div>    </div>
+</code></pre>
+    </div>
   </li>
 </ol>
 
@@ -254,28 +243,32 @@ sudo make install
 
 <p>하지만 <code class="highlighter-rouge">sudo pip3 install numpy</code> 하게 되면 아래와 같이 “TLS/SSL ~” 이라며 에러가 뜰 수도 있다. 자세히 뭔지는 모르겠지만, 구글링을 통해서 해결했다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
+<div class="highlighter-rouge"><pre class="highlight"><code>pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
 Collecting
   Could not fetch URL https://pypi.python.org/simple//: There was a problem confirming the ssl certificate: Can't connect to HTTPS URL because the SSL module is not available. - skipping
   Could not find a version that satisfies the requirement (from versions: )
 No matching distribution found for
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<h3 id="해결책">해결책</h3>
+<h3 id="section">해결책</h3>
 
 <ol>
   <li>필수 패키지를 설치한다
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
-</code></pre></div>    </div>
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+</code></pre>
+    </div>
   </li>
   <li>소스폴더로 돌아가서 다시 설치해준다.
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo make
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo make
 sudo make install
-</code></pre></div>    </div>
+</code></pre>
+    </div>
   </li>
   <li>마지막으로, pip 를 업그레이드 해준다.
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip3 install --upgrade pip
-</code></pre></div>    </div>
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo pip3 install --upgrade pip
+</code></pre>
+    </div>
   </li>
 </ol>
 
@@ -287,12 +280,13 @@ sudo make install
 
 <p>CUDA-Toolkit 를 설치하면 드라이버를 설치할 필요는 없다고하나 만약에 먼저 설치해야하면 아래와 같이 설치(업데이트) 해주자</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo add-apt-repository ppa:graphics-drivers/ppa
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
 sudo apt install nvidia-390
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<h3 id="1-cuda-toolkit">1. CUDA-Toolkit</h3>
+<h3 id="cuda-toolkit">1. CUDA-Toolkit</h3>
 
 <p><a href="https://developer.nvidia.com/cuda-90-download-archive">https://developer.nvidia.com/cuda-90-download-archive</a> 에서 자신에 버젼에 맞는 CUDA-Toolkit 을 받자.</p>
 
@@ -309,32 +303,37 @@ sudo apt install nvidia-390
 <p>세개의 다운로드 링크를 복사한 뒤 <code class="highlighter-rouge">wget</code> 메서드로 받아준다.</p>
 
 <p><strong>Base Installer</strong> 설치</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1704-9-0-local_9.0.176-1_amd64.deb
 sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 sudo apt-get update
 sudo apt-get install cuda
-</code></pre></div></div>
+</code></pre>
+</div>
 <p><strong>Patch 1</strong> 설치</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
 sudo apt-get update
 sudo apt-get upgrade cuda
-</code></pre></div></div>
+</code></pre>
+</div>
 <p><strong>Patch 2</strong> 설치</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
 sudo apt-get update
 sudo apt-get upgrade cuda
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>만약에 쿠다 드라이버 명령어인 <code class="highlighter-rouge">nvcc</code> 를 쓰고 싶다면 <code class="highlighter-rouge">./profile</code> 파일 밑에다 아래 항목을 추가해주면 된다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
+<div class="highlighter-rouge"><pre class="highlight"><code>export PATH=/usr/local/cuda-9.0/bin${PATH:+:$PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-</code></pre></div></div>
+</code></pre>
+</div>
 <p>아래 둘중에 하나를 한번 시도해보면 된다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvcc -V
+<div class="highlighter-rouge"><pre class="highlight"><code>nvcc -V
 nvidia-smi
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<h3 id="2-cudnn-설치">2. CuDNN 설치</h3>
+<h3 id="cudnn-">2. CuDNN 설치</h3>
 
 <p>CuDNN 을 설치하려면 NVIDIA 회원 가입을 해야한다. 그리고 아래 싸이트에서 받아서 <code class="highlighter-rouge">scp</code> 명령어로 서버로 옮기자.</p>
 
@@ -344,13 +343,14 @@ nvidia-smi
 
 <p>압축을 해제하고, 파일들을 옮겨주면 된다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xzvf cudnn-9.0-linux-x64-v7.tgz
+<div class="highlighter-rouge"><pre class="highlight"><code>tar -xzvf cudnn-9.0-linux-x64-v7.tgz
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<h2 id="pytorch-설치한-후-테스트">Pytorch 설치한 후 테스트</h2>
+<h2 id="pytorch---">Pytorch 설치한 후 테스트</h2>
 
 <p><img src="/assets/ds/gpuserver/torch.png" /></p>
 
@@ -377,7 +377,7 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+3+PYTHON+%26+CUDA&u=http%3A%2F%2Flocalhost%3A4000%2Fdatascience%2F2018%2F06%2F03%2Fgpuserver3.html"
+      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9C%EC%9D%B8+%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9A%A9+%EC%84%9C%EB%B2%84+%EC%84%A4%EC%B9%98+%EA%B3%BC%EC%A0%95%EA%B8%B0+-+3+PYTHON+%26+CUDA&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2018%2F06%2F03%2Fgpuserver3.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -411,11 +411,13 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
   
 
   
+
+  
     
-    <!-- <h2 id="DataScience">2</h2> -->
+    <!-- <h2 id="DataScience">3</h2> -->
     <!-- <h2 id="DataScience">/datascience/2018/06/24/pycharmssh.html</h2> -->
     
-    <!-- <h2 id="DataScience">4</h2> -->
+    <!-- <h2 id="DataScience">5</h2> -->
     <!-- <h2 id="DataScience">/datascience/2018/06/03/gpuserver2.html</h2> -->
     
 
@@ -497,20 +499,6 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         

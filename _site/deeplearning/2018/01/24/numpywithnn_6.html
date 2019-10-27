@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 6" />
-  <meta property="og:url" content="http://localhost:4000" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 6: Weight Initialization" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 6: Weight Initialization">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 6">
-  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
-  <meta name="twitter:url" content="http://localhost:4000">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/deeplearning/2018/01/24/numpywithnn_6.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
+  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/01/24/numpywithnn_6.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -163,20 +163,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -222,12 +208,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy로-짜보는-neural-network-basic---6">Numpy로 짜보는 Neural Network Basic - 6</h1>
+  <h1 id="numpy--neural-network-basic---6">Numpy로 짜보는 Neural Network Basic - 6</h1>
 
 <hr />
-<h2 id="학습관련-기술-part-2">학습관련 기술 Part 2</h2>
+<h2 id="part-2">학습관련 기술 Part 2</h2>
 
-<h3 id="가중치-초기값-설정weight-initialization">가중치 초기값 설정(Weight Initialization)</h3>
+<h3 id="weight-initialization">가중치 초기값 설정(Weight Initialization)</h3>
 <p>이전에 활성화 함수가 왜 중요한지 이야기 했었다. 다시 한 번 이야기 하면, 비 선형 활성화 함수를 사용해서 선형으로만 표현할 수 없는 값을 표현할 수 있게 되며, 그로 인해 은닉층을 쌓는 의미가 생긴다. 이런 비 선형 함수의 가중치 미분을 구해서 학습하고자 하는 파라미터를 업데이트 하게 된다.</p>
 
 <p>[<a href="https://simonjisu.github.io/datascience/2017/12/08/numpywithnn_2.html">Numpy로 짜보는 Neural Network Basic - 2</a>] 참고</p>
@@ -241,7 +227,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>선형결합을 통해 구해진 값 a은 뉴런을 거쳐서 Sigmoid로 활성화 된 함수는 대부분 $[0, 1]$ 사이의 값을 가지게 될 것이다. 선형결합을 통해 구해진 값이 조금만 커져도 (약 $[-5, 5]$ 이외 값) Gradient 값이 0으로 되는 경우가 많아진다. 이를 <strong>Gradient Vanishing Problem</strong>, 즉 가중치 0에 가까워져 업데이트 안되는 현상을 말한다. 따라서 가중치 초기 값이 엄청 작게 설정 했다고 해도 dot product해진 값이 커지면 이런 현상이 일어날 수가 있다.</p>
 
-<h4 id="mnist-데이터로-살펴보기">Mnist 데이터로 살펴보기</h4>
+<h4 id="mnist--">Mnist 데이터로 살펴보기</h4>
 
 <p>실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.</p>
 
@@ -319,7 +305,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </tbody>
 </table>
 
-<h4 id="활성화-함수를-바꿔보자-relu">활성화 함수를 바꿔보자: ReLu</h4>
+<h4 id="relu">활성화 함수를 바꿔보자: ReLu</h4>
 <p>ReLu의 미분 값은 $x &gt; 0$ 에서 $1$ 이고 나머지는 $0$ 이다. ReLu는 <strong>He</strong> 라는 초기값을 설정하게 된다.</p>
 
 <script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
@@ -353,7 +339,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+6%3A+Weight+Initialization&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2018%2F01%2F24%2Fnumpywithnn_6.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+6%3A+Weight+Initialization&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F01%2F24%2Fnumpywithnn_6.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -475,20 +461,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         

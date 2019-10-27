@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="All about Word Vectors: Negative Sampling" />
-  <meta property="og:url" content="http://localhost:4000" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="All about Word Vectors: Negative Sampling" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="All about Word Vectors: Negative Sampling">
   <meta name="twitter:description" content="All about Word Vectors: Negative Sampling">
-  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
-  <meta name="twitter:url" content="http://localhost:4000">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/nlp/2018/04/24/allaboutwv3.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
+  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/04/24/allaboutwv3.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -163,20 +163,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -229,7 +215,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><img src="/assets/ML/nlp/L2_model_train.png" /></p>
 
-<h2 id="navie-softmax-의-단점">Navie Softmax 의 단점</h2>
+<h2 id="navie-softmax--">Navie Softmax 의 단점</h2>
 
 <p>Navie Softmax 를 최종단에 출력으로 두고 Backpropagation 할때는 큰 단점이 있다.</p>
 
@@ -273,7 +259,7 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 <hr />
 
-<h3 id="상세-논문-설명">상세 논문 설명</h3>
+<h3 id="section">상세 논문 설명</h3>
 
 <p>논문 기준으로 위에 <strong><span style="color: #e87d7d">표기법</span></strong> 이 조금 다르다.</p>
 <ul>
@@ -404,7 +390,7 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 <hr />
 
-<h3 id="참고-1-trivial-solution">참고 1. Trivial Solution</h3>
+<h3 id="trivial-solution">참고 1. Trivial Solution</h3>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned} L(\theta;w,c) &= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
@@ -415,11 +401,12 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 <p>같은 두 벡터의 내적을 하게 되면 값은 최대가 된다. $\cos$ 값이 1이 되기 때문이다. (여기서는 최대 값이 중요한건 아니지만 값이 커진다는데 의의가 있다.)
 <script type="math/tex">a\cdot a=\vert a \vert \vert a \vert \cos \theta</script></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = np.array([1,2,3,4,5,6,7])
+<div class="highlighter-rouge"><pre class="highlight"><code>a = np.array([1,2,3,4,5,6,7])
 b = np.array([.1,.2,.3,.4,.5,.6,.7])
 print(np.dot(a, a))
 print(np.dot(a, b))
-</code></pre></div></div>
+</code></pre>
+</div>
 <blockquote>
   <p>140</p>
 
@@ -453,7 +440,7 @@ print(np.dot(a, b))
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Negative+Sampling&u=http%3A%2F%2Flocalhost%3A4000%2Fnlp%2F2018%2F04%2F24%2Fallaboutwv3.html"
+      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Negative+Sampling&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F04%2F24%2Fallaboutwv3.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -575,20 +562,6 @@ print(np.dot(a, b))
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         

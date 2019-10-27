@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="[PAPER] A Neural Probabilistic Language Model" />
-  <meta property="og:url" content="http://localhost:4000" />
+  <meta property="og:url" content="http://simonjisu.github.io" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="A Neural Probabilistic Language Model" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="A Neural Probabilistic Language Model">
   <meta name="twitter:description" content="[PAPER] A Neural Probabilistic Language Model">
-  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
-  <meta name="twitter:url" content="http://localhost:4000">
+  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
+  <meta name="twitter:url" content="http://simonjisu.github.io">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
+  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -163,20 +163,6 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
           <li class="nav-link"><a href="https://simonjisu.gitbook.io/resume/"> ME </a>
           <li class="nav-link"><a href="https://github.com/simonjisu"> GitHub </a>
       </ul>
@@ -237,7 +223,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <hr />
 
-<h2 id="메인-아이디어">메인 아이디어</h2>
+<h2 id="section">메인 아이디어</h2>
 
 <p>기존의 통계 기반의 Language Modeling 은 N-Gram 을 기반으로, 이전 토큰의 나오는 단어를 기반으로 다음 단어의 확률을 극대화 작업이었다. 처음부터 끝까지 보지 않고 N-Gram으로 잘라서 예측하게된 이유는 예측해야할 단어와 아주 오래된 단어간의 상관관계가 적다(혹은 분포가 다르다)라고 생각했기 때문이다.</p>
 
@@ -270,13 +256,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <hr />
 
-<h2 id="모델-설명">모델 설명</h2>
+<h2 id="section-1">모델 설명</h2>
 
 <p><img src="https://dl.dropbox.com/s/8thdipjnc7bl95f/0826_nnlm.png" /></p>
 
 <p>두 가지 단계로 모델이 구성되 있다.</p>
 
-<h3 id="1-단계-distributed-feature-vectors">1 단계: Distributed feature vectors</h3>
+<h3 id="distributed-feature-vectors">1 단계: Distributed feature vectors</h3>
 
 <blockquote>
   <p>각 단어를 $C$ 행렬을 통해 $m$ 차원 벡터로 표현한다.</p>
@@ -288,7 +274,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>$C$ 행렬의 $i$ 번째 행을, $i$ 번째 단어의 벡터라고 규정 지었으며, $C$ 의 형태는 $\vert V \vert \times m$ 다.</p>
 
-<h3 id="2-단계-probability-functions">2 단계: Probability functions</h3>
+<h3 id="probability-functions">2 단계: Probability functions</h3>
 
 <blockquote>
   <p>$m$ 차원으로 표현된 벡터를 2 층의 신경망을 사용해서 조건부 확률을 구성한다.</p>
@@ -304,7 +290,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script type="math/tex; mode=display">P(w_i = i \vert context) = \dfrac{\exp(y_{w_t})}{\sum_i \exp(y_i)}</script>
 
-<h3 id="기타-direct-connection">기타: direct connection</h3>
+<h3 id="direct-connection">기타: direct connection</h3>
 
 <p>논문에서는 실험적으로 선형적인 관계식을 하나 더 넣어서 context 와 y 사이의 선형관계를 알아내고자 했다.</p>
 
@@ -312,7 +298,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <hr />
 
-<h2 id="실험결과">실험결과</h2>
+<h2 id="section-2">실험결과</h2>
 
 <h3 id="perplexity">Perplexity</h3>
 
@@ -483,7 +469,7 @@ C &= \vert V \vert \times m
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=A+Neural+Probabilistic+Language+Model&u=http%3A%2F%2Flocalhost%3A4000%2Fnlp%2F2018%2F08%2F22%2Fneuralnetworklm.html"
+      <a href="//www.facebook.com/sharer.php?t=A+Neural+Probabilistic+Language+Model&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F08%2F22%2Fneuralnetworklm.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -589,20 +575,6 @@ C &= \vert V \vert \times m
         
         
           <li class="nav-link"><a href="/posts/">Posts</a>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
