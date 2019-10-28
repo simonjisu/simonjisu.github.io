@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 1Neural Network의 역사: 링크 참고" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 1: Perceptron" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 1: Perceptron">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 1Neural Network의 역사: 링크 참고">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2017/12/07/numpywithnn_1.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -208,12 +208,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---1">Numpy로 짜보는 Neural Network Basic - 1</h1>
+  <h1 id="numpy로-짜보는-neural-network-basic---1">Numpy로 짜보는 Neural Network Basic - 1</h1>
 <hr />
 <p>Neural Network의 역사: <a href="http://solarisailab.com/archives/1206">링크</a> 참고</p>
 
 <p>Neural Network를 알려먼 퍼셉트론이란 개념을 우선 이야기 해보자</p>
-<h2 id="perceptron">퍼셉트론(Perceptron)</h2>
+<h2 id="퍼셉트론perceptron">퍼셉트론(Perceptron)</h2>
 <p>퍼셉트론(perceptron)은 인공신경망의 한 종류로서, 1957년에 코넬 항공 연구소(Cornell Aeronautical Lab)의 프랑크 로젠블라트 (Frank Rosenblatt)에 의해 고안되었다. 이것은 가장 간단한 형태의 피드포워드(Feedforward) 네트워크 - 선형분류기- 으로도 볼 수 있다.</p>
 
 <p>퍼셉트론이 동작하는 방식은 다음과 같다. 각 노드의 가중치와 입력치를 곱한 것을 모두 합한 값이 활성함수에 의해 판단되는데, 그 값이 임계치(보통 0)보다 크면 뉴런이 활성화되고 결과값으로 1을 출력한다. 뉴런이 활성화되지 않으면 결과값으로 -1을 출력한다.</p>
@@ -266,7 +266,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 \end{cases}</script>
 
 <p>만약에 $b$ 가 임의의 음수이고, $w_1$, $w_2$ 값이 $b$ 보다 작거나 같은 임의의 양수면 이 식은 항상 성립한다. 각종 변수가 이를 만족 할 때 <strong>AND 게이트</strong> 라고 부르며 코드로 이렇게 짜볼 수 있다.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def AND(x1, x2):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def AND(x1, x2):
     x = np.array([x1, x2])
     w = np.array([0.5, 0.5])
     b = -0.7
@@ -275,14 +275,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return 0
     else:
         return 1
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>확인해보면</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('AND({0},{1}) : {2}'.format(x[0], x[1], AND(x[0], x[1])))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>AND(0,0) : 0</p>
 
@@ -307,7 +305,7 @@ for x in xx:
 |1|0|1|
 |0|1|1|
 |1|1|0|</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def NAND(x1, x2):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def NAND(x1, x2):
     x = np.array([x1, x2])
     w = np.array([-0.5, -0.5])
     b = 0.7
@@ -316,14 +314,12 @@ for x in xx:
         return 0
     else:
         return 1
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>결과 값을 측정해보면</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('NAND({0},{1}) : {2}'.format(x[0], x[1], NAND(x[0], x[1])))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>NAND(0,0) : 1</p>
 
@@ -342,7 +338,7 @@ for x in xx:
 |1|0|1|
 |0|1|1|
 |1|1|1|</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def OR(x1, x2):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def OR(x1, x2):
     x = np.array([x1, x2])
     w = np.array([0.5, 0.5])
     b = -0.2
@@ -351,14 +347,12 @@ for x in xx:
         return 0
     else:
         return 1
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>결과 값을 확인해보면</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('OR({0},{1}) : {2}'.format(x[0], x[1], OR(x[0], x[1])))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>OR(0,0) : 0</p>
 
@@ -373,7 +367,7 @@ for x in xx:
 
 <p><img src="/assets/ML/perceptron/perceptron_2.png" alt="Drawing" style="width: 800px;" /></p>
 
-<h3 id="xor-">XOR 문제</h3>
+<h3 id="xor-문제">XOR 문제</h3>
 <p>XOR 문제란 어떤 선형식으로 이산 변수 $x_1$과 $x_2$에 대해서 둘중에 하나라도 1이 되면 결과 값으로 1를 반환하, 둘다 0이거나 1이면 0을 반환하는 식을 찾는 것이다.</p>
 
 <p>표로 그려보면 아래와 같은 문제다.</p>
@@ -467,19 +461,17 @@ for x in xx:
 </table>
 
 <p>코드로 구현하느 것은 아까 만든 코드를 나열하면 된다.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def XOR(x1, x2):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def XOR(x1, x2):
     s1 = NAND(x1, x2)
     s2 = OR(x1, x2)
     y = AND(s1, s2)
     return y
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>확인해보면</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('XOR({0},{1}) : {2}'.format(x[0], x[1], XOR(x[0], x[1])))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>XOR(0,0) : 0</p>
 
@@ -523,7 +515,7 @@ for x in xx:
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+1%3A+Perceptron&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2017%2F12%2F07%2Fnumpywithnn_1.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+1%3A+Perceptron&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2017%2F12%2F07%2Fnumpywithnn_1.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>

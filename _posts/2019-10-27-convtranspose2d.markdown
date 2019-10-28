@@ -109,7 +109,7 @@ $$\begin{bmatrix}w_{11} x^{(l+1)}_{11} & w_{11} x^{(l+1)}_{12} + w_{12} x^{(l+1)
 
 <img src="https://drive.google.com/uc?id=1acZ6YvrW6xooXJd6nYpFYhm-eDHSe2f1">
 
-Fractionally-strided convolution 연산은 다음 그림과 같다. "fractionally" 의 단어 뜻 처럼 필터가 출력 이미지의 일부분을 걸치면서 이동(stride)하면서 연산된다. 또한 가중치도 기존의 형태와 달리 약간의 변형(transpose)이 된다(정확한 전치행렬은 아니다). 
+Fractionally-strided convolution 연산은 다음 그림과 같다. "fractionally" 의 단어 뜻 처럼 필터가 출력 이미지의 일부분을 걸치면서 이동(stride)하면서 연산된다. 또한 가중치도 기존의 형태와 달리 약간의 변형(transpose)이 된다(정확한 전치행렬은 아니다). 그렇다면 "출력 픽셀"과 연관이 없는 부분은? 0으로 곱해져서 더해진다!
 
 <img src="https://drive.google.com/uc?id=1WumIP2aCDNJ4cCWQW_2_Q0e1LCx_WkdQ">
 

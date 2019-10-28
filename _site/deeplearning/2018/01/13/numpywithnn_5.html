@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 5학습관련 기술 Part 1" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 5: Optimizer" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 5: Optimizer">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 5학습관련 기술 Part 1">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2018/01/13/numpywithnn_5.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2018/01/13/numpywithnn_5.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -208,27 +208,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---5">Numpy로 짜보는 Neural Network Basic - 5</h1>
+  <h1 id="numpy로-짜보는-neural-network-basic---5">Numpy로 짜보는 Neural Network Basic - 5</h1>
 <hr />
-<h2 id="part-1">학습관련 기술 Part 1</h2>
+<h2 id="학습관련-기술-part-1">학습관련 기술 Part 1</h2>
 
 <h3 id="optimizer">Optimizer</h3>
 
 <p>손실 함수 값을 가능한 낮게 만들어 매개변수 최적값을 찾는 과정을 <strong>최적화</strong> 라고 한다. 여기서 몇가지 방법을 한번 살펴본다.</p>
 
-<h4 id="sgd--">SGD(확률적 경사 하강법)</h4>
+<h4 id="sgd확률적-경사-하강법">SGD(확률적 경사 하강법)</h4>
 <p>$W \leftarrow W - \eta \dfrac{\partial L}{\partial W}$</p>
 
 <p>$\eta$ 는 학습률로 얼만큼 가중치를 업데이트 할지 정하는 하이퍼파라미터다. 즉 우리가 미리 정해줘야하는 변수다. 그러나 SGD 알고리즘에서는 이 변수에 따라서 학습되는 모양이 다르다.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class SGD(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class SGD(object):
     def __init__(self, lr=0.01):
         self.lr = lr
 
     def update(self, params, grads):
         for key in params.keys():
             params[key] -= self.lr * grads[key]
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><strong>장점</strong>:</p>
 <ul>
   <li>일부 데이터로 업데이트를 해서 진동이 심할 수도 있지만, 전체 데이터의 Gradient를 구하는 것보다 빠르다</li>
@@ -243,22 +242,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>아래와 같은 함수의 최적값을 찾아보자.</p>
 
 <p>$f(x, y) = \dfrac{1}{20} x^2 + y^2$</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def f(x, y):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(x, y):
     return np.array((1/20)*(x**2) + (y**2))
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>$f$ 를 미분하면 아래와 같다.</p>
 
 <p>$\dfrac{\partial f}{\partial x}, \dfrac{\partial f}{\partial y} = \dfrac{x}{10}, 2y$</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def f_prime(x, y, grads=None):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f_prime(x, y, grads=None):
     if grads is None:
         grads = {}
 
     grads['x'] = (1/10)*x
     grads['y'] = 2*y
     return grads
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>시작은 <strong>(-7, 2)</strong> 점부터 시작한다고 하면 아래처럼 그림으로 표현할 수 있다.</p>
 
 <p><img src="/assets/ML/nn/fgraph.png" alt="Drawing" style="width: 400px;" /></p>
@@ -355,7 +352,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>$\odot$ 는 여기서 dot product가 아닌 element-wise multiplication를 말한다. 수식을 보면 gradient를 제곱하여 h에 저장한다. 업데이트시 여태까지 저장해온 gradient 제곱 값을 분모로 두게 된다. 따라서 시간이 지날 수록 gradient 누적 값이 큰 것은 learning rate 가 반대로 작아지게 된서 학습률이 조정 된다. 이를 적응적으로(adaptive) 학습률을 조정한다고 한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Adagrad(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Adagrad(object):
     def __init__(self, lr=0.01):
         self.lr = lr
         self.h = None
@@ -370,8 +367,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         for key in params.keys():
             self.h[key] += grads[key] * grads[key]
             params[key] -= self.lr * grads[key] / np.sqrt(self.h[key] + self.epsilon)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <table>
   <thead>
@@ -397,7 +393,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>이를 개선하기 위해서 RMSProp과 Adadelta라는 방법이 있다. (코드는 기본 알고리즘 원리만 구현해놨다. 구체적으로 효율적인 학습을 위해서 조금씩 변형이 가해진다. 논문 참조 할 것, <del>아직 이해중</del>)</p>
 
 <p>RMSProp:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class RMSProp(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class RMSProp(object):
     def __init__(self, lr=0.01, gamma=0.9):
     """G는 이동평균의 개념으로 과거 1보다 작은 gamma값을 곱해서 서서히 잊게 하고 새로운 값을 조금씩 더 해준다."""
         self.lr = lr
@@ -414,10 +410,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         for key in params.keys():
             self.G[key] += self.gamma * self.G[key] + (1 - self.gamma) * (grads[key] * grads[key])
             params[key] -= self.lr * grads[key] / np.sqrt(self.G[key] + self.epsilon)
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>AdaDelta:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class AdaDelta(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AdaDelta(object):
     def __init__(self, gamma=0.9):
         """
         https://arxiv.org/pdf/1212.5701
@@ -445,8 +440,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             self.del_W[key] = -(np.sqrt(self.s[key] + self.epsilon) / np.sqrt(self.G[key] + self.epsilon)) * grads[key]
             self.s[key] += self.gamma * self.s[key] + (1 - self.gamma) * self.del_W[key]**2
             params[key] += self.del_W[key]
-</code></pre>
-</div>
+</code></pre></div></div>
 <h4 id="adamadaptive-moment-estimation">Adam(Adaptive Moment Estimation)</h4>
 <p><strong>Adam</strong> (Adaptive Moment Estimation)은 RMSProp과 Momentum 방식을 합친 것 같은 알고리즘이다.</p>
 
@@ -465,7 +459,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <hr />
 
-<h4 id="initialization-bias-correction">추가 설명:(18.01.16) Initialization Bias Correction</h4>
+<h4 id="추가-설명180116-initialization-bias-correction">추가 설명:(18.01.16) Initialization Bias Correction</h4>
 <p>우리가 구한 $m_t$, $v_t$ 값이 초기 값이 0으로 설정하고, $\beta$ 도 1에 가깝기 때문에 처음에 적용하는 gradient($g_t$) 값이 적용이 잘 안되서(즉, 업데이트가 안된다), 초기 epoch에서는 학습 진행이 안되는 경우가 있다.</p>
 
 <p>이는 $m_t$, $v_t$ 값이 실제로 $g_t$, $g_t^2$ 가 맞는지 확인하는 작업이 필요하다. 따라서 각각 기대값(Expectation)을 씌워서</p>
@@ -509,7 +503,7 @@ E[v_t] &= E[(1-\beta_2) \sum_{i=1}^{t} \beta_2^{t-i}(g_i^2 - g_t^2 + g_t^2))] \\
 <p><a href="http://dalpo0814.tistory.com/29#comment5316278">http://dalpo0814.tistory.com</a></p>
 
 <p>기존 알고리즘 코드:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Adam(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Adam(object):
     """Adam (http://arxiv.org/abs/1412.6980v8)"""
 
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999):
@@ -538,12 +532,11 @@ E[v_t] &= E[(1-\beta_2) \sum_{i=1}^{t} \beta_2^{t-i}(g_i^2 - g_t^2 + g_t^2))] \\
             self.unbias_m = self.m[key] / (1 - self.beta1**self.iter) # correct bias
             self.unbias_v = self.v[key] / (1 - self.beta2**self.iter) # correct bias
             params[key] -= self.lr * self.unbias_m / (np.sqrt(self.unbias_v) + 1e-7)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>아래는 다른 사람의 코드를 따와서 개조했다. 출처: <a href="https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py">https://github.com/WegraLee/deep-learning-from-scratch/</a></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>class Adam(object):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Adam(object):
     """Adam (http://arxiv.org/abs/1412.6980v8)"""
 
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999):
@@ -569,8 +562,7 @@ E[v_t] &= E[(1-\beta_2) \sum_{i=1}^{t} \beta_2^{t-i}(g_i^2 - g_t^2 + g_t^2))] \\
             self.v[key] += (1 - self.beta2) * (grads[key] ** 2 - self.v[key])
 
             params[key] -= lr_t * self.m[key] / (np.sqrt(self.v[key]) + 1e-7)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>조금 더 효율 적으로 개선된 것을 볼 수 있다. <strong>lr_t</strong> 는 위에 unbias 항들을 넣어서 정리해주면 아래와 같이 정의 할 수 있다.</p>
 
@@ -640,7 +632,7 @@ v_t &= v_{t-1} + (1-\beta_1)(g_t^2-v_{t-1}) \\
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+5%3A+Optimizer&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2018%2F01%2F13%2Fnumpywithnn_5.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+5%3A+Optimizer&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2018%2F01%2F13%2Fnumpywithnn_5.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>

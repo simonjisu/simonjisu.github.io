@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Numpy로 짜보는 Neural Network Basic - 3" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="NUMPY with NN - 3: Loss Function" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="NUMPY with NN - 3: Loss Function">
   <meta name="twitter:description" content="Numpy로 짜보는 Neural Network Basic - 3">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/deeplearning/2017/12/10/numpywithnn_3.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/deeplearning/2017/12/10/numpywithnn_3.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -208,57 +208,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="numpy--neural-network-basic---3">Numpy로 짜보는 Neural Network Basic - 3</h1>
+  <h1 id="numpy로-짜보는-neural-network-basic---3">Numpy로 짜보는 Neural Network Basic - 3</h1>
 <hr />
 
 <p>저번 시간에는 Feedforward 과정을 보았는데, 정확도가 8.578% 밖에 안됐다. 이제 Neural Network가 데이터로부터 어떻게 학습하여 정확도를 올리는지 보자.</p>
 
-<h2 id="loss-function">손실 함수(Loss Function)</h2>
+<h2 id="손실-함수loss-function">손실 함수(Loss Function)</h2>
 <p>왜 우리의 목표인 정확도를 안쓰고 손실 함수라는 매개변수를 설정하는 걸까?</p>
 
 <p>그 이유는 먼저 밝히면 신경망 학습에 미분이 사용되기 때문이다. 최적의 가중치(그리고 편향)을 탐색할 때 손실 함수의 값을 가능한 작게하는 가중치 값을 찾는데, 이때 가중치의 미분을 계산하고, 그 미분 값을 단서로 가중치를 서서히 갱신하는 과정을 거친다. 그러나 손실함수에 정확도를 쓰면 가중치의 미분이 대부분의 장소에서 0이 되기 때문에 가중치 값을 갱신할 수가 없다.</p>
 
 <p>mnist 데이터의 경우 최종 출력층에 나온 $y$ 값은 Softmax에 의해 $(10 \times 1)$ 행렬의 확률로 출력되고, 그에 응답하는 정답 $t$ 는 one-hot encoded된 행렬이다.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>y = np.array([0.05, 0.01, 0.7, 0.14, 0.05, 0.0, 0.05, 0.0, 0.0, 0.0])
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = np.array([0.05, 0.01, 0.7, 0.14, 0.05, 0.0, 0.05, 0.0, 0.0, 0.0])
 t = np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0])
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<h3 id="mse">평균 제곱 오차(MSE)</h3>
+<h3 id="평균-제곱-오차mse">평균 제곱 오차(MSE)</h3>
 
 <p><script type="math/tex">E=\frac{1}{2}\sum_{k}{(y_k - t_k)^2}</script></p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def mean_squared_error(y, t):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def mean_squared_error(y, t):
     return (1/2) * np.sum((y - t) ** 2)
 
 mean_squared_error(y, t)
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>0.05860000000000002</p>
 </blockquote>
 
-<h3 id="cross-entropy">교차 엔트로피 오차(Cross Entropy)</h3>
+<h3 id="교차-엔트로피-오차cross-entropy">교차 엔트로피 오차(Cross Entropy)</h3>
 
 <p><script type="math/tex">E=-\sum_{k}{t_k\log{y_k}}</script></p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def cross_entropy_error(y, t):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def cross_entropy_error(y, t):
     delta = 1e-7
     return -np.sum(t * np.log(y + delta))
 
 cross_entropy_error(y, t)
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>0.51082545709933802</p>
 </blockquote>
 
 <p>여기서 delta라는 작은 값을 더해준 이유는 y값이 0이면 $\log 0= -\inf$가 되서 미분 계산이 불가능하기 때문이다.</p>
 
-<h3 id="section">미니 배치 학습</h3>
+<h3 id="미니-배치-학습">미니 배치 학습</h3>
 
 <script type="math/tex; mode=display">E=-\frac{1}{N}\sum_{n}{\sum_{k}{t_k\log{y_k}}}</script>
 
 <p>엄청나게 많은 양의 데이터를 사용하는데 오차를 한번에 계산하려면 오랜 시간이 든다. 따라서 작은 양의 데이터를 사용해 조금씩 오차의 합을 구한다음에 그것의 평균을 내면 전체의 근사치로 사용할 수 있다.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def cross_entropy_error(y, t):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def cross_entropy_error(y, t):
     delta = 1e-7
     if y.ndim == 1:
         t = t.reshape(1, t.size)
@@ -266,22 +263,20 @@ cross_entropy_error(y, t)
 
     batch_size = y.shape[0]
     return -np.sum(t * np.log(y[np.arange(batch_size), t] + delta)) / batch_size
-</code></pre>
-</div>
-<h2 id="section-1">미분</h2>
+</code></pre></div></div>
+<h2 id="미분">미분</h2>
 
 <p>목적을 정했으니 이제 학습에 들어가면된다. 손실함수를 가중치에 대한 미분을 구해야 한다.</p>
 
-<h3 id="section-2">수치 미분과 중심 차분법</h3>
+<h3 id="수치-미분과-중심-차분법">수치 미분과 중심 차분법</h3>
 
 <p>수치 미분이란 변화율이라고 볼 수 있다. $x$에서 $h$만큼 변했을 때 $f(x)$의 변화량을 나타낸 것이다.</p>
 
 <script type="math/tex; mode=display">\frac{df(x)}{dx} = \lim_{h\rightarrow0}{\frac{f(x+h) - f(x)}{h}}</script>
 
 <p>그러나 $f(x+h) - f(x)$ 는 굉장히 작은 수라 컴퓨터로 구현시 Underflow문제에 봉착하게 된다.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>np.float32(1e-50)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>np.float32(1e-50)
+</code></pre></div></div>
 <blockquote>
   <p>0.0</p>
 </blockquote>
@@ -291,19 +286,17 @@ cross_entropy_error(y, t)
 <p><strong>중심 차분법</strong> 을 이용하면 미분은 아래와 같다.</p>
 
 <p><script type="math/tex">\frac{df(x)}{dx} = \lim_{h\rightarrow0}{\frac{f(x+h) - f(x-h)}{2h}}</script></p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def numerical_diff(f, x):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def numerical_diff(f, x):
     h = 1e-4
     return (f(x + h) - f(x - h)) / (2*h)
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>예시 함수 $y = 0.01 x^2 + 0.1 x$ 의 수치 미분을 보자</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def f1(x):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f1(x):
     return 0.01 * x**2 + 0.1 * x
 
 print(numerical_diff(f1, 5))
 print(numerical_diff(f1, 10))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>0.1999999999990898</p>
 
@@ -315,7 +308,7 @@ print(numerical_diff(f1, 10))
 <p><img src="/assets/ML/nn/numerical_diff.png" alt="Drawing" style="width: 500px;" /></p>
 
 <p>2차원 이상의 데이터는 어떻게 짜야할까? 아래의 코드를 참조하자</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>def numerical_gradient(f, x):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def numerical_gradient(f, x):
     h = 1e-4  # 0.0001
     grad = np.zeros_like(x)
 
@@ -334,8 +327,7 @@ print(numerical_diff(f1, 10))
         it.iternext()
 
     return grad
-</code></pre>
-</div>
+</code></pre></div></div>
 <ul>
   <li>np.nditer: iterator 객체를 만들어 준다. 행마다 원소가 iterate 된다.</li>
 </ul>
@@ -352,10 +344,10 @@ print(numerical_diff(f1, 10))
 
 <p><img src="/assets/ML/nn/GDanimation.gif" alt="Drawing" style="width: 500px;" /></p>
 
-<h2 id="section-3">학습 알고리즘</h2>
+<h2 id="학습-알고리즘">학습 알고리즘</h2>
 
-<h3 id="nn----">간단한 NN 으로 가중치의 미분 구해보기</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>class simpleNet(object):
+<h3 id="간단한-nn-으로-가중치의-미분-구해보기">간단한 NN 으로 가중치의 미분 구해보기</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class simpleNet(object):
     def __init__(self):
         # Input size = 2
         # Output size = 3
@@ -380,15 +372,14 @@ nn = simpleNet()
 f = lambda w: nn.loss(x, t)
 dW = numerical_gradient(f, nn.W)
 print(dW)
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>[[ 0.05244267  0.24743359 -0.29987626]</p>
 
   <p>[ 0.07866401  0.37115039 -0.44981439]]</p>
 </blockquote>
 
-<h3 id="sgd">확률적 경사 하강법(SGD)</h3>
+<h3 id="확률적-경사-하강법sgd">확률적 경사 하강법(SGD)</h3>
 <p>아래 방법은 데이터를 무작위로 가져와서 학습하는 것이기 때문에 확률적 경사 하강법(Stochastic Gradient Descent)이라고도 한다.</p>
 
 <ul>
@@ -414,7 +405,7 @@ print(dW)
   </li>
 </ul>
 
-<h3 id="neural-network-">2층 Neural Network 실습</h3>
+<h3 id="2층-neural-network-실습">2층 Neural Network 실습</h3>
 
 <p><img src="/assets/ML/nn/NN_3.png" alt="Drawing" style="width: 350px;" /></p>
 
@@ -430,7 +421,7 @@ print(dW)
 
 <p>이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [<a href="https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py">여기</a>]서 가져왔다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
 
 train_loss_list = []
 train_acc_list = []
@@ -482,8 +473,7 @@ for epoch in range(epoch_num):
 
 end = time.time()
 print('total time:', (end - start))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <table>
     <tbody>
@@ -520,7 +510,7 @@ print('total time:', (end - start))
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+3%3A+Loss+Function&u=http%3A%2F%2Fsimonjisu.github.io%2Fdeeplearning%2F2017%2F12%2F10%2Fnumpywithnn_3.html"
+      <a href="//www.facebook.com/sharer.php?t=NUMPY+with+NN+-+3%3A+Loss+Function&u=http%3A%2F%2Flocalhost%3A4000%2Fdeeplearning%2F2017%2F12%2F10%2Fnumpywithnn_3.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>

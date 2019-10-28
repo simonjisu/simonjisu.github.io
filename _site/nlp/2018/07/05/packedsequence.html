@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="Pytorch 의 PackedSequence object 알아보기" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="Pytorch 의 PackedSequence object 알아보기" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Pytorch 의 PackedSequence object 알아보기">
   <meta name="twitter:description" content="Pytorch 의 PackedSequence object 알아보기">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/07/05/packedsequence.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/07/05/packedsequence.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -208,11 +208,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <article class="post-content">
-  <h1 id="pytorch--packedsequence-object-">Pytorch 의 PackedSequence object 알아보기</h1>
+  <h1 id="pytorch-의-packedsequence-object-알아보기">Pytorch 의 PackedSequence object 알아보기</h1>
 
 <hr />
 
-<h2 id="packedsequence-">PackedSequence 란?</h2>
+<h2 id="packedsequence-란">PackedSequence 란?</h2>
 
 <blockquote>
   <p>아래의 일련의 과정을 PackedSequence 라고 할 수 있다.</p>
@@ -261,31 +261,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb">nbviewer</a> 혹은 <a href="https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb">github</a>에 있다.</p>
 
-<h3 id="section">과정</h3>
+<h3 id="과정">과정</h3>
 
 <p>전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>input_seq2idx
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input_seq2idx
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
         [ 12,   9,   0,   0,   0,   0],
         [  5,  14,   3,  17,   0,   0],
         [ 10,   0,   0,   0,   0,   0]])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>하단의 코드를 통해서 정렬을 해주고, 각 문장의 길이를 담은 list를 만들어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
 input_lengths, sorted_idx = input_lengths.sort(0, descending=True)
 input_seq2idx = input_seq2idx[sorted_idx]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>모든 <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰의 인덱스인 0 이 밑으로 내려간 것을 알 수 있다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>input_seq2idx, input_lengths
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input_seq2idx, input_lengths
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
@@ -294,53 +292,48 @@ tensor([[  1,  16,   7,  11,  13,   2],
         [ 10,   0,   0,   0,   0,   0]])
 
 tensor([ 6,  5,  4,  2,  1])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>torch.nn.utils.rnn</strong> 에서 <strong>pack_padded_sequence</strong> 를 사용하면 PackedSequence object를 얻을 수 있다. packed_input 에는 위에서 말한 합병된 데이터와 각 타임스텝의 배치사이즈들이 담겨있다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
+</code></pre></div></div>
 
 <p><br /></p>
 
-<h3 id="rnn---">RNN 에서의 사용 방법</h3>
+<h3 id="rnn-에서의-사용-방법">RNN 에서의 사용 방법</h3>
 
 <p>실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
 gru = nn.RNN(input_size=embedding_size, hidden_size=hidden_size, num_layers=num_layers, bidirectional=False, batch_first=True)
 
 embeded = embed(input_seq2idx)
 packed_input = pack_padded_sequence(embeded, input_lengths.tolist(), batch_first=True)
 packed_output, hidden = gru(packed_input)
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>packed_output 에는 합병된 output 과 batch_sizes 가 포함되어 있다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>packed_output[0].size(), packed_output[1]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>packed_output[0].size(), packed_output[1]
 =========================================================
 (torch.Size([18, 2]), tensor([ 5,  4,  3,  3,  2,  1]))
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>이를 다시 원래 형태의 <strong>(배치크기, 문장의 최대 길이, 히든크기)</strong> 로 바꾸려면 <strong>pad_packed_sequence</strong> 를 사용하면 된다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
 output.size(), output_lengths
 =========================================================
 (torch.Size([5, 6, 2]), tensor([ 6,  5,  4,  2,  1]))
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>실습코드에서 출력 결과를 살펴보면 <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰과 연관된 행은 모드 0으로 채워져 있다.</p>
 
 <hr />
 
-<h2 id="rnn-backend--">RNN Backend 작동 방식</h2>
+<h2 id="rnn-backend-작동-방식">RNN Backend 작동 방식</h2>
 
-<h3 id="rnn-----">RNN 안에서 어떤 방법으로 실행되는 것일까?</h3>
+<h3 id="rnn-안에서-어떤-방법으로-실행되는-것일까">RNN 안에서 어떤 방법으로 실행되는 것일까?</h3>
 
 <p>아래의 그림을 살펴보자</p>
 
@@ -350,7 +343,7 @@ output.size(), output_lengths
 
 <p>기존의 RNN 이라면, <strong>(배치크기 $\times$ 문장의 최대 길이 $\times$ 층의 갯수)</strong> 만큼 연산을 해야하지만, <strong>(실제 토큰의 갯수 $\times$ 층의 갯수)</strong> 만큼 계산하면 된다. 이 예제로 말하면 $(5 \times 6 \times 1)=30 \rightarrow (18 \times 1)=18$ 로 크게 줄었다.</p>
 
-<h3 id="hidden---">그렇다면 Hidden 어떻게 출력 되는가?</h3>
+<h3 id="그렇다면-hidden-어떻게-출력-되는가">그렇다면 Hidden 어떻게 출력 되는가?</h3>
 
 <p>기존의 RNN 이라면 마지막 타임스텝 때 hidden vector 만 출력하지만, packed sequence 는 아래의 그림 처럼 골라서 출력하게 된다.</p>
 
@@ -377,7 +370,7 @@ output.size(), output_lengths
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=Pytorch+%EC%9D%98+PackedSequence+object+%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F07%2F05%2Fpackedsequence.html"
+      <a href="//www.facebook.com/sharer.php?t=Pytorch+%EC%9D%98+PackedSequence+object+%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0&u=http%3A%2F%2Flocalhost%3A4000%2Fnlp%2F2018%2F07%2F05%2Fpackedsequence.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>

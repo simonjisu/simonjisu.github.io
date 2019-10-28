@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="[ML] DecisionTree의사결정나무의 소개는 링크로 대체하고 어떻게 진행되는지만 알아보자" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="ML-DecisionTree" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="ML-DecisionTree">
   <meta name="twitter:description" content="[ML] DecisionTree의사결정나무의 소개는 링크로 대체하고 어떻게 진행되는지만 알아보자">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/datascience/2017/11/28/mlstudydecisiontree.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/datascience/2017/11/28/mlstudydecisiontree.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -224,7 +224,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>그렇다면 데이터를 분류하는 기준은 도대체 무엇인가?</p>
 
-<h1 id="entropy-information-gain">엔트로피(Entropy)와 정보획득(Information Gain)</h1>
+<h1 id="엔트로피entropy와-정보획득information-gain">엔트로피(Entropy)와 정보획득(Information Gain)</h1>
 <p>데이터를 분류하는 기준은 아래와 같다.</p>
 
 <ol>
@@ -297,8 +297,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </tbody>
 </table>
 
-<h2 id="section">계산과정</h2>
-<h3 id="base-entropy----entropy">[1 단계] base entropy: 분류가 안되었을 때의 entropy</h3>
+<h2 id="계산과정">계산과정</h2>
+<h3 id="1-단계-base-entropy-분류가-안되었을-때의-entropy">[1 단계] base entropy: 분류가 안되었을 때의 entropy</h3>
 <p>기초 엔트로피(base entropy), 즉 분류가 되기전의 상태를 계산해야 분류후에 엔트로피의 차이를 구할 수 있다.</p>
 
 <p>기초 엔트로피를 $E_{base}$ 라고 하면,</p>
@@ -326,7 +326,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 = -(\frac{2}{6}\log{\frac{2}{6}}+\frac{4}{6}\log{\frac{4}{6}}) = 0.9182$</p>
 </blockquote>
 
-<h3 id="feature----infomation-gain">[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함</h3>
+<h3 id="2-단계-feature별로-조건부-엔트로피를-구하고-infomation-gain구함">[2 단계] feature별로 조건부 엔트로피를 구하고 Infomation Gain구함</h3>
 <p>Information Gain 은 이전 단계 엔트로피에서 각 feature의 엔트로피를 빼면 구할 수 있다. 즉, 각 feature가 기준이 되어서 엔트로피를 제일 작게 만드는, 혹은 Information Gain을 제일 크게 만드는 쪽으로 분류를 진행하는 것이다.</p>
 <h4 id="feature-1">feature 1</h4>
 
@@ -447,7 +447,7 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
   <p>$IG_3 = E_{base} - E_3=0.2516$</p>
 </blockquote>
 
-<h3 id="section-1">[3단계] 결과 및 선택:</h3>
+<h3 id="3단계-결과-및-선택">[3단계] 결과 및 선택:</h3>
 
 <table>
   <thead>
@@ -567,7 +567,7 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
 
 <p>데이터를 없에지 않는 방법도 존재한다. feature3를 선택하고 남은 feature들 중에서 다시 선택하는 방법이다.</p>
 
-<h2 id="section-2">코드</h2>
+<h2 id="코드">코드</h2>
 <p>모든 코드는 Github<a href="https://github.com/simonjisu/ML/tree/master/DecisionTreeModel"><span style="color: #7d7ee8">링크</span></a>, DecisionTree.py에 공개되어 있다.</p>
 
 </article>
@@ -589,7 +589,7 @@ $= -[\ \frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log{\frac{1}{2}}+\frac{1}{6}\log
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=ML-DecisionTree&u=http%3A%2F%2Fsimonjisu.github.io%2Fdatascience%2F2017%2F11%2F28%2Fmlstudydecisiontree.html"
+      <a href="//www.facebook.com/sharer.php?t=ML-DecisionTree&u=http%3A%2F%2Flocalhost%3A4000%2Fdatascience%2F2017%2F11%2F28%2Fmlstudydecisiontree.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>

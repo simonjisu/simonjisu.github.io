@@ -42,11 +42,11 @@
   
   <!-- Facebook OGP cards -->
   <meta property="og:description" content="All about Word Vectors: Word2Vec" />
-  <meta property="og:url" content="http://simonjisu.github.io" />
+  <meta property="og:url" content="http://localhost:4000" />
   <meta property="og:site_name" content="Soo" />
   <meta property="og:title" content="All about Word Vectors: Word2Vec" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://simonjisu.github.io/assets/logo.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,16 +57,16 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="All about Word Vectors: Word2Vec">
   <meta name="twitter:description" content="All about Word Vectors: Word2Vec">
-  <meta name="twitter:image" content="http://simonjisu.github.io/assets/logo.png">
-  <meta name="twitter:url" content="http://simonjisu.github.io">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html">
-  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://simonjisu.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/04/20/allaboutwv2.html">
+  <link rel="alternate" type="application/rss+xml" title="Soo" href="http://localhost:4000/feed.xml" />
 
 
   <!-- <script type="text/javascript"
@@ -304,7 +304,7 @@ and their Compositionality</a> (Mikolov et al. 2013)</p>
 </ul>
 
 <p><strong>코드 예시:</strong></p>
-<div class="highlighter-rouge"><pre class="highlight"><code>import numpy as np
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import numpy as np
 sentence = "I am going to watch Avengers Infinity War".split()
 embedding_matrix = np.array([[1,2,5,1,9,10,3,4], [5,1,4,1,8,1,2,5], [7,8,1,4,1,6,2,1]])
 vocab = {w: i for i, w in enumerate(sentence)}
@@ -314,8 +314,7 @@ print("="*30)
 print("Word:", word)
 print("Index:", vocab[word])
 print("Vector:", embedding_matrix[:, vocab.get(word)])
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>[[ 1  2  5  1  9 10  3  4]</p>
 
@@ -338,11 +337,11 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <p><img src="/assets/ML/nlp/L2_model_train.png" /></p>
 
-<h3 id="section">요약</h3>
+<h3 id="요약">요약</h3>
 
 <p>Skip-gram 모델을 한 마디로 설명하자면, 문장의 모든 단어가 한번 씩 중심단어 $c$ 가 되어, $c$ 주변 문맥 단어 $o$ 가 나올 확률을 최대화 하는 것이다.</p>
 
-<h3 id="section-1">목적</h3>
+<h3 id="목적">목적</h3>
 
 <p>각 중심단어 $c$ 에 대해서 아래의 <strong>가능도/우도 (Likelihood)</strong> 를 구해본다.</p>
 
@@ -404,7 +403,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 <hr />
 
-<h3 id="why-mle-is-equivalent-to-minimize-nll">참고 1: Why MLE is equivalent to minimize NLL?</h3>
+<h3 id="참고-1-why-mle-is-equivalent-to-minimize-nll">참고 1: Why MLE is equivalent to minimize NLL?</h3>
 
 <p><strong>Likelihood</strong> 의 정의:</p>
 
@@ -465,7 +464,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
   <!-- 
     
     
-      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Word2Vec&u=http%3A%2F%2Fsimonjisu.github.io%2Fnlp%2F2018%2F04%2F20%2Fallaboutwv2.html"
+      <a href="//www.facebook.com/sharer.php?t=All+about+Word+Vectors%3A+Word2Vec&u=http%3A%2F%2Flocalhost%3A4000%2Fnlp%2F2018%2F04%2F20%2Fallaboutwv2.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
