@@ -4,10 +4,10 @@
     <title>Soopace</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 15 Dec 2019 00:12:49 +0900</pubDate>
-    <lastBuildDate>Sun, 15 Dec 2019 00:12:49 +0900</lastBuildDate>
+    <link>https://simonjisu.github.io/</link>
+    <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 15 Dec 2019 01:12:12 +0900</pubDate>
+    <lastBuildDate>Sun, 15 Dec 2019 01:12:12 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -143,8 +143,8 @@
 &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.07285&quot;&gt;A guide to convolution arithmetic for deep learning&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 27 Oct 2019 21:56:38 +0900</pubDate>
-        <link>http://localhost:4000/programming/2019/10/27/convtranspose2d.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2019/10/27/convtranspose2d.html</guid>
+        <link>https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</guid>
         
         
         <category>programming</category>
@@ -764,8 +764,8 @@
 &lt;p&gt;그러나 우리는 설명가능성의 다른 측면을 다루기 위해 취해진 다양한 접근방식이 고립되어 있다는 것을 발견했다. 더 효율적인 설명을 달성하기 위해 다른 범주의 기술을 합병하는 접근 방법과 같은 설명가능성 공간에 대한 작업은 상대적으로 적은 주의를 주고도 특정 범주의 기술의 발전을 야기했다. 설명의 목적과 유형이 주어졌을 때, 어떤 설명 측정기준이 제일 좋은 것인지 알기가 명확하지 않다. 우리는 표적 설명(the targeted explanation)의 목적과 완전무결성에 맞는 다양한 측정기준을 사용하길 권장한다. 커뮤니티에서 다양한 분야의 여러 아이디어를 합치고 함께 작업하고 배우면서, 시스템 설명의 전반적인 상태 눈에 띄게 향상될 것이다. 그 결과로 행동 추정(behavioral extrapolation)을 제공하고, 딥러닝 시스템의 신뢰를 구축하고, 심층 네트워크 연산의 유용한 인사이트 등 시스템 행동의 이해와 증진을 가능케한다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Sep 2019 11:04:38 +0900</pubDate>
-        <link>http://localhost:4000/xai/2019/09/18/introxai.html</link>
-        <guid isPermaLink="true">http://localhost:4000/xai/2019/09/18/introxai.html</guid>
+        <link>https://simonjisu.github.io/xai/2019/09/18/introxai.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/xai/2019/09/18/introxai.html</guid>
         
         
         <category>xai</category>
@@ -793,8 +793,8 @@
 &lt;p&gt;이 블로그가 조금씩 성장을 보인 한해이기도 하다. 주간 평균 조회수가 8~10 사이를 왔다&lt;/p&gt;
 </description>
         <pubDate>Mon, 31 Dec 2018 18:49:32 +0900</pubDate>
-        <link>http://localhost:4000/others/2018/12/31/lookback2018.html</link>
-        <guid isPermaLink="true">http://localhost:4000/others/2018/12/31/lookback2018.html</guid>
+        <link>https://simonjisu.github.io/others/2018/12/31/lookback2018.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2018/12/31/lookback2018.html</guid>
         
         
         <category>others</category>
@@ -1031,8 +1031,8 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/12/04/buildgithubpages.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/12/04/buildgithubpages.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</guid>
         
         
         <category>programming</category>
@@ -1201,8 +1201,8 @@ def init_db():
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/11/11/flaskstudy2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/11/11/flaskstudy2.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</guid>
         
         
         <category>programming</category>
@@ -1304,8 +1304,8 @@ if __name__ == '__main__':
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/10/30/flaskstudy1.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/30/flaskstudy1.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</guid>
         
         
         <category>programming</category>
@@ -1464,8 +1464,8 @@ $ source ~/.bashrc
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 28 Oct 2018 19:22:40 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/10/28/flaskstudy0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/28/flaskstudy0.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</guid>
         
         
         <category>programming</category>
@@ -1717,8 +1717,8 @@ C &amp;= \vert V \vert \times m
 &lt;p&gt;결과를 살펴보면 문맥은 상당히 못맞추었으나 문장의 구조는 잘 학습한 것을 알 수 있다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 22 Aug 2018 23:26:14 +0900</pubDate>
-        <link>http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html</guid>
+        <link>https://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/nlp/2018/08/22/neuralnetworklm.html</guid>
         
         
         <category>nlp</category>
@@ -1911,8 +1911,8 @@ tensor([ 0,  3,  1])
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 19 Jul 2018 00:18:29 +0900</pubDate>
-        <link>http://localhost:4000/nlp/2018/07/19/torchtext.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/2018/07/19/torchtext.html</guid>
+        <link>https://simonjisu.github.io/nlp/2018/07/19/torchtext.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/nlp/2018/07/19/torchtext.html</guid>
         
         
         <category>nlp</category>
@@ -2065,8 +2065,8 @@ output.size(), output_lengths
 &lt;p&gt;참고자료: &lt;a href=&quot;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&quot;&gt;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 05 Jul 2018 09:45:37 +0900</pubDate>
-        <link>http://localhost:4000/nlp/2018/07/05/packedsequence.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/2018/07/05/packedsequence.html</guid>
+        <link>https://simonjisu.github.io/nlp/2018/07/05/packedsequence.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/nlp/2018/07/05/packedsequence.html</guid>
         
         
         <category>nlp</category>

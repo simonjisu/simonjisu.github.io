@@ -291,8 +291,8 @@ p.readmore {
 .article-footer {
 
   padding:2rem 0;
-  border-top:1px solid #ddd;
-  border-bottom:1px solid #ddd;
+  border-top:1px solid rgb(0, 0, 0);
+  border-bottom:1px solid rgb(0, 0, 0);
 
   .share {
     text-align:center;
@@ -417,17 +417,22 @@ div.post_title span.date {
 
 /* Pagination */
 
-
 .pagination {
   width:50%;
 }  
 
-.pagination.older-post{
+.pagination.to-posts{
   margin-top : 5px;
   float: right;
   text-align: right;
 }
-
+.pagination.to-top-post{
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: auto;
+  float: center;
+  text-align: center;
+}
 /* others */
 
 .small-font{

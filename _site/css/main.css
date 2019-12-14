@@ -329,7 +329,7 @@ blockquote { margin: 1.5rem 0; padding: 0 0 0 10px; font-style: normal; font-siz
 /* layout */
 html { position: relative; min-height: 100%; }
 
-.container { position: relative; min-height: 100%; padding-left: 0px; padding-right: 0px; border: none; }
+.container { position: relative; min-height: 100%; border: none; }
 
 body { min-height: 100%; height: auto; }
 
@@ -416,7 +416,7 @@ p.readmore { text-align: right; }
 
 .article-content a:hover { color: red; border-bottom: 1px dotted red; }
 
-.article-footer { padding: 2rem 0; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+.article-footer { padding: 2rem 0; border-top: 1px solid black; border-bottom: 1px solid black; }
 
 .article-footer .share { text-align: center; }
 
@@ -461,7 +461,9 @@ div.post_title span.date { font-size: 80%; color: #828282; }
 /* Pagination */
 .pagination { width: 50%; }
 
-.pagination.older-post { margin-top: 5px; float: right; text-align: right; }
+.pagination.to-posts { margin-top: 5px; float: right; text-align: right; }
+
+.pagination.to-top-post { font-size: 1.2em; font-weight: bold; margin: auto; float: center; text-align: center; }
 
 /* others */
 .small-font { font-size: 14px; }
