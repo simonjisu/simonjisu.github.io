@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "A Neural Probabilistic Language Model"
+title: "[Paper] A Neural Probabilistic Language Model"
 date: "2018-08-22 23:26:14 +0900"
-categories: "NLP"
+categories: nlp
 author: "Soo"
 comments: true
 ---

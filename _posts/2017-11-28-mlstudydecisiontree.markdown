@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ML-DecisionTree"
-categories: "DataScience"
+categories: study
 date: "2017-11-28 14:48:12 +0900"
 comments: true
 ---

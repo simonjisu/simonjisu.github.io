@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "End-to-End Memory Network 논문 요약 및 정리"
+title: "[Paper] End-to-End Memory Network"
 date: "2017-08-04 22:09:05"
 author: Soo
-categories: DataScience
+categories: nlp
 ---
 # End-to-End Memory Network 논문 요약 및 정리
 

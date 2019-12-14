@@ -2,7 +2,7 @@
 layout: post
 title: "[비전공자의 Flask-0] 설치하기"
 date: "2018-10-28 19:22:40 +0900"
-categories: "Flask"
+categories: programming
 author: "Soo"
 comments: true
 ---

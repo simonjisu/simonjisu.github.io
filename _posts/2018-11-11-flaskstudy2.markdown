@@ -2,7 +2,7 @@
 layout: post
 title: "[비전공자의 Flask-2] 본격 앱 만들기 1"
 date: "2018-11-11 17:39:48 +0900"
-categories: "Flask"
+categories: programming
 author: "Soo"
 comments: true
 ---

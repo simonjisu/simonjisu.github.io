@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "NUMPY with NN - 1: Perceptron"
-categories: "DeepLearning"
+title: "[DeepLearning]-1: Perceptron"
+categories: numpyseries
 author: "Soo"
 date: "2017-12-07 17:54:18 +0900"
 comments: true
@@ -41,7 +41,8 @@ y =
 $$
 
 만약에 $b$ 가 임의의 음수이고, $w_1$, $w_2$ 값이 $b$ 보다 작거나 같은 임의의 양수면 이 식은 항상 성립한다. 각종 변수가 이를 만족 할 때 **AND 게이트** 라고 부르며 코드로 이렇게 짜볼 수 있다.
-```
+
+```python
 def AND(x1, x2):
     x = np.array([x1, x2])
     w = np.array([0.5, 0.5])
@@ -53,7 +54,8 @@ def AND(x1, x2):
         return 1
 ```
 확인해보면
-```
+
+```python
 xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('AND({0},{1}) : {2}'.format(x[0], x[1], AND(x[0], x[1])))
@@ -80,7 +82,8 @@ for x in xx:
 |1|0|1|
 |0|1|1|
 |1|1|0|
-```
+
+```python
 def NAND(x1, x2):
     x = np.array([x1, x2])
     w = np.array([-0.5, -0.5])
@@ -92,7 +95,8 @@ def NAND(x1, x2):
         return 1
 ```
 결과 값을 측정해보면
-```
+
+```python
 xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('NAND({0},{1}) : {2}'.format(x[0], x[1], NAND(x[0], x[1])))
@@ -113,7 +117,8 @@ for x in xx:
 |1|0|1|
 |0|1|1|
 |1|1|1|
-```
+
+```python
 def OR(x1, x2):
     x = np.array([x1, x2])
     w = np.array([0.5, 0.5])
@@ -125,7 +130,8 @@ def OR(x1, x2):
         return 1
 ```
 결과 값을 확인해보면
-```
+
+```python
 xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('OR({0},{1}) : {2}'.format(x[0], x[1], OR(x[0], x[1])))
@@ -176,7 +182,7 @@ XOR 문제란 어떤 선형식으로 이산 변수 $x_1$과 $x_2$에 대해서 �
 |1|1|0|1|0|
 
 코드로 구현하느 것은 아까 만든 코드를 나열하면 된다.
-```
+```python
 def XOR(x1, x2):
     s1 = NAND(x1, x2)
     s2 = OR(x1, x2)
@@ -184,7 +190,7 @@ def XOR(x1, x2):
     return y
 ```
 확인해보면
-```
+```python
 xx = [[0, 0], [0, 1], [1, 0], [1, 1]]
 for x in xx:
     print('XOR({0},{1}) : {2}'.format(x[0], x[1], XOR(x[0], x[1])))

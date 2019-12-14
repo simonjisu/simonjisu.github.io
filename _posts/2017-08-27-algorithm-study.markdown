@@ -2,7 +2,7 @@
 layout: post
 title: "algorithm study"
 date: "2017-08-27 15:43:39 +0900"
-categories: "Algorithm"
+categories: programming
 author: Soo
 ---
 **알고리즘 공부**

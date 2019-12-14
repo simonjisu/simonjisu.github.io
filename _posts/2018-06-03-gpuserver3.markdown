@@ -2,7 +2,7 @@
 layout: post
 title: "개인 딥러닝용 서버 설치 과정기 - 3 PYTHON & CUDA"
 date: "2018-06-03 21:08:24 +0900"
-categories: "DataScience"
+categories: programming
 author: "Soo"
 comments: true
 ---

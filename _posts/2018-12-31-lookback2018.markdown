@@ -2,7 +2,7 @@
 layout: post
 title: "2018 회고"
 date: "2018-12-31 18:49:32 +0900"
-categories: "BlaBla"
+categories: others
 author: "Soo"
 comments: true
 ---

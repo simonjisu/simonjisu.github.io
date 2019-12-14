@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "NUMPY with NN - 4: Backpropagation"
-categories: "DeepLearning"
+title: "[DeepLearning]-4: Backpropagation"
+categories: numpyseries
 author: "Soo"
 date: "2017-12-15 12:21:48 +0900"
 comments: true

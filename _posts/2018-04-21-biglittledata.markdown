@@ -2,7 +2,7 @@
 layout: post
 title: "Big Little Data 참석후기"
 date: "2018-04-21 12:47:28 +0900"
-categories: "DataScience"
+categories: others
 author: "Soo"
 comments: true
 ---
