@@ -50,7 +50,6 @@ toc:
       - subcat: others
       - subcat: programming
       - subcat: numpyseries
-      - subcat: jekyll
       - subcat: separator
   - title: Abouts
     url: /about
