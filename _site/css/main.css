@@ -200,7 +200,7 @@ html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
 html { font-size: 62.5%; }
 
-body { font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */ line-height: 1.6; font-weight: 400; /* font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif; */ /* font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; */ /* font-family: -apple-system-font,"Helvetica Neue","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; */ font-family: -apple-system-font,"Nanum Gothic",sans-serif; color: #222; }
+body { font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */ line-height: 1.6; font-weight: 400; font-family: -apple-system-font,"Nanum Gothic",sans-serif; color: #222; }
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -327,13 +327,13 @@ img { max-width: 100%; vertical-align: middle; }
 blockquote { margin: 1.5rem 0; padding: 0 0 0 10px; font-style: normal; font-size: 100%; line-height: 1.8rem; border-left: 3px solid #D0E5F2; font-size: 1.3rem; }
 
 /* layout */
-html, .container { position: relative; min-height: 100%; }
+html { position: relative; min-height: 100%; }
+
+.container { position: relative; min-height: 100%; padding-left: 0px; padding-right: 0px; border: none; }
 
 body { min-height: 100%; height: auto; }
 
 .page-content { min-height: 100%; box-sizing: border-box; height: auto; padding-bottom: 140px; /*等于或略大于footer的高度*/ }
-
-.homecontainer { position: relative; min-height: 100%; box-sizing: border-box; height: auto; padding-top: 20%; padding-bottom: 140px; /*等于或略大于footer的高度*/ }
 
 .site-footer { position: absolute; bottom: 0; padding-bottom: 0rem; width: 100%; /* footer style */ color: #99999a; background-color: #FAFAFB; }
 
@@ -351,9 +351,9 @@ body { min-height: 100%; height: auto; }
 
 .logo a:hover { color: #222; background-image: -webkit-linear-gradient(bottom, #222, #222); background-image: linear-gradient(to top, #222, #222); text-shadow: -1px -1px 0 #FDFDFD,1px -1px 0 #FDFDFD,-1px 1px 0 #FDFDFD,1px 1px 0 #FDFDFD; background-repeat: repeat-x; background-size: 2px 2px; background-position: 0 96%; }
 
-.logoimage { display: inline-block; width: 20px; height: 20px; border-radius: 5%; -webkit-background-size: cover !important; background-size: cover !important; background-position: center center !important; margin-right: 10px; }
+.logoimage { display: inline-block; width: 20px; height: 20px; border-radius: 5%; -webkit-background-size: cover !important; background-size: cover !important; background-position: center center !important; margin-left: 10px; margin-top: 5px; }
 
-@media (min-width: 781px) { .logoimage { float: left; } }
+@media (min-width: 781px) { .logoimage { float: right; } }
 
 .nav { line-height: 1.5; }
 
@@ -372,7 +372,7 @@ body { min-height: 100%; height: auto; }
 /* site-nav */
 @media screen and (max-width: 780px) { .site-nav { /* flex box */ display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */ display: -moz-box; /* Firefox 17- */ display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */ display: -moz-flex; /* Firefox 18+ */ display: -ms-flexbox; /* IE 10 */ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */ opacity: 0; height: 0; -webkit-transition: all .4s; transition: all .4s; -webkit-justify-content: center; justify-content: center; } }
 
-@media screen and (max-width: 780px) and (max-width: 780px) { .site-nav { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; } }
+@media screen and (max-width: 780px) and (max-width: 780px) { .site-nav { border-top: 1px solid white; border-bottom: 1px solid #ddd; } }
 
 @media screen and (max-width: 780px) { #menu-toggle:checked + .site-nav { opacity: 1; height: auto; margin-bottom: -25px; } }
 

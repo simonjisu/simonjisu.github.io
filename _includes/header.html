@@ -3,8 +3,10 @@
 
 <header class="site-header">
   <h2 class="logo">
+    <a href="{{ site.baseurl }}/">{{ site.title }}</a>
     <div class="logoimage box" style="background: url({{site.baseurl}}/assets/img/logo.png)"></div>
-    <a href="{{ site.baseurl }}/">{{ site.title }}</a></h2>
+  </h2>
+    
     
   <div class="nav">
     <label for="menu-toggle" class="menu-icon">
@@ -32,7 +34,7 @@
                 {% else %}
                   {% if sitecates contains subcat %}
                   <li>
-                    <a href="{{ site.url }}{{ site.baseurl }}/archive/#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a>
+                    <a href="{{ site.url }}{{ site.baseurl }}/archive#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a>
                   </li>
                   {% endif %}
                 {% endif %}
