@@ -2,7 +2,7 @@
 layout: post
 title: "All about Word Vectors: Intro"
 date: "2018-04-19 16:41:36 +0900"
-categories: "NLP"
+categories: nlp
 author: "Soo"
 comments: true
 ---

@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "RNN & LSTM - 2: Numpy with RNN"
+title: "[DeepLearning]-10: Forward & Backward of RNN"
+categories: numpyseries
 date: "2018-03-14 22:05:37 +0900"
-categories: "DeepLearning"
 author: "Soo"
 comments: true
 ---
-# 자세하게 설명한 RNN 과 LSTM 시리즈 - 2
+# Numpy로 짜보는 Neural Network Basic - 10
+
+# RNN 과 LSTM - 2
 
 ## Numpy 로 RNN 만들어보기
 모든 코드는 Github: [NUMPYwithNN](https://github.com/simonjisu/NUMPYwithNN) 에 올려져 있습니다.

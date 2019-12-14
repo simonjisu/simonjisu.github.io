@@ -2,7 +2,7 @@
 layout: post
 title: "Github pages 로 프로젝트 문서화"
 date: "2018-12-04 22:04:38 +0900"
-categories: "DataScience"
+categories: programming
 author: "Soo"
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "Pytorch 의 PackedSequence object 알아보기"
 date: "2018-07-05 09:45:37 +0900"
-categories: "NLP"
+categories: nlp
 author: "Soo"
 comments: true
 ---

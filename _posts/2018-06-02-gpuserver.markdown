@@ -2,7 +2,7 @@
 layout: post
 title: "개인 딥러닝용 서버 설치 과정기 - 1 사양 및 우분투 서버 설치"
 date: "2018-06-02 22:26:58 +0900"
-categories: "DataScience"
+categories: programming
 author: "Soo"
 comments: true
 ---

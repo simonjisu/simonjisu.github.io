@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "NUMPY with NN - 2: Activation Function"
-categories: "DeepLearning"
+title: "[DeepLearning]-2: Activation Function"
+categories: numpyseries
 author: "Soo"
 date: "2017-12-08 11:52:21 +0900"
 comments: true

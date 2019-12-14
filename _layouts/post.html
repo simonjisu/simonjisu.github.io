@@ -1,97 +1,23 @@
 ---
 layout: default
 ---
-<div class="post">
-<div class="post-header-container {% if page.cover %}has-cover{% endif %}" {% if page.cover %}style="background-image: url({{ page.cover | prepend: site.baseurl }});"{% endif %}>
-  <div class="scrim {% if page.cover %}has-cover{% endif %}">
-    <header class="post-header">
-      <h1 class="title">{{ page.title }}</h1>
-      <p class="info">by <strong>{{ page.author }}</strong></p>
-    </header>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="article_header">
+    <h1 id="article_top" itemprop="name headline">{{ page.title }}</h1>
+    <p class="article_meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    <hr>
+  </header>
+
+  <div class="article-content" itemprop="articleBody">
+    {{ page.content }}
   </div>
-</div>
 
-<div class="wrapper">
-
-{% unless page.cover %} {% include page_divider.html %} {% endunless %}
-
-<section class="post-meta">
-  <div class="post-date">{{ page.date | date: "%B %-d, %Y" }}</div>
-  <div class="post-categories">
-  {% if page.categories.size > 0 %} in {% for cat in page.categories %}
-    {% if site.jekyll-archives %}
-    <a href="{{ site.baseurl }}/category/{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
-    {% else %}
-    <a href="{{ site.baseurl }}/posts/#{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
-    {% endif %}
-  {% endfor %}{% endif %}
-  </div>
-</section>
-
-<article class="post-content">
-  {{ content }}
-</article>
-
-{% if site.jekyll-archives %}
-  {% if page.tags.size > 0 %}
-  <section class="tags">
-    <strong>Tags:</strong> {% for tag in page.tags %}<a href="{{ site.baseurl }}/tag/{{ tag }}">{{ tag }}</a>{% if forloop.last == false %},&nbsp;{% endif %}{% endfor %}
-  </section>
-  {% endif %}
-{% endif %}
-
-<section class="rss">
-  <p class="rss-subscribe text"><strong>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></strong></p>
-</section>
-
-<section class="share">
-  <span>이 글이 도움이 되었다면? </span>
+  <footer class="article-footer">
   {% include buymecoffee.html %}
-  <!-- {% for social in site.social %}
-    {% capture full_url %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endcapture %}
-    {% if social.name == "Facebook" and social.share == true %}
-      <a href="//www.facebook.com/sharer.php?t={{ page.title | cgi_escape }}&u={{ full_url | cgi_escape}}"
-        onclick="window.open(this.href, '{{ social.icon }}-share', 'width=550,height=255');return false;">
-        <i class="fa fa-{{ social.icon | remove_first: '-square' }}-square fa-lg"></i>
-      </a>
-    {% endif %}
-    {% if social.name == "Google+" and social.share == true %}
-      <a href="//plus.google.com/share?title={{ page.title | cgi_escape }}&url={{ full_url | cgi_escape}}"
-        onclick="window.open(this.href, '{{ social.icon }}-share', 'width=550,height=255');return false;">
-        <i class="fa fa-{{ social.icon | remove_first: '-square' }}-square fa-lg"></i>
-      </a>
-    {% endif %}
-    {% if social.name == "LinkedIn" and social.share == true %}
-      <a href="//www.linkedin.com/shareArticle?mini=true&url={{ full_url | cgi_escape}}"
-        onclick="window.open(this.href, '{{ social.icon }}-share', 'width=550,height=255');return false;">
-        <i class="fa fa-{{ social.icon | remove_first: '-square' }}-square fa-lg"></i>
-      </a>
-    {% endif %}
-  {% endfor %} -->
-</section>
-
-{% include prevnext.html %}
-
-{% if site.disqus_shortname %}
-  {% unless page.disqus_disabled %}
-  <section class="disqus">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = '{{ site.disqus_shortname }}';
-
-      /* * * DON'T EDIT BELOW THIS LINE * * */
-      (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  </section>
-  {% endunless %}
-{% endif %}
-
-{% include google_ad.html %}
-</div>
-</div>
+  {% include author.html %}
+  
+  </footer>
+  {% include dq.html %}
+  {% include google_ad.html %}
+</article>

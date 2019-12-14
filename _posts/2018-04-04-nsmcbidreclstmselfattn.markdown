@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Bidirectional LSTM + self Attention Model"
+title: "[Paper] A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING"
 date: "2018-04-04 01:01:13 +0900"
-categories: "DataScience"
+categories: nlp
 author: "Soo"
 comments: true
 ---

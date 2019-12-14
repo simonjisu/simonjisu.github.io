@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "NUMPY with NN - 5: Optimizer"
-categories: "DeepLearning"
+title: "[DeepLearning]-5: Optimizer"
+categories: numpyseries
 author: "Soo"
 date: "2018-01-13 14:17:06 +0900"
 comments: true

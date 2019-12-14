@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "RNN & LSTM - 1: RNN"
 date: "2018-03-07 10:46:04 +0900"
-categories: "DeepLearning"
+title: "[DeepLearning]-9: RNN & LSTM"
+categories: numpyseries
 author: "Soo"
 comments: true
 ---
-# 자세하게 설명한 RNN 과 LSTM 시리즈 - 1
+# Numpy로 짜보는 Neural Network Basic - 9
+
+# RNN 과 LSTM - 1
 
 ## RNN(Recurrent Neural Network)
 우리가 사는 세상에 연속된 일들, 혹은 시간과 연관된 일은 매우매우 많을 것이다. 예를 들자면, 지금 이 글을 읽은 당신도 앞에 있는 내용을 기억하면서 글을 읽고 있을 것이다. 일반적인 신경망 구조에서는 이 '기억' 이라는 시스템이 존재 하지 않는다. 하지만 RNN은 다르다. 이놈은 '기억'을 할 수가 있다. 그렇다면 RNN과 기존 신경망과 어떻게 다른지를 한번 살펴보자.

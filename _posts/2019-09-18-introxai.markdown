@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[논문 리뷰] XAI Introduction"
+title: "[Paper] XAI Introduction"
 date: "2019-09-18 11:04:38 +0900"
-categories: "DataScience"
+categories: xai
 author: "Soo"
 comments: true
 ---

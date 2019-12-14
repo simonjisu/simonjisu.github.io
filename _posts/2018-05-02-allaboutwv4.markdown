@@ -2,7 +2,7 @@
 layout: post
 title: "All about Word Vectors: GloVe"
 date: "2018-05-02 23:22:05 +0900"
-categories: "NLP"
+categories: nlp
 author: "Soo"
 comments: true
 ---

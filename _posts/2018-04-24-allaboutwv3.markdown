@@ -2,7 +2,7 @@
 layout: post
 title: "All about Word Vectors: Negative Sampling"
 date: "2018-04-24 16:14:13 +0900"
-categories: "NLP"
+categories: nlp
 author: "Soo"
 comments: true
 ---

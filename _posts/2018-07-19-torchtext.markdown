@@ -2,7 +2,7 @@
 layout: post
 title: "Torchtext Tutorial"
 date: "2018-07-19 00:18:29 +0900"
-categories: "NLP"
+categories: nlp
 author: "Soo"
 comments: true
 ---

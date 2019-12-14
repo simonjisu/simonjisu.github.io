@@ -2,7 +2,7 @@
 layout: post
 title: "[PyTorch] ConvTranspose2d 와 Conv2d 의 관계"
 date: "2019-10-27 21:56:38 +0900"
-categories: "DataScience"
+categories: programming
 author: "Soo"
 comments: true
 ---

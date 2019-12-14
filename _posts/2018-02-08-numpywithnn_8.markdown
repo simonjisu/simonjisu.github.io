@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "NUMPY with NN - 8: Summary"
-categories: "DeepLearning"
+title: "[DeepLearning]-8: Summary"
+categories: numpyseries
 author: "Soo"
 date: "2018-02-08 15:13:40 +0900"
 comments: true

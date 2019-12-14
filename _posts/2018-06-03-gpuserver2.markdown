@@ -2,7 +2,7 @@
 layout: post
 title: "개인 딥러닝용 서버 설치 과정기 - 2 원격 부팅 접속"
 date: "2018-06-03 10:09:54 +0900"
-categories: "DataScience"
+categories: programming
 author: "Soo"
 comments: true
 ---

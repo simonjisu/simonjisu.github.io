@@ -2,7 +2,7 @@
 layout: post
 title: "PyCharm SSH 연결하기"
 date: "2018-06-24 18:41:07 +0900"
-categories: "DataScience"
+categories: programming
 author: "Soo"
 comments: true
 ---
