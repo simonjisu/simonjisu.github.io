@@ -369,6 +369,8 @@ body { min-height: 100%; height: auto; }
 
 .nav .page-link a:active { font-weight: 500; }
 
+.adblock { line-height: 1.5; padding: 5px 0px 0px 0px; }
+
 /* site-nav */
 @media screen and (max-width: 780px) { .site-nav { /* flex box */ display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */ display: -moz-box; /* Firefox 17- */ display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */ display: -moz-flex; /* Firefox 18+ */ display: -ms-flexbox; /* IE 10 */ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */ opacity: 0; height: 0; -webkit-transition: all .4s; transition: all .4s; -webkit-justify-content: center; justify-content: center; } }
 

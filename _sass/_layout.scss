@@ -133,6 +133,11 @@ body {
   }
 }
 
+.adblock {
+  line-height: $base-line-height;
+  padding: 5px 0px 0px 0px;
+}
+
 /* site-nav */
 
 @include media-query($on-laptop) {
