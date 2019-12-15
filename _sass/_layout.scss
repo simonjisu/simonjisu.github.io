@@ -24,7 +24,7 @@ body {
 .site-footer {
   position: absolute;
   bottom: 0;
-  padding-bottom: 0rem;
+  padding: 0px;
   width:100%;
 
   /* footer style */    
@@ -135,7 +135,7 @@ body {
 
 .adblock {
   line-height: $base-line-height;
-  padding: 5px 0px 0px 0px;
+  padding: 50px 0px 0px 0px;
 }
 
 /* site-nav */
