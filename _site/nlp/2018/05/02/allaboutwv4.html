@@ -177,6 +177,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                   
                   <li>
+                    <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
+                  </li>
+                  
+                
+              
+              
+                
+                  
+                  <li>
                     <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                   </li>
                   
@@ -293,7 +302,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>단, 한 단어에 대해서 좌측에서 등장했는지 우측에서 등장했는 지는 상관없다(이는 co-occurrence matrix 가 대각을 기준으로 대칭하는 결과를 불러옴)</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
+<div class="highlighter-rouge"><pre class="highlight"><code>import pandas as pd
 import numpy as np
 from collections import deque, Counter
 from itertools import islice
@@ -323,7 +332,8 @@ temp = coo_matrix((data, (row, col)), shape=(len(vocab), len(vocab))).toarray()
 co_mat = temp.T + temp
 
 pd.DataFrame(co_mat, index=vocab, columns=vocab)
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>코드를 실행하면 아래와 같은 표가 나온다. window size 가 1이니까 “I” 주변 한칸에 동시 등장 단어는 “like” 가 2번 “enjoy” 가 1번이다.</p>
 

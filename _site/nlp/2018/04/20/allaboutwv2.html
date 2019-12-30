@@ -177,6 +177,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                   
                   <li>
+                    <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
+                  </li>
+                  
+                
+              
+              
+                
+                  
+                  <li>
                     <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                   </li>
                   
@@ -351,7 +360,7 @@ and their Compositionality</a> (Mikolov et al. 2013)</p>
 </ul>
 
 <p><strong>코드 예시:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import numpy as np
+<div class="highlighter-rouge"><pre class="highlight"><code>import numpy as np
 sentence = "I am going to watch Avengers Infinity War".split()
 embedding_matrix = np.array([[1,2,5,1,9,10,3,4], [5,1,4,1,8,1,2,5], [7,8,1,4,1,6,2,1]])
 vocab = {w: i for i, w in enumerate(sentence)}
@@ -361,7 +370,8 @@ print("="*30)
 print("Word:", word)
 print("Index:", vocab[word])
 print("Vector:", embedding_matrix[:, vocab.get(word)])
-</code></pre></div></div>
+</code></pre>
+</div>
 <blockquote>
   <p>[[ 1  2  5  1  9 10  3  4]</p>
 

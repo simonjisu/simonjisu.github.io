@@ -177,6 +177,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                   
                   <li>
+                    <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
+                  </li>
+                  
+                
+              
+              
+                
+                  
+                  <li>
                     <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                   </li>
                   
@@ -299,10 +308,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>좋긴한데 몇 가지 단점이 있다.</p>
 
 <p>첫째로, 단어간의 미묘한 차이, 뉘앙스(nuances)를 표현 할 수가 수 없다. 아래의 예를 보자.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from nltk.corpus import wordnet as wn
+<div class="highlighter-rouge"><pre class="highlight"><code>from nltk.corpus import wordnet as wn
 for synset in wn.synsets("adept"):
     print("({})".format(synset.pos()) + ", ".join([l.name() for l in synset.lemmas()]))
-</code></pre></div></div>
+</code></pre>
+</div>
 <blockquote>
   <p>(n) ace, adept, champion, sensation, maven, mavin, virtuoso, genius, hotshot, star, superstar, whiz, whizz, wizard, wiz
 (s) adept, expert, good, practiced, proficient, skillful, skilful</p>

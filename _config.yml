@@ -47,6 +47,7 @@ toc:
       - subcat: book
       - subcat: prml
       - subcat: study
+      - subcat: paper
       - subcat: others
       - subcat: programming
       - subcat: numpyseries

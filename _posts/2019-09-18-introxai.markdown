@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[Paper] XAI Introduction"
+title: "[XAI] XAI Introduction"
 date: "2019-09-18 11:04:38 +0900"
-categories: xai
+categories: paper
 author: "Soo"
 comments: true
 ---

@@ -177,6 +177,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                   
                   <li>
+                    <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
+                  </li>
+                  
+                
+              
+              
+                
+                  
+                  <li>
                     <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                   </li>
                   
@@ -312,25 +321,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input_seq2idx
+<div class="highlighter-rouge"><pre class="highlight"><code>input_seq2idx
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
         [ 12,   9,   0,   0,   0,   0],
         [  5,  14,   3,  17,   0,   0],
         [ 10,   0,   0,   0,   0,   0]])
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>하단의 코드를 통해서 정렬을 해주고, 각 문장의 길이를 담은 list를 만들어준다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
+<div class="highlighter-rouge"><pre class="highlight"><code>input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
 input_lengths, sorted_idx = input_lengths.sort(0, descending=True)
 input_seq2idx = input_seq2idx[sorted_idx]
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>모든 <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰의 인덱스인 0 이 밑으로 내려간 것을 알 수 있다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input_seq2idx, input_lengths
+<div class="highlighter-rouge"><pre class="highlight"><code>input_seq2idx, input_lengths
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
@@ -339,12 +350,14 @@ tensor([[  1,  16,   7,  11,  13,   2],
         [ 10,   0,   0,   0,   0,   0]])
 
 tensor([ 6,  5,  4,  2,  1])
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p><strong>torch.nn.utils.rnn</strong> 에서 <strong>pack_padded_sequence</strong> 를 사용하면 PackedSequence object를 얻을 수 있다. packed_input 에는 위에서 말한 합병된 데이터와 각 타임스텝의 배치사이즈들이 담겨있다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
+</code></pre>
+</div>
 
 <p><br /></p>
 
@@ -352,27 +365,30 @@ tensor([ 6,  5,  4,  2,  1])
 
 <p>실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
+<div class="highlighter-rouge"><pre class="highlight"><code>embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
 gru = nn.RNN(input_size=embedding_size, hidden_size=hidden_size, num_layers=num_layers, bidirectional=False, batch_first=True)
 
 embeded = embed(input_seq2idx)
 packed_input = pack_padded_sequence(embeded, input_lengths.tolist(), batch_first=True)
 packed_output, hidden = gru(packed_input)
-</code></pre></div></div>
+</code></pre>
+</div>
 <p>packed_output 에는 합병된 output 과 batch_sizes 가 포함되어 있다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>packed_output[0].size(), packed_output[1]
+<div class="highlighter-rouge"><pre class="highlight"><code>packed_output[0].size(), packed_output[1]
 =========================================================
 (torch.Size([18, 2]), tensor([ 5,  4,  3,  3,  2,  1]))
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>이를 다시 원래 형태의 <strong>(배치크기, 문장의 최대 길이, 히든크기)</strong> 로 바꾸려면 <strong>pad_packed_sequence</strong> 를 사용하면 된다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
+<div class="highlighter-rouge"><pre class="highlight"><code>output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
 output.size(), output_lengths
 =========================================================
 (torch.Size([5, 6, 2]), tensor([ 6,  5,  4,  2,  1]))
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>실습코드에서 출력 결과를 살펴보면 <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰과 연관된 행은 모드 0으로 채워져 있다.</p>
 

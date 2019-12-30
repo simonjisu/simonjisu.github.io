@@ -6,9 +6,178 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 15 Dec 2019 11:52:39 +0900</pubDate>
-    <lastBuildDate>Sun, 15 Dec 2019 11:52:39 +0900</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <pubDate>Mon, 30 Dec 2019 16:26:56 +0900</pubDate>
+    <lastBuildDate>Mon, 30 Dec 2019 16:26:56 +0900</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>2019년도 회고</title>
+        <description>&lt;h1 id=&quot;2019년도를-돌아보며&quot;&gt;2019년도를 돌아보며&lt;/h1&gt;
+
+&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#올해의-공부-농사&quot;&gt;올해의 공부 농사&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#올해의-top-4-사건&quot;&gt;올해의 Top 4 사건&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2020년도-목표&quot;&gt;2020년도 목표&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;올해의-공부-농사&quot;&gt;올해의 공부 농사&lt;/h2&gt;
+
+&lt;p&gt;올 한해는 작년보다 한 층 더 성장했다고 생각한다. 작년과 비교해서 어떤 목표를 달성했는지 어떤 공부를 더 했는지 GitHub에 정리를 해두었다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://github.com/simonjisu/LookBack-Me&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;작년에는 NLP 공부에 매진했다면, 올해는 확률 통계의 기초를 조금더 공고히 다지고, XAI 분야과 조우했다. 물론 쉽지 않지만 앞으로 더 수요가 있는 분야일거라 생각한다. 딥러닝의 성능은 좋지만, 기계가 어떤 결정을 내리는지 아직 명백하게 밝히기 어려운 부분들이 많이 있다. 사람(Human)을 배제한 End-to-End 학습이 현업에서 딥러닝을 도입하지 못하는 이유라고 생각한다.&lt;/p&gt;
+
+&lt;p&gt;XAI 분야는 “기계의 설명력”을 3가지 경우로 응용 할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;기계의 성능이 사람보다 못할 경우, 연구자가 개입해서 성능 부족의 부분을 찾아내는 역할&lt;/li&gt;
+  &lt;li&gt;기계의 성능이 사람과 비슷한 경우, 사용자에게 신뢰와 믿음의 근거가 되는 역할&lt;/li&gt;
+  &lt;li&gt;기계의 성능이 사람보다 우월한 경우, 기계가 직접 선생님이 되어 다른 기계를 가르치는 역할&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2020년도에는 이 분야를 계속해서 공부하려고 한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;올해의-top-4-사건&quot;&gt;올해의 Top 4 사건&lt;/h2&gt;
+
+&lt;p&gt;올해의 개인 Top4 사건을 추리자면 다음과 같다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-커넥트재단-퇴사-서울대-데이터-사이언스-대학원-진학&quot;&gt;커넥트재단 퇴사, 서울대 데이터 사이언스 대학원 진학&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-책-출간-및-강의&quot;&gt;책 출간 및 강의&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-글또-3기-ai-collage&quot;&gt;글또 3기, AI Collage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#4-home-comming-github-블로그-복귀&quot;&gt;Home Comming, GitHub 블로그 복귀&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;1-커넥트재단-퇴사-서울대-데이터-사이언스-대학원-진학&quot;&gt;1. 커넥트재단 퇴사, 서울대 데이터 사이언스 대학원 진학&lt;/h3&gt;
+
+&lt;p&gt;2018년 2월부터 다니던 네이버 커넥트재단을 2019년 8월에 퇴사했다. 주로 맡은 업무는 강의 퍼블리싱 및 기획 업무였다. 개인적으로 첫 직장에서 좋은 사람들을 만나서 행운이라 생각했다. 그동안 했던 일을 살펴보면 다음과 같다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;퍼블리싱 업무&lt;/strong&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/deepnlp&quot;&gt;딥러닝을 이용한 자연어 처리&lt;/a&gt; - 조경현 교수님&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/deeplearningai1&quot;&gt;DeepLearniNg AI 시리즈&lt;/a&gt; - Andrew Ng&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;프로젝트 기반 학습 콘텐츠 기획 및 매니징&lt;/strong&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://deeplearningzerotoall.github.io/season2/&quot;&gt;모두를 위한 딥러닝 시즌 2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/boostcourse-dl-tensorflow&quot;&gt;텐서플로우로 시작하는 딥러닝 기초&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/boostcourse-dl-pytorch&quot;&gt;파이토치로 시작하는 딥러닝 기초&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;수강신청 데이터를 잘 보기 위한 대시보드 만들기&lt;/strong&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://www.notion.so/simonjisu/87f45a6c9a264f43aa53c843157026ef&quot;&gt;Notion 포스트 링크&lt;/a&gt;, 조만간 다시 이 블로그에 새로 올릴 예정&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;커넥트재단을 다니면서 좋았던 점은 해당 분야의 유명한 사람들을 만날 수 있었다는 것이다. GRU과 기계번역 Encoder-Decoder구조를 제안하신 조경현 교수님의 오프라인 강의를 현장 맨 앞줄에서 들을 수 있었고, 캐나다 Albert 대학의 &lt;a href=&quot;https://www.ualberta.ca/science/about-us/contact-us/faculty-directory/randy-goebel&quot;&gt;Randy Geobel&lt;/a&gt; 교수님을 보고 대가의 생각을 들으면서 다시 한 번 공부뽕(?!)이 차오르는 경험을 했다.&lt;/p&gt;
+
+&lt;p&gt;막상 퇴사하려니 조금 아쉽기도 했지만, 내가 하고싶은 공부를 하기위해 떠났다. 그리하여 올해 하반기에는 대학원에 진학하려고 부단히 노력했다. 최근에 이 분야로 진출하려는 사람들이 많아져 컨택이 쉽지는 않았다(누가 나이 30 대학원생을 받아주려나…). 다행이 이번에 신설된 서울대 데이터 사이언스 대학원에 합격하여 내년부터 하고싶은 공부를 하게 됐다. 앞으로 2년 동안 큰 목표는 다음과 같이 세웠다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;데이터 수집단계 공부를 집중적으로 한다.&lt;/li&gt;
+  &lt;li&gt;NLP, 금융 두 개의 도메인에서 XAI를 적용한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;전에 다니던 회사는 비교적 작은 규모의 회사였고, 데이터팀 같은건 없었다. 수강신청 대시보드도 사실 내가 보고싶어서 혼자 만든 작은 프로젝트다. 사람들이 언제 학습을 주로하고 어떤 콘텐츠를 주로 공부하는지 살펴볼 수 있는지 궁금했기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;대부분의 기업에서는 데이터를 수집하는 pipeline이 제대로 갖춰저 있지 않기 때문에, 데이터 수집단계에서 잘 설계해야 원하는 분석을 진행하고, 데이터에서 얻은 인사이트로 의사결정을 할 수 있다. 따라서 첫번째 목표는 데이터 수집을 잘 하기 위한 공부를 할 것이다.&lt;/p&gt;
+
+&lt;p&gt;두번째 목표는 지금까지 공부한 분야에서 최근에 공부한 XAI 분야를 접목하려고 한다. 기계의 의사결정을 잘 설명할 수 있는 모델을 만들어 사람이 보고 기계를 신뢰할 수 있게 만들어 보려고 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-책-출간-및-강의&quot;&gt;2. 책 출간 및 강의&lt;/h3&gt;
+
+&lt;p&gt;2019년도 7월말에 내가 쓴 책 &lt;딥러닝에 목마른=&quot;&quot; 사람들을=&quot;&quot; 위한=&quot;&quot; PyTorch=&quot;&quot;&gt;가 발간됐다. 책 내용은 집에서 GPU서버를 만드는 법 부터 시작해서, PyTorch로 딥러닝에 입문하는 것이다. 책을 쓰는 작업이 정말 어렵다는 것을 이번 경험으로 부터 깨달았다. 부족한 부분도 많아서 다음에는 조금더 알찬 내용으로 구성해서 다시 gitbook 형태로 써볼까 생각중이다.&lt;/딥러닝에&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bit.ly/딥목파&quot;&gt;&amp;lt;딥러닝에 목마른 사람들을 위한 PyTorch&amp;gt; 홈페이지 바로가기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2019년도 말에는 멀티캠퍼스에서 책 내용을 기반으로 강의도 진행했다. 처음해보는 강의라 목소리도 많이 쉬었었다. 사람이 말을 이렇게나 많이 할 수도 있구나 생각했다… 그래도 최선을 다해서 개념 하나하나 설명해드리고 자료도 충분히 많이 준비했다고 생각한다. 3일짜리 강의라 처음 배우시는 분들이 개념을 받아들이기 쉽지는 않았을 거라 생각한다. 다음에 기회가 된다면 책처럼 만들어서 배포해보는 것도 나쁘지 않을 것 같다.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-글또-3기-ai-collage&quot;&gt;3. 글또 3기, AI Collage&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;글또&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2019년도 여름부터 겨울까지 글또 3기에 참가했다. 역시 강제로 due를 정하더니 글을 쓰게 되더라. 이런 규제는 자신에게 긍정적인 효과가 있다고 생각한다. 그래도 초중반까지 꾸준히 글을 써왔는데 후반부에는 바쁘다는 핑계로 계속 안쓰게 됐다. 반성하자. 다음 기수에도 참가할 생각이다. 그때는 정말 한번도 놓치지 않고 예치금을 다 돌려 받으리라.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/groups/375431516259701/&quot;&gt;글또 페이스북 바로가기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;AI Collage&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;또 하나 새로 참가한 것은 모두의 연구소에서 진행하는 AI Collage다. AI Collage는 현실에 있는 6개 분야의 문제를 풀어보고, 최종단계에서는 논문을 써보는 장기 프로젝트다. XAI 팀에 합류하여 여러가지 논문을 읽고 구현을 진행하고 있다. 내년 5월까지 진행되는데 아직 여러 논문을 구현 중에 있다. 내년에는 꼭 논문을 써보려고 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/XAI&quot;&gt;XAI GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://aic.yangjaehub.com/&quot;&gt;AIC 바로가기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-home-comming-github-블로그-복귀&quot;&gt;4. Home Comming, GitHub 블로그 복귀&lt;/h3&gt;
+
+&lt;p&gt;지난 1년간 Notion을 활용해서 블로그를 만드려고 했다. 깔끔하고 페이지를 정리하는데 좋은 기능들이 많기 때문이다. 그러나 블로그로 활용하기에 부족한 부분이 2가지 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Inline Math 의 부재&lt;/li&gt;
+  &lt;li&gt;Google Analytics 의 부재&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Inline Math를 사용할 수 없는 것은 큰 타격이었다. 보통 논문을 보면 수식이 정말 많은데 이를 사용할 수 없다 점은 너무 불편했다. 한줄 짜리 간단한 수식조차 Math Block 으로 만들어야 했기 때문에, 글의 구조를 짜는데 방해가 됐다. Notion 공식 트위터에 많은 사람들이 요청중이긴 하나 언제 개발될지는 아직 미지수다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://twitter.com/notionhq/status/1093334827770699778&quot;&gt;Notion 공식 트위터 Inline Math 요청 바로가기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그리고 GA를 달수 없어서 내 블로그의 유입을 파악할 수가 없었다. 작은 이미지 패킷으로 페이지 조회수를 확인 할 수 있지만, 그럴려면 모든 페이지에 패킷을 달아야하는데 여간 귀찮은 작업이 아니다.&lt;/p&gt;
+
+&lt;p&gt;그래서 다시 복귀했다. 이번달에 블로그 스킨을 다시 깔끔하게 바꾸고 우측의 custom 메뉴바를 으로 2일동안 만들었다. 그렇다고 Notion 이 안좋은 것은 아니다. 빠르게 메모나 기록할 때, 여행 계획을 만들때 이만큼 유용한 도구는 없다. 다만 Notion 기술 블로그를 만드려고 하면 굉장히 비추천한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;2020년도-목표&quot;&gt;2020년도 목표&lt;/h2&gt;
+
+&lt;p&gt;2020년이 코앞으로 다가왔다. 내년에는 다음과 같은 목표를 세웠다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PRML 공부 계속하기&lt;/li&gt;
+  &lt;li&gt;더 많은 논문을 읽고 블로그에 정리하기&lt;/li&gt;
+  &lt;li&gt;글또 4기에 참가하기&lt;/li&gt;
+  &lt;li&gt;AI Collage 에서 논문 한편 쓰기&lt;/li&gt;
+  &lt;li&gt;데이터 프로세싱에 대한 공부하기&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이중 얼만큼 달성할지 모르겠지만, 노력하여 올해보다 더 성장할 수 있는 한해가 되기를 …&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pCe5D4-wrxlP4v1CqRx_u-_CeGZToDDJ&quot; width=&quot;240px&quot; height=&quot;300px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;P.S. 닌텐도 스위치도 사자&lt;/del&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
+        <link>http://localhost:4000/others/2019/12/30/lookback2019.html</link>
+        <guid isPermaLink="true">http://localhost:4000/others/2019/12/30/lookback2019.html</guid>
+        
+        
+        <category>others</category>
+        
+      </item>
     
       <item>
         <title>[PyTorch] ConvTranspose2d 와 Conv2d 의 관계</title>
@@ -82,11 +251,11 @@
 
 &lt;p&gt;이 미분 과정을 파이썬의 &lt;code class=&quot;highlighter-rouge&quot;&gt;sympy&lt;/code&gt; 패키지로 쉽게 만들 수 있다(Jupyter Notebook 에서 사용하길 권장). 다음 코드에서 C 매트릭스를 살펴보면 위와 같은 결과를 얻을 수 있다.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sympy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;# 노트북에서 수학식의 LaTeX 표현 사용
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sympy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_printing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_latex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mathjax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 노트북에서 수학식의 LaTeX 표현 사용&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sympy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_printing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_latex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mathjax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convolution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
@@ -100,23 +269,26 @@
 &lt;span class=&quot;n&quot;&gt;x_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x^{(l+1)}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;# Convolution Output
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;convolution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Convolution Output&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;convolution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;# Calculate derivatives &amp;amp; get matrix C
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;span class=&quot;c&quot;&gt;# Calculate derivatives &amp;amp; get matrix C&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;이 C 행렬은 재밌는 특징을 가진다. 매트릭스 형태의 입력 데이터를 한줄로 핀 후에 매트릭스 연산을 하고, 다시 형태를 변환 시켜주면 Convolution 의 출력값이 나온다. 정말 맞는지 살펴보기 위해서 다음 코드를 실행해보자.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# forward (1, 16) x (16, 4) = (1, 4) = (2, 2)
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# forward (1, 16) x (16, 4) = (1, 4) = (2, 2)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;반대로 출력값을 한줄로 피고 C의 전치행렬과 곱한 후 다시 형태를 변환 시켜주면 입력과 다른 행렬이 나온다.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# backward
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# backward&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;실행하면 다음과 같은 행렬이 나오는데 이 연산 과정을 Deconvolution 연산, 정확히는 &lt;strong&gt;Fractionally-strided convolution&lt;/strong&gt; 혹은 &lt;strong&gt;Transpose convolution&lt;/strong&gt; 이라고 한다. 어떻게 계산된 것이며 어떤 뜻일까?&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
@@ -152,7 +324,7 @@
       </item>
     
       <item>
-        <title>[Paper] XAI Introduction</title>
+        <title>[XAI] XAI Introduction</title>
         <description>&lt;h1 id=&quot;explaining-explanations-an-overview-of-interpretability-of-machine-learning&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/h1&gt;
 
 &lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1806.00069&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/a&gt;&lt;/p&gt;
@@ -764,40 +936,11 @@
 &lt;p&gt;그러나 우리는 설명가능성의 다른 측면을 다루기 위해 취해진 다양한 접근방식이 고립되어 있다는 것을 발견했다. 더 효율적인 설명을 달성하기 위해 다른 범주의 기술을 합병하는 접근 방법과 같은 설명가능성 공간에 대한 작업은 상대적으로 적은 주의를 주고도 특정 범주의 기술의 발전을 야기했다. 설명의 목적과 유형이 주어졌을 때, 어떤 설명 측정기준이 제일 좋은 것인지 알기가 명확하지 않다. 우리는 표적 설명(the targeted explanation)의 목적과 완전무결성에 맞는 다양한 측정기준을 사용하길 권장한다. 커뮤니티에서 다양한 분야의 여러 아이디어를 합치고 함께 작업하고 배우면서, 시스템 설명의 전반적인 상태 눈에 띄게 향상될 것이다. 그 결과로 행동 추정(behavioral extrapolation)을 제공하고, 딥러닝 시스템의 신뢰를 구축하고, 심층 네트워크 연산의 유용한 인사이트 등 시스템 행동의 이해와 증진을 가능케한다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Sep 2019 11:04:38 +0900</pubDate>
-        <link>http://localhost:4000/xai/2019/09/18/introxai.html</link>
-        <guid isPermaLink="true">http://localhost:4000/xai/2019/09/18/introxai.html</guid>
+        <link>http://localhost:4000/paper/2019/09/18/introxai.html</link>
+        <guid isPermaLink="true">http://localhost:4000/paper/2019/09/18/introxai.html</guid>
         
         
-        <category>xai</category>
-        
-      </item>
-    
-      <item>
-        <title>2018 회고</title>
-        <description>&lt;h1 id=&quot;2018년-회고와-다짐&quot;&gt;2018년 회고와 다짐&lt;/h1&gt;
-
-&lt;p&gt;이렇게 2018년이 지나간다, 올해 공부한 것은 Github 에 정리했고, 올해 잘했던 점과 아쉬웠던 점을 블로그에 쓰기로 한다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Look Back - Me: &lt;a href=&quot;https://github.com/simonjisu/LookBack-Me&quot;&gt;https://github.com/simonjisu/LookBack-Me&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;2018년-회고&quot;&gt;2018년 회고&lt;/h2&gt;
-
-&lt;p&gt;총평으로 2018년은 나에게는 운이 좋았던해였다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;내가 첫 직장을 잡은 해이자 8년간 다닌 학교를 졸업한 한해 였다. (Gitbook 프로필도 업데이트 해야지..) 네이버 커넥트재단에서 좋은 상사를 만났다. 그 분은 효율적이고 솔직한 사람이며 가식을 별로 좋아하지 않는다. 이런 점은 나랑 잘 맞는 부분이다. 나도 첫 직장이기도 하고 더 열심히 했던것 같다. 뭔가 상호보완을 잘 해준 그리고 교육쪽 사업과 사람을 보는 눈이 남다르다. 인문계에서 공부하다가 이공계관련 지식을 공부하다보니, 점점더 실력이&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이 블로그가 조금씩 성장을 보인 한해이기도 하다. 주간 평균 조회수가 8~10 사이를 왔다&lt;/p&gt;
-</description>
-        <pubDate>Mon, 31 Dec 2018 18:49:32 +0900</pubDate>
-        <link>http://localhost:4000/others/2018/12/31/lookback2018.html</link>
-        <guid isPermaLink="true">http://localhost:4000/others/2018/12/31/lookback2018.html</guid>
-        
-        
-        <category>others</category>
+        <category>paper</category>
         
       </item>
     
@@ -821,31 +964,34 @@
 
 &lt;p&gt;사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;패키지 버전을 체크해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nodejs --version
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nodejs --version
 v10.14.1
 
 $ npm --version
 6.4.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;install-gitbook-client&quot;&gt;Install gitbook client&lt;/h3&gt;
 
 &lt;p&gt;gitbook client 를 설치해야한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;initialize-gitbook&quot;&gt;Initialize gitbook&lt;/h3&gt;
 
 &lt;p&gt;이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
 \README.md
 \SUMMARY.md
 \book.json
@@ -857,52 +1003,59 @@ $ npm --version
 \docs  # github page 로 가는 html 파일들 등
 	\...
 		
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;그럼 우선 프로젝트 디렉토리를 만들어보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [프로젝트 디렉토리] &amp;amp;&amp;amp; cd [프로젝트 디렉토리]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [프로젝트 디렉토리] &amp;amp;&amp;amp; cd [프로젝트 디렉토리]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 디렉토리를 만들자. 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 안에 있는 모든 내용이 향후에 웹페이지로 갈것이다. 만들고 아래 명령어를 시작해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook init
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook init
 Installing GitBook 3.2.3
 ...
 warn: no summary file in this book 
 info: create README.md 
 info: create SUMMARY.md 
 info: initialization is finished 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ ls
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ ls
 README.md  SUMMARY.md
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;README.md&lt;/strong&gt; 파일은 gitbook 의 첫번째 페이지, &lt;strong&gt;SUMMARY.md&lt;/strong&gt; 는 gitbook 의 목차 역할을 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 폴더 안에 첫번째 챕터를 만들어보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ mkdir posts &amp;amp;&amp;amp; cd posts
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ mkdir posts &amp;amp;&amp;amp; cd posts
 [./posts] $ mkdir chapter-1 &amp;amp;&amp;amp; cd chapter-1
 [./posts/chapter-1] $ vi README.md  # 아무거나 쓰고 저장하자
 [./posts/chapter-1] $ vi 01_helloworld.md  # 아무거나 쓰고 저장하자
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;이제 SUMMARY.md 에서 목차를 수정해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[./posts/chapter-1] $ cd ../..
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[./posts/chapter-1] $ cd ../..
 [.] $ vi SUMMARY.md
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Summary
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Summary
   
 * [Introduction](README.md)
 * [Chapter-1](post/chapter-1/README.md)
 	* [01 hello world](post/chapter-1/01_helloworld.md)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;여기까지 왔으면 기본적인 설정은 완료된것이다. &lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook serve&lt;/code&gt; 명령어를 통해 한번 살펴보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook serve
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook serve
 Live reload server started on port: 35729
 Press CTRL+C to quit ...
 
@@ -920,7 +1073,8 @@ info: &amp;gt;&amp;gt; generation finished with success in 0.3s !
 
 Starting server ...
 Serving book on http://localhost:4000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;http://localhost:4000&lt;/strong&gt; 로 접속을 시도해보자. 아래와 같은 화면이 나오면 성공이다.&lt;/p&gt;
 
@@ -932,51 +1086,56 @@ Serving book on http://localhost:4000
 
 &lt;p&gt;테스트 후, 프로젝트 디렉토리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt; 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ vi .gitignore
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ vi .gitignore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;아래 코드를 넣어주자. &lt;strong&gt;node_modules&lt;/strong&gt; 는 plugin 에 필요한 패키지들을 설치하는 디렉토리인데 올리지 않는다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Book build output
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Book build output
 _book
 # Dependency packages
 node_modules
 # Jupyter Notebook checkpoint
 .ipynb_checkpoints
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;이제 github 에 올려보도록 한다. 우선 자신의 github 에 [프로젝트 디렉토리]와 같은 이름의 github 저장소를 생성하자. 그리고 git 을 사용하기 위해, 다시 돌아와서 해당 프로젝트 디렉토리를 git 저장소로 만들어준다. (애당초에 repository 를 만들어서 clone 하는 상태에서 시작해도 좋다.)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ git init
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ git init
 [.](master) $ git remote add origin git@github.com:[사용자이름]/[프로젝트 디렉토리].git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;완료되었으면 저장소에 올려보도록 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;publish-gitbook.sh&lt;/code&gt; 라는 쉘 스크립트를 만들어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.](master) $ vi publish-gitbook.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.](master) $ vi publish-gitbook.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# remove gitbook old things&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; _book
-&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; docs
+rm -rf _book
+rm -rf docs
 
 &lt;span class=&quot;c&quot;&gt;# gitbook init&lt;/span&gt;
-gitbook &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gitbook build
+gitbook install &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gitbook build
 
 &lt;span class=&quot;c&quot;&gt;# build pages&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;docs
-&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; _book/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; docs/
+mkdir docs
+cp -R _book/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; docs/
 
 &lt;span class=&quot;c&quot;&gt;# delete things&lt;/span&gt;
-git clean &lt;span class=&quot;nt&quot;&gt;-fx&lt;/span&gt; _book
+git clean -fx _book
 
 &lt;span class=&quot;c&quot;&gt;# upload&lt;/span&gt;
-git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-git commit &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;update docs&quot;&lt;/span&gt;
-git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+git add .
+git commit -a -m &lt;span class=&quot;s2&quot;&gt;&quot;update docs&quot;&lt;/span&gt;
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;저장소에서-활성화-하기&quot;&gt;저장소에서 활성화 하기&lt;/h3&gt;
 
@@ -1002,21 +1161,22 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;p&gt;주로 사용하는것은 수식편집이 가능한 “katex”, 방문자 분석을 위한 구글 애널릭틱스 “ga”, 댓글을 달수 있는 “disqus” (회원가입 필요함) 정도다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
-	&quot;plugins&quot;: [
-		&quot;katex&quot;,
-		&quot;disqus&quot;,
-		&quot;ga&quot;
-		],
-	&quot;pluginsConfig&quot;: {
-        &quot;disqus&quot;: {
-            &quot;shortName&quot;: &quot;XXXXXXX&quot;
-        },
-        &quot;ga&quot;: {
-            &quot;token&quot;: &quot;UA-XXXX-Y&quot;
-        }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;katex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;disqus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ga&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pluginsConfig&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;disqus&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;shortName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;XXXXXXX&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;ga&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UA-XXXX-Y&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;hr /&gt;
 
@@ -1059,10 +1219,11 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;p&gt;어플리케이션 개발을 시작하기전에, 어플리케이션에서 사용할 폴더를 만들자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
     /static
     /templates
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;앞으로 이 &lt;strong&gt;“nmtapp”&lt;/strong&gt; 폴더 안에 우리가 사용할 것들을 넣는다. &lt;strong&gt;“static”&lt;/strong&gt; 은 사용자들을 위한 폴더, 이 폴더는 css와 javascript 파일들이 저장되는 곳이다. Flasks는 templates 폴더에서 &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja2&lt;/a&gt; 템플릿을 찾을 것이다.&lt;/p&gt;
 
@@ -1070,12 +1231,13 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;p&gt;데이터베이스 스키마를 생성해야 한다. 우리의 어플리케이션은 단지 하나의 테이블만 필요하며 사용이 매우 쉬운 SQLite를 쓸것이다. 다음의 내용을 schema.sql 이라는 이름의 파일로 방금 생성한 nmtapp 폴더에 저장한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drop table if exists nmtmain;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drop table if exists nmtmain;
 create table nmtmain (
   id integer primary key autoincrement,
    question string not null
 );
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;해당 테이블의 이름은 “nmtmain” 이며, 간략하게 칼럼을 소개하자면, 아래와같다.&lt;/p&gt;
 
@@ -1090,26 +1252,28 @@ create table nmtmain (
 
 &lt;h2 id=&quot;step-2-어플리케이션-셋업-코드&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
     /static
     /templates
     /schema.sql
     /e2estart.py
     /settings.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;settingspy&quot;&gt;settings.py&lt;/h3&gt;
 
 &lt;p&gt;추가로 앱을 실행하기 위한 파일들을 만든다. 중요한 정보 혹은 환경변수가 있는 파일은 &lt;strong&gt;“settings.py”&lt;/strong&gt; 에 넣기로 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## settings.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## settings.py
 # configuration
 DATABASE = '../data/e2e.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'password'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;클라이언트에서의 세션을 안전하게 보장하기 위해서는 secret_key 가 필요하다. secret_key는 추측이 어렵도록 가능한 복잡하게 선택하여야 한다. 디버그(DEBUG) 플래그는 인터랙티브 디버거를 활성화 시키거나 비활성화 시키는 일을 한다. 운영시스템에서는 디버그 모드를 절대로 활성화 시키지 말아야 한다. 왜냐하면 디버그 모드에서는 사용자가 서버의 코드를 실행할수가 있기 때문이다.&lt;/p&gt;
 
@@ -1117,7 +1281,7 @@ PASSWORD = 'password'
 
 &lt;p&gt;앱을 실행하는 &lt;strong&gt;“e2estart.py”&lt;/strong&gt; 파일을 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# all the imports
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# all the imports
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
@@ -1130,23 +1294,26 @@ def connect_db():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;아직 모르는 import 가 많지만, 차차 배울테니 우선 앱을 만들고 실행하는 부분을 알아보자.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;환경설정 불러오기:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.from_pyfile(&quot;./settings.py&quot;, silent=True)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.from_pyfile(&quot;./settings.py&quot;, silent=True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;만약에 현재 파일 위치에 환경변수 객체(settings.py 의 내용)를 작성하였으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;from_object(__name__)&lt;/code&gt; 라는 명령어를 쓰면 된다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;실행&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ python3 e2estart.py  
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ python3 e2estart.py  
 ...
 192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET / HTTP/1.1&quot; 404 -
 192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;지금은 어떤 뷰(view)를 만들지 않았기 때문에, 브라우저에서 페이지를 찾을 수 없다는 404에러를 볼 수 있을 것이다. 이건 나중에 살펴보고, 우선 데이터베이스를 만들고 진행하도록 하자.&lt;/p&gt;
 
@@ -1156,25 +1323,28 @@ if __name__ == '__main__':
 
 &lt;p&gt;우선 데이터를 어디다 저장할지 정해보자. 데이터는 앱 밖에 있는 &lt;strong&gt;data&lt;/strong&gt; 폴더를 생성해서 저장하기로 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/demo
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/demo
 	/venv
 	/e2eapp
 	/data
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;아까 만들어둔 &lt;strong&gt;“schema.sql”&lt;/strong&gt; 파일을 이용하여 sqlite3 명령어를 사용하여 다음과 같이 만들 수 있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ sqlite3 ../data/e2e.db &amp;lt; schema.sql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ sqlite3 ../data/e2e.db &amp;lt; schema.sql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Sqlite3 가 설치 안됐을 수도 있다. 아래 명령어를 쳐서 (가상환경 빠져나와서) sqlite3 를 설치하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install sqlite3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install sqlite3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;데이터베이스를 초기화하는 함수를 만들고 싶다면 contextlib 의 closing 함수를 import 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# import 에 추가
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# import 에 추가
 from contextlib import closing
 
 def init_db():
@@ -1182,7 +1352,8 @@ def init_db():
         with app.open_resource('schema.sql') as f:
             db.cursor().executescript(f.read())
         db.commit()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;함수설명&lt;/strong&gt;&lt;/p&gt;
 
@@ -1221,7 +1392,7 @@ def init_db():
 
 &lt;p&gt;hello.py 파일을 하나 만들어 아래와 같이 작성하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from flask import Flask
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
@@ -1230,18 +1401,20 @@ def hello_world():
 
 if __name__ == '__main__':
     app.run()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;hello.py 를 실행하자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 hello.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 hello.py
  * Serving Flask app &quot;hello&quot; (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
    Use a production WSGI server instead.
  * Debug mode: off
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;일단 &lt;strong&gt;WARNING&lt;/strong&gt; 이 뜨는데 어떻게 해결하는지는 나중에 살펴보고 통신이 어떻게 되는지 살펴보자.&lt;/p&gt;
 
@@ -1251,8 +1424,9 @@ if __name__ == '__main__':
 
 &lt;p&gt;우선 app.run 부분을 아래와 같이 바꿔주고 다시 실행해보자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.run(host='0.0.0.0')
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.run(host='0.0.0.0')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;그리고 추가로 라즈베리파이를 현재 어떻게 접속하고 있는지를 이해해야한다.&lt;/p&gt;
 
@@ -1288,8 +1462,9 @@ if __name__ == '__main__':
 
 &lt;p&gt;자, 설정을 마쳤다면 실행하고 있는 노트북의 인터넷 창에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;[외부 IP 주소]:5000&lt;/code&gt; 를 쳐보자. 그리고 라즈베리파이 터미널을 확인하면&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.6.34 - - [30/Oct/2018 21:23:18] &quot;GET / HTTP/1.1&quot; 200 -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;192.168.6.34 - - [30/Oct/2018 21:23:18] &quot;GET / HTTP/1.1&quot; 200 -
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;표시가 뜰텐데, &lt;strong&gt;“정상적으로 신호를 주고 받아서 ‘Hello World!’ 를 보냈어!”&lt;/strong&gt; 라는 뜻이다.&lt;/p&gt;
 
@@ -1336,25 +1511,29 @@ if __name__ == '__main__':
 
 &lt;p&gt;virtualenv 패키지를 받는다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install virtualenv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install virtualenv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;자신의 폴더로 들어가서 가상환경을 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir demo
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir demo
 $ cd demo
 $ virtualenv venv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;가상환경으로 접속한다&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . venv/bin/activate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;앞에 괄호에 만든 가상환경이 뜨면, 성공한것이다. 만약에 가상환경을 빠져나오려면 아래와 같이 실행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ deactivate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ deactivate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;hr /&gt;
 
@@ -1362,8 +1541,9 @@ $ virtualenv venv
 
 &lt;h3 id=&quot;flask&quot;&gt;Flask&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install Flask
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install Flask
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;pytorch-1115-수정&quot;&gt;PyTorch (11.15 수정)&lt;/h3&gt;
 
@@ -1371,83 +1551,93 @@ $ virtualenv venv
 
 &lt;p&gt;설치전 필요한 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;pip list&lt;/code&gt; 를 통해서 없는 패키지라면 설치해주자.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
 numpy
 pyyaml
 setuptools
 six
 typing
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install torch torchvision torchtext&lt;/code&gt; 을 써준다.&lt;/p&gt;
 
 &lt;p&gt;하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. “&lt;a href=&quot;https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754&quot;&gt;라즈베리파이에 파이토치 설치하기&lt;/a&gt;” 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libopenblas-dev cython libatlas-dev \
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libopenblas-dev cython libatlas-dev \
 m4 libblas-dev python3-dev cmake
 # 필수로 먼저 설치해주자
 (venv) $ pip install pyyaml numpy 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;pytorch 설치전 리눅스 환경변수를 만들어준다. &lt;code class=&quot;highlighter-rouge&quot;&gt;.profile&lt;/code&gt; 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi ~/.profile
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi ~/.profile
 # 아래 내용을 밑단에 추가한다.
 export NO_CUDA=1
 export NO_DISTRIBUTED=1
 
 # 설정후, 터미널 재시작한다.
 $ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;download 폴더를 만들어서 안에 PyTorch 를 clone 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ mkdir downloads &amp;amp;&amp;amp; cd downloads
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ mkdir downloads &amp;amp;&amp;amp; cd downloads
 (venv) $ git clone --recursive https://github.com/pytorch/pytorch
 (venv) $ cd pytorch
 (venv) $ git checkout tags/v0.4.1 -b build
 (venv) $ git submodule update --init --recursive
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;PyTorch 를 빌드한다. 한숨 자고 오는게 마음 편하다..&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py build
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py build
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종료하면 안된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ date &amp;amp;&amp;amp; python3 setup.py build &amp;amp;&amp;amp; date &amp;amp;&amp;amp; python3 setup.py install &amp;amp;&amp;gt; message-build &amp;amp;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ date &amp;amp;&amp;amp; python3 setup.py build &amp;amp;&amp;amp; date &amp;amp;&amp;amp; python3 setup.py install &amp;amp;&amp;gt; message-build &amp;amp;
 (venv) $ 2018. 11. 14. (수) 17:46:27 KST
 (venv) $ ...설치내용 주르륵...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;아래 명령어를 쳐서 date 함수가 잘 출력됐으면, 빌드는 성공적으로 진행된 것이다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ tail -l message-build
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ tail -l message-build
 (venv) $ 2018. 11. 15. (목) 05:54:24 KST
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;거의 열두시간 걸렸다… ㅋㅋ 에러가 없을 경우 아래를 계속 진행한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;위에 방법도 좋지만 향후에 재설치를 할수 있게 아래처럼 해준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ export NO_CUDA=1
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ export NO_CUDA=1
 (venv) $ export NO_DISTRIBUTED=1
 (venv) $ pip install wheel
 (venv) $ python3 setup.py bdist_wheel
 (venv) $ cd dist
 (venv) $ pip install [dist 폴더 안에 있는 wheel 파일]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/0sm9i9ajhp5y5kw/1115_installtorch.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;해당 wheel 파일을 어딘가 다른 곳에 저장 해두었다가 나중에 설치할 일이 생기면 다시 아래처럼만 하면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install [pytorch wheel 파일]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install [pytorch wheel 파일]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;설치 종료후 잘 설치가 됐는지, 확인해보자&lt;/p&gt;
 
@@ -1473,7 +1663,7 @@ $ source ~/.bashrc
       </item>
     
       <item>
-        <title>[Paper] A Neural Probabilistic Language Model</title>
+        <title>[NLP] A Neural Probabilistic Language Model</title>
         <description>&lt;h1 id=&quot;paper-a-neural-probabilistic-language-model&quot;&gt;[PAPER] A Neural Probabilistic Language Model&lt;/h1&gt;
 &lt;hr /&gt;
 
@@ -1717,11 +1907,11 @@ C &amp;= \vert V \vert \times m
 &lt;p&gt;결과를 살펴보면 문맥은 상당히 못맞추었으나 문장의 구조는 잘 학습한 것을 알 수 있다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 22 Aug 2018 23:26:14 +0900</pubDate>
-        <link>http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/2018/08/22/neuralnetworklm.html</guid>
+        <link>http://localhost:4000/paper/2018/08/22/neuralnetworklm.html</link>
+        <guid isPermaLink="true">http://localhost:4000/paper/2018/08/22/neuralnetworklm.html</guid>
         
         
-        <category>nlp</category>
+        <category>paper</category>
         
       </item>
     
@@ -1741,8 +1931,9 @@ C &amp;= \vert V \vert \times m
 
 &lt;p&gt;&lt;strong&gt;설치:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torchtext
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torchtext
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.&lt;/p&gt;
 
@@ -1763,13 +1954,14 @@ C &amp;= \vert V \vert \times m
 
 &lt;p&gt;아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations&quot;, 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations&quot;, 
 '3']
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;텍스트를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TEXT&lt;/code&gt;, 해당 문장의 sentiment 를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;LABEL&lt;/code&gt; 필드객체 두 개를 만든다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Field
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Field
 
 TEXT = Field(sequential=True,
              use_vocab=True,
@@ -1781,7 +1973,8 @@ LABEL = Field(sequential=False,
               preprocessing = lambda x: int(x),  
               batch_first=True)
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Arguments:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1799,7 +1992,7 @@ LABEL = Field(sequential=False,
 
 &lt;p&gt;데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용해서 아래와 같이 만들어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import TabularDataset
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import TabularDataset
 
 train_data = TabularDataset.splits(path='./data/',
 					train='train_path',
@@ -1807,14 +2000,16 @@ train_data = TabularDataset.splits(path='./data/',
 					test='test_path',
 					format='tsv', 
 					fields=[('text', TEXT), ('label', LABEL)])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_data = TabularDataset(path='./data/examples.tsv', 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_data = TabularDataset(path='./data/examples.tsv', 
 				format='tsv', 
 				fields=[('text', TEXT), ('label', LABEL)])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;fields:&lt;/strong&gt; 아까 만들어준 필드는 리스트 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]&lt;/code&gt; 로 넣어준다.&lt;/li&gt;
@@ -1826,35 +2021,38 @@ train_data = TabularDataset.splits(path='./data/',
 
 &lt;p&gt;훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TEXT.build_vocab(train_data)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TEXT.build_vocab(train_data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;4-데이터-로더-만들기create-data-loader&quot;&gt;4. 데이터 로더 만들기(Create Data Loader)&lt;/h3&gt;
 
 &lt;p&gt;마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Iterator
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Iterator
 
 train_loader, valid_loader, test_loader = \
 	TabularDataset.splits((train_data, valid_data, test_data), 
 				batch_size=3, 
 				device=None,  # gpu 사용시 &quot;cuda&quot; 입력
 				repeat=False)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;만약에 없다면? 아래와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterator&lt;/code&gt; 객체에 그냥 넣어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loader = Iterator(train_data, 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loader = Iterator(train_data, 
 			batch_size=3, 
 			device=None,  # gpu 사용시 &quot;cuda&quot; 입력
 			repeat=False)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.&lt;/p&gt;
 
 &lt;h3 id=&quot;테스트&quot;&gt;테스트&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for batch in train_loader:
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for batch in train_loader:
     break
 print(batch.text)
 print(batch.label)
@@ -1875,7 +2073,8 @@ tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
            6910,      8,  10136,      8,      3,   2204,   4340,      2,
               1,      1,      1]])
 tensor([ 0,  3,  1])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.&lt;/p&gt;
 
@@ -1978,25 +2177,27 @@ tensor([ 0,  3,  1])
 
 &lt;p&gt;전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
         [ 12,   9,   0,   0,   0,   0],
         [  5,  14,   3,  17,   0,   0],
         [ 10,   0,   0,   0,   0,   0]])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;하단의 코드를 통해서 정렬을 해주고, 각 문장의 길이를 담은 list를 만들어준다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
 input_lengths, sorted_idx = input_lengths.sort(0, descending=True)
 input_seq2idx = input_seq2idx[sorted_idx]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;모든 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰의 인덱스인 0 이 밑으로 내려간 것을 알 수 있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx, input_lengths
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx, input_lengths
 ============================================
 tensor([[  1,  16,   7,  11,  13,   2],
         [  1,  16,   6,  15,   8,   0],
@@ -2005,12 +2206,14 @@ tensor([[  1,  16,   7,  11,  13,   2],
         [ 10,   0,   0,   0,   0,   0]])
 
 tensor([ 6,  5,  4,  2,  1])
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;torch.nn.utils.rnn&lt;/strong&gt; 에서 &lt;strong&gt;pack_padded_sequence&lt;/strong&gt; 를 사용하면 PackedSequence object를 얻을 수 있다. packed_input 에는 위에서 말한 합병된 데이터와 각 타임스텝의 배치사이즈들이 담겨있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -2018,27 +2221,30 @@ tensor([ 6,  5,  4,  2,  1])
 
 &lt;p&gt;실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
 gru = nn.RNN(input_size=embedding_size, hidden_size=hidden_size, num_layers=num_layers, bidirectional=False, batch_first=True)
 
 embeded = embed(input_seq2idx)
 packed_input = pack_padded_sequence(embeded, input_lengths.tolist(), batch_first=True)
 packed_output, hidden = gru(packed_input)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;packed_output 에는 합병된 output 과 batch_sizes 가 포함되어 있다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_output[0].size(), packed_output[1]
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_output[0].size(), packed_output[1]
 =========================================================
 (torch.Size([18, 2]), tensor([ 5,  4,  3,  3,  2,  1]))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;이를 다시 원래 형태의 &lt;strong&gt;(배치크기, 문장의 최대 길이, 히든크기)&lt;/strong&gt; 로 바꾸려면 &lt;strong&gt;pad_packed_sequence&lt;/strong&gt; 를 사용하면 된다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
 output.size(), output_lengths
 =========================================================
 (torch.Size([5, 6, 2]), tensor([ 6,  5,  4,  2,  1]))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;실습코드에서 출력 결과를 살펴보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰과 연관된 행은 모드 0으로 채워져 있다.&lt;/p&gt;
 

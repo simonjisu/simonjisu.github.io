@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "[Paper] A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING"
+title: "[NLP] A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING"
 date: "2018-04-04 01:01:13 +0900"
-categories: nlp
+categories: paper
 author: "Soo"
 comments: true
 ---
