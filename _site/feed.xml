@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 03 Jan 2020 22:19:27 +0900</pubDate>
-    <lastBuildDate>Fri, 03 Jan 2020 22:19:27 +0900</lastBuildDate>
+    <pubDate>Fri, 03 Jan 2020 22:27:10 +0900</pubDate>
+    <lastBuildDate>Fri, 03 Jan 2020 22:27:10 +0900</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -92,7 +92,7 @@
 &lt;p&gt;이쯤에서 &lt;del&gt;차후에 가고 싶은&lt;/del&gt; 페이스북(Facebook)의 채용 공고를 몇개 살펴보면 그 역할이 다 다르다는 것을 확인 할 수 있다.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Research Scientist, Artificial Intelligence (PhD)&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Research Scientist, Artificial Intelligence (PhD)&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;figure class=&quot;image&quot;&gt;
@@ -100,8 +100,10 @@
     &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/985225105171427&lt;/figcaption&gt;
 &lt;/figure&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
-  &lt;p&gt;Data Scientist, Analytics (PhD)&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Data Scientist, Analytics (PhD)&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;figure class=&quot;image&quot;&gt;
@@ -111,8 +113,10 @@
 
 &lt;p&gt;https://drive.google.com/file/d//view?usp=sharing&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
-  &lt;p&gt;Data Engineer, Machine Learning&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Data Engineer, Machine Learning&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;figure class=&quot;image&quot;&gt;

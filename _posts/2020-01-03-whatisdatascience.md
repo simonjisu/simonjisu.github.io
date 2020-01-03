@@ -46,17 +46,21 @@ comments: true
 
 이쯤에서 ~~차후에 가고 싶은~~ 페이스북(Facebook)의 채용 공고를 몇개 살펴보면 그 역할이 다 다르다는 것을 확인 할 수 있다.
 
-> Research Scientist, Artificial Intelligence (PhD)
+> **Research Scientist, Artificial Intelligence (PhD)**
 
 {% include image.html id="1D83TD6ZtJrSNwsSYNZVl86IynC0SWnuI" desc="출처: https://www.facebook.com/careers/jobs/985225105171427" width="auto" height="auto" %}
 
-> Data Scientist, Analytics (PhD)
+<br>
+
+> **Data Scientist, Analytics (PhD)**
 
 {% include image.html id="1c_DpRBhg9yAwQYE59swch4X2OFhSt4qv" desc="출처: https://www.facebook.com/careers/jobs/387405225294114" width="auto" height="auto" %}
 
 https://drive.google.com/file/d//view?usp=sharing
 
-> Data Engineer, Machine Learning
+<br>
+
+> **Data Engineer, Machine Learning**
 
 {% include image.html id="1mabjOctjAExkzV2SLpbv7UPo6zMpu_Uu" desc="출처: https://www.facebook.com/careers/jobs/997860117229177" width="auto" height="auto" %}
 
