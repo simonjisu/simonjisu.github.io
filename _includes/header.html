@@ -31,6 +31,8 @@
               {% assign subcat = sub.subcat | downcase %}
                 {% if subcat == 'separator' %}
                   <li role="separator" class="divider"></li>
+                {% elsif subcat == 'lightseparator' %}
+                  <li role="lightseparator" class="lightdivider"></li>
                 {% else %}
                   {% if sitecates contains subcat %}
                   <li>

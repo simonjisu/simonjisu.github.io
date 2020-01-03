@@ -4,11 +4,155 @@
     <title>Soopace</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 30 Dec 2019 16:26:56 +0900</pubDate>
-    <lastBuildDate>Mon, 30 Dec 2019 16:26:56 +0900</lastBuildDate>
+    <link>https://simonjisu.github.io/</link>
+    <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 03 Jan 2020 22:19:27 +0900</pubDate>
+    <lastBuildDate>Fri, 03 Jan 2020 22:19:27 +0900</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>What is Data Science?</title>
+        <description>&lt;h1 id=&quot;데이터-사이언스란&quot;&gt;데이터 사이언스란?&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Joma Tech&lt;/code&gt; 라는 분의 유튜브에서 간결하고 명료하게 데이터 사이언스의 유래 및 역할에 대해 설명하여, 이를 정리하고 현재 내 상황, 그리고 나아가야할 방향에 대해 분석해보려고 한다.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/xC-c7E5PK0Y&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;목차&quot;&gt;목차&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#데이터-사이언스와-데이터-사이언티스트의-역할&quot;&gt;데이터 사이언스와 데이터 사이언티스트의 역할&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#상황분석-및-나아가야할-방향&quot;&gt;상황분석 및 나아가야할 방향&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;데이터-사이언스와-데이터-사이언티스트의-역할&quot;&gt;데이터 사이언스와 데이터 사이언티스트의 역할&lt;/h2&gt;
+
+&lt;p&gt;동영상에서 소개한 데이터 사이언티스트의 근본은 &lt;strong&gt;“Problem Solver”&lt;/strong&gt;다. 현실에 존재하는 풀기 어려운 문제를 데이터를 사용해서 좋은 방향으로 이끌어가는 것이 데이터 사이언티스트의 역할이다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1Wm5n8IMK5ruCcgu-7ccUxPIH8XOuGx2N&quot; alt=&quot;출처: https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;출처: https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;위 사진은 영상에서 소개한 데이터 사이언스의 계층적 요구에 대해서 사진이다. 피라미드 꼭대기부터 정리해보면 다음과 같다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;번호&lt;/th&gt;
+      &lt;th&gt;카테고리&lt;/th&gt;
+      &lt;th&gt;업무&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;LEARN/OPTIMIZE&lt;/td&gt;
+      &lt;td&gt;AI, Deep Learning&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;LEARN/OPTIMIZE&lt;/td&gt;
+      &lt;td&gt;A/B Testing, Experimentation, Simple ML Algorithm&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;AGGREGATE/LABEL&lt;/td&gt;
+      &lt;td&gt;Analytics, Metrics, Segments, Aggregates, Features, Training Data&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;EXPLORE/TRANSFORM&lt;/td&gt;
+      &lt;td&gt;Cleaning, Anomaly Detection, Prep&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;MOVE/STORE&lt;/td&gt;
+      &lt;td&gt;Reliable Data Flow, Infrastructure, Pipelines, ETL(extract, transform, load), Structured and unstructured data storage&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;COLLECT&lt;/td&gt;
+      &lt;td&gt;Instrumentation, Logging, Sensors, External Data, User generated content&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;동영상에 따르면 스타트업 같은 경우, 리소스가 부족하기 때문에 데이터 사이언티스트는 1~6의 업무를 다 맡게 된다. 중견 기업의 경우 약간의 리소스를 더 사용하여, 데이터의 수집(6)은 소프트웨어 엔지니어가, 데이터의 보관 및 정제 준비(4, 5)는 데이터 엔지니어가, 나머지는 데이터 사이언티스트가 하게 된다. 조금더 큰 기업이라면 탑 3개의 분야를 한번 더 나눠서 데이터 분석, 평가 방법 설정 실험 등(2, 3)은 데이터 사이언스 애널리틱스, AI, Deep Learning 부분(1)의 업무는 리서치 사이언티스트 혹은 코어 데이터 사이언스가 맡게 된다.&lt;/p&gt;
+
+&lt;p&gt;정리하면 이 분야의 직군 분류는 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;소프트웨어 엔지니어(풀스택) - Software Engineer(Full Stack)&lt;/li&gt;
+  &lt;li&gt;데이터 엔지니어 - Data Engineer&lt;/li&gt;
+  &lt;li&gt;데이터 사이언스 애널릭틱스 - Data Science Analytics&lt;/li&gt;
+  &lt;li&gt;리서치 사이언티스트 / 코어 데이터 사이언스 - Research Data Scientist / Core Data Science&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이쯤에서 &lt;del&gt;차후에 가고 싶은&lt;/del&gt; 페이스북(Facebook)의 채용 공고를 몇개 살펴보면 그 역할이 다 다르다는 것을 확인 할 수 있다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Research Scientist, Artificial Intelligence (PhD)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1D83TD6ZtJrSNwsSYNZVl86IynC0SWnuI&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/985225105171427&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/985225105171427&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Data Scientist, Analytics (PhD)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1c_DpRBhg9yAwQYE59swch4X2OFhSt4qv&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/387405225294114&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/387405225294114&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;https://drive.google.com/file/d//view?usp=sharing&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Data Engineer, Machine Learning&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1mabjOctjAExkzV2SLpbv7UPo6zMpu_Uu&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/997860117229177&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/997860117229177&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;–&lt;/p&gt;
+
+&lt;h2 id=&quot;상황분석-및-나아가야할-방향&quot;&gt;상황분석 및 나아가야할 방향&lt;/h2&gt;
+
+&lt;p&gt;최근 언론에서 이야기하는 부분은 극 소수인 1번 분야이고 지금까지 내가 공부한 방향은 대부분 딥러닝 쪽이었다. 그러나 더 현실적인 문제는 4, 5 번인 데이터 엔지니어 분야, 3번인 데이터 분석 쪽에 있다고 생각한다. 특정 문제를 해결하기 위해 데이터를 수집 및 정제하고, 어플리케이션으로 과정을 경험해보면 좋은 포트폴리오가 될거라고 생각했다.&lt;/p&gt;
+
+&lt;p&gt;그렇다면 앞으로 대학원 2년간 어떤 전략을 짤 것인가?&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;기존의 딥러닝 분야의 공부는 계속하되, XAI, NLP 두 분야만 집중적으로 공부한다(+ 수학 및 통계 공부는 지속).&lt;/li&gt;
+  &lt;li&gt;데이터 기반 Product를 분석 및 연구
+    &lt;ul&gt;
+      &lt;li&gt;각 산업별로 관련 회사 리스트업&lt;/li&gt;
+      &lt;li&gt;어떤 문제들이 있었고, 어떻게 해결했는지 스터디하기&lt;/li&gt;
+      &lt;li&gt;가능하면 업계사람들 많이 만나보기(묻고 싶은 질문지 준비하기)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;간단한 서비스, 웹 어플리케이션을 만들고 개선함으로써 데이터 수집 및 가공하는 연습하기(팀단위로 진행 목표)
+    &lt;ul&gt;
+      &lt;li&gt;실존하는 해결하지 못한 문제를 찾아보고 괜찮은 서비스 기획해보기&lt;/li&gt;
+      &lt;li&gt;SQL 기반의 데이터 파이프라인 설계(ETL 프로세스 설계 및 구현)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/datascience/2019/12/30/whatisdatascience.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2019/12/30/whatisdatascience.html</guid>
+        
+        
+        <category>datascience</category>
+        
+      </item>
     
       <item>
         <title>2019년도 회고</title>
@@ -171,8 +315,8 @@
 &lt;p&gt;&lt;del&gt;P.S. 닌텐도 스위치도 사자&lt;/del&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
-        <link>http://localhost:4000/others/2019/12/30/lookback2019.html</link>
-        <guid isPermaLink="true">http://localhost:4000/others/2019/12/30/lookback2019.html</guid>
+        <link>https://simonjisu.github.io/others/2019/12/30/lookback2019.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2019/12/30/lookback2019.html</guid>
         
         
         <category>others</category>
@@ -315,8 +459,8 @@
 &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.07285&quot;&gt;A guide to convolution arithmetic for deep learning&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 27 Oct 2019 21:56:38 +0900</pubDate>
-        <link>http://localhost:4000/programming/2019/10/27/convtranspose2d.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2019/10/27/convtranspose2d.html</guid>
+        <link>https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</guid>
         
         
         <category>programming</category>
@@ -936,8 +1080,8 @@
 &lt;p&gt;그러나 우리는 설명가능성의 다른 측면을 다루기 위해 취해진 다양한 접근방식이 고립되어 있다는 것을 발견했다. 더 효율적인 설명을 달성하기 위해 다른 범주의 기술을 합병하는 접근 방법과 같은 설명가능성 공간에 대한 작업은 상대적으로 적은 주의를 주고도 특정 범주의 기술의 발전을 야기했다. 설명의 목적과 유형이 주어졌을 때, 어떤 설명 측정기준이 제일 좋은 것인지 알기가 명확하지 않다. 우리는 표적 설명(the targeted explanation)의 목적과 완전무결성에 맞는 다양한 측정기준을 사용하길 권장한다. 커뮤니티에서 다양한 분야의 여러 아이디어를 합치고 함께 작업하고 배우면서, 시스템 설명의 전반적인 상태 눈에 띄게 향상될 것이다. 그 결과로 행동 추정(behavioral extrapolation)을 제공하고, 딥러닝 시스템의 신뢰를 구축하고, 심층 네트워크 연산의 유용한 인사이트 등 시스템 행동의 이해와 증진을 가능케한다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Sep 2019 11:04:38 +0900</pubDate>
-        <link>http://localhost:4000/paper/2019/09/18/introxai.html</link>
-        <guid isPermaLink="true">http://localhost:4000/paper/2019/09/18/introxai.html</guid>
+        <link>https://simonjisu.github.io/paper/2019/09/18/introxai.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2019/09/18/introxai.html</guid>
         
         
         <category>paper</category>
@@ -1191,8 +1335,8 @@ git push -u origin master
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/12/04/buildgithubpages.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/12/04/buildgithubpages.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</guid>
         
         
         <category>programming</category>
@@ -1372,8 +1516,8 @@ def init_db():
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/11/11/flaskstudy2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/11/11/flaskstudy2.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</guid>
         
         
         <category>programming</category>
@@ -1479,8 +1623,8 @@ if __name__ == '__main__':
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/10/30/flaskstudy1.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/30/flaskstudy1.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</guid>
         
         
         <category>programming</category>
@@ -1654,8 +1798,8 @@ $ source ~/.bashrc
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 28 Oct 2018 19:22:40 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/10/28/flaskstudy0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/28/flaskstudy0.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</guid>
         
         
         <category>programming</category>
@@ -1907,8 +2051,8 @@ C &amp;= \vert V \vert \times m
 &lt;p&gt;결과를 살펴보면 문맥은 상당히 못맞추었으나 문장의 구조는 잘 학습한 것을 알 수 있다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 22 Aug 2018 23:26:14 +0900</pubDate>
-        <link>http://localhost:4000/paper/2018/08/22/neuralnetworklm.html</link>
-        <guid isPermaLink="true">http://localhost:4000/paper/2018/08/22/neuralnetworklm.html</guid>
+        <link>https://simonjisu.github.io/paper/2018/08/22/neuralnetworklm.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2018/08/22/neuralnetworklm.html</guid>
         
         
         <category>paper</category>
@@ -2110,169 +2254,8 @@ tensor([ 0,  3,  1])
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 19 Jul 2018 00:18:29 +0900</pubDate>
-        <link>http://localhost:4000/nlp/2018/07/19/torchtext.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/2018/07/19/torchtext.html</guid>
-        
-        
-        <category>nlp</category>
-        
-      </item>
-    
-      <item>
-        <title>Pytorch 의 PackedSequence object 알아보기</title>
-        <description>&lt;h1 id=&quot;pytorch-의-packedsequence-object-알아보기&quot;&gt;Pytorch 의 PackedSequence object 알아보기&lt;/h1&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;packedsequence-란&quot;&gt;PackedSequence 란?&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;아래의 일련의 과정을 PackedSequence 라고 할 수 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;NLP 에서 매 배치(batch)마다 고정된 문장의 길이로 만들어주기 위해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰을 넣어야 한다. 아래 그림의 파란색 영역은 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/ctd209m9zlzs0cw/0705img1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;사진 출처: &lt;a href=&quot;https://medium.com/huggingface/understanding-emotions-from-keras-to-pytorch-3ccb61d5a983&quot;&gt;Understanding emotions — from Keras to pyTorch&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;그림과 같은 내용을 연산을 하게 되면, 쓸모없는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰까지 연산을 하게 된다.
-따라서 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 를 계산 안하고 효율적으로 진행하기 위해 병렬처리를 하려고한다. 그렇다면 아래의 조건을 만족해야한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;RNN의 히든 스테이트가 이전 타임스텝에 의존해서 최대한 많은 토큰을 병렬적으로 처리해야한다.&lt;/li&gt;
-  &lt;li&gt;각 문장의 마지막 토큰이 마지막 타임스텝에서 계산을 멈춰야한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;아직 어떤 느낌인지 잘 모르겠다면 아래의 그림을 보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/3ze3svhdz05aakk/0705img3.gif&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;즉, 컴퓨터로 하여금 각 &lt;strong&gt;타임스텝&lt;/strong&gt;(T=배치내에서 문장의 최대 길이) 마다 일련의 단어를 처리해야한다는 뜻이다.&lt;/p&gt;
-
-&lt;p&gt;하지만 $T=2, 3$ 인 부분은 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt;이 끼어 있어서 어쩔수 없이 연산을 하게 되는데, 이를 방지하기 위해서, 아래의 그림같이 각 배치내에 문장의 길이를 기준으로 &lt;span style=&quot;color: #e87d7d&quot;&gt;정렬(sorting)&lt;/span&gt; 후, 하나의 통합된 배치로 만들어준다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/op87oonnoqegn5c/0705img2.png&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;사진 출처: &lt;a href=&quot;https://medium.com/huggingface/understanding-emotions-from-keras-to-pytorch-3ccb61d5a983&quot;&gt;Understanding emotions — from Keras to pyTorch&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;data:&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰이 제거후 합병된 데이터&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;batch_sizes:&lt;/strong&gt; 각 타임스텝 마다 배치를 몇개를 넣는지 기록해 둠&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이처럼 PackedSequence 의 &lt;strong&gt;장점&lt;/strong&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰을 계산 안하기 때문에 더 빠른 연산을 처리 할 수 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;pytorch---packedsequence&quot;&gt;Pytorch - PackedSequence&lt;/h2&gt;
-
-&lt;p&gt;Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb&quot;&gt;nbviewer&lt;/a&gt; 혹은 &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb&quot;&gt;github&lt;/a&gt;에 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;과정&quot;&gt;과정&lt;/h3&gt;
-
-&lt;p&gt;전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx
-============================================
-tensor([[  1,  16,   7,  11,  13,   2],
-        [  1,  16,   6,  15,   8,   0],
-        [ 12,   9,   0,   0,   0,   0],
-        [  5,  14,   3,  17,   0,   0],
-        [ 10,   0,   0,   0,   0,   0]])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;하단의 코드를 통해서 정렬을 해주고, 각 문장의 길이를 담은 list를 만들어준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_lengths = torch.LongTensor([torch.max(input_seq2idx[i, :].data.nonzero())+1 for i in range(input_seq2idx.size(0))])
-input_lengths, sorted_idx = input_lengths.sort(0, descending=True)
-input_seq2idx = input_seq2idx[sorted_idx]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;모든 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰의 인덱스인 0 이 밑으로 내려간 것을 알 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input_seq2idx, input_lengths
-============================================
-tensor([[  1,  16,   7,  11,  13,   2],
-        [  1,  16,   6,  15,   8,   0],
-        [  5,  14,   3,  17,   0,   0],
-        [ 12,   9,   0,   0,   0,   0],
-        [ 10,   0,   0,   0,   0,   0]])
-
-tensor([ 6,  5,  4,  2,  1])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;torch.nn.utils.rnn&lt;/strong&gt; 에서 &lt;strong&gt;pack_padded_sequence&lt;/strong&gt; 를 사용하면 PackedSequence object를 얻을 수 있다. packed_input 에는 위에서 말한 합병된 데이터와 각 타임스텝의 배치사이즈들이 담겨있다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_lengths.tolist(), batch_first=True)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;rnn-에서의-사용-방법&quot;&gt;RNN 에서의 사용 방법&lt;/h3&gt;
-
-&lt;p&gt;실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;embed = nn.Embedding(vocab_size, embedding_size, padding_idx=0)
-gru = nn.RNN(input_size=embedding_size, hidden_size=hidden_size, num_layers=num_layers, bidirectional=False, batch_first=True)
-
-embeded = embed(input_seq2idx)
-packed_input = pack_padded_sequence(embeded, input_lengths.tolist(), batch_first=True)
-packed_output, hidden = gru(packed_input)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;packed_output 에는 합병된 output 과 batch_sizes 가 포함되어 있다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;packed_output[0].size(), packed_output[1]
-=========================================================
-(torch.Size([18, 2]), tensor([ 5,  4,  3,  3,  2,  1]))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;이를 다시 원래 형태의 &lt;strong&gt;(배치크기, 문장의 최대 길이, 히든크기)&lt;/strong&gt; 로 바꾸려면 &lt;strong&gt;pad_packed_sequence&lt;/strong&gt; 를 사용하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output, output_lengths = pad_packed_sequence(packed_output, batch_first=True)
-output.size(), output_lengths
-=========================================================
-(torch.Size([5, 6, 2]), tensor([ 6,  5,  4,  2,  1]))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;실습코드에서 출력 결과를 살펴보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰과 연관된 행은 모드 0으로 채워져 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;rnn-backend-작동-방식&quot;&gt;RNN Backend 작동 방식&lt;/h2&gt;
-
-&lt;h3 id=&quot;rnn-안에서-어떤-방법으로-실행되는-것일까&quot;&gt;RNN 안에서 어떤 방법으로 실행되는 것일까?&lt;/h3&gt;
-
-&lt;p&gt;아래의 그림을 살펴보자&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/jl1iymxj6fdtvoe/0705img4.gif&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;은닉층에서는 매 타임스텝마다 batch_sizes 를 참고해서 배치수 만큼 은닉층을 골라서 뒤로 전파한다.&lt;/p&gt;
-
-&lt;p&gt;기존의 RNN 이라면, &lt;strong&gt;(배치크기 $\times$ 문장의 최대 길이 $\times$ 층의 갯수)&lt;/strong&gt; 만큼 연산을 해야하지만, &lt;strong&gt;(실제 토큰의 갯수 $\times$ 층의 갯수)&lt;/strong&gt; 만큼 계산하면 된다. 이 예제로 말하면 $(5 \times 6 \times 1)=30 \rightarrow (18 \times 1)=18$ 로 크게 줄었다.&lt;/p&gt;
-
-&lt;h3 id=&quot;그렇다면-hidden-어떻게-출력-되는가&quot;&gt;그렇다면 Hidden 어떻게 출력 되는가?&lt;/h3&gt;
-
-&lt;p&gt;기존의 RNN 이라면 마지막 타임스텝 때 hidden vector 만 출력하지만, packed sequence 는 아래의 그림 처럼 골라서 출력하게 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/e1kjq4jsehbixiq/0705img5.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;참고자료: &lt;a href=&quot;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&quot;&gt;https://discuss.pytorch.org/t/lstm-hidden-cell-outputs-and-packed-sequence-for-variable-length-sequence-inputs/1183&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 05 Jul 2018 09:45:37 +0900</pubDate>
-        <link>http://localhost:4000/nlp/2018/07/05/packedsequence.html</link>
-        <guid isPermaLink="true">http://localhost:4000/nlp/2018/07/05/packedsequence.html</guid>
+        <link>https://simonjisu.github.io/nlp/2018/07/19/torchtext.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/nlp/2018/07/19/torchtext.html</guid>
         
         
         <category>nlp</category>

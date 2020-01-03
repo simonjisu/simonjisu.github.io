@@ -357,6 +357,9 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+table {
+  margin-bottom: 10px;
+}
 th,
 td {
   padding: 12px 15px;
@@ -437,10 +440,15 @@ hr {
 /* Images 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-img {
-    max-width: 100%;
-    vertical-align: middle;
+figure figcaption {
+  font-size: 50%;
 }
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
 
 /* blockquote */ 
 

@@ -45,11 +45,12 @@ toc:
       - subcat: xai
       - subcat: nlp
       - subcat: book
-      - subcat: prml
-      - subcat: study
       - subcat: paper
       - subcat: others
       - subcat: programming
+      - subcat: datascience
+      - subcat: lightseparator
+      - subcat: prml
       - subcat: numpyseries
       - subcat: separator
   - title: Abouts

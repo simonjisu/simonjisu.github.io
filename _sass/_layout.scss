@@ -126,7 +126,12 @@ body {
       overflow: hidden;
       background-color: #313131;
     }
-    
+    .lightdivider {
+      height: 1px;
+      margin: 5px 0;
+      overflow: hidden;
+      background-color: #9e9e9e;
+    }
     a:active {
       font-weight: 500;
     }
@@ -329,6 +334,11 @@ p.readmore {
 
 }
 
+iframe {
+  min-width: 100%;
+  height: 50vh;
+}
+
 /* author info */
 
 
@@ -442,6 +452,8 @@ div.post_title span.date {
 .small-font{
   font-size:$small-font-size;
 }
+
+
 
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

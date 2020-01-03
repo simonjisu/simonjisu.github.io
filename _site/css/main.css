@@ -797,6 +797,9 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+table {
+  margin-bottom: 10px; }
+
 th,
 td {
   padding: 12px 15px;
@@ -872,6 +875,9 @@ hr {
 
 /* Images 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+figure figcaption {
+  font-size: 50%; }
+
 img {
   max-width: 100%;
   vertical-align: middle; }
@@ -991,6 +997,11 @@ body {
       margin: 5px 0;
       overflow: hidden;
       background-color: #313131; }
+    .nav .page-link .lightdivider {
+      height: 1px;
+      margin: 5px 0;
+      overflow: hidden;
+      background-color: #9e9e9e; }
     .nav .page-link a:active {
       font-weight: 500; }
 
@@ -1119,6 +1130,10 @@ p.readmore {
     text-align: center;
     margin: auto;
     padding: 2rem 0; }
+
+iframe {
+  min-width: 100%;
+  height: 50vh; }
 
 /* author info */
 @media (max-width: 780px) {
