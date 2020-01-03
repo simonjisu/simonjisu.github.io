@@ -56,8 +56,6 @@ comments: true
 
 {% include image.html id="1c_DpRBhg9yAwQYE59swch4X2OFhSt4qv" desc="출처: https://www.facebook.com/careers/jobs/387405225294114" width="auto" height="auto" %}
 
-https://drive.google.com/file/d//view?usp=sharing
-
 <br>
 
 > **Data Engineer, Machine Learning**
