@@ -17,6 +17,10 @@ $color-red:     #ff4136;
 $color-fuchsia: #f012be;
 $color-purple:  #b10dc9;
 $color-maroon:  #85144b;
+$color-pastelred: #e25252;
+$color-pastelblue: #5470cc;
+$color-darkyellow: #cfb648;
+$color-pastelgreen: #49aa71;
 
 .black   { color: $color-black; }
 .gray    { color: $color-gray; }
@@ -35,3 +39,6 @@ $color-maroon:  #85144b;
 .fuchsia { color: $color-fuchsia; }
 .purple  { color: $color-purple; }
 .maroon  { color: $color-maroon; }
+.pastelred {color: $color-pastelred}
+.pastelblue {color: $color-pastelblue}
+.darkyellow {color: $color-darkyellow}

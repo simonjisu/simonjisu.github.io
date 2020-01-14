@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What is Data Science?"
-date: "2019-12-30 14:19:38 +0900"
+date: "2020-01-03 14:19:38 +0900"
 categories: datascience
 author: "Soo"
 comments: true

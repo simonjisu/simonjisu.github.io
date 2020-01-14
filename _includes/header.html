@@ -1,13 +1,13 @@
 <!-- see if categories is exists -->
-{% assign sitecates = site.categories | downcase %}
 
 <header class="site-header">
   <h2 class="logo">
     <a href="{{ site.baseurl }}/">{{ site.title }}</a>
     <div class="logoimage box" style="background: url({{site.baseurl}}/assets/img/logo.png)"></div>
+    
   </h2>
     
-    
+  
   <div class="nav">
     <label for="menu-toggle" class="menu-icon">
         <!--div data-icon="ei-navicon"></div-->
@@ -34,11 +34,14 @@
                 {% elsif subcat == 'lightseparator' %}
                   <li role="lightseparator" class="lightdivider"></li>
                 {% else %}
-                  {% if sitecates contains subcat %}
-                  <li>
-                    <a href="{{ site.url }}{{ site.baseurl }}/archive#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a>
-                  </li>
-                  {% endif %}
+                  {% for category in site.categories %}
+                    {% capture cat %}{{ category | first }}{% endcapture %}
+                    {% if cat == subcat %}
+                      <li>
+                        <a href="{{ site.url }}{{ site.baseurl }}/archive#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
                 {% endif %}
               {% endfor %}
               </ul>

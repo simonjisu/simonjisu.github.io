@@ -6,9 +6,211 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 03 Jan 2020 22:29:10 +0900</pubDate>
-    <lastBuildDate>Fri, 03 Jan 2020 22:29:10 +0900</lastBuildDate>
+    <pubDate>Wed, 15 Jan 2020 01:22:14 +0900</pubDate>
+    <lastBuildDate>Wed, 15 Jan 2020 01:22:14 +0900</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>[NLP] Attention Is All You Need - 1</title>
+        <description>&lt;h1 id=&quot;attention-is-all-you-need---1&quot;&gt;Attention Is All You Need - 1&lt;/h1&gt;
+
+&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-introduction&quot;&gt;1. Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-scaled-dotproduct-attention&quot;&gt;2. Scaled Dot-Product Attention&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+
+&lt;p&gt;그 동안 LSTM(&lt;a href=&quot;https://dl.acm.org/citation.cfm?id=1246450&quot;&gt;Long Short-term Memory&lt;/a&gt;, 1997) 과 GRU(&lt;a href=&quot;https://arxiv.org/abs/1412.3555&quot;&gt;Gated Recurrent Unit&lt;/a&gt;, 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz&quot; alt=&quot;[그림 1] RNN의 forward propagation&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;[그림 1] RNN의 forward propagation&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt; 처럼 이전 스텝의 은닉층 유닛인 $h_{t-1}$ 를 현재 스텝의 은닉층 유닛 $h_t$ 로 전달하면서 자연스럽게 시퀀스 데이터의 특징을 유지하지만, 아쉽게도 병렬 처리를 원천적으로 배제한다는 단점이 존재한다. 따라서 만약에 문장이 길어질 수록 훈련 속도가 현저하게 느려진다.&lt;/p&gt;
+
+&lt;p&gt;Input 과 Output 문장의 길이와 관계없이 의존성(dependencies)을 해결해주는 &lt;strong&gt;Attention&lt;/strong&gt; 매커니즘은 시퀀스 모델링 혹은 변환 모델링&lt;span style=&quot;color:gray&quot;&gt;(transduction modeling: 각기 다른 특성을 가진 입력-출력 데이터를 변환하는 문제들, 예를 들어 기계번역)&lt;/span&gt;에서 필수적인 요소가 됐다. 예시로 다음 논문들을 참고하면 좋다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1409.0473&quot;&gt;Neural Machine Translation by Jointly Learning to Align and Translate, Dzmitry Bahdanau 2014&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1702.00887&quot;&gt;Structured Attention Networks, Yoon Kim, 2017&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1606.01933&quot;&gt;A Decomposable Attention Model for Natural Language Inference, Ankur P. Parikh, 2016&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위 두 가지를 결합하여 저자들은 Attention 매커니즘만 활용하여 Input 과 Output 의 의존성을 글로벌하게 처리하고, 병렬화까지 가능한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Transformer&lt;/code&gt;라는 새로운 모델구조를 제안했다.&lt;/p&gt;
+
+&lt;h3 id=&quot;전체-모델구조&quot;&gt;전체 모델구조&lt;/h3&gt;
+
+&lt;p&gt;대부분의 신경망 시퀀스 변환 모델(transduction models)들은 대체로 Encoder 와 Decoder 로 구성된다. Encoder는 심볼로 표현된 입력 시퀀스(비연속적인 토큰들) $x$ 를 연속 공간(Continuous Space) $z$ 로 맵핑 후, $z$ 를 바탕으로 출력 시퀀스 심볼인 $y$ 를 얻는다. 출력 시퀀스는 이전 타임 스텝($t-1$) 시퀀스를 입력으로 다음 타임 스텝($t$)을 출력하는 자기회귀(auto-regressive) 성격을 가진다. 수식으로 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} \mathbf{x}&amp;=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_1, z_2, \cdots, z_n)\\ \mathbf{y}&amp;=(y_1, y_2, \cdots, y_m)\ \text{for}\  y_{t}=f(y_{t-1}, \mathbf{z}) \end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97&quot; alt=&quot;[그림 2] 모델구조: Encoder(좌), Decoder(우)&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;[그림 2] 모델구조: Encoder(좌), Decoder(우)&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;하지만 &lt;strong&gt;Transformer&lt;/strong&gt; 에서는 한 타임 스텝마다 $y$ 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt; 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).&lt;/p&gt;
+
+&lt;h3 id=&quot;encoder&quot;&gt;Encoder&lt;/h3&gt;
+
+&lt;p&gt;Encoder는 각기 다른 N 개의 “Encoder Layer”라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 “Multi-Head Attention”, 두번째는 일반적인 “Position-wise Feed Forward”로 구성되며, 각 서브층은 Residual Network(&lt;a href=&quot;https://arxiv.org/abs/1512.03385&quot;&gt;Kaiming He, 2015&lt;/a&gt;)처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm(&lt;a href=&quot;https://arxiv.org/abs/1607.06450&quot;&gt;Jimmy Lei Ba, 2016&lt;/a&gt;) 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{LayerNorm}(x + \text{SubLayer}(x))&lt;/script&gt;
+
+&lt;h3 id=&quot;decoder&quot;&gt;Decoder&lt;/h3&gt;
+
+&lt;p&gt;Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 “Decoder Layer” 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 “Multi-Head Attention”을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 “Multi-Head Attention”에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 됩니다. 따라서 $i$ 번째 토큰은 $i+1$ 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.&lt;/p&gt;
+
+&lt;p&gt;이제부터 모델의 세부 사항을 살펴보면서 저자가 왜 이렇게 사용했는지, 의도가 무엇인지를 알아보려고 한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;2-scaled-dot-product-attention&quot;&gt;2. Scaled Dot-Product Attention&lt;/h2&gt;
+
+&lt;h3 id=&quot;attention&quot;&gt;Attention&lt;/h3&gt;
+
+&lt;p&gt;Transformer 에서 Attention은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 세트를 입력으로 집중된 어떤 벡터를 출력하는 함수로 표현할 수 있다. 출력은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 간의 관계(Attention), 즉 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 정보를 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 에 대조 했을 때, 어느 부분을 집중해서 볼 것인지를 계산하고 해당 관계를 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 와 결합하여 출력을 만든다. 수식으로 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;O = \text{Attention}(Q, K, V)&lt;/script&gt;
+
+&lt;p&gt;직관적으로 잘 안떠오르는데, 이게 어떤 느낌인지 알아보기위해 예를 들어보면 다음과 같다.&lt;/p&gt;
+
+&lt;h4 id=&quot;기계번역-문제&quot;&gt;기계번역 문제:&lt;/h4&gt;
+
+&lt;p&gt;영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 관계는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 3&lt;/code&gt; 과같이 표현할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G&quot; alt=&quot;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;: 한국어 문장 정보&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 세트: 인코딩된 영어 문장 정보, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 는 같은 벡터&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 는 우리가 알고 싶어하는 문제라고 생각할 수 있다. 명칭도 “query=질의” 그대로 &lt;strong&gt;“한국어로 변역하기 위해 영어 문장에서 집중적으로 봐야하는 단어는 어느 것인가?”&lt;/strong&gt; 라는 질문을 인코딩된 영어 문장 정보인 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;  한테 물어보게 된다. 그 방법은 이 다음에 소개하도록 하고, 그렇게 얻은 결과인 &lt;strong&gt;A&lt;/strong&gt; 를 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 와 곱하여 그 단어를 집중적으로 보게한다. 그렇게 Attention의 결과물인 &lt;span style=&quot;color:#49aa71&quot;&gt;&lt;strong&gt;O&lt;/strong&gt;&lt;/span&gt; 를 얻는다.&lt;/p&gt;
+
+&lt;h4 id=&quot;감성-분석-문제&quot;&gt;감성 분석 문제:&lt;/h4&gt;
+
+&lt;p&gt;꼭 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 모두 같은 문장을 지정하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 4&lt;/code&gt;처럼 Attention 을 사용할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX&quot; alt=&quot;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;scaled-dot-product-attention&quot;&gt;Scaled Dot-Product Attention&lt;/h3&gt;
+
+&lt;p&gt;Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 제일 기본적인 “Dot Product” 를 사용했으며, 그 수식은 다음과 같으며, 배치크기를 제외한 Q, K, V 의 크기를 표기해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 5&lt;/code&gt; 와 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V&lt;/script&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM&quot; alt=&quot;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;여기서 주의할 점은 $T_k$ 과 $T_v$가 같다는 점이다. 기계 번역을 예로 들면 소스 문장이 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 세트이기 때문에 같은 길이의 내용을 담고 있지만 각 토큰이 표현하고 있는 차원만 다를 뿐이다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 의 길이는 다를 수 있지만 차원 $d_k$ 로 같다. 두 행렬은 행렬의 곱(matrix multiplication)을 통해서 크기가 $(T_q, T_v)$ 인 점수 행렬 &lt;strong&gt;A&lt;/strong&gt; 를 만들어 낸다.&lt;/p&gt;
+
+&lt;p&gt;행렬 &lt;strong&gt;A&lt;/strong&gt; 는 스케일링(Scaling), 마스킹(Masking) 후 Softmax 를 통해 확률값을 도출한다. 이 행렬의 뜻은 “문제를 해결하기 위해서 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 토큰이 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 의 어떤 토큰을 가장 많이 참고해야하는가?” 를 뜻한다. 따라서 확률이 높게 부여된 토큰은 &lt;strong&gt;Q&lt;/strong&gt; 의 해당하는 토큰과 연관성이 높다고 할 수 있다. 물론 이 모든 연산은 학습이 가능하도록 DAG(Directed acyclic graph)로 연결되어 있기 때문에 학습 스텝이 진행됨에 따라 풀고자하는 문제에 최적화된 확률을 계속 도출해낸다&lt;span style=&quot;color:gray&quot;&gt;((Masking 은 차후에 다룬다)&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;스케일링 작업은 행렬 곱을 구한 &lt;strong&gt;A&lt;/strong&gt; 를 $\sqrt{d_k}$ 로 나누는데, 그 이유는 다음과 같다. 차원의 크기인 $d_k$ 가 커질 수록 행렬의 곱의 수치는 점점 커지고 Softmax 수식에 의해서 그 확률 값 또한 커진다. 따라서 Softmax 의 경사(gradient) 값도 굉장히 작아지는데, 이를 막기위해서 $\frac{1}{\sqrt{d_k}}$ 값을 곱해줘야한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;왜 $\sqrt{d_k}$ 를 나눌까?&lt;/strong&gt; 평균이 0, 표준편차가 1인 랜덤한 값으로 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 로 초기화시키고 확률로 표현된 행렬값 &lt;strong&gt;A&lt;/strong&gt; 의 경사를 구해보면 $d_k$ 가 커짐에 따라서 평균이 0, 분산이 $d_k$ 를 따르는 분포가 된다. 이러한 시뮬레이션을 다음 코드를 통해 알아 볼 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;nn&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;check_dotproduct_dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    to check &quot;https://arxiv.org/abs/1706.03762&quot; Paper page 4, annotation 4
+    -------------------------------
+    To illustrate why the dot products get large, 
+    assume that the components of q and k are independent random variables 
+    with mean 0 and variance 1.
+    Then their dot product has mean 0 and variance d_k
+    
+    print(&quot;*** notice that the gradient of softmax is y(1-y) ***&quot;)
+    for d_k in [10, 100, 1000]:
+        check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)
+    
+    &quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cal_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;softmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;q&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bmm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;size of vector d_k is {d_k}, sampling result, dot product distribution has&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; - mean: {attn.mean().item():.4f}, &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; - var: {attn.var().item():.4f}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;grad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cal_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;g_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;le&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;g_percent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;count of gradients that smaller than threshod({threshold}) is {g_sum}, {g_percent:.2f}&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;attn2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as_tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;grad2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cal_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;g_sum2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grad2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;le&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;g_percent2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_sum2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;after divide by sqrt(d_k), count of gradients that smaller than threshod({threshold}) is {g_sum2}, {g_percent2:.2f}&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;% &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*** notice that the gradient of softmax is y(1-y) ***&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;check_dotproduct_dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;시뮬레이션 결과:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*** notice that the gradient of softmax is y(1-y) ***
+size of vector d_k is 10, sampling result, dot product distribution has
+
+ - mean: -0.0004, 
+ - var: 9.9979
+count of gradients that smaller than threshod(1e-10) is 193, 0.01%
+after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
+
+size of vector d_k is 100, sampling result, dot product distribution has
+
+ - mean: -0.0028, 
+ - var: 99.9868
+count of gradients that smaller than threshod(1e-10) is 402283, 16.09%
+after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
+
+size of vector d_k is 1000, sampling result, dot product distribution has
+
+ - mean: 0.0029, 
+ - var: 999.6312
+count of gradients that smaller than threshod(1e-10) is 1737479, 69.50%
+after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00%
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/modules.py#L8&quot;&gt;Link&lt;/a&gt; 에서 확인하실 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;다음편: [NLP] Attention Is All You Need - 2&lt;/p&gt;
+</description>
+        <pubDate>Tue, 14 Jan 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</guid>
+        
+        
+        <category>paper</category>
+        
+      </item>
     
       <item>
         <title>What is Data Science?</title>
@@ -147,9 +349,9 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/datascience/2019/12/30/whatisdatascience.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2019/12/30/whatisdatascience.html</guid>
+        <pubDate>Fri, 03 Jan 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/datascience/2020/01/03/whatisdatascience.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2020/01/03/whatisdatascience.html</guid>
         
         
         <category>datascience</category>
@@ -2058,209 +2260,6 @@ C &amp;= \vert V \vert \times m
         
         
         <category>paper</category>
-        
-      </item>
-    
-      <item>
-        <title>Torchtext Tutorial</title>
-        <description>&lt;h1 id=&quot;pytorch-torchtext-tutorial&quot;&gt;Pytorch TorchText Tutorial&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;튜토리얼 Notebook: &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;github&lt;/a&gt;, &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;nbviewer&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;자연어 처리에서 전처리시 자주 사용하는 패키지 하나를 소개하려고 한다.&lt;/p&gt;
-
-&lt;p&gt;Pytorch 는 데이터를 불러오는 강력한 &lt;a href=&quot;https://pytorch.org/docs/stable/data.html&quot;&gt;Data Loader&lt;/a&gt; 라는 유틸이 있는데, TorchText 는 NLP 분야만을 위한 Data Loader 이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;documentation:&lt;/strong&gt; &lt;a href=&quot;http://torchtext.readthedocs.io/en/latest/index.html&quot;&gt;http://torchtext.readthedocs.io/en/latest/index.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;설치:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install torchtext
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;토크나이징(Tokenization)&lt;/li&gt;
-  &lt;li&gt;단어장 생성(Build Vocabulary)&lt;/li&gt;
-  &lt;li&gt;토큰의 수치화(Numericalize all tokens)&lt;/li&gt;
-  &lt;li&gt;데이터 로더 생성(Create Data Loader)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;사용방법&quot;&gt;사용방법&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-필드지정create-field&quot;&gt;1. 필드지정(Create Field)&lt;/h3&gt;
-
-&lt;p&gt;필드란 텐서로 표현 될 수 있는 텍스트 데이터 타입을 처리한다. 각 토큰을 숫자 인덱으로 맵핑시켜주는 단어장(Vocabulary) 객체가 있다. 또한 토큰화 하는 함수, 전처리 등을 지정할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&quot;The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations&quot;, 
-'3']
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;텍스트를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TEXT&lt;/code&gt;, 해당 문장의 sentiment 를 뜻하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;LABEL&lt;/code&gt; 필드객체 두 개를 만든다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Field
-
-TEXT = Field(sequential=True,
-             use_vocab=True,
-             tokenize=str.split,
-             lower=True, 
-             batch_first=True)  
-LABEL = Field(sequential=False,  
-              use_vocab=False,   
-              preprocessing = lambda x: int(x),  
-              batch_first=True)
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Arguments:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;sequential:&lt;/strong&gt; TEXT 는 순서가 있는 (sequential) 데이터기 때문에 인자를 True 로 두고, LABEL 데이터는 순서가 필요없기 때문에 False 로 둔다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;use_vocab:&lt;/strong&gt; 단어장(Vocab) 객체를 사용할지의 여부. 텍스트 데이터있는 TEXT 에만 True 로 인자를 전달한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;tokenize:&lt;/strong&gt; 단어의 토크나이징을 맡아줄 함수다. 여기선 “공백”을 기준으로 나누는 함수를 사용했습니다. 한국어의 경우 보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;konlpy&lt;/code&gt; 의 토크나이징 함수들을 사용한다. 혹은 개인이 만든 함수도 사용할 수 있다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;lower:&lt;/strong&gt; 소문자 전환 여부 입니다. 보통 True 로 두며, 단어가 많아질수록 나중에 더 많은 차원에 임베딩해야하기 때문에, 왠만하면 영어는 소문자로 만들어준다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;batch_first:&lt;/strong&gt; 배치를 우선시 하게 되면, tensor 의 크기는 (B, 문장의 최대 길이) 로 만들어진다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;preprocessing:&lt;/strong&gt; 전처리는 토큰화 후, 수치화하기 전 사이에서 작동한다. 여기서는 Label 데이터가 string 타입이기 때문에 int 타입으로 만들어준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;더 자세한 것은 문서를 참조하시길 바란다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-데이터-세트-만들기create-datasets&quot;&gt;2. 데이터 세트 만들기(Create Datasets)&lt;/h3&gt;
-
-&lt;p&gt;데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용해서 아래와 같이 만들어준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import TabularDataset
-
-train_data = TabularDataset.splits(path='./data/',
-					train='train_path',
-					valid='valid_path',
-					test='test_path',
-					format='tsv', 
-					fields=[('text', TEXT), ('label', LABEL)])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_data = TabularDataset(path='./data/examples.tsv', 
-				format='tsv', 
-				fields=[('text', TEXT), ('label', LABEL)])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;fields:&lt;/strong&gt; 아까 만들어준 필드는 리스트 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]&lt;/code&gt; 로 넣어준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;3-단어장-생성build-vocabulary&quot;&gt;3. 단어장 생성(Build vocabulary)&lt;/h3&gt;
-
-&lt;p&gt;토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;unk&amp;gt;&lt;/code&gt; 토큰을 0, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.&lt;/p&gt;
-
-&lt;p&gt;훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TEXT.build_vocab(train_data)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;4-데이터-로더-만들기create-data-loader&quot;&gt;4. 데이터 로더 만들기(Create Data Loader)&lt;/h3&gt;
-
-&lt;p&gt;마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;splits&lt;/code&gt; 메서드를 사용한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from torchtext.data import Iterator
-
-train_loader, valid_loader, test_loader = \
-	TabularDataset.splits((train_data, valid_data, test_data), 
-				batch_size=3, 
-				device=None,  # gpu 사용시 &quot;cuda&quot; 입력
-				repeat=False)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;만약에 없다면? 아래와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Iterator&lt;/code&gt; 객체에 그냥 넣어준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_loader = Iterator(train_data, 
-			batch_size=3, 
-			device=None,  # gpu 사용시 &quot;cuda&quot; 입력
-			repeat=False)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;pad&amp;gt;&lt;/code&gt; 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;테스트&quot;&gt;테스트&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for batch in train_loader:
-    break
-print(batch.text)
-print(batch.label)
-=======================================================
-tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
-              7,    207,    892,    107,     43,     85,    408,      3,
-            376,     17,      5,   6447,  11035,     37,     98,     43,
-            199,   5859,      2,      1,      1,      1,      1,      1,
-              1,      1,      1],
-        [     3,   4515,     51,    444,      4,   3738,     30,     94,
-            957,   3498,     59,    700,  13967,      6,   2287,   4435,
-              4,    431,     40,      3,   1201,      7,    486,   1134,
-           4120,     59,      5,    166,   1749,    547,      6,   1339,
-            144,  14759,      2],
-        [    29,      7,    195,    568,    192,     63,    229,     60,
-             17,     21,    202,    334,     18,      5,    535,     20,
-              4,     15,    628,    231,     52,      9,    303,    195,
-           6910,      8,  10136,      8,      3,   2204,   4340,      2,
-              1,      1,      1]])
-tensor([ 0,  3,  1])
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.&lt;/p&gt;
-
-&lt;p&gt;이처럼 거의 5 줄이면 이 모든 과정을 처리해주는 강력크한 도구다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;만약에-사용하지-않겠다면&quot;&gt;만약에 사용하지 않겠다면?&lt;/h2&gt;
-
-&lt;p&gt;노트북: &lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;github&lt;/a&gt;, &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb&quot;&gt;nbviewer&lt;/a&gt; 에 상세하게 나만의 데이터 로더를 커스터마이징 하는 방법 또한 적어 두었다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;순수 파이썬 만 사용한 코드&lt;/li&gt;
-  &lt;li&gt;파이토치의 Custom Dataset 를 활용한 Data Loader 만들기&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;하지만, 여기서는 소개하지 않겠다. 한 번 TorchText를 사용하게 되면 위 두 가지 방법은 왠만하면 생각도 안날 것이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;다양한-데이터-세트&quot;&gt;다양한 데이터 세트&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;torchtext.datasets&lt;/code&gt; 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.&lt;/p&gt;
-
-&lt;p&gt;Documentation 참고: &lt;a href=&quot;http://torchtext.readthedocs.io/en/latest/datasets.html#&quot;&gt;http://torchtext.readthedocs.io/en/latest/datasets.html#&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Sentiment Analysis&lt;/li&gt;
-  &lt;li&gt;Question Classification&lt;/li&gt;
-  &lt;li&gt;Entailment&lt;/li&gt;
-  &lt;li&gt;Language Modeling&lt;/li&gt;
-  &lt;li&gt;Machine Translation&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 19 Jul 2018 00:18:29 +0900</pubDate>
-        <link>https://simonjisu.github.io/nlp/2018/07/19/torchtext.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/nlp/2018/07/19/torchtext.html</guid>
-        
-        
-        <category>nlp</category>
         
       </item>
     

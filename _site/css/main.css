@@ -403,7 +403,6 @@ th {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: 10px 10px;
   box-sizing: border-box;
   /* for test only */
   border: 1px dashed #eeeeee; }
@@ -418,7 +417,7 @@ th {
 @media (min-width: 401px) {
   .container {
     width: 100%;
-    padding: 32px 32px; } }
+    padding: 0px 0px; } }
 /* For devices larger than 780px */
 @media (min-width: 781px) {
   .container {
@@ -876,7 +875,8 @@ hr {
 /* Images 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 figure figcaption {
-  font-size: 50%; }
+  font-size: small;
+  text-align: center; }
 
 img {
   max-width: 100%;
@@ -1291,6 +1291,15 @@ there.
 .maroon {
   color: #85144b; }
 
+.pastelred {
+  color: #e25252; }
+
+.pastelblue {
+  color: #5470cc; }
+
+.darkyellow {
+  color: #cfb648; }
+
 /* Solarized Light
 
 For use with Jekyll and Pygments
@@ -1309,7 +1318,7 @@ cyan      #2aa198  strings, numbers
 green     #859900  operators, other keywords
 */
 .highlight {
-  background-color: #eef;
+  background-color: #F1F1F1;
   color: #586e75;
   /* Comment */
   /* Error */
@@ -1517,3 +1526,5 @@ green     #859900  operators, other keywords
     color: #268bd2; }
   .highlight .il {
     color: #2aa198; }
+
+/* monokai.css */
