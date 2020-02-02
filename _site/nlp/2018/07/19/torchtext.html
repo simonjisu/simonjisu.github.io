@@ -15,8 +15,8 @@
   <!-- todo: include this into main.css -->
   <link href='https://fonts.googleapis.com/css?family=' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://simonjisu.github.io/nlp/2018/07/19/torchtext.html">
-  <link rel="alternate" type="application/rss+xml" title="Soopace" href="https://simonjisu.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/07/19/torchtext.html">
+  <link rel="alternate" type="application/rss+xml" title="Soopace" href="http://localhost:4000/feed.xml">
   
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -121,14 +121,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/">Home</a></li>
+            <li><a href="http://localhost:4000/">Home</a></li>
           </ul>
         
       
         
           <ul class="dropdown">
             <li>
-              <a href="https://simonjisu.github.io/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+              <a href="http://localhost:4000/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
               <ul class="dropdown-menu">
               
               
@@ -177,7 +177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#nlp" target="_self">Nlp</a>
+                        <a href="http://localhost:4000/archive#nlp" target="_self">Nlp</a>
                       </li>
                     
                   
@@ -215,7 +215,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#paper" target="_self">Paper</a>
+                        <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
                       </li>
                     
                   
@@ -245,7 +245,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#others" target="_self">Others</a>
+                        <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                       </li>
                     
                   
@@ -275,7 +275,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#programming" target="_self">Programming</a>
+                        <a href="http://localhost:4000/archive#programming" target="_self">Programming</a>
                       </li>
                     
                   
@@ -311,7 +311,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#datascience" target="_self">Datascience</a>
+                        <a href="http://localhost:4000/archive#datascience" target="_self">Datascience</a>
                       </li>
                     
                   
@@ -360,7 +360,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#numpyseries" target="_self">Numpyseries</a>
+                        <a href="http://localhost:4000/archive#numpyseries" target="_self">Numpyseries</a>
                       </li>
                     
                   
@@ -384,13 +384,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/about">Abouts</a></li>
+            <li><a href="http://localhost:4000/about">Abouts</a></li>
           </ul>
         
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/feed.xml">RSS</a></li>
+            <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
           </ul>
         
       
@@ -441,9 +441,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><strong>설치:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install torchtext
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install torchtext
+</code></pre></div></div>
 
 <p>TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.</p>
 
@@ -464,14 +463,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>["The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations", 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations", 
 '3']
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>텍스트를 뜻하는 <code class="highlighter-rouge">TEXT</code>, 해당 문장의 sentiment 를 뜻하는 <code class="highlighter-rouge">LABEL</code> 필드객체 두 개를 만든다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from torchtext.data import Field
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from torchtext.data import Field
 
 TEXT = Field(sequential=True,
              use_vocab=True,
@@ -483,8 +481,7 @@ LABEL = Field(sequential=False,
               preprocessing = lambda x: int(x),  
               batch_first=True)
 
-</code></pre>
-</div>
+</code></pre></div></div>
 <p><strong>Arguments:</strong></p>
 
 <ul>
@@ -502,7 +499,7 @@ LABEL = Field(sequential=False,
 
 <p>데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 <code class="highlighter-rouge">splits</code> 메서드를 사용해서 아래와 같이 만들어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from torchtext.data import TabularDataset
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from torchtext.data import TabularDataset
 
 train_data = TabularDataset.splits(path='./data/',
 					train='train_path',
@@ -510,16 +507,14 @@ train_data = TabularDataset.splits(path='./data/',
 					test='test_path',
 					format='tsv', 
 					fields=[('text', TEXT), ('label', LABEL)])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>train_data = TabularDataset(path='./data/examples.tsv', 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_data = TabularDataset(path='./data/examples.tsv', 
 				format='tsv', 
 				fields=[('text', TEXT), ('label', LABEL)])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
   <li><strong>fields:</strong> 아까 만들어준 필드는 리스트 형태로 <code class="highlighter-rouge">[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]</code> 로 넣어준다.</li>
@@ -531,38 +526,35 @@ train_data = TabularDataset.splits(path='./data/',
 
 <p>훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>TEXT.build_vocab(train_data)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TEXT.build_vocab(train_data)
+</code></pre></div></div>
 
 <h3 id="4-데이터-로더-만들기create-data-loader">4. 데이터 로더 만들기(Create Data Loader)</h3>
 
 <p>마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, <code class="highlighter-rouge">splits</code> 메서드를 사용한다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>from torchtext.data import Iterator
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from torchtext.data import Iterator
 
 train_loader, valid_loader, test_loader = \
 	TabularDataset.splits((train_data, valid_data, test_data), 
 				batch_size=3, 
 				device=None,  # gpu 사용시 "cuda" 입력
 				repeat=False)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>만약에 없다면? 아래와 같이 <code class="highlighter-rouge">Iterator</code> 객체에 그냥 넣어준다.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>train_loader = Iterator(train_data, 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_loader = Iterator(train_data, 
 			batch_size=3, 
 			device=None,  # gpu 사용시 "cuda" 입력
 			repeat=False)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 <code class="highlighter-rouge">&lt;pad&gt;</code> 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.</p>
 
 <h3 id="테스트">테스트</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>for batch in train_loader:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for batch in train_loader:
     break
 print(batch.text)
 print(batch.label)
@@ -583,8 +575,7 @@ tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
            6910,      8,  10136,      8,      3,   2204,   4340,      2,
               1,      1,      1]])
 tensor([ 0,  3,  1])
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.</p>
 
@@ -623,7 +614,7 @@ tensor([ 0,  3,  1])
 
   <footer class="article-footer">
 
-  <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
+  <div class="pagination to-top-post"><a href="http://localhost:4000/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go to Posts  </a>
 </div>
   <section class="buymecoffee">

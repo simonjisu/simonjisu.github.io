@@ -13,11 +13,11 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 **목차**
 * [1. Introduction](#1-introduction)
-* [2. Scaled Dot-Product Attention](#2-scaled-dotproduct-attention)
+* [2. Scaled Dot-Product Attention](#2-scaled-dot-product-attention)
 
 ---
 
-## 1. Introduction
+## 3. Introduction
 
 그 동안 LSTM([Long Short-term Memory](https://dl.acm.org/citation.cfm?id=1246450), 1997) 과 GRU([Gated Recurrent Unit](https://arxiv.org/abs/1412.3555), 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다. 
 
@@ -94,7 +94,7 @@ $$\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V$$
 
 여기서 주의할 점은 $T_k$ 과 $T_v$가 같다는 점이다. 기계 번역을 예로 들면 소스 문장이 <span style="color:#5470cc">**K**</span>-<span style="color:#cfb648">**V**</span> 세트이기 때문에 같은 길이의 내용을 담고 있지만 각 토큰이 표현하고 있는 차원만 다를 뿐이다. <span style="color:#e25252">**Q**</span> 와 <span style="color:#5470cc">**K**</span> 의 길이는 다를 수 있지만 차원 $d_k$ 로 같다. 두 행렬은 행렬의 곱(matrix multiplication)을 통해서 크기가 $(T_q, T_v)$ 인 점수 행렬 **A** 를 만들어 낸다. 
 
-행렬 **A** 는 스케일링(Scaling), 마스킹(Masking) 후 Softmax 를 통해 확률값을 도출한다. 이 행렬의 뜻은 "문제를 해결하기 위해서 <span style="color:#e25252">**Q**</span> 의 토큰이 <span style="color:#5470cc">**K**</span> 의 어떤 토큰을 가장 많이 참고해야하는가?" 를 뜻한다. 따라서 확률이 높게 부여된 토큰은 **Q** 의 해당하는 토큰과 연관성이 높다고 할 수 있다. 물론 이 모든 연산은 학습이 가능하도록 DAG(Directed acyclic graph)로 연결되어 있기 때문에 학습 스텝이 진행됨에 따라 풀고자하는 문제에 최적화된 확률을 계속 도출해낸다<span style="color:gray">((Masking 은 차후에 다룬다)</span>.
+행렬 **A** 는 스케일링(Scaling), 마스킹(Masking) 후 Softmax 를 통해 확률값을 도출한다. 이 행렬의 뜻은 "문제를 해결하기 위해서 <span style="color:#e25252">**Q**</span> 의 토큰이 <span style="color:#5470cc">**K**</span> 의 어떤 토큰을 가장 많이 참고해야하는가?" 를 뜻한다. 따라서 확률이 높게 부여된 토큰은 <span style="color:#e25252">**Q**</span> 의 해당하는 토큰과 연관성이 높다고 할 수 있다. 물론 이 모든 연산은 학습이 가능하도록 DAG(Directed acyclic graph)로 연결되어 있기 때문에 학습 스텝이 진행됨에 따라 풀고자하는 문제에 최적화된 확률을 계속 도출해낸다<span style="color:gray">((Masking 은 차후에 다룬다)</span>.
 
 스케일링 작업은 행렬 곱을 구한 **A** 를 $\sqrt{d_k}$ 로 나누는데, 그 이유는 다음과 같다. 차원의 크기인 $d_k$ 가 커질 수록 행렬의 곱의 수치는 점점 커지고 Softmax 수식에 의해서 그 확률 값 또한 커진다. 따라서 Softmax 의 경사(gradient) 값도 굉장히 작아지는데, 이를 막기위해서 $\frac{1}{\sqrt{d_k}}$ 값을 곱해줘야한다. 
 
@@ -170,8 +170,8 @@ count of gradients that smaller than threshod(1e-10) is 1737479, 69.50%
 after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00%
 ```
 
-해당 모듈(Module) 코드는 [Link](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/modules.py#L8) 에서 확인하실 수 있습니다.
+해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/modules.py#L8) 에서 확인할 수 있다.
 
 ---
 
-다음편: [NLP] Attention Is All You Need - 2 
+다음편: [[NLP] Attention Is All You Need - 2](https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html)

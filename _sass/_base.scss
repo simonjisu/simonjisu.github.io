@@ -446,7 +446,9 @@ figure figcaption {
 
 img {
   max-width: 100%;
-  vertical-align: middle;
+  display: block; 
+  margin: 0px auto;
+  padding-bottom: 5px;
 }
 
 

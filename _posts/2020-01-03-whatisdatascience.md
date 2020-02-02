@@ -13,6 +13,10 @@ comments: true
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xC-c7E5PK0Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+--
+
+* 2020.02.02 추가: 데이터관련 직군에 대한 [Report](https://d2wahc834rj2un.cloudfront.net/Workera%20Report.pdf?fbclid=IwAR0IEBfU-7w231SNnaJFM_DYPEqJQDgOdf5_eCVs0aGsazO9XBWaVxzrbF0)
+
 ---
 
 # 목차
