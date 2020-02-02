@@ -4,10 +4,10 @@
     <title>Soopace</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 02 Feb 2020 15:59:34 +0900</pubDate>
-    <lastBuildDate>Sun, 02 Feb 2020 15:59:34 +0900</lastBuildDate>
+    <link>https://simonjisu.github.io/</link>
+    <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 02 Feb 2020 16:04:45 +0900</pubDate>
+    <lastBuildDate>Sun, 02 Feb 2020 16:04:45 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -87,12 +87,12 @@
 &lt;p&gt;즉, 위 행렬을 해석하면 현재 Input 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터, Target 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터다. 각 문장의 토큰들에 순서 인덱스를 부여하여 포지션(Position) 데이터를 얻고자하면 다음과 같다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt; 은 인위적으로 넣은 데이터기 때문에 순서가 없어야 한다.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{src\_pos} &amp;= \begin{bmatrix}1&amp;2&amp;3&amp;4 \\ 1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;0&amp;0 \end{bmatrix} \\ \text{trg\_pos} &amp;= \begin{bmatrix}1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;3&amp;4 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
+\begin{aligned} \text{src_pos} &amp;= \begin{bmatrix}1&amp;2&amp;3&amp;4 \\ 1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;0&amp;0 \end{bmatrix} \\ \text{trg_pos} &amp;= \begin{bmatrix}1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;3&amp;4 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;Decoder 의 경우 이전 타임 스텝(t-1)의 토큰들로 다음 타임 스텝(t)의 토큰을 예측하기 때문에 실질적으로 모델에 입력되는 데이터(&lt;code class=&quot;highlighter-rouge&quot;&gt;trg_input&lt;/code&gt;)와 실제 예측해야하는 타겟 데이터(&lt;code class=&quot;highlighter-rouge&quot;&gt;gold&lt;/code&gt;)는 다음과 같다. 즉, 예를 들어 1, 2, 3 포지션에 해당하는 타겟 값을 입력으로 주었을때 2, 3, 4 번 포지션에 해당하는 값을 예측하는 것이다.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{trg\_input} &amp;= \begin{bmatrix} 2&amp;5&amp;4 \\ 2&amp;5&amp;6 \\ 2&amp;7&amp;4 \end{bmatrix} \\ \text{gold} &amp;= \begin{bmatrix}5&amp;4&amp;0 \\ 5&amp;6&amp;0 \\ 7&amp;4&amp;9 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
+\begin{aligned} \text{trg_input} &amp;= \begin{bmatrix} 2&amp;5&amp;4 \\ 2&amp;5&amp;6 \\ 2&amp;7&amp;4 \end{bmatrix} \\ \text{gold} &amp;= \begin{bmatrix}5&amp;4&amp;0 \\ 5&amp;6&amp;0 \\ 7&amp;4&amp;9 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
 
 &lt;p&gt;토큰에 순서 정보인 포지션을 구하는 이유는 무엇일까? 그 해답은 RNN 의 구동원리에 있는데, RNN 을 Cell 단위로 만들면 다음 코드와 같다.&lt;/p&gt;
 
@@ -125,7 +125,7 @@
 
 &lt;h3 id=&quot;embedding&quot;&gt;Embedding&lt;/h3&gt;
 
-&lt;p&gt;임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_model}$ 를 곱했다.&lt;/p&gt;
+&lt;p&gt;임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_{model}}$ 를 곱했다.&lt;/p&gt;
 
 &lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L107&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
 
@@ -150,8 +150,8 @@
 &lt;p&gt;다음편: [NLP] Attention Is All You Need - 3&lt;/p&gt;
 </description>
         <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
-        <link>http://localhost:4000/paper/2020/02/02/attentionisallyouneed2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/paper/2020/02/02/attentionisallyouneed2.html</guid>
+        <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</guid>
         
         
         <category>paper</category>
@@ -350,8 +350,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html&quot;&gt;[NLP] Attention Is All You Need - 2&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 14 Jan 2020 14:19:38 +0900</pubDate>
-        <link>http://localhost:4000/paper/2020/01/14/attentionisallyouneed.html</link>
-        <guid isPermaLink="true">http://localhost:4000/paper/2020/01/14/attentionisallyouneed.html</guid>
+        <link>https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</guid>
         
         
         <category>paper</category>
@@ -502,8 +502,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 03 Jan 2020 14:19:38 +0900</pubDate>
-        <link>http://localhost:4000/datascience/2020/01/03/whatisdatascience.html</link>
-        <guid isPermaLink="true">http://localhost:4000/datascience/2020/01/03/whatisdatascience.html</guid>
+        <link>https://simonjisu.github.io/datascience/2020/01/03/whatisdatascience.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2020/01/03/whatisdatascience.html</guid>
         
         
         <category>datascience</category>
@@ -671,8 +671,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;&lt;del&gt;P.S. 닌텐도 스위치도 사자&lt;/del&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
-        <link>http://localhost:4000/others/2019/12/30/lookback2019.html</link>
-        <guid isPermaLink="true">http://localhost:4000/others/2019/12/30/lookback2019.html</guid>
+        <link>https://simonjisu.github.io/others/2019/12/30/lookback2019.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2019/12/30/lookback2019.html</guid>
         
         
         <category>others</category>
@@ -812,8 +812,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.07285&quot;&gt;A guide to convolution arithmetic for deep learning&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 27 Oct 2019 21:56:38 +0900</pubDate>
-        <link>http://localhost:4000/programming/2019/10/27/convtranspose2d.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2019/10/27/convtranspose2d.html</guid>
+        <link>https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</guid>
         
         
         <category>programming</category>
@@ -1433,8 +1433,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;그러나 우리는 설명가능성의 다른 측면을 다루기 위해 취해진 다양한 접근방식이 고립되어 있다는 것을 발견했다. 더 효율적인 설명을 달성하기 위해 다른 범주의 기술을 합병하는 접근 방법과 같은 설명가능성 공간에 대한 작업은 상대적으로 적은 주의를 주고도 특정 범주의 기술의 발전을 야기했다. 설명의 목적과 유형이 주어졌을 때, 어떤 설명 측정기준이 제일 좋은 것인지 알기가 명확하지 않다. 우리는 표적 설명(the targeted explanation)의 목적과 완전무결성에 맞는 다양한 측정기준을 사용하길 권장한다. 커뮤니티에서 다양한 분야의 여러 아이디어를 합치고 함께 작업하고 배우면서, 시스템 설명의 전반적인 상태 눈에 띄게 향상될 것이다. 그 결과로 행동 추정(behavioral extrapolation)을 제공하고, 딥러닝 시스템의 신뢰를 구축하고, 심층 네트워크 연산의 유용한 인사이트 등 시스템 행동의 이해와 증진을 가능케한다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Sep 2019 11:04:38 +0900</pubDate>
-        <link>http://localhost:4000/paper/2019/09/18/introxai.html</link>
-        <guid isPermaLink="true">http://localhost:4000/paper/2019/09/18/introxai.html</guid>
+        <link>https://simonjisu.github.io/paper/2019/09/18/introxai.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2019/09/18/introxai.html</guid>
         
         
         <category>paper</category>
@@ -1671,8 +1671,8 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/12/04/buildgithubpages.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/12/04/buildgithubpages.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</guid>
         
         
         <category>programming</category>
@@ -1841,8 +1841,8 @@ def init_db():
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/11/11/flaskstudy2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/11/11/flaskstudy2.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</guid>
         
         
         <category>programming</category>
@@ -1944,8 +1944,8 @@ if __name__ == '__main__':
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/10/30/flaskstudy1.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/30/flaskstudy1.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</guid>
         
         
         <category>programming</category>
@@ -2104,8 +2104,8 @@ $ source ~/.bashrc
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 28 Oct 2018 19:22:40 +0900</pubDate>
-        <link>http://localhost:4000/programming/2018/10/28/flaskstudy0.html</link>
-        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/28/flaskstudy0.html</guid>
+        <link>https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</guid>
         
         
         <category>programming</category>

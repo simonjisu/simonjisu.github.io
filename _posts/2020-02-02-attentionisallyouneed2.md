@@ -69,11 +69,11 @@ $$\begin{aligned} \text{src} &= \begin{bmatrix}3&6&4&9 \\ 1&3&5&0 \\ 3&2&0&0 \en
 
 즉, 위 행렬을 해석하면 현재 Input 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터, Target 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터다. 각 문장의 토큰들에 순서 인덱스를 부여하여 포지션(Position) 데이터를 얻고자하면 다음과 같다. `Padding` 은 인위적으로 넣은 데이터기 때문에 순서가 없어야 한다.
 
-$$\begin{aligned} \text{src\_pos} &= \begin{bmatrix}1&2&3&4 \\ 1&2&3&0 \\ 1&2&0&0 \end{bmatrix} \\ \text{trg\_pos} &= \begin{bmatrix}1&2&3&0 \\ 1&2&3&0 \\ 1&2&3&4 \end{bmatrix}  \end{aligned}$$
+$$\begin{aligned} \text{src_pos} &= \begin{bmatrix}1&2&3&4 \\ 1&2&3&0 \\ 1&2&0&0 \end{bmatrix} \\ \text{trg_pos} &= \begin{bmatrix}1&2&3&0 \\ 1&2&3&0 \\ 1&2&3&4 \end{bmatrix}  \end{aligned}$$
 
 Decoder 의 경우 이전 타임 스텝(t-1)의 토큰들로 다음 타임 스텝(t)의 토큰을 예측하기 때문에 실질적으로 모델에 입력되는 데이터(`trg_input`)와 실제 예측해야하는 타겟 데이터(`gold`)는 다음과 같다. 즉, 예를 들어 1, 2, 3 포지션에 해당하는 타겟 값을 입력으로 주었을때 2, 3, 4 번 포지션에 해당하는 값을 예측하는 것이다.
 
-$$\begin{aligned} \text{trg\_input} &= \begin{bmatrix} 2&5&4 \\ 2&5&6 \\ 2&7&4 \end{bmatrix} \\ \text{gold} &= \begin{bmatrix}5&4&0 \\ 5&6&0 \\ 7&4&9 \end{bmatrix}  \end{aligned}$$
+$$\begin{aligned} \text{trg_input} &= \begin{bmatrix} 2&5&4 \\ 2&5&6 \\ 2&7&4 \end{bmatrix} \\ \text{gold} &= \begin{bmatrix}5&4&0 \\ 5&6&0 \\ 7&4&9 \end{bmatrix}  \end{aligned}$$
 
 토큰에 순서 정보인 포지션을 구하는 이유는 무엇일까? 그 해답은 RNN 의 구동원리에 있는데, RNN 을 Cell 단위로 만들면 다음 코드와 같다.
 
@@ -107,7 +107,7 @@ RNN 의 특징 중 하나는 시퀀스 길이에 상관없이 한 스텝씩 처�
 
 ### Embedding
 
-임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_model}$ 를 곱했다.
+임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_{model}}$ 를 곱했다.
 
 해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L107) 에서 확인할 수 있다.
 
