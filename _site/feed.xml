@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 02 Feb 2020 16:04:45 +0900</pubDate>
-    <lastBuildDate>Sun, 02 Feb 2020 16:04:45 +0900</lastBuildDate>
+    <pubDate>Sun, 02 Feb 2020 16:08:39 +0900</pubDate>
+    <lastBuildDate>Sun, 02 Feb 2020 16:08:39 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -600,7 +600,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;h3 id=&quot;2-책-출간-및-강의&quot;&gt;2. 책 출간 및 강의&lt;/h3&gt;
 
-&lt;p&gt;2019년도 7월말에 내가 쓴 책 &lt;딥러닝에 목마른=&quot;&quot; 사람들을=&quot;&quot; 위한=&quot;&quot; PyTorch=&quot;&quot;&gt;가 발간됐다. 책 내용은 집에서 GPU서버를 만드는 법 부터 시작해서, PyTorch로 딥러닝에 입문하는 것이다. 책을 쓰는 작업이 정말 어렵다는 것을 이번 경험으로 부터 깨달았다. 부족한 부분도 많아서 다음에는 조금더 알찬 내용으로 구성해서 다시 gitbook 형태로 써볼까 생각중이다.&lt;/딥러닝에&gt;&lt;/p&gt;
+&lt;p&gt;2019년도 7월말에 내가 쓴 책 &amp;lt;딥러닝에 목마른 사람들을 위한 PyTorch&amp;gt;가 발간됐다. 책 내용은 집에서 GPU서버를 만드는 법 부터 시작해서, PyTorch로 딥러닝에 입문하는 것이다. 책을 쓰는 작업이 정말 어렵다는 것을 이번 경험으로 부터 깨달았다. 부족한 부분도 많아서 다음에는 조금더 알찬 내용으로 구성해서 다시 gitbook 형태로 써볼까 생각중이다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://bit.ly/딥목파&quot;&gt;&amp;lt;딥러닝에 목마른 사람들을 위한 PyTorch&amp;gt; 홈페이지 바로가기&lt;/a&gt;&lt;/li&gt;
