@@ -42,7 +42,6 @@ toc:
     url: /archive
     subposts:
       - subcat: separator
-      - subcat: xai
       - subcat: nlp
       - subcat: book
       - subcat: paper
