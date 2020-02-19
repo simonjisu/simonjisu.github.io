@@ -4,10 +4,10 @@
     <title>Soopace</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>https://simonjisu.github.io/</link>
-    <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 19 Feb 2020 19:16:44 +0900</pubDate>
-    <lastBuildDate>Wed, 19 Feb 2020 19:16:44 +0900</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 19 Feb 2020 19:33:13 +0900</pubDate>
+    <lastBuildDate>Wed, 19 Feb 2020 19:33:13 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -74,8 +74,8 @@
 
 </description>
         <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/others/2020/02/02/geultto4.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/others/2020/02/02/geultto4.html</guid>
+        <link>http://localhost:4000/others/2020/02/02/geultto4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/others/2020/02/02/geultto4.html</guid>
         
         
         <category>others</category>
@@ -203,8 +203,8 @@
 &lt;p&gt;다음편: [NLP] Attention Is All You Need - 3&lt;/p&gt;
 </description>
         <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</guid>
+        <link>http://localhost:4000/paper/2020/02/02/attentionisallyouneed2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/paper/2020/02/02/attentionisallyouneed2.html</guid>
         
         
         <category>paper</category>
@@ -395,8 +395,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html&quot;&gt;[NLP] Attention Is All You Need - 2&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 14 Jan 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</guid>
+        <link>http://localhost:4000/paper/2020/01/14/attentionisallyouneed.html</link>
+        <guid isPermaLink="true">http://localhost:4000/paper/2020/01/14/attentionisallyouneed.html</guid>
         
         
         <category>paper</category>
@@ -539,8 +539,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 03 Jan 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/datascience/2020/01/03/whatisdatascience.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2020/01/03/whatisdatascience.html</guid>
+        <link>http://localhost:4000/datascience/2020/01/03/whatisdatascience.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2020/01/03/whatisdatascience.html</guid>
         
         
         <category>datascience</category>
@@ -697,8 +697,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;&lt;del&gt;P.S. 닌텐도 스위치도 사자&lt;/del&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/others/2019/12/30/lookback2019.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/others/2019/12/30/lookback2019.html</guid>
+        <link>http://localhost:4000/others/2019/12/30/lookback2019.html</link>
+        <guid isPermaLink="true">http://localhost:4000/others/2019/12/30/lookback2019.html</guid>
         
         
         <category>others</category>
@@ -836,8 +836,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.07285&quot;&gt;A guide to convolution arithmetic for deep learning&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 27 Oct 2019 21:56:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html</guid>
+        <link>http://localhost:4000/datascience/2019/10/27/convtranspose2d.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2019/10/27/convtranspose2d.html</guid>
         
         
         <category>datascience</category>
@@ -1455,8 +1455,8 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 &lt;p&gt;그러나 우리는 설명가능성의 다른 측면을 다루기 위해 취해진 다양한 접근방식이 고립되어 있다는 것을 발견했다. 더 효율적인 설명을 달성하기 위해 다른 범주의 기술을 합병하는 접근 방법과 같은 설명가능성 공간에 대한 작업은 상대적으로 적은 주의를 주고도 특정 범주의 기술의 발전을 야기했다. 설명의 목적과 유형이 주어졌을 때, 어떤 설명 측정기준이 제일 좋은 것인지 알기가 명확하지 않다. 우리는 표적 설명(the targeted explanation)의 목적과 완전무결성에 맞는 다양한 측정기준을 사용하길 권장한다. 커뮤니티에서 다양한 분야의 여러 아이디어를 합치고 함께 작업하고 배우면서, 시스템 설명의 전반적인 상태 눈에 띄게 향상될 것이다. 그 결과로 행동 추정(behavioral extrapolation)을 제공하고, 딥러닝 시스템의 신뢰를 구축하고, 심층 네트워크 연산의 유용한 인사이트 등 시스템 행동의 이해와 증진을 가능케한다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Sep 2019 11:04:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2019/09/18/introxai.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2019/09/18/introxai.html</guid>
+        <link>http://localhost:4000/paper/2019/09/18/introxai.html</link>
+        <guid isPermaLink="true">http://localhost:4000/paper/2019/09/18/introxai.html</guid>
         
         
         <category>paper</category>
@@ -1689,8 +1689,8 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</guid>
+        <link>http://localhost:4000/programming/2018/12/04/buildgithubpages.html</link>
+        <guid isPermaLink="true">http://localhost:4000/programming/2018/12/04/buildgithubpages.html</guid>
         
         
         <category>programming</category>
@@ -1857,8 +1857,8 @@ def init_db():
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</guid>
+        <link>http://localhost:4000/programming/2018/11/11/flaskstudy2.html</link>
+        <guid isPermaLink="true">http://localhost:4000/programming/2018/11/11/flaskstudy2.html</guid>
         
         
         <category>programming</category>
@@ -1958,8 +1958,8 @@ if __name__ == '__main__':
 &lt;/ul&gt;
 </description>
         <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</guid>
+        <link>http://localhost:4000/programming/2018/10/30/flaskstudy1.html</link>
+        <guid isPermaLink="true">http://localhost:4000/programming/2018/10/30/flaskstudy1.html</guid>
         
         
         <category>programming</category>
