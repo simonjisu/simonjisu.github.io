@@ -11,10 +11,10 @@ layout: default
   <div>
     <div id="table-of-contents">
       <h2> Contents </h2>
-      {% toc %}
+      {{ content | toc_only }}
     </div>
     <div class="article-content" id="markdown-content">
-      {{ content }}
+      {{ content | inject_anchors }}
     </div>
   </div>
   <!-- <div class="table-of-contents" itemprop="articleBody">
