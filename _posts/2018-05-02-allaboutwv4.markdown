@@ -5,13 +5,12 @@ date: "2018-05-02 23:22:05 +0900"
 categories: nlp
 author: "Soo"
 comments: true
+toc: true
 ---
-# All about Word Vectors: GloVe
 
----
 본 포스팅은 [CS224n](http://web.stanford.edu/class/cs224n/) Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.
 
-## Co-occurrence
+# Co-occurrence
 
 공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다. 여기서 어휘는 단어 뿐만 아니라 형태소, 합성어 등의 단위로 의미를 부여할 수 있는 언어 단위다. 그렇다면 왜 **공기 관계** 를 살피는 것일까?
 
@@ -26,7 +25,7 @@ comments: true
 1. window 기반: 품사와 의미(semantic) 정보를 캡쳐할 수 있다.
 2. word-document co-occurrence matrix 기반: 조금 더 일반적인 토픽을 추출 할 수 있고, 이는 Latent Semantic Analysis 와 연결 된다.
 
-## Example: Window based co-occurrence matrix
+# Example: Window based co-occurrence matrix
 
 > I like deep learning.
 >
@@ -93,7 +92,7 @@ co-occurrence matrix와 같은 단어 벡터는 어떤 문제점이 있을까?
 
 이와 같은 생각이 GloVe 를 탄생시켰다.
 
-## GloVe
+# GloVe
 
 Paper: [GloVe: Global Vectors for Word Representation](https://www.aclweb.org/anthology/D14-1162)
 
@@ -104,7 +103,7 @@ $$J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(P_{ij})(u_i^T v_j - \log P_{ij})^2
 논문해설을 통해서 자세히 보자.
 
 ---
-### 논문 해설
+## 논문 해설
 
 **GloVe:** Global Vectors라고 명칭을 지은 이유는 모델에서 직접적으로 문서 전체의 코퍼스 통계량을 포착할 수있기 때문이다. (the global corpus statistics are captured directly by the model)
 
@@ -202,7 +201,7 @@ $$\hat{J} = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j - \log X_{ij})^2$$
 이는 연구팀이 도출한 $(7)$ 식과 같은 식이다.
 
 ---
-### 참고 1: Homomorphism
+## 참고 1: Homomorphism
 
 혹시나 틀렸으면 댓글로 이야기 해주세요.
 

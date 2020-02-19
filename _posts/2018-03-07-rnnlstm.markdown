@@ -5,6 +5,7 @@ title: "[DeepLearning]-9: RNN & LSTM"
 categories: numpyseries
 author: "Soo"
 comments: true
+toc: true
 ---
 # Numpy로 짜보는 Neural Network Basic - 9
 

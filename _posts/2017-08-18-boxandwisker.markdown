@@ -4,6 +4,8 @@ title: "박스앤위스커-박장시님 강연 후기"
 date: "2017-08-18 13:34:35 +0900"
 author: "Soo"
 categories: others
+comments: true
+toc: true
 ---
 **박스앤위스커 - 박장시님 강연 후기**
 ===

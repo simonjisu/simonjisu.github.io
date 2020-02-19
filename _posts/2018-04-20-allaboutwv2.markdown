@@ -5,10 +5,9 @@ date: "2018-04-20 10:19:06 +0900"
 categories: nlp
 author: "Soo"
 comments: true
+toc: true
 ---
-# All about Word Vectors: Word2Vec
 
----
 본 포스팅은 [CS224n](http://web.stanford.edu/class/cs224n/) Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.
 
 자연어 처리 공부를 해보신 분이라면 한번쯤 접한 그림이 있을 것이다.
@@ -23,7 +22,7 @@ comments: true
 
 이번 시간에는 **Word2vec** 에 대해서 알아보려고 한다.
 
-## Word2Vec
+# Word2Vec
 
 Word2Vec은 두 가지 알고리즘이 있다.
 
@@ -51,13 +50,13 @@ Word2Vec은 두 가지 알고리즘이 있다.
 
 ---
 
-## Skip-gram model with Naive Softmax
+# Skip-gram model with Naive Softmax
 Paper: [Distributed Representations of Words and Phrases
 and their Compositionality](https://arxiv.org/pdf/1310.4546.pdf) (Mikolov et al. 2013)
 
 <br>
 
-### Embedding Look up
+## Embedding Look up
 
 모델 설명에 들어가기 앞서 **Embedding Look up** 이란 것을 알아보자. 이 용어는 이제 여기저기서 많이 나올텐데 알아두면 좋다.
 
@@ -118,11 +117,11 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <img src="/assets/ML/nlp/L2_model_train.png">
 
-### 요약
+## 요약
 
 Skip-gram 모델을 한 마디로 설명하자면, 문장의 모든 단어가 한번 씩 중심단어 $c$ 가 되어, $c$ 주변 문맥 단어 $o$ 가 나올 확률을 최대화 하는 것이다.
 
-### 목적
+## 목적
 
 각 중심단어 $c$ 에 대해서 아래의 **가능도/우도 (Likelihood)** 를 구해본다.
 
@@ -154,7 +153,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W'$ 두
 
 <br>
 
-### Update
+## Update
 
 Gradient를 통해서 각 파라미터들을 업데이트 하게 된다. $(3)$ 식의 $\log$ 를 취하게 되면 아래와 같다.
 
@@ -177,7 +176,7 @@ $$\begin{aligned} \dfrac{\partial f}{\partial V_c}
 
 ---
 
-### 참고 1: Why MLE is equivalent to minimize NLL?
+## 참고 1: Why MLE is equivalent to minimize NLL?
 
 **Likelihood** 의 정의:
 

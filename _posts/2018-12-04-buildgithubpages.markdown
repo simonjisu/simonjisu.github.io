@@ -5,21 +5,18 @@ date: "2018-12-04 22:04:38 +0900"
 categories: programming
 author: "Soo"
 comments: true
+toc: true
 ---
-
-# Github pages 로 프로젝트 문서화
 
 잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다. 
 
-## 실습환경
-
-* Ubuntu Server 18.04 LTS
+* 실습환경: Ubuntu Server 18.04 LTS
 
 ---
 
-## 준비과정
+# 준비과정
 
-### Install nodejs & npm
+## Install nodejs & npm
 
 사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.
 
@@ -38,7 +35,7 @@ $ npm --version
 6.4.1
 ```
 
-### Install gitbook client
+## Install gitbook client
 
 gitbook client 를 설치해야한다.
 
@@ -46,7 +43,7 @@ gitbook client 를 설치해야한다.
 $ npm install gitbook-cli -g
 ```
 
-### Initialize gitbook
+## Initialize gitbook
 
 이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 `posts` 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.
 
@@ -142,7 +139,7 @@ Serving book on http://localhost:4000
 **CTRL+C** 를 눌러서 꺼주자.
 
 
-### Initialize git
+## Initialize git
 
 테스트 후, 프로젝트 디렉토리에 `_book` 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)
 
@@ -197,7 +194,7 @@ git commit -a -m "update docs"
 git push -u origin master
 ```
 
-### 저장소에서 활성화 하기
+## 저장소에서 활성화 하기
 
 자신의 github 저장소의 **Settings** 에 가서 **Github Pages** 항목의 **master branch /docs folder** 를 누르고 **Save** 를 누르자.
 
@@ -209,13 +206,13 @@ git push -u origin master
 
 ---
 
-## Customizing
+# Customizing
 
-### book.json
+## book.json
 
 프로젝트 디렉토리에서 `book.json` 파일을 생성하여 커스터마이징이 가능하다. 사실 쓰는건 플러그인과 변수 정도이지만, book.json의 기본 설정을 [여기](https://toolchain.gitbook.com/config.html)서 참고할 수 있다.
 
-### plugins
+## plugins
 
 gitbook 에 다양한 플러그인을 설치 할 수 있는데, [https://plugins.gitbook.com/](https://plugins.gitbook.com/) 사이트에서 확인 할 수 있다.
 
@@ -240,7 +237,7 @@ gitbook 에 다양한 플러그인을 설치 할 수 있는데, [https://plugins
 
 ---
 
-## References
+# References
 
 * [GitBook Toolchain Documentation for Multi-Languages](https://tinydew4.gitbooks.io/gitbook/ko/structure.html)
 * [윈도우에서 깃북 제작 및 깃헙 페이지로 호스팅하기](https://blog.psangwoo.com/coding/2018/01/31/gitbook-on-windows.html)

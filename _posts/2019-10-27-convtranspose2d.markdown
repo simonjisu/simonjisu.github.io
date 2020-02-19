@@ -2,18 +2,17 @@
 layout: post
 title: "[PyTorch] ConvTranspose2d 와 Conv2d 의 관계"
 date: "2019-10-27 21:56:38 +0900"
-categories: programming
+categories: datascience
 author: "Soo"
 comments: true
+toc: true
 ---
-
-# ConvTranspose2d 와 Conv2d
 
 최근 XAI 에 관련된 공부를 하면서 비전쪽의 많은 논문을 살펴보고 있다. "Visualizing and Understanding Convolutional Networks (2013)" 논문에서는 이미지 처리에서는 CNN 알고리즘이 제일 좋지만, 그 이유에 대해서 탐구를 시도한 논문이다. 도대체 Convolution의 필터가 어떤 역할을 하는지, 이들이 어떤 부분을 살펴보는 지를 확인한다. 오늘은 이 논문에서 제안하는 Deconvolutional layers(정확히는 Fractionally-strided convolution 이지만 차후에 언급한다)의 실체를 낱낱이 살펴보도록 한다. 
 
 * link: [Visualizing and Understanding Convolutional Networks](https://arxiv.org/abs/1311.2901)
 
-## Convolution layer
+# Convolution layer
 
 Deconvolutional layer을 알아보기 전에 합성곱 연산(Convolutional Operation)에 대해 알아볼 필요가 있다. 합성곱 연산은 필터가 조금씩 이동하면서 이미지의 일부와 필터간 연산을 통해 진행된다.
 
@@ -41,7 +40,7 @@ $$\begin{aligned} X^{(l+1)} &= X^{(l)}*W\\&=\begin{bmatrix}w_{11} x^{(l)}_{11} +
 
 * link: [torch.nn.Conv2d - PyTorch master documentation](https://pytorch.org/docs/stable/nn.html#conv2d)
 
-## Deconvolution Layer? Transposed Convolution Layer!
+# Deconvolution Layer? Transposed Convolution Layer!
 
 저자는 이미 2011 년도에 Deconvolution Layer 를 제안했다. 
 
@@ -121,6 +120,6 @@ $$X^{(l)} = [Vec\big(X^{(l+1)}\big)C^T]^{(N)}$$
 
  
 
-### Additional Reference
+# Additional Reference
 
 [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285)

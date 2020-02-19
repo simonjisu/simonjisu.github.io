@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Pytorch 의 PackedSequence object 알아보기</title>
-  <meta name="description" content="Pytorch 의 PackedSequence object 알아보기PackedSequence 란?  아래의 일련의 과정을 PackedSequence 라고 할 수 있다.NLP 에서 매 배치(batch)마다 고정된 문장의 길이로 만들어주기 위해서 &lt;pad&gt; 토큰을 넣어야 한다...">
+  <meta name="description" content="PackedSequence 란?  아래의 일련의 과정을 PackedSequence 라고 할 수 있다.NLP 에서 매 배치(batch)마다 고정된 문장의 길이로 만들어주기 위해서 &lt;pad&gt; 토큰을 넣어야 한다. 아래 그림의 파란색 영역은 &lt;pad&gt; 토큰이다.  ...">
 
   <!-- evil icon -->
   <link rel="stylesheet" href="/assets/evil-icons.min.css">
@@ -134,29 +134,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               
                 
                   <li role="separator" class="divider"></li>
-                
-              
-              
-                
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
                 
               
               
@@ -425,13 +402,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-07-05T09:45:37+09:00" itemprop="datePublished">Jul 5, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-
+  <div id="table-of-contents">
+    <h2> 목차 </h2>
+<ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#packedsequence-란">PackedSequence 란?</a></li>
+<li class="toc-entry toc-h1"><a href="#pytorch---packedsequence">Pytorch - PackedSequence</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#과정">과정</a></li>
+<li class="toc-entry toc-h2"><a href="#rnn-에서의-사용-방법">RNN 에서의 사용 방법</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#rnn-backend-작동-방식">RNN Backend 작동 방식</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#rnn-안에서-어떤-방법으로-실행되는-것일까">RNN 안에서 어떤 방법으로 실행되는 것일까?</a></li>
+<li class="toc-entry toc-h2"><a href="#그렇다면-hidden-어떻게-출력-되는가">그렇다면 Hidden 어떻게 출력 되는가?</a></li>
+</ul>
+</li>
+</ul>
+  </div>
   <div class="article-content" itemprop="articleBody">
-    <h1 id="pytorch-의-packedsequence-object-알아보기">Pytorch 의 PackedSequence object 알아보기</h1>
-
-<hr />
-
-<h2 id="packedsequence-란">PackedSequence 란?</h2>
+    <h1 id="packedsequence-란">PackedSequence 란?</h1>
 
 <blockquote>
   <p>아래의 일련의 과정을 PackedSequence 라고 할 수 있다.</p>
@@ -476,11 +466,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <hr />
 
-<h2 id="pytorch---packedsequence">Pytorch - PackedSequence</h2>
+<h1 id="pytorch---packedsequence">Pytorch - PackedSequence</h1>
 
 <p>Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb">nbviewer</a> 혹은 <a href="https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb">github</a>에 있다.</p>
 
-<h3 id="과정">과정</h3>
+<h2 id="과정">과정</h2>
 
 <p>전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.</p>
 
@@ -520,7 +510,7 @@ tensor([ 6,  5,  4,  2,  1])
 
 <p><br /></p>
 
-<h3 id="rnn-에서의-사용-방법">RNN 에서의 사용 방법</h3>
+<h2 id="rnn-에서의-사용-방법">RNN 에서의 사용 방법</h2>
 
 <p>실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.</p>
 
@@ -550,9 +540,9 @@ output.size(), output_lengths
 
 <hr />
 
-<h2 id="rnn-backend-작동-방식">RNN Backend 작동 방식</h2>
+<h1 id="rnn-backend-작동-방식">RNN Backend 작동 방식</h1>
 
-<h3 id="rnn-안에서-어떤-방법으로-실행되는-것일까">RNN 안에서 어떤 방법으로 실행되는 것일까?</h3>
+<h2 id="rnn-안에서-어떤-방법으로-실행되는-것일까">RNN 안에서 어떤 방법으로 실행되는 것일까?</h2>
 
 <p>아래의 그림을 살펴보자</p>
 
@@ -562,7 +552,7 @@ output.size(), output_lengths
 
 <p>기존의 RNN 이라면, <strong>(배치크기 $\times$ 문장의 최대 길이 $\times$ 층의 갯수)</strong> 만큼 연산을 해야하지만, <strong>(실제 토큰의 갯수 $\times$ 층의 갯수)</strong> 만큼 계산하면 된다. 이 예제로 말하면 $(5 \times 6 \times 1)=30 \rightarrow (18 \times 1)=18$ 로 크게 줄었다.</p>
 
-<h3 id="그렇다면-hidden-어떻게-출력-되는가">그렇다면 Hidden 어떻게 출력 되는가?</h3>
+<h2 id="그렇다면-hidden-어떻게-출력-되는가">그렇다면 Hidden 어떻게 출력 되는가?</h2>
 
 <p>기존의 RNN 이라면 마지막 타임스텝 때 hidden vector 만 출력하지만, packed sequence 는 아래의 그림 처럼 골라서 출력하게 된다.</p>
 
@@ -575,7 +565,7 @@ output.size(), output_lengths
   <footer class="article-footer">
 
   <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
-    <data data-icon="ei-arrow-up"></data> Go to Posts  </a>
+    <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">
     <p>이 글이 도움이 되었다면?</p> 

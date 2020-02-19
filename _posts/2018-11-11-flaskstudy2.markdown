@@ -5,11 +5,10 @@ date: "2018-11-11 17:39:48 +0900"
 categories: programming
 author: "Soo"
 comments: true
+toc: true
 ---
 
-# [비전공자의 Flask-2] 본격 앱 만들기 1
-
-## 폴더 생성부터 데이터베이스 만들기
+# 폴더 생성부터 데이터베이스 만들기
 
 내가 만드려고 하는 앱은 사용자가 어떤 query 를 날리면 이를 모델을 거쳐서 결과를 웹에서 보여주는 간단한 앱이다. 예를 들어, 번역기 같은 앱의 경우를 생각해보자.
 
@@ -19,7 +18,7 @@ comments: true
 
 구체적으로 [End to End Memory Network](https://simonjisu.github.io/datascience/2017/08/04/E2EMN.html) 모델을 활용해서 스토리 내용을 사용자가 선택해서 질문을 던지면 그에 대한 결과를 받는 앱을 만들 것이다.
 
-## Step 0: 폴더 생성하기
+# Step 0: 폴더 생성하기
 
 어플리케이션 개발을 시작하기전에, 어플리케이션에서 사용할 폴더를 만들자.
 
@@ -31,7 +30,7 @@ comments: true
 
 앞으로 이 **"nmtapp"** 폴더 안에 우리가 사용할 것들을 넣는다. **"static"** 은 사용자들을 위한 폴더, 이 폴더는 css와 javascript 파일들이 저장되는 곳이다. Flasks는 templates 폴더에서 [Jinja2](http://jinja.pocoo.org/) 템플릿을 찾을 것이다.
 
-## Step 1: 데이터베이스 스키마
+# Step 1: 데이터베이스 스키마
 
 데이터베이스 스키마를 생성해야 한다. 우리의 어플리케이션은 단지 하나의 테이블만 필요하며 사용이 매우 쉬운 SQLite를 쓸것이다. 다음의 내용을 schema.sql 이라는 이름의 파일로 방금 생성한 nmtapp 폴더에 저장한다. 
 
@@ -50,7 +49,7 @@ create table nmtmain (
 
 > 데이터베이스 스키마(database schema)란 데이터베이스에서 자료의 구조, 자료의 표현 방법, 자료 간의 관계를 형식 언어로 정의한 구조이다. 
 
-## Step 2: 어플리케이션 셋업 코드
+# Step 2: 어플리케이션 셋업 코드
 
 ```
 /e2eapp
@@ -61,12 +60,12 @@ create table nmtmain (
     /settings.py
 ```
 
-### settings.py
+## settings.py
 
 추가로 앱을 실행하기 위한 파일들을 만든다. 중요한 정보 혹은 환경변수가 있는 파일은 **"settings.py"** 에 넣기로 한다.
 
 ```
-## settings.py
+# settings.py
 # configuration
 DATABASE = '../data/e2e.db'
 DEBUG = True
@@ -77,7 +76,7 @@ PASSWORD = 'password'
 
 클라이언트에서의 세션을 안전하게 보장하기 위해서는 secret\_key 가 필요하다. secret\_key는 추측이 어렵도록 가능한 복잡하게 선택하여야 한다. 디버그(DEBUG) 플래그는 인터랙티브 디버거를 활성화 시키거나 비활성화 시키는 일을 한다. 운영시스템에서는 디버그 모드를 절대로 활성화 시키지 말아야 한다. 왜냐하면 디버그 모드에서는 사용자가 서버의 코드를 실행할수가 있기 때문이다.
 
-### nmtstart.py
+## nmtstart.py
 
 앱을 실행하는 **"e2estart.py"** 파일을 만든다.
 
@@ -117,7 +116,7 @@ config.from_pyfile("./settings.py", silent=True)
 
 지금은 어떤 뷰(view)를 만들지 않았기 때문에, 브라우저에서 페이지를 찾을 수 없다는 404에러를 볼 수 있을 것이다. 이건 나중에 살펴보고, 우선 데이터베이스를 만들고 진행하도록 하자.
 
-## Step 3: 데이터베이스 생성하기
+# Step 3: 데이터베이스 생성하기
 
 현재 만들고자 하는 앱은 관계형 데이터베이스 시스템에 의해 구동되는 어플리케이션이다. 이러한 시스템은 어떻게 데이터를 저장할지에 대한 정보를 가지고 있는 스키마가 필요하다. 그래서 처음으로 서버를 실행하기 전에 스키마를 생성하는 것이 중요하다.
 
@@ -162,7 +161,7 @@ def init_db():
 
 다음 시간에는 데이터베이스와 연결하고, 뷰함수 및 템플릿을 만들어보자.
 
-## Reference
+# Reference
 
 * [flask 한글 튜토리얼](https://flask-docs-kr.readthedocs.io/ko/latest/installation.html)
 * [SQLite로 가볍게 배우는 데이터베이스](https://wikidocs.net/book/1530)

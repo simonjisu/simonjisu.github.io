@@ -1,17 +1,16 @@
 ---
 layout: post
-title: "[XAI] XAI Introduction"
+title: "[XAI] Explaining Explanations: An Overview of Interpretability of Machine Learning"
 date: "2019-09-18 11:04:38 +0900"
 categories: paper
 author: "Soo"
 comments: true
+toc: true
 ---
-
-# Explaining Explanations: An Overview of Interpretability of Machine Learning
 
 Paper Link: [Explaining Explanations: An Overview of Interpretability of Machine Learning](https://arxiv.org/abs/1806.00069)
 
-## 1. Introduction
+# 1. Introduction
 
 - **설명가능한(explainable)** 모델은 **해석(interpretable)** 이 가능하지만 그 반대는 아니다.
 - 설명가능한 시스템(explanatory system)는 머신러닝, 인간과 컴퓨터 상호 작용(Human-computer interaction), 크라우드 소싱, 교육분야, AI 윤리, 기술정책 등 다양한 분야에서 연구되고 적용되고 있다.
@@ -23,15 +22,15 @@ Paper Link: [Explaining Explanations: An Overview of Interpretability of Machine
 
 ---
 
-## 2. Background and Foundational Concepts
+# 2. Background and Foundational Concepts
 
-### A. What is an Explanation?
+## A. What is an Explanation?
 
 철학적인 문헌에서 "설명을 구성하는 것은 무엇인가"에 대해 많은 논쟁이 있었다. 그중 관심있는 부분은 "어떤 설명이 좋은 설명인가" 혹은 "설명의 진짜 정의는 무엇인가"다. 어떤 사람들은 좋은 설명은 질문에 달려있다고 말한다. 많은 논문이 설명의 기원, 이론 그리고 언어의 토대를 다루고 있다. 그러나 우리의 연구에서 대부분 중요하고 관심있었던 작업은 "왜"라는 질문(Why Questions)이다. 특별히 "어떤 알고리즘에서 알고싶은 것이 무언인가"를 "왜"라는 질문으로 했을 때, 더 이상 질문을 할 수 없을 때까지 질문에 답변을 받을 수 있는 특정 시기를 정량적으로 표현할 수 있다. "왜"라는 질문에는 두 의미가 있는데, "왜(why)" 그리고 "왜 그래야하는가(why should)"이다. 다른 Explainable planning 문헌과 마찬가지로, 철학자들은 "왜 그렇게 하지 말아야 하는지(why-shouldn't)" 질문과 "왜 그렇게 해야 하는지(why-should)" 질문이 실제로 우리가 원하는 "설명성 요건(explainability requirements)"을 제공할 수 있지에 대해 궁금해 한다.
 
 어떤 설명이 가장 좋은 설명인지도 철학자들 사이에서 많은 논쟁이 있다. 많은 사람이 말하기를 그것은 추론(inference)이라고 하는데, 학자들 사이에서 많은 논쟁이 있다. 많은 사람이 말하기를 그것은 추론(inference)이라고 하는데, 귀추법(abductive reasoning)을 사용해서 모든 가능성있는 결과에 대해 설명하는 것과 비슷한 관점이다.
 
-### B. Interpretability vs. Completeness
+## B. Interpretability vs. Completeness
 
 설명(explanation)은 두 가지 방식으로 평가될 수 있다.
 
@@ -54,7 +53,7 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
 
 이러한 함정을 피하기 위해서 설명(explanations)은 해석가능성과 완전무결함 사이의 트레이드 오프를 허용해야 한다. 단순한 묘사(descriptions)만을 제공하는 것보다 약간의 해석가능성을 대가로 시스템이 자세하고 완전무결한 묘사를 할수 있게 해야한다. 설명 방법은 트레이드 오프의 하나의 점으로 평가될 것이 아니라, 최대 해석가능성부터 최대 완전무결함의 곡선상에서 어떻게 변화하는 가를 봐야한다.  
 
-### C. Explainability of Deep Networks
+## C. Explainability of Deep Networks
 
 딥 네트워크의 연산에 대한 설명은 네트워크의 데이터 **처리(processing)** 를 설명하거나, 네트워크 내부에서 데이터의 **표상(representation)** 을 설명하는 것이다. 처리(processing)에 관한 설명은 "왜 해당 입력이 특정 출력으로 이어지는가?"을 대답하는 것이고 프로그램의 실행 추적을 설명하는 것과 같다. 표상(representation)에 관한 설명은 "네트워크가 어떤 정보를 포함하고 있는가?"를 대답하는 것이고, 프로그램의 내부 데이터 구조를 설명하는 것과 같다.
 
@@ -62,11 +61,11 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
 
 ---
 
-## 3. Review
+# 3. Review
 
 급격한 하위 분야의 확장 그리고 불투명한(opaque) 시스템의 정책 및 법적 파장 때문에, 해석가능성에 대한 연구가 급격이 늘어나고 있다. 모든 분야의 논문을 다루기 어렵기 때문에, 심층 신경망 아키텍처에 대해 집중하고, 다른 분야의 논문를 간단히 강조하려한다.
 
-### A. Explanations of Deep Network Processing
+## A. Explanations of Deep Network Processing
 
 보통 심층 네트워크에서는 큰 숫자의 연산을 통해서 결론을 내린다. 예를 들어, 이미지 분류에서 유명한 구조인 ResNet 에서는 이미지 한장을 분류하기 위해 대략 5천만개의 학습된 파라미터와 100억 회의 부동소수점 연산(floating point operations)을 실행한다. 따라서 이러한 프로세스를 설명하기 위해 직면하는 근본적인 문제는 복잡한 연산들을 줄이는 방법을 찾아야한다는 것이다. 이는 기존 모델과 비슷하게 행동하는 **프록시(proxy) 모델** 을 만들거나, 가장 연관있는 연산을 강조하는 **돌출 맵(salience/saliency map)** 을 만드는 것이다. 
 
@@ -128,7 +127,7 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
     - `[Paper Links]`
         - [Towards better understanding of gradient-based attribution methods for Deep Neural Networks](https://arxiv.org/abs/1711.06104)
 
-### B. Explanations of Deep Network Representations
+## B. Explanations of Deep Network Representations
 
 비록 네트워크의 개별 연산숫자는 방대하나, 심층 신경망의 구조는 작은 서브컴포넌트로 잘 정리할 수 있다. ResNet 에서는 100개의 층으로 구성되어 있고 각 픽셀 정보를 64개에서 2048개의 채널로 연산한다. 심층 신경망 표상의 설명 목적은 이런 병목 현상(bottlenecks)을 통해 데이터 흐름의 구조와 역할를 이해하는 것이다. 이는 세밀하게 나눔으로써 달성할 수 있다. 표상(representations)은 **레이어(layer)**, **유닛(unit)**, **벡터(vector)** 로 나눠서 이해할수가 있다. 
 
@@ -172,7 +171,7 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
     - `[Paper Links]`
         - [Interpretability Beyond Feature Attribution: Quantitative Testing with Concept Activation Vectors (TCAV)](https://arxiv.org/abs/1711.11279)
 
-### C. Explanation-Producing Systems
+## C. Explanation-Producing Systems
 
 훈련 가능한 네트워크 아키텍처의 일부로 명시적 **어텐션(attention)**을 포함시키는 방법과 같이, 용이한 설명을 위한 네트워크를 만드는 접근법도 있다. 어텐션은 **분리된 표상(disentangled representations)**을 학습을 하도록 훈련 시키거나, 직접 **생성가능한 설명(generative explanations)**을 만들도록 훈련 시킬수도 있다.
 
@@ -217,9 +216,9 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
 
 ---
 
-## 4. Related Work
+# 4. Related Work
 
-### A. Interpretability
+## A. Interpretability
 
 이전에 해석가능성에 대해서 분류법과 모범 사례를 정의해보려는 시도가 있었다. 
 
@@ -244,7 +243,7 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
 
 그런 다음 저자들은 해석가능성 연구에서 개방된 문제, 모범 사례 및 향후 작업에 대해 논의하고, 해석가능성의 발견을 위한 데이터 중심 접근법을 크게 권장했다. 해석가능성의 정의에 대한 이러한 공헌이 있음에도 불구하고, 우리는 모델이 제공하는 설명에 각기 다른 초점을 맞춰 정의하고, 각 설명들이 어떻게 평가되어야 하는지를 포함하여 우리만의 분류법을 구별했다. 
 
-### B. Explainable AI for HCI
+## B. Explainable AI for HCI
 
 이전에 설명가능한 AI에 관련된 어떤 논문은 설명가능한 시스템에 관해 상당한 데이터 중심 문헌 분석을 수행했다. 
 
@@ -263,7 +262,7 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
 
 우리는 이들의 논문 마지막에서 언급한 두 가지 동향이 흥미로웠다(머신러닝 생산 규칙(ML production rules)과 엄격하고 사용 가능한 지식에 대한 로드맵). 저자들은 해석가능성이 적용된 고전적인 AI 방법들의 부족을 지적하며, 현재의 연구에서는 그러한 방법들의 광범위한 적용을 장려한다. 본 논문은 주로 설명가능성에서 HCI 연구 어젠다를 정하는 데 초점을 맞췄지만, 우리 연구와 관련된 많은 논점을 제기한다. 특히, 문헌 분석은 심리학 및 사회과학에서 하위 주제와 하위 학문을 발견했는데, 아직 우리의 분석과 관련이 있는 것으로 확인되지는 않았다.
 
-### C. Explanations for Black-Box Models
+## C. Explanations for Black-Box Models
 
 최근 블랙박스(black-box) 모델을 설명하는 조사에서는 이해하기 힘든(opaque) 알고리즘을 사용한 주요 문제의 분류를 제공하기 위한 분류법을 소개했다. 조사된 대부분의 방법은 신경망을 기반으로한 알고리즘 이기 때문에 우리의 연구와 연관이 있다.
 
@@ -286,7 +285,7 @@ Herman은 단순히 인간의 기준으로 해석가능한 시스템을 평가�
 
 그들의 분류 특징과 문제 정의를 사용하여, 그들은 채택된 설명 기능의 유형, 블랙 박스 모델 "개방여부" 및 입력 데이터에 따라 방법을 토론하고 추가로 분류했다. 이들의 목표는 주요 블랙박스 설명 아키텍처를 검토하고 분류하는 것이다. 따라서 이들의 분류는 유사한 문제와 접근방식을 식별하는 지침이 될 수 있다. 우리는 이 연구가 설명 방법의 설계 공간을 탐색하는 데 유용하고 의미있는 기여를 하고 있다는 것을 발견했다. 우리의 분류는 덜 세분화되어 있다. 구현 기법을 세분화하기 보다는 설명 능력의 초점과 각 접근방식이 설명할 수 있는 것을 조사하며, 다양한 유형의 설명가능성(explainability) 방법이 어떻게 평가될 수 있는지를 이해하는 데 중점을 둔다.
 
-### D. Explainability in Other Domains
+## D. Explainability in Other Domains
 
 설명가능한 계획법(Explainable Planning)은 planning 커뮤니티에 있던 모델 기반 표상을 활용하는 새로운 학문이다. 수년 전 몇가지 핵심 아이디어가 계획 인식 분야에서 제안됐다.  
 
@@ -331,7 +330,7 @@ Genesis Story-Understanding 시스템은 상위 개념 패턴(higher-level conce
 
 ---
 
-## 5. Taxonomy
+# 5. Taxonomy
 
 3가지 다른 카테고리로 접근법을 나눌 수 있다. 
 
@@ -355,7 +354,7 @@ Genesis Story-Understanding 시스템은 상위 개념 패턴(higher-level conce
 
 우리는 하위범주를 생성하는 설명 분류법을 신경망 아키텍쳐와 시스템을 디자인하는 하나의 방법으로써 제시하려고한다. 또한 표준화된 평가 지표의 부족을 강조하고, 향후 분류학의 영역 교차 연구를 제안하려고 한다.
 
-## 6. Evaluation
+# 6. Evaluation
 
 비록 심층 신경망을 위한 설명을 3 가지로 나눴지만, 셋다 같은 평가기준을 가지지 않는다. 조사된 작업의 대부분은 다음 유형의 설명 중 하나라고 할 수 있다.
 

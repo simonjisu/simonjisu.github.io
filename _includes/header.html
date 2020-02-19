@@ -20,7 +20,7 @@
     <input type="checkbox" id="menu-toggle">
     <div class="site-nav">
       <nav class="page-link">
-      {% assign links = site.toc %}
+      {% assign links = site.table_of_contents %}
       {% for link in links %}
         {% if link.subposts %}
           <ul class="dropdown">

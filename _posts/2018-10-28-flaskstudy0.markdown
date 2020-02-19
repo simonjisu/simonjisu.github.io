@@ -5,9 +5,8 @@ date: "2018-10-28 19:22:40 +0900"
 categories: programming
 author: "Soo"
 comments: true
+toc: true
 ---
-
-# [비전공자의 Flask-0] 설치하기
 
 python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버에 웹 데모 프로그램 만드려고 한다. 나중에 app 만들때 활용할 수 있을 것 같다.
 
@@ -21,7 +20,7 @@ python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버
 
 ---
 
-## 가상환경 설치
+# 가상환경 설치
 
 가상환경으로 작업하는 이유는 구글한테 물어보면 잘 대답해준다. 개인적으로는 **"지우기 편하다"** 가 제일 큰 장점인것 같다.
 
@@ -53,16 +52,16 @@ $ . venv/bin/activate
 
 ---
 
-## 필요한 패키지 설치하기
+# 필요한 패키지 설치하기
 
-### Flask
+## Flask
 
 ```
 (venv) $ pip install Flask
 ```
 
 
-### PyTorch (11.15 수정)
+## PyTorch (11.15 수정)
 
 PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.
 
@@ -164,7 +163,7 @@ PyTorch 를 빌드한다. 한숨 자고 오는게 마음 편하다..
 
 다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.
 
-## Reference
+# Reference
 
 * [flask 한글 튜토리얼](https://flask-docs-kr.readthedocs.io/ko/latest/installation.html)
 * [리눅스 환경변수 확인하기](http://onecellboy.tistory.com/220)

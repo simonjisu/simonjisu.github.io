@@ -5,6 +5,7 @@ date: "2018-03-30 20:14:21 +0900"
 categories: others
 author: "Soo"
 comments: true
+toc: true
 ---
 # Naver AI Colloquium 2018 참석 후기
 ~~\+ 클로바스피커 후기~~

@@ -5,6 +5,7 @@ categories: numpyseries
 date: "2018-03-14 22:05:37 +0900"
 author: "Soo"
 comments: true
+toc: true
 ---
 # Numpy로 짜보는 Neural Network Basic - 10
 

@@ -5,19 +5,14 @@ date: "2020-01-14 14:19:38 +0900"
 categories: paper
 author: "Soo"
 comments: true
+toc: true
 ---
-
-# Attention Is All You Need - 1
 
 Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
-**목차**
-* [1. Introduction](#1-introduction)
-* [2. Scaled Dot-Product Attention](#2-scaled-dot-product-attention)
-
 ---
 
-## 3. Introduction
+## 1. Introduction
 
 그 동안 LSTM([Long Short-term Memory](https://dl.acm.org/citation.cfm?id=1246450), 1997) 과 GRU([Gated Recurrent Unit](https://arxiv.org/abs/1412.3555), 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다. 
 

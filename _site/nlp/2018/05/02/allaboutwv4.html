@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>All about Word Vectors: GloVe</title>
-  <meta name="description" content="All about Word Vectors: GloVe본 포스팅은 CS224n Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.Co-occurrence공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(...">
+  <meta name="description" content="본 포스팅은 CS224n Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.Co-occurrence공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다...">
 
   <!-- evil icon -->
   <link rel="stylesheet" href="/assets/evil-icons.min.css">
@@ -134,29 +134,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               
                 
                   <li role="separator" class="divider"></li>
-                
-              
-              
-                
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
                 
               
               
@@ -425,14 +402,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-05-02T23:22:05+09:00" itemprop="datePublished">May 2, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-
+  <div id="table-of-contents">
+    <h2> 목차 </h2>
+<ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#co-occurrence">Co-occurrence</a></li>
+<li class="toc-entry toc-h1"><a href="#example-window-based-co-occurrence-matrix">Example: Window based co-occurrence matrix</a></li>
+<li class="toc-entry toc-h1"><a href="#glove">GloVe</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#논문-해설">논문 해설</a></li>
+<li class="toc-entry toc-h2"><a href="#참고-1-homomorphism">참고 1: Homomorphism</a></li>
+</ul>
+</li>
+</ul>
+  </div>
   <div class="article-content" itemprop="articleBody">
-    <h1 id="all-about-word-vectors-glove">All about Word Vectors: GloVe</h1>
+    <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
-<hr />
-<p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
-
-<h2 id="co-occurrence">Co-occurrence</h2>
+<h1 id="co-occurrence">Co-occurrence</h1>
 
 <p>공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다. 여기서 어휘는 단어 뿐만 아니라 형태소, 합성어 등의 단위로 의미를 부여할 수 있는 언어 단위다. 그렇다면 왜 <strong>공기 관계</strong> 를 살피는 것일까?</p>
 
@@ -451,7 +437,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>word-document co-occurrence matrix 기반: 조금 더 일반적인 토픽을 추출 할 수 있고, 이는 Latent Semantic Analysis 와 연결 된다.</li>
 </ol>
 
-<h2 id="example-window-based-co-occurrence-matrix">Example: Window based co-occurrence matrix</h2>
+<h1 id="example-window-based-co-occurrence-matrix">Example: Window based co-occurrence matrix</h1>
 
 <blockquote>
   <p>I like deep learning.</p>
@@ -615,7 +601,7 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>이와 같은 생각이 GloVe 를 탄생시켰다.</p>
 
-<h2 id="glove">GloVe</h2>
+<h1 id="glove">GloVe</h1>
 
 <p>Paper: <a href="https://www.aclweb.org/anthology/D14-1162">GloVe: Global Vectors for Word Representation</a></p>
 
@@ -626,7 +612,7 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 <p>논문해설을 통해서 자세히 보자.</p>
 
 <hr />
-<h3 id="논문-해설">논문 해설</h3>
+<h2 id="논문-해설">논문 해설</h2>
 
 <p><strong>GloVe:</strong> Global Vectors라고 명칭을 지은 이유는 모델에서 직접적으로 문서 전체의 코퍼스 통계량을 포착할 수있기 때문이다. (the global corpus statistics are captured directly by the model)</p>
 
@@ -761,7 +747,7 @@ f(x) =
 <p>이는 연구팀이 도출한 $(7)$ 식과 같은 식이다.</p>
 
 <hr />
-<h3 id="참고-1-homomorphism">참고 1: Homomorphism</h3>
+<h2 id="참고-1-homomorphism">참고 1: Homomorphism</h2>
 
 <p>혹시나 틀렸으면 댓글로 이야기 해주세요.</p>
 
@@ -798,7 +784,7 @@ f(x) =
   <footer class="article-footer">
 
   <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
-    <data data-icon="ei-arrow-up"></data> Go to Posts  </a>
+    <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">
     <p>이 글이 도움이 되었다면?</p> 

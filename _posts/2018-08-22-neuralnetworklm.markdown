@@ -5,22 +5,16 @@ date: "2018-08-22 23:26:14 +0900"
 categories: paper
 author: "Soo"
 comments: true
+toc: true
 ---
 
-# [PAPER] A Neural Probabilistic Language Model
----
-
-클릭하면 링크를 따라갑니다.
-
-**paper: [A Neural Probabilistic Language Model](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf) - Yoshua Bengio, 2003**
+* paper: [A Neural Probabilistic Language Model](http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf) - Yoshua Bengio, 2003
 
 * [Slide Share](http://bit.ly/2OkYFkY)
-* [Code Repo](http://bit.ly/2PsEPpg)
-* [Notebook](https://nbviewer.jupyter.org/github/simonjisu/deepnlp_study/blob/master/notebook/01_NNLM.ipynb)
 
 ---
 
-## 메인 아이디어
+# 메인 아이디어
 
 기존의 통계 기반의 Language Modeling 은 N-Gram 을 기반으로, 이전 토큰의 나오는 단어를 기반으로 다음 단어의 확률을 극대화 작업이었다. 처음부터 끝까지 보지 않고 N-Gram으로 잘라서 예측하게된 이유는 예측해야할 단어와 아주 오래된 단어간의 상관관계가 적다(혹은 분포가 다르다)라고 생각했기 때문이다.
 
@@ -47,13 +41,13 @@ Yoshua Bengio 교수님이 제안한 모델의 특징은 3 가지로 요약 할 
 
 ---
 
-## 모델 설명
+# 모델 설명
 
 <img src="https://dl.dropbox.com/s/8thdipjnc7bl95f/0826_nnlm.png">
 
 두 가지 단계로 모델이 구성되 있다.
 
-### 1 단계: Distributed feature vectors
+## 1 단계: Distributed feature vectors
 
 > 각 단어를 $C$ 행렬을 통해 $m$ 차원 벡터로 표현한다. 
 
@@ -63,7 +57,7 @@ $$C(i) \in \Bbb{R}^m$$
 
 $C$ 행렬의 $i$ 번째 행을, $i$ 번째 단어의 벡터라고 규정 지었으며, $C$ 의 형태는 $\vert V \vert \times m$ 다.
 
-### 2 단계: Probability functions
+## 2 단계: Probability functions
 
 > $m$ 차원으로 표현된 벡터를 2 층의 신경망을 사용해서 조건부 확률을 구성한다.
 
@@ -77,7 +71,7 @@ $$y = U \tanh(d + Hx)$$
 
 $$P(w_i = i \vert context) = \dfrac{\exp(y_{w_t})}{\sum_i \exp(y_i)}$$
 
-### 기타: direct connection
+## 기타: direct connection
 
 논문에서는 실험적으로 선형적인 관계식을 하나 더 넣어서 context 와 y 사이의 선형관계를 알아내고자 했다.
 
@@ -85,9 +79,9 @@ $$y = \underbrace{b + Wx}_{\text{direct connection}} +U \tanh(d + Hx)$$
 
 ---
 
-## 실험결과
+# 실험결과
 
-### Perplexity
+## Perplexity
 
 Test Measurement 로 **Perplexity** 를 선택했다. 정의는 아래와 같다.
 
@@ -99,7 +93,7 @@ $$PP = \exp(-\dfrac{1}{N} \sum_{i=1}^N \log_e q(x_i))$$
 
 해당 수식을 말로 풀어보면, 모든 테스트 세트에서 확률 모델 $q$ 의 불확실 정도가 어떻게 되는지를 측정한다. 즉, 이 값이 높을 수록 모델이 예측을 잘 못하며, 낮을 수록 해당테스트 토큰을 확실하게 측정한다는 뜻이다.
 
-### Time
+## Time
 
 시간을 측정한 이유는 학습할 파라미터 숫자가 생각보다 많기 때문이다.
 
@@ -117,7 +111,7 @@ H &= h \times (n-1)m \\
 C &= \vert V \vert \times m
 \end{aligned}$$
 
-### Result
+## Result
 
 <img src="https://dl.dropbox.com/s/c975f2j26kzj715/0826_nnlmresult.png">
 

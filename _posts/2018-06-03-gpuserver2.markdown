@@ -5,14 +5,14 @@ date: "2018-06-03 10:09:54 +0900"
 categories: programming
 author: "Soo"
 comments: true
+toc: true
 ---
-# Install Ubuntu 18.04 GPU Server For DeepLearning - 2
 
 개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.
 
 ---
 
-## After Install
+# After Install
 
 설치후에 아래 명령어들을 쳐준다.
 
@@ -28,9 +28,9 @@ sudo apt install make
 sudo apt install zlib1g-dev
 ```
 
-## SSH(SECURE SHELL) 접속
+# SSH(SECURE SHELL) 접속
 
-### `서버` 컴퓨터에서 아래의 사항을 수정:
+## `서버` 컴퓨터에서 아래의 사항을 수정:
 
 ```
 sudo vi /etc/ssh/sshd_config
@@ -42,7 +42,7 @@ sudo vi /etc/ssh/sshd_config
 * PasswordAuthentication yes : 원격 서버 비밀번호로 로그인 가능하게 것, 나중에 ssh 로만 접속 가능케 하려면 바꿔줘야한다.
 * PermitEmptyPasswords no : 로그인시 빈 비밀번호를 가능케하는 옵션 기본으로 no로 되어 있다. 비밀번호 없이 로그인하게 하려면 yes로 바꿔줄 것, 권장은 안함
 
-### `로컬` 컴퓨터에서 SSH KEY 생성하고 `서버` 컴퓨터로 보내기:
+## `로컬` 컴퓨터에서 SSH KEY 생성하고 `서버` 컴퓨터로 보내기:
 
 1. **ssh-keygen:** SSH 키를 생성한다. 경로 지정을 안할 때 보통 `~/.ssh` 폴더 안에 `id_rsa` 라는 이름으로 생성한다.
 2. **ssh-copy-id:** SSH 키를 서버로 보낸다. 옵션으로 포트번, 키 디렉토리 등등 설정 가능하다
@@ -52,7 +52,7 @@ ssh-keygen -f [filepath]
 ssh-copy-id -i [key_directory] -p [port] [user]@[ip_address]
 ```
 
-### 파일전송 명령어 SCP 사용하기
+## 파일전송 명령어 SCP 사용하기
 * 서버 > 로컬
 ```
 scp [옵션] [계정명]@[원격지IP주소]:[원본 경로 및 파일] [전송받을 위치]
@@ -71,7 +71,7 @@ scp [옵션] [원본 경로 및 파일] [계정명]@[원격지IP주소]:[전송�
 
 <br>
 
-## WOL(Wake-On-Lan)
+# WOL(Wake-On-Lan)
 
 전기세 때문에 원격으로 컴퓨터를 껐다 켯다 하고 싶었다. 찾아보니 WOL 라는 방법이 있었다. 우선 자신의 컴퓨터의 메인보드가 이 기능을 지원해주고, 공유기도 이 기능을 지원해줘야 사용할 수 있다.
 컴퓨터 부팅전 `BIOS` (내경우는 DEL 키를 눌렀음) 에 들어가서 `Wake-On-Lan` 이라는 글귀가 있는지 찾아보고, 있다면 enable 로 바꿔주자. 그리고 아래 명령어를 통해 내컴퓨터의 `이더넷 포트(Ethernet port)` 알아보자

@@ -5,7 +5,7 @@ date: "2017-08-27 15:43:39 +0900"
 categories: programming
 author: Soo
 comments: true
-
+toc: true
 ---
 **알고리즘 공부**
 ===

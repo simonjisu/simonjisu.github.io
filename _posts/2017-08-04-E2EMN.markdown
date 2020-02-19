@@ -5,8 +5,8 @@ date: "2017-08-04 22:09:05"
 author: Soo
 categories: paper
 comments: true
+toc: true
 ---
-# End-to-End Memory Network 논문 요약 및 정리
 
 * Pytorch 구현 코드: [https://github.com/simonjisu/E2EMN](https://github.com/simonjisu/E2EMN)
 
@@ -14,18 +14,18 @@ memN2N 검색하면 다른 패키지로 구현한 repo 들이 많음으로 한�
 facebook: [https://github.com/facebook/MemNN](https://github.com/facebook/MemNN)
 
 ---
-## A. Single layer
+# A. Single layer
 
 ![](/assets/E2EMN.png)
 
-### Input
+## Input
 1. $T_c$ 개의 단어가 포함된 한 **문장 sentence i** 는 $x_i = [x_{i1}, x_{i2}, \cdots, x_{iT_c}]$ 로 표현 할 수 있으며, 하나의 단어 는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. (**단어 사전의 index**), 이렇게 구성된 여러 문장들의 집합을 Context(Sentences) $\{x_i\}$라고 한다. 실제 구현 시, 길이를 맞추기 위해서 batch 에서 최대 문장의 길이를 $T_c$ 로 기억한 다음에 $T_c$ 보다 짧은 문장의 뒷 부분은 $0$ 으로 패딩(padding)해준다.
 
 $$Context = [x_1, x_2, \cdots ,x_n]\quad (n \times T_c)$$
 
 2. $T_q$ 개의 단어가 포함된 질문 question q도 마찬가지로 BoW방식으로 인코딩해준다.
 
-### Input Memory
+## Input Memory
 1. 하나의 문장 $x_i$ 각각의 단어에 Embedding matrix $A$를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) $m_i$를 구한다. 이렇게 총 $n$개의 메모리가 만들어 진다. 조금 더 설명 하자면, 임베딩 후 $Ax_{ij}$ 의 사이즈는 $(T_c \times d)$ 가 되고 이를 $T_c$ 차원으로 summation 하게 되면 문장 하나에 대한 메모리 $m_i$ 의 사이즈는 $(1\times d)$ 가 된다.
 
 $$m_i = \sum_{j}^{n} Ax_{ij} = Ax_{i1} + Ax_{i2} + \cdots + Ax_{in} \quad (1 \times d)$$
@@ -43,7 +43,7 @@ $$p_i = Softmax(u^Tm_i)$$
 이러한 과정을 통해서 **Input Memory** 에는 Context 문장들($\{x_i\}$)과 질문($q$)의 축약된 정보가 들어가게 된다.
 
 
-### Output Memory
+## Output Memory
 1. 모든 Context 문장들 ${x_i}$ 의 각각의 단어에  다시 Embedding matrix C를 곱하고 더하여 $c_i$로 변환한다.
 
 $$c_i = \sum_{j} Cx_{ij} = Cx_{i1} + Cx_{i2} + \cdots + Cx_{in} \quad (1 \times d)$$
@@ -52,12 +52,12 @@ $$c_i = \sum_{j} Cx_{ij} = Cx_{i1} + Cx_{i2} + \cdots + Cx_{in} \quad (1 \times 
 
 $$o = \sum_{i} p_i \otimes c_i$$
 
-### Final Prediction
+## Final Prediction
 output $o$와 질문으로부터 추출한 Internal state $u$에 가중치값 $W$를 곱하여 더한뒤에 Softmax Function을 적용하여 답 $\hat{a}$을 추론한다.
 
 $$\hat{a} = Softmax(W(o+u))$$
 
-### Weight Updating
+## Weight Updating
 Loss Function은 standard cross-entropy loss를 사용하여 예측치 $\hat{a}$ 와 정답인 true 값 $a$ 간의 오차를 최소화해서 학습 시킨다.
 
 Input에서 Output까지 함수들은 무한정미분가능(function is smooth)하기 때문에, 손쉽게 Gradient와 back-propagate을 진행할 수 있다.
@@ -67,7 +67,7 @@ Input에서 Output까지 함수들은 무한정미분가능(function is smooth)�
 <br>
 
 ---
-## B. Multiple layers
+# B. Multiple layers
 
 위와 같은 Final Prediction 전 단계까지를 1 hop라고 규정하며, Multiple layers $K$ hops까지 확장 시킨다.
 
@@ -81,7 +81,7 @@ $$u^{k+1} = u^k + o^k$$
 
 $$\hat{a} = Softmax(Wu^{K+1})$$
 
-### 두 가지 가중치 버젼
+## 두 가지 가중치 버젼
 1. Adjacent:
   $k_{th}$ output layer embedding matrix가 다음 input layer의 embedding matrix가 된다. 예를 들면, $A^{k+1} = C^k$. 또한, 두 가지 제약 조건을 추가했는데, (a) answer prediction matrix가 최종 output embedding과 같고 ($W^T = C^K)$, (b) question embedding 과 첫번째 layer의 input embedding과 같게 했다($B = A^1$).
 
@@ -93,7 +93,7 @@ $$\hat{a} = Softmax(Wu^{K+1})$$
 <br>
 
 ---
-## C. Synthetic Question and Answering Experiments
+# C. Synthetic Question and Answering Experiments
 
 * 예시1:
 > Sam walks into the kitchen.
@@ -134,31 +134,31 @@ $$\hat{a} = Softmax(Wu^{K+1})$$
 
 예시에도 보듯이 문장의 일부만 답변의 정답정보를 가지고 있다. 이를 support subset이라고 하며, training 할때 support subset을 명시한다. 그러나 실제 테스트할 때는 이 support subset이 표시되지 않는다.
 
-### Model details
+## Model details
 $K=3$ hops이고 weight sharing(Layer-wise) 모델을 쓸 것이다.  모든 output lists(답변에 여러 단어가 있는 경우)에 대하여 단어별로 분리하여 가능성을 나타낸다.
 
-#### Sentence Representaion:
+## Sentence Representaion:
 문장들을 표현할 때 두 가지 방법을 쓰기로 한다. 첫번째로는 BoW가 하나의 문장을 표현하는 것인데, 이 방법은 문장에서 단어의 순서(the order of the words in sentence)라는 특징을 잡을 수가 없다. 따라서 두 번째 방법으로, 문장에서 단어의 순서(the position of words)를 인코딩 한다. $m_i = \sum_{j} l_j \otimes Ax_{ij}$ 여기서 $l_j$ 연산은 element-wise multiplication이다.
 
 또한, $l_j$ 는 $l_{kj} = (1-j/J) - (k/d)(1-2j/J)$, J는 문장에 있는 단어 갯수인 column vector 구조를 가지고 있다. 이것을 $PE$ (position encoding)이라고 하며, 이는 단어의 순서가 얼만큼 문장$m_i$에 영향을 주는지 알려준다. 나머지 question, memory inputs 그리고 memory outputs에서도 두 번째 방법으로 문장을 표현할 것이다.
 
-#### Temporal Encoding:
+## Temporal Encoding:
 많은 QA tasks에서는 temporal context라는 개념이 필요한데, 예를 들어 첫 번째 예시에서 Sam이 kitchen에 간 다음에 bedroom에 들어간 것을 알 수 있다. 이것을 모델에 적용하려면, memory vector를 약간 변형시킨다. $m_i = \sum_{j} Ax_{ij} + T_A(i)$, 여기서 $T_A(i)$ 는 일시적인 정보를 저장할 특별한 행렬 $T_A$ 의 i 번째 행이다. Ouput embedding할 때도 마찬가지로 해준다. $c_i = \sum_{j} Cx_{ij} + T_C(i)$. $T_A$ 와 $T_C$ 둘다 training 할 때 갱신한다. 그리고 A 와 C 랑 마찬가지로 제약 또한 같이 공유한다. 여기서 주의할 점은 문장들이 역순으로 인덱싱되어있다.  문장이 질문으로부터 상대적인 거리를 반영한다, 즉 $x_1$ 은 이야기의 마지막 문장이 된다.
 
-#### Learning time invariance by injecting random noise:
+## Learning time invariance by injecting random noise:
 $T_A$ 를 정규화 시킬때 더미 변수를 넣는 것이 도움이 된다. 즉, 트레이닝할 때는 랜덤으로 10%의 빈 메모리를 스토리에 넣는 것이다. 여기서 이를 Random Noise (RN)라고 한다
 
-### Training Details
+## Training Details
 bAbI training set중 10%는 Validation용으로 쓴다. 이는 optimal model architecture 과 hyperparameters를 선택하기 위해서다. Learning rate $\eta$는 0.01로 설정하고, 100번째 epoch가 될때 까지, 매 25번째 epochs 마다, $\eta$ 를 2로 나눠준다. Momentum 이나 weight decay는 사용되지 않았다. 가중치들은 $\mu = 0$, $\sigma = 0.1$ 인 가우시안 정규분포로 초기값을 설정했다. 모든 training에 사용된 batch size는 32 이며, gradients는 L2로 정규화해서 40이 넘으면 어떤 스칼라를 나눠서 norm을 40으로 만들어준다.
 
 어떤 모델에서는 처음시작에 softmax를 안쓰다가 (linear하게 만드는 것) 나중에 최종 예측시에 softmax를 썼다. 그러다 validation loss가 더 이상 떨어지지 않을 때, 다시 softmax 층이 다시 입력이 되서 트레이닝을 한다. 이를 Linear Start (LS) training이라고 하며, 이때 초기 learning rate 를 $\eta = 0.005$ 로 설정한다.
 
-### Baselines
+## Baselines
 * MemNN: strongly supervised, softmax대신 max operation사용
 * MemNN-WSH: weakly supervised, 트레이닝시 supporting sentence labels를 안씀
 * LSTM: weakly supervised
 
-### Result
+## Result
 모델 선택을 다양하게 했다.
 
 1) BoW vs Position Encoding
@@ -173,6 +173,6 @@ bAbI training set중 10%는 Validation용으로 쓴다. 이는 optimal model arc
 
 <br>
 ---
-## D.참고문헌
+# D.참고문헌
 
 [End-To-End Memory Networks: Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus](https://arxiv.org/abs/1503.08895)

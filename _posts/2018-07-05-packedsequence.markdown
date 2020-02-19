@@ -5,13 +5,10 @@ date: "2018-07-05 09:45:37 +0900"
 categories: nlp
 author: "Soo"
 comments: true
+toc: true
 ---
 
-# Pytorch 의 PackedSequence object 알아보기
-
----
-
-## PackedSequence 란?
+# PackedSequence 란?
 
 > 아래의 일련의 과정을 PackedSequence 라고 할 수 있다.
 
@@ -46,12 +43,12 @@ NLP 에서 매 배치(batch)마다 고정된 문장의 길이로 만들어주기
 
 ---
 
-## Pytorch - PackedSequence
+# Pytorch - PackedSequence
 
 Pytorch 에서 사용하는 방법은 의외로 간단하다. 실습 코드는 [nbviewer](https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb) 혹은 [github](https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/02_PackedSequence.ipynb)에 있다.
 
 
-### 과정
+## 과정
 
 전처리를 통해 위 배치의 문장들을 숫자로 바꿔주었다.
 
@@ -95,7 +92,7 @@ packed_input = torch.nn.utils.rnn.pack_padded_sequence(input_seq2idx, input_leng
 
 <br>
 
-### RNN 에서의 사용 방법
+## RNN 에서의 사용 방법
 
 실수 벡터공간에 임베딩된 문장들을 pack 한 다음에 RNN 에 input을 넣기만 하면 된다.
 
@@ -128,9 +125,9 @@ output.size(), output_lengths
 
 ---
 
-## RNN Backend 작동 방식
+# RNN Backend 작동 방식
 
-### RNN 안에서 어떤 방법으로 실행되는 것일까?
+## RNN 안에서 어떤 방법으로 실행되는 것일까?
 
 아래의 그림을 살펴보자
 
@@ -140,7 +137,7 @@ output.size(), output_lengths
 
 기존의 RNN 이라면, **(배치크기 $\times$ 문장의 최대 길이 $\times$ 층의 갯수)** 만큼 연산을 해야하지만, **(실제 토큰의 갯수 $\times$ 층의 갯수)** 만큼 계산하면 된다. 이 예제로 말하면 $(5 \times 6 \times 1)=30 \rightarrow (18 \times 1)=18$ 로 크게 줄었다.
 
-### 그렇다면 Hidden 어떻게 출력 되는가?
+## 그렇다면 Hidden 어떻게 출력 되는가?
 
 기존의 RNN 이라면 마지막 타임스텝 때 hidden vector 만 출력하지만, packed sequence 는 아래의 그림 처럼 골라서 출력하게 된다.
 

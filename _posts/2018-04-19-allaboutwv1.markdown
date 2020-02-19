@@ -5,14 +5,12 @@ date: "2018-04-19 16:41:36 +0900"
 categories: nlp
 author: "Soo"
 comments: true
----
-# All about Word Vectors: Intro
-
+toc: true
 ---
 
 본 포스팅은 [CS224n](http://web.stanford.edu/class/cs224n/) Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.
 
-## 자연어 처리 (Natural Language Processing)
+# 자연어 처리 (Natural Language Processing)
 이야기를 하기 앞서서, "언어"를 살펴보자. [위키백과](https://ko.wikipedia.org/wiki/%EC%96%B8%EC%96%B4) 에 따르면 아래와 같다.
 
 > 언어(言語)에 대한 정의는 여러가지 시도가 있었다. 아래는 그러한 예의 일부이다.
@@ -35,7 +33,7 @@ comments: true
 
 <br>
 
-## 단어의 표현(Word Representation)
+# 단어의 표현(Word Representation)
 
 어떻게 하면 단어의 "의미"를 표현할 수 있을까?
 
@@ -62,7 +60,7 @@ for synset in wn.synsets("adept"):
 
 마지막으로, 유사도 계산이 어렵다는 점이다. 즉, 같은 상위어에 속해 있는 하위어는 비슷한 것은 알겠는데, 정량적으로 이를 계산할 방법이 없다는 것이다.
 
-### Bag of words representation
+## Bag of words representation
 
 또다른 방법으로 discrete 된 심볼로 단어를 표현했는데 이를 **one-hot representation** 라고 하며, 아래와 같이 표현했다.
 
@@ -83,7 +81,7 @@ $$hotel \cdot motel^T = 0$$
 
 <br>
 
-## 분포 유사성 기반 표현 (Distributional similarity based representations)
+# 분포 유사성 기반 표현 (Distributional similarity based representations)
 
 연구자들은 one-hot vector 와 다른 어떤 유사도를 계산할 수 있는 벡터를 만들고 싶어했다. 따라서 유사도의 정보를 어디서 얻을 수 있을까를 찾기 시작했다. 그리고 어떤 핵심 아이디어를 생각해냈다.
 
@@ -95,7 +93,7 @@ $$hotel \cdot motel^T = 0$$
 
 그들은 주변 단어의 정보로 어떤 단어의 의미를 규정하는 시도를 하였고, 이는 modern statistical NLP 에서 많은 각광을 받기 시작했다. 그리고 어떤 단어 $w$ 에 대해서 주변에 나타나는 단어의 집합을 **맥락/문맥(context)** 이라고 했다.
 
-### Word Vectors
+## Word Vectors
 
 이전에 0과 1로 채워진 one-hot vector 와 달리 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터(dense vector)를 만든다. 핵심 아이디어는 아래와 같다.
 

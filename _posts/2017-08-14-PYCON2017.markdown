@@ -4,6 +4,8 @@ title: "pycon2017"
 date: "2017-08-14 19:22:36 +0900"
 author: "Soo"
 categories: others
+comments: true
+toc: true
 ---
 **PYCON 2017 후기**
 ===

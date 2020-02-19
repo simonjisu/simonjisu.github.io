@@ -6,34 +6,87 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 02 Feb 2020 16:08:39 +0900</pubDate>
-    <lastBuildDate>Sun, 02 Feb 2020 16:08:39 +0900</lastBuildDate>
+    <pubDate>Wed, 19 Feb 2020 18:54:30 +0900</pubDate>
+    <lastBuildDate>Wed, 19 Feb 2020 18:54:30 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>[NLP] Attention Is All You Need - 2</title>
-        <description>&lt;h1 id=&quot;attention-is-all-you-need---2&quot;&gt;Attention Is All You Need - 2&lt;/h1&gt;
+        <title>글또 4기 다짐</title>
+        <description>&lt;h1 id=&quot;글또-4기를-시작하며&quot;&gt;글또 4기를 시작하며&lt;/h1&gt;
 
-&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;“글또”가 궁금하다면? &lt;a href=&quot;https://www.notion.so/ac5b18a482fb4df497d4e8257ad4d516&quot;&gt;&lt;strong&gt;글또 Notion 페이지 바로가기&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;작년 여름의 어느날 글또를 시작하면서 세웠던 계획을 다시 돌아보게 됐다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;“너는 다 계획이 있구나”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;image&quot;&gt;
+    &lt;img src=&quot;https://drive.google.com/uc?id=1Y534QRewyuENFNHTtf2WXgZe_5VH91MS&quot; alt=&quot;출처: 영화 기생충 스틸컷&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
+    &lt;figcaption&gt;출처: 영화 기생충 스틸컷&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PRML(“Pattern Recognition and Machine Learning” - Christopher Bishop) 책 공부하기&lt;/li&gt;
+  &lt;li&gt;NLP 논문 읽기 (BERT 등)&lt;/li&gt;
+  &lt;li&gt;새로운 것 배우기: Flask, Spark, Reinforcement Learning&lt;/li&gt;
+  &lt;li&gt;대학원 준비&lt;/li&gt;
+  &lt;li&gt;장롱면허 탈출&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 5가지 목표 중에서 3개는 달성하고 새로운 것을 배우는 것은 달성하지 못했고 장롱면허도 아직 탈출하지 못했다. 첫번째 목표도 100% 완성하지 못했기 때문에 사실상 50%를 완성했다고 할 수 있다. 다시 돌아보니 글또와는 크게 관련이 없는 목표들이 많았다. 그래서 이번 글또 4기에는 글또에 알맞는 목표를 세워보려고 한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;최소 12편 이상의 글 작성하기&lt;/li&gt;
+  &lt;li&gt;어떤 주제든 시리즈 글 연재하기(3편 이상)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;글또 4기를 마치고 꼭 두 가지 목표를 완수하기를…&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;글또-4기에서-작성하고-싶은-글&quot;&gt;글또 4기에서 작성하고 싶은 글&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;인지(행동)과학 관련 책 리뷰&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;인지과학 분야의 책을 통해 사람이 어떤 방식으로 생각을 하는지 이해하고, 딥러닝 모델의 설명과 연관지어 떠오르는 아이디어를 정리해보고자 한다. 컴퓨터 비전 분야에서 인간의 시각 시스템을 모방한 Neocognitron(1979, Kunihiko Fukushima)부터 현재의 다양한 Convolution Neural Network 까지, 인간에 대한 연구는 알고리즘을 해석하고 발전시키는데 많은 영향을 줬었다. 사람이 생각하는 과정(인지 프로세스)를 이용해 더 좋은 성능을 내는 모델을 연구하거나, 더 나아가 “설명가능한 딥러닝 모델”의 실마리가 나올 수 있지 않을까 생각하고 있다. 관련 전공이 아니기 때문에, 먼저 사람들이 주로 읽는 도서부터 시작해서 천천히 깊게 탐구해볼 생각이다. 현재 도서 목록으로 다음과 같이 정했는데, 혹시 추천할 만한 책이 있으면 댓글 부탁드린다.&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;ul&gt;
+        &lt;li&gt;생각에 관한 생각&lt;/li&gt;
+        &lt;li&gt;넛지&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;데이터 사이언스 대학원 입학과정 및 생활&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;나는 대학원에 운좋은 타이밍에 입학했다고 생각한다. 그래도 차후에 다른 사람에게 도움이 될만한 정보와 신설된 데이터 사이언스 대학원에 입학하게된 계기 및 과정을 쓰려고 한다. 또한, 후회없는 2년(혹은 그 이상..?) 대학원 과정을 만들기 위해서 어떤 것을 계획하고 어떻게 공부를 하는지도 기록할 것이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;논문 리뷰(NLP, XAI 분야)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;마지막으로 최근에 보고 있는 논문들을 간략하게 정리할 예정이다. 최근 1월~2월 사이에 읽은 Vision 분야에서 사용되고 있는 XAI 관련 논문을 읽었고 이를 정리하고자 한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/others/2020/02/02/geultto4.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2020/02/02/geultto4.html</guid>
+        
+        
+        <category>others</category>
+        
+      </item>
+    
+      <item>
+        <title>[NLP] Attention Is All You Need - 2</title>
+        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;이전 글: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html&quot;&gt;Attention Is All You Need - 1&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#3-sub-layers&quot;&gt;3. Sub Layers&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#multi-head-attention&quot;&gt;Multi-Head Attention&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#position-wise-feed-forward-networks&quot;&gt;Position-wise Feed-Forward Networks&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#4-embeddings&quot;&gt;4. Embeddings&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#input-과-output&quot;&gt;Input 과 Output&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#embedding&quot;&gt;Embedding&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#positional-encoding&quot;&gt;Positional Encoding&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;hr /&gt;
 
@@ -160,19 +213,11 @@
     
       <item>
         <title>[NLP] Attention Is All You Need - 1</title>
-        <description>&lt;h1 id=&quot;attention-is-all-you-need---1&quot;&gt;Attention Is All You Need - 1&lt;/h1&gt;
-
-&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#1-introduction&quot;&gt;1. Introduction&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#2-scaled-dot-product-attention&quot;&gt;2. Scaled Dot-Product Attention&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-introduction&quot;&gt;3. Introduction&lt;/h2&gt;
+&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
 
 &lt;p&gt;그 동안 LSTM(&lt;a href=&quot;https://dl.acm.org/citation.cfm?id=1246450&quot;&gt;Long Short-term Memory&lt;/a&gt;, 1997) 과 GRU(&lt;a href=&quot;https://arxiv.org/abs/1412.3555&quot;&gt;Gated Recurrent Unit&lt;/a&gt;, 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다.&lt;/p&gt;
 
@@ -366,19 +411,11 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/xC-c7E5PK0Y&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;–&lt;/p&gt;
-
 &lt;ul&gt;
   &lt;li&gt;2020.02.02 추가: 데이터관련 직군에 대한 &lt;a href=&quot;https://d2wahc834rj2un.cloudfront.net/Workera%20Report.pdf?fbclid=IwAR0IEBfU-7w231SNnaJFM_DYPEqJQDgOdf5_eCVs0aGsazO9XBWaVxzrbF0&quot;&gt;Report&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
-
-&lt;h1 id=&quot;목차&quot;&gt;목차&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#데이터-사이언스와-데이터-사이언티스트의-역할&quot;&gt;데이터 사이언스와 데이터 사이언티스트의 역할&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#상황분석-및-나아가야할-방향&quot;&gt;상황분석 및 나아가야할 방향&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;h2 id=&quot;데이터-사이언스와-데이터-사이언티스트의-역할&quot;&gt;데이터 사이언스와 데이터 사이언티스트의 역할&lt;/h2&gt;
 
@@ -512,18 +549,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
     
       <item>
         <title>2019년도 회고</title>
-        <description>&lt;h1 id=&quot;2019년도를-돌아보며&quot;&gt;2019년도를 돌아보며&lt;/h1&gt;
-
-&lt;h2 id=&quot;목차&quot;&gt;목차&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#올해의-공부-농사&quot;&gt;올해의 공부 농사&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#올해의-top-4-사건&quot;&gt;올해의 Top 4 사건&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#2020년도-목표&quot;&gt;2020년도 목표&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;올해의-공부-농사&quot;&gt;올해의 공부 농사&lt;/h2&gt;
+        <description>&lt;h1 id=&quot;올해의-공부-농사&quot;&gt;올해의 공부 농사&lt;/h1&gt;
 
 &lt;p&gt;올 한해는 작년보다 한 층 더 성장했다고 생각한다. 작년과 비교해서 어떤 목표를 달성했는지 어떤 공부를 더 했는지 GitHub에 정리를 해두었다.&lt;/p&gt;
 
@@ -544,7 +570,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;올해의-top-4-사건&quot;&gt;올해의 Top 4 사건&lt;/h2&gt;
+&lt;h1 id=&quot;올해의-top-4-사건&quot;&gt;올해의 Top 4 사건&lt;/h1&gt;
 
 &lt;p&gt;올해의 개인 Top4 사건을 추리자면 다음과 같다.&lt;/p&gt;
 
@@ -555,7 +581,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;li&gt;&lt;a href=&quot;#4-home-comming-github-블로그-복귀&quot;&gt;Home Comming, GitHub 블로그 복귀&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;1-커넥트재단-퇴사-서울대-데이터-사이언스-대학원-진학&quot;&gt;1. 커넥트재단 퇴사, 서울대 데이터 사이언스 대학원 진학&lt;/h3&gt;
+&lt;h2 id=&quot;1-커넥트재단-퇴사-서울대-데이터-사이언스-대학원-진학&quot;&gt;1. 커넥트재단 퇴사, 서울대 데이터 사이언스 대학원 진학&lt;/h2&gt;
 
 &lt;p&gt;2018년 2월부터 다니던 네이버 커넥트재단을 2019년 8월에 퇴사했다. 주로 맡은 업무는 강의 퍼블리싱 및 기획 업무였다. 개인적으로 첫 직장에서 좋은 사람들을 만나서 행운이라 생각했다. 그동안 했던 일을 살펴보면 다음과 같다.&lt;/p&gt;
 
@@ -598,7 +624,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;두번째 목표는 지금까지 공부한 분야에서 최근에 공부한 XAI 분야를 접목하려고 한다. 기계의 의사결정을 잘 설명할 수 있는 모델을 만들어 사람이 보고 기계를 신뢰할 수 있게 만들어 보려고 한다.&lt;/p&gt;
 
-&lt;h3 id=&quot;2-책-출간-및-강의&quot;&gt;2. 책 출간 및 강의&lt;/h3&gt;
+&lt;h2 id=&quot;2-책-출간-및-강의&quot;&gt;2. 책 출간 및 강의&lt;/h2&gt;
 
 &lt;p&gt;2019년도 7월말에 내가 쓴 책 &amp;lt;딥러닝에 목마른 사람들을 위한 PyTorch&amp;gt;가 발간됐다. 책 내용은 집에서 GPU서버를 만드는 법 부터 시작해서, PyTorch로 딥러닝에 입문하는 것이다. 책을 쓰는 작업이 정말 어렵다는 것을 이번 경험으로 부터 깨달았다. 부족한 부분도 많아서 다음에는 조금더 알찬 내용으로 구성해서 다시 gitbook 형태로 써볼까 생각중이다.&lt;/p&gt;
 
@@ -608,7 +634,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;2019년도 말에는 멀티캠퍼스에서 책 내용을 기반으로 강의도 진행했다. 처음해보는 강의라 목소리도 많이 쉬었었다. 사람이 말을 이렇게나 많이 할 수도 있구나 생각했다… 그래도 최선을 다해서 개념 하나하나 설명해드리고 자료도 충분히 많이 준비했다고 생각한다. 3일짜리 강의라 처음 배우시는 분들이 개념을 받아들이기 쉽지는 않았을 거라 생각한다. 다음에 기회가 된다면 책처럼 만들어서 배포해보는 것도 나쁘지 않을 것 같다.&lt;/p&gt;
 
-&lt;h3 id=&quot;3-글또-3기-ai-collage&quot;&gt;3. 글또 3기, AI Collage&lt;/h3&gt;
+&lt;h2 id=&quot;3-글또-3기-ai-collage&quot;&gt;3. 글또 3기, AI Collage&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;글또&lt;/strong&gt;&lt;/p&gt;
@@ -631,7 +657,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;li&gt;&lt;a href=&quot;http://aic.yangjaehub.com/&quot;&gt;AIC 바로가기&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;4-home-comming-github-블로그-복귀&quot;&gt;4. Home Comming, GitHub 블로그 복귀&lt;/h3&gt;
+&lt;h2 id=&quot;4-home-comming-github-블로그-복귀&quot;&gt;4. Home Comming, GitHub 블로그 복귀&lt;/h2&gt;
 
 &lt;p&gt;지난 1년간 Notion을 활용해서 블로그를 만드려고 했다. 깔끔하고 페이지를 정리하는데 좋은 기능들이 많기 때문이다. 그러나 블로그로 활용하기에 부족한 부분이 2가지 있다.&lt;/p&gt;
 
@@ -652,7 +678,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;2020년도-목표&quot;&gt;2020년도 목표&lt;/h2&gt;
+&lt;h1 id=&quot;2020년도-목표&quot;&gt;2020년도 목표&lt;/h1&gt;
 
 &lt;p&gt;2020년이 코앞으로 다가왔다. 내년에는 다음과 같은 목표를 세웠다.&lt;/p&gt;
 
@@ -681,15 +707,13 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
     
       <item>
         <title>[PyTorch] ConvTranspose2d 와 Conv2d 의 관계</title>
-        <description>&lt;h1 id=&quot;convtranspose2d-와-conv2d&quot;&gt;ConvTranspose2d 와 Conv2d&lt;/h1&gt;
-
-&lt;p&gt;최근 XAI 에 관련된 공부를 하면서 비전쪽의 많은 논문을 살펴보고 있다. “Visualizing and Understanding Convolutional Networks (2013)” 논문에서는 이미지 처리에서는 CNN 알고리즘이 제일 좋지만, 그 이유에 대해서 탐구를 시도한 논문이다. 도대체 Convolution의 필터가 어떤 역할을 하는지, 이들이 어떤 부분을 살펴보는 지를 확인한다. 오늘은 이 논문에서 제안하는 Deconvolutional layers(정확히는 Fractionally-strided convolution 이지만 차후에 언급한다)의 실체를 낱낱이 살펴보도록 한다.&lt;/p&gt;
+        <description>&lt;p&gt;최근 XAI 에 관련된 공부를 하면서 비전쪽의 많은 논문을 살펴보고 있다. “Visualizing and Understanding Convolutional Networks (2013)” 논문에서는 이미지 처리에서는 CNN 알고리즘이 제일 좋지만, 그 이유에 대해서 탐구를 시도한 논문이다. 도대체 Convolution의 필터가 어떤 역할을 하는지, 이들이 어떤 부분을 살펴보는 지를 확인한다. 오늘은 이 논문에서 제안하는 Deconvolutional layers(정확히는 Fractionally-strided convolution 이지만 차후에 언급한다)의 실체를 낱낱이 살펴보도록 한다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;link: &lt;a href=&quot;https://arxiv.org/abs/1311.2901&quot;&gt;Visualizing and Understanding Convolutional Networks&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;convolution-layer&quot;&gt;Convolution layer&lt;/h2&gt;
+&lt;h1 id=&quot;convolution-layer&quot;&gt;Convolution layer&lt;/h1&gt;
 
 &lt;p&gt;Deconvolutional layer을 알아보기 전에 합성곱 연산(Convolutional Operation)에 대해 알아볼 필요가 있다. 합성곱 연산은 필터가 조금씩 이동하면서 이미지의 일부와 필터간 연산을 통해 진행된다.&lt;/p&gt;
 
@@ -722,7 +746,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;li&gt;link: &lt;a href=&quot;https://pytorch.org/docs/stable/nn.html#conv2d&quot;&gt;torch.nn.Conv2d - PyTorch master documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;deconvolution-layer-transposed-convolution-layer&quot;&gt;Deconvolution Layer? Transposed Convolution Layer!&lt;/h2&gt;
+&lt;h1 id=&quot;deconvolution-layer-transposed-convolution-layer&quot;&gt;Deconvolution Layer? Transposed Convolution Layer!&lt;/h1&gt;
 
 &lt;p&gt;저자는 이미 2011 년도에 Deconvolution Layer 를 제안했다.&lt;/p&gt;
 
@@ -807,26 +831,24 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;li&gt;$^{(N)}$은 Vector Transpose이며, 이는 다음 노트북을 살펴보자. &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/04_Backpropagation_Matrix_diff.ipynb&quot;&gt;Vector Transpose&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;additional-reference&quot;&gt;Additional Reference&lt;/h3&gt;
+&lt;h1 id=&quot;additional-reference&quot;&gt;Additional Reference&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.07285&quot;&gt;A guide to convolution arithmetic for deep learning&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 27 Oct 2019 21:56:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2019/10/27/convtranspose2d.html</guid>
+        <link>https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html</guid>
         
         
-        <category>programming</category>
+        <category>datascience</category>
         
       </item>
     
       <item>
-        <title>[XAI] XAI Introduction</title>
-        <description>&lt;h1 id=&quot;explaining-explanations-an-overview-of-interpretability-of-machine-learning&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/h1&gt;
+        <title>[XAI] Explaining Explanations: An Overview of Interpretability of Machine Learning</title>
+        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1806.00069&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1806.00069&quot;&gt;Explaining Explanations: An Overview of Interpretability of Machine Learning&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;설명가능한(explainable)&lt;/strong&gt; 모델은 &lt;strong&gt;해석(interpretable)&lt;/strong&gt; 이 가능하지만 그 반대는 아니다.&lt;/li&gt;
@@ -843,15 +865,15 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-background-and-foundational-concepts&quot;&gt;2. Background and Foundational Concepts&lt;/h2&gt;
+&lt;h1 id=&quot;2-background-and-foundational-concepts&quot;&gt;2. Background and Foundational Concepts&lt;/h1&gt;
 
-&lt;h3 id=&quot;a-what-is-an-explanation&quot;&gt;A. What is an Explanation?&lt;/h3&gt;
+&lt;h2 id=&quot;a-what-is-an-explanation&quot;&gt;A. What is an Explanation?&lt;/h2&gt;
 
 &lt;p&gt;철학적인 문헌에서 “설명을 구성하는 것은 무엇인가”에 대해 많은 논쟁이 있었다. 그중 관심있는 부분은 “어떤 설명이 좋은 설명인가” 혹은 “설명의 진짜 정의는 무엇인가”다. 어떤 사람들은 좋은 설명은 질문에 달려있다고 말한다. 많은 논문이 설명의 기원, 이론 그리고 언어의 토대를 다루고 있다. 그러나 우리의 연구에서 대부분 중요하고 관심있었던 작업은 “왜”라는 질문(Why Questions)이다. 특별히 “어떤 알고리즘에서 알고싶은 것이 무언인가”를 “왜”라는 질문으로 했을 때, 더 이상 질문을 할 수 없을 때까지 질문에 답변을 받을 수 있는 특정 시기를 정량적으로 표현할 수 있다. “왜”라는 질문에는 두 의미가 있는데, “왜(why)” 그리고 “왜 그래야하는가(why should)”이다. 다른 Explainable planning 문헌과 마찬가지로, 철학자들은 “왜 그렇게 하지 말아야 하는지(why-shouldn’t)” 질문과 “왜 그렇게 해야 하는지(why-should)” 질문이 실제로 우리가 원하는 “설명성 요건(explainability requirements)”을 제공할 수 있지에 대해 궁금해 한다.&lt;/p&gt;
 
 &lt;p&gt;어떤 설명이 가장 좋은 설명인지도 철학자들 사이에서 많은 논쟁이 있다. 많은 사람이 말하기를 그것은 추론(inference)이라고 하는데, 학자들 사이에서 많은 논쟁이 있다. 많은 사람이 말하기를 그것은 추론(inference)이라고 하는데, 귀추법(abductive reasoning)을 사용해서 모든 가능성있는 결과에 대해 설명하는 것과 비슷한 관점이다.&lt;/p&gt;
 
-&lt;h3 id=&quot;b-interpretability-vs-completeness&quot;&gt;B. Interpretability vs. Completeness&lt;/h3&gt;
+&lt;h2 id=&quot;b-interpretability-vs-completeness&quot;&gt;B. Interpretability vs. Completeness&lt;/h2&gt;
 
 &lt;p&gt;설명(explanation)은 두 가지 방식으로 평가될 수 있다.&lt;/p&gt;
 
@@ -881,7 +903,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;이러한 함정을 피하기 위해서 설명(explanations)은 해석가능성과 완전무결함 사이의 트레이드 오프를 허용해야 한다. 단순한 묘사(descriptions)만을 제공하는 것보다 약간의 해석가능성을 대가로 시스템이 자세하고 완전무결한 묘사를 할수 있게 해야한다. 설명 방법은 트레이드 오프의 하나의 점으로 평가될 것이 아니라, 최대 해석가능성부터 최대 완전무결함의 곡선상에서 어떻게 변화하는 가를 봐야한다.&lt;/p&gt;
 
-&lt;h3 id=&quot;c-explainability-of-deep-networks&quot;&gt;C. Explainability of Deep Networks&lt;/h3&gt;
+&lt;h2 id=&quot;c-explainability-of-deep-networks&quot;&gt;C. Explainability of Deep Networks&lt;/h2&gt;
 
 &lt;p&gt;딥 네트워크의 연산에 대한 설명은 네트워크의 데이터 &lt;strong&gt;처리(processing)&lt;/strong&gt; 를 설명하거나, 네트워크 내부에서 데이터의 &lt;strong&gt;표상(representation)&lt;/strong&gt; 을 설명하는 것이다. 처리(processing)에 관한 설명은 “왜 해당 입력이 특정 출력으로 이어지는가?”을 대답하는 것이고 프로그램의 실행 추적을 설명하는 것과 같다. 표상(representation)에 관한 설명은 “네트워크가 어떤 정보를 포함하고 있는가?”를 대답하는 것이고, 프로그램의 내부 데이터 구조를 설명하는 것과 같다.&lt;/p&gt;
 
@@ -889,11 +911,11 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-review&quot;&gt;3. Review&lt;/h2&gt;
+&lt;h1 id=&quot;3-review&quot;&gt;3. Review&lt;/h1&gt;
 
 &lt;p&gt;급격한 하위 분야의 확장 그리고 불투명한(opaque) 시스템의 정책 및 법적 파장 때문에, 해석가능성에 대한 연구가 급격이 늘어나고 있다. 모든 분야의 논문을 다루기 어렵기 때문에, 심층 신경망 아키텍처에 대해 집중하고, 다른 분야의 논문를 간단히 강조하려한다.&lt;/p&gt;
 
-&lt;h3 id=&quot;a-explanations-of-deep-network-processing&quot;&gt;A. Explanations of Deep Network Processing&lt;/h3&gt;
+&lt;h2 id=&quot;a-explanations-of-deep-network-processing&quot;&gt;A. Explanations of Deep Network Processing&lt;/h2&gt;
 
 &lt;p&gt;보통 심층 네트워크에서는 큰 숫자의 연산을 통해서 결론을 내린다. 예를 들어, 이미지 분류에서 유명한 구조인 ResNet 에서는 이미지 한장을 분류하기 위해 대략 5천만개의 학습된 파라미터와 100억 회의 부동소수점 연산(floating point operations)을 실행한다. 따라서 이러한 프로세스를 설명하기 위해 직면하는 근본적인 문제는 복잡한 연산들을 줄이는 방법을 찾아야한다는 것이다. 이는 기존 모델과 비슷하게 행동하는 &lt;strong&gt;프록시(proxy) 모델&lt;/strong&gt; 을 만들거나, 가장 연관있는 연산을 강조하는 &lt;strong&gt;돌출 맵(salience/saliency map)&lt;/strong&gt; 을 만드는 것이다.&lt;/p&gt;
 
@@ -993,7 +1015,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;b-explanations-of-deep-network-representations&quot;&gt;B. Explanations of Deep Network Representations&lt;/h3&gt;
+&lt;h2 id=&quot;b-explanations-of-deep-network-representations&quot;&gt;B. Explanations of Deep Network Representations&lt;/h2&gt;
 
 &lt;p&gt;비록 네트워크의 개별 연산숫자는 방대하나, 심층 신경망의 구조는 작은 서브컴포넌트로 잘 정리할 수 있다. ResNet 에서는 100개의 층으로 구성되어 있고 각 픽셀 정보를 64개에서 2048개의 채널로 연산한다. 심층 신경망 표상의 설명 목적은 이런 병목 현상(bottlenecks)을 통해 데이터 흐름의 구조와 역할를 이해하는 것이다. 이는 세밀하게 나눔으로써 달성할 수 있다. 표상(representations)은 &lt;strong&gt;레이어(layer)&lt;/strong&gt;, &lt;strong&gt;유닛(unit)&lt;/strong&gt;, &lt;strong&gt;벡터(vector)&lt;/strong&gt; 로 나눠서 이해할수가 있다.&lt;/p&gt;
 
@@ -1074,7 +1096,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;c-explanation-producing-systems&quot;&gt;C. Explanation-Producing Systems&lt;/h3&gt;
+&lt;h2 id=&quot;c-explanation-producing-systems&quot;&gt;C. Explanation-Producing Systems&lt;/h2&gt;
 
 &lt;p&gt;훈련 가능한 네트워크 아키텍처의 일부로 명시적 &lt;strong&gt;어텐션(attention)&lt;/strong&gt;을 포함시키는 방법과 같이, 용이한 설명을 위한 네트워크를 만드는 접근법도 있다. 어텐션은 &lt;strong&gt;분리된 표상(disentangled representations)&lt;/strong&gt;을 학습을 하도록 훈련 시키거나, 직접 &lt;strong&gt;생성가능한 설명(generative explanations)&lt;/strong&gt;을 만들도록 훈련 시킬수도 있다.&lt;/p&gt;
 
@@ -1145,9 +1167,9 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;4-related-work&quot;&gt;4. Related Work&lt;/h2&gt;
+&lt;h1 id=&quot;4-related-work&quot;&gt;4. Related Work&lt;/h1&gt;
 
-&lt;h3 id=&quot;a-interpretability&quot;&gt;A. Interpretability&lt;/h3&gt;
+&lt;h2 id=&quot;a-interpretability&quot;&gt;A. Interpretability&lt;/h2&gt;
 
 &lt;p&gt;이전에 해석가능성에 대해서 분류법과 모범 사례를 정의해보려는 시도가 있었다.&lt;/p&gt;
 
@@ -1183,7 +1205,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;그런 다음 저자들은 해석가능성 연구에서 개방된 문제, 모범 사례 및 향후 작업에 대해 논의하고, 해석가능성의 발견을 위한 데이터 중심 접근법을 크게 권장했다. 해석가능성의 정의에 대한 이러한 공헌이 있음에도 불구하고, 우리는 모델이 제공하는 설명에 각기 다른 초점을 맞춰 정의하고, 각 설명들이 어떻게 평가되어야 하는지를 포함하여 우리만의 분류법을 구별했다.&lt;/p&gt;
 
-&lt;h3 id=&quot;b-explainable-ai-for-hci&quot;&gt;B. Explainable AI for HCI&lt;/h3&gt;
+&lt;h2 id=&quot;b-explainable-ai-for-hci&quot;&gt;B. Explainable AI for HCI&lt;/h2&gt;
 
 &lt;p&gt;이전에 설명가능한 AI에 관련된 어떤 논문은 설명가능한 시스템에 관해 상당한 데이터 중심 문헌 분석을 수행했다.&lt;/p&gt;
 
@@ -1207,7 +1229,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;우리는 이들의 논문 마지막에서 언급한 두 가지 동향이 흥미로웠다(머신러닝 생산 규칙(ML production rules)과 엄격하고 사용 가능한 지식에 대한 로드맵). 저자들은 해석가능성이 적용된 고전적인 AI 방법들의 부족을 지적하며, 현재의 연구에서는 그러한 방법들의 광범위한 적용을 장려한다. 본 논문은 주로 설명가능성에서 HCI 연구 어젠다를 정하는 데 초점을 맞췄지만, 우리 연구와 관련된 많은 논점을 제기한다. 특히, 문헌 분석은 심리학 및 사회과학에서 하위 주제와 하위 학문을 발견했는데, 아직 우리의 분석과 관련이 있는 것으로 확인되지는 않았다.&lt;/p&gt;
 
-&lt;h3 id=&quot;c-explanations-for-black-box-models&quot;&gt;C. Explanations for Black-Box Models&lt;/h3&gt;
+&lt;h2 id=&quot;c-explanations-for-black-box-models&quot;&gt;C. Explanations for Black-Box Models&lt;/h2&gt;
 
 &lt;p&gt;최근 블랙박스(black-box) 모델을 설명하는 조사에서는 이해하기 힘든(opaque) 알고리즘을 사용한 주요 문제의 분류를 제공하기 위한 분류법을 소개했다. 조사된 대부분의 방법은 신경망을 기반으로한 알고리즘 이기 때문에 우리의 연구와 연관이 있다.&lt;/p&gt;
 
@@ -1239,7 +1261,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;그들의 분류 특징과 문제 정의를 사용하여, 그들은 채택된 설명 기능의 유형, 블랙 박스 모델 “개방여부” 및 입력 데이터에 따라 방법을 토론하고 추가로 분류했다. 이들의 목표는 주요 블랙박스 설명 아키텍처를 검토하고 분류하는 것이다. 따라서 이들의 분류는 유사한 문제와 접근방식을 식별하는 지침이 될 수 있다. 우리는 이 연구가 설명 방법의 설계 공간을 탐색하는 데 유용하고 의미있는 기여를 하고 있다는 것을 발견했다. 우리의 분류는 덜 세분화되어 있다. 구현 기법을 세분화하기 보다는 설명 능력의 초점과 각 접근방식이 설명할 수 있는 것을 조사하며, 다양한 유형의 설명가능성(explainability) 방법이 어떻게 평가될 수 있는지를 이해하는 데 중점을 둔다.&lt;/p&gt;
 
-&lt;h3 id=&quot;d-explainability-in-other-domains&quot;&gt;D. Explainability in Other Domains&lt;/h3&gt;
+&lt;h2 id=&quot;d-explainability-in-other-domains&quot;&gt;D. Explainability in Other Domains&lt;/h2&gt;
 
 &lt;p&gt;설명가능한 계획법(Explainable Planning)은 planning 커뮤니티에 있던 모델 기반 표상을 활용하는 새로운 학문이다. 수년 전 몇가지 핵심 아이디어가 계획 인식 분야에서 제안됐다.&lt;/p&gt;
 
@@ -1318,7 +1340,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;5-taxonomy&quot;&gt;5. Taxonomy&lt;/h2&gt;
+&lt;h1 id=&quot;5-taxonomy&quot;&gt;5. Taxonomy&lt;/h1&gt;
 
 &lt;p&gt;3가지 다른 카테고리로 접근법을 나눌 수 있다.&lt;/p&gt;
 
@@ -1349,7 +1371,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;우리는 하위범주를 생성하는 설명 분류법을 신경망 아키텍쳐와 시스템을 디자인하는 하나의 방법으로써 제시하려고한다. 또한 표준화된 평가 지표의 부족을 강조하고, 향후 분류학의 영역 교차 연구를 제안하려고 한다.&lt;/p&gt;
 
-&lt;h2 id=&quot;6-evaluation&quot;&gt;6. Evaluation&lt;/h2&gt;
+&lt;h1 id=&quot;6-evaluation&quot;&gt;6. Evaluation&lt;/h1&gt;
 
 &lt;p&gt;비록 심층 신경망을 위한 설명을 3 가지로 나눴지만, 셋다 같은 평가기준을 가지지 않는다. 조사된 작업의 대부분은 다음 유형의 설명 중 하나라고 할 수 있다.&lt;/p&gt;
 
@@ -1443,21 +1465,17 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
     
       <item>
         <title>Github pages 로 프로젝트 문서화</title>
-        <description>&lt;h1 id=&quot;github-pages-로-프로젝트-문서화&quot;&gt;Github pages 로 프로젝트 문서화&lt;/h1&gt;
-
-&lt;p&gt;잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;실습환경&quot;&gt;실습환경&lt;/h2&gt;
+        <description>&lt;p&gt;잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Ubuntu Server 18.04 LTS&lt;/li&gt;
+  &lt;li&gt;실습환경: Ubuntu Server 18.04 LTS&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;준비과정&quot;&gt;준비과정&lt;/h2&gt;
+&lt;h1 id=&quot;준비과정&quot;&gt;준비과정&lt;/h1&gt;
 
-&lt;h3 id=&quot;install-nodejs--npm&quot;&gt;Install nodejs &amp;amp; npm&lt;/h3&gt;
+&lt;h2 id=&quot;install-nodejs--npm&quot;&gt;Install nodejs &amp;amp; npm&lt;/h2&gt;
 
 &lt;p&gt;사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.&lt;/p&gt;
 
@@ -1474,14 +1492,14 @@ $ npm --version
 6.4.1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;install-gitbook-client&quot;&gt;Install gitbook client&lt;/h3&gt;
+&lt;h2 id=&quot;install-gitbook-client&quot;&gt;Install gitbook client&lt;/h2&gt;
 
 &lt;p&gt;gitbook client 를 설치해야한다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;initialize-gitbook&quot;&gt;Initialize gitbook&lt;/h3&gt;
+&lt;h2 id=&quot;initialize-gitbook&quot;&gt;Initialize gitbook&lt;/h2&gt;
 
 &lt;p&gt;이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.&lt;/p&gt;
 
@@ -1568,7 +1586,7 @@ Serving book on http://localhost:4000
 
 &lt;p&gt;&lt;strong&gt;CTRL+C&lt;/strong&gt; 를 눌러서 꺼주자.&lt;/p&gt;
 
-&lt;h3 id=&quot;initialize-git&quot;&gt;Initialize git&lt;/h3&gt;
+&lt;h2 id=&quot;initialize-git&quot;&gt;Initialize git&lt;/h2&gt;
 
 &lt;p&gt;테스트 후, 프로젝트 디렉토리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt; 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)&lt;/p&gt;
 
@@ -1618,7 +1636,7 @@ git commit &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot
 git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;저장소에서-활성화-하기&quot;&gt;저장소에서 활성화 하기&lt;/h3&gt;
+&lt;h2 id=&quot;저장소에서-활성화-하기&quot;&gt;저장소에서 활성화 하기&lt;/h2&gt;
 
 &lt;p&gt;자신의 github 저장소의 &lt;strong&gt;Settings&lt;/strong&gt; 에 가서 &lt;strong&gt;Github Pages&lt;/strong&gt; 항목의 &lt;strong&gt;master branch /docs folder&lt;/strong&gt; 를 누르고 &lt;strong&gt;Save&lt;/strong&gt; 를 누르자.&lt;/p&gt;
 
@@ -1630,13 +1648,13 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;customizing&quot;&gt;Customizing&lt;/h2&gt;
+&lt;h1 id=&quot;customizing&quot;&gt;Customizing&lt;/h1&gt;
 
-&lt;h3 id=&quot;bookjson&quot;&gt;book.json&lt;/h3&gt;
+&lt;h2 id=&quot;bookjson&quot;&gt;book.json&lt;/h2&gt;
 
 &lt;p&gt;프로젝트 디렉토리에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;book.json&lt;/code&gt; 파일을 생성하여 커스터마이징이 가능하다. 사실 쓰는건 플러그인과 변수 정도이지만, book.json의 기본 설정을 &lt;a href=&quot;https://toolchain.gitbook.com/config.html&quot;&gt;여기&lt;/a&gt;서 참고할 수 있다.&lt;/p&gt;
 
-&lt;h3 id=&quot;plugins&quot;&gt;plugins&lt;/h3&gt;
+&lt;h2 id=&quot;plugins&quot;&gt;plugins&lt;/h2&gt;
 
 &lt;p&gt;gitbook 에 다양한 플러그인을 설치 할 수 있는데, &lt;a href=&quot;https://plugins.gitbook.com/&quot;&gt;https://plugins.gitbook.com/&lt;/a&gt; 사이트에서 확인 할 수 있다.&lt;/p&gt;
 
@@ -1660,7 +1678,7 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://tinydew4.gitbooks.io/gitbook/ko/structure.html&quot;&gt;GitBook Toolchain Documentation for Multi-Languages&lt;/a&gt;&lt;/li&gt;
@@ -1681,9 +1699,7 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
     
       <item>
         <title>[비전공자의 Flask-2] 본격 앱 만들기 1</title>
-        <description>&lt;h1 id=&quot;비전공자의-flask-2-본격-앱-만들기-1&quot;&gt;[비전공자의 Flask-2] 본격 앱 만들기 1&lt;/h1&gt;
-
-&lt;h2 id=&quot;폴더-생성부터-데이터베이스-만들기&quot;&gt;폴더 생성부터 데이터베이스 만들기&lt;/h2&gt;
+        <description>&lt;h1 id=&quot;폴더-생성부터-데이터베이스-만들기&quot;&gt;폴더 생성부터 데이터베이스 만들기&lt;/h1&gt;
 
 &lt;p&gt;내가 만드려고 하는 앱은 사용자가 어떤 query 를 날리면 이를 모델을 거쳐서 결과를 웹에서 보여주는 간단한 앱이다. 예를 들어, 번역기 같은 앱의 경우를 생각해보자.&lt;/p&gt;
 
@@ -1695,7 +1711,7 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;p&gt;구체적으로 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/08/04/E2EMN.html&quot;&gt;End to End Memory Network&lt;/a&gt; 모델을 활용해서 스토리 내용을 사용자가 선택해서 질문을 던지면 그에 대한 결과를 받는 앱을 만들 것이다.&lt;/p&gt;
 
-&lt;h2 id=&quot;step-0-폴더-생성하기&quot;&gt;Step 0: 폴더 생성하기&lt;/h2&gt;
+&lt;h1 id=&quot;step-0-폴더-생성하기&quot;&gt;Step 0: 폴더 생성하기&lt;/h1&gt;
 
 &lt;p&gt;어플리케이션 개발을 시작하기전에, 어플리케이션에서 사용할 폴더를 만들자.&lt;/p&gt;
 
@@ -1706,7 +1722,7 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
 
 &lt;p&gt;앞으로 이 &lt;strong&gt;“nmtapp”&lt;/strong&gt; 폴더 안에 우리가 사용할 것들을 넣는다. &lt;strong&gt;“static”&lt;/strong&gt; 은 사용자들을 위한 폴더, 이 폴더는 css와 javascript 파일들이 저장되는 곳이다. Flasks는 templates 폴더에서 &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja2&lt;/a&gt; 템플릿을 찾을 것이다.&lt;/p&gt;
 
-&lt;h2 id=&quot;step-1-데이터베이스-스키마&quot;&gt;Step 1: 데이터베이스 스키마&lt;/h2&gt;
+&lt;h1 id=&quot;step-1-데이터베이스-스키마&quot;&gt;Step 1: 데이터베이스 스키마&lt;/h1&gt;
 
 &lt;p&gt;데이터베이스 스키마를 생성해야 한다. 우리의 어플리케이션은 단지 하나의 테이블만 필요하며 사용이 매우 쉬운 SQLite를 쓸것이다. 다음의 내용을 schema.sql 이라는 이름의 파일로 방금 생성한 nmtapp 폴더에 저장한다.&lt;/p&gt;
 
@@ -1728,7 +1744,7 @@ create table nmtmain (
   &lt;p&gt;데이터베이스 스키마(database schema)란 데이터베이스에서 자료의 구조, 자료의 표현 방법, 자료 간의 관계를 형식 언어로 정의한 구조이다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;step-2-어플리케이션-셋업-코드&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h2&gt;
+&lt;h1 id=&quot;step-2-어플리케이션-셋업-코드&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h1&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
     /static
@@ -1738,11 +1754,11 @@ create table nmtmain (
     /settings.py
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;settingspy&quot;&gt;settings.py&lt;/h3&gt;
+&lt;h2 id=&quot;settingspy&quot;&gt;settings.py&lt;/h2&gt;
 
 &lt;p&gt;추가로 앱을 실행하기 위한 파일들을 만든다. 중요한 정보 혹은 환경변수가 있는 파일은 &lt;strong&gt;“settings.py”&lt;/strong&gt; 에 넣기로 한다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## settings.py
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# settings.py
 # configuration
 DATABASE = '../data/e2e.db'
 DEBUG = True
@@ -1753,7 +1769,7 @@ PASSWORD = 'password'
 
 &lt;p&gt;클라이언트에서의 세션을 안전하게 보장하기 위해서는 secret_key 가 필요하다. secret_key는 추측이 어렵도록 가능한 복잡하게 선택하여야 한다. 디버그(DEBUG) 플래그는 인터랙티브 디버거를 활성화 시키거나 비활성화 시키는 일을 한다. 운영시스템에서는 디버그 모드를 절대로 활성화 시키지 말아야 한다. 왜냐하면 디버그 모드에서는 사용자가 서버의 코드를 실행할수가 있기 때문이다.&lt;/p&gt;
 
-&lt;h3 id=&quot;nmtstartpy&quot;&gt;nmtstart.py&lt;/h3&gt;
+&lt;h2 id=&quot;nmtstartpy&quot;&gt;nmtstart.py&lt;/h2&gt;
 
 &lt;p&gt;앱을 실행하는 &lt;strong&gt;“e2estart.py”&lt;/strong&gt; 파일을 만든다.&lt;/p&gt;
 
@@ -1790,7 +1806,7 @@ if __name__ == '__main__':
 
 &lt;p&gt;지금은 어떤 뷰(view)를 만들지 않았기 때문에, 브라우저에서 페이지를 찾을 수 없다는 404에러를 볼 수 있을 것이다. 이건 나중에 살펴보고, 우선 데이터베이스를 만들고 진행하도록 하자.&lt;/p&gt;
 
-&lt;h2 id=&quot;step-3-데이터베이스-생성하기&quot;&gt;Step 3: 데이터베이스 생성하기&lt;/h2&gt;
+&lt;h1 id=&quot;step-3-데이터베이스-생성하기&quot;&gt;Step 3: 데이터베이스 생성하기&lt;/h1&gt;
 
 &lt;p&gt;현재 만들고자 하는 앱은 관계형 데이터베이스 시스템에 의해 구동되는 어플리케이션이다. 이러한 시스템은 어떻게 데이터를 저장할지에 대한 정보를 가지고 있는 스키마가 필요하다. 그래서 처음으로 서버를 실행하기 전에 스키마를 생성하는 것이 중요하다.&lt;/p&gt;
 
@@ -1833,7 +1849,7 @@ def init_db():
 
 &lt;p&gt;다음 시간에는 데이터베이스와 연결하고, 뷰함수 및 템플릿을 만들어보자.&lt;/p&gt;
 
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/installation.html&quot;&gt;flask 한글 튜토리얼&lt;/a&gt;&lt;/li&gt;
@@ -1851,11 +1867,9 @@ def init_db():
     
       <item>
         <title>[비전공자의 Flask-1] 첫 앱 만들어보기</title>
-        <description>&lt;h1 id=&quot;비전공자의-flask-1-첫-앱-만들어보기&quot;&gt;[비전공자의 Flask-1] 첫 앱 만들어보기&lt;/h1&gt;
+        <description>&lt;p&gt;설치가 완료 되었으니 빠르게 첫 앱을 만들어보자.&lt;/p&gt;
 
-&lt;p&gt;설치가 완료 되었으니 빠르게 첫 앱을 만들어보자.&lt;/p&gt;
-
-&lt;h2 id=&quot;hello-world-찍기&quot;&gt;Hello World 찍기&lt;/h2&gt;
+&lt;h1 id=&quot;hello-world-찍기&quot;&gt;Hello World 찍기&lt;/h1&gt;
 
 &lt;p&gt;컴퓨터 책에 보면 꼭 해보라는 문구가 있다. 그 말을 찍어 볼 것이다.&lt;/p&gt;
 
@@ -1898,7 +1912,7 @@ if __name__ == '__main__':
 
 &lt;p&gt;현재 글쓴이는 &lt;strong&gt;노트북&lt;/strong&gt;을 통해 라즈베리파이의 리눅스 터미널로 접속하고 있는데 이게 어떻게 진행되는 지 알아보자.&lt;/p&gt;
 
-&lt;h3 id=&quot;포트포워딩을-이해보자&quot;&gt;포트포워딩을 이해보자&lt;/h3&gt;
+&lt;h2 id=&quot;포트포워딩을-이해보자&quot;&gt;포트포워딩을 이해보자&lt;/h2&gt;
 
 &lt;p&gt;개인별로 사정이 다르지만, 집에서 라즈베리파이 서버를 사용한다고 가정하고 진행하겠다.&lt;/p&gt;
 
@@ -1924,7 +1938,7 @@ if __name__ == '__main__':
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;실행하기&quot;&gt;실행하기&lt;/h2&gt;
+&lt;h1 id=&quot;실행하기&quot;&gt;실행하기&lt;/h1&gt;
 
 &lt;p&gt;자, 설정을 마쳤다면 실행하고 있는 노트북의 인터넷 창에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;[외부 IP 주소]:5000&lt;/code&gt; 를 쳐보자. 그리고 라즈베리파이 터미널을 확인하면&lt;/p&gt;
 
@@ -1937,7 +1951,7 @@ if __name__ == '__main__':
 
 &lt;p&gt;기본 어플리케이션인 “Hello World!” 를 성공시켰으니 충분히 고생했다고 생각한다. 다음 시간에는 본격적으로 튜토리얼을 따라서 시작해보도록 한다.&lt;/p&gt;
 
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/installation.html&quot;&gt;flask 한글 튜토리얼&lt;/a&gt;&lt;/li&gt;
@@ -1946,166 +1960,6 @@ if __name__ == '__main__':
         <pubDate>Tue, 30 Oct 2018 21:25:57 +0900</pubDate>
         <link>https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</link>
         <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/30/flaskstudy1.html</guid>
-        
-        
-        <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>[비전공자의 Flask-0] 설치하기</title>
-        <description>&lt;h1 id=&quot;비전공자의-flask-0-설치하기&quot;&gt;[비전공자의 Flask-0] 설치하기&lt;/h1&gt;
-
-&lt;p&gt;python 으로 딥러닝 공부도 열심히 하지만, 라즈베리파이 서버에 웹 데모 프로그램 만드려고 한다. 나중에 app 만들때 활용할 수 있을 것 같다.&lt;/p&gt;
-
-&lt;p&gt;우선 Flask 가 무엇인지는 공식 튜토리얼 문서를 한 번 쓰윽 훑고 오자. 머리말을 읽는 것은 중요하다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/foreword.html&quot;&gt;공식 튜토리얼 - 머리말&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;읽고 오면 이제 본격적으로 시작해보자.&lt;/p&gt;
-
-&lt;p&gt;컴퓨터를 다룰때 제일 짜증나는 부분이 설치다. 내 마음대로 안되는 것도 컴퓨터다. 시행착오도 겪어야 하고 … 아주 오냐오냐 해줘야 말을 듣기 때문에, 같이 한번 잘 다뤄줘보자.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;가상환경-설치&quot;&gt;가상환경 설치&lt;/h2&gt;
-
-&lt;p&gt;가상환경으로 작업하는 이유는 구글한테 물어보면 잘 대답해준다. 개인적으로는 &lt;strong&gt;“지우기 편하다”&lt;/strong&gt; 가 제일 큰 장점인것 같다.&lt;/p&gt;
-
-&lt;p&gt;virtualenv 패키지를 받는다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo pip install virtualenv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;자신의 폴더로 들어가서 가상환경을 만든다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir demo
-$ cd demo
-$ virtualenv venv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;가상환경으로 접속한다&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ . venv/bin/activate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;앞에 괄호에 만든 가상환경이 뜨면, 성공한것이다. 만약에 가상환경을 빠져나오려면 아래와 같이 실행한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ deactivate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;필요한-패키지-설치하기&quot;&gt;필요한 패키지 설치하기&lt;/h2&gt;
-
-&lt;h3 id=&quot;flask&quot;&gt;Flask&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install Flask
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;pytorch-1115-수정&quot;&gt;PyTorch (11.15 수정)&lt;/h3&gt;
-
-&lt;p&gt;PyTorch 를 설치하는 이유는 단순히 훈련된 모델을 실행하여 결과값을 얻으려고 하는 것이다. 필요없다면 이 과정을 건너뛰어도 좋다.&lt;/p&gt;
-
-&lt;p&gt;설치전 필요한 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;pip list&lt;/code&gt; 를 통해서 없는 패키지라면 설치해주자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;future
-numpy
-pyyaml
-setuptools
-six
-typing
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;만약에 당신의 서버가 라즈베리파이가 아니라면 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install torch torchvision torchtext&lt;/code&gt; 을 써준다.&lt;/p&gt;
-
-&lt;p&gt;하지만 우리의 귀엽고 작은 라즈베리파이는 파이토치를 pip 로 바로 설치를 못한다. “&lt;a href=&quot;https://gist.github.com/fgolemo/b973a3fa1aaa67ac61c480ae8440e754&quot;&gt;라즈베리파이에 파이토치 설치하기&lt;/a&gt;” 를 확인하고 따라해보자. 우선 필수 패키지를 설치해준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install libopenblas-dev cython libatlas-dev \
-m4 libblas-dev python3-dev cmake
-# 필수로 먼저 설치해주자
-(venv) $ pip install pyyaml numpy 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;pytorch 설치전 리눅스 환경변수를 만들어준다. &lt;code class=&quot;highlighter-rouge&quot;&gt;.profile&lt;/code&gt; 밑단에 환경변수를 설정하자. 우리의 작은 라즈베리파이는 GPU를 지원할 CUDA 가 필요 있을 리가 없다. “NO_CUDA” 변수를 1로 설정한다. “NO_DISTRIBUTED” 는 뭔지 모르겠다. (알려주세요)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi ~/.profile
-# 아래 내용을 밑단에 추가한다.
-export NO_CUDA=1
-export NO_DISTRIBUTED=1
-
-# 설정후, 터미널 재시작한다.
-$ source ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;download 폴더를 만들어서 안에 PyTorch 를 clone 한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ mkdir downloads &amp;amp;&amp;amp; cd downloads
-(venv) $ git clone --recursive https://github.com/pytorch/pytorch
-(venv) $ cd pytorch
-(venv) $ git checkout tags/v0.4.1 -b build
-(venv) $ git submodule update --init --recursive
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;PyTorch 를 빌드한다. 한숨 자고 오는게 마음 편하다..&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py build
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;시간이 오래걸려서 백그라운드로 돌려놓고싶다면 아래와 같이 해라. 단, 터미널을 종료하면 안된다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ date &amp;amp;&amp;amp; python3 setup.py build &amp;amp;&amp;amp; date &amp;amp;&amp;amp; python3 setup.py install &amp;amp;&amp;gt; message-build &amp;amp;
-(venv) $ 2018. 11. 14. (수) 17:46:27 KST
-(venv) $ ...설치내용 주르륵...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;아래 명령어를 쳐서 date 함수가 잘 출력됐으면, 빌드는 성공적으로 진행된 것이다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ tail -l message-build
-(venv) $ 2018. 11. 15. (목) 05:54:24 KST
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;거의 열두시간 걸렸다… ㅋㅋ 에러가 없을 경우 아래를 계속 진행한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ python3 setup.py install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위에 방법도 좋지만 향후에 재설치를 할수 있게 아래처럼 해준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ export NO_CUDA=1
-(venv) $ export NO_DISTRIBUTED=1
-(venv) $ pip install wheel
-(venv) $ python3 setup.py bdist_wheel
-(venv) $ cd dist
-(venv) $ pip install [dist 폴더 안에 있는 wheel 파일]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/0sm9i9ajhp5y5kw/1115_installtorch.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;해당 wheel 파일을 어딘가 다른 곳에 저장 해두었다가 나중에 설치할 일이 생기면 다시 아래처럼만 하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) $ pip install [pytorch wheel 파일]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;설치 종료후 잘 설치가 됐는지, 확인해보자&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/s5h0s5lc187a2ek/1115_testtorch.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음 시간에는 빠르게 앱을 만들어보고 잘 작동하는지 테스트를 해볼 예정이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/installation.html&quot;&gt;flask 한글 튜토리얼&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://onecellboy.tistory.com/220&quot;&gt;리눅스 환경변수 확인하기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wormtooth.com/20180617-pytorch-on-raspberrypi/&quot;&gt;라즈베리파이에 파이토치 설치하기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 28 Oct 2018 19:22:40 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/10/28/flaskstudy0.html</guid>
         
         
         <category>programming</category>

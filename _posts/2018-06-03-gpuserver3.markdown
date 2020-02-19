@@ -5,14 +5,14 @@ date: "2018-06-03 21:08:24 +0900"
 categories: programming
 author: "Soo"
 comments: true
+toc: true
 ---
-# Install Ubuntu 18.04 GPU Server For DeepLearning - 3
 
 개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.
 
 ---
 
-## Install PYTHON
+# Install PYTHON
 
 아나콘다를 통하지 않고 소스를 통해 파이썬을 설치하기로 했다. 일단 용량이 작고, 다른 부가 spyder 등 프로그램을 설치하기 싫어서 소스에서 직접 설치하기로 했다.
 
@@ -44,7 +44,7 @@ Collecting
 No matching distribution found for
 ```
 
-### 해결책
+## 해결책
 
 1. 필수 패키지를 설치한다
 ```
@@ -64,7 +64,7 @@ sudo pip3 install --upgrade pip
 
 <br>
 
-## Install CUDA 9.0
+# Install CUDA 9.0
 
 CUDA-Toolkit 를 설치하면 드라이버를 설치할 필요는 없다고하나 만약에 먼저 설치해야하면 아래와 같이 설치(업데이트) 해주자
 
@@ -74,7 +74,7 @@ sudo apt update
 sudo apt install nvidia-390
 ```
 
-### 1. CUDA-Toolkit
+## 1. CUDA-Toolkit
 
 [https://developer.nvidia.com/cuda-90-download-archive](https://developer.nvidia.com/cuda-90-download-archive) 에서 자신에 버젼에 맞는 CUDA-Toolkit 을 받자.
 
@@ -119,7 +119,7 @@ nvcc -V
 nvidia-smi
 ```
 
-### 2. CuDNN 설치
+## 2. CuDNN 설치
 
 CuDNN 을 설치하려면 NVIDIA 회원 가입을 해야한다. 그리고 아래 싸이트에서 받아서 `scp` 명령어로 서버로 옮기자.
 
@@ -134,7 +134,7 @@ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 ```
 
-## Pytorch 설치한 후 테스트
+# Pytorch 설치한 후 테스트
 
 <img src="/assets/ds/gpuserver/torch.png">
 

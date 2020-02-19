@@ -5,15 +5,14 @@ date: "2018-04-24 16:14:13 +0900"
 categories: nlp
 author: "Soo"
 comments: true
+toc: true
 ---
-# All about Word Vectors: Negative Sampling
 
----
 본 포스팅은 [CS224n](http://web.stanford.edu/class/cs224n/) Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.
 
 <img src="/assets/ML/nlp/L2_model_train.png">
 
-## Navie Softmax 의 단점
+# Navie Softmax 의 단점
 
 Navie Softmax 를 최종단에 출력으로 두고 Backpropagation 할때는 큰 단점이 있다.
 
@@ -27,7 +26,7 @@ $$\triangledown_\theta J_t(\theta) \in \Bbb{R}^{2dV}$$
 
 그래서 **"window에 실제로 등장하는 단어들만 업데이트 하면 좋지 않을까?"** 라는 생각을 하게 된다.
 
-## Negative Sampling
+# Negative Sampling
 
 > paper 1: [Distributed representaions of Words and Phrases and their Compositionality (Mikolov et al. 2013)](https://arxiv.org/abs/1310.4546)
 >
@@ -49,7 +48,7 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 ---
 
-### 상세 논문 설명
+## 상세 논문 설명
 
 논문 기준으로 위에 **<span style="color: #e87d7d">표기법</span>** 이 조금 다르다.
 * 여기서 **$w$ = center word, $c$ = context** 다.
@@ -129,7 +128,7 @@ $$p_{words}(w) = p_{contexts} (c) = \dfrac{count(x)}{ \vert text \vert }$$
 
 ---
 
-### 참고 1. Trivial Solution
+## 참고 1. Trivial Solution
 
 $$\begin{aligned} L(\theta;w,c) &= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
 &= \underset{(w,c) \in D}{\sum} \log(1) - \log(1+e^{-v_c v_w}) \\

@@ -5,6 +5,7 @@ date: "2020-01-03 14:19:38 +0900"
 categories: datascience
 author: "Soo"
 comments: true
+toc: true
 ---
 
 # 데이터 사이언스란?
@@ -13,15 +14,9 @@ comments: true
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xC-c7E5PK0Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
---
-
 * 2020.02.02 추가: 데이터관련 직군에 대한 [Report](https://d2wahc834rj2un.cloudfront.net/Workera%20Report.pdf?fbclid=IwAR0IEBfU-7w231SNnaJFM_DYPEqJQDgOdf5_eCVs0aGsazO9XBWaVxzrbF0)
 
 ---
-
-# 목차
-* [데이터 사이언스와 데이터 사이언티스트의 역할](#데이터-사이언스와-데이터-사이언티스트의-역할)
-* [상황분석 및 나아가야할 방향](#상황분석-및-나아가야할-방향)
 
 ## 데이터 사이언스와 데이터 사이언티스트의 역할
 

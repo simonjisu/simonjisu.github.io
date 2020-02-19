@@ -5,14 +5,14 @@ date: "2018-06-02 22:26:58 +0900"
 categories: programming
 author: "Soo"
 comments: true
+toc: true
 ---
-# Install Ubuntu 18.04 GPU Server For DeepLearning - 1
 
 개인 딥러닝용 서버 설치 과정과 삽질을 담은 글입니다.
 
 ---
 
-## 컴퓨터 사양 상세
+# 컴퓨터 사양 상세
 
 |항목|상품코드|제품명|금액|수량|최종금액|
 |:-:|:-:|-|:-:|:-:|:-:|
@@ -40,11 +40,11 @@ comments: true
 
 2018년 5월 28일 컴퓨존에서 주문해서, 5월 30일 수요일 도착했다. 총비용은 대략 130만원 정도 ㅎㅎ 언른 GPU를 쓰고 싶은 생각에 그날밤 바로 설치를 진행하였다.
 
-## Ubuntu Server 설치
+# Ubuntu Server 설치
 
 5월 30일 저녁, 우분투를 설치하려고 하니 버전이 마음에 걸렸다. NVIDIA CUDA TOOLKIT을 보니 리눅스 17.04 버전 까지 지원하는듯 했기 때문이다. 16.04를 설치해야하나? 싶은 찰나에 그냥 최신으로 한번 도전해보기로 했다. 안되면 다시 갈지머..
 
-### Making a bootable Ubuntu USB disk Tutorial at Mac OS
+## Making a bootable Ubuntu USB disk Tutorial at Mac OS
 
 맥에서 부팅 디스크 만들기, 정말 간단하다. [tutorials.ubuntu.com](https://tutorials.ubuntu.com/tutorial/tutorial-create-a-usb-stick-on-macos#0) 튜토리얼을 따라가면 된다.
 
@@ -54,7 +54,7 @@ comments: true
 > * Mac OS 컴퓨터
 > * 우분투 서버 ISO 다운로드 [우분투 서버 다운로드](https://www.ubuntu.com/download/server)
 
-#### 구동 디스크 FORMAT
+## 구동 디스크 FORMAT
 
 1. 응용프로그램 > 유틸리티 > 디스크 유틸리티 선택
 2. MAC OS에 꼽은 USB 를 선택한 다음에 `지우기` 를 선택한다.
@@ -63,7 +63,7 @@ comments: true
 
 <img src="/assets/ds/gpuserver/format_disk.png">
 
-#### Etcher 를 사용한 시동 디스크 생성
+## Etcher 를 사용한 시동 디스크 생성
 
 [Etcher](https://etcher.io/) 먼저 받는다. 그후에는 정말 간단하다.
 
@@ -75,7 +75,7 @@ comments: true
 
 이제 설치 준비 완료되었다.
 
-### Install Ubuntu Server 18.04
+## Install Ubuntu Server 18.04
 
 이제 설치릃 해보자. 설치를 하려면, 최소 한번은 모니터에 연결해서 설치해야한다. 나는 정말 서버만을 생각해서 모니터를 않샀기에... HDMI 케이블로 티비화면으로 연결했다... 덕분에 고생이 두배!
 

@@ -5,15 +5,15 @@ date: "2018-04-21 12:47:28 +0900"
 categories: others
 author: "Soo"
 comments: true
+toc: true
 ---
-# Little Big Data 참석 후기
 
 <img src="/assets/ds/littlebigdata.png">
 
 주최: ZEPL
 링크: [festa](https://festa.io/events/21)
 
-## 후기
+# 후기
 
 발표자분들께서 자신들이 겪은 다양한 경험을 들었다. 모든 일이 다 그렇지만, 문제를 파악하고 정의를 어떻게 하며, 방법을 모색하고 해결 후 결과를 다시 한번 정리해보는 사고 프로세스를 배운 것 같다.
 
@@ -21,13 +21,13 @@ comments: true
 
 ---
 
-## 상세
+# 상세
 
 발표자의 내용이 완벽하게 일치하지 않으며, 제가 중간중간 생각나서 제 생각을 기록한 것도 있습니다. (거의 없긴 하지만)
 
 ---
 
-### 극한직업: 한국어 채팅 데이터로 머신러닝 하기
+## 극한직업: 한국어 채팅 데이터로 머신러닝 하기
 
 **[Scatter Lab](http://www.scatterlab.co.kr/) 조한석 님**
 
@@ -66,7 +66,7 @@ comments: true
 
 ---
 
-### 딥러닝에 필요한 로그 기깔나게 잘 디자인하는 법
+## 딥러닝에 필요한 로그 기깔나게 잘 디자인하는 법
 
 **구글 클라우드 엔지니어 백정상 님**
 
@@ -128,7 +128,7 @@ Feature engineering: feature selection
 
 ---
 
-### 바닥부터 시작하는 데이터 인프라
+## 바닥부터 시작하는 데이터 인프라
 
 **(전) 레트리카, 변성윤 님** [(블로그)](https://zzsza.github.io/)
 
@@ -161,7 +161,7 @@ Feature engineering: feature selection
 
 ---
 
-### 게임회사 주니어 웹 개발자가 바라본 데이터 분석 이야기
+## 게임회사 주니어 웹 개발자가 바라본 데이터 분석 이야기
 
 **넥슨 이준범 님**
 

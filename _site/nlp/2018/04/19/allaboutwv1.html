@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>All about Word Vectors: Intro</title>
-  <meta name="description" content="All about Word Vectors: Intro본 포스팅은 CS224n Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.자연어 처리 (Natural Language Processing)이야기를 하기 앞서서, “언어”를 살펴보자. 위키백과 에 따르면...">
+  <meta name="description" content="본 포스팅은 CS224n Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.자연어 처리 (Natural Language Processing)이야기를 하기 앞서서, “언어”를 살펴보자. 위키백과 에 따르면 아래와 같다.  언어(言語)에 대한 정의는 여러가지...">
 
   <!-- evil icon -->
   <link rel="stylesheet" href="/assets/evil-icons.min.css">
@@ -134,29 +134,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               
                 
                   <li role="separator" class="divider"></li>
-                
-              
-              
-                
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
-                    
-                    
-                  
                 
               
               
@@ -425,15 +402,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-04-19T16:41:36+09:00" itemprop="datePublished">Apr 19, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-
+  <div id="table-of-contents">
+    <h2> 목차 </h2>
+<ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#자연어-처리-natural-language-processing">자연어 처리 (Natural Language Processing)</a></li>
+<li class="toc-entry toc-h1"><a href="#단어의-표현word-representation">단어의 표현(Word Representation)</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#bag-of-words-representation">Bag of words representation</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#분포-유사성-기반-표현-distributional-similarity-based-representations">분포 유사성 기반 표현 (Distributional similarity based representations)</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#word-vectors">Word Vectors</a></li>
+</ul>
+</li>
+</ul>
+  </div>
   <div class="article-content" itemprop="articleBody">
-    <h1 id="all-about-word-vectors-intro">All about Word Vectors: Intro</h1>
+    <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
-<hr />
-
-<p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
-
-<h2 id="자연어-처리-natural-language-processing">자연어 처리 (Natural Language Processing)</h2>
+<h1 id="자연어-처리-natural-language-processing">자연어 처리 (Natural Language Processing)</h1>
 <p>이야기를 하기 앞서서, “언어”를 살펴보자. <a href="https://ko.wikipedia.org/wiki/%EC%96%B8%EC%96%B4">위키백과</a> 에 따르면 아래와 같다.</p>
 
 <blockquote>
@@ -460,7 +448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><br /></p>
 
-<h2 id="단어의-표현word-representation">단어의 표현(Word Representation)</h2>
+<h1 id="단어의-표현word-representation">단어의 표현(Word Representation)</h1>
 
 <p>어떻게 하면 단어의 “의미”를 표현할 수 있을까?</p>
 
@@ -490,7 +478,7 @@ for synset in wn.synsets("adept"):
 
 <p>마지막으로, 유사도 계산이 어렵다는 점이다. 즉, 같은 상위어에 속해 있는 하위어는 비슷한 것은 알겠는데, 정량적으로 이를 계산할 방법이 없다는 것이다.</p>
 
-<h3 id="bag-of-words-representation">Bag of words representation</h3>
+<h2 id="bag-of-words-representation">Bag of words representation</h2>
 
 <p>또다른 방법으로 discrete 된 심볼로 단어를 표현했는데 이를 <strong>one-hot representation</strong> 라고 하며, 아래와 같이 표현했다.</p>
 
@@ -512,7 +500,7 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 
 <p><br /></p>
 
-<h2 id="분포-유사성-기반-표현-distributional-similarity-based-representations">분포 유사성 기반 표현 (Distributional similarity based representations)</h2>
+<h1 id="분포-유사성-기반-표현-distributional-similarity-based-representations">분포 유사성 기반 표현 (Distributional similarity based representations)</h1>
 
 <p>연구자들은 one-hot vector 와 다른 어떤 유사도를 계산할 수 있는 벡터를 만들고 싶어했다. 따라서 유사도의 정보를 어디서 얻을 수 있을까를 찾기 시작했다. 그리고 어떤 핵심 아이디어를 생각해냈다.</p>
 
@@ -526,7 +514,7 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 
 <p>그들은 주변 단어의 정보로 어떤 단어의 의미를 규정하는 시도를 하였고, 이는 modern statistical NLP 에서 많은 각광을 받기 시작했다. 그리고 어떤 단어 $w$ 에 대해서 주변에 나타나는 단어의 집합을 <strong>맥락/문맥(context)</strong> 이라고 했다.</p>
 
-<h3 id="word-vectors">Word Vectors</h3>
+<h2 id="word-vectors">Word Vectors</h2>
 
 <p>이전에 0과 1로 채워진 one-hot vector 와 달리 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터(dense vector)를 만든다. 핵심 아이디어는 아래와 같다.</p>
 
@@ -556,7 +544,7 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
   <footer class="article-footer">
 
   <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
-    <data data-icon="ei-arrow-up"></data> Go to Posts  </a>
+    <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">
     <p>이 글이 도움이 되었다면?</p> 

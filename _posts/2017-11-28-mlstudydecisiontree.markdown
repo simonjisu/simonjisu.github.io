@@ -3,8 +3,10 @@ layout: post
 title: "ML-DecisionTree"
 date: "2017-11-28 14:48:12 +0900"
 comments: true
+toc: true
 ---
 # [ML] DecisionTree
+
 의사결정나무의 소개는 [링크](https://ko.wikipedia.org/wiki/%EA%B2%B0%EC%A0%95_%ED%8A%B8%EB%A6%AC_%ED%95%99%EC%8A%B5%EB%B2%95)로 대체하고 어떻게 진행되는지만 알아보자
 
 * 의사결정나무의 장점: 어떤 변수가 분류에 영향을 끼쳤는지 사람이 보기 쉽게 되어있다. 사람 입장에서 해석에 용이하다.

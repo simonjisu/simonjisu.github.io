@@ -5,14 +5,13 @@ date: "2018-04-04 01:01:13 +0900"
 categories: paper
 author: "Soo"
 comments: true
+toc: true
 ---
-# Naver Sentiment Movie Corpus Classification
 
----
 
 네이버 영화 감성분류 with Bidirectional LSTM + Self Attention
 
-## 목표
+# 목표
 
 * 영화 리뷰를 통해 긍정인지 부정인지 분류하는 문제 (Many-to-One)
 * 사용한 모델: Bidirectional LSTM with Self Attention Model
@@ -21,7 +20,7 @@ comments: true
 
 Reference Paper: [A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING](https://arxiv.org/pdf/1703.03130.pdf)
 
-## 모델 핵심 부분 설명
+# 모델 핵심 부분 설명
 
 그림과 수식을 함께 보면 이해하기 쉽다
 
@@ -97,7 +96,7 @@ $$M=AH  \qquad\qquad (7)$$
 
 <br>
 
-### Penalization Term
+## Penalization Term
 
 임베딩된 매트릭스 $M$ 은 $r$ hops 동안 계속해서 같은 유사도 벡터 $a$ 를 곱하게 되면 **중복 문제(redundancy problems)** 가 생길 수 있다. 즉, 같은 단어 혹은 구문만 계속해서 attention 하게 되는 문제다.
 
@@ -129,30 +128,30 @@ $$0< a_{ij} = \sum_{k=1}^{n} a_k^i a_k^j <1$$
 
 <br>
 
-## 네이버 영화 리뷰 테스트 결과 및 시각화
+# 네이버 영화 리뷰 테스트 결과 및 시각화
 총 150000 개의 Train Set과 50000 개의 Test Set 으로 진행했고, 모델에서는 hyperparameter가 많기 때문에 몇 가지 실험을 진행 했다.
 
 간단한 실험을 위해서 사전에 단어들을 word2vec 으로 학습시키지 않고, mecab 으로 tokenizing 만해서 임베딩 시켰다. (실험을 안해봐서 사실 크게 상관있나 모르겠다. 나중에 여러가지로 실험해볼 예정)
 
 내가 주로 건드린건 LSTM 에서의 **hidden layer의 갯수** 와 hops 인 **$r$** 을 바꾸어 보았다.
 
-### model 1: 1 개의 Hidden Layer 와 5번의 hops
+## model 1: 1 개의 Hidden Layer 와 5번의 hops
 
 <img src="/assets/ML/nsmc/model_1.png">
 
-### model 2: 1 개의 Hidden Layer 와 20번의 hops
+## model 2: 1 개의 Hidden Layer 와 20번의 hops
 
 <img src="/assets/ML/nsmc/model_2.png">
 
 hops 가 많아지면 긍정/부정을 판단하게 되는 근거도 많아지고, 모델의 정확도도 향상되는 것을 2번에서 볼 수 있다.
 
-### model 3: 3 개의 Hidden Layer 와 5번의 hops
+## model 3: 3 개의 Hidden Layer 와 5번의 hops
 
 <img src="/assets/ML/nsmc/model_3.png">
 
 3번째 모델은 조금 이상하다고 느껴진 것이 있다. 그림을 보면 기계가 문장의 앞뒤만 보고 리뷰가 긍정인지 부정인지 판단했다는 것이다. 그림만 보면 과최적화된 느낌? 정확히 각 층의 layer 값을 보지는 못했지만, 층이 깊어 질 수록 기계가 이전 단계의 layer 에서 추출한 특징들로 학습해서 긍부정을 판단 했을 가능성이 있다. 점수는 높게 나왔으나 사람이 판단하기에는 부적절한 모델
 
-## 향후 해볼 수 있는 과제들
+# 향후 해볼 수 있는 과제들
 * 전처리 단계에서 임베딩시 다양한 임베딩을 해볼 수 있을 것 같다. 예를 들어 word2vec으로 미리 선학습 후에 만든다던지, 아니면 N-hot 인코딩 (단어 원형 + 품사 + 어미) 등등 시도해볼 수 있는 것은 많다.
 * LSTM Cell 로 구현
 * 이와 연관은 좀 덜하지만, CNN으로 분류하는 것과 비교해 성능이 더 잘나올지? **김윤** 님의 논문 참고 : [링크 ](http://emnlp2014.org/papers/pdf/EMNLP2014181.pdf)

@@ -5,22 +5,12 @@ date: "2020-02-02 14:19:38 +0900"
 categories: paper
 author: "Soo"
 comments: true
+toc: true
 ---
-
-# Attention Is All You Need - 2
 
 Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 이전 글: [Attention Is All You Need - 1](https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html)
-
-**목차**
-* [3. Sub Layers](#3-sub-layers)
-    * [Multi-Head Attention](#multi-head-attention)
-    * [Position-wise Feed-Forward Networks](#position-wise-feed-forward-networks)
-* [4. Embeddings](#4-embeddings)
-    * [Input 과 Output](#input-과-output)
-    * [Embedding](#embedding)
-    * [Positional Encoding](#positional-encoding)
 
 ---
 
