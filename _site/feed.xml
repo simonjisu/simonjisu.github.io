@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 19 Feb 2020 19:04:43 +0900</pubDate>
-    <lastBuildDate>Wed, 19 Feb 2020 19:04:43 +0900</lastBuildDate>
+    <pubDate>Wed, 19 Feb 2020 19:09:44 +0900</pubDate>
+    <lastBuildDate>Wed, 19 Feb 2020 19:09:44 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -90,9 +90,9 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-sub-layers&quot;&gt;3. Sub Layers&lt;/h2&gt;
+&lt;h1 id=&quot;3-sub-layers&quot;&gt;3. Sub Layers&lt;/h1&gt;
 
-&lt;h3 id=&quot;multi-head-attention&quot;&gt;Multi-Head Attention&lt;/h3&gt;
+&lt;h2 id=&quot;multi-head-attention&quot;&gt;Multi-Head Attention&lt;/h2&gt;
 
 &lt;figure class=&quot;image&quot;&gt;
     &lt;img src=&quot;https://drive.google.com/uc?id=1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_&quot; alt=&quot;[그림 1] Multi-Head Attention&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
@@ -114,7 +114,7 @@
 
 &lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/sublayers.py#L11&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
 
-&lt;h3 id=&quot;position-wise-feed-forward-networks&quot;&gt;Position-wise Feed-Forward Networks&lt;/h3&gt;
+&lt;h2 id=&quot;position-wise-feed-forward-networks&quot;&gt;Position-wise Feed-Forward Networks&lt;/h2&gt;
 
 &lt;p&gt;또 다른 서브층으로써 완전 연결층(Fully Connect Layer)인 네트워크를 Encoder, Decoder 뒤에 하나씩 추가했다. 이 완전 연결층은 두 개의 선형변환과 ReLU 활성화 함수를 사용했으며 그 수식은 다음과 같다.&lt;/p&gt;
 
@@ -128,9 +128,9 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;4-embeddings&quot;&gt;4. Embeddings&lt;/h2&gt;
+&lt;h1 id=&quot;4-embeddings&quot;&gt;4. Embeddings&lt;/h1&gt;
 
-&lt;h3 id=&quot;input-과-output&quot;&gt;Input 과 Output&lt;/h3&gt;
+&lt;h2 id=&quot;input-과-output&quot;&gt;Input 과 Output&lt;/h2&gt;
 
 &lt;p&gt;Embedding 층과 Position Encoding 을 설명하기 전에 입출력이 어떻게 구성되어 있는지를 살펴봐야한다. 기계 번역 문제를 다시 예시로 들어보면, 다음과 같이 수치화된 문장들이 있다. 0 은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt; 토큰으로써 데이터 처리를 위해 설정한 문장의 최대 길이에 맞춰서 넣은 인위적인 토큰이다.&lt;/p&gt;
 
@@ -176,13 +176,13 @@
 
 &lt;p&gt;RNN 의 특징 중 하나는 시퀀스 길이에 상관없이 한 스텝씩 처리하기 때문에 아주 긴 시퀀스도 처리를 할 수 있다. 그러나 이러한 특징은 이전 타입스텝의 정보를 다음 타임스텝에게 전달할 수 있지만 병렬 처리가 불가능 하다. 하지만 Transformer 의 목표중 하나는 시퀀스 데이터의 병렬 처리인데, 즉, 한 번에 지정된 길이의 시퀀스를 모두 모델에게 전달하고 Forward 하게 된다. 그렇다면 시퀀스의 각 토큰간 순서 관계 정보를 모델은 어떻게 알아낼 수 있을까? 바로 &lt;strong&gt;Position Encoding&lt;/strong&gt; 을 통해서 각 토큰의 순서 정보를 &lt;strong&gt;Embedding&lt;/strong&gt; 된 벡터와 결합하여 모델로 전달하게 된다.&lt;/p&gt;
 
-&lt;h3 id=&quot;embedding&quot;&gt;Embedding&lt;/h3&gt;
+&lt;h2 id=&quot;embedding&quot;&gt;Embedding&lt;/h2&gt;
 
 &lt;p&gt;임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_{model}}$ 를 곱했다.&lt;/p&gt;
 
 &lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L107&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
 
-&lt;h3 id=&quot;positional-encoding&quot;&gt;Positional Encoding&lt;/h3&gt;
+&lt;h2 id=&quot;positional-encoding&quot;&gt;Positional Encoding&lt;/h2&gt;
 
 &lt;p&gt;Positional Encoding 은 상대적이거나 절대적인 위치정보를 부여하는 방법이다. 각 Position Encoding 의 차원의 크기는 더할 수 있게 임베딩된 텐서의 차원 크기인 $d_{model}$과 같고 수식은 다음과 같다.&lt;/p&gt;
 
@@ -217,7 +217,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h2&gt;
+&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
 
 &lt;p&gt;그 동안 LSTM(&lt;a href=&quot;https://dl.acm.org/citation.cfm?id=1246450&quot;&gt;Long Short-term Memory&lt;/a&gt;, 1997) 과 GRU(&lt;a href=&quot;https://arxiv.org/abs/1412.3555&quot;&gt;Gated Recurrent Unit&lt;/a&gt;, 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다.&lt;/p&gt;
 
@@ -238,7 +238,7 @@
 
 &lt;p&gt;위 두 가지를 결합하여 저자들은 Attention 매커니즘만 활용하여 Input 과 Output 의 의존성을 글로벌하게 처리하고, 병렬화까지 가능한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Transformer&lt;/code&gt;라는 새로운 모델구조를 제안했다.&lt;/p&gt;
 
-&lt;h3 id=&quot;전체-모델구조&quot;&gt;전체 모델구조&lt;/h3&gt;
+&lt;h2 id=&quot;전체-모델구조&quot;&gt;전체 모델구조&lt;/h2&gt;
 
 &lt;p&gt;대부분의 신경망 시퀀스 변환 모델(transduction models)들은 대체로 Encoder 와 Decoder 로 구성된다. Encoder는 심볼로 표현된 입력 시퀀스(비연속적인 토큰들) $x$ 를 연속 공간(Continuous Space) $z$ 로 맵핑 후, $z$ 를 바탕으로 출력 시퀀스 심볼인 $y$ 를 얻는다. 출력 시퀀스는 이전 타임 스텝($t-1$) 시퀀스를 입력으로 다음 타임 스텝($t$)을 출력하는 자기회귀(auto-regressive) 성격을 가진다. 수식으로 다음과 같다.&lt;/p&gt;
 
@@ -252,13 +252,13 @@
 
 &lt;p&gt;하지만 &lt;strong&gt;Transformer&lt;/strong&gt; 에서는 한 타임 스텝마다 $y$ 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt; 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).&lt;/p&gt;
 
-&lt;h3 id=&quot;encoder&quot;&gt;Encoder&lt;/h3&gt;
+&lt;h2 id=&quot;encoder&quot;&gt;Encoder&lt;/h2&gt;
 
 &lt;p&gt;Encoder는 각기 다른 N 개의 “Encoder Layer”라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 “Multi-Head Attention”, 두번째는 일반적인 “Position-wise Feed Forward”로 구성되며, 각 서브층은 Residual Network(&lt;a href=&quot;https://arxiv.org/abs/1512.03385&quot;&gt;Kaiming He, 2015&lt;/a&gt;)처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm(&lt;a href=&quot;https://arxiv.org/abs/1607.06450&quot;&gt;Jimmy Lei Ba, 2016&lt;/a&gt;) 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{LayerNorm}(x + \text{SubLayer}(x))&lt;/script&gt;
 
-&lt;h3 id=&quot;decoder&quot;&gt;Decoder&lt;/h3&gt;
+&lt;h2 id=&quot;decoder&quot;&gt;Decoder&lt;/h2&gt;
 
 &lt;p&gt;Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 “Decoder Layer” 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 “Multi-Head Attention”을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 “Multi-Head Attention”에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 됩니다. 따라서 $i$ 번째 토큰은 $i+1$ 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.&lt;/p&gt;
 
@@ -266,9 +266,9 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-scaled-dot-product-attention&quot;&gt;2. Scaled Dot-Product Attention&lt;/h2&gt;
+&lt;h1 id=&quot;2-scaled-dot-product-attention&quot;&gt;2. Scaled Dot-Product Attention&lt;/h1&gt;
 
-&lt;h3 id=&quot;attention&quot;&gt;Attention&lt;/h3&gt;
+&lt;h2 id=&quot;attention&quot;&gt;Attention&lt;/h2&gt;
 
 &lt;p&gt;Transformer 에서 Attention은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 세트를 입력으로 집중된 어떤 벡터를 출력하는 함수로 표현할 수 있다. 출력은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 간의 관계(Attention), 즉 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 정보를 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 에 대조 했을 때, 어느 부분을 집중해서 볼 것인지를 계산하고 해당 관계를 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 와 결합하여 출력을 만든다. 수식으로 다음과 같다.&lt;/p&gt;
 
@@ -276,7 +276,7 @@
 
 &lt;p&gt;직관적으로 잘 안떠오르는데, 이게 어떤 느낌인지 알아보기위해 예를 들어보면 다음과 같다.&lt;/p&gt;
 
-&lt;h4 id=&quot;기계번역-문제&quot;&gt;기계번역 문제:&lt;/h4&gt;
+&lt;h2 id=&quot;기계번역-문제&quot;&gt;기계번역 문제:&lt;/h2&gt;
 
 &lt;p&gt;영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 관계는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 3&lt;/code&gt; 과같이 표현할 수 있다.&lt;/p&gt;
 
@@ -292,7 +292,7 @@
 
 &lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 는 우리가 알고 싶어하는 문제라고 생각할 수 있다. 명칭도 “query=질의” 그대로 &lt;strong&gt;“한국어로 변역하기 위해 영어 문장에서 집중적으로 봐야하는 단어는 어느 것인가?”&lt;/strong&gt; 라는 질문을 인코딩된 영어 문장 정보인 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;  한테 물어보게 된다. 그 방법은 이 다음에 소개하도록 하고, 그렇게 얻은 결과인 &lt;strong&gt;A&lt;/strong&gt; 를 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 와 곱하여 그 단어를 집중적으로 보게한다. 그렇게 Attention의 결과물인 &lt;span style=&quot;color:#49aa71&quot;&gt;&lt;strong&gt;O&lt;/strong&gt;&lt;/span&gt; 를 얻는다.&lt;/p&gt;
 
-&lt;h4 id=&quot;감성-분석-문제&quot;&gt;감성 분석 문제:&lt;/h4&gt;
+&lt;h2 id=&quot;감성-분석-문제&quot;&gt;감성 분석 문제:&lt;/h2&gt;
 
 &lt;p&gt;꼭 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 모두 같은 문장을 지정하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 4&lt;/code&gt;처럼 Attention 을 사용할 수 있다.&lt;/p&gt;
 
@@ -301,7 +301,7 @@
     &lt;figcaption&gt;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;h3 id=&quot;scaled-dot-product-attention&quot;&gt;Scaled Dot-Product Attention&lt;/h3&gt;
+&lt;h2 id=&quot;scaled-dot-product-attention&quot;&gt;Scaled Dot-Product Attention&lt;/h2&gt;
 
 &lt;p&gt;Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 제일 기본적인 “Dot Product” 를 사용했으며, 그 수식은 다음과 같으며, 배치크기를 제외한 Q, K, V 의 크기를 표기해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 5&lt;/code&gt; 와 같다.&lt;/p&gt;
 

@@ -14,9 +14,9 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 ---
 
-## 3. Sub Layers
+# 3. Sub Layers
 
-### Multi-Head Attention
+## Multi-Head Attention
 
 {% include image.html id="1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_" desc="[그림 1] Multi-Head Attention" width="75%" height="auto" %}
 
@@ -35,7 +35,7 @@ $$\begin{aligned} W^Q_i \in \Bbb{R}^{d_{model}\times d_k}, W^K_i\in \Bbb{R}^{d_{
 해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/sublayers.py#L11) 에서 확인할 수 있다.
 
 
-### Position-wise Feed-Forward Networks
+## Position-wise Feed-Forward Networks
 
 또 다른 서브층으로써 완전 연결층(Fully Connect Layer)인 네트워크를 Encoder, Decoder 뒤에 하나씩 추가했다. 이 완전 연결층은 두 개의 선형변환과 ReLU 활성화 함수를 사용했으며 그 수식은 다음과 같다.
 
@@ -49,9 +49,9 @@ $$(B, T, d_{model}) \rightarrow(B, T, d_{ff}) \rightarrow (B, T, d_{model})$$
 
 ---
 
-## 4. Embeddings
+# 4. Embeddings
 
-### Input 과 Output
+## Input 과 Output
 
 Embedding 층과 Position Encoding 을 설명하기 전에 입출력이 어떻게 구성되어 있는지를 살펴봐야한다. 기계 번역 문제를 다시 예시로 들어보면, 다음과 같이 수치화된 문장들이 있다. 0 은 `Padding` 토큰으로써 데이터 처리를 위해 설정한 문장의 최대 길이에 맞춰서 넣은 인위적인 토큰이다.
 
@@ -95,13 +95,13 @@ $$\begin{aligned} \text{trg_input} &= \begin{bmatrix} 2&5&4 \\ 2&5&6 \\ 2&7&4 \e
 
 RNN 의 특징 중 하나는 시퀀스 길이에 상관없이 한 스텝씩 처리하기 때문에 아주 긴 시퀀스도 처리를 할 수 있다. 그러나 이러한 특징은 이전 타입스텝의 정보를 다음 타임스텝에게 전달할 수 있지만 병렬 처리가 불가능 하다. 하지만 Transformer 의 목표중 하나는 시퀀스 데이터의 병렬 처리인데, 즉, 한 번에 지정된 길이의 시퀀스를 모두 모델에게 전달하고 Forward 하게 된다. 그렇다면 시퀀스의 각 토큰간 순서 관계 정보를 모델은 어떻게 알아낼 수 있을까? 바로 **Position Encoding** 을 통해서 각 토큰의 순서 정보를 **Embedding** 된 벡터와 결합하여 모델로 전달하게 된다.
 
-### Embedding
+## Embedding
 
 임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_{model}}$ 를 곱했다.
 
 해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L107) 에서 확인할 수 있다.
 
-### Positional Encoding
+## Positional Encoding
 
 Positional Encoding 은 상대적이거나 절대적인 위치정보를 부여하는 방법이다. 각 Position Encoding 의 차원의 크기는 더할 수 있게 임베딩된 텐서의 차원 크기인 $d_{model}$과 같고 수식은 다음과 같다.
 

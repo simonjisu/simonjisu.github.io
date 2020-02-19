@@ -12,7 +12,7 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 ---
 
-## 1. Introduction
+# 1. Introduction
 
 그 동안 LSTM([Long Short-term Memory](https://dl.acm.org/citation.cfm?id=1246450), 1997) 과 GRU([Gated Recurrent Unit](https://arxiv.org/abs/1412.3555), 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다. 
 
@@ -28,7 +28,7 @@ Input 과 Output 문장의 길이와 관계없이 의존성(dependencies)을 해
 
 위 두 가지를 결합하여 저자들은 Attention 매커니즘만 활용하여 Input 과 Output 의 의존성을 글로벌하게 처리하고, 병렬화까지 가능한 `Transformer`라는 새로운 모델구조를 제안했다.
 
-### 전체 모델구조
+## 전체 모델구조
 
 대부분의 신경망 시퀀스 변환 모델(transduction models)들은 대체로 Encoder 와 Decoder 로 구성된다. Encoder는 심볼로 표현된 입력 시퀀스(비연속적인 토큰들) $x$ 를 연속 공간(Continuous Space) $z$ 로 맵핑 후, $z$ 를 바탕으로 출력 시퀀스 심볼인 $y$ 를 얻는다. 출력 시퀀스는 이전 타임 스텝($t-1$) 시퀀스를 입력으로 다음 타임 스텝($t$)을 출력하는 자기회귀(auto-regressive) 성격을 가진다. 수식으로 다음과 같다.
 
@@ -38,13 +38,13 @@ $$\begin{aligned} \mathbf{x}&=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_
 
 하지만 **Transformer** 에서는 한 타임 스텝마다 $y$ 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 `그림 2` 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).
 
-### Encoder
+## Encoder
 
 Encoder는 각기 다른 N 개의 "Encoder Layer"라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 "Multi-Head Attention", 두번째는 일반적인 "Position-wise Feed Forward"로 구성되며, 각 서브층은 Residual Network([Kaiming He, 2015](https://arxiv.org/abs/1512.03385))처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm([Jimmy Lei Ba, 2016](https://arxiv.org/abs/1607.06450)) 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.
 
 $$\text{LayerNorm}(x + \text{SubLayer}(x))$$
 
-### Decoder
+## Decoder
 
 Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 "Decoder Layer" 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 "Multi-Head Attention"을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 "Multi-Head Attention"에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 됩니다. 따라서 $i$ 번째 토큰은 $i+1$ 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.
 
@@ -52,9 +52,9 @@ Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 "Decoder Layer" 라
 
 ---
 
-## 2. Scaled Dot-Product Attention
+# 2. Scaled Dot-Product Attention
 
-### Attention
+## Attention
 
 Transformer 에서 Attention은 <span style="color:#e25252">**query(Q)**</span> 와 <span style="color:#5470cc">**key(K)**</span>-<span style="color:#cfb648">**value(V)**</span> 세트를 입력으로 집중된 어떤 벡터를 출력하는 함수로 표현할 수 있다. 출력은 <span style="color:#e25252">**Q**</span> 와 <span style="color:#5470cc">**K**</span> 간의 관계(Attention), 즉 <span style="color:#e25252">**Q**</span> 의 정보를 <span style="color:#5470cc">**K**</span> 에 대조 했을 때, 어느 부분을 집중해서 볼 것인지를 계산하고 해당 관계를 <span style="color:#cfb648">**V**</span> 와 결합하여 출력을 만든다. 수식으로 다음과 같다.
 
@@ -62,7 +62,7 @@ $$O = \text{Attention}(Q, K, V)$$
 
 직관적으로 잘 안떠오르는데, 이게 어떤 느낌인지 알아보기위해 예를 들어보면 다음과 같다.
 
-#### 기계번역 문제:
+## 기계번역 문제:
 
 영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. <span style="color:#e25252">**query(Q)**</span>, <span style="color:#5470cc">**key(K)**</span>, <span style="color:#cfb648">**value(V)**</span> 관계는 `그림 3` 과같이 표현할 수 있다.
 
@@ -73,13 +73,13 @@ $$O = \text{Attention}(Q, K, V)$$
 
 <span style="color:#e25252">**Q**</span> 는 우리가 알고 싶어하는 문제라고 생각할 수 있다. 명칭도 "query=질의" 그대로 **"한국어로 변역하기 위해 영어 문장에서 집중적으로 봐야하는 단어는 어느 것인가?"** 라는 질문을 인코딩된 영어 문장 정보인 <span style="color:#5470cc">**K**</span>  한테 물어보게 된다. 그 방법은 이 다음에 소개하도록 하고, 그렇게 얻은 결과인 **A** 를 <span style="color:#cfb648">**V**</span> 와 곱하여 그 단어를 집중적으로 보게한다. 그렇게 Attention의 결과물인 <span style="color:#49aa71">**O**</span> 를 얻는다.
 
-#### 감성 분석 문제:
+## 감성 분석 문제:
 
 꼭 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>-<span style="color:#cfb648">**V**</span> 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>, <span style="color:#cfb648">**V**</span> 모두 같은 문장을 지정하여 `그림 4`처럼 Attention 을 사용할 수 있다. 
 
 {% include image.html id="1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX" desc="[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기" width="auto" height="auto" %}
 
-### Scaled Dot-Product Attention
+## Scaled Dot-Product Attention
 
 Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 제일 기본적인 "Dot Product" 를 사용했으며, 그 수식은 다음과 같으며, 배치크기를 제외한 Q, K, V 의 크기를 표기해서 `그림 5` 와 같다. 
 
