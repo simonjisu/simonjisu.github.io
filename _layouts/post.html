@@ -11,14 +11,10 @@ layout: default
   <div class="article-content" itemprop="articleBody">
     <div id="table-of-contents" >
       <h2> Contents </h2>
-      {{ content | toc_only }}
+      {{ page.content | toc }}
     </div>
-    {{ content | inject_anchors }}
-  </div>
-  <!--
-  <div class="article-content" itemprop="articleBody">
     {{ page.content }}
-  </div> -->
+  </div>
 
   <footer class="article-footer">
 
