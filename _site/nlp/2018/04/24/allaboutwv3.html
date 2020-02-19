@@ -15,8 +15,8 @@
   <!-- todo: include this into main.css -->
   <link href='https://fonts.googleapis.com/css?family=' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://simonjisu.github.io/nlp/2018/04/24/allaboutwv3.html">
-  <link rel="alternate" type="application/rss+xml" title="Soopace" href="https://simonjisu.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/04/24/allaboutwv3.html">
+  <link rel="alternate" type="application/rss+xml" title="Soopace" href="http://localhost:4000/feed.xml">
   
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -121,14 +121,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/">Home</a></li>
+            <li><a href="http://localhost:4000/">Home</a></li>
           </ul>
         
       
         
           <ul class="dropdown">
             <li>
-              <a href="https://simonjisu.github.io/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+              <a href="http://localhost:4000/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
               <ul class="dropdown-menu">
               
               
@@ -154,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#nlp" target="_self">Nlp</a>
+                        <a href="http://localhost:4000/archive#nlp" target="_self">Nlp</a>
                       </li>
                     
                   
@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#paper" target="_self">Paper</a>
+                        <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
                       </li>
                     
                   
@@ -222,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#others" target="_self">Others</a>
+                        <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                       </li>
                     
                   
@@ -252,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#programming" target="_self">Programming</a>
+                        <a href="http://localhost:4000/archive#programming" target="_self">Programming</a>
                       </li>
                     
                   
@@ -288,7 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#datascience" target="_self">Datascience</a>
+                        <a href="http://localhost:4000/archive#datascience" target="_self">Datascience</a>
                       </li>
                     
                   
@@ -337,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#numpyseries" target="_self">Numpyseries</a>
+                        <a href="http://localhost:4000/archive#numpyseries" target="_self">Numpyseries</a>
                       </li>
                     
                   
@@ -361,13 +361,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/about">Abouts</a></li>
+            <li><a href="http://localhost:4000/about">Abouts</a></li>
           </ul>
         
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/feed.xml">RSS</a></li>
+            <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
           </ul>
         
       
@@ -402,7 +402,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-04-24T16:14:13+09:00" itemprop="datePublished">Apr 24, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-  <div id="table-of-contents">
+  <div class="table-of-contents" itemprop="articleBody">
     <h2> 목차 </h2>
 <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#navie-softmax-의-단점">Navie Softmax 의 단점</a></li>
@@ -414,13 +414,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
 </ul>
   </div>
-  <div class="article-content" itemprop="articleBody" id="markdown-content">
+  <div class="article-content" itemprop="articleBody">
     <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
-<p><img src="/assets/ML/nlp/L2_model_train.png"></p>
+<p><img src="/assets/ML/nlp/L2_model_train.png" /></p>
 
-<h1 id="navie-softmax-의-단점">
-<a class="anchor" href="#navie-softmax-%EC%9D%98-%EB%8B%A8%EC%A0%90" aria-hidden="true"><span class="octicon octicon-link"></span></a>Navie Softmax 의 단점</h1>
+<h1 id="navie-softmax-의-단점">Navie Softmax 의 단점</h1>
 
 <p>Navie Softmax 를 최종단에 출력으로 두고 Backpropagation 할때는 큰 단점이 있다.</p>
 
@@ -434,8 +433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>그래서 <strong>“window에 실제로 등장하는 단어들만 업데이트 하면 좋지 않을까?”</strong> 라는 생각을 하게 된다.</p>
 
-<h1 id="negative-sampling">
-<a class="anchor" href="#negative-sampling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Negative Sampling</h1>
+<h1 id="negative-sampling">Negative Sampling</h1>
 
 <blockquote>
   <p>paper 1: <a href="https://arxiv.org/abs/1310.4546">Distributed representaions of Words and Phrases and their Compositionality (Mikolov et al. 2013)</a></p>
@@ -463,10 +461,9 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 <p>말로 풀어보자면, 모든 단어 $T$ 에 대해서 중심단어 $c$ 와 그 주변단어 $o$ 가 같이 나올 확률 <strong>[수식 (1)]</strong> 을 최대화 하고, 그 주변단어가 아닌 집합에서 sampling 하여 나온 $k$ 개의 단어의 확률 <strong>[수식 (2)]</strong> 을 최소화 시키는 것이다. (음수가 붙기 때문에 최소하하게 되면 최대화가 된다.)</p>
 
-<hr>
+<hr />
 
-<h2 id="상세-논문-설명">
-<a class="anchor" href="#%EC%83%81%EC%84%B8-%EB%85%BC%EB%AC%B8-%EC%84%A4%EB%AA%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>상세 논문 설명</h2>
+<h2 id="상세-논문-설명">상세 논문 설명</h2>
 
 <p>논문 기준으로 위에 <strong><span style="color: #e87d7d">표기법</span></strong> 이 조금 다르다.</p>
 <ul>
@@ -595,10 +592,9 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 <script type="math/tex; mode=display">p_{words}(w) = p_{contexts} (c) = \dfrac{count(x)}{ \vert text \vert }</script>
 
-<hr>
+<hr />
 
-<h2 id="참고-1-trivial-solution">
-<a class="anchor" href="#%EC%B0%B8%EA%B3%A0-1-trivial-solution" aria-hidden="true"><span class="octicon octicon-link"></span></a>참고 1. Trivial Solution</h2>
+<h2 id="참고-1-trivial-solution">참고 1. Trivial Solution</h2>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned} L(\theta;w,c) &= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
@@ -622,9 +618,9 @@ print(np.dot(a, b))
 
 <p>즉, $v_c = v_w$ 이며, $\forall v_c,\ v_w$ 에 대해 $v_c \cdot v_w = K$ 를 만족하는 모든 값들이 $e^{-v_c v_w}$ 를 0으로 만든다면, $L(\theta; w, c)$ 값은 0이 될것이다. 보통 $K$ 가 40 이 상이면, $L(\theta;w,c)$ 의 해는 모두 0 일 것이며 이것을 <strong>trivial solution</strong> 이라고 한다. 우리의 목적은 단어 벡터 $v_c$ 와 $v_w$ 의 구별이기 때문에, $v_c \not = v_w$ 으로 만들어야한다.</p>
 
-<hr>
+<hr />
 
-<p><br></p>
+<p><br /></p>
 
 <p>다음 시간에는 말뭉치의 공기정보(co-occurance)를 고려해 단어를 벡터화 시킨 <strong>GloVe</strong> 에 대해 알아보자.</p>
 
@@ -632,7 +628,7 @@ print(np.dot(a, b))
 
   <footer class="article-footer">
 
-  <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
+  <div class="pagination to-top-post"><a href="http://localhost:4000/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">

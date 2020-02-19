@@ -15,8 +15,8 @@
   <!-- todo: include this into main.css -->
   <link href='https://fonts.googleapis.com/css?family=' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://simonjisu.github.io/nlp/2018/05/02/allaboutwv4.html">
-  <link rel="alternate" type="application/rss+xml" title="Soopace" href="https://simonjisu.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/05/02/allaboutwv4.html">
+  <link rel="alternate" type="application/rss+xml" title="Soopace" href="http://localhost:4000/feed.xml">
   
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -121,14 +121,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/">Home</a></li>
+            <li><a href="http://localhost:4000/">Home</a></li>
           </ul>
         
       
         
           <ul class="dropdown">
             <li>
-              <a href="https://simonjisu.github.io/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+              <a href="http://localhost:4000/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
               <ul class="dropdown-menu">
               
               
@@ -154,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#nlp" target="_self">Nlp</a>
+                        <a href="http://localhost:4000/archive#nlp" target="_self">Nlp</a>
                       </li>
                     
                   
@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#paper" target="_self">Paper</a>
+                        <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
                       </li>
                     
                   
@@ -222,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#others" target="_self">Others</a>
+                        <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                       </li>
                     
                   
@@ -252,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#programming" target="_self">Programming</a>
+                        <a href="http://localhost:4000/archive#programming" target="_self">Programming</a>
                       </li>
                     
                   
@@ -288,7 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#datascience" target="_self">Datascience</a>
+                        <a href="http://localhost:4000/archive#datascience" target="_self">Datascience</a>
                       </li>
                     
                   
@@ -337,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#numpyseries" target="_self">Numpyseries</a>
+                        <a href="http://localhost:4000/archive#numpyseries" target="_self">Numpyseries</a>
                       </li>
                     
                   
@@ -361,13 +361,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/about">Abouts</a></li>
+            <li><a href="http://localhost:4000/about">Abouts</a></li>
           </ul>
         
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/feed.xml">RSS</a></li>
+            <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
           </ul>
         
       
@@ -402,7 +402,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-05-02T23:22:05+09:00" itemprop="datePublished">May 2, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-  <div id="table-of-contents">
+  <div class="table-of-contents" itemprop="articleBody">
     <h2> 목차 </h2>
 <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#co-occurrence">Co-occurrence</a></li>
@@ -415,11 +415,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
 </ul>
   </div>
-  <div class="article-content" itemprop="articleBody" id="markdown-content">
+  <div class="article-content" itemprop="articleBody">
     <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 3 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
-<h1 id="co-occurrence">
-<a class="anchor" href="#co-occurrence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Co-occurrence</h1>
+<h1 id="co-occurrence">Co-occurrence</h1>
 
 <p>공기(Co-occurrence) 란 무엇인가? 두 개 이상의 어휘가 일정한 범위(range) 혹은 거리(distance) 내에서 함께 출현하는 현상을 말한다. 여기서 어휘는 단어 뿐만 아니라 형태소, 합성어 등의 단위로 의미를 부여할 수 있는 언어 단위다. 그렇다면 왜 <strong>공기 관계</strong> 를 살피는 것일까?</p>
 
@@ -438,8 +437,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>word-document co-occurrence matrix 기반: 조금 더 일반적인 토픽을 추출 할 수 있고, 이는 Latent Semantic Analysis 와 연결 된다.</li>
 </ol>
 
-<h1 id="example-window-based-co-occurrence-matrix">
-<a class="anchor" href="#example-window-based-co-occurrence-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example: Window based co-occurrence matrix</h1>
+<h1 id="example-window-based-co-occurrence-matrix">Example: Window based co-occurrence matrix</h1>
 
 <blockquote>
   <p>I like deep learning.</p>
@@ -603,8 +601,7 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>이와 같은 생각이 GloVe 를 탄생시켰다.</p>
 
-<h1 id="glove">
-<a class="anchor" href="#glove" aria-hidden="true"><span class="octicon octicon-link"></span></a>GloVe</h1>
+<h1 id="glove">GloVe</h1>
 
 <p>Paper: <a href="https://www.aclweb.org/anthology/D14-1162">GloVe: Global Vectors for Word Representation</a></p>
 
@@ -614,9 +611,8 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>논문해설을 통해서 자세히 보자.</p>
 
-<hr>
-<h2 id="논문-해설">
-<a class="anchor" href="#%EB%85%BC%EB%AC%B8-%ED%95%B4%EC%84%A4" aria-hidden="true"><span class="octicon octicon-link"></span></a>논문 해설</h2>
+<hr />
+<h2 id="논문-해설">논문 해설</h2>
 
 <p><strong>GloVe:</strong> Global Vectors라고 명칭을 지은 이유는 모델에서 직접적으로 문서 전체의 코퍼스 통계량을 포착할 수있기 때문이다. (the global corpus statistics are captured directly by the model)</p>
 
@@ -740,7 +736,7 @@ f(x) =
 1 \quad otherwise
 \end{cases} %]]></script>
 
-<p><img src="/assets/ML/nlp/L3_weight_f.png"></p>
+<p><img src="/assets/ML/nlp/L3_weight_f.png" /></p>
 
 <p>그림: $f(x)$ with $\alpha = 3/4$ 일때 좋은 성과를 얻었다. 재밌는 것은 Mikolov 논문에서 나온 unigram distribution 에 3/4 승을 해주는 것과 같다는 것을 발견했다.</p>
 
@@ -750,9 +746,8 @@ f(x) =
 
 <p>이는 연구팀이 도출한 $(7)$ 식과 같은 식이다.</p>
 
-<hr>
-<h2 id="참고-1-homomorphism">
-<a class="anchor" href="#%EC%B0%B8%EA%B3%A0-1-homomorphism" aria-hidden="true"><span class="octicon octicon-link"></span></a>참고 1: Homomorphism</h2>
+<hr />
+<h2 id="참고-1-homomorphism">참고 1: Homomorphism</h2>
 
 <p>혹시나 틀렸으면 댓글로 이야기 해주세요.</p>
 
@@ -781,14 +776,14 @@ f(x) =
   <p>Homomorphism 을 만족한다.</p>
 </blockquote>
 
-<hr>
+<hr />
 <p>word2vec 과 glove 관련 포스팅은 <strong>“All about word vectors”</strong> 시리즈로 마치겠다. 기회가 되면 gensim 의 사용법과, 데이터 차원 축소와 시각화 방법인 t-SNE 을 포스팅 하도록 하겠다.</p>
 
   </div>
 
   <footer class="article-footer">
 
-  <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
+  <div class="pagination to-top-post"><a href="http://localhost:4000/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">

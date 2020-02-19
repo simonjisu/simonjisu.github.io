@@ -27,7 +27,7 @@ plugins:
   - jekyll-toc
   - jekyll-sitemap
   - jekyll-feed
-  
+
 # jekyll-toc settings
 toc:
   min_level: 1
@@ -51,7 +51,7 @@ excerpt_separator: <!--description-->
 google_fonts: "Nanum+Gothic:400,700"
 
 # menu bar
-table_of_contents: 
+menu_contents: 
   - title: Home
     url: /
   - title: Posts
@@ -73,5 +73,6 @@ table_of_contents:
   - title: RSS
     url: /feed.xml
 
-
-  
+# exclude cache files
+exclude:
+  - .jekyll-cache

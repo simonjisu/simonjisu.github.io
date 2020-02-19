@@ -1,6 +1,4 @@
 _site
 .sass-cache
 .jekyll-metadata
-.jekyll-cache/Jekyll/Cache/Jekyll--Cache/*
-.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/*
 .jekyll-cache

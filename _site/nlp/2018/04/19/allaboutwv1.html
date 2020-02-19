@@ -15,8 +15,8 @@
   <!-- todo: include this into main.css -->
   <link href='https://fonts.googleapis.com/css?family=' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://simonjisu.github.io/nlp/2018/04/19/allaboutwv1.html">
-  <link rel="alternate" type="application/rss+xml" title="Soopace" href="https://simonjisu.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/04/19/allaboutwv1.html">
+  <link rel="alternate" type="application/rss+xml" title="Soopace" href="http://localhost:4000/feed.xml">
   
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -121,14 +121,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/">Home</a></li>
+            <li><a href="http://localhost:4000/">Home</a></li>
           </ul>
         
       
         
           <ul class="dropdown">
             <li>
-              <a href="https://simonjisu.github.io/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+              <a href="http://localhost:4000/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
               <ul class="dropdown-menu">
               
               
@@ -154,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#nlp" target="_self">Nlp</a>
+                        <a href="http://localhost:4000/archive#nlp" target="_self">Nlp</a>
                       </li>
                     
                   
@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#paper" target="_self">Paper</a>
+                        <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
                       </li>
                     
                   
@@ -222,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#others" target="_self">Others</a>
+                        <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                       </li>
                     
                   
@@ -252,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#programming" target="_self">Programming</a>
+                        <a href="http://localhost:4000/archive#programming" target="_self">Programming</a>
                       </li>
                     
                   
@@ -288,7 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#datascience" target="_self">Datascience</a>
+                        <a href="http://localhost:4000/archive#datascience" target="_self">Datascience</a>
                       </li>
                     
                   
@@ -337,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#numpyseries" target="_self">Numpyseries</a>
+                        <a href="http://localhost:4000/archive#numpyseries" target="_self">Numpyseries</a>
                       </li>
                     
                   
@@ -361,13 +361,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/about">Abouts</a></li>
+            <li><a href="http://localhost:4000/about">Abouts</a></li>
           </ul>
         
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/feed.xml">RSS</a></li>
+            <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
           </ul>
         
       
@@ -402,7 +402,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-04-19T16:41:36+09:00" itemprop="datePublished">Apr 19, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-  <div id="table-of-contents">
+  <div class="table-of-contents" itemprop="articleBody">
     <h2> 목차 </h2>
 <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#자연어-처리-natural-language-processing">자연어 처리 (Natural Language Processing)</a></li>
@@ -418,11 +418,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
 </ul>
   </div>
-  <div class="article-content" itemprop="articleBody" id="markdown-content">
+  <div class="article-content" itemprop="articleBody">
     <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
-<h1 id="자연어-처리-natural-language-processing">
-<a class="anchor" href="#%EC%9E%90%EC%97%B0%EC%96%B4-%EC%B2%98%EB%A6%AC-natural-language-processing" aria-hidden="true"><span class="octicon octicon-link"></span></a>자연어 처리 (Natural Language Processing)</h1>
+<h1 id="자연어-처리-natural-language-processing">자연어 처리 (Natural Language Processing)</h1>
 <p>이야기를 하기 앞서서, “언어”를 살펴보자. <a href="https://ko.wikipedia.org/wiki/%EC%96%B8%EC%96%B4">위키백과</a> 에 따르면 아래와 같다.</p>
 
 <blockquote>
@@ -447,10 +446,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>참고: ratsgo 님의 블로그 - <a href="https://ratsgo.github.io/from%20frequency%20to%20semantics/2017/03/10/frequency/">idea of statistical semantics</a></p>
 
-<p><br></p>
+<p><br /></p>
 
-<h1 id="단어의-표현word-representation">
-<a class="anchor" href="#%EB%8B%A8%EC%96%B4%EC%9D%98-%ED%91%9C%ED%98%84word-representation" aria-hidden="true"><span class="octicon octicon-link"></span></a>단어의 표현(Word Representation)</h1>
+<h1 id="단어의-표현word-representation">단어의 표현(Word Representation)</h1>
 
 <p>어떻게 하면 단어의 “의미”를 표현할 수 있을까?</p>
 
@@ -480,8 +478,7 @@ for synset in wn.synsets("adept"):
 
 <p>마지막으로, 유사도 계산이 어렵다는 점이다. 즉, 같은 상위어에 속해 있는 하위어는 비슷한 것은 알겠는데, 정량적으로 이를 계산할 방법이 없다는 것이다.</p>
 
-<h2 id="bag-of-words-representation">
-<a class="anchor" href="#bag-of-words-representation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bag of words representation</h2>
+<h2 id="bag-of-words-representation">Bag of words representation</h2>
 
 <p>또다른 방법으로 discrete 된 심볼로 단어를 표현했는데 이를 <strong>one-hot representation</strong> 라고 하며, 아래와 같이 표현했다.</p>
 
@@ -501,10 +498,9 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 
 <script type="math/tex; mode=display">hotel \cdot motel^T = 0</script>
 
-<p><br></p>
+<p><br /></p>
 
-<h1 id="분포-유사성-기반-표현-distributional-similarity-based-representations">
-<a class="anchor" href="#%EB%B6%84%ED%8F%AC-%EC%9C%A0%EC%82%AC%EC%84%B1-%EA%B8%B0%EB%B0%98-%ED%91%9C%ED%98%84-distributional-similarity-based-representations" aria-hidden="true"><span class="octicon octicon-link"></span></a>분포 유사성 기반 표현 (Distributional similarity based representations)</h1>
+<h1 id="분포-유사성-기반-표현-distributional-similarity-based-representations">분포 유사성 기반 표현 (Distributional similarity based representations)</h1>
 
 <p>연구자들은 one-hot vector 와 다른 어떤 유사도를 계산할 수 있는 벡터를 만들고 싶어했다. 따라서 유사도의 정보를 어디서 얻을 수 있을까를 찾기 시작했다. 그리고 어떤 핵심 아이디어를 생각해냈다.</p>
 
@@ -512,14 +508,13 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
   <p>어떤 단어의 “의미”는 그 단어 근처에 자주 출현하는 단어로부터 얻을 수 있다.</p>
 </blockquote>
 
-<p><img src="/assets/ML/nlp/L2_context.png"></p>
+<p><img src="/assets/ML/nlp/L2_context.png" /></p>
 
 <p>출처: <a href="http://web.stanford.edu/class/cs224n/syllabus.html">CS224n Lecture 2</a></p>
 
 <p>그들은 주변 단어의 정보로 어떤 단어의 의미를 규정하는 시도를 하였고, 이는 modern statistical NLP 에서 많은 각광을 받기 시작했다. 그리고 어떤 단어 $w$ 에 대해서 주변에 나타나는 단어의 집합을 <strong>맥락/문맥(context)</strong> 이라고 했다.</p>
 
-<h2 id="word-vectors">
-<a class="anchor" href="#word-vectors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Word Vectors</h2>
+<h2 id="word-vectors">Word Vectors</h2>
 
 <p>이전에 0과 1로 채워진 one-hot vector 와 달리 문맥에서 비슷한 단어들을 잘 예측 될 수 있게 단어 타입 별로 촘촘한 벡터(dense vector)를 만든다. 핵심 아이디어는 아래와 같다.</p>
 
@@ -548,7 +543,7 @@ hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
 
   <footer class="article-footer">
 
-  <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
+  <div class="pagination to-top-post"><a href="http://localhost:4000/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">

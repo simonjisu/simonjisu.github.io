@@ -15,8 +15,8 @@
   <!-- todo: include this into main.css -->
   <link href='https://fonts.googleapis.com/css?family=' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="https://simonjisu.github.io/nlp/2018/07/19/torchtext.html">
-  <link rel="alternate" type="application/rss+xml" title="Soopace" href="https://simonjisu.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/nlp/2018/07/19/torchtext.html">
+  <link rel="alternate" type="application/rss+xml" title="Soopace" href="http://localhost:4000/feed.xml">
   
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -121,14 +121,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/">Home</a></li>
+            <li><a href="http://localhost:4000/">Home</a></li>
           </ul>
         
       
         
           <ul class="dropdown">
             <li>
-              <a href="https://simonjisu.github.io/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+              <a href="http://localhost:4000/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
               <ul class="dropdown-menu">
               
               
@@ -154,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#nlp" target="_self">Nlp</a>
+                        <a href="http://localhost:4000/archive#nlp" target="_self">Nlp</a>
                       </li>
                     
                   
@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#paper" target="_self">Paper</a>
+                        <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
                       </li>
                     
                   
@@ -222,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#others" target="_self">Others</a>
+                        <a href="http://localhost:4000/archive#others" target="_self">Others</a>
                       </li>
                     
                   
@@ -252,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#programming" target="_self">Programming</a>
+                        <a href="http://localhost:4000/archive#programming" target="_self">Programming</a>
                       </li>
                     
                   
@@ -288,7 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#datascience" target="_self">Datascience</a>
+                        <a href="http://localhost:4000/archive#datascience" target="_self">Datascience</a>
                       </li>
                     
                   
@@ -337,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="https://simonjisu.github.io/archive#numpyseries" target="_self">Numpyseries</a>
+                        <a href="http://localhost:4000/archive#numpyseries" target="_self">Numpyseries</a>
                       </li>
                     
                   
@@ -361,13 +361,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/about">Abouts</a></li>
+            <li><a href="http://localhost:4000/about">Abouts</a></li>
           </ul>
         
       
         
           <ul class="">
-            <li><a href="https://simonjisu.github.io/feed.xml">RSS</a></li>
+            <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
           </ul>
         
       
@@ -402,7 +402,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="article_meta"><time datetime="2018-07-19T00:18:29+09:00" itemprop="datePublished">Jul 19, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Soo</span></span></p>
     <hr>
   </header>
-  <div id="table-of-contents">
+  <div class="table-of-contents" itemprop="articleBody">
     <h2> 목차 </h2>
 <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#사용방법">사용방법</a>
@@ -418,7 +418,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li class="toc-entry toc-h1"><a href="#다양한-데이터-세트">다양한 데이터 세트</a></li>
 </ul>
   </div>
-  <div class="article-content" itemprop="articleBody" id="markdown-content">
+  <div class="article-content" itemprop="articleBody">
     <blockquote>
   <p>튜토리얼 Notebook: <a href="https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb">github</a>, <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb">nbviewer</a></p>
 </blockquote>
@@ -445,13 +445,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <li>데이터 로더 생성(Create Data Loader)</li>
 </ul>
 
-<p><br></p>
+<p><br /></p>
 
-<h1 id="사용방법">
-<a class="anchor" href="#%EC%82%AC%EC%9A%A9%EB%B0%A9%EB%B2%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>사용방법</h1>
+<h1 id="사용방법">사용방법</h1>
 
-<h2 id="1-필드지정create-field">
-<a class="anchor" href="#1-%ED%95%84%EB%93%9C%EC%A7%80%EC%A0%95create-field" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 필드지정(Create Field)</h2>
+<h2 id="1-필드지정create-field">1. 필드지정(Create Field)</h2>
 
 <p>필드란 텐서로 표현 될 수 있는 텍스트 데이터 타입을 처리한다. 각 토큰을 숫자 인덱으로 맵핑시켜주는 단어장(Vocabulary) 객체가 있다. 또한 토큰화 하는 함수, 전처리 등을 지정할 수 있다.</p>
 
@@ -479,24 +477,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><strong>Arguments:</strong></p>
 
 <ul>
-  <li>
-<strong>sequential:</strong> TEXT 는 순서가 있는 (sequential) 데이터기 때문에 인자를 True 로 두고, LABEL 데이터는 순서가 필요없기 때문에 False 로 둔다.</li>
-  <li>
-<strong>use_vocab:</strong> 단어장(Vocab) 객체를 사용할지의 여부. 텍스트 데이터있는 TEXT 에만 True 로 인자를 전달한다.</li>
-  <li>
-<strong>tokenize:</strong> 단어의 토크나이징을 맡아줄 함수다. 여기선 “공백”을 기준으로 나누는 함수를 사용했습니다. 한국어의 경우 보통 <code class="highlighter-rouge">konlpy</code> 의 토크나이징 함수들을 사용한다. 혹은 개인이 만든 함수도 사용할 수 있다.</li>
-  <li>
-<strong>lower:</strong> 소문자 전환 여부 입니다. 보통 True 로 두며, 단어가 많아질수록 나중에 더 많은 차원에 임베딩해야하기 때문에, 왠만하면 영어는 소문자로 만들어준다.</li>
-  <li>
-<strong>batch_first:</strong> 배치를 우선시 하게 되면, tensor 의 크기는 (B, 문장의 최대 길이) 로 만들어진다.</li>
-  <li>
-<strong>preprocessing:</strong> 전처리는 토큰화 후, 수치화하기 전 사이에서 작동한다. 여기서는 Label 데이터가 string 타입이기 때문에 int 타입으로 만들어준다.</li>
+  <li><strong>sequential:</strong> TEXT 는 순서가 있는 (sequential) 데이터기 때문에 인자를 True 로 두고, LABEL 데이터는 순서가 필요없기 때문에 False 로 둔다.</li>
+  <li><strong>use_vocab:</strong> 단어장(Vocab) 객체를 사용할지의 여부. 텍스트 데이터있는 TEXT 에만 True 로 인자를 전달한다.</li>
+  <li><strong>tokenize:</strong> 단어의 토크나이징을 맡아줄 함수다. 여기선 “공백”을 기준으로 나누는 함수를 사용했습니다. 한국어의 경우 보통 <code class="highlighter-rouge">konlpy</code> 의 토크나이징 함수들을 사용한다. 혹은 개인이 만든 함수도 사용할 수 있다.</li>
+  <li><strong>lower:</strong> 소문자 전환 여부 입니다. 보통 True 로 두며, 단어가 많아질수록 나중에 더 많은 차원에 임베딩해야하기 때문에, 왠만하면 영어는 소문자로 만들어준다.</li>
+  <li><strong>batch_first:</strong> 배치를 우선시 하게 되면, tensor 의 크기는 (B, 문장의 최대 길이) 로 만들어진다.</li>
+  <li><strong>preprocessing:</strong> 전처리는 토큰화 후, 수치화하기 전 사이에서 작동한다. 여기서는 Label 데이터가 string 타입이기 때문에 int 타입으로 만들어준다.</li>
 </ul>
 
 <p>더 자세한 것은 문서를 참조하시길 바란다.</p>
 
-<h2 id="2-데이터-세트-만들기create-datasets">
-<a class="anchor" href="#2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0create-datasets" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. 데이터 세트 만들기(Create Datasets)</h2>
+<h2 id="2-데이터-세트-만들기create-datasets">2. 데이터 세트 만들기(Create Datasets)</h2>
 
 <p>데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 <code class="highlighter-rouge">splits</code> 메서드를 사용해서 아래와 같이 만들어준다.</p>
 
@@ -518,12 +509,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </code></pre></div></div>
 
 <ul>
-  <li>
-<strong>fields:</strong> 아까 만들어준 필드는 리스트 형태로 <code class="highlighter-rouge">[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]</code> 로 넣어준다.</li>
+  <li><strong>fields:</strong> 아까 만들어준 필드는 리스트 형태로 <code class="highlighter-rouge">[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]</code> 로 넣어준다.</li>
 </ul>
 
-<h2 id="3-단어장-생성build-vocabulary">
-<a class="anchor" href="#3-%EB%8B%A8%EC%96%B4%EC%9E%A5-%EC%83%9D%EC%84%B1build-vocabulary" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. 단어장 생성(Build vocabulary)</h2>
+<h2 id="3-단어장-생성build-vocabulary">3. 단어장 생성(Build vocabulary)</h2>
 
 <p>토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 <code class="highlighter-rouge">&lt;unk&gt;</code> 토큰을 0, <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.</p>
 
@@ -532,8 +521,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TEXT</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
 </code></pre></div></div>
 
-<h2 id="4-데이터-로더-만들기create-data-loader">
-<a class="anchor" href="#4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A1%9C%EB%8D%94-%EB%A7%8C%EB%93%A4%EA%B8%B0create-data-loader" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 데이터 로더 만들기(Create Data Loader)</h2>
+<h2 id="4-데이터-로더-만들기create-data-loader">4. 데이터 로더 만들기(Create Data Loader)</h2>
 
 <p>마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, <code class="highlighter-rouge">splits</code> 메서드를 사용한다.</p>
 
@@ -556,8 +544,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 <code class="highlighter-rouge">&lt;pad&gt;</code> 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.</p>
 
-<h2 id="테스트">
-<a class="anchor" href="#%ED%85%8C%EC%8A%A4%ED%8A%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>테스트</h2>
+<h2 id="테스트">테스트</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
     <span class="k">break</span>
@@ -586,10 +573,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>이처럼 거의 5 줄이면 이 모든 과정을 처리해주는 강력크한 도구다.</p>
 
-<hr>
+<hr />
 
-<h1 id="만약에-사용하지-않겠다면">
-<a class="anchor" href="#%EB%A7%8C%EC%95%BD%EC%97%90-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EA%B2%A0%EB%8B%A4%EB%A9%B4" aria-hidden="true"><span class="octicon octicon-link"></span></a>만약에 사용하지 않겠다면?</h1>
+<h1 id="만약에-사용하지-않겠다면">만약에 사용하지 않겠다면?</h1>
 
 <p>노트북: <a href="https://github.com/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb">github</a>, <a href="https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/01_TorchText.ipynb">nbviewer</a> 에 상세하게 나만의 데이터 로더를 커스터마이징 하는 방법 또한 적어 두었다.</p>
 
@@ -600,10 +586,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>하지만, 여기서는 소개하지 않겠다. 한 번 TorchText를 사용하게 되면 위 두 가지 방법은 왠만하면 생각도 안날 것이다.</p>
 
-<hr>
+<hr />
 
-<h1 id="다양한-데이터-세트">
-<a class="anchor" href="#%EB%8B%A4%EC%96%91%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8" aria-hidden="true"><span class="octicon octicon-link"></span></a>다양한 데이터 세트</h1>
+<h1 id="다양한-데이터-세트">다양한 데이터 세트</h1>
 
 <p><code class="highlighter-rouge">torchtext.datasets</code> 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.</p>
 
@@ -621,7 +606,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <footer class="article-footer">
 
-  <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
+  <div class="pagination to-top-post"><a href="http://localhost:4000/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">
