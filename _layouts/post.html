@@ -11,8 +11,8 @@ layout: default
   <div id="table-of-contents">
     {% include toc_block.html %}
   </div>
-  <div class="article-content" itemprop="articleBody">
-    {{ page.content }}
+  <div class="article-content" itemprop="articleBody" id="markdown-content">
+    {{ page.content | inject_anchors }}
   </div>
 
   <footer class="article-footer">

@@ -15,8 +15,8 @@
   <!-- todo: include this into main.css -->
   <link href='https://fonts.googleapis.com/css?family=' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/nlp/2018/04/20/allaboutwv2.html">
-  <link rel="alternate" type="application/rss+xml" title="Soopace" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="https://simonjisu.github.io/nlp/2018/04/20/allaboutwv2.html">
+  <link rel="alternate" type="application/rss+xml" title="Soopace" href="https://simonjisu.github.io/feed.xml">
   
   <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
   <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -121,14 +121,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="http://localhost:4000/">Home</a></li>
+            <li><a href="https://simonjisu.github.io/">Home</a></li>
           </ul>
         
       
         
           <ul class="dropdown">
             <li>
-              <a href="http://localhost:4000/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+              <a href="https://simonjisu.github.io/archive" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
               <ul class="dropdown-menu">
               
               
@@ -154,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="http://localhost:4000/archive#nlp" target="_self">Nlp</a>
+                        <a href="https://simonjisu.github.io/archive#nlp" target="_self">Nlp</a>
                       </li>
                     
                   
@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="http://localhost:4000/archive#paper" target="_self">Paper</a>
+                        <a href="https://simonjisu.github.io/archive#paper" target="_self">Paper</a>
                       </li>
                     
                   
@@ -222,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="http://localhost:4000/archive#others" target="_self">Others</a>
+                        <a href="https://simonjisu.github.io/archive#others" target="_self">Others</a>
                       </li>
                     
                   
@@ -252,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="http://localhost:4000/archive#programming" target="_self">Programming</a>
+                        <a href="https://simonjisu.github.io/archive#programming" target="_self">Programming</a>
                       </li>
                     
                   
@@ -288,7 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="http://localhost:4000/archive#datascience" target="_self">Datascience</a>
+                        <a href="https://simonjisu.github.io/archive#datascience" target="_self">Datascience</a>
                       </li>
                     
                   
@@ -337,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     
                     
                       <li>
-                        <a href="http://localhost:4000/archive#numpyseries" target="_self">Numpyseries</a>
+                        <a href="https://simonjisu.github.io/archive#numpyseries" target="_self">Numpyseries</a>
                       </li>
                     
                   
@@ -361,13 +361,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       
         
           <ul class="">
-            <li><a href="http://localhost:4000/about">Abouts</a></li>
+            <li><a href="https://simonjisu.github.io/about">Abouts</a></li>
           </ul>
         
       
         
           <ul class="">
-            <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
+            <li><a href="https://simonjisu.github.io/feed.xml">RSS</a></li>
           </ul>
         
       
@@ -417,12 +417,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
 </ul>
   </div>
-  <div class="article-content" itemprop="articleBody">
+  <div class="article-content" itemprop="articleBody" id="markdown-content">
     <p>본 포스팅은 <a href="http://web.stanford.edu/class/cs224n/">CS224n</a> Lecture 2 강의내용을 기반으로 강의 내용 이해를 돕고자 작성 됐습니다.</p>
 
 <p>자연어 처리 공부를 해보신 분이라면 한번쯤 접한 그림이 있을 것이다.</p>
 
-<p><img src="/assets/ML/nlp/L2_linear-relationships.png" /></p>
+<p><img src="/assets/ML/nlp/L2_linear-relationships.png"></p>
 
 <blockquote>
   <p>“king” - “man” + “woman” = ?</p>
@@ -434,7 +434,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>이번 시간에는 <strong>Word2vec</strong> 에 대해서 알아보려고 한다.</p>
 
-<h1 id="word2vec">Word2Vec</h1>
+<h1 id="word2vec">
+<a class="anchor" href="#word2vec" aria-hidden="true"><span class="octicon octicon-link"></span></a>Word2Vec</h1>
 
 <p>Word2Vec은 두 가지 알고리즘이 있다.</p>
 
@@ -454,10 +455,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </blockquote>
 
 <ul id="light-slider1">
-  <li><img src="/assets/ML/nlp/L2_skipgram1.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_skipgram2.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_cbow1.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_cbow2.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_skipgram1.png"></li>
+  <li><img src="/assets/ML/nlp/L2_skipgram2.png"></li>
+  <li><img src="/assets/ML/nlp/L2_cbow1.png"></li>
+  <li><img src="/assets/ML/nlp/L2_cbow2.png"></li>
 </ul>
 
 <p>그리고 몇 가지 효율적인 훈련 방법들이 있다.</p>
@@ -474,15 +475,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>이번 포스팅에서는 Skip-gram 과 Negative Sampling을 메인으로 소개하겠다.</p>
 
-<hr />
+<hr>
 
-<h1 id="skip-gram-model-with-naive-softmax">Skip-gram model with Naive Softmax</h1>
+<h1 id="skip-gram-model-with-naive-softmax">
+<a class="anchor" href="#skip-gram-model-with-naive-softmax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Skip-gram model with Naive Softmax</h1>
 <p>Paper: <a href="https://arxiv.org/pdf/1310.4546.pdf">Distributed Representations of Words and Phrases
 and their Compositionality</a> (Mikolov et al. 2013)</p>
 
-<p><br /></p>
+<p><br></p>
 
-<h2 id="embedding-look-up">Embedding Look up</h2>
+<h2 id="embedding-look-up">
+<a class="anchor" href="#embedding-look-up" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embedding Look up</h2>
 
 <p>모델 설명에 들어가기 앞서 <strong>Embedding Look up</strong> 이란 것을 알아보자. 이 용어는 이제 여기저기서 많이 나올텐데 알아두면 좋다.</p>
 
@@ -491,23 +494,23 @@ and their Compositionality</a> (Mikolov et al. 2013)</p>
 <p>아래 그림의 예를 보자. 8차원 one-hot vector를 3차원으로 만들고 싶다. 그렇다면 $3\times 8$ 행렬을 만들어서 각 column vector 가 하나의 3차원 단어를 표현하면 2-D Matrix 가 되지 않는가? 이 Matrix를 <strong>Embedding Matrix</strong> 라고 부르기로 하자</p>
 
 <ul id="light-slider2">
-  <li><img src="/assets/ML/nlp/L2_embedlookup1.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_embedlookup2.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup1.png"></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup2.png"></li>
 </ul>
 
 <p>그렇다면 어떻게 각 단어와 이 Embedding Matrix 를 매칭 시킬수 있을까? 여기서 <strong>내적</strong> 을 활용하게 된다.</p>
 
 <ul id="light-slider3">
-  <li><img src="/assets/ML/nlp/L2_embedlookup3.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_embedlookup4.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_embedlookup5.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup3.png"></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup4.png"></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup5.png"></li>
 </ul>
 
 <p>그런데 자세히 보니, one-hot vector의 숫자 $1$ 이 위치한 index 가 Embedding Matrix 의 column vector 의 index 와 같다. 따라서 중복되지 않는 단어사전을 만들고, 각 단어에 대해 index를 메긴 다음, 찾고 싶은 단어를 Embedding Matrix 에서 column vector index 만 <strong>조회(Look up)</strong> 하면 되는 것이다.</p>
 
 <ul id="light-slider4">
-  <li><img src="/assets/ML/nlp/L2_embedlookup6.png" /></li>
-  <li><img src="/assets/ML/nlp/L2_embedlookup7.png" /></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup6.png"></li>
+  <li><img src="/assets/ML/nlp/L2_embedlookup7.png"></li>
 </ul>
 
 <p><strong>코드 예시:</strong></p>
@@ -540,15 +543,17 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <p>이해가 됐으면 이제 모델로 들어가보자.</p>
 
-<p><br /></p>
+<p><br></p>
 
-<p><img src="/assets/ML/nlp/L2_model_train.png" /></p>
+<p><img src="/assets/ML/nlp/L2_model_train.png"></p>
 
-<h2 id="요약">요약</h2>
+<h2 id="요약">
+<a class="anchor" href="#%EC%9A%94%EC%95%BD" aria-hidden="true"><span class="octicon octicon-link"></span></a>요약</h2>
 
 <p>Skip-gram 모델을 한 마디로 설명하자면, 문장의 모든 단어가 한번 씩 중심단어 $c$ 가 되어, $c$ 주변 문맥 단어 $o$ 가 나올 확률을 최대화 하는 것이다.</p>
 
-<h2 id="목적">목적</h2>
+<h2 id="목적">
+<a class="anchor" href="#%EB%AA%A9%EC%A0%81" aria-hidden="true"><span class="octicon octicon-link"></span></a>목적</h2>
 
 <p>각 중심단어 $c$ 에 대해서 아래의 <strong>가능도/우도 (Likelihood)</strong> 를 구해본다.</p>
 
@@ -566,7 +571,7 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
   <li>$(1)$ 식과 $(2)$ 식이 왜 동등한지는 밑에 <strong><span style="color: #e87d7d">참고 1</span></strong> 을 확인하길 바란다.</li>
 </ul>
 
-<p><br /></p>
+<p><br></p>
 
 <p>그렇다면 단어가 등장할 확률 $p(w_{t+j} \vert w_t)$ 는 어떻게 구할 것인가?</p>
 
@@ -579,12 +584,14 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 <ul>
   <li>왜 $\theta \in \Bbb{R}^{2dV}$ 인가?
 Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ 두개를 학습 시켜야하기 때문이다.</li>
-  <li><strong><span style="color: #e87d7d">주의 )</span></strong> $W’$ 는 $W$ 의 전치 행렬이 아니라 완전히 새로운 Embedding Matrix 다.</li>
+  <li>
+<strong><span style="color: #e87d7d">주의 )</span></strong> $W’$ 는 $W$ 의 전치 행렬이 아니라 완전히 새로운 Embedding Matrix 다.</li>
 </ul>
 
-<p><br /></p>
+<p><br></p>
 
-<h2 id="update">Update</h2>
+<h2 id="update">
+<a class="anchor" href="#update" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update</h2>
 
 <p>Gradient를 통해서 각 파라미터들을 업데이트 하게 된다. $(3)$ 식의 $\log$ 를 취하게 되면 아래와 같다.</p>
 
@@ -608,9 +615,10 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 <p>흥미로운 점: <strong>미분 값</strong> 은 관측된 context word 벡터 $u_o$ 에서 center word $c$ 가 주어졌을 때 나올 수 있는 모든 단어의 기대치를 빼준 다는 것이다.</p>
 
-<hr />
+<hr>
 
-<h2 id="참고-1-why-mle-is-equivalent-to-minimize-nll">참고 1: Why MLE is equivalent to minimize NLL?</h2>
+<h2 id="참고-1-why-mle-is-equivalent-to-minimize-nll">
+<a class="anchor" href="#%EC%B0%B8%EA%B3%A0-1-why-mle-is-equivalent-to-minimize-nll" aria-hidden="true"><span class="octicon octicon-link"></span></a>참고 1: Why MLE is equivalent to minimize NLL?</h2>
 
 <p><strong>Likelihood</strong> 의 정의:</p>
 
@@ -634,7 +642,8 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
   <li>왜 log 로 바꾸는 것인가?
     <ol>
       <li>컴퓨터 연산시 곱하기 보다 더하기를 쓰면 <strong>복잡도</strong> 가 훨씬 줄어들어 계산이 빠르다. ($O(n) \rightarrow O(1)$)</li>
-      <li><strong>언더플로우</strong> 를 방지할수 있다. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.</li>
+      <li>
+<strong>언더플로우</strong> 를 방지할수 있다. 언더플로우란 1보다 작은 수를 계속곱하면 0에 가까워져 컴퓨터에서 0 으로 표시되는 현상을 말한다.</li>
       <li>자연로그함수는 <strong>단조증가함수(monotonic increase function)</strong> 라서 대소관계가 바뀌지 않는다. 예를 들자면, $5 &lt; 10 \Longleftrightarrow log(5) &lt; log(10)$ 의 관계가 바뀌지 않는 다는 것. 따라서 언제든지 지수를 취해서 다시 원래의 값으로 복귀 가능.</li>
     </ol>
   </li>
@@ -646,9 +655,9 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
   </li>
 </ul>
 
-<hr />
+<hr>
 
-<p><br /></p>
+<p><br></p>
 
 <p>다음 시간에는 <strong>Naive Softmax</strong> 로 훈련 시켰을 때의 단점과 이를 보완 해준 <strong><span style="color: #e87d7d">Negative Sampling</span></strong> 에 대해서 알아보자.</p>
 
@@ -656,7 +665,7 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
   <footer class="article-footer">
 
-  <div class="pagination to-top-post"><a href="http://localhost:4000/archive#nlp">
+  <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
   <section class="buymecoffee">
