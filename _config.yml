@@ -24,19 +24,8 @@ kramdown:
 
 # plugins
 plugins:
-  # - jekyll-toc
   - jekyll-sitemap
   - jekyll-feed
-
-# jekyll-toc settings
-# toc:
-#   min_level: 1
-#   max_level: 2
-#   no_toc_section_class: no_toc_section
-#   list_class: section-nav
-#   sublist_class: ''
-#   item_class: toc-entry
-#   item_prefix: toc-
 
 # Third-party services
 # just leave someone empty to disable it

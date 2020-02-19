@@ -9,10 +9,12 @@ layout: default
     <hr>
   </header>
   <div>
-    <div class="table-of-contents">
+    {% if page.toc == true %}
+    <div id="table-of-contents">
       <h2> Contents </h2>
       {% include toc.html html=content h_min=1 h_max=2 class="toc-nav" %}
     </div>
+    {% endif %}
     <div class="article-content" itemprop="articleBody">
       {{ page.content }}
     </div>
