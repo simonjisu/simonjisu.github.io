@@ -299,7 +299,7 @@ div#table-of-contents ul.toc-nav li a:hover { color: #b1b1b1; text-decoration: u
 
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-code { padding: .2rem .5rem; margin: 0 .2rem; font-size: 90%; white-space: nowrap; background: #F1F1F1; border: 1px solid #E1E1E1; border-radius: 4px; }
+code { padding: .2rem .2rem; margin: 0 .2rem; font-size: 90%; white-space: nowrap; background: #F1F1F1; border: 1px solid #E1E1E1; border-radius: 4px; }
 
 pre > code { display: block; padding: 1rem 1.5rem; white-space: pre; }
 
@@ -351,7 +351,7 @@ html { position: relative; min-height: 100%; }
 
 body { min-height: 100%; height: auto; }
 
-.page-content { min-height: 100%; box-sizing: border-box; height: auto; padding-top: 40px; padding-bottom: 100px; /*等于或略大于footer的高度*/ }
+.page-content { min-height: 100%; box-sizing: border-box; height: auto; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 40px; padding-bottom: 100px; /*等于或略大于footer的高度*/ }
 
 .site-footer { position: absolute; bottom: 0; padding: 0px; width: 100%; height: 80px; /* footer style */ color: #99999a; background-color: #FAFAFB; }
 
