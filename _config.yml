@@ -25,7 +25,9 @@ kramdown:
 # plugins
 plugins:
   - jekyll-toc
-
+  - jekyll-sitemap
+  - jekyll-feed
+  
 # jekyll-toc settings
 toc:
   min_level: 1
