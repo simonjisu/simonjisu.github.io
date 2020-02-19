@@ -287,15 +287,15 @@ li {
 */
 /* toc list
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-div#table-of-contents { padding: .5rem .5rem; border-bottom: 1.2px solid #888; margin-bottom: 10px; }
+div.table-of-contents { padding: .5rem .5rem; border-bottom: 1.2px solid #888; margin-bottom: 10px; }
 
-div#table-of-contents h2 { margin-top: 5px; }
+div.table-of-contents h2 { margin-top: 5px; }
 
-div#table-of-contents ul.section-nav { margin: 5px 0px; }
+div.table-of-contents ul.toc-nav { margin: 5px 0px; }
 
-div#table-of-contents ul.section-nav li a { color: #222; text-decoration: none; -webkit-transition: color .4s; transition: color .4s; border-bottom: 0px; }
+div.table-of-contents ul.toc-nav li a { color: #222; text-decoration: none; -webkit-transition: color .4s; transition: color .4s; border-bottom: 0px; }
 
-div#table-of-contents ul.section-nav li a:hover { color: #b1b1b1; text-decoration: underline; border-bottom: 0px; }
+div.table-of-contents ul.toc-nav li a:hover { color: #b1b1b1; text-decoration: underline; border-bottom: 0px; }
 
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

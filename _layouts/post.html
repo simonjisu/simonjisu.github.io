@@ -8,14 +8,15 @@ layout: default
     <p class="article_meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
     <hr>
   </header>
-  <div class="article-content" itemprop="articleBody">
-    <div id="table-of-contents" >
+  <div>
+    <div class="table-of-contents">
       <h2> Contents </h2>
-      {{ page.content | toc }}
+      {% include toc.html html=content h_min=1 h_max=2 class="toc-nav" %}
     </div>
-    {{ page.content }}
+    <div class="article-content" itemprop="articleBody">
+      {{ page.content }}
+    </div>
   </div>
-
   <footer class="article-footer">
 
   {% include tothetop.html %}
