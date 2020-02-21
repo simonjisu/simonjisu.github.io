@@ -26,5 +26,8 @@ layout: default
   {% include author.html %}
   
   </footer>
-  {% include dq.html %}
+  {% if jekyll.environment == 'production' %}
+    {% include dq.html %}
+  {% endif %}
+  
 </article>

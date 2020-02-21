@@ -15,8 +15,11 @@
           </div>
         </div>
       </div>
-      {% include footer.html %} 
-      {% include ga.html %}
+      {% include footer.html %}
+      {% if jekyll.environment == 'production' %}
+        {% include ga.html %}
+      {% endif %}
+      
     </div>
   </body>
 </html>
