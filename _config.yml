@@ -16,7 +16,10 @@ description: > # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://simonjisu.github.io" # the base hostname & protocol for your site
 logo: "/assets/img/logo.png"
+
+# social
 github_username: simonjisu 
+facebook_username: simonjisu
 
 # Build settings
 markdown: kramdown
@@ -54,9 +57,9 @@ menu_contents:
       - subcat: others
       - subcat: programming
       - subcat: datascience
+      - subcat: numpyseries
       - subcat: lightseparator
       - subcat: prml
-      - subcat: numpyseries
       - subcat: separator
   - title: Abouts
     url: /about

@@ -230,14 +230,19 @@ input#menu-toggle {
   }
 }
 
-.homeimage{
-  position:relative;
+.homeimage {
+  position: relative;
+  display:inline-block;
   height: 100%;
   width: 100%;
-  padding-right: 0px;
-  padding-left: 0px;
+  padding: 0px;
   background-position: center;
-  background-color: #4D4E56;
+  background-color: #ffffff;
+}
+
+.homeauthor {
+  display:inline-block;
+  width: 100%;
 }
 
 .post {
@@ -303,7 +308,7 @@ p.readmore {
 }
 
 .article-footer {
-  padding:2rem 0;
+  padding: 2rem 0;
   border-top:1px solid rgb(0, 0, 0);
   border-bottom:1px solid rgb(0, 0, 0);
 
@@ -318,7 +323,7 @@ p.readmore {
   .buymecoffee {
     text-align:center;
     margin: auto;
-    padding:2rem 0;
+    padding: 1rem 0;
   }
 }
 
@@ -369,8 +374,18 @@ iframe {
 }
 
 .authorinfo {
-  .bio {
+  a {
+    font-size:$small-font-size;
+  }
+  .biotitle {
+    font-weight: bold;
+  }
+  .biosubdesc {
     color:#999;
+    margin-bottom: 10px;
+  }
+  .icon {
+    display:inline-block;
   }
 }
 
@@ -435,14 +450,16 @@ div.post_title span.date {
 
 /* Pagination */
 
-.pagination {
-  width:50%;
-}  
+// .pagination {
+//   width:50%;
+// }  
 
 .pagination.to-posts{
-  margin-top : 5px;
+  width: 100%;
+  margin-bottom: 5px;
   float: right;
   text-align: right;
+  display: block;
 }
 .pagination.to-top-post{
   font-size: 1.2em;

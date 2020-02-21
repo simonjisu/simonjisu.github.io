@@ -416,7 +416,9 @@ input#menu-toggle { display: none; }
 
 .site-header nav a { font-weight: 400; }
 
-.homeimage { position: relative; height: 100%; width: 100%; padding-right: 0px; padding-left: 0px; background-position: center; background-color: #4D4E56; }
+.homeimage { position: relative; display: inline-block; height: 100%; width: 100%; padding: 0px; background-position: center; background-color: #ffffff; }
+
+.homeauthor { display: inline-block; width: 100%; }
 
 .post_header { margin-bottom: 1rem; }
 
@@ -444,7 +446,7 @@ p.readmore { text-align: right; }
 
 .article-footer .share-link { text-decoration: underline; margin-left: 8px; }
 
-.article-footer .buymecoffee { text-align: center; margin: auto; padding: 2rem 0; }
+.article-footer .buymecoffee { text-align: center; margin: auto; padding: 1rem 0; }
 
 iframe { min-width: 100%; height: 50vh; }
 
@@ -455,7 +457,13 @@ iframe { min-width: 100%; height: 50vh; }
 
 @media (min-width: 781px) { .authorimage { float: left; } }
 
-.authorinfo .bio { color: #999; }
+.authorinfo a { font-size: 14px; }
+
+.authorinfo .biotitle { font-weight: bold; }
+
+.authorinfo .biosubdesc { color: #999; margin-bottom: 10px; }
+
+.authorinfo .icon { display: inline-block; }
 
 /* footer */
 .footer { float: left; }
@@ -483,9 +491,7 @@ body.custom-background { background-image: url("/images/background.png"); backgr
 div.post_title span.date { font-size: 80%; color: #828282; }
 
 /* Pagination */
-.pagination { width: 50%; }
-
-.pagination.to-posts { margin-top: 5px; float: right; text-align: right; }
+.pagination.to-posts { width: 100%; margin-bottom: 5px; float: right; text-align: right; display: block; }
 
 .pagination.to-top-post { font-size: 1.2em; font-weight: bold; margin: auto; float: center; text-align: center; }
 

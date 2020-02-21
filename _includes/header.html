@@ -1,13 +1,9 @@
-<!-- see if categories is exists -->
-
 <header class="site-header">
   <h2 class="logo">
     <a href="{{ site.baseurl }}/">{{ site.title }}</a>
     <div class="logoimage box" style="background: url({{site.baseurl}}/assets/img/logo.png)"></div>
-    
   </h2>
-    
-  
+
   <div class="nav">
     <label for="menu-toggle" class="menu-icon">
         <!--div data-icon="ei-navicon"></div-->
@@ -33,8 +29,13 @@
                   <li role="separator" class="divider"></li>
                 {% elsif subcat == 'lightseparator' %}
                   <li role="lightseparator" class="lightdivider"></li>
+                {% elsif subcat == 'prml' %}
+                  <li>
+                    <a href="https://soo.gitbook.io/prml/" target="_blank"> PRML </a>
+                  </li>
                 {% else %}
                   {% for category in site.categories %}
+                    <!-- Site Navigation to "archive#subcat" -->
                     {% capture cat %}{{ category | first }}{% endcapture %}
                     {% if cat == subcat %}
                       <li>

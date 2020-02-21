@@ -54,9 +54,9 @@ menu_contents:
       - subcat: others
       - subcat: programming
       - subcat: datascience
+      - subcat: numpyseries
       - subcat: lightseparator
       - subcat: prml
-      - subcat: numpyseries
       - subcat: separator
   - title: Abouts
     url: /about
