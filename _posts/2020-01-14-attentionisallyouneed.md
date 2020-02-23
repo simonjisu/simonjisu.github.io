@@ -169,4 +169,4 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 ---
 
-다음편: [[NLP] Attention Is All You Need - 2](https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html)
+다음편: [Attention Is All You Need - 2](https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html)

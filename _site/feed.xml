@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 21 Feb 2020 20:41:23 +0900</pubDate>
-    <lastBuildDate>Fri, 21 Feb 2020 20:41:23 +0900</lastBuildDate>
+    <pubDate>Sun, 23 Feb 2020 15:19:50 +0900</pubDate>
+    <lastBuildDate>Sun, 23 Feb 2020 15:19:50 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -40,10 +40,7 @@
   &lt;p&gt;&lt;strong&gt;&lt;em&gt;“너는 다 계획이 있구나”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1Y534QRewyuENFNHTtf2WXgZe_5VH91MS&quot; alt=&quot;출처: 영화 기생충 스틸컷&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;출처: 영화 기생충 스틸컷&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Y534QRewyuENFNHTtf2WXgZe_5VH91MS&quot; alt=&quot;출처: 영화 기생충 스틸컷&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: 영화 기생충 스틸컷&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;PRML(“Pattern Recognition and Machine Learning” - Christopher Bishop) 책 공부하기&lt;/li&gt;
@@ -101,6 +98,144 @@
       </item>
     
       <item>
+        <title>[NLP] Attention Is All You Need - 3</title>
+        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;이전 글: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html&quot;&gt;Attention Is All You Need - 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;5-models&quot;&gt;5. Models&lt;/h1&gt;
+
+&lt;h2 id=&quot;masking&quot;&gt;Masking&lt;/h2&gt;
+
+&lt;p&gt;지금까지 미뤄온 Attention 의 마스킹(Masking)을 이야기 해보려 한다. 마스킹이 필요한 이유는 두 가지다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Decoder 의 Self Attention&lt;/p&gt;
+
+    &lt;p&gt;Decoder 에서는 이전의 타임 스텝(t-1)의 정보를 활용하여 다음 타임 스텝(t)의 정보를 예측하게 되는데 이를 &lt;strong&gt;자기회귀(auto-regressive)&lt;/strong&gt;특성이라고 한다. 이러한 특성을 보존하기 위해서 이전 타임 스텝(t-1)을 입력으로 현재 타임 스텝(t)를 예측하려고 할 때, 다음 타임 스텝(t+1)의 정보를 참조하면 안된다. 따라서 이를 Scaled Dot-Product Attention 에서 마스킹을 통해, 음의 무한대(&lt;code class=&quot;highlighter-rouge&quot;&gt;-np.inf&lt;/code&gt;) 값을 주어서 Softmax 값을 0으로 만들어 준다.&lt;/p&gt;
+
+    &lt;p&gt;예를 들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt;처럼 (검은색이 마스킹 위치) Decoder 의 입력 데이터 최대 길이가 4인 경우, &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 에서 0 번째 토큰은 1 번째 토큰을 예측해야 함으로 Self-Attention 시 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 의 1, 2, 3 번째의 토큰의 관계를 무시해야한다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 1 번째 토큰을 입력시 2 번째 토큰을 예측하게 되는데, 자기 자신을 포함한 그 이전의 정보를 참조 할 수는 있지만 미래의 2, 3 번째의 정보를 미리 참고하면 안된다.&lt;/p&gt;
+
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn&quot; alt=&quot;[그림 1] Decoder Sub-sequence Attention Masking&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 1] Decoder Sub-sequence Attention Masking&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;실제 토큰의 길이&lt;/p&gt;
+
+    &lt;p&gt;앞서 말했듯이 RNN 처럼 recurrance 하지 않기 때문에 최대 입력/출력 길이를 정해야한다. 따라서 실제 문장은 길이가 4인데도 설정한 최대 길이 때문에 그 길이만큼 &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt;을 하게 되는데, Attention 계산시 &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt; 은 인위적으로 넣은 토큰이기 때문에 이를 무시해야 한다.&lt;/p&gt;
+
+    &lt;p&gt;예를 들어 Decoder 에 들어가는 타겟 데이터의 최대 길이는 4이지만 실제 토큰의 길이가 3이라면 Attention Matrix 에 해당하는 마스킹은 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt;와 같다. 여기서는 마지막 토큰이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt; 토큰이기 때문에 Self Attention 시 마지막 토큰은 참조하지 않는다. Attention 코드(&lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/master/transformer/modules.py&quot;&gt;GitHub&lt;/a&gt; 참고) 구현하게 되면 3 번째 행은 Softmax 를 통과시 &lt;code class=&quot;highlighter-rouge&quot;&gt;nan&lt;/code&gt; 값이 된다. 따라서 해당하는 값을 0으로 다시 마스킹하는 과정이 필요하다.&lt;/p&gt;
+
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2&quot; alt=&quot;[그림 2] 실제 토큰 길이에 대한 Masking&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 2] 실제 토큰 길이에 대한 Masking&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;해당 모듈(Module) 코드는 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L11&quot;&gt;Encoder Layer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L42&quot;&gt;Decoder Layer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L10&quot;&gt;Encoder&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L54&quot;&gt;Decoder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;transformer-model&quot;&gt;Transformer Model&lt;/h2&gt;
+
+&lt;p&gt;특이한 점이라면 마지막 예측 토큰을 출력하는 선형 변환 층(&lt;code class=&quot;highlighter-rouge&quot;&gt;projection&lt;/code&gt;)을 임베딩 층으로 치환하는 방법이 있는데 이를 논문에서 Linear Weight Sharing이라고 했다. 또한, 문제에 따라서 Encoder층의 임베딩과 Decoder층의 임베딩을 공유 할 수도 있는데 Language Modeling 같은 문제가 그 예시라고 할 수 있다. 이를 논문에서 Embed Weight Sharing이라고 했다.&lt;/p&gt;
+
+&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L112&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;6-loss-function&quot;&gt;6. Loss Function&lt;/h1&gt;
+
+&lt;h2 id=&quot;label-smoothing&quot;&gt;Label Smoothing&lt;/h2&gt;
+
+&lt;p&gt;Discrete한 분포를 예측하는 방법은 주로 Cross Entropy를 많이 사용하지만 논문에서는 &lt;a href=&quot;https://arxiv.org/abs/1512.00567&quot;&gt;Rethinking the inception architecture for computer vision&lt;/a&gt; 논문에서 언급한 Label Smoothing 기법을 활용했다.&lt;/p&gt;
+
+&lt;p&gt;예측 확률 분포를 &lt;strong&gt;P&lt;/strong&gt;, 정답/타겟 확률 분포(ground-truth distribution)를 &lt;strong&gt;Q&lt;/strong&gt;라고 하겠다. $x$ 를 입력으로 예측 확률 질량함수 &lt;code class=&quot;highlighter-rouge&quot;&gt;p(y=k|x)&lt;/code&gt; 에서 구한 확률(Softmax)을 타겟 확률 질량함수 &lt;code class=&quot;highlighter-rouge&quot;&gt;q(y=k|x)=1&lt;/code&gt; 처럼 만드는 것이 원래의 최종목표다. 이제부터 $x$를 생략해서 쓰겠다. Cross Entropy의 수식은 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Loss = -\sum_{k=1}^{K} \log\big(p(k) \big) q(k)&lt;/script&gt;
+
+&lt;p&gt;Cross Entropy 를 최소화 하는 것은 $k$ 라벨에 해당하는 log-likelihood 의 기댓값을 $q(k)$로 최대화 하는 것과 같다. 그리고 Cross Entropy 는 Softmax 에 사용되는 예측값의 로짓(logit, $z_k$)에 대해 미분을 구할 수 있는데, 그 미분값은 다음과 같으며 -1 과 1 사이의 치역을 갖는다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{aligned} \dfrac{\partial Loss}{\partial z_k} = q(k)\big(p(k)-1\big) \end{aligned}&lt;/script&gt;
+
+&lt;p&gt;정답 라벨(ground-truth label)이 $y$인 예시를 들어봅자. 논문에서는 라벨 $y$에 해당하는 로짓($z_y$) 값이 다른 라벨 $k$의 로짓($z_k$) 값에 비해 월등히 클 수록 2가지 문제가 생긴다고 한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;오버피팅(over-fitting)이 될 가능성이 있다. 만약에 모델이 전체 확률 분포(모든 라벨)를 학습 시, 일반화(generalize)를 보장할 수 없다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이러한 구조는 제일 큰 로짓 값과 상대적으로 작은 로짓 값의 차이를 점점 더 크게 만들도록 학습한다. 이는 미분 값을 항상 0에 가깝게 만들어 가중치 업데이트가 안된다. 다음 미분의 수식에서 확인 할 수 있듯이, 정답 라벨 $y$ 의 로짓 값이 높을 수록, 그 확률은 1 에 가까워 경사(gradient)가 0에 가깝다.&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} \dfrac{\partial Loss}{\partial z_y} &amp;= -q(z_y)\cdot\frac{1}{p(z_y)} \times p(z_y)\big(1-p(z_y) \big) \\ &amp;= -q(z_y)+q(z_y)p(z_y) \\&amp;= p(z_y) -1 \end{aligned} %]]&gt;&lt;/script&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;결론적으로 말하면, 정답 라벨에 대해서 너무 확실한 예측을 내놓는 다는 것이다. 따라서 이러한 효과를 줄이기 위해서 해당 논문에서는 색다른 정답 확률 분포를 이야기 하는데, 기존의 &lt;code class=&quot;highlighter-rouge&quot;&gt;q(k)&lt;/code&gt;의 분포는 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;q(k)=\delta_{k,y} \begin{cases} 1 \quad \text{if } k=y \\ 0 \quad \text{else} \end{cases}&lt;/script&gt;
+
+&lt;p&gt;이를 새로운 &lt;code class=&quot;highlighter-rouge&quot;&gt;q'(k)&lt;/code&gt;로 치환하게 된다. $\epsilon$은 Smoothing을 위한 변수다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;q'(k) = (1-\epsilon)\delta_{k,y} + \epsilon \cdot u(k)&lt;/script&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;u(k)&lt;/code&gt; 의 분포는 훈련데이터와 무관한 분포이며, 보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;u(k) = 1/K&lt;/code&gt;인 Uniform Distribution 을 사용한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;q'(k)&lt;/code&gt;와 같은 정규화의 한 방법으로 논문에서는 이를 &lt;strong&gt;Label-Smoothing Regularization (LSR)&lt;/strong&gt; 이라고 제시했다.&lt;/p&gt;
+
+&lt;p&gt;LSR 의 목적은 원래 목표인 타겟 라벨을 맞추는 목적과 정답 라벨의 로짓(logit) 값이 학습과정에서 과도하게 다른 로짓 값보다 커지는 현상을 방지하는 것이다. 수식을 약간 변형하여 LSR 를 다른 관점에서 볼 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{aligned} LSR = H(p, q') &amp;= -\sum_{k=1}^K \log \big( p(k)\big) q'(k) \\ &amp;= -\sum_{k=1}^K \log \big( p(k)\big)\big( (1-\epsilon)\delta_{k,y} + \epsilon u(k) \big) \\ &amp;= (1-\epsilon)\big(-\sum_{k=1}^K \log \big( p(k)\big)\delta_{k,y} \big) \epsilon \big( -\sum_{k=1}^K \log \big( p(k)\big)u(k) \big) \\ &amp;= (1-\epsilon) H(q, p) + \epsilon H(u, p) \end{aligned} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;LSR 은 기존에 Cross Entropy &lt;code class=&quot;highlighter-rouge&quot;&gt;H(q, p)&lt;/code&gt;를 한 쌍의 &lt;code class=&quot;highlighter-rouge&quot;&gt;H(q, p)&lt;/code&gt; 와 &lt;code class=&quot;highlighter-rouge&quot;&gt;H(u, p)&lt;/code&gt;로 대체한 것이다. Smoothing Factor 인 $\epsilon$의 크기의 여부에 따라 정규화의 정도가 달라진다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Transformer&lt;/strong&gt; 에서도 해당 방법을 정규화 목적으로 $K$ 는 타겟 단어장(vocab)의 크기, $\epsilon$=0.1 로 사용했다.&lt;/p&gt;
+
+&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/labelsmooth.py#L5&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1512.00567&quot;&gt;Rethinking the Inception Architecture for Computer Vision&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nlp.seas.harvard.edu/2018/04/03/attention.html#label-smoothing&quot;&gt;The Annotated Transformer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;7-optimizer&quot;&gt;7. Optimizer&lt;/h1&gt;
+
+&lt;h2 id=&quot;learning-rate-variation&quot;&gt;Learning Rate Variation&lt;/h2&gt;
+
+&lt;p&gt;논문에서는 Adam Optimizer 를 기반으로 다양한 학습률을 적용하여 사용했다. 학습률 변화의 수식은 다음과 같다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \cdot \text{warmup_steps}^{-1.5} )&lt;/script&gt;
+
+&lt;p&gt;해당 수식에 따르면 처음 warmup_steps 동안 학습률은 가파르게 상승하다가 차후에 천천히 하강하게 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1d0xw7_xjr1rv7-SjuxQKRmML4oio561j&quot; alt=&quot;[그림 3] hidden 크기 및 warmup steps 에 따른 학습률의 변화&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 3] hidden 크기 및 warmup steps 에 따른 학습률의 변화&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/warmupoptim.py#L1&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;8-training-multi30k-with-transformer&quot;&gt;8. Training Multi30k with Transformer&lt;/h1&gt;
+
+&lt;p&gt;PyTorch의 &lt;code class=&quot;highlighter-rouge&quot;&gt;torchtext&lt;/code&gt;에 있는 Multi30k 데이터 세트(영어-독일어 번역)로 테스트 해보았다. 큰 데이터는 아니기 때문에, NVIDIA GTX 1080 ti 로 약 36분 훈련시켰다. 기존의 RNN 으로 훈련시키는 것 보다 월등히 빨랐다. 모델에서 Attention에 대한 그림도 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr&quot;&gt;github&lt;/a&gt;에 올려두었으니 확인해보길 바란다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa&quot; alt=&quot;[그림 4] Multi30k 성능 테스트&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 4] Multi30k 성능 테스트&lt;/figcaption&gt;&lt;/figure&gt;
+</description>
+        <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed3.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed3.html</guid>
+        
+        
+        <category>paper</category>
+        
+      </item>
+    
+      <item>
         <title>[NLP] Attention Is All You Need - 2</title>
         <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
 
@@ -112,10 +247,7 @@
 
 &lt;h2 id=&quot;multi-head-attention&quot;&gt;Multi-Head Attention&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_&quot; alt=&quot;[그림 1] Multi-Head Attention&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 1] Multi-Head Attention&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_&quot; alt=&quot;[그림 1] Multi-Head Attention&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 1] Multi-Head Attention&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;첫번째 서브층(SubLayer) Multi-Head Attention 의 구조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt; 과 같다. 연구자들은 $d_{model}$ 크기의 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 를 한 번 수행하는 것보다 $h$ 개의 각기 다른 &lt;strong&gt;선형 투영(linear projection)&lt;/strong&gt;을 시켜, 크기가 $d_k$(&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;), $d_v$(&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt;) 인 텐서를 사용해서 Attention 을 병렬로 수행하는 것이 더 유리한 것을 찾아냈다. 각기 다른 Attention 을 수행한 $h$ 개의 출력값은 하나로 concatenate 후에 최종 선형결합을 통해 다시 $d_{model}$ 크기로 돌아오는데 이를 수식으로 표현하면 다음과 같다.&lt;/p&gt;
 
@@ -209,16 +341,13 @@
 
 &lt;p&gt;결론을 말하자면 각 시퀀스의 순서 인덱서는 PE(Positonal Encoding) 테이블에서 각자의 위치를 조회후에 임베딩된 텐서와 결합하게 된다. pos 는 시퀀스의 위치정보, 예를 들어 텐서의 크기가 $d_{model}$ = 1024 의 경우, 각 1024의 짝수(2i)에 위치한 값들은 sin 함수를 적용하고, 홀수(2i+1) 에 위치한 값들은 cos 함수를 적용한다. PE 테이블을 그리면 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt; 과 같은데, 자세히 보시면 각 포지션에 해당하는 1 줄(1024 크기의 벡터)값은 모두 차별화 되어있다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22&quot; alt=&quot;[그림 2] 최대 길이가 51인 Positional Encoding Table&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 2] 최대 길이가 51인 Positional Encoding Table&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22&quot; alt=&quot;[그림 2] 최대 길이가 51인 Positional Encoding Table&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 2] 최대 길이가 51인 Positional Encoding Table&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L82&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;다음편: [NLP] Attention Is All You Need - 3&lt;/p&gt;
+&lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/23/attentionisallyouneed3.html&quot;&gt;Attention Is All You Need - 3&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
         <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</link>
@@ -239,10 +368,7 @@
 
 &lt;p&gt;그 동안 LSTM(&lt;a href=&quot;https://dl.acm.org/citation.cfm?id=1246450&quot;&gt;Long Short-term Memory&lt;/a&gt;, 1997) 과 GRU(&lt;a href=&quot;https://arxiv.org/abs/1412.3555&quot;&gt;Gated Recurrent Unit&lt;/a&gt;, 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz&quot; alt=&quot;[그림 1] RNN의 forward propagation&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 1] RNN의 forward propagation&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz&quot; alt=&quot;[그림 1] RNN의 forward propagation&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 1] RNN의 forward propagation&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt; 처럼 이전 스텝의 은닉층 유닛인 $h_{t-1}$ 를 현재 스텝의 은닉층 유닛 $h_t$ 로 전달하면서 자연스럽게 시퀀스 데이터의 특징을 유지하지만, 아쉽게도 병렬 처리를 원천적으로 배제한다는 단점이 존재한다. 따라서 만약에 문장이 길어질 수록 훈련 속도가 현저하게 느려진다.&lt;/p&gt;
 
@@ -263,10 +389,7 @@
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
 \begin{aligned} \mathbf{x}&amp;=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_1, z_2, \cdots, z_n)\\ \mathbf{y}&amp;=(y_1, y_2, \cdots, y_m)\ \text{for}\  y_{t}=f(y_{t-1}, \mathbf{z}) \end{aligned} %]]&gt;&lt;/script&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97&quot; alt=&quot;[그림 2] 모델구조: Encoder(좌), Decoder(우)&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 2] 모델구조: Encoder(좌), Decoder(우)&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97&quot; alt=&quot;[그림 2] 모델구조: Encoder(좌), Decoder(우)&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 2] 모델구조: Encoder(좌), Decoder(우)&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;하지만 &lt;strong&gt;Transformer&lt;/strong&gt; 에서는 한 타임 스텝마다 $y$ 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt; 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).&lt;/p&gt;
 
@@ -298,10 +421,7 @@
 
 &lt;p&gt;영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 관계는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 3&lt;/code&gt; 과같이 표현할 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G&quot; alt=&quot;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G&quot; alt=&quot;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;: 한국어 문장 정보&lt;/li&gt;
@@ -314,10 +434,7 @@
 
 &lt;p&gt;꼭 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 모두 같은 문장을 지정하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 4&lt;/code&gt;처럼 Attention 을 사용할 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX&quot; alt=&quot;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX&quot; alt=&quot;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;scaled-dot-product-attention&quot;&gt;Scaled Dot-Product Attention&lt;/h2&gt;
 
@@ -325,10 +442,7 @@
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V&lt;/script&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM&quot; alt=&quot;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM&quot; alt=&quot;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;여기서 주의할 점은 $T_k$ 과 $T_v$가 같다는 점이다. 기계 번역을 예로 들면 소스 문장이 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 세트이기 때문에 같은 길이의 내용을 담고 있지만 각 토큰이 표현하고 있는 차원만 다를 뿐이다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 의 길이는 다를 수 있지만 차원 $d_k$ 로 같다. 두 행렬은 행렬의 곱(matrix multiplication)을 통해서 크기가 $(T_q, T_v)$ 인 점수 행렬 &lt;strong&gt;A&lt;/strong&gt; 를 만들어 낸다.&lt;/p&gt;
 
@@ -410,7 +524,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;hr /&gt;
 
-&lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html&quot;&gt;[NLP] Attention Is All You Need - 2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html&quot;&gt;Attention Is All You Need - 2&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 14 Jan 2020 14:19:38 +0900</pubDate>
         <link>https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</link>
@@ -439,10 +553,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 &lt;p&gt;동영상에서 소개한 데이터 사이언티스트의 근본은 &lt;strong&gt;“Problem Solver”&lt;/strong&gt;다. 현실에 존재하는 풀기 어려운 문제를 데이터를 사용해서 좋은 방향으로 이끌어가는 것이 데이터 사이언티스트의 역할이다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1Wm5n8IMK5ruCcgu-7ccUxPIH8XOuGx2N&quot; alt=&quot;출처: https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;출처: https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Wm5n8IMK5ruCcgu-7ccUxPIH8XOuGx2N&quot; alt=&quot;출처: https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;위 사진은 영상에서 소개한 데이터 사이언스의 계층적 요구에 대해서 사진이다. 피라미드 꼭대기부터 정리해보면 다음과 같다.&lt;/p&gt;
 
@@ -504,10 +615,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;p&gt;&lt;strong&gt;Research Scientist, Artificial Intelligence (PhD)&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1D83TD6ZtJrSNwsSYNZVl86IynC0SWnuI&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/985225105171427&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/985225105171427&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1D83TD6ZtJrSNwsSYNZVl86IynC0SWnuI&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/985225105171427&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/985225105171427&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -515,10 +623,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;p&gt;&lt;strong&gt;Data Scientist, Analytics (PhD)&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1c_DpRBhg9yAwQYE59swch4X2OFhSt4qv&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/387405225294114&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/387405225294114&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1c_DpRBhg9yAwQYE59swch4X2OFhSt4qv&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/387405225294114&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/387405225294114&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -526,10 +631,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
   &lt;p&gt;&lt;strong&gt;Data Engineer, Machine Learning&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;figure class=&quot;image&quot;&gt;
-    &lt;img src=&quot;https://drive.google.com/uc?id=1mabjOctjAExkzV2SLpbv7UPo6zMpu_Uu&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/997860117229177&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;
-    &lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/997860117229177&lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1mabjOctjAExkzV2SLpbv7UPo6zMpu_Uu&quot; alt=&quot;출처: https://www.facebook.com/careers/jobs/997860117229177&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: https://www.facebook.com/careers/jobs/997860117229177&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;–&lt;/p&gt;
 
@@ -1709,174 +1811,6 @@ git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
         <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
         <link>https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</link>
         <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</guid>
-        
-        
-        <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>[비전공자의 Flask-2] 본격 앱 만들기 1</title>
-        <description>&lt;h1 id=&quot;폴더-생성부터-데이터베이스-만들기&quot;&gt;폴더 생성부터 데이터베이스 만들기&lt;/h1&gt;
-
-&lt;p&gt;내가 만드려고 하는 앱은 사용자가 어떤 query 를 날리면 이를 모델을 거쳐서 결과를 웹에서 보여주는 간단한 앱이다. 예를 들어, 번역기 같은 앱의 경우를 생각해보자.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;사용자 (웹페이지 방문자)는 번역하고자 하는 글을 쓴고 “번역” 버튼을 클릭한다.&lt;/li&gt;
-  &lt;li&gt;번역 클릭 후, 해당 string이 flask를 통해 전송 받으면 이를 모델에 넣어서 결과를 뱉는다.&lt;/li&gt;
-  &lt;li&gt;결과를 다시 flask 앱을 통해 사용자에게 보여준다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;구체적으로 &lt;a href=&quot;https://simonjisu.github.io/datascience/2017/08/04/E2EMN.html&quot;&gt;End to End Memory Network&lt;/a&gt; 모델을 활용해서 스토리 내용을 사용자가 선택해서 질문을 던지면 그에 대한 결과를 받는 앱을 만들 것이다.&lt;/p&gt;
-
-&lt;h1 id=&quot;step-0-폴더-생성하기&quot;&gt;Step 0: 폴더 생성하기&lt;/h1&gt;
-
-&lt;p&gt;어플리케이션 개발을 시작하기전에, 어플리케이션에서 사용할 폴더를 만들자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
-    /static
-    /templates
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;앞으로 이 &lt;strong&gt;“nmtapp”&lt;/strong&gt; 폴더 안에 우리가 사용할 것들을 넣는다. &lt;strong&gt;“static”&lt;/strong&gt; 은 사용자들을 위한 폴더, 이 폴더는 css와 javascript 파일들이 저장되는 곳이다. Flasks는 templates 폴더에서 &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja2&lt;/a&gt; 템플릿을 찾을 것이다.&lt;/p&gt;
-
-&lt;h1 id=&quot;step-1-데이터베이스-스키마&quot;&gt;Step 1: 데이터베이스 스키마&lt;/h1&gt;
-
-&lt;p&gt;데이터베이스 스키마를 생성해야 한다. 우리의 어플리케이션은 단지 하나의 테이블만 필요하며 사용이 매우 쉬운 SQLite를 쓸것이다. 다음의 내용을 schema.sql 이라는 이름의 파일로 방금 생성한 nmtapp 폴더에 저장한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drop table if exists nmtmain;
-create table nmtmain (
-  id integer primary key autoincrement,
-   question string not null
-);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;해당 테이블의 이름은 “nmtmain” 이며, 간략하게 칼럼을 소개하자면, 아래와같다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;id: 자동으로 증가되는 정수이며 프라이머리 키(primary key) 이다.&lt;/li&gt;
-  &lt;li&gt;query: 사용자들이 입력한 질문.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;데이터베이스 스키마(database schema)란 데이터베이스에서 자료의 구조, 자료의 표현 방법, 자료 간의 관계를 형식 언어로 정의한 구조이다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;step-2-어플리케이션-셋업-코드&quot;&gt;Step 2: 어플리케이션 셋업 코드&lt;/h1&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/e2eapp
-    /static
-    /templates
-    /schema.sql
-    /e2estart.py
-    /settings.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;settingspy&quot;&gt;settings.py&lt;/h2&gt;
-
-&lt;p&gt;추가로 앱을 실행하기 위한 파일들을 만든다. 중요한 정보 혹은 환경변수가 있는 파일은 &lt;strong&gt;“settings.py”&lt;/strong&gt; 에 넣기로 한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# settings.py
-# configuration
-DATABASE = '../data/e2e.db'
-DEBUG = True
-SECRET_KEY = 'development key'
-USERNAME = 'admin'
-PASSWORD = 'password'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;클라이언트에서의 세션을 안전하게 보장하기 위해서는 secret_key 가 필요하다. secret_key는 추측이 어렵도록 가능한 복잡하게 선택하여야 한다. 디버그(DEBUG) 플래그는 인터랙티브 디버거를 활성화 시키거나 비활성화 시키는 일을 한다. 운영시스템에서는 디버그 모드를 절대로 활성화 시키지 말아야 한다. 왜냐하면 디버그 모드에서는 사용자가 서버의 코드를 실행할수가 있기 때문이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;nmtstartpy&quot;&gt;nmtstart.py&lt;/h2&gt;
-
-&lt;p&gt;앱을 실행하는 &lt;strong&gt;“e2estart.py”&lt;/strong&gt; 파일을 만든다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# all the imports
-import sqlite3
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
-
-# create application
-app = Flask(__name__)
-app.config.from_pyfile(&quot;./settings.py&quot;, silent=True)
-
-def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;아직 모르는 import 가 많지만, 차차 배울테니 우선 앱을 만들고 실행하는 부분을 알아보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;환경설정 불러오기:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;config.from_pyfile(&quot;./settings.py&quot;, silent=True)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;만약에 현재 파일 위치에 환경변수 객체(settings.py 의 내용)를 작성하였으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;from_object(__name__)&lt;/code&gt; 라는 명령어를 쓰면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;실행&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ python3 e2estart.py  
-...
-192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET / HTTP/1.1&quot; 404 -
-192.168.6.34 - - [11/Nov/2018 19:08:40] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;지금은 어떤 뷰(view)를 만들지 않았기 때문에, 브라우저에서 페이지를 찾을 수 없다는 404에러를 볼 수 있을 것이다. 이건 나중에 살펴보고, 우선 데이터베이스를 만들고 진행하도록 하자.&lt;/p&gt;
-
-&lt;h1 id=&quot;step-3-데이터베이스-생성하기&quot;&gt;Step 3: 데이터베이스 생성하기&lt;/h1&gt;
-
-&lt;p&gt;현재 만들고자 하는 앱은 관계형 데이터베이스 시스템에 의해 구동되는 어플리케이션이다. 이러한 시스템은 어떻게 데이터를 저장할지에 대한 정보를 가지고 있는 스키마가 필요하다. 그래서 처음으로 서버를 실행하기 전에 스키마를 생성하는 것이 중요하다.&lt;/p&gt;
-
-&lt;p&gt;우선 데이터를 어디다 저장할지 정해보자. 데이터는 앱 밖에 있는 &lt;strong&gt;data&lt;/strong&gt; 폴더를 생성해서 저장하기로 한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/demo
-	/venv
-	/e2eapp
-	/data
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;아까 만들어둔 &lt;strong&gt;“schema.sql”&lt;/strong&gt; 파일을 이용하여 sqlite3 명령어를 사용하여 다음과 같이 만들 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(venv) /e2eapp $ sqlite3 ../data/e2e.db &amp;lt; schema.sql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Sqlite3 가 설치 안됐을 수도 있다. 아래 명령어를 쳐서 (가상환경 빠져나와서) sqlite3 를 설치하자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install sqlite3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;데이터베이스를 초기화하는 함수를 만들고 싶다면 contextlib 의 closing 함수를 import 한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# import 에 추가
-from contextlib import closing
-
-def init_db():
-    with closing(connect_db()) as db:
-        with app.open_resource('schema.sql') as f:
-            db.cursor().executescript(f.read())
-        db.commit()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;함수설명&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;closing:&lt;/strong&gt; with 블럭안에서 연결한 커넥션을 유지하도록 도와준다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;app객체의 open_resource:&lt;/strong&gt; 리소스 경로(nmtapp 의 폴더)의 파일을 열고 그 값을 읽을 수 있다. 우리는 이것을 이용하여 데이터베이스에 연결하는 스크립트를 실행시킬 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;다음 시간에는 데이터베이스와 연결하고, 뷰함수 및 템플릿을 만들어보자.&lt;/p&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://flask-docs-kr.readthedocs.io/ko/latest/installation.html&quot;&gt;flask 한글 튜토리얼&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wikidocs.net/book/1530&quot;&gt;SQLite로 가볍게 배우는 데이터베이스&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 11 Nov 2018 17:39:48 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/11/11/flaskstudy2.html</guid>
         
         
         <category>programming</category>

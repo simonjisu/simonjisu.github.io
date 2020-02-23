@@ -115,4 +115,4 @@ $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{
 
 ---
 
-다음편: [NLP] Attention Is All You Need - 3
+다음편: [Attention Is All You Need - 3](https://simonjisu.github.io/paper/2020/02/23/attentionisallyouneed3.html)
