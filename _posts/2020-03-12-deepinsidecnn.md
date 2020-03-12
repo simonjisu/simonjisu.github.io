@@ -12,7 +12,7 @@ Paper Link: [Deep Inside Convolutional Networks: Visualising Image Classificatio
 
 # 0. Abstract
 
-이 논문에서는 입력 이미지에 해당하는 대한 경사(gradient)를 구함으로써 두 가지 이미지 분류 모델의 시각화 기술을 중점적으로 서술했다. 첫 번째는 class score(최종 분류층 점수)를 극대화하여, ConvNet에서 포착된 클래스의 개념을 시각화하는 이미지를 생성한다. 두 번째는 이미지와 해당하는 클래스가 주어 졌을 때 saliency maps(특징 지도)를 생성해내는 것이다. 특징 지도로 weakly supervised image segmentation에 적용해보았고, deconvolutional network와 비교도 해보았다.
+이 논문에서는 입력 이미지에 대한 경사(gradient)를 구함으로써 두 가지 이미지 분류 모델의 시각화 기술을 중점적으로 서술했다. 첫째는 class score(최종 분류층 점수)를 극대화하여, ConvNet에서 포착된 클래스의 개념을 시각화하는 이미지를 생성한다. 둘째는 이미지와 이에 해당하는 클래스의 saliency maps(특징 지도)를 생성해내는 것이다. Saliency maps로 weakly supervised image segmentation에 적용했고, deconvolutional network와 비교도 해보았다.
 
 ---
 
@@ -20,9 +20,9 @@ Paper Link: [Deep Inside Convolutional Networks: Visualising Image Classificatio
 
 이 논문의 기여는 다음과 같다.
 
-1. 입력이미지의 수치적 최적화를 통해 CNN 모델에서 이해가능한 수준의 시각화된 이미지를 얻을 수 있다.
+1. 입력 이미지의 수치적 최적화를 통해 CNN 모델에서 이해가능한 수준의 시각화된 이미지를 얻을 수 있다.
 2. ConvNet을 통한 분류에서 단일 역전파(back-propagation) 경로를 사용하여 주어진 이미지(이미지별 class saliency map)에서 주어진 클래스의 공간적 지지점(spatial support)을 계산하는 방법을 제안한다. 
-3. gradient 기반의 시각화 방법으로 deconvolutional network의 재구성 과정을 일반화 했다.
+3. gradient 기반의 시각화 방법으로 deconvolutional network의 재구성 과정을 일반화했다.
 
 ---
 
@@ -66,17 +66,17 @@ $$M_{ij} = \max_c \vert w_{h(i, j, c)} \vert$$
 
 ## Weakly Supervised Object Localisation
 
-이러한 saliency map을 물체 위치 탐지 문제에 적용했다. 간단히 과정을 간략하게 요약하면 다음과 같다.
+이러한 saliency map을 물체 위치 탐지 문제에 적용했다. 과정을 요약하면 다음과 같다.
 
 {% include image.html id="1V237wxA35x4oebtlzbOqc3h0-nH44cL6" desc="[그림 1] Geodesic Star Convexity for Interactive Image Segmentation" width="100%" height="auto" %}
 
-1. GraphCut 이라는 것을 사용한다. 관심 가지는 클래스를 foreground, 그외에 배경을 background라고하는데, `그림 1`의 Step 2 처럼, foreground와 background 구분짓기 위해서 색상으로 tagging을 해야한다.
-2. saliency map과 가우시안 믹스쳐(Gaussian Mixture) 모델을 활용하여 saliency map의 특정 경계값을 기준으로 foreground 와 background 경계 지도을 만든다.
-3. 2에서 만들어진 태깅된 경계 지도로 GraphCut으로 Segmentation을 진행한다.
+1. GraphCut 이라는 것을 사용한다. 관심 가지는 클래스를 foreground, 그외에 배경을 background라고하는데, `그림 1`의 Step 2 처럼, foreground와 background 구분짓기 위해서 특정 색상으로 tagging을 해야한다.
+2. saliency map은 특정 색상을 지정할 수 없기 때문에, 가우시안 믹스쳐(Gaussian Mixture) 모델을 활용하여 saliency map의 특정 경계값을 기준으로 foreground와 background의 경계 지도을 만든다.
+3. `2`에서 만들어진 태깅된 경계 지도로 GraphCut으로 Segmentation을 진행한다.
 
 자세한 설명은 다음과 같다.
 
-[GraphCut](http://www.csd.uwo.ca/~yuri/Papers/iccv01.pdf)을 사용하게된 계기는 saliency map은 물체를 판별하는 영역만 탐지하지 물체 전체를 잡아내지 않기 때문이다. 그러므로 다른 물체의 경계 지도를 전달하는게 중요하다. Foreground(관심 가지는 물체 클래스) 와 background(물체 이외에 배경) 모델은 가우시안 믹스처(Gaussian Mixture) 모델들을 적용했다. Saliency 분포값의 95%를 경계로 이보다 높은 값을 가지는 픽셀들로 foreground를 추정했고, 30%를 경계로 이보다 이하의 값을 가지는 픽셀들은 background로 추정했다. 
+[GraphCut](http://www.csd.uwo.ca/~yuri/Papers/iccv01.pdf)을 사용하게된 계기는 saliency map은 물체를 판별하는 영역만 탐지하지 물체 전체를 잡아내지 않기 때문이다. GraphCut을 사용하기 위해서 물체의 경계 지도를 전달하는게 중요하다. Foreground(관심 가지는 물체 클래스)와 background(물체 이외에 배경) 모델은 가우시안 믹스처(Gaussian Mixture)를 적용했다. Saliency 분포값의 95%를 경계로 이보다 높은 값을 가지는 픽셀들로 foreground를 추정했고, 30%를 경계로 이보다 이하의 값을 가지는 픽셀들은 background로 추정했다. 실제로 적용하면 `[그림 2]`의 3번째 그림처럼 나온다.
 
 {% include image.html id="1Tqqu_QRGqMvOyrvoOVLJdaLOjuxGkGGS" desc="[그림 2] 1: 원본 / 2: saliency map / 3: 경계 지도 / 4: segmentated image" width="100%" height="auto" %}
 
