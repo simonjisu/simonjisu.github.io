@@ -6,94 +6,131 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 23 Feb 2020 15:19:50 +0900</pubDate>
-    <lastBuildDate>Sun, 23 Feb 2020 15:19:50 +0900</lastBuildDate>
+    <pubDate>Thu, 12 Mar 2020 17:10:00 +0900</pubDate>
+    <lastBuildDate>Thu, 12 Mar 2020 17:10:00 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>PRML Project</title>
-        <description>&lt;p&gt;크리스토퍼 비숍의 책 “패턴 인식과 기계 학습(Pattern Recognition and Machine Learning)” 의 원서를 공부하고, 그에 필요한 코드와 수식을 정리하고 있습니다. 아래 사이트에서 확인하실 수 있습니다.&lt;/p&gt;
+        <title>[VISION] Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</title>
+        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1312.6034&quot;&gt;Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps&lt;/a&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;원서 다운로드: &lt;a href=&quot;https://aka.ms/prml&quot;&gt;https://aka.ms/prml&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;GitBook: &lt;a href=&quot;https://soo.gitbook.io/prml&quot;&gt;https://soo.gitbook.io/prml&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 21 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/prml/2020/02/21/prml.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/prml/2020/02/21/prml.html</guid>
-        
-        
-        <category>prml</category>
-        
-      </item>
-    
-      <item>
-        <title>글또 4기 다짐</title>
-        <description>&lt;h1 id=&quot;글또-4기를-시작하며&quot;&gt;글또 4기를 시작하며&lt;/h1&gt;
+&lt;h1 id=&quot;0-abstract&quot;&gt;0. Abstract&lt;/h1&gt;
 
-&lt;p&gt;“글또”가 궁금하다면? &lt;a href=&quot;https://www.notion.so/ac5b18a482fb4df497d4e8257ad4d516&quot;&gt;&lt;strong&gt;글또 Notion 페이지 바로가기&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;작년 여름의 어느날 글또를 시작하면서 세웠던 계획을 다시 돌아보게 됐다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;“너는 다 계획이 있구나”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Y534QRewyuENFNHTtf2WXgZe_5VH91MS&quot; alt=&quot;출처: 영화 기생충 스틸컷&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: 영화 기생충 스틸컷&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PRML(“Pattern Recognition and Machine Learning” - Christopher Bishop) 책 공부하기&lt;/li&gt;
-  &lt;li&gt;NLP 논문 읽기 (BERT 등)&lt;/li&gt;
-  &lt;li&gt;새로운 것 배우기: Flask, Spark, Reinforcement Learning&lt;/li&gt;
-  &lt;li&gt;대학원 준비&lt;/li&gt;
-  &lt;li&gt;장롱면허 탈출&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이 5가지 목표 중에서 3개는 달성하고 새로운 것을 배우는 것은 달성하지 못했고 장롱면허도 아직 탈출하지 못했다. 첫번째 목표도 100% 완성하지 못했기 때문에 사실상 50%를 완성했다고 할 수 있다. 다시 돌아보니 글또와는 크게 관련이 없는 목표들이 많았다. 그래서 이번 글또 4기에는 글또에 알맞는 목표를 세워보려고 한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;최소 12편 이상의 글 작성하기&lt;/li&gt;
-  &lt;li&gt;어떤 주제든 시리즈 글 연재하기(3편 이상)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;글또 4기를 마치고 꼭 두 가지 목표를 완수하기를…&lt;/p&gt;
+&lt;p&gt;이 논문에서는 입력 이미지에 해당하는 대한 경사(gradient)를 구함으로써 두 가지 이미지 분류 모델의 시각화 기술을 중점적으로 서술했다. 첫 번째는 class score(최종 분류층 점수)를 극대화하여, ConvNet에서 포착된 클래스의 개념을 시각화하는 이미지를 생성한다. 두 번째는 이미지와 해당하는 클래스가 주어 졌을 때 saliency maps(특징 지도)를 생성해내는 것이다. 특징 지도로 weakly supervised image segmentation에 적용해보았고, deconvolutional network와 비교도 해보았다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h1 id=&quot;글또-4기에서-작성하고-싶은-글&quot;&gt;글또 4기에서 작성하고 싶은 글&lt;/h1&gt;
+&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
+
+&lt;p&gt;이 논문의 기여는 다음과 같다.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;인지(행동)과학 관련 책 리뷰&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;인지과학 분야의 책을 통해 사람이 어떤 방식으로 생각을 하는지 이해하고, 딥러닝 모델의 설명과 연관지어 떠오르는 아이디어를 정리해보고자 한다. 컴퓨터 비전 분야에서 인간의 시각 시스템을 모방한 Neocognitron(1979, Kunihiko Fukushima)부터 현재의 다양한 Convolution Neural Network 까지, 인간에 대한 연구는 알고리즘을 해석하고 발전시키는데 많은 영향을 줬었다. 사람이 생각하는 과정(인지 프로세스)를 이용해 더 좋은 성능을 내는 모델을 연구하거나, 더 나아가 “설명가능한 딥러닝 모델”의 실마리가 나올 수 있지 않을까 생각하고 있다. 관련 전공이 아니기 때문에, 먼저 사람들이 주로 읽는 도서부터 시작해서 천천히 깊게 탐구해볼 생각이다. 현재 도서 목록으로 다음과 같이 정했는데, 혹시 추천할 만한 책이 있으면 댓글 부탁드린다.&lt;/p&gt;
-    &lt;blockquote&gt;
-      &lt;ul&gt;
-        &lt;li&gt;생각에 관한 생각&lt;/li&gt;
-        &lt;li&gt;넛지&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;데이터 사이언스 대학원 입학과정 및 생활&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;나는 대학원에 운좋은 타이밍에 입학했다고 생각한다. 그래도 차후에 다른 사람에게 도움이 될만한 정보와 신설된 데이터 사이언스 대학원에 입학하게된 계기 및 과정을 쓰려고 한다. 또한, 후회없는 2년(혹은 그 이상..?) 대학원 과정을 만들기 위해서 어떤 것을 계획하고 어떻게 공부를 하는지도 기록할 것이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;논문 리뷰(NLP, XAI 분야)&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;마지막으로 최근에 보고 있는 논문들을 간략하게 정리할 예정이다. 최근 1월~2월 사이에 읽은 Vision 분야에서 사용되고 있는 XAI 관련 논문을 읽었고 이를 정리하고자 한다.&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;입력이미지의 수치적 최적화를 통해 CNN 모델에서 이해가능한 수준의 시각화된 이미지를 얻을 수 있다.&lt;/li&gt;
+  &lt;li&gt;ConvNet을 통한 분류에서 단일 역전파(back-propagation) 경로를 사용하여 주어진 이미지(이미지별 class saliency map)에서 주어진 클래스의 공간적 지지점(spatial support)을 계산하는 방법을 제안한다.&lt;/li&gt;
+  &lt;li&gt;gradient 기반의 시각화 방법으로 deconvolutional network의 재구성 과정을 일반화 했다.&lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;2-class-model-visualisation&quot;&gt;2. Class Model Visualisation&lt;/h1&gt;
+
+&lt;p&gt;$S_c(I)$가 주어진 이미지($I$)의 클래스($c$) 점수(score)라고 정의한다. 그러면 다음 수식과 같이 점수$S_c$를 최대화 하는 L2 정규화된 이미지를 찾을 수 있을 것이다($\lambda$는 정규화 하이퍼파라미터).&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\arg \underset{I}{\max} S_c(I) - \lambda \Vert I\Vert^2_2&lt;/script&gt;
+
+&lt;p&gt;지역적으로 최적화된 이미지($I$)는 역전파(back-propagation)방법으로 찾을 수 있다. 이는 ConvNet의 훈련 과정중 역전파에서 각 층의 가중치를 최적화 할 때와 연관이 있다. 여기서 다른 점이라면 입력 이미지($I$)에 대한 최적화를 수행하는 것이고, 모델 가중치(weights)는 고정시킨다. 전체 과정은 다음과 같다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;먼저 zero image $I$를 만든다.&lt;/li&gt;
+  &lt;li&gt;$I$를 네트워크에 입력으로 해당 타겟에 해당하는 출력 스코어$S_c(I)$를 구한다.&lt;/li&gt;
+  &lt;li&gt;출력 스코어$S_c(I)$에 정규화 계수 $\lambda$와 입력 이미지 $I$의 L2 Norm을 곱한 값을 빼주면 최종 손실값$L$이 된다.&lt;/li&gt;
+  &lt;li&gt;손실값을 입력 이미지 $I$에 대해서 미분하여 업데이트 한다&lt;/li&gt;
+  &lt;li&gt;1~4 과정을 반복한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;3-image-specific-class-saliency-visualization&quot;&gt;3. Image-Specific class Saliency Visualization&lt;/h1&gt;
+
+&lt;p&gt;이번 파트에서는 ConvNet가 주어진 이미지와 클래스에 대한 공간적 지지점(spatial support)을 찾는 과정을 설명한다. 주어진 이미지를 $I_0$, 타겟 클래스를 $c$ 그리고 ConvNet에 이미지를 입력하여 얻은 점수 벡터$S_c(I)$ 라고 해보자. 이제 점수 벡터 $S_c(I_0)$에 근거하여 입력 이미지 $I_0$에 픽셀들의 순위를 정할 것이다.&lt;/p&gt;
+
+&lt;p&gt;먼저 제일 간단한 예제인 선형모델로 시작해보면 다음과 같다(이미지 $I$는 벡터화 시켰다).&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;S_c(I) = w_c^TI+b_c&lt;/script&gt;
+
+&lt;p&gt;이 경우, 가중치벡터 $w$내에 있는 각 원소의 크기가 입력 이미지 $I$에 대한 중요도라고 정의할 수 있다. 그러나 심층 신경망에서 점수$S_c(I)$는 깊게 꼬인 비선형함수다. 따라서 위와 같이 적용이 불가능하다. 그러나 이미지 $I_0$가 주어졌을 때, 테일러 1차 급수로 $S_c(I)$에 대한 선형함수를 근사할 수 있다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;S_c(I) \approx w^TI+b \quad \text{where } w= \dfrac{\partial S_c}{\partial I}\Bigg\vert_{I_0} \cdot&lt;/script&gt;
+
+&lt;p&gt;Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르다고 할 수 있다. 이를 통해 이미지의 위치를 알아내기를 기대할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;class-saliency-extraction&quot;&gt;Class Saliency Extraction&lt;/h2&gt;
+
+&lt;p&gt;흑백이미지의 경우 절대값을 취해주면 그대로 추출할 수 있다. 컬러 이미지같은 경우 절대값에서 각 채널을 기준으로 최대 값을 뽑아내서 Saliency Map을 만든다.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;M_{ij} = \max_c \vert w_{h(i, j, c)} \vert&lt;/script&gt;
+
+&lt;p&gt;이 논문에서는 ILSVRC-2013에서 높은 점수를 가진 클래스를 가지고 10장의 이미지를 서브 이미지를 crop 한 후, saliency map들을 산출하여 평균내서 한 장으로 합쳐서 그렸다.&lt;/p&gt;
+
+&lt;h2 id=&quot;weakly-supervised-object-localisation&quot;&gt;Weakly Supervised Object Localisation&lt;/h2&gt;
+
+&lt;p&gt;이러한 saliency map을 물체 위치 탐지 문제에 적용했다. 간단히 과정을 간략하게 요약하면 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1V237wxA35x4oebtlzbOqc3h0-nH44cL6&quot; alt=&quot;[그림 1] Geodesic Star Convexity for Interactive Image Segmentation&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 1] Geodesic Star Convexity for Interactive Image Segmentation&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;GraphCut 이라는 것을 사용한다. 관심 가지는 클래스를 foreground, 그외에 배경을 background라고하는데, &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt;의 Step 2 처럼, foreground와 background 구분짓기 위해서 색상으로 tagging을 해야한다.&lt;/li&gt;
+  &lt;li&gt;saliency map과 가우시안 믹스쳐(Gaussian Mixture) 모델을 활용하여 saliency map의 특정 경계값을 기준으로 foreground 와 background 경계 지도을 만든다.&lt;/li&gt;
+  &lt;li&gt;2에서 만들어진 태깅된 경계 지도로 GraphCut으로 Segmentation을 진행한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;자세한 설명은 다음과 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.csd.uwo.ca/~yuri/Papers/iccv01.pdf&quot;&gt;GraphCut&lt;/a&gt;을 사용하게된 계기는 saliency map은 물체를 판별하는 영역만 탐지하지 물체 전체를 잡아내지 않기 때문이다. 그러므로 다른 물체의 경계 지도를 전달하는게 중요하다. Foreground(관심 가지는 물체 클래스) 와 background(물체 이외에 배경) 모델은 가우시안 믹스처(Gaussian Mixture) 모델들을 적용했다. Saliency 분포값의 95%를 경계로 이보다 높은 값을 가지는 픽셀들로 foreground를 추정했고, 30%를 경계로 이보다 이하의 값을 가지는 픽셀들은 background로 추정했다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Tqqu_QRGqMvOyrvoOVLJdaLOjuxGkGGS&quot; alt=&quot;[그림 2] 1: 원본 / 2: saliency map / 3: 경계 지도 / 4: segmentated image&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 2] 1: 원본 / 2: saliency map / 3: 경계 지도 / 4: segmentated image&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Weakly supervised 임에도 불구하고, ILSVRC-2013 테스트 데이터에서 46.4%의 Top-5 error 성적을 거두었다(당시 우승자는 29.9%를 기록). GraphCut 프로그램은 &lt;a href=&quot;http://www.robots.ox.ac.uk/~vgg/software/iseg/&quot;&gt;여기&lt;/a&gt;서 사용할 수 있다(matlab code).&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;4-relation-to-deconvolutional-networks&quot;&gt;4. Relation to Deconvolutional Networks&lt;/h1&gt;
+
+&lt;p&gt;저자는 Deconvolution Network(Zeiler &amp;amp; Fergus, 2013) 구조를 사용해 원래 이미지를 재구성하는 것은 사실상 미분하는 것과 거의 동일하다고 이야기한다.&lt;/p&gt;
+
+&lt;p&gt;Deconvolution과 미분의 관계는 전에 작성한 포스트를 참고하길 바란다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html&quot;&gt;[PyTorch] ConvTranspose2d 와 Conv2d 의 관계&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;appendix-직접-코딩하여-살펴보기&quot;&gt;Appendix: 직접 코딩하여 살펴보기&lt;/h1&gt;
+
+&lt;p&gt;ILSVRC 2015의 1위 모델인 &lt;code class=&quot;highlighter-rouge&quot;&gt;ResNet152&lt;/code&gt;을 가져와서 &lt;a href=&quot;https://pixabay.com/ko/&quot;&gt;Pixabay&lt;/a&gt;에 있는 플라밍고(class: 130) 이미지를 사용해서 Class Model Visualization과 Saliency Map을 생성해보았다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1qyoRulVHIqlqESl0roNMSoLB8s9OB9zN&quot; alt=&quot;[그림 3] 플라밍고 Class Model Visualization과 Saliency Map&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 3] 플라밍고 Class Model Visualization과 Saliency Map&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;이미지는 256x256 크기로 재조정하고 224x224 크기로 center crop을 진행했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Class model visualization&lt;/strong&gt;의 경우, 151스텝동안 backpropagation 진행, L2 정규화에 $\lambda$를 1.0 으로 설정한 결과다. 자세히 보면 플라밍고의 머리와 목 부분이 곳곳에서 보인다(사실 이게 어떤 의미인지는 아직 연구가 필요하다).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Saliency Map&lt;/strong&gt;의 경우, 딱 1회만 역전파를 한 결과다. 논문에서도 서술했지만, 물체를 직접 탐지하지는 않으며, 물체를 판별하는데 도움이되는 영역이 주로 표시된다.&lt;/p&gt;
+
+&lt;p&gt;자세한 코드는 다음 항목들에서 이용할 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/pytorch_tutorials/blob/master/02_VISION/03_deep_inside_cnn.ipynb&quot;&gt;GitHub&lt;/a&gt; 에서 보기&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/02_VISION/03_deep_inside_cnn.ipynb&quot;&gt;Jupyter Notebook&lt;/a&gt; 에서 보기&lt;/li&gt;
+&lt;/ul&gt;
 </description>
-        <pubDate>Wed, 19 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/others/2020/02/19/geultto4.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/others/2020/02/19/geultto4.html</guid>
+        <pubDate>Thu, 12 Mar 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/paper/2020/03/12/deepinsidecnn.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/03/12/deepinsidecnn.html</guid>
         
         
-        <category>others</category>
+        <category>paper</category>
         
       </item>
     
@@ -226,12 +263,99 @@
 
 &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa&quot; alt=&quot;[그림 4] Multi30k 성능 테스트&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 4] Multi30k 성능 테스트&lt;/figcaption&gt;&lt;/figure&gt;
 </description>
-        <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed3.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed3.html</guid>
+        <pubDate>Sun, 23 Feb 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/paper/2020/02/23/attentionisallyouneed3.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/23/attentionisallyouneed3.html</guid>
         
         
         <category>paper</category>
+        
+      </item>
+    
+      <item>
+        <title>PRML Project</title>
+        <description>&lt;p&gt;크리스토퍼 비숍의 책 “패턴 인식과 기계 학습(Pattern Recognition and Machine Learning)” 의 원서를 공부하고, 그에 필요한 코드와 수식을 정리하고 있습니다. 아래 사이트에서 확인하실 수 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;원서 다운로드: &lt;a href=&quot;https://aka.ms/prml&quot;&gt;https://aka.ms/prml&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;GitBook: &lt;a href=&quot;https://soo.gitbook.io/prml&quot;&gt;https://soo.gitbook.io/prml&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 21 Feb 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/prml/2020/02/21/prml.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/prml/2020/02/21/prml.html</guid>
+        
+        
+        <category>prml</category>
+        
+      </item>
+    
+      <item>
+        <title>글또 4기 다짐</title>
+        <description>&lt;h1 id=&quot;글또-4기를-시작하며&quot;&gt;글또 4기를 시작하며&lt;/h1&gt;
+
+&lt;p&gt;“글또”가 궁금하다면? &lt;a href=&quot;https://www.notion.so/ac5b18a482fb4df497d4e8257ad4d516&quot;&gt;&lt;strong&gt;글또 Notion 페이지 바로가기&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;작년 여름의 어느날 글또를 시작하면서 세웠던 계획을 다시 돌아보게 됐다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;“너는 다 계획이 있구나”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Y534QRewyuENFNHTtf2WXgZe_5VH91MS&quot; alt=&quot;출처: 영화 기생충 스틸컷&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: 영화 기생충 스틸컷&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PRML(“Pattern Recognition and Machine Learning” - Christopher Bishop) 책 공부하기&lt;/li&gt;
+  &lt;li&gt;NLP 논문 읽기 (BERT 등)&lt;/li&gt;
+  &lt;li&gt;새로운 것 배우기: Flask, Spark, Reinforcement Learning&lt;/li&gt;
+  &lt;li&gt;대학원 준비&lt;/li&gt;
+  &lt;li&gt;장롱면허 탈출&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 5가지 목표 중에서 3개는 달성하고 새로운 것을 배우는 것은 달성하지 못했고 장롱면허도 아직 탈출하지 못했다. 첫번째 목표도 100% 완성하지 못했기 때문에 사실상 50%를 완성했다고 할 수 있다. 다시 돌아보니 글또와는 크게 관련이 없는 목표들이 많았다. 그래서 이번 글또 4기에는 글또에 알맞는 목표를 세워보려고 한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;최소 12편 이상의 글 작성하기&lt;/li&gt;
+  &lt;li&gt;어떤 주제든 시리즈 글 연재하기(3편 이상)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;글또 4기를 마치고 꼭 두 가지 목표를 완수하기를…&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;글또-4기에서-작성하고-싶은-글&quot;&gt;글또 4기에서 작성하고 싶은 글&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;인지(행동)과학 관련 책 리뷰&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;인지과학 분야의 책을 통해 사람이 어떤 방식으로 생각을 하는지 이해하고, 딥러닝 모델의 설명과 연관지어 떠오르는 아이디어를 정리해보고자 한다. 컴퓨터 비전 분야에서 인간의 시각 시스템을 모방한 Neocognitron(1979, Kunihiko Fukushima)부터 현재의 다양한 Convolution Neural Network 까지, 인간에 대한 연구는 알고리즘을 해석하고 발전시키는데 많은 영향을 줬었다. 사람이 생각하는 과정(인지 프로세스)를 이용해 더 좋은 성능을 내는 모델을 연구하거나, 더 나아가 “설명가능한 딥러닝 모델”의 실마리가 나올 수 있지 않을까 생각하고 있다. 관련 전공이 아니기 때문에, 먼저 사람들이 주로 읽는 도서부터 시작해서 천천히 깊게 탐구해볼 생각이다. 현재 도서 목록으로 다음과 같이 정했는데, 혹시 추천할 만한 책이 있으면 댓글 부탁드린다.&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;ul&gt;
+        &lt;li&gt;생각에 관한 생각&lt;/li&gt;
+        &lt;li&gt;넛지&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;데이터 사이언스 대학원 입학과정 및 생활&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;나는 대학원에 운좋은 타이밍에 입학했다고 생각한다. 그래도 차후에 다른 사람에게 도움이 될만한 정보와 신설된 데이터 사이언스 대학원에 입학하게된 계기 및 과정을 쓰려고 한다. 또한, 후회없는 2년(혹은 그 이상..?) 대학원 과정을 만들기 위해서 어떤 것을 계획하고 어떻게 공부를 하는지도 기록할 것이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;논문 리뷰(NLP, XAI 분야)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;마지막으로 최근에 보고 있는 논문들을 간략하게 정리할 예정이다. 최근 1월~2월 사이에 읽은 Vision 분야에서 사용되고 있는 XAI 관련 논문을 읽었고 이를 정리하고자 한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Wed, 19 Feb 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/others/2020/02/19/geultto4.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2020/02/19/geultto4.html</guid>
+        
+        
+        <category>others</category>
         
       </item>
     
@@ -1580,240 +1704,6 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
         
         
         <category>paper</category>
-        
-      </item>
-    
-      <item>
-        <title>Github pages 로 프로젝트 문서화</title>
-        <description>&lt;p&gt;잘 만든 프로젝트를 jupyter notebook 으로 보여주기에는 난잡해 보일 수가 있다. 프로젝트를 정리하고 싶다면 프로젝트 폴더에 docs 를 만들어서 github가 제공하는 웹호스팅 기능을 이용해서 프로젝트 홈페이지를 만들수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;실습환경: Ubuntu Server 18.04 LTS&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;준비과정&quot;&gt;준비과정&lt;/h1&gt;
-
-&lt;h2 id=&quot;install-nodejs--npm&quot;&gt;Install nodejs &amp;amp; npm&lt;/h2&gt;
-
-&lt;p&gt;사용하기 위해서 우선 nodejs 와 노드 패키지 매니저(npm) 를 설치해야한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-$ sudo apt-get install -y nodejs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;패키지 버전을 체크해보자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ nodejs --version
-v10.14.1
-
-$ npm --version
-6.4.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;install-gitbook-client&quot;&gt;Install gitbook client&lt;/h2&gt;
-
-&lt;p&gt;gitbook client 를 설치해야한다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ npm install gitbook-cli -g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;initialize-gitbook&quot;&gt;Initialize gitbook&lt;/h2&gt;
-
-&lt;p&gt;이제 본젹적으로 gitbook 을 사용해보자. 처음 프로젝트를 시작하면서 문서화를 생각하는 것은 좋다. 만약에 이미 작업한 프로젝트가 있다면, 중간에 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 를 만드는 작업만 유심히 살펴봐도 된다. 프로젝트 디렉토리 구조는 아래와 같다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
-\README.md
-\SUMMARY.md
-\book.json
-\notebooks  # 내 프로젝트 쥬피터 노트북
-\posts  # 내 프로젝트 관련 포스터
-	\chapter-1
-		\README.md
-		\01_helloworld.md
-\docs  # github page 로 가는 html 파일들 등
-	\...
-		
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그럼 우선 프로젝트 디렉토리를 만들어보자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ mkdir [프로젝트 디렉토리] &amp;amp;&amp;amp; cd [프로젝트 디렉토리]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 디렉토리를 만들자. 이 &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 안에 있는 모든 내용이 향후에 웹페이지로 갈것이다. 만들고 아래 명령어를 시작해보자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook init
-Installing GitBook 3.2.3
-...
-warn: no summary file in this book 
-info: create README.md 
-info: create SUMMARY.md 
-info: initialization is finished 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ ls
-README.md  SUMMARY.md
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;README.md&lt;/strong&gt; 파일은 gitbook 의 첫번째 페이지, &lt;strong&gt;SUMMARY.md&lt;/strong&gt; 는 gitbook 의 목차 역할을 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; 폴더 안에 첫번째 챕터를 만들어보자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ mkdir posts &amp;amp;&amp;amp; cd posts
-[./posts] $ mkdir chapter-1 &amp;amp;&amp;amp; cd chapter-1
-[./posts/chapter-1] $ vi README.md  # 아무거나 쓰고 저장하자
-[./posts/chapter-1] $ vi 01_helloworld.md  # 아무거나 쓰고 저장하자
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이제 SUMMARY.md 에서 목차를 수정해보자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[./posts/chapter-1] $ cd ../..
-[.] $ vi SUMMARY.md
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Summary
-  
-* [Introduction](README.md)
-* [Chapter-1](post/chapter-1/README.md)
-	* [01 hello world](post/chapter-1/01_helloworld.md)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;여기까지 왔으면 기본적인 설정은 완료된것이다. &lt;code class=&quot;highlighter-rouge&quot;&gt;gitbook serve&lt;/code&gt; 명령어를 통해 한번 살펴보자.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ gitbook serve
-Live reload server started on port: 35729
-Press CTRL+C to quit ...
-
-info: 7 plugins are installed 
-info: loading plugin &quot;livereload&quot;... OK 
-info: loading plugin &quot;highlight&quot;... OK 
-info: loading plugin &quot;search&quot;... OK 
-info: loading plugin &quot;lunr&quot;... OK 
-info: loading plugin &quot;sharing&quot;... OK 
-info: loading plugin &quot;fontsettings&quot;... OK 
-info: loading plugin &quot;theme-default&quot;... OK 
-info: found 3 pages 
-info: found 0 asset files 
-info: &amp;gt;&amp;gt; generation finished with success in 0.3s ! 
-
-Starting server ...
-Serving book on http://localhost:4000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;http://localhost:4000&lt;/strong&gt; 로 접속을 시도해보자. 아래와 같은 화면이 나오면 성공이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/77u9dksoz4tio2x/1204_gitbook.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;CTRL+C&lt;/strong&gt; 를 눌러서 꺼주자.&lt;/p&gt;
-
-&lt;h2 id=&quot;initialize-git&quot;&gt;Initialize git&lt;/h2&gt;
-
-&lt;p&gt;테스트 후, 프로젝트 디렉토리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;_book&lt;/code&gt; 라는 폴더가 생성됐을 것이다. 이 폴더를 통햇 github 페이지를 만든다. 이 폴더는 나중에 github 저장소에 올릴 필요가 없기 때문에 .gitignore 에 추가해줘야한다. (밑에 한번 지우는 과정을 거치지만 혹시 모르는 상태에 대비해서 작성해준다.)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ vi .gitignore
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;아래 코드를 넣어주자. &lt;strong&gt;node_modules&lt;/strong&gt; 는 plugin 에 필요한 패키지들을 설치하는 디렉토리인데 올리지 않는다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Book build output
-_book
-# Dependency packages
-node_modules
-# Jupyter Notebook checkpoint
-.ipynb_checkpoints
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이제 github 에 올려보도록 한다. 우선 자신의 github 에 [프로젝트 디렉토리]와 같은 이름의 github 저장소를 생성하자. 그리고 git 을 사용하기 위해, 다시 돌아와서 해당 프로젝트 디렉토리를 git 저장소로 만들어준다. (애당초에 repository 를 만들어서 clone 하는 상태에서 시작해도 좋다.)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.] $ git init
-[.](master) $ git remote add origin git@github.com:[사용자이름]/[프로젝트 디렉토리].git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;완료되었으면 저장소에 올려보도록 한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;publish-gitbook.sh&lt;/code&gt; 라는 쉘 스크립트를 만들어준다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[.](master) $ vi publish-gitbook.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# remove gitbook old things&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; _book
-&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; docs
-
-&lt;span class=&quot;c&quot;&gt;# gitbook init&lt;/span&gt;
-gitbook &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; gitbook build
-
-&lt;span class=&quot;c&quot;&gt;# build pages&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;docs
-&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; _book/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; docs/
-
-&lt;span class=&quot;c&quot;&gt;# delete things&lt;/span&gt;
-git clean &lt;span class=&quot;nt&quot;&gt;-fx&lt;/span&gt; _book
-
-&lt;span class=&quot;c&quot;&gt;# upload&lt;/span&gt;
-git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-git commit &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;update docs&quot;&lt;/span&gt;
-git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;저장소에서-활성화-하기&quot;&gt;저장소에서 활성화 하기&lt;/h2&gt;
-
-&lt;p&gt;자신의 github 저장소의 &lt;strong&gt;Settings&lt;/strong&gt; 에 가서 &lt;strong&gt;Github Pages&lt;/strong&gt; 항목의 &lt;strong&gt;master branch /docs folder&lt;/strong&gt; 를 누르고 &lt;strong&gt;Save&lt;/strong&gt; 를 누르자.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/n4kcz94j5z77ia4/1204_repo1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/s/4s8rsdyl71ph1hd/1204_repo2.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 인터넷 주소창에 &lt;strong&gt;https://[사용자이름].github.io/[프로젝트 디렉토리]&lt;/strong&gt; 에 접속하면 아까 보았던 gitbook 모습을 볼 수 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;customizing&quot;&gt;Customizing&lt;/h1&gt;
-
-&lt;h2 id=&quot;bookjson&quot;&gt;book.json&lt;/h2&gt;
-
-&lt;p&gt;프로젝트 디렉토리에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;book.json&lt;/code&gt; 파일을 생성하여 커스터마이징이 가능하다. 사실 쓰는건 플러그인과 변수 정도이지만, book.json의 기본 설정을 &lt;a href=&quot;https://toolchain.gitbook.com/config.html&quot;&gt;여기&lt;/a&gt;서 참고할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;plugins&quot;&gt;plugins&lt;/h2&gt;
-
-&lt;p&gt;gitbook 에 다양한 플러그인을 설치 할 수 있는데, &lt;a href=&quot;https://plugins.gitbook.com/&quot;&gt;https://plugins.gitbook.com/&lt;/a&gt; 사이트에서 확인 할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;주로 사용하는것은 수식편집이 가능한 “katex”, 방문자 분석을 위한 구글 애널릭틱스 “ga”, 댓글을 달수 있는 “disqus” (회원가입 필요함) 정도다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
-	&quot;plugins&quot;: [
-		&quot;katex&quot;,
-		&quot;disqus&quot;,
-		&quot;ga&quot;
-		],
-	&quot;pluginsConfig&quot;: {
-        &quot;disqus&quot;: {
-            &quot;shortName&quot;: &quot;XXXXXXX&quot;
-        },
-        &quot;ga&quot;: {
-            &quot;token&quot;: &quot;UA-XXXX-Y&quot;
-        }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tinydew4.gitbooks.io/gitbook/ko/structure.html&quot;&gt;GitBook Toolchain Documentation for Multi-Languages&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.psangwoo.com/coding/2018/01/31/gitbook-on-windows.html&quot;&gt;윈도우에서 깃북 제작 및 깃헙 페이지로 호스팅하기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://book.zhlzzz.com/gitbook/&quot;&gt;GitBook完整教程&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://beomi.github.io/2017/11/20/Deploy-Gitbook-to-Github-Pages/&quot;&gt;깃헙 Pages에 깃북 배포하기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gitbook.zhangjikai.com/plugins.html&quot;&gt;github plugin 설명(중국어)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 04 Dec 2018 22:04:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2018/12/04/buildgithubpages.html</guid>
-        
-        
-        <category>programming</category>
         
       </item>
     
