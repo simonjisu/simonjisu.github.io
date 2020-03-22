@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Mar 2020 19:49:30 +0900</pubDate>
-    <lastBuildDate>Sun, 22 Mar 2020 19:49:30 +0900</lastBuildDate>
+    <pubDate>Sun, 22 Mar 2020 19:52:14 +0900</pubDate>
+    <lastBuildDate>Sun, 22 Mar 2020 19:52:14 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -92,9 +92,9 @@ p_X(x) = \int_{\mathcal{X}_0} f_X(x) dx &amp;= \int_{\mathcal{Y}_0} f_X(x) \vert
 &lt;p&gt;관련 분포를 그리면 다음 그림과 같다(관련 코드는 &lt;a href=&quot;https://gist.github.com/simonjisu/57c6e2b89b4c9457541809ec5b5f51c9&quot;&gt;링크&lt;/a&gt;에서 확인 할 수 있다). 각 선의 의미는 다음과 같다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#d40000&quot;&gt;빨강&lt;/span&gt;: 확률변수 $X$의 실제 분포&lt;/li&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#002ed4&quot;&gt;파랑&lt;/span&gt;: 확률변수 $Y$의 실제 분포&lt;/li&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#e3a205&quot;&gt;노랑&lt;/span&gt;: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;color:#d40000&quot;&gt;빨강&lt;/span&gt;: 확률변수 $X$의 실제 분포(0과 0.5 사이로 rescale함)&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;color:#002ed4&quot;&gt;파랑&lt;/span&gt;: 확률변수 $Y$의 실제 분포(0과 1 사이로 rescale함)&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;color:#e3a205&quot;&gt;노랑&lt;/span&gt;: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포(0과 1 사이로 rescale함)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;또한, 오른쪽 밑의 파란 막대 그래프가 샘플링된 확률변수 $X$의 분포, 왼쪽 파란 막대 그래프 부분이 $y=g^{-1}(x)$로 변환된 확률변수 $Y$의 분포다.&lt;/p&gt;

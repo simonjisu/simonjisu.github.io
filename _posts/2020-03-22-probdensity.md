@@ -82,9 +82,9 @@ py_real = px * np.abs(dxdy(y))
 
 관련 분포를 그리면 다음 그림과 같다(관련 코드는 [링크](https://gist.github.com/simonjisu/57c6e2b89b4c9457541809ec5b5f51c9)에서 확인 할 수 있다). 각 선의 의미는 다음과 같다.
 
-* <span style="color:#d40000">빨강</span>: 확률변수 $X$의 실제 분포
-* <span style="color:#002ed4">파랑</span>: 확률변수 $Y$의 실제 분포
-* <span style="color:#e3a205">노랑</span>: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포
+* <span style="color:#d40000">빨강</span>: 확률변수 $X$의 실제 분포(0과 0.5 사이로 rescale함)
+* <span style="color:#002ed4">파랑</span>: 확률변수 $Y$의 실제 분포(0과 1 사이로 rescale함)
+* <span style="color:#e3a205">노랑</span>: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포(0과 1 사이로 rescale함)
 
 또한, 오른쪽 밑의 파란 막대 그래프가 샘플링된 확률변수 $X$의 분포, 왼쪽 파란 막대 그래프 부분이 $y=g^{-1}(x)$로 변환된 확률변수 $Y$의 분포다.
 
