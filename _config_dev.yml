@@ -49,7 +49,7 @@ menu_contents:
     subposts:
       - subcat: separator
       - subcat: nlp
-      - subcat: book
+      - subcat: math
       - subcat: paper
       - subcat: others
       - subcat: programming
