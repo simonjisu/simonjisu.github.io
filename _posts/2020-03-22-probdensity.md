@@ -29,14 +29,14 @@ $$p_X(X \in (x, x+\delta x)) = \int_{x}^{x+\delta x} f_X(x) dx$$
 
 예를 들어, 확률변수 $X$에 해당하는 확률 밀도함수는 $f_X(x)$, 확률변수 $Y$에 해당하는 확률 밀도함수는 $f_Y(y)$인 경우에서 $x=g(y)$인 비선형 변환이 있다고 가정해본다. 그렇다면 두 확률 밀도함수는 정말 다른 것일까? 확률 밀도함수의 최댓값도 변수의 선택에 종속되어 변화했을까($\hat{x}=g(\hat{y})$의 관계를 유지하는지 아니면 변화했는지)? 이를 알아보기 위해 변화된 확률 분포를 분해해본다.
 
-확률변수 $X$의 가측 부분집합(measurable subset)을 $\mathcal{X}_0 \subset \mathcal{X}$, 확률변수 $Y$의 정의역에 해당하는 가측 부분집합을 $\mathcal{Y}_0 \subset \mathcal{Y}$라고 정의한다. 변환식 $x = g(y)$을 $x$에 관해 미분하면, $dx = g'(y)dy$를 얻을 수 있으며, $X$의 확률 분포$p_X(x)$는 다음과 같이 변환할 수 있다.
+확률변수 $X$의 가측 부분집합(measurable subset)을 $\mathcal{X}_0 \subset \mathcal{X}$, 확률변수 $Y$의 정의역에 해당하는 가측 부분집합을 $\mathcal{Y}_0 \subset \mathcal{Y}$라고 정의한다. 변환식 $x = g(y)$을 $y$에 관해 미분하면, $dx = g'(y)dy$를 얻을 수 있으며, $X$의 확률 분포$p_X(x)$는 다음과 같이 변환할 수 있다.
 
 * 여기서 가측 부분집합은 쉽게 얘기해서 정의된 범위라고 생각할 수 있다
 
 $$\begin{aligned}
 p_X(x) = \int_{\mathcal{X}_0} f_X(x) dx &= \int_{\mathcal{Y}_0} f_X(x) \vert \dfrac{dx}{dy} \vert dy \\
 &= \int_{\mathcal{Y}_0} f_X(g(y)) \vert g'(y) \vert dy \\
-&= \int_{\mathcal{Y}_0} f_Y(y) dy
+&= \int_{\mathcal{Y}_0} f_Y(y) dy \\
 &= p_Y(y)
 \end{aligned}$$
 
@@ -44,7 +44,7 @@ p_X(x) = \int_{\mathcal{X}_0} f_X(x) dx &= \int_{\mathcal{Y}_0} f_X(x) \vert \df
 
 ## Example of Transformation
 
-과연 다른지 $x = g(y) = \ln(y) - \ln(1-y) + 5$라는 변환으로 $\hat{x}=g(\hat{y})$ 관계($y$의 최댓값 위치가 변환된 최댓값을 결정)를 유지하고 있는지 아닌지 살펴본다. $g$의 역함수는 $g^{-1}(x) = \dfrac{1}{1 + \exp(-x + 5)}$인 sigmoid 함수가 된다. 즉, $y$의 정의역은 0과 1 사이의 실수, $x$는 $-\infty$와 $\infty$의 실수 값을 취할 수 있다. 또한 함수 $g$의 미분값은 $\dfrac{dx}{dy}=\dfrac{1}{y - y^2}$ 다.
+과연 다른지 $x = g(y) = \ln(y) - \ln(1-y) + 5$ 라는 변환으로 $\hat{x}=g(\hat{y})$ 관계($y$의 최댓값 위치가 변환된 최댓값을 결정)를 유지하고 있는지 아닌지 살펴본다. $g$의 역함수는 $g^{-1}(x) = \dfrac{1}{1 + \exp(-x + 5)}$인 sigmoid 함수가 된다. 즉, $y$의 정의역은 0과 1 사이의 실수, $x$는 $-\infty$와 $\infty$의 실수 값을 취할 수 있다. 또한 함수 $g$의 미분값은 $\dfrac{dx}{dy}=\dfrac{1}{y - y^2}$ 다.
 
 ```python
 import numpy as np
@@ -82,15 +82,15 @@ py_real = px * np.abs(dxdy(y))
 
 관련 분포를 그리면 다음 그림과 같다(관련 코드는 [링크](https://gist.github.com/simonjisu/57c6e2b89b4c9457541809ec5b5f51c9)에서 확인 할 수 있다). 각 선의 의미는 다음과 같다.
 
-* 빨강: 확률변수 $X$의 실제 분포
-* 파랑: 확률변수 $Y$의 실제 분포
-* 노랑: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포
+* <span style="color:#d40000">빨강</span>: 확률변수 $X$의 실제 분포
+* <span style="color:#002ed4">파랑</span>: 확률변수 $Y$의 실제 분포
+* <span style="color:#e3a205">노랑</span>: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포
 
 또한, 오른쪽 밑의 파란 막대 그래프가 샘플링된 확률변수 $X$의 분포, 왼쪽 파란 막대 그래프 부분이 $y=g^{-1}(x)$로 변환된 확률변수 $Y$의 분포다.
 
 {% include image.html id="1c83fpP9BQb7DjtK0EmTUKSPcdt6gLCA5" desc="" width="100%" height="auto" %}
 
-이 그래프에서 명백한 것은 $X$분포의 최대값 $\hat{x}$과 실제 $Y$분포의 최대값$\hat{y}$은 단순 $x=g(y)$(혹은 $y=g^{-1}(x)$)의 관계를 가지지 않는다. 즉, $X$분포와 $Y$분포는 서로 다른 특성을 가지며, 확률 밀도가 변수의 변환으로 인해서 바뀌었다고 할수 있다.
+이 그래프에서 명백한 것은 $X$분포(<span style="color:#d40000">빨강</span>)의 최대값 $\hat{x}$과 실제 $Y$분포(<span style="color:#002ed4">파랑</span>)의 최대값 $\hat{y}$은 단순 $x=g(y)$(혹은 $y=g^{-1}(x)$)의 관계를 가지지 않는다. 즉, $X$분포와 $Y$분포는 서로 다른 특성을 가지며, 확률 밀도가 변수의 변환으로 인해서 바뀌었다고 할수 있다.
 
 ---
 
