@@ -90,13 +90,15 @@ py_real = px * np.abs(dxdy(y))
 
 {% include image.html id="1c83fpP9BQb7DjtK0EmTUKSPcdt6gLCA5" desc="" width="100%" height="auto" %}
 
-이 그래프에서 명백한 것은 $X$분포(<span style="color:#d40000">빨강</span>)의 최대값 $\hat{x}$과 실제 $Y$분포(<span style="color:#002ed4">파랑</span>)의 최대값 $\hat{y}$은 단순 $x=g(y)$(혹은 $y=g^{-1}(x)$)의 관계를 가지지 않는다. 즉, $X$분포와 $Y$분포는 서로 다른 특성을 가지며, 확률 밀도가 변수의 변환으로 인해서 바뀌었다고 할수 있다.
+이 그래프에서 명백한 것은 $X$분포(<span style="color:#d40000">빨강</span>)의 최대값 $\hat{x}$과 실제 $Y$분포(<span style="color:#002ed4">파랑</span>)의 최대값 $\hat{y}$은 단순 $x=g(y)$(혹은 $y=g^{-1}(x)$)의 관계를 가지지 않는다. 실제 $g^{-1}(\hat{x})$의 위치(약 $y=0.73$ 부근)에서 $Y$분포의 값은 $P_Y(\hat{y})$위치 보다 더 아래부분이다.
+
+이를 통해, $X$분포와 $Y$분포는 서로 다른 특성을 가지며, 확률 밀도가 변수의 변환으로 인해서 바뀌었다고 할 수 있다.
 
 ---
 
 # Determinent of Jacobian
 
-위에서 이야기한 $\vert \dfrac{dx}{dy} \vert$인 Jacobian Factor 란 무엇일까? 야코비 행렬식(Jacobian Determinant)을 기하학적으로 풀면 좌표계가 변환할 때  변환된 면적의 너비로 풀이할 수 있다. 
+위에서 이야기한 $\vert \dfrac{dx}{dy} \vert$인 Jacobian Factor 란 무엇일까? 야코비 행렬식(Jacobian Determinant)을 기하학적으로 풀면 좌표계가 변환할 때 변환된 면적의 너비로 풀이할 수 있다. 
 
 $$det \Big( \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix} \Big) = 6$$
 
@@ -104,7 +106,9 @@ $$det \Big( \begin{bmatrix} 3 & 1 \\ 0 & 2 \end{bmatrix} \Big) = 6$$
 
 위 행렬식값인 6의 의미는 단위 벡터 기저(basis)에서 새로운 기저로 변환했을 때 면적이 1(노란색 부분)에서 6(초록색 부분)만큼 바뀐 다는 뜻이다. 
 
-* 단위 벡터 기저: $ \Big( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \Big)$
+단위 벡터 기저: 
+
+$$ \Big( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \Big)$$
 
 즉, 확률 변수의 변환 예제에서 작은 구간의 확률값 $f_X(x) dx$에 해당하는 면적에  $\dfrac{dx}{dy}=g'(y)=\dfrac{1}{y-y^2}$값을 곱한 만큼 바뀐다는 뜻이다. 
 
