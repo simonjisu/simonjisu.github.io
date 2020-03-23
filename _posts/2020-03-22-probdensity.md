@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Probability Density and Transformation"
-date: "2020-03-12 14:19:38 +0900"
+date: "2020-03-22 14:19:38 +0900"
 categories: math
 author: "Soo"
 comments: true
