@@ -6,9 +6,125 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 23 Mar 2020 20:38:40 +0900</pubDate>
-    <lastBuildDate>Mon, 23 Mar 2020 20:38:40 +0900</lastBuildDate>
+    <pubDate>Tue, 24 Mar 2020 19:39:36 +0900</pubDate>
+    <lastBuildDate>Tue, 24 Mar 2020 19:39:36 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Visual Studio Code Remote Development</title>
+        <description>&lt;h1 id=&quot;계기&quot;&gt;계기&lt;/h1&gt;
+
+&lt;p&gt;대학원 수업 중 VMware의 &lt;a href=&quot;https://www.sap.com/korea/products/hana.html&quot;&gt;SAP HANA&lt;/a&gt;를 사용할 일이 있었는데, VM에 있는 Container CMD가 너무 불편해서 VS Code와 연결하는 작업을 진행했다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;환경-및-준비물&quot;&gt;환경 및 준비물&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;OS 환경: Windows 10&lt;/li&gt;
+  &lt;li&gt;준비물:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Stuido Code&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;VMware의 가상머신의 Host IP&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;vmware란&quot;&gt;VMware란?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.vmware.com/kr.html&quot;&gt;VMware&lt;/a&gt;는 하드웨어 가상 머신 기능을 제공하는 소프트웨어다. 내 컴퓨터의 일부 리소스를 사용하여 내부에 가상의 컴퓨터를 하나 더 만드는 것이다.&lt;/p&gt;
+
+&lt;p&gt;여기서는 VMware에 SAP HANA를 설치해서 사용한다(소개링크: &lt;a href=&quot;https://www.sap.com/korea/products/hana.html&quot;&gt;SAP HANA&lt;/a&gt;). 사실 이게 뭔지 잘 몰라도 된다. 중요한 것은 가상머신과 내 컴퓨터와 통신하는 IP 주소를 알아내는 것이다. 가상머신을 키게되면 다음 그림과 같이 IP 주소(&lt;code class=&quot;highlighter-rouge&quot;&gt;IP address&lt;/code&gt;)를 보여주는데 이것을 꼭 기억해두자.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1etP3nFKJvKEcai35qowatBJWPQgv3g28&quot; alt=&quot;가성머신 Power ON 화면&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;가성머신 Power ON 화면&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;vs-code-remote-development란&quot;&gt;VS Code Remote Development란?&lt;/h2&gt;
+
+&lt;p&gt;쉽게 말해서 외부 컴퓨터 혹은 가상환경(Remote OS)을 현재 내 컴퓨터(Local OS)에서 원격으로 조종하는 것이다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1fpWgA8YuFAj4q94fqCaau0y3LeCALlfZ&quot; alt=&quot;Remote Development Package&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Remote Development Package&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;이 패키지는 다음 3가지 패키지를 통합한 것이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Remote-SSH&lt;/strong&gt;: Work with source code in any location by opening folders on a remote machine/VM using SSH. Supports x86_64, ARMv7l (AArch32), and ARMv8l (AArch64) glibc-based Linux, Windows 10/Server (1803+), and macOS 10.14+ (Mojave) SSH hosts.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote-Containers&lt;/strong&gt;: Work with a sandboxed toolchain or container based application by opening any folder mounted into or inside a container.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote-WSL&lt;/strong&gt;: Get a Linux-powered development experience from the comfort of Windows by opening any folder in the Windows Subsystem for Linux.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;실제로 사용할 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Remote - SSH&lt;/code&gt;다. 이제 Visual Stuido Code 설치를 완료했으면 이제 시작해보자.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;과정&quot;&gt;과정&lt;/h1&gt;
+
+&lt;h2 id=&quot;1-vs-code에서-remote-development-설치&quot;&gt;1. VS Code에서 Remote Development 설치&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;VS Code 키고 Extension으로 가기(단축키: &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + Shift + X&lt;/code&gt;)
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=10lbaK-XGUrvSaQbqS1XE6BAnEsWA8_tV&quot; alt=&quot;Extension 에서 검색&quot; width=&quot;60%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Extension 에서 검색&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;검색창에 &lt;strong&gt;remote development&lt;/strong&gt; 검색후 설치
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Q1HQpUEH3X5sFq29qJ1WGLpwCPofdMjT&quot; alt=&quot;1. Remote Development 설치&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;1. Remote Development 설치&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-연결설정-세팅&quot;&gt;2. 연결설정 세팅&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;설치가 완료되면 VS Code 좌측 하단에 초록색 버튼이 생기는데 이걸 누른다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1i5253NbIp0WG6eoFM0m6R-wc_emJkFGp&quot; alt=&quot;파란 상태라인 옆 초록색 버튼 누르기&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;파란 상태라인 옆 초록색 버튼 누르기&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Remote로 연결 할 수 있는 Command Palette가 뜬다. 여기서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Remote-SSH: Open Configuration File...&lt;/code&gt; 를 클릭한다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1ZWVM6W8RRb9Ge9-ZZeXTAkl2Ual59Nrn&quot; alt=&quot;Remote-SSH 선택&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Remote-SSH 선택&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;원하는 경로에 config 파일 만든다(이미 있으면 해당 파일에 작성).
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1RHenESTELTmwV50OU_-K5Zb815v5zNht&quot; alt=&quot;Config 경로 선택&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Config 경로 선택&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;다음과 같이 config 파일을 만들고 저장한다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1n3NJ0phct1qOjNXakXUPdO45eIFEktQM&quot; alt=&quot;Remote-SSH 선택&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Remote-SSH 선택&lt;/figcaption&gt;&lt;/figure&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Host&lt;/strong&gt;: 간편하게 지정하는 호스트 이름이다. 만약 CMD 에서 ssh를 이용해 접속하려면 &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh [Host]&lt;/code&gt; 만 쓰면 밑에 있는 세팅이 자동으로 적용된다.
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh hxehost  
+  &lt;span class=&quot;c&quot;&gt;# 다음 명령어와 같다.&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh hxeadm@192.168.153.128:22 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HostName&lt;/strong&gt;: 실제 호스트 이름, 보통 접속하려는 IP 주소거나 도메인 이름이다.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;User&lt;/strong&gt;: 외부 컴퓨터 혹은 가상환경 로그인 하려는 이름이다.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Port&lt;/strong&gt;: 접속하려는 포트, 22번은 SSH(Secure Shell)에 사용되는 기본 포트이며, 만약 개인 서버라면 웬만하면 바꾸는게 좋다(여기서는 VMware에 접속하는 것이기 때문에 그냥 두었다.)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3-연결하기&quot;&gt;3. 연결하기&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다시 좌측 하단의 초록버튼을 누른 후, 이번에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Remote-SSH: Connect to Host...&lt;/code&gt;를 누른다.&lt;/li&gt;
+  &lt;li&gt;2번에서 설정한 &lt;code class=&quot;highlighter-rouge&quot;&gt;hxehost&lt;/code&gt;가 생기고, 이를 누르면 연결을 시작한다. 당연히 VMware의 가상머신(&lt;code class=&quot;highlighter-rouge&quot;&gt;hxehost&lt;/code&gt;)은 켜둬야한다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1ipIXZSH3M26yv9GkkNrDaZ_MIo3B5Oaj&quot; alt=&quot;Remote-SSH: Connect to Host&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Remote-SSH: Connect to Host&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;연결을 시작하면 파란색 상태라인이 보라색으로 바뀌면서 연결을 시도한다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1qj7fv6e7CrlnAvaQnLG-cuApKHCnz8xp&quot; alt=&quot;가상머신과 연결하기&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;가상머신과 연결하기&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;만약 가상머신에 로그인 password가 있다면 입력하라는 창이 뜬다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Dl6Hfop-CL1jUVtrLw8uiEZ4frRmwbEN&quot; alt=&quot;비밀번호 입력&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;비밀번호 입력&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;연결이 완료되면 상태창에 어떤 호스트와 연결됐는지 뜬다.
+    &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1xz0jPstm8SlKOifxazBXgu3nlXAyT7__&quot; alt=&quot;연결 완료후 상태라인&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;연결 완료후 상태라인&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이제 자유롭게 관련 스크립트를 작성하고 파일을 실행할 수 있다! 또한 단축키로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + Shift + ~&lt;/code&gt;를 누르면 가상머신의 CMD를 활용할 수 있는데, 여기서는 복사 붙여넣기가 되서 너무 편하다 ㅎㅎ.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 Mar 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/programming/2020/03/24/vscoderemote.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/programming/2020/03/24/vscoderemote.html</guid>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>Probability Density and Transformation</title>
@@ -1078,145 +1194,6 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
         
         
         <category>others</category>
-        
-      </item>
-    
-      <item>
-        <title>[PyTorch] ConvTranspose2d 와 Conv2d 의 관계</title>
-        <description>&lt;p&gt;최근 XAI 에 관련된 공부를 하면서 비전쪽의 많은 논문을 살펴보고 있다. “Visualizing and Understanding Convolutional Networks (2013)” 논문에서는 이미지 처리에서는 CNN 알고리즘이 제일 좋지만, 그 이유에 대해서 탐구를 시도한 논문이다. 도대체 Convolution의 필터가 어떤 역할을 하는지, 이들이 어떤 부분을 살펴보는 지를 확인한다. 오늘은 이 논문에서 제안하는 Deconvolutional layers(정확히는 Fractionally-strided convolution 이지만 차후에 언급한다)의 실체를 낱낱이 살펴보도록 한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;link: &lt;a href=&quot;https://arxiv.org/abs/1311.2901&quot;&gt;Visualizing and Understanding Convolutional Networks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;convolution-layer&quot;&gt;Convolution layer&lt;/h1&gt;
-
-&lt;p&gt;Deconvolutional layer을 알아보기 전에 합성곱 연산(Convolutional Operation)에 대해 알아볼 필요가 있다. 합성곱 연산은 필터가 조금씩 이동하면서 이미지의 일부와 필터간 연산을 통해 진행된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=17x4ZQ_r0FTa_mlDFiIWvMJcg22vRrBd6&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;일반적으로 CNN 알고리즘은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Convolution&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;Activation&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;Maxpooling&lt;/code&gt; 과정을 거친다. 예를 들어, 위 그림과 같이 4x4 이미지는 3x3 필터를 통해 2x2 의 선형변환 값을 갖는다(padding=0, stride=1 인 경우). 그리고 활성화 함수를 통과한 뒤에 Maxpool 과정을 거친다. 이때 &lt;code class=&quot;highlighter-rouge&quot;&gt;Convolution&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;Activation&lt;/code&gt;을 거쳤을 때 나오는 텐서를 Activation Map이라고 하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;Pooling&lt;/code&gt; 과정을 거쳤을 때 나오는 텐서를 Pooled Map 이라고 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Y4kIqXn7vUYQgoZWDdprrO-SP9a-Qogs&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 논문에서는 그 과정을 역으로 한번 해보는 것을 제안했다. 위 그림처럼 마지막 Pooled Maps 에서 풀링된 위치를 기억했다가(Max Locations “Switches” 부분), 이 위치를 기반으로 역으로 Unpooled Maps 를 재구축한다(이 부분에 관심있는 분들은 이 논문을 한번 살펴보는 것을 추천드린다). 이번 글에서는 그 다음 스텝인 Convolution layer 에서 역으로 돌아가는 방법에 대해서 설명하려고 한다.&lt;/p&gt;
-
-&lt;p&gt;먼저 이미지의 크기를 $N$, 필터(커널)의 크기를 $K$, 패딩의 크기를 $P$, 스트라이드를 $S$ 라고 정의하고, 여러 변수를 정의 한다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{input image size} &amp;= N \times N =4 \times 4 \\ \text{filter size} &amp;= K\times K = 3 \times 3 \\ \text{padding} &amp;= P = 0 \\ \text{stride} &amp;= S = 1 \\ \text{output image size} &amp;= (\dfrac{N+2P-K}{S}+1, \dfrac{N+2P-K}{S}+1) \\&amp;= 2 \times 2 \\ \text{input image} &amp;: X^{(l)} = \begin{bmatrix} x_{11} &amp; x_{12} &amp; x_{13} &amp;x_{14}\\  x_{21} &amp; x_{22} &amp; x_{23} &amp;x_{24}\\ x_{31} &amp; x_{32} &amp; x_{33} &amp;x_{34}\\ x_{41} &amp; x_{42} &amp; x_{43} &amp;x_{44}\end{bmatrix}^{(l)} \\ \text{output image} &amp;: x^{(l+1)} =\begin{bmatrix} x_{11} &amp; x_{12}\\ x_{21} &amp; x_{22} \end{bmatrix}^{(l+1)} \\ \text{filter} &amp;: W = \begin{bmatrix} w_{11} &amp; w_{12} &amp; w_{13}\\  w_{21} &amp; w_{22} &amp; w_{23}\\ w_{31} &amp; w_{32} &amp; w_{33}\end{bmatrix} \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;이제 수식으로 합성곱 연산을 정의한다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} x_{pq}^{(l+1)} &amp;= \sum_{p=i}^{K+i-1} \sum_{q=j}^{K+j-1} w_{pq} x_{pq}^{(l)} \quad \text{for }i, j \in (1, 2, \cdots,  N-K+1)\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;위 수식으로는 어려워 보이지만 아래와 같은 연산을 &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; 라고 하면 결과는 2x2 행렬이 출력되며 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} X^{(l+1)} &amp;= X^{(l)}*W\\&amp;=\begin{bmatrix}w_{11} x^{(l)}_{11} + w_{12} x^{(l)}_{12} + w_{13} x^{(l)}_{13} + w_{21} x^{(l)}_{21} + w_{22} x^{(l)}_{22} + w_{23} x^{(l)}_{23} + w_{31} x^{(l)}_{31} + w_{32} x^{(l)}_{32} + w_{33} x^{(l)}_{33} &amp; w_{11} x^{(l)}_{12} + w_{12} x^{(l)}_{13} + w_{13} x^{(l)}_{14} + w_{21} x^{(l)}_{22} + w_{22} x^{(l)}_{23} + w_{23} x^{(l)}_{24} + w_{31} x^{(l)}_{32} + w_{32} x^{(l)}_{33} + w_{33} x^{(l)}_{34}\\ w_{11} x^{(l)}_{21} + w_{12} x^{(l)}_{22} + w_{13} x^{(l)}_{23} + w_{21} x^{(l)}_{31} + w_{22} x^{(l)}_{32} + w_{23} x^{(l)}_{33} + w_{31} x^{(l)}_{41} + w_{32} x^{(l)}_{42} + w_{33} x^{(l)}_{43} &amp; w_{11} x^{(l)}_{22} + w_{12} x^{(l)}_{23} + w_{13} x^{(l)}_{24} + w_{21} x^{(l)}_{32} + w_{22} x^{(l)}_{33} + w_{23} x^{(l)}_{34} + w_{31} x^{(l)}_{42} + w_{32} x^{(l)}_{43} + w_{33} x^{(l)}_{44}\end{bmatrix} \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;파이토치에서 Convolution Layer 는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Conv2d&lt;/code&gt; 로 구현되어 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;link: &lt;a href=&quot;https://pytorch.org/docs/stable/nn.html#conv2d&quot;&gt;torch.nn.Conv2d - PyTorch master documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;deconvolution-layer-transposed-convolution-layer&quot;&gt;Deconvolution Layer? Transposed Convolution Layer!&lt;/h1&gt;
-
-&lt;p&gt;저자는 이미 2011 년도에 Deconvolution Layer 를 제안했다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;link: &lt;a href=&quot;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.849.3679&amp;amp;rep=rep1&amp;amp;type=pdf&quot;&gt;Adaptive Deconvolutional Networks for Mid and High Level Feature Learning&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;간단하게 생각해보면 다음 그림과 같이 필터를 이동시키면서 원래 4x4 이미지(초록색)를 복원하면 될것 같다. 이 과정이 맞는지 이후에 살펴볼 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1R-C4g1zSpculTzC8w00IrM9CNM0vifN_&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;흥미로운 것은 파이토치에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConvTranspose2d&lt;/code&gt; 라고 구현이 되어 있다. 그리고 다음과 같은 설명이 덧붙여져 있다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This module can be seen as the gradient of &lt;code class=&quot;highlighter-rouge&quot;&gt;Conv2d&lt;/code&gt; with respect to its input. It is also known as a fractionally-strided convolution or a deconvolution (although it is not an actual deconvolution operation).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;link: &lt;a href=&quot;https://pytorch.org/docs/stable/nn.html#convtranspose2d&quot;&gt;torch.nn.ConvTranspose2d - PyTorch master documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;왜 이름이 Deconvolution 이 아닐까? 읽어보면 이 연산은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Conv2d&lt;/code&gt;의 출력을 입력에 대해 미분을 연산하는 것과 같다고 한다. 미분을 한번 구해보고 이를 C 라고 하자.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} C = \dfrac{\partial X^{(l+1)}}{\partial X^{(l)}}  &amp;= \dfrac{\partial Vec(X^{(l+1)})}{\partial Vec(X^{(l)})} \\ &amp;= \begin{bmatrix}  \dfrac{\partial x_{11}^{(l+1)}}{\partial x_{11}^{(l)}} &amp; \dfrac{\partial x_{12}^{(l+1)}}{\partial x_{11}^{(l)}} &amp; \dfrac{\partial x_{13}^{(l+1)}}{\partial x_{11}^{(l)}} &amp; \dfrac{\partial x_{14}^{(l+1)}}{\partial x_{11}^{(l)}} \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ \dfrac{\partial x_{11}^{(l+1)}}{\partial x_{44}^{(l)}} &amp; \dfrac{\partial x_{12}^{(l+1)}}{\partial x_{44}^{(l)}} &amp; \dfrac{\partial x_{13}^{(l+1)}}{\partial x_{44}^{(l)}} &amp; \dfrac{\partial x_{14}^{(l+1)}}{\partial x_{44}^{(l)}} \end{bmatrix} \\ &amp; = \begin{bmatrix}w_{11} &amp; 0 &amp; 0 &amp; 0\\w_{12} &amp; w_{11} &amp; 0 &amp; 0\\w_{13} &amp; w_{12} &amp; 0 &amp; 0\\0 &amp; w_{13} &amp; 0 &amp; 0\\w_{21} &amp; 0 &amp; w_{11} &amp; 0\\w_{22} &amp; w_{21} &amp; w_{12} &amp; w_{11}\\w_{23} &amp; w_{22} &amp; w_{13} &amp; w_{12}\\0 &amp; w_{23} &amp; 0 &amp; w_{13}\\w_{31} &amp; 0 &amp; w_{21} &amp; 0\\w_{32} &amp; w_{31} &amp; w_{22} &amp; w_{21}\\w_{33} &amp; w_{32} &amp; w_{23} &amp; w_{22}\\0 &amp; w_{33} &amp; 0 &amp; w_{23}\\0 &amp; 0 &amp; w_{31} &amp; 0\\0 &amp; 0 &amp; w_{32} &amp; w_{31}\\0 &amp; 0 &amp; w_{33} &amp; w_{32}\\0 &amp; 0 &amp; 0 &amp; w_{33}\end{bmatrix} \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;이 미분 과정을 파이썬의 &lt;code class=&quot;highlighter-rouge&quot;&gt;sympy&lt;/code&gt; 패키지로 쉽게 만들 수 있다(Jupyter Notebook 에서 사용하길 권장). 다음 코드에서 C 매트릭스를 살펴보면 위와 같은 결과를 얻을 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sympy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# 노트북에서 수학식의 LaTeX 표현 사용
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sympy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_printing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_latex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mathjax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;convolution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multiply_elementwise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x^{(l)}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x^{(l+1)}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatrixSymbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Convolution Output
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;convolution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# Calculate derivatives &amp;amp; get matrix C
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 C 행렬은 재밌는 특징을 가진다. 매트릭스 형태의 입력 데이터를 한줄로 핀 후에 매트릭스 연산을 하고, 다시 형태를 변환 시켜주면 Convolution 의 출력값이 나온다. 정말 맞는지 살펴보기 위해서 다음 코드를 실행해보자.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# forward (1, 16) x (16, 4) = (1, 4) = (2, 2)
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;반대로 출력값을 한줄로 피고 C의 전치행렬과 곱한 후 다시 형태를 변환 시켜주면 입력과 다른 행렬이 나온다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# backward
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;실행하면 다음과 같은 행렬이 나오는데 이 연산 과정을 Deconvolution 연산, 정확히는 &lt;strong&gt;Fractionally-strided convolution&lt;/strong&gt; 혹은 &lt;strong&gt;Transpose convolution&lt;/strong&gt; 이라고 한다. 어떻게 계산된 것이며 어떤 뜻일까?&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{bmatrix}w_{11} x^{(l+1)}_{11} &amp; w_{11} x^{(l+1)}_{12} + w_{12} x^{(l+1)}_{11} &amp; w_{12} x^{(l+1)}_{12} + w_{13} x^{(l+1)}_{11} &amp; w_{13} x^{(l+1)}_{12}\\w_{11} x^{(l+1)}_{21} + w_{21} x^{(l+1)}_{11} &amp; w_{11} x^{(l+1)}_{22} + w_{12} x^{(l+1)}_{21} + w_{21} x^{(l+1)}_{12} + w_{22} x^{(l+1)}_{11} &amp; w_{12} x^{(l+1)}_{22} + w_{13} x^{(l+1)}_{21} + w_{22} x^{(l+1)}_{12} + w_{23} x^{(l+1)}_{11} &amp; w_{13} x^{(l+1)}_{22} + w_{23} x^{(l+1)}_{12}\\w_{21} x^{(l+1)}_{21} + w_{31} x^{(l+1)}_{11} &amp; w_{21} x^{(l+1)}_{22} + w_{22} x^{(l+1)}_{21} + w_{31} x^{(l+1)}_{12} + w_{32} x^{(l+1)}_{11} &amp; w_{22} x^{(l+1)}_{22} + w_{23} x^{(l+1)}_{21} + w_{32} x^{(l+1)}_{12} + w_{33} x^{(l+1)}_{11} &amp; w_{23} x^{(l+1)}_{22} + w_{33} x^{(l+1)}_{12}\\w_{31} x^{(l+1)}_{21} &amp; w_{31} x^{(l+1)}_{22} + w_{32} x^{(l+1)}_{21} &amp; w_{32} x^{(l+1)}_{22} + w_{33} x^{(l+1)}_{21} &amp; w_{33} x^{(l+1)}_{22}\end{bmatrix} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;출력을 계산하는 Convolution 연산 과정에서 &lt;strong&gt;“입력 픽셀”&lt;/strong&gt; 에서 &lt;strong&gt;“출력 픽셀”&lt;/strong&gt; 과 연결된 가중치를 생각하면 편하다. 다음 그림을 살펴보면, 필터(노란색)가 지나가면서, &lt;strong&gt;“입력 픽셀”&lt;/strong&gt; ($x_{12}^{(l)}$)과 &lt;strong&gt;“출력 픽셀”&lt;/strong&gt; ($x_{11}^{(l+1)}$, $x_{12}^{(l+1)}$)사이에 연결된 두 개의 가중치 ($w_{11}$, $w_{12}$)를 통해 연산이 된다. 위 행렬에서 1행 2열에 있는 원소 값과 연관이 있는 것을 확인 할 수 있는데, fractionally-strided convolution 연산은 바로 &lt;strong&gt;“출력 픽셀”&lt;/strong&gt; 에서 &lt;strong&gt;“입력 픽셀”&lt;/strong&gt; 로 방향을 바꿔 연산하면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1acZ6YvrW6xooXJd6nYpFYhm-eDHSe2f1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Fractionally-strided convolution 연산은 다음 그림과 같다. “fractionally” 의 단어 뜻 처럼 필터가 출력 이미지의 일부분을 걸치면서 이동(stride)하면서 연산된다. 또한 가중치도 기존의 형태와 달리 약간의 변형(transpose)이 된다(정확한 전치행렬은 아니다). 그렇다면 “출력 픽셀”과 연관이 없는 부분은? 0으로 곱해져서 더해진다!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1WumIP2aCDNJ4cCWQW_2_Q0e1LCx_WkdQ&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;따라서 다시 정리하면 Convolution Layer의 출력을 입력에 대한 미분을 구해서(C 행렬), 이를 한줄로 편 출력과 곱한 후에 형태를 입력 이미지로 변환해주는 것이 Convolution 의 반대 연산인 Fractionally-strided convolution 이다. 수식으로 다음과 같이 정리 할 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;X^{(l)} = [Vec\big(X^{(l+1)}\big)C^T]^{(N)}&lt;/script&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$^{(N)}$은 Vector Transpose이며, 이는 다음 노트북을 살펴보자. &lt;a href=&quot;https://nbviewer.jupyter.org/github/simonjisu/pytorch_tutorials/blob/master/00_Basic_Utils/04_Backpropagation_Matrix_diff.ipynb&quot;&gt;Vector Transpose&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;additional-reference&quot;&gt;Additional Reference&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1603.07285&quot;&gt;A guide to convolution arithmetic for deep learning&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 27 Oct 2019 21:56:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html</guid>
-        
-        
-        <category>datascience</category>
         
       </item>
     
