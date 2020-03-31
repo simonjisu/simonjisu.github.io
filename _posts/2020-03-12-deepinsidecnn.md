@@ -50,11 +50,15 @@ $$\arg \underset{I}{\max} S_c(I) - \lambda \Vert I\Vert^2_2$$
 
 $$S_c(I) = w_c^TI+b_c$$
 
-이 경우, 가중치벡터 $w$내에 있는 각 원소의 크기가 입력 이미지 $I$에 대한 중요도라고 정의할 수 있다. 그러나 심층 신경망에서 점수$S_c(I)$는 깊게 꼬인 비선형함수다. 따라서 위와 같이 적용이 불가능하다. 그러나 이미지 $I_0$가 주어졌을 때, 테일러 1차 급수로 $S_c(I)$에 대한 선형함수를 근사할 수 있다.
+이 경우, 가중치벡터 $w_c$내에 있는 각 원소의 크기가 입력 이미지 $I$에 대한 중요도라고 정의할 수 있다. 그러나 심층 신경망에서 점수$S_c(I)$는 깊게 꼬인 비선형함수다. 따라서 위와 같이 적용이 불가능하다. 그러나 이미지 $I_0$가 주어졌을 때, 테일러 1차 급수로 $S_c(I)$에 대한 선형함수를 근사할 수 있다.
 
-$$S_c(I) \approx w^TI+b \quad \text{where } w= \dfrac{\partial S_c}{\partial I}\Bigg\vert_{I_0} \cdot$$
+$$\begin{aligned} S_c(I) 
+&\approx S_c(I_0) + \dfrac{\partial S_c}{\partial I_0}(I - I_0)  \\
+&=w^TI+b \\
+&\text{where } w= \dfrac{\partial S_c}{\partial I}\Bigg\vert_{I_0} \cdot
+\end{aligned}$$
 
-Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르다고 할 수 있다. 이를 통해 이미지의 위치를 알아내기를 기대할 수 있다.
+Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$, 모델 가중치 값이 아님)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르다고 할 수 있다. 이를 통해 이미지의 위치를 알아내기를 기대할 수 있다.
 
 ## Class Saliency Extraction
 
