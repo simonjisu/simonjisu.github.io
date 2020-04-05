@@ -58,7 +58,7 @@ $$\begin{aligned} S_c(I)
 &\text{where } w= \dfrac{\partial S_c}{\partial I}\Bigg\vert_{I_0} \cdot
 \end{aligned}$$
 
-Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$, 모델 가중치 값이 아님)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르다고 할 수 있다. 이를 통해 이미지의 위치를 알아내기를 기대할 수 있다.
+Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$, 모델 가중치 값이 아님)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르킨다. 이를 통해 이미지의 사물의 위치를 알아내기를 기대할 수 있다.
 
 ## Class Saliency Extraction
 

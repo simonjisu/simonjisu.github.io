@@ -6,9 +6,115 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 31 Mar 2020 11:14:25 +0900</pubDate>
-    <lastBuildDate>Tue, 31 Mar 2020 11:14:25 +0900</lastBuildDate>
+    <pubDate>Sun, 05 Apr 2020 12:25:52 +0900</pubDate>
+    <lastBuildDate>Sun, 05 Apr 2020 12:25:52 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>[Python] yield form</title>
+        <description>&lt;h1 id=&quot;iterator--generator&quot;&gt;Iterator &amp;amp; Generator&lt;/h1&gt;
+
+&lt;p&gt;Python에서 set, list등은 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;__iter__()&lt;/code&gt; method를 내장하고 있다. 이를 python 내장함수 &lt;code class=&quot;highlighter-rouge&quot;&gt;iter&lt;/code&gt;와 함께 사용하면 &lt;a href=&quot;https://docs.python.org/ko/3.7/c-api/iterator.html&quot;&gt;&lt;strong&gt;Iterator&lt;/strong&gt;&lt;/a&gt; 객체를 만들 수 있다. 그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt;를 사용하면 원소를 하나씩 뽑아 낼 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__iter__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# &amp;lt;class 'set_iterator'&amp;gt;
+# &amp;lt;class 'list_iterator'&amp;gt;
+# &amp;lt;class 'dict_keyiterator'&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;set_iterator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# set_iterator = a.__iter__() 와 같다
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_iterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Generator&lt;/strong&gt;는 Iterator를 생성해주는 함수다. 위와 같이 길이가 정해진 일반적인 Iterator와 달리 Generator는 명확한 끝이 없는 Iterator 객체를 만들 수 있다. Generator를 만들기 위해서는 &lt;a href=&quot;https://docs.python.org/3/reference/expressions.html#yieldexpr&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yield&lt;/code&gt;&lt;/a&gt; 명령어와 함께 사용하거나, &lt;a href=&quot;https://www.python.org/dev/peps/pep-0289/&quot;&gt;PEP 289&lt;/a&gt; 에서 정의된 형태의 표현(expression)을 사용하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;odd_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;generate number if it is odd, smaller than x&quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;odd_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# same as
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;odd_generator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;odd_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Generator의 시각화된 자세한 과정을 보고 싶으면 &lt;a href=&quot;http://www.pythontutor.com/visualize.html#mode=edit&quot;&gt;http://www.pythontutor.com&lt;/a&gt;에서 다음 코드를 붙여넣고 실행시켜보자!&lt;/p&gt;
+
+&lt;p&gt;Generator를 쓰는 이유는 메모리를 효율적으로 사용할 수 있기 때문에다. 다음 코드를 살펴보면, 리스트는 모든 원소들(1~100)에 해당하는 메모리를 미리 배정하지만, generator는 함수에 접근할 때(&lt;code class=&quot;highlighter-rouge&quot;&gt;next()&lt;/code&gt;를 호출시) 메모리를 할당한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# list comprehension
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# generator expression
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;size of a:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getsizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# size of a: 912
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;size of b:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getsizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# size of b: 120
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;yield--yield-form&quot;&gt;“yield” &amp;amp; “yield form”&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yield from&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;from&lt;/code&gt; 뒤에 따라오는 subiterator를 한번 더 &lt;code class=&quot;highlighter-rouge&quot;&gt;yield&lt;/code&gt;하게 된다. 다음 두 개의 같은 작업을 표현한 예제를 통해 빠르게 이해해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;normal_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;from_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# normal generator
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;lt;class 'generator'&amp;gt;
+# [0, 1, 2, 3, 4]
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# from generator
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_generator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;lt;class 'generator'&amp;gt;
+# [0, 1, 2, 3, 4]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이를 활용하면 리스트 안에 리스트를 원소로 가지는 nested list를 1차원 리스트로 만들 수 있다. 일반적인 list comprehension을 사용하게 되면 2단계 깊이 정도 밖에 1차원으로 만들 수 있지만, 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;yield from&lt;/code&gt;을 이용한 generator를 만든다면 깊은 netsted list도 1차원 리스트롤 만들 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ele&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;isinstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ele&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ele&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ele&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;lt;generator object flatten at 0x00000212BF603CC8&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 24 Mar 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/python/2020/03/24/nestedlist.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/03/24/nestedlist.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>Visual Studio Code Remote Development</title>
@@ -315,7 +421,7 @@ det \Big( \begin{bmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{bmatrix} \Big) = 6 %]]&gt;
 &amp;\text{where } w= \dfrac{\partial S_c}{\partial I}\Bigg\vert_{I_0} \cdot
 \end{aligned} %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$, 모델 가중치 값이 아님)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르다고 할 수 있다. 이를 통해 이미지의 위치를 알아내기를 기대할 수 있다.&lt;/p&gt;
+&lt;p&gt;Image-Specific class Saliency의 다른 해석으로 클래스 점수에 대한 미분값($w$, 모델 가중치 값이 아님)의 크기는 어떤 픽셀들이 가장 적은 변화량으로 클래스 점수에 가장 큰 영향일 미치는지를 가르킨다. 이를 통해 이미지의 사물의 위치를 알아내기를 기대할 수 있다.&lt;/p&gt;
 
 &lt;h2 id=&quot;class-saliency-extraction&quot;&gt;Class Saliency Extraction&lt;/h2&gt;
 
@@ -1041,164 +1147,6 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
         
         
         <category>datascience</category>
-        
-      </item>
-    
-      <item>
-        <title>2019년도 회고</title>
-        <description>&lt;h1 id=&quot;올해의-공부-농사&quot;&gt;올해의 공부 농사&lt;/h1&gt;
-
-&lt;p&gt;올 한해는 작년보다 한 층 더 성장했다고 생각한다. 작년과 비교해서 어떤 목표를 달성했는지 어떤 공부를 더 했는지 GitHub에 정리를 해두었다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;https://github.com/simonjisu/LookBack-Me&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;작년에는 NLP 공부에 매진했다면, 올해는 확률 통계의 기초를 조금더 공고히 다지고, XAI 분야과 조우했다. 물론 쉽지 않지만 앞으로 더 수요가 있는 분야일거라 생각한다. 딥러닝의 성능은 좋지만, 기계가 어떤 결정을 내리는지 아직 명백하게 밝히기 어려운 부분들이 많이 있다. 사람(Human)을 배제한 End-to-End 학습이 현업에서 딥러닝을 도입하지 못하는 이유라고 생각한다.&lt;/p&gt;
-
-&lt;p&gt;XAI 분야는 “기계의 설명력”을 3가지 경우로 응용 할 수 있다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;기계의 성능이 사람보다 못할 경우, 연구자가 개입해서 성능 부족의 부분을 찾아내는 역할&lt;/li&gt;
-  &lt;li&gt;기계의 성능이 사람과 비슷한 경우, 사용자에게 신뢰와 믿음의 근거가 되는 역할&lt;/li&gt;
-  &lt;li&gt;기계의 성능이 사람보다 우월한 경우, 기계가 직접 선생님이 되어 다른 기계를 가르치는 역할&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2020년도에는 이 분야를 계속해서 공부하려고 한다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;올해의-top-4-사건&quot;&gt;올해의 Top 4 사건&lt;/h1&gt;
-
-&lt;p&gt;올해의 개인 Top4 사건을 추리자면 다음과 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;#1-커넥트재단-퇴사-서울대-데이터-사이언스-대학원-진학&quot;&gt;커넥트재단 퇴사, 서울대 데이터 사이언스 대학원 진학&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#2-책-출간-및-강의&quot;&gt;책 출간 및 강의&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#3-글또-3기-ai-collage&quot;&gt;글또 3기, AI Collage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#4-home-comming-github-블로그-복귀&quot;&gt;Home Comming, GitHub 블로그 복귀&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;1-커넥트재단-퇴사-서울대-데이터-사이언스-대학원-진학&quot;&gt;1. 커넥트재단 퇴사, 서울대 데이터 사이언스 대학원 진학&lt;/h2&gt;
-
-&lt;p&gt;2018년 2월부터 다니던 네이버 커넥트재단을 2019년 8월에 퇴사했다. 주로 맡은 업무는 강의 퍼블리싱 및 기획 업무였다. 개인적으로 첫 직장에서 좋은 사람들을 만나서 행운이라 생각했다. 그동안 했던 일을 살펴보면 다음과 같다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;퍼블리싱 업무&lt;/strong&gt;&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/deepnlp&quot;&gt;딥러닝을 이용한 자연어 처리&lt;/a&gt; - 조경현 교수님&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/deeplearningai1&quot;&gt;DeepLearniNg AI 시리즈&lt;/a&gt; - Andrew Ng&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;프로젝트 기반 학습 콘텐츠 기획 및 매니징&lt;/strong&gt;&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&quot;https://deeplearningzerotoall.github.io/season2/&quot;&gt;모두를 위한 딥러닝 시즌 2&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/boostcourse-dl-tensorflow&quot;&gt;텐서플로우로 시작하는 딥러닝 기초&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;https://www.edwith.org/boostcourse-dl-pytorch&quot;&gt;파이토치로 시작하는 딥러닝 기초&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;수강신청 데이터를 잘 보기 위한 대시보드 만들기&lt;/strong&gt;&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&quot;https://www.notion.so/simonjisu/87f45a6c9a264f43aa53c843157026ef&quot;&gt;Notion 포스트 링크&lt;/a&gt;, 조만간 다시 이 블로그에 새로 올릴 예정&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;커넥트재단을 다니면서 좋았던 점은 해당 분야의 유명한 사람들을 만날 수 있었다는 것이다. GRU과 기계번역 Encoder-Decoder구조를 제안하신 조경현 교수님의 오프라인 강의를 현장 맨 앞줄에서 들을 수 있었고, 캐나다 Albert 대학의 &lt;a href=&quot;https://www.ualberta.ca/science/about-us/contact-us/faculty-directory/randy-goebel&quot;&gt;Randy Geobel&lt;/a&gt; 교수님을 보고 대가의 생각을 들으면서 다시 한 번 공부뽕(?!)이 차오르는 경험을 했다.&lt;/p&gt;
-
-&lt;p&gt;막상 퇴사하려니 조금 아쉽기도 했지만, 내가 하고싶은 공부를 하기위해 떠났다. 그리하여 올해 하반기에는 대학원에 진학하려고 부단히 노력했다. 최근에 이 분야로 진출하려는 사람들이 많아져 컨택이 쉽지는 않았다(누가 나이 30 대학원생을 받아주려나…). 다행이 이번에 신설된 서울대 데이터 사이언스 대학원에 합격하여 내년부터 하고싶은 공부를 하게 됐다. 앞으로 2년 동안 큰 목표는 다음과 같이 세웠다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;데이터 수집단계 공부를 집중적으로 한다.&lt;/li&gt;
-  &lt;li&gt;NLP, 금융 두 개의 도메인에서 XAI를 적용한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;전에 다니던 회사는 비교적 작은 규모의 회사였고, 데이터팀 같은건 없었다. 수강신청 대시보드도 사실 내가 보고싶어서 혼자 만든 작은 프로젝트다. 사람들이 언제 학습을 주로하고 어떤 콘텐츠를 주로 공부하는지 살펴볼 수 있는지 궁금했기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;대부분의 기업에서는 데이터를 수집하는 pipeline이 제대로 갖춰저 있지 않기 때문에, 데이터 수집단계에서 잘 설계해야 원하는 분석을 진행하고, 데이터에서 얻은 인사이트로 의사결정을 할 수 있다. 따라서 첫번째 목표는 데이터 수집을 잘 하기 위한 공부를 할 것이다.&lt;/p&gt;
-
-&lt;p&gt;두번째 목표는 지금까지 공부한 분야에서 최근에 공부한 XAI 분야를 접목하려고 한다. 기계의 의사결정을 잘 설명할 수 있는 모델을 만들어 사람이 보고 기계를 신뢰할 수 있게 만들어 보려고 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;2-책-출간-및-강의&quot;&gt;2. 책 출간 및 강의&lt;/h2&gt;
-
-&lt;p&gt;2019년도 7월말에 내가 쓴 책 &amp;lt;딥러닝에 목마른 사람들을 위한 PyTorch&amp;gt;가 발간됐다. 책 내용은 집에서 GPU서버를 만드는 법 부터 시작해서, PyTorch로 딥러닝에 입문하는 것이다. 책을 쓰는 작업이 정말 어렵다는 것을 이번 경험으로 부터 깨달았다. 부족한 부분도 많아서 다음에는 조금더 알찬 내용으로 구성해서 다시 gitbook 형태로 써볼까 생각중이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://bit.ly/딥목파&quot;&gt;&amp;lt;딥러닝에 목마른 사람들을 위한 PyTorch&amp;gt; 홈페이지 바로가기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2019년도 말에는 멀티캠퍼스에서 책 내용을 기반으로 강의도 진행했다. 처음해보는 강의라 목소리도 많이 쉬었었다. 사람이 말을 이렇게나 많이 할 수도 있구나 생각했다… 그래도 최선을 다해서 개념 하나하나 설명해드리고 자료도 충분히 많이 준비했다고 생각한다. 3일짜리 강의라 처음 배우시는 분들이 개념을 받아들이기 쉽지는 않았을 거라 생각한다. 다음에 기회가 된다면 책처럼 만들어서 배포해보는 것도 나쁘지 않을 것 같다.&lt;/p&gt;
-
-&lt;h2 id=&quot;3-글또-3기-ai-collage&quot;&gt;3. 글또 3기, AI Collage&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;글또&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;2019년도 여름부터 겨울까지 글또 3기에 참가했다. 역시 강제로 due를 정하더니 글을 쓰게 되더라. 이런 규제는 자신에게 긍정적인 효과가 있다고 생각한다. 그래도 초중반까지 꾸준히 글을 써왔는데 후반부에는 바쁘다는 핑계로 계속 안쓰게 됐다. 반성하자. 다음 기수에도 참가할 생각이다. 그때는 정말 한번도 놓치지 않고 예치금을 다 돌려 받으리라.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.facebook.com/groups/375431516259701/&quot;&gt;글또 페이스북 바로가기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;AI Collage&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;또 하나 새로 참가한 것은 모두의 연구소에서 진행하는 AI Collage다. AI Collage는 현실에 있는 6개 분야의 문제를 풀어보고, 최종단계에서는 논문을 써보는 장기 프로젝트다. XAI 팀에 합류하여 여러가지 논문을 읽고 구현을 진행하고 있다. 내년 5월까지 진행되는데 아직 여러 논문을 구현 중에 있다. 내년에는 꼭 논문을 써보려고 한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/simonjisu/XAI&quot;&gt;XAI GitHub&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://aic.yangjaehub.com/&quot;&gt;AIC 바로가기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;4-home-comming-github-블로그-복귀&quot;&gt;4. Home Comming, GitHub 블로그 복귀&lt;/h2&gt;
-
-&lt;p&gt;지난 1년간 Notion을 활용해서 블로그를 만드려고 했다. 깔끔하고 페이지를 정리하는데 좋은 기능들이 많기 때문이다. 그러나 블로그로 활용하기에 부족한 부분이 2가지 있다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Inline Math 의 부재&lt;/li&gt;
-  &lt;li&gt;Google Analytics 의 부재&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Inline Math를 사용할 수 없는 것은 큰 타격이었다. 보통 논문을 보면 수식이 정말 많은데 이를 사용할 수 없다 점은 너무 불편했다. 한줄 짜리 간단한 수식조차 Math Block 으로 만들어야 했기 때문에, 글의 구조를 짜는데 방해가 됐다. Notion 공식 트위터에 많은 사람들이 요청중이긴 하나 언제 개발될지는 아직 미지수다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://twitter.com/notionhq/status/1093334827770699778&quot;&gt;Notion 공식 트위터 Inline Math 요청 바로가기&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;그리고 GA를 달수 없어서 내 블로그의 유입을 파악할 수가 없었다. 작은 이미지 패킷으로 페이지 조회수를 확인 할 수 있지만, 그럴려면 모든 페이지에 패킷을 달아야하는데 여간 귀찮은 작업이 아니다.&lt;/p&gt;
-
-&lt;p&gt;그래서 다시 복귀했다. 이번달에 블로그 스킨을 다시 깔끔하게 바꾸고 우측의 custom 메뉴바를 으로 2일동안 만들었다. 그렇다고 Notion 이 안좋은 것은 아니다. 빠르게 메모나 기록할 때, 여행 계획을 만들때 이만큼 유용한 도구는 없다. 다만 Notion 기술 블로그를 만드려고 하면 굉장히 비추천한다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;2020년도-목표&quot;&gt;2020년도 목표&lt;/h1&gt;
-
-&lt;p&gt;2020년이 코앞으로 다가왔다. 내년에는 다음과 같은 목표를 세웠다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PRML 공부 계속하기&lt;/li&gt;
-  &lt;li&gt;더 많은 논문을 읽고 블로그에 정리하기&lt;/li&gt;
-  &lt;li&gt;글또 4기에 참가하기&lt;/li&gt;
-  &lt;li&gt;AI Collage 에서 논문 한편 쓰기&lt;/li&gt;
-  &lt;li&gt;데이터 프로세싱에 대한 공부하기&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이중 얼만큼 달성할지 모르겠지만, 노력하여 올해보다 더 성장할 수 있는 한해가 되기를 …&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pCe5D4-wrxlP4v1CqRx_u-_CeGZToDDJ&quot; width=&quot;240px&quot; height=&quot;300px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;del&gt;P.S. 닌텐도 스위치도 사자&lt;/del&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 30 Dec 2019 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/others/2019/12/30/lookback2019.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/others/2019/12/30/lookback2019.html</guid>
-        
-        
-        <category>others</category>
         
       </item>
     

@@ -55,6 +55,7 @@ menu_contents:
       - subcat: math
       - subcat: paper
       - subcat: others
+      - subcat: python
       - subcat: programming
       - subcat: datascience
       - subcat: numpyseries
