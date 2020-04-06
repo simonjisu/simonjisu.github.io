@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Python] yield form"
-date: "2020-03-24 14:19:38 +0900"
+date: "2020-04-01 14:19:38 +0900"
 categories: python
 author: "Soo"
 comments: true
