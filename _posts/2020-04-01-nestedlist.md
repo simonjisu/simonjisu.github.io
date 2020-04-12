@@ -1,12 +1,48 @@
 ---
 layout: post
-title: "[Python] yield form"
+title: "[Algorithms] flatten nested list"
 date: "2020-04-01 14:19:38 +0900"
 categories: python
 author: "Soo"
 comments: true
 toc: true
 ---
+
+# Nestsed list란?
+
+**Nested list** 란 list 안에 list 혹은 기타 다른 타입의 원소를 가지는 구조다. 예를 들자면 다음과 같다. 
+
+```python
+[1, [2, 3], [[4], [5], [6]]]
+```
+
+실제 세상에서 우리가 자주 보는 nested list의 단계(level)는 2단계 정도다. 친숙한 Excel형태의 matrix, 혹은 자연어 처리에서 문장을 토큰으로 나눈 형태가 그 예시다.
+
+```python
+# Excel
+[[  4, 12,  3,  4], 
+ [  4,  3, 65,  3],
+ [  3, 33, 22,  1],
+ [  2, 11,  8,  2]]
+
+# Processed Natural Language
+[["오늘", "아침", "글", "을", "쓴다", "."], 
+ ["파이썬", "관련", "글", "을", "작성", "했다", "." ]] 
+```
+
+nested list의 모든 원소들을 하나씩 해체하여, 원소가 list인 경우, 그 내부값을 모두 꺼내서 오직 하나의 list안에 담아내는 과정을 **flatten**이라고 한다. 
+
+flatten을 하는 이유는 여러가지가 있다. 자연어 처리를 예로 들자면, 단어의 개수를 파악하고 번호를 부여하기 위해, 유니크한 토큰(token) 혹은 단어(word)들의 집합(set)을 구할 필요가 있다. 코드로 다음과 같이 할 수 있다.
+
+```python
+>>> x = [["오늘", "아침", "글", "을", "쓴다", "."], 
+         ["파이썬", "관련", "글", "을", "작성", "했다", "." ]] 
+>>> flatten = lambda nested_li: [ele for li in nested_li for ele in li]
+>>> set(flatten(x))
+{'파이썬', '글', '을', '쓴다', '아침', '오늘', '했다', '관련', '작성', '.'}
+```
+
+2단계 nested list의 경우 2번의 for문을 사용하면 해결할 수 있다. 그러나 이보다 더 깊은 경우는 어떻게 할까? 앞으로 소개할 Generator를 활용해서 이를 해결한다.
 
 # Iterator & Generator
 
