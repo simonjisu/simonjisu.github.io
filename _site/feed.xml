@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Apr 2020 17:13:04 +0900</pubDate>
-    <lastBuildDate>Sun, 12 Apr 2020 17:13:04 +0900</lastBuildDate>
+    <pubDate>Sun, 12 Apr 2020 17:18:56 +0900</pubDate>
+    <lastBuildDate>Sun, 12 Apr 2020 17:18:56 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -56,7 +56,7 @@
 
 &lt;p&gt;약간 추상적이지만 구체적 예를 들어 “고양이를 판별하는 모델이 왜 고양이를 예측할 수 있는가?”에 답변을 적용해볼 수 있다.&lt;/p&gt;
 
-&lt;p&gt;과연 위 대답이 정확한 답변일까? 길게 모델의 작동원리를 설명했지만, 알고리즘 연산 결과 값이 왜 해당 결과를 뜻하는지? 모델은 데이터의 어떤 부분을 보고 해당 결과를 판단했는지? 등등의 질문을 설명하지 못한다. 이 영역은 아직 많은 연구자들이 연구중이다.&lt;/p&gt;
+&lt;p&gt;하지만 과연 위 대답이 정확한 답변일까? 길게 모델의 작동원리를 “학습”이라는 단어를 가져와서 설명했지만, 알고리즘 연산 결과 값이 왜 해당 결과를 뜻하는지? 모델은 데이터의 어떤 부분을 보고 해당 결과를 판단했는지? 등등의 질문을 설명하지 못한다. 사실 이 영역은 아직 많은 연구자들이 연구중이다.&lt;/p&gt;
 
 &lt;p&gt;리처드 파인만의 이 영상은 꽤나 철학적인 이야기지만 어떤 개념을 알고싶을 때 중요한 사고방식이다. 계속 “왜”라는 질문을 하고 이를 다른 사람에게 잘 설명할 수 있는 방식으로 공부하는 습관을 길러야겠다.&lt;/p&gt;
 </description>
