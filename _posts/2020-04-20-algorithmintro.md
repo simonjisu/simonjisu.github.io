@@ -110,3 +110,79 @@ $T(n) = 5n^2 + 12n + 4$만큼 실행시간이 걸리는 알고리즘이 있을 �
 |$T(n) \neq \Omega (n)$| $f(n)$값(파란선)이 $cg(n)$보다 크다. |
 |$T(n) = \Omega (n^2)$| $f(n)$값(파란선)이 $cg(n)$보다 커야 하는데 그렇지 않다. |
 |$T(n) = \Omega (n^3)$| $f(n)$값(파란선)이 $cg(n)$보다 커야 하는데 그렇지 않다. |
+
+그래프 관련 코드를 첨부한다.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def T(n):
+    return 5*(n**2) + 12*n + 4
+
+def g1(n):
+    return n
+
+def g2(n):
+    return n**2
+
+def g3(n):
+    return n**3
+
+def BigTheta(g_fn, n, c_1, c_2):
+    return c_1*g_fn(n), c_2*g_fn(n)
+
+def BigO(g_fn, n, c):
+    return c*g_fn(n)
+
+def BigOmega(g_fn, n, c):
+    return c*g_fn(n)
+
+def draw(typ, g_fns, N, c_upper, c_lower, ylim=35000, **kwargs):
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+    n = np.linspace(0, N)
+    f_values = T(n)
+    ax.plot(n, f_values, label="$f(n)$", c=colors[0])
+    for i, g_fn in enumerate(g_fns, 1):
+        plot_bignotation(ax=ax, typ=typ, g_fn=g_fn, n=n, 
+                         c_1=c_upper, c_2=c_lower, color=colors[i])
+    ax.set_xlabel("$n$", fontsize = 16)
+    ax.legend(fontsize=14)
+    ax.set_ylim(0, ylim)
+    ax.set_title(typ, fontsize=20)
+    plt.show()
+    if kwargs.get("return_fig") == True:
+        return fig
+    
+def plot_bignotation(ax, typ, g_fn, n, c_1, c_2, color=None):
+    typ_fn_dict = {"Big-Theta": BigTheta,"Big-O": BigO, "Big-Omega": BigOmega}
+    g_dict = {g1: "n", g2: "n^2", g3: "n^3"}
+    fn = typ_fn_dict.get(typ)
+    g_str = g_dict.get(g_fn)
+    if typ == "Big-Theta":
+        upper, lower = fn(g_fn, n, c_1, c_2)
+        ax.plot(n, lower, c=color, label=f"$c_1*g(n): g={g_str}, c_1={c_1}$")
+        ax.plot(n, upper, c=color, label=f"$c_2*g(n): g={g_str}, c_2={c_2}$")
+    elif typ == "Big-O":
+        upper = fn(g_fn, n, c_1)
+        ax.plot(n, upper, c=color, label=f"$c*g(n): g={g_str}, c={c_1}$")
+    elif typ == "Big-Omega":
+        lower = fn(g_fn, n, c_1)
+        ax.plot(n, lower, c=color, label=f"$c*g(n): g={g_str}, c={c_2}$")
+        
+notations = ["Big-Theta", "Big-Omega", "Big-O"]
+ylims = [50000, 50000, 50000]
+g_fns = [g1, g2, g3]
+N = 500
+c_upper = 6
+c_lower = 4
+for typ, ylim in zip(notations, ylims): 
+    draw(typ, g_fns, N, c_upper, c_lower, ylim)
+```
+
+# References:
+
+* 본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.
+* [Asymptotic Analysis](https://www.programiz.com/dsa/asymptotic-notations)
