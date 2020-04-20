@@ -6,9 +6,176 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 12 Apr 2020 17:59:59 +0900</pubDate>
-    <lastBuildDate>Sun, 12 Apr 2020 17:59:59 +0900</lastBuildDate>
+    <pubDate>Mon, 20 Apr 2020 21:37:12 +0900</pubDate>
+    <lastBuildDate>Mon, 20 Apr 2020 21:37:12 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Introduction of Algorithms &amp; Data Structures</title>
+        <description>&lt;h1 id=&quot;algorithms-and-data-structures&quot;&gt;Algorithms and Data Structures&lt;/h1&gt;
+
+&lt;h2 id=&quot;알고리즘algorithm이란&quot;&gt;알고리즘(Algorithm)이란?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Algorithm&quot;&gt;위키백과&lt;/a&gt;에 따르면 &lt;strong&gt;알고리즘(Algorithm)&lt;/strong&gt;은 수학과 컴퓨터 과학분야에서 잘 정의(well-defined)되어진 컴퓨터로 실행 가능한 유한한 명령 시퀀스(sequence)다.&lt;/p&gt;
+
+&lt;p&gt;다음과 같은 특징을 가진다고 볼 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;하나의 값 혹은 여러 값의 집합을 &lt;strong&gt;입력(input)&lt;/strong&gt;으로 받고, 궁극적으로 하나의 값 혹은 여러 값의 집합을 &lt;strong&gt;출력(output)&lt;/strong&gt;으로 뱉어낸다.&lt;/li&gt;
+  &lt;li&gt;모든 입력에 대해서 정확한 출력을 뱉어낼 경우, “알고리즘이 정확하다”라고 말 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;또한 알고리즘은 잘 정의된 문제를 해결하기 위한 도구(tool)로 볼 수 있다. 단, “잘 정의된 문제”이라는 문구에는 일반적인(general) 입력-출력 관계가 정의되어야 한다. 잘 정의만 되면, 알고리즘은 곧 문제를 해결하는 일련의 과정을 서술한다고 볼 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;자료구조data-structures란&quot;&gt;자료구조(Data Structures)란?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Data_structure&quot;&gt;위키백과&lt;/a&gt;에 따르면 &lt;strong&gt;자료구조(Data Structure)&lt;/strong&gt;는 컴퓨터 과학에서 효율적인 접근 및 수정을 가능케 하는 자료의 조직, 관리, 저장을 의미한다.&lt;/p&gt;
+
+&lt;p&gt;자료구조에는 여러 종류가 있으며, 이러한 각각의 자료구조는 각자의 연산 및 목적에 맞추어져 있다. 향후 다뤄볼 자료구조들을 나열해보았다(더 추가할 예정).&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;배열(array)&lt;/li&gt;
+  &lt;li&gt;해시 테이블(hash table)&lt;/li&gt;
+  &lt;li&gt;B-트리(B-Tree)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;알고리즘의-분석&quot;&gt;알고리즘의 분석&lt;/h1&gt;
+
+&lt;p&gt;효율적인 알고리즘이란 무엇인지 알려면 “효율”을 정의해야 될 것이다. 그렇다면 알고리즘을 측정하고 분석 해야하는데, 알고리즘을 분석한다는 것은 곧 이에 소요되는 자원(resources)을 예측한다는 것이다. 대부분의 경우 &lt;strong&gt;실행시간(running time)&lt;/strong&gt;과 &lt;strong&gt;메모리 공간(memmory space)&lt;/strong&gt;를 측정한다. 따라서, 한 문제 대해서 여러 알고리즘을 실행하여 사용되는 자원들을 비교하여 제일 적은 자원을 소모하는 것이 곧 효율적인(effective) 알고리즘이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;실행시간running-time&quot;&gt;실행시간(Running time)&lt;/h2&gt;
+
+&lt;p&gt;다른 말로 &lt;strong&gt;알고리즘 복잡도(algorithm complexity)&lt;/strong&gt;이라 하는데, 알고리즘의 실행 횟수(primitive operations or steps)을 뜻하며, 입력 크기가 커질 수록 실행시간도 커진다. 사실 여기에는 실행 횟수만이 복잡도에 비례한다는 강력한 가정이 들어간다. 여담으로 실제 실행시간은 컴퓨터 CPU의 cache의 접근 속도, cache에 사용했던 메모리의 존재 여부등이 관여를 한다.&lt;/p&gt;
+
+&lt;p&gt;실행시간을 측정했을 때, 가장 빨리된 경우를 best case, 최악의 경우를 worst case라고 하는데, 보통 worst case를 기준으로 복잡도를 측정하고 비교한다.&lt;/p&gt;
+
+&lt;p&gt;또한, 실행시간은 횟수에 관련있다고 했기에 수식으로 $T(N)$으로 표기되며, $N$은 입력의 크기다.&lt;/p&gt;
+
+&lt;h2 id=&quot;order-of-growth-classification&quot;&gt;Order of Growth Classification&lt;/h2&gt;
+
+&lt;p&gt;증가 기준(Order-of-Growth)은 자료 개수의 증가에 따라 소요시간이 변하는 정도를 나타내며, 실제 걸린 시간을 무시하고 표기하자는 것이다. 예를 들어, 어떤 알고리즘의 실행시간이 $T(N) = C\times N^2 + D\times N + E$ 정도 걸린다면 뭉뚱그려서 $C\times N^2$ 정도 시간이 걸린다 라고 말할 수 있다($C$는 알수 없는 반복에 걸리는 시간을 말한다). 이렇게 상대적으로 큰 값을 취하여 시간을 근사하는 방법을 &lt;strong&gt;점근법(asymptote)&lt;/strong&gt;이라고 한다.&lt;/p&gt;
+
+&lt;p&gt;점근 표기법은 알고리즘의 복잡도를 단순화할 때나 무한급수의 뒷부분을 간소화할 때 쓰인다. $\Theta, O, \Omega$ 등이 있고, Order of Growth 의 분류로 다음과 같은 표를 그릴 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1xH_B7ndU6XNlZY1lUnIom_q2Tdv7hNi2&quot; alt=&quot;[출처] Robert-Sedgewick 교수의 Algoritms 강의&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[출처] Robert-Sedgewick 교수의 Algoritms 강의&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;asymptotic-notation&quot;&gt;Asymptotic Notation&lt;/h2&gt;
+
+&lt;p&gt;평소에 Big O Notation이라는 말을 많이 들어보는데, 무슨 뜻인지 잘 이해가 안됐었다. 여기서 Big O를 포함하여 3가지 점근 표기법을 정확한 알아본다.&lt;/p&gt;
+
+&lt;p&gt;알아보기 전에 중요한 가정이 있는데 아주 작은 입력크기 $N$에 대해서는 이러한 점근법이 작동하지 않는다. 즉, 우리가 말하는 “효율”이 좋다는 언제까지나 아주 큰 입력 $N$에 대해서 적용되는 말이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;theta-notation&quot;&gt;$\Theta$ Notation&lt;/h3&gt;
+
+&lt;p&gt;$\text{Big-}\Theta$: $g(n)$와 양의 상수$c_1, c_2, n_0$가 주어졌을 때, 모든 $n_0$보다 크거나 같은 $n$에 대해서, $0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n)$ 식을 만족하는 $f(n)$을 $\Theta \big( g(n) \big)$ 로 표기한다.&lt;/p&gt;
+
+&lt;p&gt;위 정의는 간단히 말해, “$n_0$보다 큰 $n$크기의 입력에 대해서, 함수 $f(n)$의 값이 $(c_1 g(n), c_2 g(n))$ 구간에 존재한다”라고 추정하는 것이다. 즉, 아무리 커봐야 $c_2 g(n)$과 같거나 작을 것이고, 작아봐야 $c_1 g(n)$보다 같거나 클 것이다. 그림으로 표시하면 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1OM8KllT_GcAt-wB7FtzulsoN3e13v0w3&quot; alt=&quot;Big Theta Notation&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Big Theta Notation&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;o-notation&quot;&gt;$O$ Notation&lt;/h3&gt;
+
+&lt;p&gt;$\text{Big-}O$: $g(n)$와 양의 상수$c, n_0$가 주어졌을 때, 모든 $n_0$보다 크거나 같은 $n$에 대해서, $0 \leq f(n) \leq c g(n)$ 식을 만족하는 $f(n)$을 $O \big( g(n) \big)$ 로 표기한다.&lt;/p&gt;
+
+&lt;p&gt;위 정의는 간단히 말해, “$n_0$보다 큰 $n$크기의 입력에 대해서, 함수 $f(n)$의 값이 $(0, c g(n))$ 구간에 존재한다”라고 추정하는 것이다. 즉, 아무리 커봐야 $c g(n)$과 같거나 작을 것이다. 그림으로 표시하면 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1cPpJQJqrJ-orjTNDQCLWYQiCib_5kF1m&quot; alt=&quot;Big O Notation&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Big O Notation&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;omega-notation&quot;&gt;$\Omega$ Notation&lt;/h3&gt;
+
+&lt;p&gt;$\text{Big-}\Omega$: $g(n)$와 양의 상수$c, n_0$가 주어졌을 때, 모든 $n_0$보다 크거나 같은 $n$에 대해서, $0 \leq c g(n) \leq f(n)$ 식을 만족하는 $f(n)$을 $\Omega \big( g(n) \big)$ 로 표기한다.&lt;/p&gt;
+
+&lt;p&gt;위 정의는 간단히 말해, “$n_0$보다 큰 $n$크기의 입력에 대해서, 함수 $f(n)$의 값이 $(c g(n), +\infty)$ 구간에 존재한다”라고 추정하는 것이다. 즉, 아무리 작아도 $c g(n)$보다는 클 것이다. 그림으로 표시하면 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1D03BHXbVlkYqf_EIgCcQ-TTT-fkC38IH&quot; alt=&quot;Big Omega Notation&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Big Omega Notation&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;예시&quot;&gt;예시&lt;/h3&gt;
+
+&lt;p&gt;$T(n) = 5n^2 + 12n + 4$만큼 실행시간이 걸리는 알고리즘이 있을 때, 각 표기법으로 표현해보자. 실제로는 근사 값이지만 보통 등호(=)를 사용한다(이번 예시에서는 n이 엄청 크다는 가정을 한다).&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1cNJKtz7dJmN03nsc_6R3ca5vOZuvMw6I&quot; alt=&quot;Big Theta Notation Example&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Big Theta Notation Example&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;표기 가능여부&lt;/th&gt;
+      &lt;th&gt;이유&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) \neq \Theta(n)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $c_1g(n), c_2g(n)$사이에 들어와야 하는데 그렇지 않다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) = \Theta(n^2)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $c_1g(n), c_2g(n)$사이에 들어간다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) \neq \Theta(n^3)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $c_1g(n), c_2g(n)$사이에 들어와야 하는데 그렇지 않다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Zx82-4p5KNf1UmVejUe4ibuv5ZdUpCZn&quot; alt=&quot;Big O Notation Example&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Big O Notation Example&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;표기 가능여부&lt;/th&gt;
+      &lt;th&gt;이유&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) \neq O(n)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $cg(n)$보다 작아야 하는데 그렇지 않다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) = O(n^2)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $cg(n)$보다 작다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) = O(n^3)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $cg(n)$보다 작다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1k4DPvz1TYW_Kp8CdbTuNzT6XCXR6TbCS&quot; alt=&quot;Big Omega Notation Example&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;Big Omega Notation Example&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;표기 가능여부&lt;/th&gt;
+      &lt;th&gt;이유&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) \neq \Omega (n)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $cg(n)$보다 크다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) = \Omega (n^2)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $cg(n)$보다 커야 하는데 그렇지 않다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$T(n) = \Omega (n^3)$&lt;/td&gt;
+      &lt;td&gt;$f(n)$값(파란선)이 $cg(n)$보다 커야 하는데 그렇지 않다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Sun, 19 Apr 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/python/2020/04/19/algorithmintro.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/04/19/algorithmintro.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>The Question Of Why</title>
@@ -927,183 +1094,6 @@ det \Big( \begin{bmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{bmatrix} \Big) = 6 %]]&gt;
         <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
         <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</link>
         <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</guid>
-        
-        
-        <category>paper</category>
-        
-      </item>
-    
-      <item>
-        <title>[NLP] Attention Is All You Need - 1</title>
-        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
-
-&lt;p&gt;그 동안 LSTM(&lt;a href=&quot;https://dl.acm.org/citation.cfm?id=1246450&quot;&gt;Long Short-term Memory&lt;/a&gt;, 1997) 과 GRU(&lt;a href=&quot;https://arxiv.org/abs/1412.3555&quot;&gt;Gated Recurrent Unit&lt;/a&gt;, 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz&quot; alt=&quot;[그림 1] RNN의 forward propagation&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 1] RNN의 forward propagation&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt; 처럼 이전 스텝의 은닉층 유닛인 $h_{t-1}$ 를 현재 스텝의 은닉층 유닛 $h_t$ 로 전달하면서 자연스럽게 시퀀스 데이터의 특징을 유지하지만, 아쉽게도 병렬 처리를 원천적으로 배제한다는 단점이 존재한다. 따라서 만약에 문장이 길어질 수록 훈련 속도가 현저하게 느려진다.&lt;/p&gt;
-
-&lt;p&gt;Input 과 Output 문장의 길이와 관계없이 의존성(dependencies)을 해결해주는 &lt;strong&gt;Attention&lt;/strong&gt; 매커니즘은 시퀀스 모델링 혹은 변환 모델링&lt;span style=&quot;color:gray&quot;&gt;(transduction modeling: 각기 다른 특성을 가진 입력-출력 데이터를 변환하는 문제들, 예를 들어 기계번역)&lt;/span&gt;에서 필수적인 요소가 됐다. 예시로 다음 논문들을 참고하면 좋다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1409.0473&quot;&gt;Neural Machine Translation by Jointly Learning to Align and Translate, Dzmitry Bahdanau 2014&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1702.00887&quot;&gt;Structured Attention Networks, Yoon Kim, 2017&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/1606.01933&quot;&gt;A Decomposable Attention Model for Natural Language Inference, Ankur P. Parikh, 2016&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 두 가지를 결합하여 저자들은 Attention 매커니즘만 활용하여 Input 과 Output 의 의존성을 글로벌하게 처리하고, 병렬화까지 가능한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Transformer&lt;/code&gt;라는 새로운 모델구조를 제안했다.&lt;/p&gt;
-
-&lt;h2 id=&quot;전체-모델구조&quot;&gt;전체 모델구조&lt;/h2&gt;
-
-&lt;p&gt;대부분의 신경망 시퀀스 변환 모델(transduction models)들은 대체로 Encoder 와 Decoder 로 구성된다. Encoder는 심볼로 표현된 입력 시퀀스(비연속적인 토큰들) $x$ 를 연속 공간(Continuous Space) $z$ 로 맵핑 후, $z$ 를 바탕으로 출력 시퀀스 심볼인 $y$ 를 얻는다. 출력 시퀀스는 이전 타임 스텝($t-1$) 시퀀스를 입력으로 다음 타임 스텝($t$)을 출력하는 자기회귀(auto-regressive) 성격을 가진다. 수식으로 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \mathbf{x}&amp;=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_1, z_2, \cdots, z_n)\\ \mathbf{y}&amp;=(y_1, y_2, \cdots, y_m)\ \text{for}\  y_{t}=f(y_{t-1}, \mathbf{z}) \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97&quot; alt=&quot;[그림 2] 모델구조: Encoder(좌), Decoder(우)&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 2] 모델구조: Encoder(좌), Decoder(우)&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;하지만 &lt;strong&gt;Transformer&lt;/strong&gt; 에서는 한 타임 스텝마다 $y$ 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt; 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).&lt;/p&gt;
-
-&lt;h2 id=&quot;encoder&quot;&gt;Encoder&lt;/h2&gt;
-
-&lt;p&gt;Encoder는 각기 다른 N 개의 “Encoder Layer”라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 “Multi-Head Attention”, 두번째는 일반적인 “Position-wise Feed Forward”로 구성되며, 각 서브층은 Residual Network(&lt;a href=&quot;https://arxiv.org/abs/1512.03385&quot;&gt;Kaiming He, 2015&lt;/a&gt;)처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm(&lt;a href=&quot;https://arxiv.org/abs/1607.06450&quot;&gt;Jimmy Lei Ba, 2016&lt;/a&gt;) 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{LayerNorm}(x + \text{SubLayer}(x))&lt;/script&gt;
-
-&lt;h2 id=&quot;decoder&quot;&gt;Decoder&lt;/h2&gt;
-
-&lt;p&gt;Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 “Decoder Layer” 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 “Multi-Head Attention”을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 “Multi-Head Attention”에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 됩니다. 따라서 $i$ 번째 토큰은 $i+1$ 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.&lt;/p&gt;
-
-&lt;p&gt;이제부터 모델의 세부 사항을 살펴보면서 저자가 왜 이렇게 사용했는지, 의도가 무엇인지를 알아보려고 한다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;2-scaled-dot-product-attention&quot;&gt;2. Scaled Dot-Product Attention&lt;/h1&gt;
-
-&lt;h2 id=&quot;attention&quot;&gt;Attention&lt;/h2&gt;
-
-&lt;p&gt;Transformer 에서 Attention은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 세트를 입력으로 집중된 어떤 벡터를 출력하는 함수로 표현할 수 있다. 출력은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 간의 관계(Attention), 즉 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 정보를 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 에 대조 했을 때, 어느 부분을 집중해서 볼 것인지를 계산하고 해당 관계를 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 와 결합하여 출력을 만든다. 수식으로 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;O = \text{Attention}(Q, K, V)&lt;/script&gt;
-
-&lt;p&gt;직관적으로 잘 안떠오르는데, 이게 어떤 느낌인지 알아보기위해 예를 들어보면 다음과 같다.&lt;/p&gt;
-
-&lt;h2 id=&quot;기계번역-문제&quot;&gt;기계번역 문제:&lt;/h2&gt;
-
-&lt;p&gt;영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 관계는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 3&lt;/code&gt; 과같이 표현할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G&quot; alt=&quot;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;query(Q)&lt;/strong&gt;&lt;/span&gt;: 한국어 문장 정보&lt;/li&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 세트: 인코딩된 영어 문장 정보, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;key(K)&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;value(V)&lt;/strong&gt;&lt;/span&gt; 는 같은 벡터&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 는 우리가 알고 싶어하는 문제라고 생각할 수 있다. 명칭도 “query=질의” 그대로 &lt;strong&gt;“한국어로 변역하기 위해 영어 문장에서 집중적으로 봐야하는 단어는 어느 것인가?”&lt;/strong&gt; 라는 질문을 인코딩된 영어 문장 정보인 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;  한테 물어보게 된다. 그 방법은 이 다음에 소개하도록 하고, 그렇게 얻은 결과인 &lt;strong&gt;A&lt;/strong&gt; 를 &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 와 곱하여 그 단어를 집중적으로 보게한다. 그렇게 Attention의 결과물인 &lt;span style=&quot;color:#49aa71&quot;&gt;&lt;strong&gt;O&lt;/strong&gt;&lt;/span&gt; 를 얻는다.&lt;/p&gt;
-
-&lt;h2 id=&quot;감성-분석-문제&quot;&gt;감성 분석 문제:&lt;/h2&gt;
-
-&lt;p&gt;꼭 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 모두 같은 문장을 지정하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 4&lt;/code&gt;처럼 Attention 을 사용할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX&quot; alt=&quot;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;scaled-dot-product-attention&quot;&gt;Scaled Dot-Product Attention&lt;/h2&gt;
-
-&lt;p&gt;Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 제일 기본적인 “Dot Product” 를 사용했으며, 그 수식은 다음과 같으며, 배치크기를 제외한 Q, K, V 의 크기를 표기해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 5&lt;/code&gt; 와 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V&lt;/script&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM&quot; alt=&quot;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&quot; width=&quot;auto&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;여기서 주의할 점은 $T_k$ 과 $T_v$가 같다는 점이다. 기계 번역을 예로 들면 소스 문장이 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;-&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 세트이기 때문에 같은 길이의 내용을 담고 있지만 각 토큰이 표현하고 있는 차원만 다를 뿐이다. &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 의 길이는 다를 수 있지만 차원 $d_k$ 로 같다. 두 행렬은 행렬의 곱(matrix multiplication)을 통해서 크기가 $(T_q, T_v)$ 인 점수 행렬 &lt;strong&gt;A&lt;/strong&gt; 를 만들어 낸다.&lt;/p&gt;
-
-&lt;p&gt;행렬 &lt;strong&gt;A&lt;/strong&gt; 는 스케일링(Scaling), 마스킹(Masking) 후 Softmax 를 통해 확률값을 도출한다. 이 행렬의 뜻은 “문제를 해결하기 위해서 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 토큰이 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 의 어떤 토큰을 가장 많이 참고해야하는가?” 를 뜻한다. 따라서 확률이 높게 부여된 토큰은 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 의 해당하는 토큰과 연관성이 높다고 할 수 있다. 물론 이 모든 연산은 학습이 가능하도록 DAG(Directed acyclic graph)로 연결되어 있기 때문에 학습 스텝이 진행됨에 따라 풀고자하는 문제에 최적화된 확률을 계속 도출해낸다&lt;span style=&quot;color:gray&quot;&gt;((Masking 은 차후에 다룬다)&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;스케일링 작업은 행렬 곱을 구한 &lt;strong&gt;A&lt;/strong&gt; 를 $\sqrt{d_k}$ 로 나누는데, 그 이유는 다음과 같다. 차원의 크기인 $d_k$ 가 커질 수록 행렬의 곱의 수치는 점점 커지고 Softmax 수식에 의해서 그 확률 값 또한 커진다. 따라서 Softmax 의 경사(gradient) 값도 굉장히 작아지는데, 이를 막기위해서 $\frac{1}{\sqrt{d_k}}$ 값을 곱해줘야한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;왜 $\sqrt{d_k}$ 를 나눌까?&lt;/strong&gt; 평균이 0, 표준편차가 1인 랜덤한 값으로 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 로 초기화시키고 확률로 표현된 행렬값 &lt;strong&gt;A&lt;/strong&gt; 의 경사를 구해보면 $d_k$ 가 커짐에 따라서 평균이 0, 분산이 $d_k$ 를 따르는 분포가 된다. 이러한 시뮬레이션을 다음 코드를 통해 알아 볼 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;check_dotproduct_dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    to check &quot;https://arxiv.org/abs/1706.03762&quot; Paper page 4, annotation 4
-    -------------------------------
-    To illustrate why the dot products get large, 
-    assume that the components of q and k are independent random variables 
-    with mean 0 and variance 1.
-    Then their dot product has mean 0 and variance d_k
-    
-    print(&quot;*** notice that the gradient of softmax is y(1-y) ***&quot;)
-    for d_k in [10, 100, 1000]:
-        check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)
-    
-    &quot;&quot;&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cal_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;softmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;q&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bmm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;size of vector d_k is {d_k}, sampling result, dot product distribution has&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; - mean: {attn.mean().item():.4f}, &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; - var: {attn.var().item():.4f}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;grad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cal_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;g_sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;le&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;g_percent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;count of gradients that smaller than threshod({threshold}) is {g_sum}, {g_percent:.2f}&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;attn2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as_tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;grad2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cal_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attn2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;g_sum2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grad2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;le&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;g_percent2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_sum2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grad2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;after divide by sqrt(d_k), count of gradients that smaller than threshod({threshold}) is {g_sum2}, {g_percent2:.2f}&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;% &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*** notice that the gradient of softmax is y(1-y) ***&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;check_dotproduct_dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d_k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampling_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;threshold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;시뮬레이션 결과:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*** notice that the gradient of softmax is y(1-y) ***
-size of vector d_k is 10, sampling result, dot product distribution has
-
- - mean: -0.0004, 
- - var: 9.9979
-count of gradients that smaller than threshod(1e-10) is 193, 0.01%
-after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
-
-size of vector d_k is 100, sampling result, dot product distribution has
-
- - mean: -0.0028, 
- - var: 99.9868
-count of gradients that smaller than threshod(1e-10) is 402283, 16.09%
-after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
-
-size of vector d_k is 1000, sampling result, dot product distribution has
-
- - mean: 0.0029, 
- - var: 999.6312
-count of gradients that smaller than threshod(1e-10) is 1737479, 69.50%
-after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00%
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/modules.py#L8&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html&quot;&gt;Attention Is All You Need - 2&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 14 Jan 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html</guid>
         
         
         <category>paper</category>
