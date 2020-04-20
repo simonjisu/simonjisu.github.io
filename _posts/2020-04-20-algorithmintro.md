@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Introduction of Algorithms & Data Structures"
-date: "2020-04-19 14:19:38 +0900"
+date: "2020-04-20 14:19:38 +0900"
 categories: python
 author: "Soo"
 comments: true
@@ -47,7 +47,9 @@ toc: true
 
 증가 기준(Order-of-Growth)은 자료 개수의 증가에 따라 소요시간이 변하는 정도를 나타내며, 실제 걸린 시간을 무시하고 표기하자는 것이다. 예를 들어, 어떤 알고리즘의 실행시간이 $T(N) = C\times N^2 + D\times N + E$ 정도 걸린다면 뭉뚱그려서 $C\times N^2$ 정도 시간이 걸린다 라고 말할 수 있다($C$는 알수 없는 반복에 걸리는 시간을 말한다). 이렇게 상대적으로 큰 값을 취하여 시간을 근사하는 방법을 **점근법(asymptote)**이라고 한다.
 
-점근 표기법은 알고리즘의 복잡도를 단순화할 때나 무한급수의 뒷부분을 간소화할 때 쓰인다. $\Theta, O, \Omega$ 등이 있고, Order of Growth 의 분류로 다음과 같은 표를 그릴 수 있다.
+점근 표기법(Asymptotic Notation)은 알고리즘의 복잡도를 단순화할 때나 무한급수의 뒷부분을 간소화할 때 쓰이며 $\Theta, O, \Omega$ 등이 있다. 보통 "빅오" 라고 많이 들어봤을 것이다.
+
+Order of Growth의 분류로 다음과 같은 표를 그릴 수 있다.
 
 {% include image.html id="1xH_B7ndU6XNlZY1lUnIom_q2Tdv7hNi2" desc="[출처] Robert-Sedgewick 교수의 Algoritms 강의" width="100%" height="auto" %}
 
