@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 May 2020 15:51:34 +0900</pubDate>
-    <lastBuildDate>Sat, 02 May 2020 15:51:34 +0900</lastBuildDate>
+    <pubDate>Sat, 02 May 2020 16:01:57 +0900</pubDate>
+    <lastBuildDate>Sat, 02 May 2020 16:01:57 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -37,7 +37,7 @@
 
 &lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf&quot; alt=&quot;[출처] Wikipedia: Sorting algorithm&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[출처] Wikipedia: Sorting algorithm&lt;/figcaption&gt;&lt;/figure&gt;
 
-&lt;p&gt;이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 차근차근 하나씩 알아가보기로 한다.&lt;/p&gt;
+&lt;p&gt;이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 어떤 것이 Stable 하고 아닌지는 마지막에 한번에 정리하고, 지금부터 각 알고리즘을 하나씩 알아보기로 한다.&lt;/p&gt;
 
 &lt;h1 id=&quot;bubble-sort&quot;&gt;Bubble Sort&lt;/h1&gt;
 

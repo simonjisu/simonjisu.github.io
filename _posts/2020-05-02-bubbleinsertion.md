@@ -34,7 +34,7 @@ toc: true
 
 {% include image.html id="1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf" desc="[출처] Wikipedia: Sorting algorithm" width="50%" height="auto" %}
 
-이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 차근차근 하나씩 알아가보기로 한다. 
+이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 어떤 것이 Stable 하고 아닌지는 마지막에 한번에 정리하고, 지금부터 각 알고리즘을 하나씩 알아보기로 한다.
 
 # Bubble Sort
 
