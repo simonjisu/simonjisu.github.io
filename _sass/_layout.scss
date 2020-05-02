@@ -141,12 +141,15 @@ body {
     }
   }
 }
-
-.adblock {
-  line-height: $base-line-height;
-  padding: 50px 0px 0px 0px;
+@media (max-width: 781px) {
+  .adblock {
+    line-height: $base-line-height;
+    padding: 0px 0px 0px 0px;
+    margin: 0;
+    height: 0;
+    width: 0;
+  }
 }
-
 /* site-nav */
 
 @include media-query($on-laptop) {

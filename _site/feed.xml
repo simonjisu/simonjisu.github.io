@@ -6,9 +6,140 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Apr 2020 21:53:53 +0900</pubDate>
-    <lastBuildDate>Mon, 20 Apr 2020 21:53:53 +0900</lastBuildDate>
+    <pubDate>Sat, 02 May 2020 15:47:41 +0900</pubDate>
+    <lastBuildDate>Sat, 02 May 2020 15:47:41 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>[Algorithms] Bubble Sort &amp; Insertion Sort</title>
+        <description>&lt;h1 id=&quot;sorting-problem&quot;&gt;Sorting Problem&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Sorting_algorithm&quot;&gt;&lt;strong&gt;정렬(Sorting) 문제&lt;/strong&gt;&lt;/a&gt;는 입력 시퀀스 $(x_1, x_2, \cdots, x_n)$를 오름차순의 순열(permutation)으로 만드는 문제를 말한다. 예를 들면 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;input_seq&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;output_seq&lt;/code&gt;로 바꾸는 형태다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# Before Sorting
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_seq&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# After Sorting
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;가장 많이 사용되는 순서의 종류는 숫자 순서(numerical order), &lt;a href=&quot;https://en.wikipedia.org/wiki/Lexicographical_order&quot;&gt;사전 순서(lexicographical order)&lt;/a&gt; 다.&lt;/p&gt;
+
+&lt;h2 id=&quot;inplace-algorithms&quot;&gt;Inplace Algorithms&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/04/20/algorithmintro.html&quot;&gt;알고리즘 Introduction 글&lt;/a&gt;에서 알고리즘의 효율을 따지기 위해 시간 이외에 중요한 요소가 &lt;strong&gt;메모리 공간&lt;/strong&gt; 이라고 언급했었다. 이와 연관된 용어가 바로 알고리즘의 Inplace 여부다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inplace Algorithms&lt;/strong&gt; 이란, 실행하는데 추가로 공간이 필요하지 않는(혹은 거의 필요하지 않는) 알고리즘을 말한다. 앞으로 다뤄볼 정렬 문제에 사용되는 알고리즘은 대부분은 Inplace 알고리즘들이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;stable-or-unstable&quot;&gt;Stable or Unstable&lt;/h2&gt;
+
+&lt;p&gt;이외에도 정렬 문제에서 자주 나오는 용어는 &lt;strong&gt;안정성(stability)&lt;/strong&gt;다. Stable 과 Unstable 두 가지로 나누는데, 정렬 후에도 기존 입력 시퀀스의 특성 또한 그 순서을 유지하는 것이 stable sort, 그렇지 않은 것을 unstable sort라고 한다.&lt;/p&gt;
+
+&lt;p&gt;다음 그림 처럼, 숫자 순서로 정렬한 포커 그림을 보자. 정렬 후에도 하트, 스페이드라는 특성이 기존의 “하트5 &amp;gt; 스페이드5” 순서로 유지되는 것이 stable sort, 밑에 그림 처럼 그 순서가 유지되지 않는 것이 unstable sort다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf&quot; alt=&quot;[출처] Wikipedia: Sorting algorithm&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[출처] Wikipedia: Sorting algorithm&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 차근차근 하나씩 알아가보기로 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;bubble-sort&quot;&gt;Bubble Sort&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;버블 정렬(Bubble Sort)&lt;/strong&gt;은 각 스텝에서 서로 인접한(adjacent) 두 원소를 크기를 비교하여 바르지 않은 순서일 경우 두 원소를 교환(swap)하는 알고리즘이다. &lt;code class=&quot;highlighter-rouge&quot;&gt;그림1&lt;/code&gt;과 같이 알고리즘의 각 스텝을 표현할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1JoOMFOFarMnqXIUpKmRQDnWbCEkPsfUI&quot; alt=&quot;[그림1] Bubble Sort&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림1] Bubble Sort&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;각 스텝별로 Index &lt;strong&gt;j&lt;/strong&gt;가 가르키는 원소와 &lt;strong&gt;j+1&lt;/strong&gt;번째 원소와 비교하여 &lt;strong&gt;j&lt;/strong&gt;번째 원소가 더 크면 &lt;strong&gt;j+1&lt;/strong&gt;번째 원소와 swap하게 된다. 스텝이 지날수록 &lt;strong&gt;j&lt;/strong&gt;가 가질수 있는 최대 크기는 점점 줄어드며, 최대값이 0이 되었을 때 비로소 멈추게 된다. 코드로 구현하면 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bubble_sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;r&quot;&quot;&quot;
+    Bubble Sort
+    Args: 
+        l: input list
+    Return:
+        sorted list by ascending
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;r&quot;&quot;&quot;swap p-th element and q-th element&quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;  
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;버블 정렬의 특징은 구현이 간단하며, 추가 공간이 필요하지 않는 inplace 알고리즘이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;알고리즘-복잡도&quot;&gt;알고리즘 복잡도&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;# 1
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# n
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# (n-1) + (n-2) + ... + 1
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# 비교: (n-1) + (n-2) + ... + 1
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# 스왑: (n-1) + (n-2) + ... + 1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index &lt;strong&gt;j&lt;/strong&gt;가 순환하면서 모든 원소와 비교와 교환하게 되는데, 각각의 스텝 횟수는 $N-1, N-2 \cdots, 1$라서 총 $T(N) = c \times \dfrac{N(N-1)}{2} + \alpha$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;insertion-sort&quot;&gt;Insertion Sort&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;삽입 정렬(Insertion Sort)&lt;/strong&gt;은 정렬된 부분과 정렬되지 않는 부분을 따로 두어 정렬되지 않은 부분의 첫 원소부터 차례대로 정렬된 부분으로 넣는 알고리즘이다. 정렬된 부분은 보통 리스트의 첫번째 원소를 택한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;그림2&lt;/code&gt;과 같이 알고리즘의 각 스텝을 표현할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1uN_BaCpFNpFS1ZD3HtkqigMI9scolVEJ&quot; alt=&quot;[그림1] Insertion Sort&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림1] Insertion Sort&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;각 스텝별로 Index &lt;strong&gt;j&lt;/strong&gt;가 가르키는 원소와 파란색으로 표시된 정렬된 부분의 원소와 비교하여 삽입할 index를 찾는 것이다. 실제로는 삽입할 index를 찾게 될때까지 비교가 완료된 원소를 오른쪽으로 미는 작업(Shift)을 한다. 코드로 구현하면 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;insertion_sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;r&quot;&quot;&quot;
+    Insertion Sort
+    Args: 
+        l: input list
+    Return:
+        sorted list by ascending
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;삽입 정렬도 상대적으로 구현이 간단하며, 추가 공간이 필요하지 않는 inplace 알고리즘이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;알고리즘-복잡도-1&quot;&gt;알고리즘 복잡도&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                          &lt;span class=&quot;c1&quot;&gt;# 1
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;# n-1
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;# n-1
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;                           &lt;span class=&quot;c1&quot;&gt;# n-1
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 비교: 1 + 2 + ... + (n-1)
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;# Shift: 1 + 2 + ... + (n-1)
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;# 1 + 2 + ... + (n-1)
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;# 삽입: n-1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index &lt;strong&gt;j&lt;/strong&gt;가 순환하면서 앞의 정렬된 부분과 모두 비교하고 Shift하는 횟수는 $1, 2, \cdots, N-1$라서 총 $T(N) = c \dfrac{N(N-1)}{2} + \alpha$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.programiz.com/dsa/asymptotic-notations&quot;&gt;Asymptotic Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 27 Apr 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/python/2020/04/27/bubbleinsertion.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/04/27/bubbleinsertion.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>Introduction of Algorithms &amp; Data Structures</title>
@@ -1053,129 +1184,6 @@ det \Big( \begin{bmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{bmatrix} \Big) = 6 %]]&gt;
         
         
         <category>others</category>
-        
-      </item>
-    
-      <item>
-        <title>[NLP] Attention Is All You Need - 2</title>
-        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1706.03762&quot;&gt;Attention Is All You Need&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;이전 글: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/01/14/attentionisallyouneed.html&quot;&gt;Attention Is All You Need - 1&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;3-sub-layers&quot;&gt;3. Sub Layers&lt;/h1&gt;
-
-&lt;h2 id=&quot;multi-head-attention&quot;&gt;Multi-Head Attention&lt;/h2&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_&quot; alt=&quot;[그림 1] Multi-Head Attention&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 1] Multi-Head Attention&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;첫번째 서브층(SubLayer) Multi-Head Attention 의 구조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 1&lt;/code&gt; 과 같다. 연구자들은 $d_{model}$ 크기의 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 를 한 번 수행하는 것보다 $h$ 개의 각기 다른 &lt;strong&gt;선형 투영(linear projection)&lt;/strong&gt;을 시켜, 크기가 $d_k$(&lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;), $d_v$(&lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt;) 인 텐서를 사용해서 Attention 을 병렬로 수행하는 것이 더 유리한 것을 찾아냈다. 각기 다른 Attention 을 수행한 $h$ 개의 출력값은 하나로 concatenate 후에 최종 선형결합을 통해 다시 $d_{model}$ 크기로 돌아오는데 이를 수식으로 표현하면 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{MultiHead}(Q, K, V) &amp;= \text{Concat}(\text{head}_1, \cdots \text{head}_h)W^O  \\ \text{where head}_i &amp;= \text{Attention}(QW^Q_i, KW^K_i, VW^V_i)  \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;W 는 선형결합을 위한 매겨변수이며 각각의 크기는 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{aligned} W^Q_i \in \Bbb{R}^{d_{model}\times d_k}, W^K_i\in \Bbb{R}^{d_{model}\times d_k}, W^V_i\in \Bbb{R}^{d_{model}\times d_v}, W^O \in \Bbb{R}^{h*d_v\times d_{model}}\end{aligned}&lt;/script&gt;
-
-&lt;p&gt;그렇다면 이렇게 큰 차원의 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 를 선형 변환 후에 $h$ 개의 Attention 을 나눠서 학습하게 했던 이유는 무엇 일까? 논문에서 이해한 것을 정리하면 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;일단 선형 변환된 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt;, &lt;span style=&quot;color:#cfb648&quot;&gt;&lt;strong&gt;V&lt;/strong&gt;&lt;/span&gt; 를 $h$ 개로 나눠버리는데, 이는 각 토큰을 표현하고 있던 큰 차원의 뉴런들을 $h$ 개의 블록으로 나눴다고 할 수 있다. 이렇게 위치가 상이한 각기 다른 표현 부분공간(representation subspaces) 블록들이 교차하면서(jointly) 정보를 얻게 된다. 이 말은 곧 $h$ 개의 Attention Matrix 가 생기면서 &lt;span style=&quot;color:#e25252&quot;&gt;&lt;strong&gt;Q&lt;/strong&gt;&lt;/span&gt; 와 &lt;span style=&quot;color:#5470cc&quot;&gt;&lt;strong&gt;K&lt;/strong&gt;&lt;/span&gt; 간의 토큰들이 더 다양한 관점으로 볼 수 있다는 말이다. 만약에 나누지 않았다면 단 하나의 Attention Matrix 를 생성하면서 이러한 효과를 뭉게버림으로, 선형 변환 층(linear projection)은 학습 과정을 반복하면서 최적의 $h$ 개의 Attention Matrix 를 생성하는 역할을 학습하게 된다.&lt;/p&gt;
-
-&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/sublayers.py#L11&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;position-wise-feed-forward-networks&quot;&gt;Position-wise Feed-Forward Networks&lt;/h2&gt;
-
-&lt;p&gt;또 다른 서브층으로써 완전 연결층(Fully Connect Layer)인 네트워크를 Encoder, Decoder 뒤에 하나씩 추가했다. 이 완전 연결층은 두 개의 선형변환과 ReLU 활성화 함수를 사용했으며 그 수식은 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{FFN}(x) = \max(0, xW_1+b_1)W_2+b_2&lt;/script&gt;
-
-&lt;p&gt;아마도 입력 텐서가 각 토큰의 위치별로 차원이 커졌다가 다시 원래 모양으로 줄어들어서 이름이 Position-wise 라고 붙여진 것으로 추정되는데, 차원의 크기가 다음과 같이 변하기 때문이다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;(B, T, d_{model}) \rightarrow(B, T, d_{ff}) \rightarrow (B, T, d_{model})&lt;/script&gt;
-
-&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/sublayers.py#L91&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;4-embeddings&quot;&gt;4. Embeddings&lt;/h1&gt;
-
-&lt;h2 id=&quot;input-과-output&quot;&gt;Input 과 Output&lt;/h2&gt;
-
-&lt;p&gt;Embedding 층과 Position Encoding 을 설명하기 전에 입출력이 어떻게 구성되어 있는지를 살펴봐야한다. 기계 번역 문제를 다시 예시로 들어보면, 다음과 같이 수치화된 문장들이 있다. 0 은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt; 토큰으로써 데이터 처리를 위해 설정한 문장의 최대 길이에 맞춰서 넣은 인위적인 토큰이다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{src} &amp;= \begin{bmatrix}3&amp;6&amp;4&amp;9 \\ 1&amp;3&amp;5&amp;0 \\ 3&amp;2&amp;0&amp;0 \end{bmatrix} \\ \text{trg} &amp;= \begin{bmatrix}2&amp;5&amp;4&amp;0 \\ 2&amp;5&amp;6&amp;0 \\ 2&amp;7&amp;4&amp;9 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;즉, 위 행렬을 해석하면 현재 Input 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터, Target 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터다. 각 문장의 토큰들에 순서 인덱스를 부여하여 포지션(Position) 데이터를 얻고자하면 다음과 같다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Padding&lt;/code&gt; 은 인위적으로 넣은 데이터기 때문에 순서가 없어야 한다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{src_pos} &amp;= \begin{bmatrix}1&amp;2&amp;3&amp;4 \\ 1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;0&amp;0 \end{bmatrix} \\ \text{trg_pos} &amp;= \begin{bmatrix}1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;3&amp;0 \\ 1&amp;2&amp;3&amp;4 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;Decoder 의 경우 이전 타임 스텝(t-1)의 토큰들로 다음 타임 스텝(t)의 토큰을 예측하기 때문에 실질적으로 모델에 입력되는 데이터(&lt;code class=&quot;highlighter-rouge&quot;&gt;trg_input&lt;/code&gt;)와 실제 예측해야하는 타겟 데이터(&lt;code class=&quot;highlighter-rouge&quot;&gt;gold&lt;/code&gt;)는 다음과 같다. 즉, 예를 들어 1, 2, 3 포지션에 해당하는 타겟 값을 입력으로 주었을때 2, 3, 4 번 포지션에 해당하는 값을 예측하는 것이다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} \text{trg_input} &amp;= \begin{bmatrix} 2&amp;5&amp;4 \\ 2&amp;5&amp;6 \\ 2&amp;7&amp;4 \end{bmatrix} \\ \text{gold} &amp;= \begin{bmatrix}5&amp;4&amp;0 \\ 5&amp;6&amp;0 \\ 7&amp;4&amp;9 \end{bmatrix}  \end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;토큰에 순서 정보인 포지션을 구하는 이유는 무엇일까? 그 해답은 RNN 의 구동원리에 있는데, RNN 을 Cell 단위로 만들면 다음 코드와 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# create inputs tensor
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;input_dimension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_dimension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# setting rnn cell
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;hidden_dimension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;rnn_cell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RNNCell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_dimension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hidden_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hidden_dimension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# RNN Layer
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hidden_dimension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rnn_cell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# print: torch.Size([10, 2, 6])
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;RNN 의 특징 중 하나는 시퀀스 길이에 상관없이 한 스텝씩 처리하기 때문에 아주 긴 시퀀스도 처리를 할 수 있다. 그러나 이러한 특징은 이전 타입스텝의 정보를 다음 타임스텝에게 전달할 수 있지만 병렬 처리가 불가능 하다. 하지만 Transformer 의 목표중 하나는 시퀀스 데이터의 병렬 처리인데, 즉, 한 번에 지정된 길이의 시퀀스를 모두 모델에게 전달하고 Forward 하게 된다. 그렇다면 시퀀스의 각 토큰간 순서 관계 정보를 모델은 어떻게 알아낼 수 있을까? 바로 &lt;strong&gt;Position Encoding&lt;/strong&gt; 을 통해서 각 토큰의 순서 정보를 &lt;strong&gt;Embedding&lt;/strong&gt; 된 벡터와 결합하여 모델로 전달하게 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;embedding&quot;&gt;Embedding&lt;/h2&gt;
-
-&lt;p&gt;임베딩은 분절된 토큰들을 고정된 $d_{model}$ 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 $\sqrt{d_{model}}$ 를 곱했다.&lt;/p&gt;
-
-&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L107&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;positional-encoding&quot;&gt;Positional Encoding&lt;/h2&gt;
-
-&lt;p&gt;Positional Encoding 은 상대적이거나 절대적인 위치정보를 부여하는 방법이다. 각 Position Encoding 의 차원의 크기는 더할 수 있게 임베딩된 텐서의 차원 크기인 $d_{model}$과 같고 수식은 다음과 같다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned} PE_{pos, 2i} &amp;= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{pos, 2i+1} &amp;= \cos(\frac{pos}{10000^{2i/d_{model}}})\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;결론을 말하자면 각 시퀀스의 순서 인덱서는 PE(Positonal Encoding) 테이블에서 각자의 위치를 조회후에 임베딩된 텐서와 결합하게 된다. pos 는 시퀀스의 위치정보, 예를 들어 텐서의 크기가 $d_{model}$ = 1024 의 경우, 각 1024의 짝수(2i)에 위치한 값들은 sin 함수를 적용하고, 홀수(2i+1) 에 위치한 값들은 cos 함수를 적용한다. PE 테이블을 그리면 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림 2&lt;/code&gt; 과 같은데, 자세히 보시면 각 포지션에 해당하는 1 줄(1024 크기의 벡터)값은 모두 차별화 되어있다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22&quot; alt=&quot;[그림 2] 최대 길이가 51인 Positional Encoding Table&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림 2] 최대 길이가 51인 Positional Encoding Table&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;해당 모듈(Module) 코드는 &lt;a href=&quot;https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L82&quot;&gt;&lt;strong&gt;Link&lt;/strong&gt;&lt;/a&gt; 에서 확인할 수 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;다음편: &lt;a href=&quot;https://simonjisu.github.io/paper/2020/02/23/attentionisallyouneed3.html&quot;&gt;Attention Is All You Need - 3&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 02 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/02/02/attentionisallyouneed2.html</guid>
-        
-        
-        <category>paper</category>
         
       </item>
     
