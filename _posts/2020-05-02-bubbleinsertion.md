@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Algorithms] Bubble Sort & Insertion Sort"
-date: "2020-04-27 14:19:38 +0900"
+date: "2020-05-02 14:19:38 +0900"
 categories: python
 author: "Soo"
 comments: true
@@ -32,7 +32,7 @@ toc: true
 
 다음 그림 처럼, 숫자 순서로 정렬한 포커 그림을 보자. 정렬 후에도 하트, 스페이드라는 특성이 기존의 "하트5 > 스페이드5" 순서로 유지되는 것이 stable sort, 밑에 그림 처럼 그 순서가 유지되지 않는 것이 unstable sort다.
 
-{% include image.html id="1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf" desc="[출처] Wikipedia: Sorting algorithm" width="100%" height="auto" %}
+{% include image.html id="1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf" desc="[출처] Wikipedia: Sorting algorithm" width="50%" height="auto" %}
 
 이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 차근차근 하나씩 알아가보기로 한다. 
 
@@ -84,7 +84,7 @@ for i in range(n):          # n
 
 **삽입 정렬(Insertion Sort)**은 정렬된 부분과 정렬되지 않는 부분을 따로 두어 정렬되지 않은 부분의 첫 원소부터 차례대로 정렬된 부분으로 넣는 알고리즘이다. 정렬된 부분은 보통 리스트의 첫번째 원소를 택한다. `그림2`과 같이 알고리즘의 각 스텝을 표현할 수 있다. 
 
-{% include image.html id="1uN_BaCpFNpFS1ZD3HtkqigMI9scolVEJ" desc="[그림1] Insertion Sort" width="100%" height="auto" %}
+{% include image.html id="1uN_BaCpFNpFS1ZD3HtkqigMI9scolVEJ" desc="[그림2] Insertion Sort" width="75%" height="auto" %}
 
 각 스텝별로 Index **j**가 가르키는 원소와 파란색으로 표시된 정렬된 부분의 원소와 비교하여 삽입할 index를 찾는 것이다. 실제로는 삽입할 index를 찾게 될때까지 비교가 완료된 원소를 오른쪽으로 미는 작업(Shift)을 한다. 코드로 구현하면 다음과 같다.
 

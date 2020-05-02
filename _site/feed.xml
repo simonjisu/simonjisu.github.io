@@ -6,8 +6,8 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 May 2020 15:47:41 +0900</pubDate>
-    <lastBuildDate>Sat, 02 May 2020 15:47:41 +0900</lastBuildDate>
+    <pubDate>Sat, 02 May 2020 15:51:34 +0900</pubDate>
+    <lastBuildDate>Sat, 02 May 2020 15:51:34 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -35,7 +35,7 @@
 
 &lt;p&gt;다음 그림 처럼, 숫자 순서로 정렬한 포커 그림을 보자. 정렬 후에도 하트, 스페이드라는 특성이 기존의 “하트5 &amp;gt; 스페이드5” 순서로 유지되는 것이 stable sort, 밑에 그림 처럼 그 순서가 유지되지 않는 것이 unstable sort다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf&quot; alt=&quot;[출처] Wikipedia: Sorting algorithm&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[출처] Wikipedia: Sorting algorithm&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1JAW-0E7H5Dh2C_BMfI6vP9r4q5czRFAf&quot; alt=&quot;[출처] Wikipedia: Sorting algorithm&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[출처] Wikipedia: Sorting algorithm&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;이러한 특성을 유지하는 정렬 알고리즘이 있고 그렇지 않은 것들이 있다. 차근차근 하나씩 알아가보기로 한다.&lt;/p&gt;
 
@@ -85,7 +85,7 @@
 
 &lt;p&gt;&lt;strong&gt;삽입 정렬(Insertion Sort)&lt;/strong&gt;은 정렬된 부분과 정렬되지 않는 부분을 따로 두어 정렬되지 않은 부분의 첫 원소부터 차례대로 정렬된 부분으로 넣는 알고리즘이다. 정렬된 부분은 보통 리스트의 첫번째 원소를 택한다. &lt;code class=&quot;highlighter-rouge&quot;&gt;그림2&lt;/code&gt;과 같이 알고리즘의 각 스텝을 표현할 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1uN_BaCpFNpFS1ZD3HtkqigMI9scolVEJ&quot; alt=&quot;[그림1] Insertion Sort&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림1] Insertion Sort&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1uN_BaCpFNpFS1ZD3HtkqigMI9scolVEJ&quot; alt=&quot;[그림2] Insertion Sort&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림2] Insertion Sort&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;각 스텝별로 Index &lt;strong&gt;j&lt;/strong&gt;가 가르키는 원소와 파란색으로 표시된 정렬된 부분의 원소와 비교하여 삽입할 index를 찾는 것이다. 실제로는 삽입할 index를 찾게 될때까지 비교가 완료된 원소를 오른쪽으로 미는 작업(Shift)을 한다. 코드로 구현하면 다음과 같다.&lt;/p&gt;
 
@@ -132,9 +132,9 @@
   &lt;li&gt;&lt;a href=&quot;https://www.programiz.com/dsa/asymptotic-notations&quot;&gt;Asymptotic Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Mon, 27 Apr 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/04/27/bubbleinsertion.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/04/27/bubbleinsertion.html</guid>
+        <pubDate>Sat, 02 May 2020 14:19:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html</guid>
         
         
         <category>python</category>
