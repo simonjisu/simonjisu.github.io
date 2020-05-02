@@ -299,7 +299,7 @@ div#table-of-contents ul.toc-nav li a:hover { color: #b1b1b1; text-decoration: u
 
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-code { padding: .2rem .2rem; margin: 0 .2rem; font-size: 90%; white-space: nowrap; background: #F1F1F1; border: 1px solid #E1E1E1; border-radius: 4px; }
+code { padding: .2rem .2rem; margin: 0 .2rem; font-size: 90%; white-space: nowrap; }
 
 pre > code { display: block; padding: 1rem 1.5rem; white-space: pre; }
 
@@ -571,144 +571,144 @@ blue      #268bd2  reserved keywords
 cyan      #2aa198  strings, numbers
 green     #859900  operators, other keywords
 */
-.highlight { background-color: #F1F1F1; color: #586e75; /* Comment */ /* Error */ /* Generic */ /* Keyword */ /* Literal */ /* Name */ /* Operator */ /* Other */ /* Punctuation */ /* Comment.Multiline */ /* Comment.Preproc */ /* Comment.Single */ /* Comment.Special */ /* Generic.Deleted */ /* Generic.Emph */ /* Generic.Error */ /* Generic.Heading */ /* Generic.Inserted */ /* Generic.Output */ /* Generic.Prompt */ /* Generic.Strong */ /* Generic.Subheading */ /* Generic.Traceback */ /* Keyword.Constant */ /* Keyword.Declaration */ /* Keyword.Namespace */ /* Keyword.Pseudo */ /* Keyword.Reserved */ /* Keyword.Type */ /* Literal.Date */ /* Literal.Number */ /* Literal.String */ /* Name.Attribute */ /* Name.Builtin */ /* Name.Class */ /* Name.Constant */ /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */ /* Name.Label */ /* Name.Namespace */ /* Name.Other */ /* Name.Property */ /* Name.Tag */ /* Name.Variable */ /* Operator.Word */ /* Text.Whitespace */ /* Literal.Number.Float */ /* Literal.Number.Hex */ /* Literal.Number.Integer */ /* Literal.Number.Oct */ /* Literal.String.Backtick */ /* Literal.String.Char */ /* Literal.String.Doc */ /* Literal.String.Double */ /* Literal.String.Escape */ /* Literal.String.Heredoc */ /* Literal.String.Interpol */ /* Literal.String.Other */ /* Literal.String.Regex */ /* Literal.String.Single */ /* Literal.String.Symbol */ /* Name.Builtin.Pseudo */ /* Name.Variable.Class */ /* Name.Variable.Global */ /* Name.Variable.Instance */ /* Literal.Number.Integer.Long */ }
+/* custom monokai.css */
+/** Syntax highlighting styles */
+.highlight, pre.highlight { font-family: 'D2 coding', "Consolas", monospace; background: #272b33; color: #aab1bf; }
 
-.highlight .c { color: #93a1a1; }
+.highlight .c { color: #75715e; font-style: italic; }
 
-.highlight .err { color: #586e75; }
+.highlight .err { color: #960050; background-color: #1e0010; }
 
-.highlight .g { color: #586e75; }
+.highlight .k { color: #66d9ef; font-weight: bold; }
 
-.highlight .k { color: #859900; }
+.highlight .o { color: #f92672; font-weight: bold; }
 
-.highlight .l { color: #586e75; }
+.highlight .l { color: #ae81ff; }
 
-.highlight .n { color: #586e75; }
+.highlight .n { color: #f8f8f2; }
 
-.highlight .o { color: #859900; }
+.highlight .p { color: #f8f8f2; }
 
-.highlight .x { color: #cb4b16; }
+.highlight .cm { color: #75715e; font-style: italic; }
 
-.highlight .p { color: #586e75; }
+.highlight .cp { color: #75715e; font-weight: bold; }
 
-.highlight .cm { color: #93a1a1; }
+.highlight .c1 { color: #49a027; }
 
-.highlight .cp { color: #859900; }
+.highlight .cs { color: #75715e; font-weight: bold; font-style: italic; }
 
-.highlight .c1 { color: #93a1a1; }
+.highlight .gd { color: #f92672; background-color: #fdd; }
 
-.highlight .cs { color: #859900; }
+.highlight .gd .x { color: #000; background-color: #faa; }
 
-.highlight .gd { color: #2aa198; }
+.highlight .ge { font-style: italic; }
 
-.highlight .ge { color: #586e75; font-style: italic; }
+.highlight .gr { color: #a00; }
 
-.highlight .gr { color: #dc322f; }
+.highlight .gh { color: #999; }
 
-.highlight .gh { color: #cb4b16; }
+.highlight .gi { color: #a6e22e; background-color: #dfd; }
 
-.highlight .gi { color: #859900; }
+.highlight .gi .x { color: #a6e22e; background-color: #afa; }
 
-.highlight .go { color: #586e75; }
+.highlight .go { color: #888; }
 
-.highlight .gp { color: #586e75; }
+.highlight .gp { color: #555; }
 
-.highlight .gs { color: #586e75; font-weight: bold; }
+.highlight .gs { font-weight: bold; }
 
-.highlight .gu { color: #cb4b16; }
+.highlight .gu { color: #75715e; }
 
-.highlight .gt { color: #586e75; }
+.highlight .gt { color: #a00; }
 
-.highlight .kc { color: #cb4b16; }
+.highlight .kc { color: #66d9ef; font-weight: bold; }
 
-.highlight .kd { color: #268bd2; }
+.highlight .kd { color: #66d9ef; font-weight: bold; }
 
-.highlight .kn { color: #859900; }
+.highlight .kn { color: #f92672; }
 
-.highlight .kp { color: #859900; }
+.highlight .kp { color: #66d9ef; font-weight: bold; }
 
-.highlight .kr { color: #268bd2; }
+.highlight .kr { color: #66d9ef; font-weight: bold; }
 
-.highlight .kt { color: #dc322f; }
+.highlight .kt { color: #66d9ef; font-weight: bold; }
 
-.highlight .ld { color: #586e75; }
+.highlight .m { color: #ae81ff; }
 
-.highlight .m { color: #2aa198; }
+.highlight .s { color: #e6db74; }
 
-.highlight .s { color: #2aa198; }
+.highlight .ld { color: #e6db74; }
 
-.highlight .na { color: #586e75; }
+.highlight .na { color: #a6e22e; }
 
-.highlight .nb { color: #B58900; }
+.highlight .nb { color: #f8f8f2; }
 
-.highlight .nc { color: #268bd2; }
+.highlight .nc { color: #a6e22e; font-weight: bold; }
 
-.highlight .no { color: #cb4b16; }
+.highlight .no { color: #66d9ef; }
 
-.highlight .nd { color: #268bd2; }
+.highlight .nd { color: #a6e22e; }
 
-.highlight .ni { color: #cb4b16; }
+.highlight .ni { color: #f8f8f2; }
 
-.highlight .ne { color: #cb4b16; }
+.highlight .ne { color: #a6e22e; }
 
-.highlight .nf { color: #268bd2; }
+.highlight .nf { color: #a6e22e; }
 
-.highlight .nl { color: #586e75; }
+.highlight .nl { color: #f8f8f2; }
 
-.highlight .nn { color: #586e75; }
+.highlight .nn { color: #f8f8f2; }
 
-.highlight .nx { color: #586e75; }
+.highlight .nx { color: #a6e22e; }
 
-.highlight .py { color: #586e75; }
+.highlight .py { color: #f8f8f2; }
 
-.highlight .nt { color: #268bd2; }
+.highlight .nt { color: #f92672; }
 
-.highlight .nv { color: #268bd2; }
+.highlight .nv { color: #f8f8f2; }
 
-.highlight .ow { color: #859900; }
+.highlight .ow { color: #f92672; font-weight: bold; }
 
-.highlight .w { color: #586e75; }
+.highlight .w { color: #f8f8f2; }
 
-.highlight .mf { color: #2aa198; }
+.highlight .mf { color: #ae81ff; }
 
-.highlight .mh { color: #2aa198; }
+.highlight .mh { color: #ae81ff; }
 
-.highlight .mi { color: #2aa198; }
+.highlight .mi { color: #ae81ff; }
 
-.highlight .mo { color: #2aa198; }
+.highlight .mo { color: #ae81ff; }
 
-.highlight .sb { color: #93a1a1; }
+.highlight .sb { color: #e6db74; }
 
-.highlight .sc { color: #2aa198; }
+.highlight .sc { color: #e6db74; }
 
-.highlight .sd { color: #586e75; }
+.highlight .sd { color: #e6db74; }
 
-.highlight .s2 { color: #2aa198; }
+.highlight .s2 { color: #e6db74; }
 
-.highlight .se { color: #cb4b16; }
+.highlight .se { color: #ae81ff; }
 
-.highlight .sh { color: #586e75; }
+.highlight .sh { color: #e6db74; }
 
-.highlight .si { color: #2aa198; }
+.highlight .si { color: #e6db74; }
 
-.highlight .sx { color: #2aa198; }
+.highlight .sx { color: #e6db74; }
 
-.highlight .sr { color: #dc322f; }
+.highlight .sr { color: #e6db74; }
 
-.highlight .s1 { color: #2aa198; }
+.highlight .s1 { color: #e6db74; }
 
-.highlight .ss { color: #2aa198; }
+.highlight .ss { color: #e6db74; }
 
-.highlight .bp { color: #268bd2; }
+.highlight .bp { color: #f8f8f2; }
 
-.highlight .vc { color: #268bd2; }
+.highlight .vc { color: #f8f8f2; }
 
-.highlight .vg { color: #268bd2; }
+.highlight .vg { color: #f8f8f2; }
 
-.highlight .vi { color: #268bd2; }
+.highlight .vi { color: #f8f8f2; }
 
-.highlight .il { color: #2aa198; }
-
-/* monokai.css */
+.highlight .il { color: #ae81ff; }
 
 /*# sourceMappingURL=main.css.map */

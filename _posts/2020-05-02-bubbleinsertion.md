@@ -129,4 +129,3 @@ for j in range(1, n):               # n-1
 # References:
 
 * 본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.
-* [Asymptotic Analysis](https://www.programiz.com/dsa/asymptotic-notations)

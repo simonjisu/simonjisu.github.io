@@ -6,9 +6,74 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 May 2020 16:01:57 +0900</pubDate>
-    <lastBuildDate>Sat, 02 May 2020 16:01:57 +0900</lastBuildDate>
+    <pubDate>Sat, 02 May 2020 18:19:46 +0900</pubDate>
+    <lastBuildDate>Sat, 02 May 2020 18:19:46 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>[Algorithms] Selection Sort</title>
+        <description>&lt;p&gt;이전 포스팅: &lt;a href=&quot;https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html&quot;&gt;Bubble Sort &amp;amp; Insertion Sort&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;selection-sort&quot;&gt;Selection Sort&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;선택 정렬(Selection Sort)&lt;/strong&gt;의 아이디어는 정말 간단하다. 원소들중 가장 작은 원소를 찾아 첫번째 자리부터 채워넣는 것이다. 마지막 한자리가 남을 때까지 알고리즘은 계속된다. &lt;code class=&quot;highlighter-rouge&quot;&gt;그림1&lt;/code&gt;과 같이 알고리즘의 각 스텝을 표현할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1kvETAdY2928P8c1-5gBcCaaTcRkDz_ZE&quot; alt=&quot;[그림1] Selection Sort&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림1] Selection Sort&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;각 스텝별로 Index &lt;strong&gt;j&lt;/strong&gt;가 가르키는 원소를 기준으로 나머지 원소들중 가장 작은 값을 찾아내서 그 값과 교환한다. 코드로 구현하면 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;selection_sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;r&quot;&quot;&quot;
+    Selection Sort
+    Args: 
+        l: input list
+    Return:
+        sorted list by ascending
+    &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;r&quot;&quot;&quot;swap p-th element and q-th element&quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;선택 정렬 또한 간단한 아이디어로써 구현이 쉬운 편이며, 추가 공간이 필요하지 않는 inplace 알고리즘이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;알고리즘-복잡도&quot;&gt;알고리즘 복잡도&lt;/h2&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                          &lt;span class=&quot;c1&quot;&gt;# 1
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;# n-1
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;# n-1
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# (n-1) + (n-2) + ... + 1
+&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 비교: (n-1) + (n-2) + ... + 1
+&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# (n-1) + (n-2) + ... + 1
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;# 스왑: n-1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;최악의 경우에, 제일 큰 원소가 제일 앞으로 나와 있고, 나머지 모든 원소가 정렬되어 있을 때를 생각할 수 있다. Index &lt;strong&gt;j&lt;/strong&gt;가 순환하면서 나머지 모든 원소와는 한번씩 비교해야하는데, 횟수는 $N-1, N-2 \cdots, 1$이다 index를 찾으면 교환은 한번씩만 하면 되기 때문에 $n-1$번이다. 따라서, 총 $T(N) = c \times \dfrac{N(N-1)}{2} + \alpha$이 된다($c$는 상수). 즉, $T(N) = O(N^2)$ 이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 02 May 2020 14:38:38 +0900</pubDate>
+        <link>https://simonjisu.github.io/python/2020/05/02/selection.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/05/02/selection.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>[Algorithms] Bubble Sort &amp; Insertion Sort</title>
@@ -129,7 +194,6 @@
 
 &lt;ul&gt;
   &lt;li&gt;본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.programiz.com/dsa/asymptotic-notations&quot;&gt;Asymptotic Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 02 May 2020 14:19:38 +0900</pubDate>
@@ -1115,75 +1179,6 @@ det \Big( \begin{bmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{bmatrix} \Big) = 6 %]]&gt;
         
         
         <category>prml</category>
-        
-      </item>
-    
-      <item>
-        <title>글또 4기 다짐</title>
-        <description>&lt;h1 id=&quot;글또-4기를-시작하며&quot;&gt;글또 4기를 시작하며&lt;/h1&gt;
-
-&lt;p&gt;“글또”가 궁금하다면? &lt;a href=&quot;https://www.notion.so/ac5b18a482fb4df497d4e8257ad4d516&quot;&gt;&lt;strong&gt;글또 Notion 페이지 바로가기&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;작년 여름의 어느날 글또를 시작하면서 세웠던 계획을 다시 돌아보게 됐다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;&lt;em&gt;“너는 다 계획이 있구나”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Y534QRewyuENFNHTtf2WXgZe_5VH91MS&quot; alt=&quot;출처: 영화 기생충 스틸컷&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;출처: 영화 기생충 스틸컷&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PRML(“Pattern Recognition and Machine Learning” - Christopher Bishop) 책 공부하기&lt;/li&gt;
-  &lt;li&gt;NLP 논문 읽기 (BERT 등)&lt;/li&gt;
-  &lt;li&gt;새로운 것 배우기: Flask, Spark, Reinforcement Learning&lt;/li&gt;
-  &lt;li&gt;대학원 준비&lt;/li&gt;
-  &lt;li&gt;장롱면허 탈출&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이 5가지 목표 중에서 3개는 달성하고 새로운 것을 배우는 것은 달성하지 못했고 장롱면허도 아직 탈출하지 못했다. 첫번째 목표도 100% 완성하지 못했기 때문에 사실상 50%를 완성했다고 할 수 있다. 다시 돌아보니 글또와는 크게 관련이 없는 목표들이 많았다. 그래서 이번 글또 4기에는 글또에 알맞는 목표를 세워보려고 한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;최소 12편 이상의 글 작성하기&lt;/li&gt;
-  &lt;li&gt;어떤 주제든 시리즈 글 연재하기(3편 이상)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;글또 4기를 마치고 꼭 두 가지 목표를 완수하기를…&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;글또-4기에서-작성하고-싶은-글&quot;&gt;글또 4기에서 작성하고 싶은 글&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;인지(행동)과학 관련 책 리뷰&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;인지과학 분야의 책을 통해 사람이 어떤 방식으로 생각을 하는지 이해하고, 딥러닝 모델의 설명과 연관지어 떠오르는 아이디어를 정리해보고자 한다. 컴퓨터 비전 분야에서 인간의 시각 시스템을 모방한 Neocognitron(1979, Kunihiko Fukushima)부터 현재의 다양한 Convolution Neural Network 까지, 인간에 대한 연구는 알고리즘을 해석하고 발전시키는데 많은 영향을 줬었다. 사람이 생각하는 과정(인지 프로세스)를 이용해 더 좋은 성능을 내는 모델을 연구하거나, 더 나아가 “설명가능한 딥러닝 모델”의 실마리가 나올 수 있지 않을까 생각하고 있다. 관련 전공이 아니기 때문에, 먼저 사람들이 주로 읽는 도서부터 시작해서 천천히 깊게 탐구해볼 생각이다. 현재 도서 목록으로 다음과 같이 정했는데, 혹시 추천할 만한 책이 있으면 댓글 부탁드린다.&lt;/p&gt;
-    &lt;blockquote&gt;
-      &lt;ul&gt;
-        &lt;li&gt;생각에 관한 생각&lt;/li&gt;
-        &lt;li&gt;넛지&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;데이터 사이언스 대학원 입학과정 및 생활&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;나는 대학원에 운좋은 타이밍에 입학했다고 생각한다. 그래도 차후에 다른 사람에게 도움이 될만한 정보와 신설된 데이터 사이언스 대학원에 입학하게된 계기 및 과정을 쓰려고 한다. 또한, 후회없는 2년(혹은 그 이상..?) 대학원 과정을 만들기 위해서 어떤 것을 계획하고 어떻게 공부를 하는지도 기록할 것이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;논문 리뷰(NLP, XAI 분야)&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;마지막으로 최근에 보고 있는 논문들을 간략하게 정리할 예정이다. 최근 1월~2월 사이에 읽은 Vision 분야에서 사용되고 있는 XAI 관련 논문을 읽었고 이를 정리하고자 한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Wed, 19 Feb 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/others/2020/02/19/geultto4.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/others/2020/02/19/geultto4.html</guid>
-        
-        
-        <category>others</category>
         
       </item>
     
