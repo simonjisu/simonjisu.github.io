@@ -78,7 +78,7 @@ for i in range(n):          # n
             swap(j, j+1)    # 스왑: (n-1) + (n-2) + ... + 1
 ```
 
-최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index **j**가 순환하면서 모든 원소와 비교와 교환하게 되는데, 각각의 스텝 횟수는 $N-1, N-2 \cdots, 1$라서 총 $T(N) = c \times \dfrac{N(N-1)}{2} + \alpha$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.
+최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index **j**가 순환하면서 모든 원소와 비교와 교환하게 되는데, 각각의 스텝 횟수는 $N-1, N-2 \cdots, 1$라서 총 $T(N) = c \times \dfrac{N(N-1)}{2}$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.
 
 # Insertion Sort
 
@@ -124,8 +124,14 @@ for j in range(1, n):               # n-1
     l[i] = value                    # 삽입: n-1
 ```
 
-최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index **j**가 순환하면서 앞의 정렬된 부분과 모두 비교하고 Shift하는 횟수는 $1, 2, \cdots, N-1$라서 총 $T(N) = c \dfrac{N(N-1)}{2} + \alpha$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.
+최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index **j**가 순환하면서 앞의 정렬된 부분과 모두 비교하고 Shift하는 횟수는 $1, 2, \cdots, N-1$라서 총 $T(N) = c \times \dfrac{N(N-1)}{2}$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.
 
 # References:
 
 * 본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.
+
+# 관련 포스팅: 
+
+* (현재글)[Bubble Sort & Insertion Sort](https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html)
+* [Selection Sort](https://simonjisu.github.io/python/2020/05/02/selection.html)
+* [Merge Sort](https://simonjisu.github.io/python/2020/05/03/merge.html)
