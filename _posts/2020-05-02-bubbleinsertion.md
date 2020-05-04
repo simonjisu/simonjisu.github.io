@@ -71,11 +71,11 @@ def bubble_sort(l: list):
 ## 알고리즘 복잡도
 
 ```python
-n = len(l)                  # 1
-for i in range(n):          # n
+n = len(l)  # 1
+for i in range(n):  # n
     for j in range(n-1-i):  # (n-1) + (n-2) + ... + 1
-        if l[j] > l[j+1]:   # 비교: (n-1) + (n-2) + ... + 1
-            swap(j, j+1)    # 스왑: (n-1) + (n-2) + ... + 1
+        if l[j] > l[j+1]:  # 비교: (n-1) + (n-2) + ... + 1
+            swap(j, j+1)  # 교환: (n-1) + (n-2) + ... + 1
 ```
 
 최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index **j**가 순환하면서 모든 원소와 비교와 교환하게 되는데, 각각의 스텝 횟수는 $N-1, N-2 \cdots, 1$라서 총 $T(N) = c \times \dfrac{N(N-1)}{2}$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.
@@ -114,14 +114,14 @@ def insertion_sort(l):
 ## 알고리즘 복잡도
 
 ```python
-n = len(l)                          # 1
-for j in range(1, n):               # n-1
-    value = l[j]                    # n-1
-    i = j                           # n-1
+n = len(l)  # 1
+for j in range(1, n):  # n-1
+    value = l[j]  # n-1
+    i = j  # n-1
     while i > 0 and value < l[i-1]: # 비교: 1 + 2 + ... + (n-1)
-        l[i] = l[i-1]               # Shift: 1 + 2 + ... + (n-1)
-        i -= 1                      # 1 + 2 + ... + (n-1)
-    l[i] = value                    # 삽입: n-1
+        l[i] = l[i-1]  # Shift: 1 + 2 + ... + (n-1)
+        i -= 1  # 1 + 2 + ... + (n-1)
+    l[i] = value  # 삽입: n-1
 ```
 
 최악의 경우만 생각해보면 모든 원소가 역순으로 정렬되어 있을 때, Index **j**가 순환하면서 앞의 정렬된 부분과 모두 비교하고 Shift하는 횟수는 $1, 2, \cdots, N-1$라서 총 $T(N) = c \times \dfrac{N(N-1)}{2}$이 된다($c$는 상수). 따라서 $T(N) = O(N^2)$ 이다.
@@ -135,3 +135,4 @@ for j in range(1, n):               # n-1
 * (현재글)[Bubble Sort & Insertion Sort](https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html)
 * [Selection Sort](https://simonjisu.github.io/python/2020/05/02/selection.html)
 * [Merge Sort](https://simonjisu.github.io/python/2020/05/03/merge.html)
+* [Quick Sort](https://simonjisu.github.io/python/2020/05/04/quick.html)
