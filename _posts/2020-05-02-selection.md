@@ -34,7 +34,7 @@ def selection_sort(l):
     for j in range(n-1):
         smallest_idx = j
         for i in range(j+1, n):
-            if l[smallest_idx] >= l[i]:
+            if l[smallest_idx] > l[i]:
                 smallest_idx = i
         swap(j, smallest_idx)
     return l

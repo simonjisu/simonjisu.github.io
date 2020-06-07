@@ -4,11 +4,140 @@
     <title>Soopace</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>https://simonjisu.github.io/</link>
-    <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 14 May 2020 14:36:27 +0900</pubDate>
-    <lastBuildDate>Thu, 14 May 2020 14:36:27 +0900</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 07 Jun 2020 15:29:29 +0900</pubDate>
+    <lastBuildDate>Sun, 07 Jun 2020 15:29:29 +0900</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>[Algorithms] Comparison Sort</title>
+        <description>&lt;h1 id=&quot;comparison-sort&quot;&gt;Comparison Sort&lt;/h1&gt;
+
+&lt;p&gt;지금까지 봐온 정렬 알고리즘들은 원소들간의 어떤 추상적인 비교연산을 통해 순서를 정하기 때문에 &lt;a href=&quot;https://en.wikipedia.org/wiki/Comparison_sort&quot;&gt;비교 정렬(comparison sort)&lt;/a&gt;이라고 한다. 이번 포스팅에서는 각 정렬방법들의 비교를 해보려고 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;각-정렬-방법들간-비교&quot;&gt;각 정렬 방법들간 비교&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Sort&lt;/th&gt;
+      &lt;th&gt;Worst $T(N)$&lt;/th&gt;
+      &lt;th&gt;Best $T(N)$&lt;/th&gt;
+      &lt;th&gt;Stability&lt;/th&gt;
+      &lt;th&gt;Inplace&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bubble&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Insertion&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Selection&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Merge&lt;/td&gt;
+      &lt;td&gt;$O(N\log N)$&lt;/td&gt;
+      &lt;td&gt;$O(N\log N)$&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Quick&lt;/td&gt;
+      &lt;td&gt;$O(N^2)$&lt;/td&gt;
+      &lt;td&gt;$O(N\log N)$&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;각-정렬-방법들의-시간-복잡도-비교&quot;&gt;각 정렬 방법들의 시간 복잡도 비교&lt;/h2&gt;
+
+&lt;p&gt;각 정렬 방법들의 시간 복잡도를 비교하기 위해서 다음과 같은 실험을 하였다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;입력 리스트의 크기 n 은 2000 부터 시작하여 17000 까지 1000 개씩 추가하여, 총 16 개 크기로 진행한다.&lt;/li&gt;
+  &lt;li&gt;각 입력 크기마다 10회 실험을 진행하고, 리스트는 0 ~ 2000 사이의 숫자로 랜덤 샘플링을 하여 구성한다(2000 포함). 최종 수치는 10회 실험의 평균 값으로 결정한다.&lt;/li&gt;
+  &lt;li&gt;각 알고리즘이 실행되는 실제 시간(t로 표기)은 time 패키지로 시작시간과 끝나는 시간의 차이로 측정한다.&lt;/li&gt;
+  &lt;li&gt;입력크기에 따라 차이나 너무 크게 나서 기존 수치과 log로 변환한 수치를 같이 본다. 각 복잡도 수치를 log로 치환하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림1&lt;/code&gt;과 같다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=129gdSPce6z6nLokn6uJPZszfBt9Qa4G-&quot; alt=&quot;[그림1] Sorting Experiment&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림1] Sorting Experiment&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;실험진행의 결과는 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림2&lt;/code&gt;와 같다. selection sort와 insertion sort는 비슷한 시간을 가진다는 것을 알 수있다. 반면 bubble sort는 두 번의 for문을 모두 꼭 돌아야하기 때문에 이들 보다 실행히간이 많이 걸린다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1dPN8TOjaW3wzEEz62i80fVOj0WOjmJQc&quot; alt=&quot;[그림2] 모든 알고리즘의 Time Complexity&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림2] 모든 알고리즘의 Time Complexity&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;merge sort와 quick sort는 비슷한 실행시간을 가진다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1HQsKgKLFKRSrK8hyRzIKtlyAK9gFP3fk&quot; alt=&quot;[그림3] merge sort와 quick sort의 Time Complexity&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림3] merge sort와 quick sort의 Time Complexity&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;stability&quot;&gt;Stability&lt;/h2&gt;
+
+&lt;p&gt;Stability는 Stable 과 Unstable 두 가지로 나뉘는데, 정렬 후에도 기존 입력 시퀀스의 특성 또한 그 순서을 유지하는 것이 stable sort, 그렇지 않은 것을 unstable sort라고 한다. 다음 &lt;code class=&quot;highlighter-rouge&quot;&gt;그림4&lt;/code&gt;처럼 카드를 숫자의 순서대로 정렬하려고 한다. 각 카드는 고유의 문양이 같이 있다. 기존의 문양 순서대로 정렬되면 stable sort라고 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1fPY3iG4szY1UxiB6D6c_yn4x7aL_yFfr&quot; alt=&quot;[그림4] 카드 정렬하기&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;[그림4] 카드 정렬하기&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;각 정렬 알고리즘의 stability를 확인해보면 Bubble, Insertion, Merge는 stable sort고, Selection과 Quick은 unstable sort다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;colver&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;diamond&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;diamond&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;heart&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;spade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;spade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bubble_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;insertion_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selection_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;merge_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quick_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;관련-포스팅&quot;&gt;관련 포스팅:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html&quot;&gt;Bubble Sort &amp;amp; Insertion Sort&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/02/selection.html&quot;&gt;Selection Sort&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/03/merge.html&quot;&gt;Merge Sort&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/04/quick.html&quot;&gt;Quick Sort&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;(현재글)&lt;a href=&quot;https://simonjisu.github.io/python/2020/06/06/comparisonsort.html&quot;&gt;Comparsion Sort&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 06 Jun 2020 11:38:38 +0900</pubDate>
+        <link>http://localhost:4000/python/2020/06/06/comparisonsort.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/06/06/comparisonsort.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
     
       <item>
         <title>Binary Relation</title>
@@ -165,8 +294,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 14 May 2020 11:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/math/2020/05/14/relation.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/math/2020/05/14/relation.html</guid>
+        <link>http://localhost:4000/math/2020/05/14/relation.html</link>
+        <guid isPermaLink="true">http://localhost:4000/math/2020/05/14/relation.html</guid>
         
         
         <category>math</category>
@@ -292,8 +421,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 04 May 2020 11:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/05/04/quick.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/05/04/quick.html</guid>
+        <link>http://localhost:4000/python/2020/05/04/quick.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/05/04/quick.html</guid>
         
         
         <category>python</category>
@@ -424,8 +553,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 03 May 2020 14:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/05/03/merge.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/05/03/merge.html</guid>
+        <link>http://localhost:4000/python/2020/05/03/merge.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/05/03/merge.html</guid>
         
         
         <category>python</category>
@@ -459,7 +588,7 @@
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
                 &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;smallest_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;
@@ -496,8 +625,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 02 May 2020 14:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/05/02/selection.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/05/02/selection.html</guid>
+        <link>http://localhost:4000/python/2020/05/02/selection.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/05/02/selection.html</guid>
         
         
         <category>python</category>
@@ -635,8 +764,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 02 May 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html</guid>
+        <link>http://localhost:4000/python/2020/05/02/bubbleinsertion.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/05/02/bubbleinsertion.html</guid>
         
         
         <category>python</category>
@@ -881,8 +1010,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 20 Apr 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/04/20/algorithmintro.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/04/20/algorithmintro.html</guid>
+        <link>http://localhost:4000/python/2020/04/20/algorithmintro.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/04/20/algorithmintro.html</guid>
         
         
         <category>python</category>
@@ -940,8 +1069,8 @@
 &lt;p&gt;리처드 파인만의 이 영상은 꽤나 철학적인 이야기지만 어떤 개념을 알고싶을 때 중요한 사고방식이다. 계속 “왜”라는 질문을 하고 이를 다른 사람에게 잘 설명할 수 있는 방식으로 공부하는 습관을 길러야겠다.&lt;/p&gt;
 </description>
         <pubDate>Sun, 12 Apr 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/datascience/2020/04/12/questionofwhy.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2020/04/12/questionofwhy.html</guid>
+        <link>http://localhost:4000/datascience/2020/04/12/questionofwhy.html</link>
+        <guid isPermaLink="true">http://localhost:4000/datascience/2020/04/12/questionofwhy.html</guid>
         
         
         <category>datascience</category>
@@ -1079,8 +1208,8 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 01 Apr 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/python/2020/04/01/nestedlist.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/python/2020/04/01/nestedlist.html</guid>
+        <link>http://localhost:4000/python/2020/04/01/nestedlist.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/04/01/nestedlist.html</guid>
         
         
         <category>python</category>
@@ -1195,143 +1324,11 @@
 &lt;p&gt;이제 자유롭게 관련 스크립트를 작성하고 파일을 실행할 수 있다! 또한 단축키로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + Shift + ~&lt;/code&gt;를 누르면 가상머신의 CMD를 활용할 수 있는데, 여기서는 복사 붙여넣기가 되서 너무 편하다 ㅎㅎ.&lt;/p&gt;
 </description>
         <pubDate>Tue, 24 Mar 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/programming/2020/03/24/vscoderemote.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/programming/2020/03/24/vscoderemote.html</guid>
+        <link>http://localhost:4000/programming/2020/03/24/vscoderemote.html</link>
+        <guid isPermaLink="true">http://localhost:4000/programming/2020/03/24/vscoderemote.html</guid>
         
         
         <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>Probability Density and Transformation</title>
-        <description>&lt;h1 id=&quot;probability-density-function&quot;&gt;Probability Density Function&lt;/h1&gt;
-
-&lt;p&gt;실수(real-valued) 확률변수 $X$가 $(x, x+ \delta x)$구간의 값을 가지고, 해당 구간의 확률이 $f_X(x)\delta x$($\delta x \rightarrow 0$일 경우)로 정의 된다면, $f_X(x)$를 $X$의 &lt;strong&gt;확률 밀도함수(probability density function)&lt;/strong&gt;라고 한다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;p_X(X \in (x, x+\delta x)) = \int_{x}^{x+\delta x} f_X(x) dx&lt;/script&gt;
-
-&lt;p&gt;확률 밀도함수는 다음 두 조건을 만족해야한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;$f(x) \geq 0$&lt;/li&gt;
-  &lt;li&gt;$\int_{-\infty}^{\infty} f(x) dx = 1$&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;transformation-of-random-variable&quot;&gt;Transformation of Random Variable&lt;/h1&gt;
-
-&lt;p&gt;확률변수의 &lt;strong&gt;변환(Transformation)&lt;/strong&gt;이란 기존의 확률변수$X$를 새로운 확률변수$Y$로 변환 하는 것이다. 비선형 변환시 단순 함수와 다르게 변환되는데 어떻게 변화하는지 살펴보기로 한다. 여기서 이야기하는 변환은 다음 조건을 만족해야한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;변환 함수 $g: Y \rightarrow X$는 전단사(bijective) 혹은 일대일 대응(one-to-one)이어야 한다. 일대일 대응이란, 모든 정의역$Y$에 존재하는 원소 $y$는 치역$X$에 대응하는 값이 유일하다(unique). 이를 다른 말로 하면, “$g$ 함수는 역을 가질 수 있다(invertible)”라고 한다 $g^{-1}: X \rightarrow Y$.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;예를 들어, 확률변수 $X$에 해당하는 확률 밀도함수는 $f_X(x)$, 확률변수 $Y$에 해당하는 확률 밀도함수는 $f_Y(y)$인 경우에서 $x=g(y)$인 비선형 변환이 있다고 가정해본다. 그렇다면 두 확률 밀도함수는 정말 다른 것일까? 확률 밀도함수의 최댓값도 변수의 선택에 종속되어 변화했을까($\hat{x}=g(\hat{y})$의 관계를 유지하는지 아니면 변화했는지)? 이를 알아보기 위해 변화된 확률 분포를 분해해본다.&lt;/p&gt;
-
-&lt;p&gt;확률변수 $X$의 가측 부분집합(measurable subset)을 $\mathcal{X}_0 \subset \mathcal{X}$, 확률변수 $Y$의 정의역에 해당하는 가측 부분집합을 $\mathcal{Y}_0 \subset \mathcal{Y}$라고 정의한다. 변환식 $x = g(y)$을 $y$에 관해 미분하면, $dx = g’(y)dy$를 얻을 수 있으며, $X$의 확률 분포$p_X(x)$는 다음과 같이 변환할 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;여기서 가측 부분집합은 쉽게 얘기해서 정의된 범위라고 생각할 수 있다&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{aligned}
-p_X(x) = \int_{\mathcal{X}_0} f_X(x) dx &amp;= \int_{\mathcal{Y}_0} f_X(x) \vert \dfrac{dx}{dy} \vert dy \\
-&amp;= \int_{\mathcal{Y}_0} f_X(g(y)) \vert g'(y) \vert dy \\
-&amp;= \int_{\mathcal{Y}_0} f_Y(y) dy \\
-&amp;= p_Y(y)
-\end{aligned} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;위 수식에서 확률변수$Y$에 대한 확률 밀도함수는 $f_Y(y) = f_X(g(y)) \vert g’(y) \vert$로 변화했는데, 이는 $X$에 대한 확률 밀도함수에 Jacobian Factor $\dfrac{dx}{dy}= g’(y)$를 곱한 값이 된다. 즉, Jacobian Factor로 인해서 확률 밀도함수$f_Y(y)$의 값이 $f_X(g(y))$로부터 약간 변화한다는 것을 의미한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;example-of-transformation&quot;&gt;Example of Transformation&lt;/h2&gt;
-
-&lt;p&gt;과연 다른지 $x = g(y) = \ln(y) - \ln(1-y) + 5$ 라는 변환으로 $\hat{x}=g(\hat{y})$ 관계($y$의 최댓값 위치가 변환된 최댓값을 결정)를 유지하고 있는지 아닌지 살펴본다. $g$의 역함수는 $g^{-1}(x) = \dfrac{1}{1 + \exp(-x + 5)}$인 sigmoid 함수가 된다. 즉, $y$의 정의역은 0과 1 사이의 실수, $x$는 $-\infty$와 $\infty$의 실수 값을 취할 수 있다. 또한 함수 $g$의 미분값은 $\dfrac{dx}{dy}=\dfrac{1}{y - y^2}$ 다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;x = g(y)&quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;g_inv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;y = g^{-1}(x)&quot;&quot;&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dxdy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;확률변수 $X$가 평균이 6, 표준편차가 1인 가우시안 분포를 따른다고 가정하고($X \sim \mathcal{N}(6, 1)$), 5만개의 샘플을 추출하고, 역함수를 이용해 샘플링된 확률변수 $Y$의 값을 구한다. 샘플링된 분포 이외에 실제 분포를 그리기 위한 작업도 진행한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;88&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50000&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;mu&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;6.0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sigma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;sampled_x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sigma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sampled_y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_inv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sampled_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;linspace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 5만개의 균일된 간격인 x 값
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_inv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;px&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gaussian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sigma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;py&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gaussian&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sigma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;py_real&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;px&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dxdy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;관련 분포를 그리면 다음 그림과 같다(관련 코드는 &lt;a href=&quot;https://gist.github.com/simonjisu/57c6e2b89b4c9457541809ec5b5f51c9&quot;&gt;링크&lt;/a&gt;에서 확인 할 수 있다). 각 선의 의미는 다음과 같다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#d40000&quot;&gt;빨강&lt;/span&gt;: 확률변수 $X$의 실제 분포(0과 0.5 사이로 rescale함)&lt;/li&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#002ed4&quot;&gt;파랑&lt;/span&gt;: 확률변수 $Y$의 실제 분포(0과 1 사이로 rescale함)&lt;/li&gt;
-  &lt;li&gt;&lt;span style=&quot;color:#e3a205&quot;&gt;노랑&lt;/span&gt;: $y=g^{-1}(x)$로 변환된 확률변수 $X$의 분포(0과 1 사이로 rescale함)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;또한, 오른쪽 밑의 파란 막대 그래프가 샘플링된 확률변수 $X$의 분포, 왼쪽 파란 막대 그래프 부분이 $y=g^{-1}(x)$로 변환된 확률변수 $Y$의 분포다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1c83fpP9BQb7DjtK0EmTUKSPcdt6gLCA5&quot; alt=&quot;&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;이 그래프에서 명백한 것은 $X$분포(&lt;span style=&quot;color:#d40000&quot;&gt;빨강&lt;/span&gt;)의 최대값 $\hat{x}$과 실제 $Y$분포(&lt;span style=&quot;color:#002ed4&quot;&gt;파랑&lt;/span&gt;)의 최대값 $\hat{y}$은 단순 $x=g(y)$(혹은 $y=g^{-1}(x)$)의 관계를 가지지 않는다. 실제 $g^{-1}(\hat{x})$의 위치(약 $y=0.73$ 부근)에서 $Y$분포의 값은 $P_Y(\hat{y})$위치 보다 더 아래부분이다.&lt;/p&gt;
-
-&lt;p&gt;이를 통해, $X$분포와 $Y$분포는 서로 다른 특성을 가지며, 확률 밀도가 변수의 변환으로 인해서 바뀌었다고 할 수 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;determinent-of-jacobian&quot;&gt;Determinent of Jacobian&lt;/h1&gt;
-
-&lt;p&gt;위에서 이야기한 $\vert \dfrac{dx}{dy} \vert$인 Jacobian Factor 란 무엇일까? 야코비 행렬식(Jacobian Determinant)을 기하학적으로 풀면 좌표계가 변환할 때 변환된 면적의 너비로 풀이할 수 있다.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-det \Big( \begin{bmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{bmatrix} \Big) = 6 %]]&gt;&lt;/script&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1o-CffunWblVIBmwU0xJSROesmlrEMTBf&quot; alt=&quot;&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;위 행렬식값인 6의 의미는 단위 벡터 기저(basis)에서 새로운 기저로 변환했을 때 면적이 1(노란색 부분)에서 6(초록색 부분)만큼 바뀐 다는 뜻이다.&lt;/p&gt;
-
-&lt;p&gt;단위 벡터 기저:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\Big( \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \Big)&lt;/script&gt;
-
-&lt;p&gt;즉, 확률 변수의 변환 예제에서 작은 구간의 확률값 $f_X(x) dx$에 해당하는 면적에  $\dfrac{dx}{dy}=g’(y)=\dfrac{1}{y-y^2}$값을 곱한 만큼 바뀐다는 뜻이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;reference&quot;&gt;Reference&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.microsoft.com/en-us/research/wp-content/uploads/2016/05/prml-web-sol-2009-09-08.pdf&quot;&gt;prml-solution 1.4&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://yousuketakada.github.io/prml_errata/prml_errata.pdf&quot;&gt;prml-errata&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 22 Mar 2020 14:19:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/math/2020/03/22/probdensity.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/math/2020/03/22/probdensity.html</guid>
-        
-        
-        <category>math</category>
         
       </item>
     
