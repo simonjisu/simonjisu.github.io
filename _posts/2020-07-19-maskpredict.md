@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[NLP] Mask-Predict: Parallel Decoding of Conditional Masked Language Models"
-date: "2020-07-05 11:38:38 +0900"
+date: "2020-07-19 11:38:38 +0900"
 categories: paper
 author: "Soo"
 comments: true
