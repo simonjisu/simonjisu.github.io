@@ -611,7 +611,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>단, 한 단어에 대해서 좌측에서 등장했는지 우측에서 등장했는 지는 상관없다(이는 co-occurrence matrix 가 대각을 기준으로 대칭하는 결과를 불러옴)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import pandas as pd
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pandas as pd
 import numpy as np
 from collections import deque, Counter
 from itertools import islice
@@ -641,8 +641,7 @@ temp = coo_matrix((data, (row, col)), shape=(len(vocab), len(vocab))).toarray()
 co_mat = temp.T + temp
 
 pd.DataFrame(co_mat, index=vocab, columns=vocab)
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>코드를 실행하면 아래와 같은 표가 나온다. window size 가 1이니까 “I” 주변 한칸에 동시 등장 단어는 “like” 가 2번 “enjoy” 가 1번이다.</p>
 
@@ -768,7 +767,7 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>GloVe 의 학습방법은 아래와 같다.</p>
 
-<script type="math/tex; mode=display">J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(P_{ij})(u_i^T v_j - \log P_{ij})^2</script>
+\[J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(P_{ij})(u_i^T v_j - \log P_{ij})^2\]
 
 <p>논문해설을 통해서 자세히 보자.</p>
 
@@ -832,7 +831,7 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>중요한 것은 이 비율은 3개의 단어 $i, j, k$ 와 연관이 있다. 따라서 아래의 함수를 구성할 수가 있다.</p>
 
-<script type="math/tex; mode=display">F(w_i, w_j, \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (1)</script>
+\[F(w_i, w_j, \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (1)\]
 
 <ul>
   <li>$w \in \Bbb{R}^d$: word vectors</li>
@@ -843,7 +842,7 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>$\dfrac{ P_{ik} }{ P_{jk} }$ 비율을 나타내는 하는 선형구조인 함수를 구하는 것이 목적이다. 그리고 $F$ 를 아래와 같이 변형시켜 본다.</p>
 
-<script type="math/tex; mode=display">F((w_i - w_j)^T \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (2)</script>
+\[F((w_i - w_j)^T \tilde{w}_k) = \dfrac{P_{ik} }{P_{jk} } \cdots (2)\]
 
 <p>이로써 선형적인 관계를 포착하고, 양변 모두 스칼라 값으로 정해진 함수가 만들어 졌다. 그러나 단어 $i, j$ 와 $k$ 동시 등장 비율의 <strong>임의적인 차별화</strong> 를 위해서 어떤 조건들을 만족해야한다. 그 조건들이란 단어 벡터 $w$ 와 문맥 단어 벡터 $\tilde{w}$ 간 서로 자유롭게 교환 될 수가 있어야 한다. 즉, 단어간 공기 매트릭스 $X$의 대칭(symmetric) 특성을 보존해야 한다.</p>
 
@@ -851,35 +850,34 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>대칭(symmetric) 을 만족하려면 2 단계로 진행 된다. 우선, 두 그룹 $(\Bbb{R}, +)$ 과 $(\Bbb{R}_{&gt;0}, \times)$ 에 대해서 함수 $F$ 가 <strong>homomorphism</strong> 이어야 한다. (homomorphism 해설: 밑에 <span style="color: #e87d7d">참고 1</span>를 보라), 예를 들어 아래와 같다.</p>
 
-<script type="math/tex; mode=display">F(w_i, w_j, \tilde{w}_k) = \dfrac{F(w_i^T \tilde{w}_k) }{F(w_j^T \tilde{w}_k) } \cdots (3)</script>
+\[F(w_i, w_j, \tilde{w}_k) = \dfrac{F(w_i^T \tilde{w}_k) }{F(w_j^T \tilde{w}_k) } \cdots (3)\]
 
 <p>$(2)$ 식에 의해서, 아래와 같이 풀 수 있다.</p>
 
-<script type="math/tex; mode=display">F(w_i^T \tilde{w}_k) = P_{ik} = \dfrac{X_{ik} }{X_i} \cdots (4)</script>
+\[F(w_i^T \tilde{w}_k) = P_{ik} = \dfrac{X_{ik} }{X_i} \cdots (4)\]
 
 <p>$(3)$ 식에 만족하는 해답은 $F = \exp$ 임으로, 아래의 식을 도출 해낼 수 있다.</p>
 
-<script type="math/tex; mode=display">w_i^T \tilde{w}_k = \log(P_{ik}) = \log(X_{ik}) - \log(X_i) \cdots (5)</script>
+\[w_i^T \tilde{w}_k = \log(P_{ik}) = \log(X_{ik}) - \log(X_i) \cdots (5)\]
 
 <p>다음으로, $(5)$ 식은 $\log(X_i)$ 만 아니였다면 대칭이었을 것이다. $\log(P_{ik})=\log(P_{ki})$ 를 만족하는지 한번 보자.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-\log(P_{ik}) &= \log(X_{ik}) - \log(X_i) \\
-\log(P_{ki}) &= \log(X_{ki}) - \log(X_k)
-\end{aligned} %]]></script>
+\[\begin{aligned}
+\log(P_{ik}) &amp;= \log(X_{ik}) - \log(X_i) \\
+\log(P_{ki}) &amp;= \log(X_{ki}) - \log(X_k)
+\end{aligned}\]
 
 <p>당연하게도, $\log(X_i) \neq \log(X_k)$ 이기 때문에 $\log(P_{ik}) \neq \log(P_{ki})$ 이다.</p>
 
 <p>하지만 $\log(X_i)$ 부분은 $k$ 에 대해서 독립적(independent) 이기 때문에, $w_i$ 의 bias $b_i$ 항으로 들어갈 수 있다. 그리고 대칭성을 유지하기 위해서 $\tilde{w}_k$ 의 bias $\tilde{b}_k$ 항도 더해준다.</p>
 
-<script type="math/tex; mode=display">w_i^T \tilde{w}_k + b_i + \tilde{b}_k = \log(X_{ik}) \cdots (6)</script>
+\[w_i^T \tilde{w}_k + b_i + \tilde{b}_k = \log(X_{ik}) \cdots (6)\]
 
 <p>$(6)$ 식이 우리의 제일 간단한 선형관계인 solution 이라고 해도 되지만 이는 문제가 좀 있다. $X_{ik} = 0$ 에서 명확하게 정의 되지 않는다. 이를 해결하기 위해서 $X_{ik}+1$ 하는 방법도 있지만, sparsity issue 를 벗어나기 힘들다. 그리고 하나의 큰 약점이 있다면 거의 등장하지 않는 단어들에게 동시 등장 비율이 모두 같을 수 있다는 점이다. 이게 왜 문제가 되냐면, co-occurrence 가 적을 수록 많이 등장하는 단어들 보다 정보 함량이 적고 데이터도 noisy 하기 때문이다.</p>
 
 <p>연구팀은 새로운 weighted least squares regression model 을 제시하여 문제를 풀고자 했다.</p>
 
-<script type="math/tex; mode=display">J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2 \cdots (7)</script>
+\[J(\theta) = \dfrac{1}{2} \sum_{i,j=1}^{W} f(X_{ij})(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij})^2 \cdots (7)\]
 
 <p>가중치 함수 (Weighting function) $f(X_{ij})$ 는 아래의 특성을 따라야 한다.</p>
 
@@ -891,11 +889,10 @@ pd.DataFrame(co_mat, index=vocab, columns=vocab)
 
 <p>연구팀은 이에 적합한 함수를 찾았다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-f(x) =
-\begin{cases} (x/x_{max})^{\alpha} \quad if\ x < x_{max} \\
+\[f(x) =
+\begin{cases} (x/x_{max})^{\alpha} \quad if\ x &lt; x_{max} \\
 1 \quad otherwise
-\end{cases} %]]></script>
+\end{cases}\]
 
 <p><img src="/assets/ML/nlp/L3_weight_f.png" /></p>
 
@@ -903,7 +900,7 @@ f(x) =
 
 <p>조금더 general 한 weighting function 은 아래와 같다. (자세한건 논문 3.1 참고)</p>
 
-<script type="math/tex; mode=display">\hat{J} = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j - \log X_{ij})^2</script>
+\[\hat{J} = \sum_{i,j} f(X_{ij})(w_i^T \tilde{w}_j - \log X_{ij})^2\]
 
 <p>이는 연구팀이 도출한 $(7)$ 식과 같은 식이다.</p>
 

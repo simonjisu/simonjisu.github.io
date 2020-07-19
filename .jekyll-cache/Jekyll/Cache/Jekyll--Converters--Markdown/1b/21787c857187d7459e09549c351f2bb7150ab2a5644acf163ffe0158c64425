@@ -1,4 +1,4 @@
-I"% <h1 id="numpy로-짜보는-neural-network-basic---9">Numpy로 짜보는 Neural Network Basic - 9</h1>
+I"�<h1 id="numpy로-짜보는-neural-network-basic---9">Numpy로 짜보는 Neural Network Basic - 9</h1>
 
 <h1 id="rnn-과-lstm---1">RNN 과 LSTM - 1</h1>
 
@@ -42,12 +42,11 @@
 <p>Time step = 0 일때, 각각 Layer들의 Weight를 초기화하게 된다. $h_0$ 층은 0으로, 나머지는 Xavier 가중치 초기값으로 초기화한다. 또한 각 가중치는 각각 layer에서 공유하게 된다.
 (가중치 초기화를 잊어 버렸다면 <a href="https://simonjisu.github.io/datascience/2018/01/24/numpywithnn_6.html">여기</a>로)</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-h_t &= \tanh(W_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
-y_t &= W_{hy} h_t + b_y
+\[\begin{aligned}
+h_t &amp;= \tanh(W_{hh} h_{t-1}+W_{xh}x_t+b_h) \\
+y_t &amp;= W_{hy} h_t + b_y
 \end{aligned}
-\quad for\ t\ in\ T %]]></script>
+\quad for\ t\ in\ T\]
 
 <p>그리고, 시간이 지날때마 위의 식 처럼 Forward가 진행된다.</p>
 
@@ -74,24 +73,22 @@ y_t &= W_{hy} h_t + b_y
 
 <p>그 이유는 우리가 업데이트 하려는 미분 식을 살펴보면 알 수 있다. 예를 들어 $W_{hh}$ 를 업데이트 한다고 하자.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 \dfrac{\partial L}{\partial W_{hh}}  
-&= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial W_{hh}} + \cdots +
+&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial W_{hh}} + \cdots +
 \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial W_{hh}} \\
-&= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \dfrac{\partial h_T}{\partial h_{T-1}}  \cdots \dfrac{\partial h_2}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} +
+&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \dfrac{\partial h_T}{\partial h_{T-1}}  \cdots \dfrac{\partial h_2}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} +
 \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}} \\
-&= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}} \dfrac{\partial h_1}{\partial W_{hh}} + \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}}
-\end{aligned} %]]></script>
+&amp;= \dfrac{\partial L}{\partial Cost_T} \dfrac{\partial Cost_T}{\partial y_T} \dfrac{\partial y_T}{\partial h_T} \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}} \dfrac{\partial h_1}{\partial W_{hh}} + \cdots + \dfrac{\partial L}{\partial Cost_1} \dfrac{\partial Cost_1}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial W_{hh}}
+\end{aligned}\]
 
 <p>위의 식중에 $\prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}}$ 부분을 자세히 펼쳐보면 아래와 같다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial h_{T-i}}
-&= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} \dfrac{\partial a_{T-i+1}}{\partial h_{T-i}} \\
-&= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} W_{hh}
-\end{aligned} %]]></script>
+&amp;= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} \dfrac{\partial a_{T-i+1}}{\partial h_{T-i}} \\
+&amp;= \prod_{i=1}^{T-1} \dfrac{\partial h_{T-i+1}}{\partial a_{T-i+1}} W_{hh}
+\end{aligned}\]
 
 <p>여기서 $a_t=W_{hh}h_{t-1} + W_{xh}x_t + b_h$ 이다.</p>
 

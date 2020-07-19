@@ -1,4 +1,4 @@
-I"�.<h1 id="알고리즘-공부"><strong>알고리즘 공부</strong></h1>
+I"U0<h1 id="알고리즘-공부"><strong>알고리즘 공부</strong></h1>
 
 <p><strong>&lt;Hello Coding 그림으로 개념을 이해하는 알고리즘&gt;</strong> 책을 요약 정리한 것입니다.</p>
 
@@ -136,7 +136,7 @@
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def countdown(i):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def countdown(i):
     print i
     if i &lt;= 1:  # 기본 단계
         return
@@ -157,7 +157,7 @@
 
 <p><strong>호출 스택(call stack)</strong>: 여러 개의 함수를 호출하면서 함수에 사용되는 변수를 저장하는 스택을 호출 스택이라함</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fact(x):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fact(x):
     if x == 1:
         return 1
     else:
@@ -181,7 +181,7 @@
       <td style="text-align: center">1</td>
       <td style="text-align: left">fact(3)</td>
       <td style="text-align: center">fact(3) 호출</td>
-      <td style="text-align: center"><code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fact(3)안의 x = 3</code></td>
     </tr>
     <tr>
       <td style="text-align: center">2</td>
@@ -199,7 +199,7 @@
       <td style="text-align: center">4</td>
       <td style="text-align: left">return x * fact(x-1)</td>
       <td style="text-align: center">fact(2) 호출</td>
-      <td style="text-align: center"><code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fact(2)안의 x = 2</code>, <code class="language-plaintext highlighter-rouge">fact(3)안의 x = 3</code></td>
     </tr>
     <tr>
       <td style="text-align: center">5</td>
@@ -217,7 +217,7 @@
       <td style="text-align: center">7</td>
       <td style="text-align: left">return x * fact(x-1)</td>
       <td style="text-align: center">fact(1) 호출</td>
-      <td style="text-align: center"><code class="highlighter-rouge">fact(1)안의 x = 1</code>, <code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fact(1)안의 x = 1</code>, <code class="language-plaintext highlighter-rouge">fact(2)안의 x = 2</code>, <code class="language-plaintext highlighter-rouge">fact(3)안의 x = 3</code></td>
     </tr>
     <tr>
       <td style="text-align: center">8</td>
@@ -228,20 +228,20 @@
     <tr>
       <td style="text-align: center">9</td>
       <td style="text-align: left">return 1</td>
-      <td style="text-align: center">아직 함수 호출이 끝난건 아니다. 이제 스택에서 <code class="highlighter-rouge">fact(1)안의 x=1</code>를 pop하면 된다. 즉, 반환해야하는 첫 번째 호출인 것이다. 1을 반환</td>
-      <td style="text-align: center"><code class="highlighter-rouge">fact(1)안의 x = 1</code>, <code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+      <td style="text-align: center">아직 함수 호출이 끝난건 아니다. 이제 스택에서 <code class="language-plaintext highlighter-rouge">fact(1)안의 x=1</code>를 pop하면 된다. 즉, 반환해야하는 첫 번째 호출인 것이다. 1을 반환</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fact(1)안의 x = 1</code>, <code class="language-plaintext highlighter-rouge">fact(2)안의 x = 2</code>, <code class="language-plaintext highlighter-rouge">fact(3)안의 x = 3</code></td>
     </tr>
     <tr>
       <td style="text-align: center">10</td>
       <td style="text-align: left">return x * fact(x-1)</td>
       <td style="text-align: center">2 * fact(1) 반환하기</td>
-      <td style="text-align: center"><code class="highlighter-rouge">fact(2)안의 x = 2</code>, <code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fact(2)안의 x = 2</code>, <code class="language-plaintext highlighter-rouge">fact(3)안의 x = 3</code></td>
     </tr>
     <tr>
       <td style="text-align: center">11</td>
       <td style="text-align: left">return x * fact(x-1)</td>
       <td style="text-align: center">3 * fact(2) 반환하기</td>
-      <td style="text-align: center"><code class="highlighter-rouge">fact(3)안의 x = 3</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">fact(3)안의 x = 3</code></td>
     </tr>
     <tr>
       <td style="text-align: center">12</td>
@@ -267,7 +267,7 @@
 </ol>
 
 <p>예제: summation</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def sum(arr):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def sum(arr):
     total = 0
     for x in arr:
         total += x
@@ -279,7 +279,7 @@
   <li>재귀 함수 호출: sum([2,3,4]) 가 아닌 2 + sum([3,4]) 로 문제를 줄임, 즉 이 함수는 리스트를 받으면, 리스트가 비어 있을 시 0을 반환하고, 아니면 총합 = 리스트의 첫번째 숫자와 나머지 리스트의 총합을 더한 값으로 출력한다.</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def newsum(lst):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def newsum(lst):
     summ = 0
     if not lst:
         return 0
@@ -295,7 +295,7 @@ print(newsum([2,3,4]))
 <h3 id="퀵-정렬quick-sort">퀵 정렬(quick sort)</h3>
 <p>기준을 정해서 그것보다 작은 것과 큰 것을 나눠서 재귀함수를 호출하는 방법</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ascending
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ascending
 def quicksort(lst):
     if len(lst) &lt; 2:
         return lst

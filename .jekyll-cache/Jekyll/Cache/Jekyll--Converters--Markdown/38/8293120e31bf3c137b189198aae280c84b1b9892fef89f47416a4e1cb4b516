@@ -1,4 +1,4 @@
-I"�/<h1 id="numpy로-짜보는-neural-network-basic---4">Numpy로 짜보는 Neural Network Basic - 4</h1>
+I".<h1 id="numpy로-짜보는-neural-network-basic---4">Numpy로 짜보는 Neural Network Basic - 4</h1>
 <hr />
 
 <h2 id="오차역전파backpropagation">오차역전파(Backpropagation)</h2>
@@ -6,20 +6,20 @@
 <h3 id="연쇄법칙의-원리">연쇄법칙의 원리</h3>
 <p>합성 함수의 미분은 합성 함수를 구성하는 각 함수의 미분의 곱으로 나타낼 수 있다.</p>
 
-<script type="math/tex; mode=display">\begin{cases} z = t^2 \\ t = x + y \end{cases}</script>
+\[\begin{cases} z = t^2 \\ t = x + y \end{cases}\]
 
 <p>위 식의 미분을 나타내면
-<script type="math/tex">\frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}}</script></p>
+\(\frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}}\)</p>
 
 <p>따라서 $z$, $t$ 식을 미분하게 되면</p>
 
-<p><script type="math/tex">\frac{\partial{z}}{\partial{t}} = 2t</script>
-<script type="math/tex">\frac{\partial{t}}{\partial{x}}=1</script></p>
+<p>\(\frac{\partial{z}}{\partial{t}} = 2t\)
+\(\frac{\partial{t}}{\partial{x}}=1\)</p>
 
-<script type="math/tex; mode=display">\therefore\  \frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}} = 2t \cdot 1 = 2(x+y)</script>
+\[\therefore\  \frac{\partial{z}}{\partial{x}} = \frac{\partial{z}}{\partial{t}} \cdot \frac{\partial{t}}{\partial{x}} = 2t \cdot 1 = 2(x+y)\]
 
 <p>우리의 목적은 $L$ 에 대해서 $W$ 를 미분하여 조금씩 업데이트 하는 것임으로 아래와 같다고 할 수 있다.
-<script type="math/tex">\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{\partial{Y}}{\partial{W}}</script></p>
+\(\frac{\partial{L}}{\partial{W}} = \frac{\partial{L}}{\partial{Y}} \cdot \frac{\partial{Y}}{\partial{W}}\)</p>
 
 <h3 id="덧셈노드와-곱셈노드의-역전파">덧셈노드와 곱셈노드의 역전파</h3>
 
@@ -27,22 +27,22 @@
 
 <p>(그림출처: ratsgo님의 블로그[<a href="https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/">링크</a>])</p>
 
-<script type="math/tex; mode=display">\begin{cases} L(z) \\ z = x + y \end{cases}</script>
+\[\begin{cases} L(z) \\ z = x + y \end{cases}\]
 
 <p>각각 미분하게 되면</p>
 
-<script type="math/tex; mode=display">\begin{cases}
+\[\begin{cases}
     \dfrac{\partial{L}}{\partial{z}} \\
     \dfrac{\partial{z}}{\partial{x}} =
     \dfrac{\partial{z}}{\partial{y}} = 1
-  \end{cases}</script>
+  \end{cases}\]
 
 <p>따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면</p>
 
-<script type="math/tex; mode=display">\begin{cases}
+\[\begin{cases}
     \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1 \\
     \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot 1
-  \end{cases}</script>
+  \end{cases}\]
 
 <p>따라서 <strong>덧셈</strong> 노드는 들어온 신호($\frac{\partial{L}}{\partial{z}}$)를 <strong>그대로</strong> 보낸다.</p>
 
@@ -50,28 +50,28 @@
 
 <p>(그림출처: ratsgo님의 블로그[<a href="https://ratsgo.github.io/deep%20learning/2017/05/14/backprop/">링크</a>])</p>
 
-<script type="math/tex; mode=display">\begin{cases} L(z) \\ z = x \times y \end{cases}</script>
+\[\begin{cases} L(z) \\ z = x \times y \end{cases}\]
 
 <p>각각 미분하게 되면</p>
 
-<script type="math/tex; mode=display">\begin{cases}
+\[\begin{cases}
     \dfrac{\partial{L}}{\partial{z}} \\
     \dfrac{\partial{z}}{\partial{x}} = y \\
     \dfrac{\partial{z}}{\partial{y}} = x
-  \end{cases}</script>
+  \end{cases}\]
 
 <p>따라서 $L$ 을 각각 $x$ 와 $y$ 로 미분하려면</p>
 
-<script type="math/tex; mode=display">\begin{cases}
+\[\begin{cases}
     \dfrac{\partial{L}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{x}} = \dfrac{\partial{L}}{\partial{z}} \cdot y \\
     \dfrac{\partial{L}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot \dfrac{\partial{z}}{\partial{y}} = \dfrac{\partial{L}}{\partial{z}} \cdot x
-  \end{cases}</script>
+  \end{cases}\]
 
 <p>따라서 <strong>곱셈</strong> 노드는 들어온 신호에 서로 바뀐 입력신호 값을 <strong>곱해서</strong> 하류로 보낸다.</p>
 
 <h2 id="sigmoid-계층의-순전파와-역전파">Sigmoid 계층의 순전파와 역전파</h2>
 
-<script type="math/tex; mode=display">y = \frac{1}{1+\exp(-x)}</script>
+\[y = \frac{1}{1+\exp(-x)}\]
 
 <h3 id="forward">Forward</h3>
 
@@ -107,17 +107,16 @@
 
 <p><img src="/assets/ML/nn/NN_sigmoid_last.png" alt="Drawing" style="width: 400px;" /></p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 \dfrac{\partial{L}}{\partial{y}}y^{2}\exp(-x)
-&= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
-&= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
-&= \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
-\end{aligned} %]]></script>
+&amp;= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{[1+\exp(-x)]^2}\exp(-x) \\
+&amp;= \dfrac{\partial{L}}{\partial{y}} \dfrac{1}{1+\exp(-x)} \dfrac{\exp(-x)}{1+\exp(-x)} \\
+&amp;= \dfrac{\partial{L}}{\partial{y}}y(1-y) \\
+\end{aligned}\]
 
 <p>이것을 코드로 구현하게 되면</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Sigmoid(object):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Sigmoid(object):
     def __init__(self):
         self.out = None  # 역전파시 곱해야 하기 때문에 저장해둔다
 
@@ -148,7 +147,7 @@
     \dfrac{\partial{L}}{\partial{B}} = 1
   \end{cases}$</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Affine(object):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Affine(object):
     def __init__(self, W, b):
         self.W = W
         self.b = b
@@ -172,7 +171,7 @@
 
 <h2 id="backpropogation-사용한-학습구현">Backpropogation 사용한 학습구현</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collections
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import collections
 from layers import *
 
 class TwoLayer(object):
@@ -236,7 +235,7 @@ class TwoLayer(object):
 
 <p>TwoLayer Neural Network 를 생성하는 객체는 따로 파일에 저장하고 불러내는 것이 좋다. OrderedDict은 dictionary 형태로 입력 순서를 기억해주는 좋은 함수다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from dataset.mnist import load_mnist
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from dataset.mnist import load_mnist
 from two_layer_nn import TwoLayer
 
 # data_loading

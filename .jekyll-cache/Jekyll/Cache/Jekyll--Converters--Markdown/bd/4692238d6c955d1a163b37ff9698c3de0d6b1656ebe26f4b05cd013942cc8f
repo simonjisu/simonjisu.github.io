@@ -1,4 +1,4 @@
-I"?<h1 id="numpy로-짜보는-neural-network-basic---6">Numpy로 짜보는 Neural Network Basic - 6</h1>
+I"/<h1 id="numpy로-짜보는-neural-network-basic---6">Numpy로 짜보는 Neural Network Basic - 6</h1>
 
 <hr />
 <h2 id="학습관련-기술-part-2">학습관련 기술 Part 2</h2>
@@ -10,8 +10,7 @@
 
 <p>그렇다면 Sigmoid를 예를 들어서 이야기 해보자, 아래 그림은 Sigmoid 함수와 미분의 그래프다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} \sigma(a) & = \dfrac{1}{1+e^{-a}} \\ \sigma'(a) &= \sigma(a)(1 - \sigma(a))\end{aligned} %]]></script>
+\[\begin{aligned} \sigma(a) &amp; = \dfrac{1}{1+e^{-a}} \\ \sigma'(a) &amp;= \sigma(a)(1 - \sigma(a))\end{aligned}\]
 
 <p><img src="/assets/ML/nn/6/sigmoid_prime.png" alt="Drawing" /></p>
 
@@ -21,12 +20,11 @@
 
 <p>실제로 활성화 함수 값이 어떤 분포인지 mnist 데이터로 살펴보자. 내가 만든 뉴럴 네트워크의 구조는 아래와 같다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} Input_{(784)}
-&\rightarrow [Affine1 \rightarrow Activation1]_{hidden1: (100)} \\
-&\rightarrow [Affine2 \rightarrow Activation2]_{hidden2: (50)} \\
-&\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]_{output:(10)_{}}
-\end{aligned} %]]></script>
+\[\begin{aligned} Input_{(784)}
+&amp;\rightarrow [Affine1 \rightarrow Activation1]_{hidden1: (100)} \\
+&amp;\rightarrow [Affine2 \rightarrow Activation2]_{hidden2: (50)} \\
+&amp;\rightarrow [Affine3 \rightarrow SoftmaxwithLoss]_{output:(10)_{}}
+\end{aligned}\]
 
 <p>Hidden Node 는 각 100개와 50개로 설정하고 Activation Fucntion은 simgoid로 했다.
 아래는 200 epoch까지 중간에 Activation 값들의 분포를 찍어본 것이다. 가중치 초기 값은 1을 곱한 것으로써 랜덤 Initialization 되었다고 생각하면 된다.(= $W$에다 1을 곱했다.)</p>
@@ -53,9 +51,9 @@
 
 <p>Paper: <a href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Understanding the difficulty of training deep feedforward neural networks</a></p>
 
-<script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
+\[W \sim Uniform(n_{in}, n_{out})\]
 
-<script type="math/tex; mode=display">Var(W)=\dfrac{1}{n_{in}}</script>
+\[Var(W)=\dfrac{1}{n_{in}}\]
 
 <p>즉 가중치 초기화를 할때 각 파라미터 $W$ 에 대하여 $\dfrac{1}{\sqrt{n_{in}}}$ 를 곱해주는 것이다.</p>
 
@@ -98,9 +96,9 @@
 <h4 id="활성화-함수를-바꿔보자-relu">활성화 함수를 바꿔보자: ReLu</h4>
 <p>ReLu의 미분 값은 $x &gt; 0$ 에서 $1$ 이고 나머지는 $0$ 이다. ReLu는 <strong>He</strong> 라는 초기값을 설정하게 된다.</p>
 
-<script type="math/tex; mode=display">W \sim Uniform(n_{in}, n_{out})</script>
+\[W \sim Uniform(n_{in}, n_{out})\]
 
-<script type="math/tex; mode=display">Var(W)=\dfrac{2}{n_{in}}</script>
+\[Var(W)=\dfrac{2}{n_{in}}\]
 
 <p>즉, 가중치 $W$ 에 $\sqrt{\dfrac{2}{n_{in}}}$ 을 곱하게 된다. 아래 동영상을 보면 0보다 큰 부분에서 꾸준히 활성화 되는 모습을 볼 수 있다.</p>
 

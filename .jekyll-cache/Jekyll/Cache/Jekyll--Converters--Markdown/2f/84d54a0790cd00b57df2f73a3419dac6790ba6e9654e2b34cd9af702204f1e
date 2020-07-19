@@ -1,4 +1,4 @@
-I"�=<h1 id="numpy로-짜보는-neural-network-basic---2">Numpy로 짜보는 Neural Network Basic - 2</h1>
+I"h<<h1 id="numpy로-짜보는-neural-network-basic---2">Numpy로 짜보는 Neural Network Basic - 2</h1>
 <hr />
 
 <p>저번 시간에는 Neural Network의 기본이 되었던 XOR 문제를 풀어보았다. 그 과정에서 Feedforward 퍼셉트론이라는 개념이 등장했고 오늘은 Feedforward 과정이 어떻게 진행되는지 알아보자.</p>
@@ -7,32 +7,31 @@
 
 <p><img src="/assets/ML/nn/NN.jpg" alt="Drawing" style="width: 350px;" /></p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} a &=b + w_1x_1 + w_2x_2 \\ y &= h(a)
-\end{aligned} %]]></script>
+\[\begin{aligned} a &amp;=b + w_1x_1 + w_2x_2 \\ y &amp;= h(a)
+\end{aligned}\]
 
 <p>단일 퍼셉트론의 과정을 담은 그림과 수식이다. 각 뉴런(동그라미들)에서 다음 층의 뉴런(오른쪽 큰 동그라미)로 진행하는데 우선 각 $x$ 를 가중합 $a$ 를 구하고, 그 합을 다시 어떤 함수 $h$ 를 거쳐 Output인 $y$ 가 나오게 된다.</p>
 
 <p>저번 시간에 이야기 했던 AND를 적용해보면 $h$ 는 0과 1을 반환하는 아래와 같은 함수일 것이다.</p>
 
-<script type="math/tex; mode=display">y = h(a) =
+\[y = h(a) =
   \begin{cases}
   0\ \ (a = b + w_1x_1 + w_2x_2 \leq 0) \\
-  1\ \ (a = b + w_1x_1 + w_2x_2 > 0)
-  \end{cases}</script>
+  1\ \ (a = b + w_1x_1 + w_2x_2 &gt; 0)
+  \end{cases}\]
 
 <p>이런 $h$ 함수를 <strong>활성화 함수</strong> 라고 부르며, 보통 비선형 함수를 쓴다.</p>
 
 <h3 id="왜-비선형을-쓰는가">왜 비선형을 쓰는가?</h3>
 <p>우리는 활성화 함수를 예측 불가능한 함수로 만들어야 하기 때문인데 비선형함수가 적합하기 때문이다. 선형함수의 특징은 더 해도 선형이라는 것인데, 예를 들어</p>
 
-<script type="math/tex; mode=display">y=3x</script>
+\[y=3x\]
 
 <p>라는 선형 함수와 간단한 산수인 $1+5=6$ 이란 것을 생각해보자. 좌변에 $1$과 $5$를 선형함수에 넣어서 더한 값인 $3 + 15 = 18$ 이란 값을 우리는 우변의 $6$ 을 선형함수에 넣었을 때 값이랑 같다는 것을 충분히 알 수 있다. 이를 “<strong>예측</strong> 할 수 있다.” 라고 이야기 한다. 이처럼 두 개의 선형함수를 더하면 선형이 된다는 것이다.</p>
 
 <p>하지만 어떤 비선형 함수</p>
 
-<p><script type="math/tex">y=3x^2</script>
+<p>\(y=3x^2\)
 로 아까의 과정을 똑같이 해보자, 좌변의 값을 넣어서 더하면 $3 + 75 = 78$ 인데, 우변의 값을 넣으면 $108$ 이 된다. 따라서 비선형 함수는 더해도 같은 비선형이 아니며 다른 값이 나오기 때문에 예측 불가능하다 라고 말 할 수 있다.</p>
 
 <p>비선형 함수를 통과함으로서 뉴런이 <strong>활성화</strong> 된다라고 이야기 한다.</p>
@@ -45,12 +44,12 @@
 
 <h4 id="계단-함수step-function">계단 함수(Step Function)</h4>
 
-<p><script type="math/tex">h(x) =
+<p>\(h(x) =
   \begin{cases}
-  1\ \ (x > 0) \\
+  1\ \ (x &gt; 0) \\
   0\ \ (x  \leq 0)
-\end{cases}</script></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def step_function(x):
+\end{cases}\)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def step_function(x):
     y = x &gt; 0
     return y.astype(np.int)
 </code></pre></div></div>
@@ -58,20 +57,20 @@
 
 <h4 id="시그모이드-함수sigmoid-function">시그모이드 함수(Sigmoid Function)</h4>
 
-<p><script type="math/tex">h(x) = \frac{1}{1+exp(-x)}</script></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def sigmoid(x):
+<p>\(h(x) = \frac{1}{1+exp(-x)}\)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 </code></pre></div></div>
 <p><img src="/assets/ML/nn/sigmoid.png" alt="Drawing" style="width: 350px;" /></p>
 
 <h4 id="relu-함수relu-function">ReLu 함수(ReLu Function)</h4>
 
-<p><script type="math/tex">h(x) =
+<p>\(h(x) =
   \begin{cases}
-  x\ \ (x > 0) \\
+  x\ \ (x &gt; 0) \\
   0\ \ (x \leq 0)
-  \end{cases}</script></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def ReLu(x):
+  \end{cases}\)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def ReLu(x):
     return np.maximum(0, x)
 </code></pre></div></div>
 <p><img src="/assets/ML/nn/relu.png" alt="Drawing" style="width: 350px;" /></p>
@@ -96,7 +95,7 @@
 
 <p>따라서 각각의 가중치 합을 구하면,</p>
 
-<script type="math/tex; mode=display">A = \begin{bmatrix}
+\[A = \begin{bmatrix}
     a_1^{(1)} \\
     a_2^{(1)} \\
     a_3^{(1)}
@@ -105,36 +104,35 @@
     w_{11}^{(1)}x_1 + w_{12}^{(1)}x_2 + b_1^{(1)} \\
     w_{21}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_2^{(1)} \\
     w_{31}^{(1)}x_1 + w_{32}^{(1)}x_2 + b_3^{(1)}
-\end{bmatrix}</script>
+\end{bmatrix}\]
 
 <p>가 되는데, 이를 다시 간단하게 쓰면</p>
 
-<script type="math/tex; mode=display">X =
+\[X =
   \begin{bmatrix}
   x_1 \\
   x_2
-\end{bmatrix}</script>
+\end{bmatrix}\]
 
-<script type="math/tex; mode=display">% <![CDATA[
-W^{(1)} =
+\[W^{(1)} =
       \begin{bmatrix}
-      w_{11}^{(1)} & w_{12}^{(1)} \\
-      w_{21}^{(1)} & w_{22}^{(1)} \\
-      w_{31}^{(1)} & w_{32}^{(1)}
-      \end{bmatrix} %]]></script>
+      w_{11}^{(1)} &amp; w_{12}^{(1)} \\
+      w_{21}^{(1)} &amp; w_{22}^{(1)} \\
+      w_{31}^{(1)} &amp; w_{32}^{(1)}
+      \end{bmatrix}\]
 
-<script type="math/tex; mode=display">B^{(1)} =
+\[B^{(1)} =
   \begin{bmatrix}
   b_1^{(1)} \\
   b_2^{(1)} \\
   b_3^{(1)}
-  \end{bmatrix}</script>
+  \end{bmatrix}\]
 
 <p>$A = W^{(1)} \cdot X + B^{(1)}$ 가 되며, 형태는 $(3, 1) = (3, 2) \times (2, 1) + (3, 1)$ 로 된다. 이는 간단한 내적 연산으로 구할 수 있게 된다.</p>
 
 <p>가중치의 합을 구하면 이제 비활성함수에 대입해서 뉴런을 활성화 시킨다.</p>
 
-<script type="math/tex; mode=display">Z^{(1)} =
+\[Z^{(1)} =
     \begin{bmatrix}
     z_1^{(1)} \\
     z_2^{(1)} \\
@@ -144,12 +142,12 @@ W^{(1)} =
     h(a_1^{(1)}) \\
     h(a_2^{(1)}) \\
     h(a_3^{(1)})
-    \end{bmatrix}</script>
+    \end{bmatrix}\]
 
 <p>이렇게 나온 $Z^{(1)}$ 값들은 다음 층에서 입력으로 쓰이게 된다.</p>
 
 <p>아래 코드의 Shape도 같이 잘 살펴보자.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X = np.array([1.0, 0.5])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X = np.array([1.0, 0.5])
 W1 = np.array([[0.1, 0.2],
                [0.3, 0.4],
                [0.5, 0.6]])
@@ -192,7 +190,7 @@ print(Z1)
 </blockquote>
 
 <h3 id="hidden-1-rightarrow-hidden-2">Hidden 1 $\rightarrow$ Hidden 2</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>W2 = np.array([[0.1, 0.2, 0.3],
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>W2 = np.array([[0.1, 0.2, 0.3],
                [0.4, 0.5, 0.6]])
 B2 = np.array([0.1, 0.2])
 
@@ -236,7 +234,7 @@ A2: (2,)</p>
 <h3 id="hidden-2-rightarrow-output">Hidden 2 $\rightarrow$ Output</h3>
 
 <p>마지막 출력 층에서는 이전 층에 출력된 $Z$ 값들을 그대로 가져올 수 있다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def identity_function(x):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def identity_function(x):
     return x
 
 W3 = np.array([[0.1, 0.2],
@@ -255,14 +253,14 @@ print(Y)
 
 <h4 id="softmax">Softmax</h4>
 
-<p><script type="math/tex">y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}</script></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def softmax(x):
+<p>\(y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}\)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def softmax(x):
     return np.exp(x) / np.sum(np.exp(x))
 </code></pre></div></div>
 <p>얼핏 잘 만든 것 같지만 컴퓨터에서 아주 큰 수를 계산시 Overflow문제가 발생한다. 오버플로우란, 사용 가능한 하드웨어(즉, 32bit 단위 워드의 하드웨어, 레지스터 등)로 연산 결과를 표현할 수 없을 때 오버플로우가 발생한다고 한다. (오버플로우 개념 출처: [<a href="https://m.blog.naver.com/PostView.nhn?blogId=osw5144&amp;logNo=120206206420&amp;proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F">링크</a>])</p>
 
 <p>간단히 예를 들어보면 아래의 코드를 실행해보면 금방 알 수 있다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = np.array([1010, 1000, 990])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = np.array([1010, 1000, 990])
 softmax(a)
 </code></pre></div></div>
 <blockquote>
@@ -277,14 +275,13 @@ from ipykernel import kernelapp as app</p>
 
 <p>경고가 뜨면서 NaN 값들만 나온다. 이를 방지하기 위해서 입력 신호 중 최대값을 이용하는게 일반적이다. 아래는 분모, 분자 변수에 어떤 상수 C’를 더해도 결국엔 Softmax가 되는 것을 증명 한 식이다.</p>
 
-<p><script type="math/tex">% <![CDATA[
-\begin{aligned}
-y_k &= \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}} \\
-&= \frac{Cexp(a_k)}{C\sum_{i=1}^{n}{exp(a_i)}} \\
-&= \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}\\
-&= \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
-\end{aligned} %]]></script></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c = np.max(a)
+<p>\(\begin{aligned}
+y_k &amp;= \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}} \\
+&amp;= \frac{Cexp(a_k)}{C\sum_{i=1}^{n}{exp(a_i)}} \\
+&amp;= \frac{exp(a_k+\log{C})}{\sum_{i=1}^{n}{exp(a_i+\log{C})}}\\
+&amp;= \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
+\end{aligned}\)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>c = np.max(a)
 print(a - c)
 print(softmax(a-c))
 </code></pre></div></div>
@@ -295,7 +292,7 @@ print(softmax(a-c))
 </blockquote>
 
 <p>이번에는 경고 없이 실행이 잘 된다. 이제 최종 Softmax는 아래와 같다. 이를 출력층에 적용하면 y값에 대한 확률을 볼 수 있다. 이를 0과 1사이의 값으로 만드는 이유가 있는데 향후 학습시에 필요하기 때문이다. (네트워크 학습에서 설명)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def softmax(a):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def softmax(a):
     c = np.max(a)
     return np.exp(a - c) / np.sum(np.exp(a - c))
 </code></pre></div></div>
@@ -309,7 +306,7 @@ print(softmax(a-c))
 
 <p>입력층에는 784 개의 뉴런, 은닉층1에는 50개, 은닉층2에는 100개, 마지막 층에는 10개의 뉴런으로 구성되어 있는 네트워크다. 활성화 함수는 sigmoid를 쓰고, 마지막에 Softmax로 확률을 구했다. 실행단계에서 batch라는 것이 있는데, 한번에 많은 양의 데이터를 계산하면 느리니, 조금씩 데이터를 사용해서 계산하는 방법이라고 생각하면 된다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 네트워크 만들기
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 네트워크 만들기
 from dataset.mnist import load_mnist
 import numpy as np
 

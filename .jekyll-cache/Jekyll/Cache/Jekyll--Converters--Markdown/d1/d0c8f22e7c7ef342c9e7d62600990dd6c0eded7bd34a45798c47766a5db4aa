@@ -1,4 +1,4 @@
-I"�D<h1 id="numpy로-짜보는-neural-network-basic---10">Numpy로 짜보는 Neural Network Basic - 10</h1>
+I"_E<h1 id="numpy로-짜보는-neural-network-basic---10">Numpy로 짜보는 Neural Network Basic - 10</h1>
 
 <h1 id="rnn-과-lstm---2">RNN 과 LSTM - 2</h1>
 
@@ -33,25 +33,23 @@
 <h3 id="참고-bptt-수식적-이해">참고) BPTT 수식적 이해</h3>
 <p>$tanh$의 미분을 $f(x) = 1 - tanh^2(x)$ 라고 하면,</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 dh_{0} = \dfrac{\partial L}{\partial h_{0}}
-&= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_0} + \dfrac{\partial L}{\partial y_{t-1}} \dfrac{\partial y_{t-1}}{\partial h_0} \cdots + \dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_0}\\
-&= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_t} \dfrac{\partial h_t}{\partial a_t} \dfrac{\partial a_t}{\partial h_{t-1}} \cdots \dfrac{\partial a_1}{\partial h_{0}} + \cdots +
+&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_0} + \dfrac{\partial L}{\partial y_{t-1}} \dfrac{\partial y_{t-1}}{\partial h_0} \cdots + \dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_0}\\
+&amp;= \dfrac{\partial L}{\partial y_t} \dfrac{\partial y_t}{\partial h_t} \dfrac{\partial h_t}{\partial a_t} \dfrac{\partial a_t}{\partial h_{t-1}} \cdots \dfrac{\partial a_1}{\partial h_{0}} + \cdots +
 \dfrac{\partial L}{\partial y_1} \dfrac{\partial y_1}{\partial h_1} \dfrac{\partial h_1}{\partial a_1} \dfrac{\partial a_1}{\partial h_0} \\
-&= W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_1) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) W_{hh} f(a_1) + W_{hy} dy_1 W_{hh} f(a_1) \\
-&= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
-\end{aligned} %]]></script>
+&amp;= W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_1) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) W_{hh} f(a_1) + W_{hy} dy_1 W_{hh} f(a_1) \\
+&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
+\end{aligned}\]
 
 <p>위 식을 위에 있는 그림대로 그려보자, 뒤에 $W_{hh} f(a_1)$ 부처 차근차근 묶어서 아래의 식을 얻을 수 있다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 \dfrac{\partial L}{\partial h_{0}}
-&= W_{hh} f(a_1) \bigg( W_{hy} dy_t  W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_2) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) + W_{hy} dy_1 \bigg) \\
-&= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_3) + \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
-&= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( \cdots W_{hh} f(a_{t-1}) \big( \underbrace{W_{hh} f(a_t) (\underbrace{ W_{hy} dy_t }_{dh_t^{raw}} + 0)}_{dh_{t-1}} + \underbrace{ W_{hy} dy_{t-1} }_{dh_{t-1}^{raw}} \big) \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
-\end{aligned} %]]></script>
+&amp;= W_{hh} f(a_1) \bigg( W_{hy} dy_t  W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_2) + \cdots + W_{hy} dy_2 W_{hh} f(a_2) + W_{hy} dy_1 \bigg) \\
+&amp;= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( W_{hy} dy_t W_{hh} f(a_t) W_{hh} f(a_{t-1}) \cdots W_{hh} f(a_3) + \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
+&amp;= W_{hh} f(a_1) \bigg( W_{hh} f(a_2) \Big( \cdots W_{hh} f(a_{t-1}) \big( \underbrace{W_{hh} f(a_t) (\underbrace{ W_{hy} dy_t }_{dh_t^{raw}} + 0)}_{dh_{t-1}} + \underbrace{ W_{hy} dy_{t-1} }_{dh_{t-1}^{raw}} \big) \cdots + W_{hy} dy_2 \Big) + W_{hy} dy_1 \bigg) \\
+\end{aligned}\]
 
 <p>위에 그림과 비교해보면 이런 식으로 계속 더해진다.</p>
 
@@ -66,7 +64,7 @@ dh_{0} = \dfrac{\partial L}{\partial h_{0}}
 </ul>
 
 <p>우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def _params_summation_init(self):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def _params_summation_init(self):
     self.params_summ = {}
     self.params_summ['W_xh'] = np.zeros_like(self.params['W_xh'])
     self.params_summ['W_hh'] = np.zeros_like(self.params['W_hh'])
@@ -76,12 +74,12 @@ dh_{0} = \dfrac{\partial L}{\partial h_{0}}
 </code></pre></div></div>
 <p>또한, $dh_T$ 를 0으로 초기화 한다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dht = np.zeros_like(self.h0)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dht = np.zeros_like(self.h0)
 </code></pre></div></div>
 
 <p>그후에 총 길이 $T$의 역순으로 각 Layer 의 Back Propagation 을 진행한다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for t in np.arange(self.T)[::-1]:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for t in np.arange(self.T)[::-1]:
     dout = self.last_layers[t].backward()
     dht_raw = self.layers['Affine_hy'][t].backward(dout)
     dat = self.layers['Activation'][t].backward(dht_raw + dht)
@@ -91,7 +89,7 @@ dh_{0} = \dfrac{\partial L}{\partial h_{0}}
 
 <p>또한, 파라미터 $W$ 와 $b$ 의 합도 같이 구해준다. 그 이유는 전편에서 설명되어 있지만, 다시 한번 이야기 하자면, 최종 Loss Function은 각 Output Loss의 평균이기 때문에, 각 Output 마다 파라미터들을 summation 하는 과정이 있다. (평균을 구할때 우선 summation을 한다는 것을 잊지 말자.)</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
 self.params_summ['W_hh'] += self.layers['Affine_hh'][t].dW
 self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
 self.params_summ['b_h'] += self.layers['Affine_hh'][t].db
@@ -100,7 +98,7 @@ self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
 
 <p>전체 Backward 과정</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def backward(self):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def backward(self):
     # BPTT
     self._params_summation_init()
     dht = np.zeros_like(self.h0)
@@ -125,11 +123,10 @@ self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
 
 <p>왜 이런것을 만들었을 까? BPTT 알고리즘의 미분식을 다시 생각해보자.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 dh_{0} = \dfrac{\partial L}{\partial h_{0}}
-&= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
-\end{aligned} %]]></script>
+&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{i} \prod_{j=1}^{i} f(a_j) \Big)
+\end{aligned}\]
 
 <p>위에서 설명했지만, BPTT 과정에서 Time-step이 길어질 수록, 많은 양의 곱셈이 이루어 진다. 계산량을 줄이기 위해서 이런 알고리즘이 나왔을 수 있다.</p>
 
@@ -137,23 +134,22 @@ dh_{0} = \dfrac{\partial L}{\partial h_{0}}
 
 <p>예를 들어 “I live in Seoul. (중략) I am Korean.” 이라는 문장을 생각해보자. 학습 데이터는 아래와 같을 것이다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["I", "live", "in", "Seoul", ".", (중략), "I", "am", "Korean", "."]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["I", "live", "in", "Seoul", ".", (중략), "I", "am", "Korean", "."]
 </code></pre></div></div>
 
 <p>Forward 할때는 순차적으로 들어갈텐데, Backward 할때는 데이터의 역순으로(“.”, “Korean”) 진행될 것이다. 그러나 내가 한국인이라는 것은 내가 서울에 살고 있기 때문인데, 굳이 앞단의 “I”, “live”, “in” 까지 참조할 필요는 없는 것이다. 그렇다면 위에 식은 아래와 같이 변할 것이다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
+\[\begin{aligned}
 dh_{0} = \dfrac{\partial L}{\partial h_{0}}
-&= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{k} \prod_{j=k}^{t} f(a_j) \Big) \\
-where \quad k &= \max(1, t - truncate)
-\end{aligned} %]]></script>
+&amp;= \sum_{i=1}^{t} \Big( dy_i W_{hy} {(W_{hh})}^{k} \prod_{j=k}^{t} f(a_j) \Big) \\
+where \quad k &amp;= \max(1, t - truncate)
+\end{aligned}\]
 
 <h3 id="t-bptt-구현">T-BPTT 구현</h3>
 <p><img src="/assets/ML/rnn/normal_truncate.png" /></p>
 
 <p>그림 출처: <a href="https://r2rt.com/styles-of-truncated-backpropagation.html">r2rt.com</a></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def backward_truncate(self):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def backward_truncate(self):
     # TBPTT
     self._params_summation_init()
     dht = np.zeros_like(self.h0)
@@ -232,17 +228,17 @@ where \quad k &= \max(1, t - truncate)
 </table>
 
 <h3 id="데이터-및-우리가-만든-패키지-준비">데이터 및 우리가 만든 패키지 준비</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import numpy as np
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import numpy as np
 from common.SimpleRNN import Single_layer_RNN
 from common.optimizer import Adam
 from common.train_graph import loss_graph
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 'hello world! nice to meet you! i love iron-man'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 'hello world! nice to meet you! i love iron-man'
 </code></pre></div></div>
 <p>인코딩 클래스 하나를 만들어서 문자열을 one-hot 인코딩 해준다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class chr_coding(object):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class chr_coding(object):
     def __init__(self):
         self._dict = None
         self._one_hot_matrix = None
@@ -268,14 +264,14 @@ from common.train_graph import loss_graph
         return decoded_data
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encoder = chr_coding()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>encoder = chr_coding()
 encoder.fit(x)
 one_hot_data = encoder.encode(x)
 </code></pre></div></div>
 
 <p>학습 데이터 x, y를 지정해준다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_x = one_hot_data[:-1]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_x = one_hot_data[:-1]
 train_y = one_hot_data[1:]
 </code></pre></div></div>
 
@@ -283,7 +279,7 @@ train_y = one_hot_data[1:]
 
 <p>INPUT_SIZE 와 OUTPUT_SIZE 는 중복되지 않는 문자열 사전의 길이라는 것을 잊지 말자.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NUM_EPOCHS = 600
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NUM_EPOCHS = 600
 PRINT_EPOCH = 30
 INPUT_SIZE = one_hot_data.shape[1]
 OUTPUT_SIZE = one_hot_data.shape[1]
@@ -292,7 +288,7 @@ HIDDEN_SIZE = 20
 
 <h3 id="필요한-함수-설정-accuracy-와-train-함수">필요한 함수 설정: accuracy 와 train 함수</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def get_accuracy(x, test_string):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def get_accuracy(x, test_string):
     bool_ = np.array(list(x))[1:] == np.array(list(test_string))[1:]
     return bool_.sum() / len(bool_)
 
@@ -337,7 +333,7 @@ def train(rnn, optim, print_epoch=20):
   <li><strong>Optimizer</strong> 의 설명은 <a href="https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py">Numpy로 짜보는 Neural Network Basic - 5</a>에 있습니다.</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rnn = Single_layer_RNN(input_size=INPUT_SIZE,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rnn = Single_layer_RNN(input_size=INPUT_SIZE,
                        hidden_size=HIDDEN_SIZE,
                        output_size=OUTPUT_SIZE)
 optim = Adam()
@@ -345,12 +341,12 @@ optim = Adam()
 
 <p>학습시키기!</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>total_loss_list, total_acc_list = train(rnn, optim, print_epoch=PRINT_EPOCH)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>total_loss_list, total_acc_list = train(rnn, optim, print_epoch=PRINT_EPOCH)
 </code></pre></div></div>
 <p><img src="/assets/ML/rnn/rnn_bptt.png" /></p>
 
 <p>Loss Graph 도 찍어보자</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loss_graph(train_loss_list=total_loss_list, train_acc_list=total_acc_list)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loss_graph(train_loss_list=total_loss_list, train_acc_list=total_acc_list)
 </code></pre></div></div>
 
 <p><img src="/assets/ML/rnn/rnn_bptt_loss.png" /></p>

@@ -1,4 +1,4 @@
-I"~<h1 id="numpy로-짜보는-neural-network-basic---8">Numpy로 짜보는 Neural Network Basic - 8</h1>
+I"�<h1 id="numpy로-짜보는-neural-network-basic---8">Numpy로 짜보는 Neural Network Basic - 8</h1>
 
 <hr />
 <h2 id="총-정리">총 정리</h2>
@@ -8,7 +8,7 @@
 
 <h3 id="package-load">Package Load</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from common.Multilayer import MLP
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from common.Multilayer import MLP
 from dataset.mnist import load_mnist
 from common.optimizer import *
 import time
@@ -16,7 +16,7 @@ import time
 
 <h3 id="data-load">Data Load</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
 print(x_train.shape)
 print(y_train.shape)
 print(x_test.shape)
@@ -34,14 +34,14 @@ print(y_test.shape)
 
 <p>가중치 업데이트를 위한 옵티마이저는 <strong>Adam</strong> 을 쓰고, Loss Function은 <strong>Cross Entropy</strong> 를 쓰게 된다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
          activation='relu', weight_init_std='he', use_batchnorm=True)
 optimizer = Adam()
 </code></pre></div></div>
 
 <h3 id="training--test">Training &amp; test</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_loss_list = []
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_loss_list = []
 train_acc_list = []
 test_acc_list = []
 epoch_list = []
@@ -99,7 +99,7 @@ print('total time:', (end - start))
 
 <h3 id="model-check">Model Check</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def check(x, y, model):
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def check(x, y, model):
     pred_y = model.predict(x)
     if x.ndim != 2:
         x = x.reshape(28, 28)
@@ -114,7 +114,7 @@ print('total time:', (end - start))
 
 <p>테스트 데이터중 하나 골라서 실험해보자</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>check(x_test[45], y_test[45], nn)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>check(x_test[45], y_test[45], nn)
 </code></pre></div></div>
 <blockquote>
   <p>Predict Answer: 5<br />Real Answer: 5</p>
