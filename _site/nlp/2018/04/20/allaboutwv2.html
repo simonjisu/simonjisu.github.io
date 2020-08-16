@@ -671,7 +671,7 @@ and their Compositionality</a> (Mikolov et al. 2013)</p>
 </ul>
 
 <p><strong>코드 예시:</strong></p>
-<div class="highlighter-rouge"><pre class="highlight"><code>import numpy as np
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import numpy as np
 sentence = "I am going to watch Avengers Infinity War".split()
 embedding_matrix = np.array([[1,2,5,1,9,10,3,4], [5,1,4,1,8,1,2,5], [7,8,1,4,1,6,2,1]])
 vocab = {w: i for i, w in enumerate(sentence)}
@@ -681,8 +681,7 @@ print("="*30)
 print("Word:", word)
 print("Index:", vocab[word])
 print("Vector:", embedding_matrix[:, vocab.get(word)])
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>[[ 1  2  5  1  9 10  3  4]</p>
 
@@ -713,7 +712,7 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <p>각 중심단어 $c$ 에 대해서 아래의 <strong>가능도/우도 (Likelihood)</strong> 를 구해본다.</p>
 
-<script type="math/tex; mode=display">L(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} p(w_{t+j} | w_t; \theta) \quad \cdots\cdots \quad (1)</script>
+\[L(\theta) = \prod_{t=1}^{T} \prod_{-m \leq j \leq m,\ j \neq 0} p(w_{t+j} | w_t; \theta) \quad \cdots\cdots \quad (1)\]
 
 <p>수식을 말로 풀어보자. 각 포지션 $(\prod_{t=1}^{T})$ 의 중심단어 $c$ = $w_t$ 에 대해서, $w_t$ 가 주어졌을 때 다른 문맥단어 $o$ = $w_{t+j}$ 가 나오는 확률 $\big( p (w_{t+j} \vert w_t; \theta) \big)$ 을 가능하게 만드는 $\theta$ 를 구하는 것이다. 단 $j$ 는 윈도우 크기 $m$ 을 넘지 않으며, $0$ 이 될 수 없다.</p>
 
@@ -721,7 +720,7 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <p>그러나 여기서는 우리가 좋아하는 Gradient Descent 를 사용하기 위해서 이 식을 <strong>Negative Log Likelihood</strong> 로 변형해서 쓰기로한다.</p>
 
-<script type="math/tex; mode=display">\min J(\theta) = -\dfrac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m,\ j \neq 0} \log p(w_{t+j} | w_t) \quad \cdots\cdots \quad (2)</script>
+\[\min J(\theta) = -\dfrac{1}{T} \sum_{t=1}^T \sum_{-m \leq j \leq m,\ j \neq 0} \log p(w_{t+j} | w_t) \quad \cdots\cdots \quad (2)\]
 
 <ul>
   <li>$(1)$ 식과 $(2)$ 식이 왜 동등한지는 밑에 <strong><span style="color: #e87d7d">참고 1</span></strong> 을 확인하길 바란다.</li>
@@ -733,7 +732,7 @@ print("Vector:", embedding_matrix[:, vocab.get(word)])
 
 <p><strong>Softmax</strong> 라는 input 값을 0과 1 사이로 만들어 주는 친근한 함수가 있다.</p>
 
-<script type="math/tex; mode=display">p(o|c) = \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} \quad \cdots\cdots \quad (3)</script>
+\[p(o|c) = \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} \quad \cdots\cdots \quad (3)\]
 
 <p>따라서 모델에 있는 모든 파라미터를 $\theta \in \Bbb{R}^{2dV}$ 로 두고, $(2)$ 식을 최적화 한다.</p>
 
@@ -749,17 +748,16 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 <p>Gradient를 통해서 각 파라미터들을 업데이트 하게 된다. $(3)$ 식의 $\log$ 를 취하게 되면 아래와 같다.</p>
 
-<script type="math/tex; mode=display">f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}</script>
+\[f = \log \dfrac{\exp(u_o^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)}\]
 
 <p>이제 $f$ 의 Gradient 를 구해보자.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} \dfrac{\partial f}{\partial V_c}
-&= \dfrac{\partial }{\partial V_c} \big(\log(\exp(u_o^T V_c)) - \log(\sum_{w=1}^V \exp(u_w^T V_c))\big) \\
-&= u_o - \dfrac{1}{\sum_{w=1}^V \exp(u_w^T V_c)}(\sum_{x=1}^V \exp(u_x^T V_c) u_x ) \\
-&= u_o - \sum_{x=1}^V \dfrac{\exp(u_x^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} u_x \\
-&= u_o - \sum_{x=1}^V P(x | c) u_x
-\end{aligned} %]]></script>
+\[\begin{aligned} \dfrac{\partial f}{\partial V_c}
+&amp;= \dfrac{\partial }{\partial V_c} \big(\log(\exp(u_o^T V_c)) - \log(\sum_{w=1}^V \exp(u_w^T V_c))\big) \\
+&amp;= u_o - \dfrac{1}{\sum_{w=1}^V \exp(u_w^T V_c)}(\sum_{x=1}^V \exp(u_x^T V_c) u_x ) \\
+&amp;= u_o - \sum_{x=1}^V \dfrac{\exp(u_x^T V_c)}{\sum_{w=1}^V \exp(u_w^T V_c)} u_x \\
+&amp;= u_o - \sum_{x=1}^V P(x | c) u_x
+\end{aligned}\]
 
 <ul>
   <li>$u_o$ : observed word, output context word</li>
@@ -775,21 +773,21 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
 <p><strong>Likelihood</strong> 의 정의:</p>
 
-<script type="math/tex; mode=display">L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)</script>
+\[L(\theta|x_1,\cdots,x_n) = f(x_1, \cdots, x_n|\theta) = \prod_{i=1}^n f(x_i|\theta)\]
 
 <p>log를 취하게 되면 아래와 같다.</p>
 
-<script type="math/tex; mode=display">\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)</script>
+\[\log L(\theta|x_1,\cdots,x_n) =  \sum_{i=1}^n log f(x_i|\theta)\]
 
 <p><strong>MLE(maximum likelihood estimator)</strong> 의 정의:</p>
 
-<script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)</script>
+\[\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta)\]
 
-<script type="math/tex; mode=display">\underset{x}{\arg \max} (x) = \underset{x}{\arg \min}(-x)</script>
+\[\underset{x}{\arg \max} (x) = \underset{x}{\arg \min}(-x)\]
 
 <p>때문에 우리는 아래의 식을 얻을 수 있다.</p>
 
-<script type="math/tex; mode=display">\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)</script>
+\[\hat{\theta}_{MLE} = \underset{\theta}{\arg \max} \sum_{i=1}^n \log f(x_i|\theta) = \underset{\theta}{\arg \min} -\sum_{i=1}^n \log f(x_i|\theta)\]
 
 <ul>
   <li>왜 log 로 바꾸는 것인가?

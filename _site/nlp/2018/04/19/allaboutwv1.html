@@ -619,11 +619,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>좋긴한데 몇 가지 단점이 있다.</p>
 
 <p>첫째로, 단어간의 미묘한 차이, 뉘앙스(nuances)를 표현 할 수가 수 없다. 아래의 예를 보자.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>from nltk.corpus import wordnet as wn
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from nltk.corpus import wordnet as wn
 for synset in wn.synsets("adept"):
     print("({})".format(synset.pos()) + ", ".join([l.name() for l in synset.lemmas()]))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>(n) ace, adept, champion, sensation, maven, mavin, virtuoso, genius, hotshot, star, superstar, whiz, whizz, wizard, wiz
 (s) adept, expert, good, practiced, proficient, skillful, skilful</p>
@@ -643,7 +642,7 @@ for synset in wn.synsets("adept"):
 
 <p>또다른 방법으로 discrete 된 심볼로 단어를 표현했는데 이를 <strong>one-hot representation</strong> 라고 하며, 아래와 같이 표현했다.</p>
 
-<script type="math/tex; mode=display">word = [0, 0, 0, 1, 0, 0, 0]</script>
+\[word = [0, 0, 0, 1, 0, 0, 0]\]
 
 <p>이러한 방법론을 <strong>Bag of words representation</strong> 이라 한다. 그러나 이는 두 가지 단점이 있다.</p>
 
@@ -651,13 +650,12 @@ for synset in wn.synsets("adept"):
 
 <p>둘째로, 제한적 표현(Localist representation)의 문제. 즉, 단어의 내적의미를 포함하지 않고, 각 단어들이 독립적이다. 예를 들면, “hotel” 과 “motel” 의 유사성을 계산하려고 하면, 0 이 나올 수 밖에 없다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-motel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \end{bmatrix} \\
-hotel &= \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix} \\
-\end{aligned} %]]></script>
+\[\begin{aligned}
+motel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \end{bmatrix} \\
+hotel &amp;= \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \end{bmatrix} \\
+\end{aligned}\]
 
-<script type="math/tex; mode=display">hotel \cdot motel^T = 0</script>
+\[hotel \cdot motel^T = 0\]
 
 <p><br /></p>
 

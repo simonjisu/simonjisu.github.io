@@ -593,9 +593,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><strong>설치:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install torchtext
-</code></pre>
-</div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install torchtext
+</code></pre></div></div>
 
 <p>TorchText 는 자연어 처리에서 아래의 과정을 한번에 쉽게 해준다.</p>
 
@@ -616,33 +615,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>아래와 같은 문장과 이에 대한 긍정/부정 정도를 분류하는 데이터셋이 있다면,</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>["The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations", 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["The Importance of Being Earnest , so thick with wit it plays like a reading from Bartlett 's Familiar Quotations", 
 '3']
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>텍스트를 뜻하는 <code class="highlighter-rouge">TEXT</code>, 해당 문장의 sentiment 를 뜻하는 <code class="highlighter-rouge">LABEL</code> 필드객체 두 개를 만든다.</p>
+<p>텍스트를 뜻하는 <code class="language-plaintext highlighter-rouge">TEXT</code>, 해당 문장의 sentiment 를 뜻하는 <code class="language-plaintext highlighter-rouge">LABEL</code> 필드객체 두 개를 만든다.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">Field</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">Field</span>
 
 <span class="n">TEXT</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">sequential</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
              <span class="n">use_vocab</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-             <span class="n">tokenize</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">,</span>
+             <span class="n">tokenize</span><span class="o">=</span><span class="nb">str</span><span class="p">.</span><span class="n">split</span><span class="p">,</span>
              <span class="n">lower</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
              <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  
 <span class="n">LABEL</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">sequential</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>  
               <span class="n">use_vocab</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>   
               <span class="n">preprocessing</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>  
               <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>Arguments:</strong></p>
 
 <ul>
   <li><strong>sequential:</strong> TEXT 는 순서가 있는 (sequential) 데이터기 때문에 인자를 True 로 두고, LABEL 데이터는 순서가 필요없기 때문에 False 로 둔다.</li>
   <li><strong>use_vocab:</strong> 단어장(Vocab) 객체를 사용할지의 여부. 텍스트 데이터있는 TEXT 에만 True 로 인자를 전달한다.</li>
-  <li><strong>tokenize:</strong> 단어의 토크나이징을 맡아줄 함수다. 여기선 “공백”을 기준으로 나누는 함수를 사용했습니다. 한국어의 경우 보통 <code class="highlighter-rouge">konlpy</code> 의 토크나이징 함수들을 사용한다. 혹은 개인이 만든 함수도 사용할 수 있다.</li>
+  <li><strong>tokenize:</strong> 단어의 토크나이징을 맡아줄 함수다. 여기선 “공백”을 기준으로 나누는 함수를 사용했습니다. 한국어의 경우 보통 <code class="language-plaintext highlighter-rouge">konlpy</code> 의 토크나이징 함수들을 사용한다. 혹은 개인이 만든 함수도 사용할 수 있다.</li>
   <li><strong>lower:</strong> 소문자 전환 여부 입니다. 보통 True 로 두며, 단어가 많아질수록 나중에 더 많은 차원에 임베딩해야하기 때문에, 왠만하면 영어는 소문자로 만들어준다.</li>
   <li><strong>batch_first:</strong> 배치를 우선시 하게 되면, tensor 의 크기는 (B, 문장의 최대 길이) 로 만들어진다.</li>
   <li><strong>preprocessing:</strong> 전처리는 토큰화 후, 수치화하기 전 사이에서 작동한다. 여기서는 Label 데이터가 string 타입이기 때문에 int 타입으로 만들어준다.</li>
@@ -652,91 +649,85 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h2 id="2-데이터-세트-만들기create-datasets">2. 데이터 세트 만들기(Create Datasets)</h2>
 
-<p>데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 <code class="highlighter-rouge">splits</code> 메서드를 사용해서 아래와 같이 만들어준다.</p>
+<p>데이터 세트는 위에 지정한 필드에 기반하여 데이터를 불러오는 작업을 한다. 보통 Train, Valid, Test 세트가 있으면 <code class="language-plaintext highlighter-rouge">splits</code> 메서드를 사용해서 아래와 같이 만들어준다.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">TabularDataset</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">TabularDataset</span>
 
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="o">.</span><span class="n">splits</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">'./data/'</span><span class="p">,</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">.</span><span class="n">splits</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">'./data/'</span><span class="p">,</span>
 					<span class="n">train</span><span class="o">=</span><span class="s">'train_path'</span><span class="p">,</span>
 					<span class="n">valid</span><span class="o">=</span><span class="s">'valid_path'</span><span class="p">,</span>
 					<span class="n">test</span><span class="o">=</span><span class="s">'test_path'</span><span class="p">,</span>
-					<span class="n">format</span><span class="o">=</span><span class="s">'tsv'</span><span class="p">,</span> 
+					<span class="nb">format</span><span class="o">=</span><span class="s">'tsv'</span><span class="p">,</span> 
 					<span class="n">fields</span><span class="o">=</span><span class="p">[(</span><span class="s">'text'</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">),</span> <span class="p">(</span><span class="s">'label'</span><span class="p">,</span> <span class="n">LABEL</span><span class="p">)])</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>만약에 없다면? 아래와 같이 객체에 그냥 넣어준다.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">train_data</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">'./data/examples.tsv'</span><span class="p">,</span> 
-				<span class="n">format</span><span class="o">=</span><span class="s">'tsv'</span><span class="p">,</span> 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_data</span> <span class="o">=</span> <span class="n">TabularDataset</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">'./data/examples.tsv'</span><span class="p">,</span> 
+				<span class="nb">format</span><span class="o">=</span><span class="s">'tsv'</span><span class="p">,</span> 
 				<span class="n">fields</span><span class="o">=</span><span class="p">[(</span><span class="s">'text'</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">),</span> <span class="p">(</span><span class="s">'label'</span><span class="p">,</span> <span class="n">LABEL</span><span class="p">)])</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <ul>
-  <li><strong>fields:</strong> 아까 만들어준 필드는 리스트 형태로 <code class="highlighter-rouge">[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]</code> 로 넣어준다.</li>
+  <li><strong>fields:</strong> 아까 만들어준 필드는 리스트 형태로 <code class="language-plaintext highlighter-rouge">[('필드이름(임의지정)', 필드객체), ('필드이름(임의지정)', 필드객체)]</code> 로 넣어준다.</li>
 </ul>
 
 <h2 id="3-단어장-생성build-vocabulary">3. 단어장 생성(Build vocabulary)</h2>
 
-<p>토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 <code class="highlighter-rouge">&lt;unk&gt;</code> 토큰을 0, <code class="highlighter-rouge">&lt;pad&gt;</code> 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.</p>
+<p>토큰과 Interger index 를 매칭시켜주는 단어장을 생성한다. 단, 기본적으로 <code class="language-plaintext highlighter-rouge">&lt;unk&gt;</code> 토큰을 0, <code class="language-plaintext highlighter-rouge">&lt;pad&gt;</code> 토큰을 1 로 만들어준다. 단, 필드지정시, 문장의 시작 토큰(init_token)과, 끝의 토큰(eos_token)을 넣으면 3, 4 번으로 할당된다. 메서드 안에는 생성한 데이터 세트를 넣어준다.</p>
 
 <p>훈련 데이터를 기반으로 단어장을 생성하려면 아래의 명령어를 입력한다.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">TEXT</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
-</code></pre>
-</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TEXT</span><span class="p">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h2 id="4-데이터-로더-만들기create-data-loader">4. 데이터 로더 만들기(Create Data Loader)</h2>
 
-<p>마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, <code class="highlighter-rouge">splits</code> 메서드를 사용한다.</p>
+<p>마지막으로 배치 사이즈 만큼 데이터를 불러올 데이터 로더를 만든다. 데이터 세트 때와 마찬가지로 데이터 세트가 분리되어 있다면, <code class="language-plaintext highlighter-rouge">splits</code> 메서드를 사용한다.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">Iterator</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">Iterator</span>
 
 <span class="n">train_loader</span><span class="p">,</span> <span class="n">valid_loader</span><span class="p">,</span> <span class="n">test_loader</span> <span class="o">=</span> \
-	<span class="n">TabularDataset</span><span class="o">.</span><span class="n">splits</span><span class="p">((</span><span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">),</span> 
+	<span class="n">TabularDataset</span><span class="p">.</span><span class="n">splits</span><span class="p">((</span><span class="n">train_data</span><span class="p">,</span> <span class="n">valid_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">),</span> 
 				<span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
-				<span class="n">device</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c"># gpu 사용시 "cuda" 입력</span>
-				<span class="n">repeat</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</code></pre>
-</div>
+				<span class="n">device</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># gpu 사용시 "cuda" 입력
+</span>				<span class="n">repeat</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>만약에 없다면? 아래와 같이 <code class="highlighter-rouge">Iterator</code> 객체에 그냥 넣어준다.</p>
+<p>만약에 없다면? 아래와 같이 <code class="language-plaintext highlighter-rouge">Iterator</code> 객체에 그냥 넣어준다.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">train_loader</span> <span class="o">=</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_loader</span> <span class="o">=</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> 
 			<span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
-			<span class="n">device</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c"># gpu 사용시 "cuda" 입력</span>
-			<span class="n">repeat</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</code></pre>
-</div>
+			<span class="n">device</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># gpu 사용시 "cuda" 입력
+</span>			<span class="n">repeat</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 <code class="highlighter-rouge">&lt;pad&gt;</code> 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.</p>
+<p>이렇게 하면 매 배치 때마다 최대 길이에 따라 알아서 패딩(padding) 작업도 같이 해준다. 패딩이란 문장의 길이를 같게 만들기 위해서 의미없는 토큰 <code class="language-plaintext highlighter-rouge">&lt;pad&gt;</code> 를 나머지 길이가 부족한 문장에게 붙여주는 토큰이다. 잘 생각해보면 input 길이를 같게 만들어 주는 과정이다.</p>
 
 <h2 id="테스트">테스트</h2>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
     <span class="k">break</span>
-<span class="k">print</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
-<span class="c">#=======================================================</span>
-<span class="c">#tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,</span>
-<span class="c">#              7,    207,    892,    107,     43,     85,    408,      3,</span>
-<span class="c">#            376,     17,      5,   6447,  11035,     37,     98,     43,</span>
-<span class="c">#            199,   5859,      2,      1,      1,      1,      1,      1,</span>
-<span class="c">#              1,      1,      1],</span>
-<span class="c">#        [     3,   4515,     51,    444,      4,   3738,     30,     94,</span>
-<span class="c">#            957,   3498,     59,    700,  13967,      6,   2287,   4435,</span>
-<span class="c">#              4,    431,     40,      3,   1201,      7,    486,   1134,</span>
-<span class="c">#           4120,     59,      5,    166,   1749,    547,      6,   1339,</span>
-<span class="c">#            144,  14759,      2],</span>
-<span class="c">#        [    29,      7,    195,    568,    192,     63,    229,     60,</span>
-<span class="c">#             17,     21,    202,    334,     18,      5,    535,     20,</span>
-<span class="c">#              4,     15,    628,    231,     52,      9,    303,    195,</span>
-<span class="c">#           6910,      8,  10136,      8,      3,   2204,   4340,      2,</span>
-<span class="c">#              1,      1,      1]])</span>
-<span class="c">#tensor([ 0,  3,  1])</span>
-</code></pre>
-</div>
+<span class="k">print</span><span class="p">(</span><span class="n">batch</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">batch</span><span class="p">.</span><span class="n">label</span><span class="p">)</span>
+<span class="c1">#=======================================================
+#tensor([[   643,    191,      4,     43,   1447,      3,   4384,    485,
+#              7,    207,    892,    107,     43,     85,    408,      3,
+#            376,     17,      5,   6447,  11035,     37,     98,     43,
+#            199,   5859,      2,      1,      1,      1,      1,      1,
+#              1,      1,      1],
+#        [     3,   4515,     51,    444,      4,   3738,     30,     94,
+#            957,   3498,     59,    700,  13967,      6,   2287,   4435,
+#              4,    431,     40,      3,   1201,      7,    486,   1134,
+#           4120,     59,      5,    166,   1749,    547,      6,   1339,
+#            144,  14759,      2],
+#        [    29,      7,    195,    568,    192,     63,    229,     60,
+#             17,     21,    202,    334,     18,      5,    535,     20,
+#              4,     15,    628,    231,     52,      9,    303,    195,
+#           6910,      8,  10136,      8,      3,   2204,   4340,      2,
+#              1,      1,      1]])
+#tensor([ 0,  3,  1])
+</span></code></pre></div></div>
 
 <p>3개의 배치에, 각 토큰에 해당하는 단어의 숫자가 들어가게 되고, 패딩 또한 잘 되었다.</p>
 
@@ -759,7 +750,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h1 id="다양한-데이터-세트">다양한 데이터 세트</h1>
 
-<p><code class="highlighter-rouge">torchtext.datasets</code> 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.</p>
+<p><code class="language-plaintext highlighter-rouge">torchtext.datasets</code> 안에는 자연어 처리에 많이 사용되는 데이터 세트들이 이미 포함돼있다. 여기서는 소개하지 않겠다.</p>
 
 <p>Documentation 참고: <a href="http://torchtext.readthedocs.io/en/latest/datasets.html#">http://torchtext.readthedocs.io/en/latest/datasets.html#</a></p>
 

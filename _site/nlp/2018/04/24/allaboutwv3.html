@@ -585,7 +585,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>사실 Softmax가 그리 값싼 연산은 아니다. 우리가 학습하고 싶은 단어 벡터 1000개가 있다고 가정해보자. 그렇다면 매 window size=2 마다, 다시 말해 총 업데이트 할 5개의 단어 (중심단어 1 + 주변 단어 2 x 2) 를 위해서, $W, W’$ 안에 파라미터를 업데이트 해야하는데, 그 갯수가 최소 $(2 \times d \times 1000)$ 만큼된다.</p>
 
-<script type="math/tex; mode=display">\triangledown_\theta J_t(\theta) \in \Bbb{R}^{2dV}</script>
+\[\triangledown_\theta J_t(\theta) \in \Bbb{R}^{2dV}\]
 
 <p>많은 양의 단어에 비해 업데이트 하는 파라미터수는 적기 때문에 gradient matrix $\triangledown_\theta J_t(\theta)$ 가 굉장히 sparse 해질 수 있다 (0이 많다는 소리). Adam 같은 알고리즘은 sparse 한 matrix 에 취약하다.</p>
 
@@ -603,11 +603,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>요약하면 아래와 같은 목적함수를 최대화 하는 것이다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-J(\theta) &= \dfrac{1}{T}\sum_{t=1}^{T} J_t(\theta)\\
-J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_c)]}_{(2)}
-\end{aligned} %]]></script>
+\[\begin{aligned}
+J(\theta) &amp;= \dfrac{1}{T}\sum_{t=1}^{T} J_t(\theta)\\
+J_t(\theta) &amp;= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_c)]}_{(2)}
+\end{aligned}\]
 
 <ul>
   <li>$T$: total num of words</li>
@@ -645,50 +644,47 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 <p>따라서, 우리의 목적은 확률 $P(D = 1\vert\ w, c)$ 를 최대화하는 parameter $\theta$를 찾는 것이기 때문에 아래와 같은 목적함수를 세울 수 있다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} &\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
-= &\arg \underset{\theta}{\max} \log \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
-= &\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta)
-\end{aligned} %]]></script>
+\[\begin{aligned} &amp;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
+= &amp;\arg \underset{\theta}{\max} \log \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \\
+= &amp;\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta)
+\end{aligned}\]
 
 <p>파라미터 $\theta$ 는 단어들의 벡터라고 생각할 수 있다. 즉, 위의 식을 만족하는 어떤 최적의 단어 벡터를 찾는것이다.</p>
 
 <p>또한, 확률 $P(D=1\vert\ w,c;\theta)$ 은 sigmoid로 아래와 같이 정의 할 수 있다.</p>
 
-<script type="math/tex; mode=display">P(D=1\vert\ w,c;\theta) = \dfrac{1}{1+e^{-v_c v_w}}</script>
+\[P(D=1\vert\ w,c;\theta) = \dfrac{1}{1+e^{-v_c v_w}}\]
 
 <p>따라서 우리의 목적함수는 아래와 같이 다시 고쳐 쓸수 있다.</p>
 
-<script type="math/tex; mode=display">\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} }</script>
+\[\arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} }\]
 
 <p>그러나 우리의 목적 함수는 매 $(w, c)$ 세트마다 $P(D=1\vert\ w,c;\theta)=1$ 를 만족하는 trivial solution이 존재한다. $v_c = v_w$ 이며, $\forall v_c,\ v_w$ 에 대해 $v_c \cdot v_w = K$ 를 만족하는 $\theta$ (보통 $K$ 가 40이 넘어가면 위 방정식의 값이 0에 가까워짐) 는 모든 값을 똑같이 0으로 만들어 버리기 때문에, 같은 값을 갖지 못하게 하는 매커니즘이 필요하다. ($\theta$ 에 뭘 넣어도 0이 되면 최대값을 찾는 의미가 없어진다, 자세한건 밑에 <span style="color: #e87d7d">참고 1</span> 를 참조) 여기서 “같은 값을 같는다” 라는 말은 단어 벡터가 같은 값을 갖는 것이다.</p>
 
 <p>따라서, 하나의 방법으로 랜덤 $(w, c)$ 조합을 생성하는 집합 $D’$를 만들어 corpus data 로부터 올 확률 $P(D=1\vert \ w,c;\theta)$ 를 낮게 강제하는 것이다. 즉, $D’$ 에서 생성된 $(w, c)$ 조합은 <strong>corpus data 로부터 오지 않게</strong> 하는 확률 $P(D=0\vert\ w,c;\theta)$ 을 최대화 하는 것.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-& \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} P(D=0\vert\ w,c;\theta) \\
-&= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} \big(1- P(D=1\vert\ w,c;\theta) \big) \\
-&= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta) + \underset{(w,c) \in D'}{\sum} \log \big(1- P(D=1\vert\ w,c;\theta) \big) \\
-&= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \big(1- \dfrac{1}{1+e^{-v_c v_w} } \big) \\
-&= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} }
-\end{aligned} %]]></script>
+\[\begin{aligned}
+&amp; \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} P(D=0\vert\ w,c;\theta) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\prod} P(D=1\vert\ w,c;\theta) \underset{(w,c) \in D'}{\prod} \big(1- P(D=1\vert\ w,c;\theta) \big) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log P(D=1\vert\ w,c;\theta) + \underset{(w,c) \in D'}{\sum} \log \big(1- P(D=1\vert\ w,c;\theta) \big) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \big(1- \dfrac{1}{1+e^{-v_c v_w} } \big) \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} }
+\end{aligned}\]
 
 <p>$\sigma(x) = \dfrac{1}{1+e^{-x} }$ 시그모이드 함수로 정의 하면, 아래와 같이 정리 할 수 있다.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-& \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} } \\
-&= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \sigma(v_c v_w) + \underset{(w,c) \in D'}{\sum} \log \sigma(- v_c v_w) \quad \cdots (3)
-\end{aligned} %]]></script>
+\[\begin{aligned}
+&amp; \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } + \underset{(w,c) \in D'}{\sum} \log \dfrac{1}{1+e^{v_c v_w} } \\
+&amp;= \arg \underset{\theta}{\max} \underset{(w,c) \in D}{\sum} \log \sigma(v_c v_w) + \underset{(w,c) \in D'}{\sum} \log \sigma(- v_c v_w) \quad \cdots (3)
+\end{aligned}\]
 
 <p>이는 <span style="color: #e87d7d">paper 1</span> 의 (4) 번 식과 같아지는다.</p>
 
-<script type="math/tex; mode=display">\log \sigma(u_c^T v_w) + \sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_w)]</script>
+\[\log \sigma(u_c^T v_w) + \sum_{i=1}^{k} \mathbb{E}_{j \backsim P(w)} [\log \sigma(-u_j^T v_w)]\]
 
 <p>다른 점이라면, 우리가 만든 (3)식에서는 전체 corpus ($D \cup D’$) 을 포함하지만, Mikolov 논문의 식은 $D$ 에 속하는 $(w, c)$ 조합 하나와 $k$ 개의 다른 $(w, c_j)$ 의 조합을 들었다는 것이다. 구체적으로, $k$ 번의 negative sampling 에서 Mikolov 는 $D’$ 를 $k \times D$ 보다 크게 설정했고, k개의 샘플 $(w, c_1), (w, c_2), \cdots, (w, c_k)$ 에 대해서 $c_j$ 는 <strong>unigram distribution</strong> 에 <strong>3/4</strong> 승으로 부터 도출된다. 이는 아래의 분포에서 $(w, c)$ 조합을 추출 하는 것과 같다.</p>
 
-<script type="math/tex; mode=display">p_{words}(w) = \dfrac{p_{contexts} (c)^{3/4} }{Z}</script>
+\[p_{words}(w) = \dfrac{p_{contexts} (c)^{3/4} }{Z}\]
 
 <ul>
   <li>$p_{words}(w)$, $p_{contexts} (c)$ 는 각각 words and contexts 의 unigram distribution 이다.</li>
@@ -750,27 +746,25 @@ J_t(\theta) &= \underbrace{\log \sigma(u_o^T v_c)}_{(1)} + \underbrace{\sum_{i=1
 
 <p>Mikolov 논문에서는 context는 하나의 단어이기 때문에 $p_{words}(w)$ 는 아래와 동일하다.</p>
 
-<script type="math/tex; mode=display">p_{words}(w) = p_{contexts} (c) = \dfrac{count(x)}{ \vert text \vert }</script>
+\[p_{words}(w) = p_{contexts} (c) = \dfrac{count(x)}{ \vert text \vert }\]
 
 <hr />
 
 <h2 id="참고-1-trivial-solution">참고 1. Trivial Solution</h2>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned} L(\theta;w,c) &= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
-&= \underset{(w,c) \in D}{\sum} \log(1) - \log(1+e^{-v_c v_w}) \\
-&= \underset{(w,c) \in D}{\sum} - \log(1+e^{-v_c v_w})
-\end{aligned} %]]></script>
+\[\begin{aligned} L(\theta;w,c) &amp;= \underset{(w,c) \in D}{\sum} \log \dfrac{1}{1+e^{-v_c v_w} } \\
+&amp;= \underset{(w,c) \in D}{\sum} \log(1) - \log(1+e^{-v_c v_w}) \\
+&amp;= \underset{(w,c) \in D}{\sum} - \log(1+e^{-v_c v_w})
+\end{aligned}\]
 
 <p>같은 두 벡터의 내적을 하게 되면 값은 최대가 된다. $\cos$ 값이 1이 되기 때문이다. (여기서는 최대 값이 중요한건 아니지만 값이 커진다는데 의의가 있다.)
-<script type="math/tex">a\cdot a=\vert a \vert \vert a \vert \cos \theta</script></p>
+\(a\cdot a=\vert a \vert \vert a \vert \cos \theta\)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>a = np.array([1,2,3,4,5,6,7])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = np.array([1,2,3,4,5,6,7])
 b = np.array([.1,.2,.3,.4,.5,.6,.7])
 print(np.dot(a, a))
 print(np.dot(a, b))
-</code></pre>
-</div>
+</code></pre></div></div>
 <blockquote>
   <p>140</p>
 

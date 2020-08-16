@@ -1,5 +1,11 @@
-_site
-.sass-cache
-.jekyll-metadata
-.jekyll-cache
 .vscode
+
+# Jekyll 이 생성한 메타 데이터 무시
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler 가 생성한 폴더 무시
+.bundle/
+vendor/
