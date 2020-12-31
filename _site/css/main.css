@@ -367,6 +367,8 @@ body { min-height: 100%; height: auto; }
 .site-footer .left a { color: #666; border-bottom: 1px dotted; text-decoration: none; }
 .site-footer .left a:hover { color: red; border-bottom: 1px dotted; }
 
+details { padding-top: 10px; padding-bottom: 10px; color: #144483; }
+
 /* Effects
 —————————————————————————————————————————————————— */
 .blinking_underscore { -webkit-animation: blinking_underscore_frame 1.5s infinite ease; -moz-animation: blinking_underscore_frame 1.5s infinite ease; -ms-animation: blinking_underscore_frame 1.5s infinite ease; -o-animation: blinking_underscore_frame 1.5s infinite ease; animation: blinking_underscore_frame 1.5s infinite ease; }
