@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[XAI] Explainable Artificial Intelligence (XAI) - 2 "
-date: "2021-01-07 11:38:38 +0900"
+date: "2021-01-14 11:38:38 +0900"
 categories: paper
 author: "Soo"
 comments: true
