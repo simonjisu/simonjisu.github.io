@@ -10,6 +10,8 @@ toc: false
 
 # Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
 
+Paper Link: [https://arxiv.org/abs/1910.10045](https://arxiv.org/abs/1910.10045)
+
 XAI에 대한 전반적인 소개를 정리한 논문이 나와서 차근 차근 요약 정리해보려고 한다(무려 115페이지, reference만 6페이지). 약간의 번역 어투와 생략된 것도 있으니 영어 원문을 참고하길 바란다.
 
 1. [<span style="color:#e25252">Introduction(이번편)</span>](https://simonjisu.github.io/paper/2020/12/31/xaitutorial1.html)
@@ -30,7 +32,7 @@ XAI에 대한 전반적인 소개를 정리한 논문이 나와서 차근 차근
 {% include collaspe-block.html summary="영어원문" article="While the very first AI systems were easily interpretable, the last years have witnessed the rise of opaque decision systems such as Deep Neural Networks (DNNs). The empirical success of Deep Learning (DL) models such as DNNs stems from a combination of efficient learning algorithms and their huge parametric space. The latter space comprises hundreds of layers and millions of parameters, which makes DNNs be considered as complex black-box models [4]. The opposite of black-box-ness is transparency, i.e., the search for a direct understanding of the mechanism by which a model works [5]."
 %}
 
-<span style="color:#e25252">요약:</span> 딥러닝 모델은 효율적인 학습 알고리즘과 거대한 파라미터 공간의 결합에서 비롯된다. 그리고 black-box 모델로 간주 된다. 이의 반대는 black-box-ness, 즉 **투명성(transparency)**이다.
+<span style="color:#e25252">요약:</span> 딥러닝 모델은 효율적인 학습 알고리즘과 거대한 파라미터 공간의 결합에서 비롯된다. 그리고 black-box 모델로 간주 된다. 이의 반대는 **투명성(transparency)**이다.
 
 {% include collaspe-block.html summary="영어원문" article="As black-box Machine Learning (ML) models are increasingly being employed to make important predictions in critical contexts, the demand for transparency is increasing from the various stakeholders in AI [6]. The danger is on creating and using decisions that are not justifiable, legitimate, or that simply do not allow obtaining detailed explanations of their behaviour [7]. Explanations supporting the output of a model are crucial, e.g., in precision medicine, where experts require far more information from the model than a simple binary prediction for supporting their diagnosis [8]. Other examples include autonomous vehicles in transportation, security, and finance, among others."
 %}
