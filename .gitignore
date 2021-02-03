@@ -9,3 +9,6 @@ _site/
 # Bundler 가 생성한 폴더 무시
 .bundle/
 vendor/
+
+# 올릴예정인 포스트
+_posts_draft/

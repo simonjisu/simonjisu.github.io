@@ -5,7 +5,7 @@ date: "2020-12-31 11:38:38 +0900"
 categories: paper
 author: "Soo"
 comments: true
-toc: false
+toc: true
 ---
 
 # Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
@@ -15,8 +15,8 @@ Paper Link: [https://arxiv.org/abs/1910.10045](https://arxiv.org/abs/1910.10045)
 XAI에 대한 전반적인 소개를 정리한 논문이 나와서 차근 차근 요약 정리해보려고 한다(무려 115페이지, reference만 6페이지). 약간의 번역 어투와 생략된 것도 있으니 영어 원문을 참고하길 바란다.
 
 1. [<span style="color:#e25252">Introduction(이번편)</span>](https://simonjisu.github.io/paper/2020/12/31/xaitutorial1.html)
-2. Explainability: What, why, what for and how?
-3. Transparent machine learning models
+2. [Explainability: What, why, what for and how?](https://simonjisu.github.io/paper/2021/01/14/xaitutorial2.html)
+3. [Transparent machine learning models](https://simonjisu.github.io/paper/2021/01/23/xaitutorial3.html)
 4. Post-hoc explainability techniques for machile learning models: Taxonomy, shallow models and deep learning
 5. XAI: Opportunities, challenges and future research needs
 6. Toward responsible AI: Principles of artificial intelligence, fairness, privacy and data fusion
