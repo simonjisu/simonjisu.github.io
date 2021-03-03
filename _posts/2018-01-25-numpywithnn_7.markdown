@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-7: Batch Normalization"
-categories: numpyseries
+title: "[deeplearning from scratch]-7: Batch Normalization"
+categories: deeplearning
 author: "Soo"
 date: "2018-01-25 12:54:15 +0900"
 comments: true
@@ -31,7 +31,7 @@ Paper: [Batch Normalization: Accelerating Deep Network Training by Reducing Inte
 
  x 부터 out 까지 차근차근 진행해보자. 헷갈리지 말아야할 점은 위에 공식에서 $i$ 는 batch를 iteration 한 것이라는 점이다.
 
-```
+```python
 ## Forward Process
 # step-1: mu (D,)
 mu = x.mean(axis=0)
@@ -148,7 +148,7 @@ $$dx_2 = \dfrac{\partial L}{\partial x_2} = \dfrac{\partial L}{\partial \mu} \df
 **Step-0:**
 * 최종적으로 구하는 $dx = \dfrac{\partial L}{\partial x} = dx_1 + dx_2$ 로 정의 된다.
 
-```
+```python
 ## Backward Process
 # step-9: out = scale + beta
 dbeta = dout.sum(axis=0)

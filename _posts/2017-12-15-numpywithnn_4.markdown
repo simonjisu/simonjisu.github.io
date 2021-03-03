@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-4: Backpropagation"
-categories: numpyseries
+title: "[deeplearning from scratch]-4: Backpropagation"
+categories: deeplearning
 author: "Soo"
 date: "2017-12-15 12:21:48 +0900"
 comments: true
@@ -123,19 +123,20 @@ $$\begin{aligned}
 \end{aligned}$$
 
 이것을 코드로 구현하게 되면
+```python
+class Sigmoid(object):
+    def __init__(self):
+        self.out = None  # 역전파시 곱해야 하기 때문에 저장해둔다
 
-    class Sigmoid(object):
-        def __init__(self):
-            self.out = None  # 역전파시 곱해야 하기 때문에 저장해둔다
+    def forward(self, x):
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
 
-        def forward(self, x):
-            out = 1 / (1 + np.exp(-x))
-            self.out = out
+        return out
 
-            return out
-
-        def backward(self, dout):
-            dx = dout * self.out * (1 - self.out)
+    def backward(self, dout):
+        dx = dout * self.out * (1 - self.out)
+```
 
 ## Affine 계층과 Affine Transform
 기하학에서 신경망 순전파 때 수행하는 행렬의 내적을 Affine Transform이라 하며, Affine 계층은 어파인 변환을 수행 처리하는 계층이다.
@@ -154,164 +155,167 @@ $\begin{cases}
     \dfrac{\partial{L}}{\partial{B}} = 1
   \end{cases}$
 
+```python
+class Affine(object):
+    def __init__(self, W, b):
+        self.W = W
+        self.b = b
+        self.x = None
+        self.dW = None
+        self.db = None
 
-    class Affine(object):
-        def __init__(self, W, b):
-            self.W = W
-            self.b = b
-            self.x = None
-            self.dW = None
-            self.db = None
+    def forward(self, x):
+        self.x = x
+        out = np.dot(self.x, self.W) + self.b
 
-        def forward(self, x):
-            self.x = x
-            out = np.dot(self.x, self.W) + self.b
+        return out
 
-            return out
+    def backward(self, dout):
+        dx = np.dot(dout, self.W.T)
+        self.dW = np.dot(self.x.T, dout)
+        self.db = np.sum(self.b, axis=0)
 
-        def backward(self, dout):
-            dx = np.dot(dout, self.W.T)
-            self.dW = np.dot(self.x.T, dout)
-            self.db = np.sum(self.b, axis=0)
-
-            return dx
+        return dx
+```
 
 ## Backpropogation 사용한 학습구현
 
-    import collections
-    from layers import *
+```python
+import collections
+from layers import *
 
-    class TwoLayer(object):
-        def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
-            self.params = {}
-            self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
-            self.params['b1'] = np.zeros(hidden_size)
-            self.params['W2'] = weight_init_std * np.random.randn(hidden_size, output_size)
-            self.params['b2'] = np.zeros(hidden_size)
+class TwoLayer(object):
+    def __init__(self, input_size, hidden_size, output_size, weight_init_std=0.01):
+        self.params = {}
+        self.params['W1'] = weight_init_std * np.random.randn(input_size, hidden_size)
+        self.params['b1'] = np.zeros(hidden_size)
+        self.params['W2'] = weight_init_std * np.random.randn(hidden_size, output_size)
+        self.params['b2'] = np.zeros(hidden_size)
 
-            # 계층 생성
-            self.layers = collections.OrderedDict()
-            self.layers['Affine1'] = Affine(self.params['W1'], self.params['b1'])
-            self.layers['ReLu1'] = ReLu()
-            self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
+        # 계층 생성
+        self.layers = collections.OrderedDict()
+        self.layers['Affine1'] = Affine(self.params['W1'], self.params['b1'])
+        self.layers['ReLu1'] = ReLu()
+        self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
 
-            self.lastLayer = SoftmaxWithLoss()
+        self.lastLayer = SoftmaxWithLoss()
 
-        def predict(self, x):
-            for layer in self.layers.values():
-                x = layer.forward(x)
+    def predict(self, x):
+        for layer in self.layers.values():
+            x = layer.forward(x)
 
-            return x
+        return x
 
-        # x: 입력 데이터, t: 정답 데이터
-        def loss(self, x, t):
-            y = self.predict(x)
-            return self.lastLayer.forward(y, t)
+    # x: 입력 데이터, t: 정답 데이터
+    def loss(self, x, t):
+        y = self.predict(x)
+        return self.lastLayer.forward(y, t)
 
-        def accuracy(self, x, t):
-            y = self.predict(x)
-            y = np.argmax(y, axis=1)
-            if t.ndim != 1: t = np.argmax(t, axis=1)
+    def accuracy(self, x, t):
+        y = self.predict(x)
+        y = np.argmax(y, axis=1)
+        if t.ndim != 1: t = np.argmax(t, axis=1)
 
-            acc = np.sum(y == t) / float(x.shape[0])
-            return acc
+        acc = np.sum(y == t) / float(x.shape[0])
+        return acc
 
-        def gradient(self, x, t):
-            # forward
-            self.loss(x, t)
+    def gradient(self, x, t):
+        # forward
+        self.loss(x, t)
 
-            # backward
-            dout = 1
-            dout = self.lastLayer.backward(dout)
+        # backward
+        dout = 1
+        dout = self.lastLayer.backward(dout)
 
-            layers = list(self.layers.values())
-            layers.reverse()
+        layers = list(self.layers.values())
+        layers.reverse()
 
-            for layer in layers:
-                dout = layer.backward(dout)
+        for layer in layers:
+            dout = layer.backward(dout)
 
-            # save
-            grads = {}
-            grads['W1'] = self.layers['Affine1'].dW
-            grads['b1'] = self.layers['Affine1'].db
-            grads['W2'] = self.layers['Affine2'].dW
-            grads['b2'] = self.layers['Affine2'].db
+        # save
+        grads = {}
+        grads['W1'] = self.layers['Affine1'].dW
+        grads['b1'] = self.layers['Affine1'].db
+        grads['W2'] = self.layers['Affine2'].dW
+        grads['b2'] = self.layers['Affine2'].db
 
-            return grads
-
+        return grads
+```
 
 TwoLayer Neural Network 를 생성하는 객체는 따로 파일에 저장하고 불러내는 것이 좋다. OrderedDict은 dictionary 형태로 입력 순서를 기억해주는 좋은 함수다.
 
+```python
+from dataset.mnist import load_mnist
+from two_layer_nn import TwoLayer
 
-    from dataset.mnist import load_mnist
-    from two_layer_nn import TwoLayer
+# data_loading
+(x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
 
-    # data_loading
-    (x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
+train_loss_list = []
+train_acc_list = []
+test_acc_list = []
 
-    train_loss_list = []
-    train_acc_list = []
-    test_acc_list = []
+#highper parameter
+epoch_num = 10000
+train_size = x_train.shape[0]
+batch_size = 100
+alpha = 0.01  # learning rate
+epsilon = 1e-6
 
-    #highper parameter
-    epoch_num = 10000
-    train_size = x_train.shape[0]
-    batch_size = 100
-    alpha = 0.01  # learning rate
-    epsilon = 1e-6
+# 1에폭당 반복 수
+iter_per_epoch = max(train_size / batch_size, 1)
 
-    # 1에폭당 반복 수
-    iter_per_epoch = max(train_size / batch_size, 1)
+start = time.time()
+nn = TwoLayer(input_size=784, hidden_size=100, output_size=10, weight_init_std=0.01)
+for epoch in range(epoch_num):
+    # get mini batch:
+    batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
+    x_batch = x_train[batch_mask]
+    y_batch = y_train[batch_mask]
 
-    start = time.time()
-    nn = TwoLayer(input_size=784, hidden_size=100, output_size=10, weight_init_std=0.01)
-    for epoch in range(epoch_num):
-        # get mini batch:
-        batch_mask = np.random.choice(train_size, batch_size) # shuffle 효과
-        x_batch = x_train[batch_mask]
-        y_batch = y_train[batch_mask]
+    # gradient 계산
+    grad = nn.gradient(x_batch, y_batch)
 
-        # gradient 계산
-        grad = nn.gradient(x_batch, y_batch)
+    # update
+    for key in ['W1', 'b1', 'W2', 'b2']:
+        nn.params[key] = nn.params[key] - alpha * grad[key]
 
-        # update
-        for key in ['W1', 'b1', 'W2', 'b2']:
-            nn.params[key] = nn.params[key] - alpha * grad[key]
+    # record
+    loss = nn.loss(x_batch, y_batch)
+    train_loss_list.append(loss)
 
-        # record
-        loss = nn.loss(x_batch, y_batch)
-        train_loss_list.append(loss)
+    # 1에폭당 정확도 계산
+    if epoch % iter_per_epoch == 0:
+        train_acc = nn.accuracy(x_train, y_train)
+        test_acc = nn.accuracy(x_test, y_test)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+        print('# {0} | trian acc: {1:.5f} | test acc: {2:.5f}'.format(epoch, train_acc, test_acc))
 
-        # 1에폭당 정확도 계산
-        if epoch % iter_per_epoch == 0:
-            train_acc = nn.accuracy(x_train, y_train)
-            test_acc = nn.accuracy(x_test, y_test)
-            train_acc_list.append(train_acc)
-            test_acc_list.append(test_acc)
-            print('# {0} | trian acc: {1:.5f} | test acc: {2:.5f}'.format(epoch, train_acc, test_acc))
+end = time.time()
+print('total time:', (end - start))
 
-    end = time.time()
-    print('total time:', (end - start))
-
-    # 결과
-    # 0 | trian acc: 0.10775 | test acc: 0.10700
-    # 600 | trian acc: 0.10775 | test acc: 0.10700
-    # 1200 | trian acc: 0.10775 | test acc: 0.10700
-    # 1800 | trian acc: 0.10775 | test acc: 0.10700
-    # 2400 | trian acc: 0.10775 | test acc: 0.10700
-    # 3000 | trian acc: 0.10775 | test acc: 0.10700
-    # 3600 | trian acc: 0.10775 | test acc: 0.10700
-    # 4200 | trian acc: 0.10775 | test acc: 0.10700
-    # 4800 | trian acc: 0.10775 | test acc: 0.10700
-    # 5400 | trian acc: 0.10775 | test acc: 0.10700
-    # 6000 | trian acc: 0.10775 | test acc: 0.10700
-    # 6600 | trian acc: 0.10775 | test acc: 0.10700
-    # 7200 | trian acc: 0.10775 | test acc: 0.10700
-    # 7800 | trian acc: 0.10775 | test acc: 0.10700
-    # 8400 | trian acc: 0.10775 | test acc: 0.10700
-    # 9000 | trian acc: 0.10775 | test acc: 0.10700
-    # 9600 | trian acc: 0.10775 | test acc: 0.10700
-    # total time: 61.07117795944214
+# 결과
+# 0 | trian acc: 0.10775 | test acc: 0.10700
+# 600 | trian acc: 0.10775 | test acc: 0.10700
+# 1200 | trian acc: 0.10775 | test acc: 0.10700
+# 1800 | trian acc: 0.10775 | test acc: 0.10700
+# 2400 | trian acc: 0.10775 | test acc: 0.10700
+# 3000 | trian acc: 0.10775 | test acc: 0.10700
+# 3600 | trian acc: 0.10775 | test acc: 0.10700
+# 4200 | trian acc: 0.10775 | test acc: 0.10700
+# 4800 | trian acc: 0.10775 | test acc: 0.10700
+# 5400 | trian acc: 0.10775 | test acc: 0.10700
+# 6000 | trian acc: 0.10775 | test acc: 0.10700
+# 6600 | trian acc: 0.10775 | test acc: 0.10700
+# 7200 | trian acc: 0.10775 | test acc: 0.10700
+# 7800 | trian acc: 0.10775 | test acc: 0.10700
+# 8400 | trian acc: 0.10775 | test acc: 0.10700
+# 9000 | trian acc: 0.10775 | test acc: 0.10700
+# 9600 | trian acc: 0.10775 | test acc: 0.10700
+# total time: 61.07117795944214
+```
 
 학습은 전혀 안되지만 수치 미분보다 더 빠르게 진행된다는 것을 알 수 있다.
 

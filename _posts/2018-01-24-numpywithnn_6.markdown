@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-6: Weight Initialization"
-categories: numpyseries
+title: "[deeplearning from scratch]-6: Weight Initialization"
+categories: deeplearning
 author: "Soo"
 date: "2018-01-24 12:31:37 +0900"
 comments: true

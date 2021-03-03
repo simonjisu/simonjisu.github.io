@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-2: Activation Function"
-categories: numpyseries
+title: "[deeplearning from scratch]-2: Activation Function"
+categories: deeplearning
 author: "Soo"
 date: "2017-12-08 11:52:21 +0900"
 comments: true
@@ -60,7 +60,7 @@ $$h(x) =
   1\ \ (x > 0) \\
   0\ \ (x  \leq 0)
 \end{cases}$$
-```
+```python
 def step_function(x):
     y = x > 0
     return y.astype(np.int)
@@ -70,7 +70,7 @@ def step_function(x):
 #### 시그모이드 함수(Sigmoid Function)
 
 $$h(x) = \frac{1}{1+exp(-x)}$$
-```
+```python
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 ```
@@ -83,7 +83,7 @@ $$h(x) =
   x\ \ (x > 0) \\
   0\ \ (x \leq 0)
   \end{cases}$$
-```
+```python
 def ReLu(x):
     return np.maximum(0, x)
 ```
@@ -161,7 +161,7 @@ $$Z^{(1)} =
 이렇게 나온 $Z^{(1)}$ 값들은 다음 층에서 입력으로 쓰이게 된다.
 
 아래 코드의 Shape도 같이 잘 살펴보자.
-```
+```python
 X = np.array([1.0, 0.5])
 W1 = np.array([[0.1, 0.2],
                [0.3, 0.4],
@@ -203,7 +203,7 @@ print(Z1)
 >[ 0.57444252  0.66818777  0.75026011]
 
 ### Hidden 1 $\rightarrow$ Hidden 2
-```
+```python
 W2 = np.array([[0.1, 0.2, 0.3],
                [0.4, 0.5, 0.6]])
 B2 = np.array([0.1, 0.2])
@@ -246,7 +246,7 @@ print(Z2)
 ### Hidden 2 $\rightarrow$ Output
 
 마지막 출력 층에서는 이전 층에 출력된 $Z$ 값들을 그대로 가져올 수 있다.
-```
+```python
 def identity_function(x):
     return x
 
@@ -265,14 +265,14 @@ print(Y)
 #### Softmax
 
 $$y_k = \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}}$$
-```
+```python
 def softmax(x):
     return np.exp(x) / np.sum(np.exp(x))
 ```
 얼핏 잘 만든 것 같지만 컴퓨터에서 아주 큰 수를 계산시 Overflow문제가 발생한다. 오버플로우란, 사용 가능한 하드웨어(즉, 32bit 단위 워드의 하드웨어, 레지스터 등)로 연산 결과를 표현할 수 없을 때 오버플로우가 발생한다고 한다. (오버플로우 개념 출처: [[링크](https://m.blog.naver.com/PostView.nhn?blogId=osw5144&logNo=120206206420&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)])
 
 간단히 예를 들어보면 아래의 코드를 실행해보면 금방 알 수 있다.
-```
+```python
 a = np.array([1010, 1000, 990])
 softmax(a)
 ```
@@ -294,7 +294,7 @@ y_k &= \frac{exp(a_k)}{\sum_{i=1}^{n}{exp(a_i)}} \\
 &= \frac{exp(a_k+C^{'})}{\sum_{i=1}^{n}{exp(a_i+C^{'})}}
 \end{aligned}
 $$
-```
+```python
 c = np.max(a)
 print(a - c)
 print(softmax(a-c))
@@ -304,7 +304,7 @@ print(softmax(a-c))
 > [  9.99954600e-01   4.53978686e-05   2.06106005e-09]
 
 이번에는 경고 없이 실행이 잘 된다. 이제 최종 Softmax는 아래와 같다. 이를 출력층에 적용하면 y값에 대한 확률을 볼 수 있다. 이를 0과 1사이의 값으로 만드는 이유가 있는데 향후 학습시에 필요하기 때문이다. (네트워크 학습에서 설명)
-```
+```python
 def softmax(a):
     c = np.max(a)
     return np.exp(a - c) / np.sum(np.exp(a - c))
@@ -319,7 +319,7 @@ def softmax(a):
 
 입력층에는 784 개의 뉴런, 은닉층1에는 50개, 은닉층2에는 100개, 마지막 층에는 10개의 뉴런으로 구성되어 있는 네트워크다. 활성화 함수는 sigmoid를 쓰고, 마지막에 Softmax로 확률을 구했다. 실행단계에서 batch라는 것이 있는데, 한번에 많은 양의 데이터를 계산하면 느리니, 조금씩 데이터를 사용해서 계산하는 방법이라고 생각하면 된다.
 
-```
+```python
 # 네트워크 만들기
 from dataset.mnist import load_mnist
 import numpy as np

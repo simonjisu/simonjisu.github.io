@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-10: Forward & Backward of RNN"
-categories: numpyseries
+title: "[deeplearning from scratch]-10: Forward & Backward of RNN"
+categories: deeplearning
 date: "2018-03-14 22:05:37 +0900"
 author: "Soo"
 comments: true
@@ -71,7 +71,7 @@ $$\begin{aligned}
 * 처음 Layer를 짜보시는 분은 [Numpy로 짜보는 Neural Network Basic](https://simonjisu.github.io/deeplearning/2017/12/07/numpywithnn_1.html) 시리즈를 참고하세요!
 
 우선 미분한 값의 합을 구하기 위해 각각 Layer의 파라미터와같은 형태(shape)로 만들어 준다.
-```
+```python
 def _params_summation_init(self):
     self.params_summ = {}
     self.params_summ['W_xh'] = np.zeros_like(self.params['W_xh'])
@@ -82,13 +82,13 @@ def _params_summation_init(self):
 ```
 또한, $dh_T$ 를 0으로 초기화 한다.
 
-```
+```python
 dht = np.zeros_like(self.h0)
 ```
 
 그후에 총 길이 $T$의 역순으로 각 Layer 의 Back Propagation 을 진행한다.
 
-```
+```python
 for t in np.arange(self.T)[::-1]:
     dout = self.last_layers[t].backward()
     dht_raw = self.layers['Affine_hy'][t].backward(dout)
@@ -99,7 +99,7 @@ for t in np.arange(self.T)[::-1]:
 
 또한, 파라미터 $W$ 와 $b$ 의 합도 같이 구해준다. 그 이유는 전편에서 설명되어 있지만, 다시 한번 이야기 하자면, 최종 Loss Function은 각 Output Loss의 평균이기 때문에, 각 Output 마다 파라미터들을 summation 하는 과정이 있다. (평균을 구할때 우선 summation을 한다는 것을 잊지 말자.)
 
-```
+```python
 self.params_summ['W_xh'] += self.layers['Affine_xh'][t].dW
 self.params_summ['W_hh'] += self.layers['Affine_hh'][t].dW
 self.params_summ['W_hy'] += self.layers['Affine_hy'][t].dW
@@ -109,7 +109,7 @@ self.params_summ['b_y'] += self.layers['Affine_hy'][t].db
 
 전체 Backward 과정
 
-```
+```python
 def backward(self):
     # BPTT
     self._params_summation_init()
@@ -162,7 +162,7 @@ where \quad k &= \max(1, t - truncate)
 <img src="/assets/ML/rnn/normal_truncate.png">
 
 그림 출처: [r2rt.com](https://r2rt.com/styles-of-truncated-backpropagation.html)
-```
+```python
 def backward_truncate(self):
     # TBPTT
     self._params_summation_init()
@@ -205,19 +205,19 @@ def backward_truncate(self):
 |a|	→	|n|
 
 ### 데이터 및 우리가 만든 패키지 준비
-```
+```python
 import numpy as np
 from common.SimpleRNN import Single_layer_RNN
 from common.optimizer import Adam
 from common.train_graph import loss_graph
 ```
 
-```
+```python
 x = 'hello world! nice to meet you! i love iron-man'
 ```
 인코딩 클래스 하나를 만들어서 문자열을 one-hot 인코딩 해준다.
 
-```
+```python
 class chr_coding(object):
     def __init__(self):
         self._dict = None
@@ -244,7 +244,7 @@ class chr_coding(object):
         return decoded_data
 ```
 
-```
+```python
 encoder = chr_coding()
 encoder.fit(x)
 one_hot_data = encoder.encode(x)
@@ -252,7 +252,7 @@ one_hot_data = encoder.encode(x)
 
 학습 데이터 x, y를 지정해준다.
 
-```
+```python
 train_x = one_hot_data[:-1]
 train_y = one_hot_data[1:]
 ```
@@ -261,7 +261,7 @@ train_y = one_hot_data[1:]
 
 INPUT_SIZE 와 OUTPUT_SIZE 는 중복되지 않는 문자열 사전의 길이라는 것을 잊지 말자.
 
-```
+```python
 NUM_EPOCHS = 600
 PRINT_EPOCH = 30
 INPUT_SIZE = one_hot_data.shape[1]
@@ -271,7 +271,7 @@ HIDDEN_SIZE = 20
 
 ### 필요한 함수 설정: accuracy 와 train 함수
 
-```
+```python
 def get_accuracy(x, test_string):
     bool_ = np.array(list(x))[1:] == np.array(list(test_string))[1:]
     return bool_.sum() / len(bool_)
@@ -315,7 +315,7 @@ rnn 모델을 만들고, 어떤 방식으로 업데이트 할 것인지 정하�
 
 * **Optimizer** 의 설명은 [Numpy로 짜보는 Neural Network Basic - 5](https://github.com/simonjisu/NUMPYwithNN/blob/master/common/SimpleRNN.py)에 있습니다.
 
-```
+```python
 rnn = Single_layer_RNN(input_size=INPUT_SIZE,
                        hidden_size=HIDDEN_SIZE,
                        output_size=OUTPUT_SIZE)
@@ -324,13 +324,13 @@ optim = Adam()
 
 학습시키기!
 
-```
+```python
 total_loss_list, total_acc_list = train(rnn, optim, print_epoch=PRINT_EPOCH)
 ```
 <img src="/assets/ML/rnn/rnn_bptt.png">
 
 Loss Graph 도 찍어보자
-```
+```python
 loss_graph(train_loss_list=total_loss_list, train_acc_list=total_acc_list)
 ```
 

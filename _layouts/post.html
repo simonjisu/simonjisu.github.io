@@ -2,7 +2,7 @@
 layout: default
 ---
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
+  
   <header class="article_header">
     <h1 id="article_top" itemprop="name headline">{{ page.title }}</h1>
     <p class="article_meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
@@ -24,7 +24,6 @@ layout: default
   {% include tothetop.html %}
   {% include buymecoffee.html %}
   {% include author.html %}
-  
   </footer>
   {% if jekyll.environment == 'production' %}
     {% include dq.html %}

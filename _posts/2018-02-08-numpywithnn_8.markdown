@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-8: Summary"
-categories: numpyseries
+title: "[deeplearning from scratch]-8: Summary"
+categories: deeplearning
 author: "Soo"
 date: "2018-02-08 15:13:40 +0900"
 comments: true
@@ -17,7 +17,7 @@ toc: true
 
 ### Package Load
 
-```
+```python
 from common.Multilayer import MLP
 from dataset.mnist import load_mnist
 from common.optimizer import *
@@ -26,7 +26,7 @@ import time
 
 ### Data Load
 
-```
+```python
 (x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
 print(x_train.shape)
 print(y_train.shape)
@@ -43,7 +43,7 @@ print(y_test.shape)
 
 가중치 업데이트를 위한 옵티마이저는 **Adam** 을 쓰고, Loss Function은 **Cross Entropy** 를 쓰게 된다.
 
-```
+```python
 nn = MLP(input_size=784, hidden_size=[100, 50], output_size=10,
          activation='relu', weight_init_std='he', use_batchnorm=True)
 optimizer = Adam()
@@ -51,7 +51,7 @@ optimizer = Adam()
 
 ### Training & test
 
-```
+```python
 train_loss_list = []
 train_acc_list = []
 test_acc_list = []
@@ -108,7 +108,7 @@ print('total time:', (end - start))
 
 ### Model Check
 
-```
+```python
 def check(x, y, model):
     pred_y = model.predict(x)
     if x.ndim != 2:
@@ -124,7 +124,7 @@ def check(x, y, model):
 
 테스트 데이터중 하나 골라서 실험해보자
 
-```
+```python
 check(x_test[45], y_test[45], nn)
 ```
 >Predict Answer: 5<br>Real Answer: 5

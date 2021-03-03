@@ -1,8 +1,8 @@
 ---
 layout: post
 date: "2018-03-07 10:46:04 +0900"
-title: "[DeepLearning]-9: RNN & LSTM"
-categories: numpyseries
+title: "[deeplearning from scratch]-9: RNN & LSTM"
+categories: deeplearning
 author: "Soo"
 comments: true
 toc: true

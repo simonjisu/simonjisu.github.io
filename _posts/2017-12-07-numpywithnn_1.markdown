@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-1: Perceptron"
-categories: numpyseries
+title: "[deeplearning from scratch]-1: Perceptron"
+categories: deeplearning
 author: "Soo"
 date: "2017-12-07 17:54:18 +0900"
 comments: true

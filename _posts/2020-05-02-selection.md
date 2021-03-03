@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithms] Selection Sort"
 date: "2020-05-02 14:38:38 +0900"
-categories: python
+categories: algorithms
 author: "Soo"
 comments: true
 toc: true

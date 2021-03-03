@@ -55,10 +55,11 @@ menu_contents:
       - subcat: math
       - subcat: paper
       - subcat: others
-      - subcat: python
+      - subcat: algorithms
+      - subcat: machinelearning
+      - subcat: deeplearning
       - subcat: programming
       - subcat: datascience
-      - subcat: numpyseries
       - subcat: lightseparator
       - subcat: prml
       - subcat: separator

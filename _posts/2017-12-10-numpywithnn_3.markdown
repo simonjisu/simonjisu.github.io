@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-3: Loss Function"
-categories: numpyseries
+title: "[deeplearning from scratch]-3: Loss Function"
+categories: deeplearning
 author: "Soo"
 date: "2017-12-10 14:06:55 +0900"
 comments: true
@@ -18,7 +18,7 @@ toc: true
 그 이유는 먼저 밝히면 신경망 학습에 미분이 사용되기 때문이다. 최적의 가중치(그리고 편향)을 탐색할 때 손실 함수의 값을 가능한 작게하는 가중치 값을 찾는데, 이때 가중치의 미분을 계산하고, 그 미분 값을 단서로 가중치를 서서히 갱신하는 과정을 거친다. 그러나 손실함수에 정확도를 쓰면 가중치의 미분이 대부분의 장소에서 0이 되기 때문에 가중치 값을 갱신할 수가 없다.
 
 mnist 데이터의 경우 최종 출력층에 나온 $y$ 값은 Softmax에 의해 $(10 \times 1)$ 행렬의 확률로 출력되고, 그에 응답하는 정답 $t$ 는 one-hot encoded된 행렬이다.
-```
+```python
 y = np.array([0.05, 0.01, 0.7, 0.14, 0.05, 0.0, 0.05, 0.0, 0.0, 0.0])
 t = np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0])
 ```
@@ -26,7 +26,7 @@ t = np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0])
 ### 평균 제곱 오차(MSE)
 
 $$E=\frac{1}{2}\sum_{k}{(y_k - t_k)^2}$$
-```
+```python
 def mean_squared_error(y, t):
     return (1/2) * np.sum((y - t) ** 2)
 
@@ -37,7 +37,7 @@ mean_squared_error(y, t)
 ### 교차 엔트로피 오차(Cross Entropy)
 
 $$E=-\sum_{k}{t_k\log{y_k}}$$
-```
+```python
 def cross_entropy_error(y, t):
     delta = 1e-7
     return -np.sum(t * np.log(y + delta))
@@ -53,7 +53,7 @@ cross_entropy_error(y, t)
 $$E=-\frac{1}{N}\sum_{n}{\sum_{k}{t_k\log{y_k}}}$$
 
 엄청나게 많은 양의 데이터를 사용하는데 오차를 한번에 계산하려면 오랜 시간이 든다. 따라서 작은 양의 데이터를 사용해 조금씩 오차의 합을 구한다음에 그것의 평균을 내면 전체의 근사치로 사용할 수 있다.
-```
+```python
 def cross_entropy_error(y, t):
     delta = 1e-7
     if y.ndim == 1:
@@ -74,7 +74,7 @@ def cross_entropy_error(y, t):
 $$\frac{df(x)}{dx} = \lim_{h\rightarrow0}{\frac{f(x+h) - f(x)}{h}}$$
 
 그러나 $f(x+h) - f(x)$ 는 굉장히 작은 수라 컴퓨터로 구현시 Underflow문제에 봉착하게 된다.
-```
+```python
 np.float32(1e-50)
 ```
 > 0.0
@@ -84,13 +84,13 @@ np.float32(1e-50)
 **중심 차분법** 을 이용하면 미분은 아래와 같다.
 
 $$\frac{df(x)}{dx} = \lim_{h\rightarrow0}{\frac{f(x+h) - f(x-h)}{2h}}$$
-```
+```python
 def numerical_diff(f, x):
     h = 1e-4
     return (f(x + h) - f(x - h)) / (2*h)
 ```
 예시 함수 $y = 0.01 x^2 + 0.1 x$ 의 수치 미분을 보자
-```
+```python
 def f1(x):
     return 0.01 * x**2 + 0.1 * x
 
@@ -106,7 +106,7 @@ print(numerical_diff(f1, 10))
 <img src="/assets/ML/nn/numerical_diff.png" alt="Drawing" style="width: 500px;"/>
 
 2차원 이상의 데이터는 어떻게 짜야할까? 아래의 코드를 참조하자
-```
+```python
 def numerical_gradient(f, x):
     h = 1e-4  # 0.0001
     grad = np.zeros_like(x)
@@ -146,7 +146,7 @@ $\eta$ 는 학습률(learning rate)라고 하며 갱신하는 양을 나타낸�
 ## 학습 알고리즘
 
 ### 간단한 NN 으로 가중치의 미분 구해보기
-```
+```python
 class simpleNet(object):
     def __init__(self):
         # Input size = 2
@@ -211,7 +211,7 @@ $$ \sigma(A2_{(batch,\ o)}) \rightarrow Y_{(batch,\ o)}$$
 
 이것을 구현해보자. 수치로 구현한 2층 Neural Network 코드는 [[여기](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/ch04/two_layer_net.py)]서 가져왔다.
 
-```
+```python
 (x_train, y_train), (x_test, y_test) = load_mnist(normalize=True, one_hot_label=True)
 
 train_loss_list = []

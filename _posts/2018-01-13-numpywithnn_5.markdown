@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[DeepLearning]-5: Optimizer"
-categories: numpyseries
+title: "[deeplearning from scratch]-5: Optimizer"
+categories: deeplearning
 author: "Soo"
 date: "2018-01-13 14:17:06 +0900"
 comments: true
@@ -19,7 +19,8 @@ toc: true
 $W \leftarrow W - \eta \dfrac{\partial L}{\partial W}$
 
 $\eta$ 는 학습률로 얼만큼 가중치를 업데이트 할지 정하는 하이퍼파라미터다. 즉 우리가 미리 정해줘야하는 변수다. 그러나 SGD 알고리즘에서는 이 변수에 따라서 학습되는 모양이 다르다.
-```
+
+```python
 class SGD(object):
     def __init__(self, lr=0.01):
         self.lr = lr
@@ -28,6 +29,7 @@ class SGD(object):
         for key in params.keys():
             params[key] -= self.lr * grads[key]
 ```
+
 **장점**:
 * 일부 데이터로 업데이트를 해서 진동이 심할 수도 있지만, 전체 데이터의 Gradient를 구하는 것보다 빠르다
 
@@ -38,14 +40,16 @@ class SGD(object):
 아래와 같은 함수의 최적값을 찾아보자.
 
 $f(x, y) = \dfrac{1}{20} x^2 + y^2$
-```
+```python
 def f(x, y):
     return np.array((1/20)*(x**2) + (y**2))
 ```
+
 $f$ 를 미분하면 아래와 같다.
 
 $\dfrac{\partial f}{\partial x}, \dfrac{\partial f}{\partial y} = \dfrac{x}{10}, 2y$
-```
+
+```python
 def f_prime(x, y, grads=None):
     if grads is None:
         grads = {}
@@ -54,6 +58,7 @@ def f_prime(x, y, grads=None):
     grads['y'] = 2*y
     return grads
 ```
+
 시작은 **(-7, 2)** 점부터 시작한다고 하면 아래처럼 그림으로 표현할 수 있다.
 
 <img src="/assets/ML/nn/fgraph.png" alt="Drawing" style="width: 400px;"/>
@@ -106,21 +111,23 @@ $W \leftarrow W - \eta \dfrac{1}{\sqrt{h +\epsilon}} \dfrac{\partial L}{\partial
 
 $\odot$ 는 여기서 dot product가 아닌 element-wise multiplication를 말한다. 수식을 보면 gradient를 제곱하여 h에 저장한다. 업데이트시 여태까지 저장해온 gradient 제곱 값을 분모로 두게 된다. 따라서 시간이 지날 수록 gradient 누적 값이 큰 것은 learning rate 가 반대로 작아지게 된서 학습률이 조정 된다. 이를 적응적으로(adaptive) 학습률을 조정한다고 한다.
 
-    class Adagrad(object):
-        def __init__(self, lr=0.01):
-            self.lr = lr
-            self.h = None
-            self.epsilon = 1e-6  # 0으로 나누눈 것을 방지
+```python
+class Adagrad(object):
+    def __init__(self, lr=0.01):
+        self.lr = lr
+        self.h = None
+        self.epsilon = 1e-6  # 0으로 나누눈 것을 방지
 
-        def update(self, params, grads):
-            if self.h is None:
-                self.h = {}
-                for key, val in params.items():
-                    self.h[key] = np.zeros_like(val)
+    def update(self, params, grads):
+        if self.h is None:
+            self.h = {}
+            for key, val in params.items():
+                self.h[key] = np.zeros_like(val)
 
-            for key in params.keys():
-                self.h[key] += grads[key] * grads[key]
-                params[key] -= self.lr * grads[key] / np.sqrt(self.h[key] + self.epsilon)
+        for key in params.keys():
+            self.h[key] += grads[key] * grads[key]
+            params[key] -= self.lr * grads[key] / np.sqrt(self.h[key] + self.epsilon)
+```
 
 |Video|Graph|
 |:-:|:-:|
@@ -135,7 +142,7 @@ $\odot$ 는 여기서 dot product가 아닌 element-wise multiplication를 말�
 이를 개선하기 위해서 RMSProp과 Adadelta라는 방법이 있다. (코드는 기본 알고리즘 원리만 구현해놨다. 구체적으로 효율적인 학습을 위해서 조금씩 변형이 가해진다. 논문 참조 할 것, ~~아직 이해중~~)
 
 RMSProp:
-```
+```python
 class RMSProp(object):
     def __init__(self, lr=0.01, gamma=0.9):
     """G는 이동평균의 개념으로 과거 1보다 작은 gamma값을 곱해서 서서히 잊게 하고 새로운 값을 조금씩 더 해준다."""
@@ -154,8 +161,10 @@ class RMSProp(object):
             self.G[key] += self.gamma * self.G[key] + (1 - self.gamma) * (grads[key] * grads[key])
             params[key] -= self.lr * grads[key] / np.sqrt(self.G[key] + self.epsilon)
 ```
+
 AdaDelta:
-```
+
+```python
 class AdaDelta(object):
     def __init__(self, gamma=0.9):
         """
@@ -185,6 +194,7 @@ class AdaDelta(object):
             self.s[key] += self.gamma * self.s[key] + (1 - self.gamma) * self.del_W[key]**2
             params[key] += self.del_W[key]
 ```
+
 #### Adam(Adaptive Moment Estimation)
 **Adam** (Adaptive Moment Estimation)은 RMSProp과 Momentum 방식을 합친 것 같은 알고리즘이다.
 
@@ -243,7 +253,8 @@ $E[g_t^2]$가 stationary 할때 $\zeta = 0$ 이 되고, 아니더라도 $\zeta$ 
 [http://dalpo0814.tistory.com](http://dalpo0814.tistory.com/29#comment5316278)
 
 기존 알고리즘 코드:
-```
+
+```python
 class Adam(object):
     """Adam (http://arxiv.org/abs/1412.6980v8)"""
 
@@ -277,7 +288,7 @@ class Adam(object):
 
 아래는 다른 사람의 코드를 따와서 개조했다. 출처: [https://github.com/WegraLee/deep-learning-from-scratch/](https://github.com/WegraLee/deep-learning-from-scratch/blob/master/common/optimizer.py)
 
-```
+```python
 class Adam(object):
     """Adam (http://arxiv.org/abs/1412.6980v8)"""
 

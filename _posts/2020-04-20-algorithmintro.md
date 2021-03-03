@@ -2,7 +2,7 @@
 layout: post
 title: "Introduction of Algorithms & Data Structures"
 date: "2020-04-20 14:19:38 +0900"
-categories: python
+categories: algorithms
 author: "Soo"
 comments: true
 toc: true
