@@ -894,8 +894,49 @@ Center Word 의 Embedding Matrix $W$ Context Words 의 Embedding Matrix $W’$ �
 
     </div>
   </div>
+  <script>
+var elements = document.querySelectorAll('div.article-content')[0].childNodes;
+var addContent = false;
+var contentsToAdd = [];
+var expandtags = null;
+var detailText = null;
+var detailsTag = null;
+var summaryTag = null;
+var detailsContent = null;
+for (var i=elements.length - 1; i > -1; i--){
+    el = elements[i]
+    if (el.innerHTML == '[/expand]'){
+        addContent = true
+        detailsContent = document.createElement('div')
+        detailsContent.className = 'collaspe-content'
+        el.parentNode.removeChild(el)
+    } else if (el.innerHTML == '[expand]' || (el.nodeName == 'P' && el.innerHTML.includes('[expand]summary:'))) {
+        addContent = false
+        expandtags = el.innerHTML.split('summary:')
+        if (expandtags.length == 1){
+            detailText = 'Details'
+        } else {
+            detailText = expandtags[1]
+        }
+        detailsTag = document.createElement('details')
+        detailsTag.className = 'collaspe-article'
+        summaryTag = document.createElement('summary')
+        summaryTag.appendChild(document.createTextNode(detailText))
+        detailsTag.appendChild(summaryTag)
+        for (var j=contentsToAdd.length - 1; j > -1; j--) {
+            detailsContent.appendChild(contentsToAdd[j])
+        }
+        detailsTag.appendChild(detailsContent)
+        el.parentNode.replaceChild(detailsTag, el)
+        contentsToAdd = []
+    } else {
+        if (addContent) {
+            contentsToAdd.push(el)
+        }
+    }
+}
+</script>
   <footer class="article-footer">
-
   <div class="pagination to-top-post"><a href="https://simonjisu.github.io/archive#nlp">
     <data data-icon="ei-arrow-up"></data> Go Back to Posts  </a>
 </div>
@@ -920,6 +961,7 @@ href="https://www.buymeacoffee.com/ZWoFwrh">
     <a class="icon" href="mailto:simonjisu@gmail.com" target="_blank"><img src="/assets/img/email-circle-64px.png"></a>
   </div>
 </section>
+  
   </footer>
   
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -932,6 +974,7 @@ href="https://www.buymeacoffee.com/ZWoFwrh">
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script> 
+  
 </article>
 
           </div>

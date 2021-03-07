@@ -19,14 +19,16 @@ layout: default
       {{ page.content }}
     </div>
   </div>
+  {% include text-expand.html %}
   <footer class="article-footer">
-
   {% include tothetop.html %}
   {% include buymecoffee.html %}
   {% include author.html %}
+  
   </footer>
   {% if jekyll.environment == 'production' %}
     {% include dq.html %}
   {% endif %}
   {% include google_ad.html %} 
+  
 </article>

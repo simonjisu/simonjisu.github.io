@@ -1,16 +1,42 @@
-<!-- <script>
-    
-    var elements = document.querySelectorAll('p');
-    Array.prototype.forEach.call(elements, function(el, i){
-        if(el.innerHTML=='[expand]') {
-            var parentcontent = el.parentNode.innerHTML.replace('<p>[expand]</p>','<div class="expand" style="display: none; height: 0; overflow: hidden;">').replace('<p>[/expand]</p>','</div>');
-            el.parentNode.innerHTML = parentcontent;
+<script>
+var elements = document.querySelectorAll('div.article-content')[0].childNodes;
+var addContent = false;
+var contentsToAdd = [];
+var expandtags = null;
+var detailText = null;
+var detailsTag = null;
+var summaryTag = null;
+var detailsContent = null;
+for (var i=elements.length - 1; i > -1; i--){
+    el = elements[i]
+    if (el.innerHTML == '[/expand]'){
+        addContent = true
+        detailsContent = document.createElement('div')
+        detailsContent.className = 'collaspe-content'
+        el.parentNode.removeChild(el)
+    } else if (el.innerHTML == '[expand]' || (el.nodeName == 'P' && el.innerHTML.includes('[expand]summary:'))) {
+        addContent = false
+        expandtags = el.innerHTML.split('summary:')
+        if (expandtags.length == 1){
+            detailText = 'Details'
+        } else {
+            detailText = expandtags[1]
         }
-    });
-
-    var elements = document.querySelectorAll('div.expand');
-    Array.prototype.forEach.call(elements, function(el, i){
-        el.previousElementSibling.innerHTML = el.previousElementSibling.innerHTML + '<span>..&nbsp; <a href="#" style="cursor: pointer;" onclick="this.parentNode.parentNode.nextElementSibling.style.display = \'block\'; this.parentNode.parentNode.nextElementSibling.style.height = \'auto\'; this.parentNode.style.display = \'none\';">read&nbsp;more&nbsp;&rarr;</a></span>';
-    });
-
-</script> -->
+        detailsTag = document.createElement('details')
+        detailsTag.className = 'collaspe-article'
+        summaryTag = document.createElement('summary')
+        summaryTag.appendChild(document.createTextNode(detailText))
+        detailsTag.appendChild(summaryTag)
+        for (var j=contentsToAdd.length - 1; j > -1; j--) {
+            detailsContent.appendChild(contentsToAdd[j])
+        }
+        detailsTag.appendChild(detailsContent)
+        el.parentNode.replaceChild(detailsTag, el)
+        contentsToAdd = []
+    } else {
+        if (addContent) {
+            contentsToAdd.push(el)
+        }
+    }
+}
+</script>

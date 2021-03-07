@@ -51,9 +51,23 @@ body {
 .collaspe-article {
   padding-top: 10px;
 	padding-bottom: 10px;
-	color: rgb(20, 68, 131);
+	// color: rgb(20, 68, 131);
 }
-
+.collaspe-content{
+  padding-top: 5px;
+}
+.collaspe-content:before {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #bcbcbc;
+}
+.collaspe-content:after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #bcbcbc;
+}
 /* Effects
 —————————————————————————————————————————————————— */
 

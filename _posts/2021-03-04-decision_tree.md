@@ -150,6 +150,14 @@ print(f"Entropy is {entropy:.4f}")
 |1|700|3| no|
 |1|900|1| yes|
 
+---
+
+|Colname|Value|MaxIG|ClsCount|
+|---|---|---|---|
+|income|700|0.557332| {False: {0: 0, 1: 1}, True: {0: 4, 1: 1}}
+|existloan|0|0.432821| {False: {0: 1, 1: 0}, True: {0: 3, 1: 2}}
+|car|0|0.012657|{False: {0: 1, 1: 1}, True: {0: 3, 1: 1}}
+
 <details class="collaspe-article">
 <summary>전체 코드보기</summary>
 <div markdown="1">
@@ -234,12 +242,6 @@ df_res.sort_values("MaxIG", ascending=False)
 
 ```
 </div></details>
-
-|Colname|Value|MaxIG|ClsCount|
-|---|---|---|---|
-|income|700|0.557332| {False: {0: 0, 1: 1}, True: {0: 4, 1: 1}}
-|existloan|0|0.432821| {False: {0: 1, 1: 0}, True: {0: 3, 1: 2}}
-|car|0|0.012657|{False: {0: 1, 1: 1}, True: {0: 3, 1: 1}}
 
 위 코드와 표는 각 입력 피처로 하나씩 규칙을 찾은 결과다. 살펴보면 최대 정보획등량(MaxIG)은 $0.068056$ 으로 `소득 <= 700` 기준으로 나누는 첫번째 노드의 규칙이 된다. 만약 소득이 규칙인 700보다 작은 값이면, 대출여부가 0인 값은 4개, 1인 값은 1개가 되고, 700 보다 크다면 대출여부가 0인 값은 0개, 1인 값은 1개가 된다. 다시 풀어서 말하면, 만약에 당신의 소득이 700 보다 적다면, 학습된 데이터를 기반으로 보았을 때, 대출가능한 확률은 20%(1/5) 정도가 될것이다. 
 

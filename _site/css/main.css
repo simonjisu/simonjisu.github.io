@@ -292,7 +292,7 @@ div#table-of-contents ul.toc-nav li a:hover { color: #b1b1b1; text-decoration: u
 
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-code { padding: .2rem .2rem; margin: 0 .2rem; font-size: 90%; white-space: nowrap; }
+code { padding: .2rem .2rem; margin: 0 .2rem; font-size: 90%; white-space: nowrap; background: #242424bd; color: #e6e6e6; }
 
 pre > code { display: block; padding: 1rem 1.5rem; white-space: pre; }
 
@@ -367,7 +367,13 @@ body { min-height: 100%; height: auto; }
 .site-footer .left a { color: #666; border-bottom: 1px dotted; text-decoration: none; }
 .site-footer .left a:hover { color: red; border-bottom: 1px dotted; }
 
-.collaspe-article { padding-top: 10px; padding-bottom: 10px; color: #144483; }
+.collaspe-article { padding-top: 10px; padding-bottom: 10px; }
+
+.collaspe-content { padding-top: 5px; }
+
+.collaspe-content:before { content: ""; display: block; width: 100%; border-bottom: 1px solid #bcbcbc; }
+
+.collaspe-content:after { content: ""; display: block; width: 100%; border-bottom: 1px solid #bcbcbc; }
 
 /* Effects
 —————————————————————————————————————————————————— */
