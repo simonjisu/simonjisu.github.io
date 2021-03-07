@@ -25,7 +25,7 @@ markdown: kramdown
 
 [expand]summary:열어서 text-expander 코드 복사하기 👈 
 
-[여기](https://gist.githubusercontent.com/simonjisu/43c789bf44e9f8171be440b46f0948a5/raw/d37f4d6390f3a3c80e953356c6166e1505954e36/text-expand.html)에서 다운로드 하거나, 아래 코드를 복사한다.
+[여기](https://gist.github.com/simonjisu/43c789bf44e9f8171be440b46f0948a5)에서 다운로드 하거나, 아래 코드를 복사한다.
 
 ```html
 <!-- Author: https://github.com/simonjisu
@@ -47,6 +47,7 @@ for (var i=elements.length - 1; i > -1; i--){
         addContent = true
         detailsContent = document.createElement('div')
         detailsContent.className = 'collaspe-content'
+        detailsContent.setAttribute('markdown', '1')
         el.parentNode.removeChild(el)
     } else if (el.innerHTML == '[expand]' || (el.nodeName == 'P' && el.innerHTML.includes('[expand]summary:'))) {
         addContent = false
@@ -84,7 +85,7 @@ for (var i=elements.length - 1; i > -1; i--){
 var elements = document.querySelectorAll('div.article-content')[0].childNodes;
 ```
 
-**'div.article-content'** 부분을 수정해야하는데 자신의 jekyll 구조를 파악해서 글의 내용이 어느 컨테이너에 있는지 확인해야한다. 자신의 블로그에서 마우스 오른쪽 버튼을 누르고 `검사`를 통해 구조를 파악하거나, `_layout`폴더의 파일들 중 `<body>` 태그 사이를 잘 살펴보면 된다. 내 블로그의 경우 구조가 다음과 같은데, `<div class="article-content">` 가 글에 해당하는 내용이다.
+`div.article-content` 부분을 수정해야하는데 자신의 jekyll 구조를 파악해서 글의 내용이 어느 컨테이너에 있는지 확인해야한다. 자신의 블로그에서 마우스 오른쪽 버튼을 누르고 `검사`를 통해 구조를 파악하거나, `_layout`폴더의 파일들 중 `<body>` 태그 사이를 잘 살펴보면 된다. 내 블로그의 경우 구조가 다음과 같은데, `<div class="article-content">` 가 글에 해당하는 내용이다.
 
 ```html
 <!DOCTYPE html>
@@ -115,10 +116,10 @@ var elements = document.querySelectorAll('div.article-content')[0].childNodes;
 </html>
 ```
 
-그 다음 스텝으로 `_layout` 폴더내에서 `</body>` 태그전에 다음과 같이 liquid 문법으로 아까 만든 `text-expand.html`을 포함시킨다.
+그 다음 스텝으로 `_layout` 폴더에서 `</body>` 태그가 들어간 파일을 찾아, 이전에 다음과 같이 liquid 문법으로 아까 만든 `text-expand.html`을 포함시킨다. 
 
 ```html
-{% include text-expand.html %}
+{% raw %}{% include text-expand.html %}{% endraw %}
 </body>
 ```
 
@@ -151,7 +152,9 @@ var elements = document.querySelectorAll('div.article-content')[0].childNodes;
 
 # 사용법
 
-마크다운에서 다음과 같이 쓰면 된다. 주의할 점은 `[expand]`사이에 새 줄만 잘 띄어주면 된다. 예를 들면, 다음 코드는 아래처럼 바뀐다.
+마크다운에서 다음과 같이 쓰면 된다. 주의할 점은 `[expand]`사이에 새 줄만 잘 띄어주면 된다. `[expand]`뒤에는 `summary:`를 붙여서 설명하고 싶은 내용을 적을 수 있다. 만약에 없으면 기본으로 `Details`가 들어간다.
+
+예를 들면, 다음 코드는 아래처럼 바뀐다.
 
 [expand]summary:원하는 블록 요약 쓰기
 
