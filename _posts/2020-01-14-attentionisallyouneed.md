@@ -46,7 +46,7 @@ $$\text{LayerNorm}(x + \text{SubLayer}(x))$$
 
 ## Decoder
 
-Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 "Decoder Layer" 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 "Multi-Head Attention"을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 "Multi-Head Attention"에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 됩니다. 따라서 $i$ 번째 토큰은 $i+1$ 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.
+Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 "Decoder Layer" 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 "Multi-Head Attention"을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 "Multi-Head Attention"에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 된다. 따라서 $i$ 번째 토큰은 $i+1$ 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.
 
 이제부터 모델의 세부 사항을 살펴보면서 저자가 왜 이렇게 사용했는지, 의도가 무엇인지를 알아보려고 한다.
 

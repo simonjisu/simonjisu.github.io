@@ -6,9 +6,583 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Mar 2021 19:45:16 +0900</pubDate>
-    <lastBuildDate>Sun, 07 Mar 2021 19:45:16 +0900</lastBuildDate>
+    <pubDate>Wed, 31 Mar 2021 01:33:32 +0900</pubDate>
+    <lastBuildDate>Wed, 31 Mar 2021 01:33:32 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>FARM tutorial</title>
+        <description>&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1hbtUClFoXg45IbViZoFRLnnDGVlr9Dlb&quot; alt=&quot;&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;farm&quot;&gt;FARM&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Framework for Adapting Representation Models&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이 패키지를 한 마디로 요약하면 Fine-tuning에 최적화된 도구다.&lt;/p&gt;
+
+&lt;p&gt;최근의 자연어처리 분야는 Transformer와 그 변형의 등장으로 인해, 보통 2단계로 나눠서 학습이 진행된다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Pretrained Language Modeling&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;대량의 텍스트 데이터를 이용해 비지도학습(unsupervised learning)으로 언어 모델링은 진행한다. 언어 모델링이란 인간의 언어를 컴퓨터로 모델링하는 과정이다. 쉽게 말하면, 모델에게 단어들을 입력했을 때, 제일 말이 되는 단어(토큰)을 뱉어내게 하는 것이다. 과거에는 단어(토큰)의 순서가 중요했었다. 즉, 일정 단어들의 시퀀스 $x_{1:t-1}$가 주어지면, $t$번째 단어인 $x_t$를 잘 학습시키는 것이었다. 이를 &lt;strong&gt;Auto Regressive Modeling&lt;/strong&gt;이라고도 한다. 그러나, &lt;strong&gt;Masked Language Modeling&lt;/strong&gt; 방법이 등장했는데, 이는 랜덤으로 맞춰야할 단어를 가린 다음에 가려진 단어 $x_{mask}$가 포함된 시퀀스 $x_{1:t}$ 를 모델에게 입력하여 맞추는 학습 방법이다. 이러한 방법이 좋은 성과를 거두면서, 최근에는 모든&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Fine-tuning&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;PLM(Pretrained Language Model)&lt;/strong&gt;을 만들고 나면, 각기 다른 downstream task에 따라서 fine-tuning을 하게 된다. Downstream task은 구체적으로 풀고 싶은 문제를 말하며, 주로 다음과 같은 문제들이다.&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;텍스트 분류 Text Classification&lt;/strong&gt; - 예시: 영화 댓글 긍정/부정 분류하기&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;개체명인식 NER(Named Entity Recognition)&lt;/strong&gt; - 예시: 특정 기관명, 인명 및 시간 날짜 등 토큰에 알맞는 태그로 분류하기&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;질의응답 Question and Answering&lt;/strong&gt; - 예시: 특정 지문과 질의(query)가 주어지면 대답하기&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;오늘 소개할 FARM 패키지는 2번째 단계인 Fine-tuning을 보다 손쉽게 만들어 놓은 패키지다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Tutorial github:&lt;/strong&gt; &lt;a href=&quot;https://github.com/simonjisu/FARM_tutorial&quot;&gt;https://github.com/simonjisu/FARM_tutorial&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Colab Tutorial:&lt;/strong&gt; &lt;a href=&quot;https://colab.research.google.com/github/simonjisu/FARM_tutorial/blob/main/notebooks/FARM_colab.ipynb&quot;&gt;링크&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;core-features&quot;&gt;Core Features&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Easy fine-tuning of language models&lt;/strong&gt; to your task and domain language&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Speed&lt;/strong&gt;: AMP(Automatic Mixed Precision) optimizers (~35% faster) and parallel preprocessing (16 CPU cores =&amp;gt; ~16x faster)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modular design&lt;/strong&gt; of language models and prediction heads&lt;/li&gt;
+  &lt;li&gt;Switch between heads or combine them for &lt;strong&gt;multitask learning&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Full Compatibility&lt;/strong&gt; with HuggingFace Transformers’ models and model hub&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Smooth upgrading&lt;/strong&gt; to newer language models&lt;/li&gt;
+  &lt;li&gt;Integration of &lt;strong&gt;custom datasets&lt;/strong&gt; via Processor class&lt;/li&gt;
+  &lt;li&gt;Powerful &lt;strong&gt;experiment tracking&lt;/strong&gt; &amp;amp; execution&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Checkpointing &amp;amp; Caching&lt;/strong&gt; to resume training and reduce costs with spot instances&lt;/li&gt;
+  &lt;li&gt;Simple &lt;strong&gt;deployment&lt;/strong&gt; and &lt;strong&gt;visualization&lt;/strong&gt; to showcase your model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[expand]summary:What is AMP? 👈&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/NVIDIA/apex&quot;&gt;https://github.com/NVIDIA/apex&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forums.fast.ai/t/mixed-precision-training/20720&quot;&gt;https://forums.fast.ai/t/mixed-precision-training/20720&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;mixed precision training이란&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;처리 속도를 높이기 위한 FP16(16bit floating point)연산과 정확도 유지를 위한 FP32 연산을 섞어 학습하는 방법&lt;/li&gt;
+  &lt;li&gt;Tensor Core를 활용한 FP16연산을 이용하면 FP32연산 대비 절반의 메모리 사용량과 8배의 연산 처리량 &amp;amp; 2배의 메모리 처리량 효과가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[/expand]&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;nsmc-데이터로-farm-알아보기&quot;&gt;NSMC 데이터로 FARM 알아보기&lt;/h1&gt;
+
+&lt;h2 id=&quot;nsmc-데이터&quot;&gt;NSMC 데이터&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;NSMC(Naver Sentiment Movie Corpus)&lt;/strong&gt;는 한국어로 된 영화 댓글 데이터 세트다. 해당 Task는 타겟 값이 긍정(1)/부정(0)이 되는 Binary Text Classification 문제로 볼 수 있다. &lt;a href=&quot;https://github.com/e9t/nsmc&quot;&gt;https://github.com/e9t/nsmc&lt;/a&gt;에서 받을 수 있다(아래 그림은 label을 bad와 good으로 처리해놓은 상태).&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1FIGIBtZxtuKD5Prps5vPOPldBb0xHwzH&quot; alt=&quot;[그림1] NSMC Dataset&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림1] NSMC Dataset&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;fine-tuning-process&quot;&gt;Fine-tuning Process&lt;/h2&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1j9pn8Lpg7sy6S8Ubvq3E7JLWf28KvRt4&quot; alt=&quot;[그림2] Fine-tuning Process&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림2] Fine-tuning Process&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Fine-tuning Process는 위 그림과 같이 진행된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Load Data: 데이터를 알맞는 형식(json, csv 등)으로 불러온다.&lt;/li&gt;
+  &lt;li&gt;Create Dataset: 데이터세트(Dataset) 만들기
+    &lt;ul&gt;
+      &lt;li&gt;Tokenization: 텍스트를 토큰으로 나누고, 단어장(vocab)을 생성한다.&lt;/li&gt;
+      &lt;li&gt;ToTensor: vocab에 해당하는 단어를 수치화하는 과정 (transformers 패키지 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;input_ids&lt;/code&gt;에 해당)&lt;/li&gt;
+      &lt;li&gt;Attention Mask: 패딩계산을 피하기 위해 Attention 해야할 토큰만 masking(transformers 패키지 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;attention_mask&lt;/code&gt; 에 해당)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create Dataloader: 훈련, 평가시 배치크기 단위로 데이터를 불러오는 객체&lt;/li&gt;
+  &lt;li&gt;Create Model:
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Pretrained Language Model: 대량의 텍스트 데이터로 사전에 훈련된 모델&lt;/p&gt;
+
+\[\underset{\theta}{\arg \max} P(x_{mask} \vert x_{1:t})\]
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Fine-tuninig Layer: Downstream Task에 맞춰서 학습한다.&lt;/p&gt;
+
+\[\underset{\theta}{\arg \max}P(y\vert x_{1:t})\]
+
+        &lt;p&gt;예를 들어, 영화 긍정/부정 분류 문제의 경우&lt;/p&gt;
+
+\[\underset{\theta}{\arg \max} P(y=\text{긍정/부정} \vert x_{1:t})\]
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Train Model: 모델 훈련&lt;/li&gt;
+  &lt;li&gt;Eval Model: 모델 평가&lt;/li&gt;
+  &lt;li&gt;Inference: 모델 서비스&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;processor--data-silo&quot;&gt;Processor &amp;amp; Data Silo&lt;/h2&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1XCc0AJpPBMFcC81NW0A6w0mpswZ2KU7h&quot; alt=&quot;[그림3] Fine-tuning Process&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림3] Fine-tuning Process&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Processor&lt;/strong&gt;는 file 혹은 request를 PyTorch Datset로 만들어 주는 역할이다. 자세한 인자값은 다음 코드 블록에서 설명한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Silo&lt;/strong&gt;는 train, dev, test sets를 관리하고, Processor의 function들 이용해 각 set를 DataLoader로 변환한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Processor&lt;/strong&gt;는 각 데이터를 처리할 때, &lt;strong&gt;Samples&lt;/strong&gt;, &lt;strong&gt;SampleBasket&lt;/strong&gt;에 담게 되는데, 이들은 raw document를 관리하는 객체이며 tokenized, features등 데이터와 각 샘플을 관리하는 id를 저장하고 있다. 이렇게 하는 이유는 하나의 소스 텍스트(raw text)에서 여러개의 샘플을 생성할 수도 있기 때문이다
+여담이지만 huggingface의 SquadProcessor는 512개 토큰이 넘어가면, 뒤에서 부터 512토큰을 세서 하나의 데이터를 두 개의 샘플로 만든다.
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dataset_from_dicts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...)&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# ...
+&lt;/span&gt;      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;segment_ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding_mask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;dicts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_ids_batch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;segment_ids_batch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding_masks_batch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokens_batch&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;# ...
+&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# Add Basket to self.baskets
+&lt;/span&gt;          &lt;span class=&quot;n&quot;&gt;curr_sample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+              &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;clear_text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;tokenized&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenized&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;features&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feat_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;curr_basket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SampleBasket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;id_internal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;raw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dictionary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;id_external&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;samples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curr_sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;baskets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curr_basket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+      &lt;span class=&quot;c1&quot;&gt;# ...
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;사용하는 방법은 다음과 같다.&lt;/p&gt;
+
+&lt;p&gt;[expand]summary: 코드보기 👈&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Reference: https://github.com/Beomi/KcBERT
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PRETRAINED_MODEL_NAME_OR_PATH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;beomi/kcbert-base&quot;&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;MAX_LENGTH&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;150&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LABEL_LIST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bad&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;good&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TRAIN_FILE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;train.tsv&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TEST_FILE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;test.tsv&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TASK_TYPE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;text_classification&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Tokenizer
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tokenizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pretrained_model_name_or_path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PRETRAINED_MODEL_NAME_OR_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;do_lower_case&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Processor
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;processor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TextClassificationProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# tokenizer 
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;train_filename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRAIN_FILE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# training data 파일명
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;dev_filename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# development data 파일명, 없으면, dev_split 비율만큼 training data에서 자른다 
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;test_filename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TEST_FILE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# test data 파일명
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;dev_split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# development data로 설정할 비율
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# csv, tsv, excel 등 tabular형태 데이터에서 첫행(보통은 컬럼명)의 위치
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;max_seq_len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MAX_LENGTH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 문장의 최대 길이
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;data_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DATA_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 데이터의 디렉토리
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;label_list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LABEL_LIST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 레이블 리스트(string 필요)
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;metric&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;acc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 평가지표
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;label_column_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;label&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# tabular형태 데이터에서 레이블의 컬럼명
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;text_column_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;document&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# tabular형태 데이터에서 텍스트의 컬럼명
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;data_silo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DataSilo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;processor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;processor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;eval_batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;caching&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;[/expand]&lt;/p&gt;
+
+&lt;p&gt;코드 실행 후, 다음과 같이 tokenization 되며, sample 객체에 저장된다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1DVPT_Rjv_SI4ggJZzqfPh0MgsMa1Q9El&quot; alt=&quot;[그림4] 실행화면&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림4] 실행화면&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;하나를 확대해서 살펴보면 Sample객체 안에 다양한 정보들이 들어 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;03/28/2021 22:12:15 - INFO - farm.data_handler.processor -   
+
+      .--.        _____                       _      
+    .'_\/_'.     / ____|                     | |     
+    '. /\ .'    | (___   __ _ _ __ ___  _ __ | | ___ 
+      &quot;||&quot;       \___ \ / _` | '_ ` _ \| '_ \| |/ _ \ 
+       || /\     ____) | (_| | | | | | | |_) | |  __/
+    /\ ||//\)   |_____/ \__,_|_| |_| |_| .__/|_|\___|
+   (/\||/                             |_|           
+______\||/___________________________________________                     
+
+ID: 437-0
+Clear Text: 
+ 	text_classification_label: good
+ 	text: 이 영화를 보고 두통이 나았습니다. ㅠ ㅠ
+Tokenized: 
+ 	tokens: ['이', '영화를', '보고', '두', '##통이', '나', '##았습니다', '.', '[UNK]', '[UNK]']
+ 	offsets: [0, 2, 6, 9, 10, 13, 14, 18, 20, 22]
+ 	start_of_word: [True, True, True, True, False, True, False, False, True, True]
+Features: 
+ 	input_ids: [2, 2451, 25833, 8198, 917, 11765, 587, 21809, 17, 1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ 	padding_mask: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ 	segment_ids: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ 	text_classification_label_ids: [1]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;modeling-layers-adaptivemodel--languagemodel--predictionhead&quot;&gt;Modeling Layers: AdaptiveModel = LanguageModel + PredictionHead&lt;/h2&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1OLWdr8rh7ucpF9t55gzVeMawMBJbRiEC&quot; alt=&quot;[그림5] Modeling Layers&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림5] Modeling Layers&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;LanguageModel&lt;/strong&gt;은 pretrained language models(BERT, XLNet …)의 표준 클래스&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PredictionHead&lt;/strong&gt;는 모든 down-stream tasks(NER, Text classification, QA …)를 표준 클래스&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AdaptiveModel&lt;/strong&gt;은 위 두 가지 모들의 결합, 하나의 LanguageModel과 여러 개의 PredictionHead를 결합할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[expand]summary: 코드보기 👈&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# LanguageModel: Build pretrained language model
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EMBEDS_DROPOUT_PROB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TASK_NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;text_classification&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;language_model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LanguageModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PRETRAINED_MODEL_NAME_OR_PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;korean&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# PredictionHead: Build predictor layer
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prediction_head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TextClassificationHead&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;num_labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LABEL_LIST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;class_weights&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_silo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calculate_class_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;task_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TASK_NAME&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AdaptiveModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;language_model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;language_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prediction_heads&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prediction_head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;embeds_dropout_prob&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EMBEDS_DROPOUT_PROB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lm_output_types&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;per_sequence&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;실제 모델의 구성을 살펴보면 classification을 위한 bert와 유사하게 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PredictionHead&lt;/code&gt;에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pooler&lt;/code&gt;에서 나온 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pooled_output&lt;/code&gt;을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dropout&lt;/code&gt;층을 통과한 후에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FeedForwardBlock&lt;/code&gt;으로 보내서 최종 logits을 생성한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AdaptiveModel&lt;/code&gt; class에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;embeds_dropout_prob&lt;/code&gt;를 바꾸면, dropout 확률을 조절할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;[/expand]&lt;/p&gt;
+
+&lt;h2 id=&quot;train--eval--inference&quot;&gt;Train &amp;amp; Eval &amp;amp; Inference&lt;/h2&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1bD54igqAn7T96gDCFZ2uxzFHpZIL5GOh&quot; alt=&quot;[그림6] Modeling Layers&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림6] Modeling Layers&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;여타 다른 패키지와 마찬가지로 Trainer는 모델과 분리되어 있다. FARM에는 EarlyStopping callback을 지원한다. 훈련 진행도중 정해진 스텝마다 평가를 하는데, 이때 callback이 작동한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;train--eval&quot;&gt;Train &amp;amp; Eval&lt;/h3&gt;
+
+&lt;p&gt;[expand]summary: 코드보기 👈&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;LEARNING_RATE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2e-5&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;N_EPOCHS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;N_GPU&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;checkpoint_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./ckpt/NSMC&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Initialize Optimizer
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr_schedule&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initialize_optimizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;LEARNING_RATE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_batches&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_silo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;train&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N_EPOCHS&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# EarlyStopping
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;earlymetric&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;f1&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;question_answering&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;acc&quot;&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;max&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task_name&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_classification&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;question_answering&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;min&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;earlystop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EarlyStopping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;save_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkpoint_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;metric&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;earlymetric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;patience&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Trainer
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trainer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Trainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lr_schedule&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lr_schedule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;data_silo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_silo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;early_stopping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;earlystop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;evaluate_every&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;checkpoints_to_keep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;checkpoint_root_dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkpoint_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;checkpoint_every&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N_EPOCHS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n_gpu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N_GPU&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# now train!
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;[/expand]&lt;/p&gt;
+
+&lt;p&gt;훈련 과정에 계속 Log가 찍히고, Processor단계에서 입력해둔 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test_filename&lt;/code&gt;로 평가도 해준다. 다음 그림은 430개의 배치 데이터(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;batch_size=256&lt;/code&gt;)를 돌렸을 때 earlystopping한 결과다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1m1K9CjBNulC4dzSxC1vKjLb94p9BQu26&quot; alt=&quot;[그림7] logging 내용&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림7] logging 내용&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;inference&quot;&gt;Inference&lt;/h3&gt;
+
+&lt;p&gt;실제 네이버 영화 두 곳에서 각기 다른 평점을 가져와서 테스트 해보았다.&lt;/p&gt;
+
+&lt;p&gt;[expand]summary: 코드보기 👈&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;termcolor&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;farm.infer&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Inferencer&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pprint&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PrettyPrinter&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# https://movie.naver.com/movie/bi/mi/basic.nhn?code=161967
+# https://movie.naver.com/movie/bi/mi/point.nhn?code=196051
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;basic_texts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;비에 젖지 않는 고급 장난감 텐트와, 비에 젖다 못해 잠겨버리는 반지하 가구&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 161967 / 평점 10
+&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;남들이 난해하단거 보고 혼자 이해했다며 심오한척 하고플때나 보면 딱인 영화. 통찰도 시사점도 재미도 의미도 감동도 없는... 
+진정한 킬링타임. 가난한 사람들 다 기생충에 비유한거야? 그렇다면 감독 개똥철학 완전꽝이고...&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 161967 / 평점 1
+&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;와 이거 안보면 인생 절반 후회한겁니다 여러분&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 196051 / 평점 10
+&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;절레절레 돈주고 보지마셈ㅋㅋㅋㅋ&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 196051 / 평점 1
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;infer_model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Inferencer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model_name_or_path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;./ckpt/best_nsmc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;task_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text_classification&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;infer_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inference_from_dicts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dicts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;basic_texts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;star&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;predictions&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;161967&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;161967&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;196051&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;196051&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;context&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;label&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;probability&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;probability&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;star&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;termcolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colored&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;star&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attrs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bold&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bad&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;termcolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colored&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attrs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bold&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;termcolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colored&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;green&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attrs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bold&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;termcolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colored&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;[Movie: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;] Context:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attrs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bold&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Probability &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;probability&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;% | Predict: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; | Real Star: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;star&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;[/expand]&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1fI8ME4YexqN75CumIcCO32jUWl3BB86U&quot; alt=&quot;[그림8] 테스트 결과&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림8] 테스트 결과&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;두 영화는 봉준호 감독님의 ‘기생충(id=161967)’, 최근 인기가도를 달리고 있는 ‘극장판 귀멸의 칼날: 무한열차편(id=196051)’를 선정했다. 하나를 제외하고 잘 맞춘 모습을 보여줬는데, 첫번째 샘플의 경우 사실 영화의 장면을 묘사한 것으로, 그만큼 인상깊었던 장면들을 달면서 평점은 10점으로 달았다. 사람으로써 이 영화을 본 관객이라면 이 평가가 10점에 알맞는 평점(혹은 긍정)이지만, 기계에게는 아직 어려운 점 중에 하나라고 생각한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;mlflow&quot;&gt;MLflow&lt;/h1&gt;
+
+&lt;p&gt;MLflow를 이용하 빠르고 쉽게 실험을 관리하고, 관련 평가지표도 함께 볼 수 있다. 다음 그림들은 TITAN RTX 4대에서 배치크기를 256으로 훈련 시킨 결과다(440 batches 에서 Early Stopping했다.).&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;public mlflow(&lt;a href=&quot;https://public-mlflow.deepset.ai/#/experiments/313/runs/05e7e3d4945642f9ab3e296637d57c26&quot;&gt;링크&lt;/a&gt;)에서 확인하기&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=13Cg8eziHBgA3JLwZJ3Bo8YzeySWPRmiP&quot; alt=&quot;[그림9] Parameters&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림9] Parameters&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Train과 Dev 세트의 loss는 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1cpFWVvjkSqshvN0hS_CuPk4RjyEyM0AV&quot; alt=&quot;[그림10] Loss Graph&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림10] Loss Graph&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Dev 세트의 정확도는 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VPso9Gx60V8_dgE4as054n7kymCoQ9w5&quot; alt=&quot;[그림11] Dev Accuracy Graph&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림11] Dev Accuracy Graph&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;task-supported&quot;&gt;TASK Supported&lt;/h1&gt;
+
+&lt;p&gt;현재 지원되는 모델과 SubTask는 다음과 같다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Task&lt;/th&gt;
+      &lt;th&gt;BERT&lt;/th&gt;
+      &lt;th&gt;RoBERTa*&lt;/th&gt;
+      &lt;th&gt;XLNet&lt;/th&gt;
+      &lt;th&gt;ALBERT&lt;/th&gt;
+      &lt;th&gt;DistilBERT&lt;/th&gt;
+      &lt;th&gt;XLMRoBERTa&lt;/th&gt;
+      &lt;th&gt;ELECTRA&lt;/th&gt;
+      &lt;th&gt;MiniLM&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Text classification&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NER&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Question Answering&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Language Model Fine-tuning&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Text Regression&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Multilabel Text classif.&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Extracting embeddings&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LM from scratch&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Text Pair Classification&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Passage Ranking&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Document retrieval (DPR)&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;x&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;compare-to-others&quot;&gt;Compare to others&lt;/h1&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1TZoRpza8-o4wSTr0s16f8hHQRroLQg30&quot; alt=&quot;[그림12] 다른 패키지와의 비교&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림12] 다른 패키지와의 비교&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;다른 모델과 비교해보면 FARM은 조금 더 huggingface와 pytorch-lightning의 합본 축약 버전이라고 생각할 수 있다. 마치 Tensorflow v1과 keras의 차이 느낌이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;farm-장단점&quot;&gt;FARM 장단점&lt;/h2&gt;
+
+&lt;p&gt;장점:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;데이터 세트만 준비되어 있으면, 다른 패키지에 비해 상대적으로 설정 할 것이 적음&lt;/li&gt;
+  &lt;li&gt;훈련 속도가 빠르고, 실험 기록 및 관리이 편리해서 빠르게 실험해 볼 수 있음(텐서보드 대신 mlflow 사용 가능)&lt;/li&gt;
+  &lt;li&gt;멀티 GPU 설정을 해줄 필요가 없음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;단점:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;customization이 상대적으로 힘듦&lt;/li&gt;
+  &lt;li&gt;아직 발전 중이라 불안정하고 documentaton이 잘 안되어 있음&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 31 Mar 2021 01:30:01 +0900</pubDate>
+        <link>https://simonjisu.github.io/nlp/2021/03/31/farm.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/nlp/2021/03/31/farm.html</guid>
+        
+        
+        <category>nlp</category>
+        
+      </item>
     
       <item>
         <title>Jekyll Blog Collapsible Block 만들기</title>
@@ -339,13 +913,11 @@ L &amp;amp;= \dfrac{1}{2}\big( Y - F(X)\big)^2 \\
 
 &lt;p&gt;예를 들어, 다음 그림과 같이 가족원 5명중 컴퓨터 게임을 좋아할 만한 사람을 분류하는 모델을 만들면 최종 리프 노드에는 해당 조건에 부합할 경우 양의 점수가 저장되고 그렇지 않으면 음의 점수가 저장된다. 이러한 결정값을 저장함으로써 더 유연한 비교와 추론을 할 수가 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=15_gKUfmzAV-oZaJ17uYDajhmGjIQc4Sc&quot; alt=&quot;출처: XGBoost Documentation&quot; width=&quot;80%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;출처: XGBoost Documentation&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=15_gKUfmzAV-oZaJ17uYDajhmGjIQc4Sc&quot; alt=&quot;출처: XGBoost Documentation&quot; width=&quot;80%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;출처: XGBoost Documentation&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;보통 하나의 의사결정 나무 모델을 쓰지 않고, 앙상블 학습법을 많이 쓰기 때문에, 예를 들어, 다음과 같이 두 개의 의사 결정나무를 예시로 어떻게 진행되는지 살펴보자.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1APEjS1gHrcfJXR_W7BC29mV6dNIteVe9&quot; alt=&quot;출처: XGBoost Documentation&quot; width=&quot;80%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;출처: XGBoost Documentation&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1APEjS1gHrcfJXR_W7BC29mV6dNIteVe9&quot; alt=&quot;출처: XGBoost Documentation&quot; width=&quot;80%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;출처: XGBoost Documentation&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;각 샘플(가족원)의 최종 점수를 계산하려면 샘플이 속한 스코어를 전부 더하면 된다. 파란 옷을 입은 아들의 경우, 첫번째 모델에서 $+2$ 그리고 두번째 모델에서 $+0.9$의 결정값을 가짐으로 최종 결정값은 $+2.9$가 된다. 점수가 높을 수록 게임을 더 좋아한다는 뜻임으로, 아들은 게임을 좋아한다고 분류할 수 있다.&lt;/p&gt;
 
@@ -419,8 +991,7 @@ f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} 
 
 &lt;p&gt;의사결정 나무는 분류 및 회귀에 사용되는 전통적인 &lt;strong&gt;비모수(non-parametric)&lt;/strong&gt; 지도학습 방법이다. 이 알고리즘의 목적은 입력 데이터 피처(features)로부터 타겟 데이터를 유추할 수 있는 간단한 규칙을 학습하는 것이다. 위키백과에 나온 타이타닉 탑승객 생존 여부를 나태내는 트리로 예를 들면 다음과 같다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1U_uzhLK2KzUYOyxjCLoHcVjzVneLOQBn&quot; alt=&quot;출처: 위키백과&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;출처: 위키백과&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1U_uzhLK2KzUYOyxjCLoHcVjzVneLOQBn&quot; alt=&quot;출처: 위키백과&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;출처: 위키백과&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;리프 노드(leaf node)가 아닌 노드들(마름모 모양)은 각 입력 데이터 피처에 대한 규칙을 나타내고 있으며, 이 그림에서는 위에서 부터&lt;/p&gt;
 &lt;ol&gt;
@@ -445,8 +1016,7 @@ f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} 
 
 &lt;p&gt;예를 들어 아래 그림처럼, 특정 영역내에 두 색상의 공을 분류하는 문제가 있고, 사각형의 수평 혹은 수직 변에서 특정 지점을 기준으로 반으로 나누는 것을 규칙이라고 해보자. 우리의 목적은 10개의 공을 잘 나누는 규칙들을 학습하는 것이며, 빨간공을 1, 초록공을 2로 표기한다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=17jk7c6NbX0ckSKhZqebV5M7m-a3bHyeV&quot; alt=&quot;영역 A&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;영역 A&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=17jk7c6NbX0ckSKhZqebV5M7m-a3bHyeV&quot; alt=&quot;영역 A&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;영역 A&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;이를 나누는 기준 엔트로피는 다음과 같으며 특정 영역 $A$의 불확실성을 나타낸다. 여기서 $p_k$는 특정 k 클래스에 속할 확률을 나타낸다($p_k$ = &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;k-class 공의 개수&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;전체 공의 개수&lt;/code&gt;).&lt;/p&gt;
 
@@ -468,8 +1038,7 @@ f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} 
 &lt;span class=&quot;c1&quot;&gt;# Entropy is 0.9710
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=133G4Y4HmuHBGTeSisfZw76h3CoXhD-5B&quot; alt=&quot;좌우 영역 A1, A2 나눌 경우&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;좌우 영역 A1, A2 나눌 경우&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=133G4Y4HmuHBGTeSisfZw76h3CoXhD-5B&quot; alt=&quot;좌우 영역 A1, A2 나눌 경우&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;좌우 영역 A1, A2 나눌 경우&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;이제 가로변의 임의로 한 곳을 나눠서 두 개의 영역(좌: $A_1$, 우: $A_2$)으로 나눠본다. 이때의 엔트로피는 두 엔트로피의 가중합으로 계산할 수 있으며, 다음과 같다.&lt;/p&gt;
 
@@ -499,8 +1068,7 @@ f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} 
 
 &lt;p&gt;그렇다면 다른 경우에는 어떨까? 예를 들어 가로로 선을 그어 두 영역(상: $A_1$, 하: $A_2$)을 나눠보고 정보획득량을 계산해보자.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VvzOYsLNMEoM2mOtCi9FbHxIo5e-bUVM&quot; alt=&quot;상하 영역 A1, A2 나눌 경우&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;상하 영역 A1, A2 나눌 경우&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VvzOYsLNMEoM2mOtCi9FbHxIo5e-bUVM&quot; alt=&quot;상하 영역 A1, A2 나눌 경우&quot; width=&quot;50%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;상하 영역 A1, A2 나눌 경우&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# A_1: p_red, p_greem
@@ -786,8 +1354,7 @@ f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} 
 &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1B8ZxPjkeFn_TCkG-ll5JSPu0JBGsLuHQ&quot; alt=&quot;Graphviz로 의사결정 나무 모델 시각화&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Graphviz로 의사결정 나무 모델 시각화&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1B8ZxPjkeFn_TCkG-ll5JSPu0JBGsLuHQ&quot; alt=&quot;Graphviz로 의사결정 나무 모델 시각화&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Graphviz로 의사결정 나무 모델 시각화&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;이 모델 그래프에 따르면 대출이 가능한 사람은 수입(income)이 575 이상이어야 하고, 대출 보유 대출 건수(existloan)가 2개 이하여야 대출이 가능하다.&lt;/p&gt;
 
@@ -808,8 +1375,7 @@ f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} 
 
 &lt;p&gt;여기서 $\vert \hat{T} \vert$는 리프 노드의 개수, $R(T)$는 전체 리프 노드에서 계산된 오분류율이다. Scikit-learn에서는 $R(T)$를 전체 샘플로 가중치화된 리프 노드의 불순도(impurity)로 대신 계산한다. $\alpha$값이 올라 갈 수록, 훈련 데이터에서 의사 결정 나무 모델의 깊이와 노드의 개수가 점점 떨어진다. 따라서, $\alpha$값을 잘 조절하면, 검증 데이터에서 좋은 성능을 낼 수 있는 최적의 모델을 만들 수 있다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Q_0g6iCs1sS7dvG1c7OA451PPrDUIMEF&quot; alt=&quot;Alpha값에 따른 Train/Test 데이터에서 정확도 변화&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Alpha값에 따른 Train/Test 데이터에서 정확도 변화&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1Q_0g6iCs1sS7dvG1c7OA451PPrDUIMEF&quot; alt=&quot;Alpha값에 따른 Train/Test 데이터에서 정확도 변화&quot; width=&quot;90%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Alpha값에 따른 Train/Test 데이터에서 정확도 변화&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;hr /&gt;
 
@@ -1047,8 +1613,7 @@ This definition is posed here as a first contribution of the present overview, i
 
 &lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 도입부에 기술한 바와 같이, 설명가능성은 AI의 실질적 활용에 직면하고 있는 주요 장벽 중 하나이다. 최첨단 ML 알고리즘이 잘 작동하는 이유를 설명하지 못하거나 완전히 이해할 수 없는 것은 두 가지 다른 원인에 그 뿌리를 찾는 문제이며, 이는 개념적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fig 2&lt;/code&gt;에 나타나 있다. &lt;span style=&quot;color:#aaa&quot;&gt;([주] 그 원인은 청중이 누구인가에 따라서 ML 알고리즘의 필요한 설명이 다르기 때문이다)&lt;/span&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1KcJ-gbJw7a8xSghhYs5uM3eefZ9h2vo7&quot; alt=&quot;Fig 2. 각기 다른 청중에 따라 달라지는 설명가능성의 목적&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Fig 2. 각기 다른 청중에 따라 달라지는 설명가능성의 목적&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1KcJ-gbJw7a8xSghhYs5uM3eefZ9h2vo7&quot; alt=&quot;Fig 2. 각기 다른 청중에 따라 달라지는 설명가능성의 목적&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Fig 2. 각기 다른 청중에 따라 달라지는 설명가능성의 목적&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;[expand]summary:영어원문&lt;/p&gt;
 
@@ -1289,8 +1854,7 @@ The following section develops these ideas further by analyzing the goals motiva
   &lt;li&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; &lt;strong&gt;알고리즘적 투명성(Algorithmic transparency):&lt;/strong&gt; 사용자가 모델에 대한 프로세스(모델이 도출한 입력 데이터에 대한 출력) 이해 능력을 나타낸다. 선형모델은 사용자가 모델이 어떻게 행동할 지 예측할 수 있고, error surface를 이해하고 설명할 수 있기 때문에 투명하다고 볼 수 있다&lt;a href=&quot;https://scholar.google.com/scholar_lookup?title=An%20introduction%20to%20statistical%20learning&amp;amp;publication_year=2013&amp;amp;author=G.%20James&amp;amp;author=D.%20Witten&amp;amp;author=T.%20Hastie&amp;amp;author=R.%20Tibshirani&quot;&gt;[163]&lt;/a&gt;. 반대로, 깊은 모델 구조를 가지는 모델은 손실값이 불투명하여(&lt;a href=&quot;https://scholar.google.com/scholar_lookup?title=Deep%20learning%20without%20poor%20local%20minima&amp;amp;publication_year=2016&amp;amp;author=K.%20Kawaguchi&quot;&gt;[172]&lt;/a&gt;, &lt;a href=&quot;https://scholar.google.com/scholar_lookup?title=Algorithmic%20transparency%20via%20quantitative%20input%20influence%3A%20Theory%20and%20experiments%20with%20learning%20systems&amp;amp;publication_year=2016&amp;amp;author=A.%20Datta&amp;amp;author=S.%20Sen&amp;amp;author=Y.%20Zick&quot;&gt;[173]&lt;/a&gt;), 특정 휴리스틱한 최적화(예, stochastic gradient descent)를 통해서 근사치를 구해야한다. &lt;span style=&quot;color:#aaa&quot;&gt;([주] 수학적으로 명쾌한 solution이 안보이면 불투명하다고 보는 것 같다. 특히 비선형함수의 손실값)&lt;/span&gt; 알고리즘적 투명성의 주된 제약 조건은 모델이 수학적 분석과 방법을 통해 완전이 탐구 가능해야 한다는 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1iZXqf9hnwcu-N9If2_R4WWF5RinPIhPX&quot; alt=&quot;Fig 3. 다양한 단계의 투명성&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Fig 3. 다양한 단계의 투명성&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1iZXqf9hnwcu-N9If2_R4WWF5RinPIhPX&quot; alt=&quot;Fig 3. 다양한 단계의 투명성&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Fig 3. 다양한 단계의 투명성&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 다양한 단계의 투명성을 설명해두었다. 머신러닝 모델은 $M_{\varphi}$, 그에 해당하는 파라미터는 $\varphi$ 로 표기했다. (a) 시뮬레이션성 (b) 분해가능성 (c) 알고리즘적 투명성. 각 예제는 일반적인 손실값 가정을 고려하지 않은 선에서, 모델이 설명 대상에 따라서 얼마나 달라지는지를 보여준다.&lt;/p&gt;
 
@@ -1378,8 +1942,7 @@ Further along this river, actual techniques, or better put, actual group of tech
 
 &lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 위 분류를 Fig 4로 표현했으며, 표 2에서도 정리했다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1CDEwm6jcM8SKvE3YT21n9HlTTPq2Orol&quot; alt=&quot;Fig 4. 사후 설명가능성 방법에 대한 컨셉 다이어그램&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Fig 4. 사후 설명가능성 방법에 대한 컨셉 다이어그램&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1CDEwm6jcM8SKvE3YT21n9HlTTPq2Orol&quot; alt=&quot;Fig 4. 사후 설명가능성 방법에 대한 컨셉 다이어그램&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Fig 4. 사후 설명가능성 방법에 대한 컨셉 다이어그램&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;hr /&gt;
 
@@ -1585,8 +2148,7 @@ Further along this river, actual techniques, or better put, actual group of tech
 
 &lt;p&gt;[/expand]&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=119QnRBvYV4gHiuKz7kpaOVo_2b2tlhz5&quot; alt=&quot;Fig 1. 학계에서 XAI 및 연관된 개념의 기여도 추세&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Fig 1. 학계에서 XAI 및 연관된 개념의 기여도 추세&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=119QnRBvYV4gHiuKz7kpaOVo_2b2tlhz5&quot; alt=&quot;Fig 1. 학계에서 XAI 및 연관된 개념의 기여도 추세&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Fig 1. 학계에서 XAI 및 연관된 개념의 기여도 추세&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fig 1&lt;/code&gt;에서 볼 수 있듯이 국가 정부 및 기관의 연구의제의 키워드 추세를 살펴보면 XAI관련 활동이 최근 급증했지만, 통일된 프레임워크가 없다. 이번 논문에서는 통일된 프레임워크의 작성하고, 개인정보 보호 및 모델 기밀성에 대해서 의견을 제시할 것이다.&lt;/p&gt;
 
@@ -1628,8 +2190,7 @@ Further along this river, actual techniques, or better put, actual group of tech
         <title>Topics to think about</title>
         <description>&lt;p&gt;공부를 하면서 앞으로 어떤것을 연구할지 생각할 시간을 가져봤다.&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1EFBMDgoDpcGadISMTbWMquvP0cJ80MUN&quot; alt=&quot;Img Source: https://pixabay.com/images/id-1868728/&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Img Source: https://pixabay.com/images/id-1868728/&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1EFBMDgoDpcGadISMTbWMquvP0cJ80MUN&quot; alt=&quot;Img Source: https://pixabay.com/images/id-1868728/&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Img Source: https://pixabay.com/images/id-1868728/&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;hr /&gt;
 
@@ -1746,12 +2307,8 @@ Further along this river, actual techniques, or better put, actual group of tech
   &lt;li&gt;
     &lt;p&gt;이 방법은 모델에 의존하지 않고 오직 입력데이터에만 더 집중할 수 있도록 했다. 결과는 Figure2 처럼 질적으로 더 좋은 saliency map을 생성함. 각 행이 어떤 그림을 그린건지는 파트5에서 설명한다.&lt;/p&gt;
 
-    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1SJcqwn25JiuD4LHO-yPILhwvaxOi7Qp6&quot; alt=&quot;Paper Figure 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;/figure&gt;
+    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1SJcqwn25JiuD4LHO-yPILhwvaxOi7Qp6&quot; alt=&quot;Paper Figure 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Figure 2&lt;/figcaption&gt;&lt;/figure&gt;
   &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&amp;lt;/p&amp;gt;&amp;lt;figcaption&amp;gt;Paper Figure 2&amp;lt;/figcaption&amp;gt;&amp;lt;/figure&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
   &lt;li&gt;ImageNet 데이터로 weakly-supervised 방법중에서 SOTA를 달성, strongly supervised 모델과 비슷한 성과를 냈다고 주장한다. 심지어, 훈련하지 않은 class에 대해서 잘 작동하는 모습도 보여줬다.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1842,25 +2399,27 @@ Further along this river, actual techniques, or better put, actual group of tech
   &lt;li&gt;
     &lt;p&gt;구체적인 알고리즘은 다음과 같다.&lt;/p&gt;
 
-    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1xCajsDh2yozXxhMwYy82TzJ702BMv6BA&quot; alt=&quot;Paper Algorithm 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;/figure&gt;
+    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1xCajsDh2yozXxhMwYy82TzJ702BMv6BA&quot; alt=&quot;Paper Algorithm 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Algorithm 1&lt;/figcaption&gt;&lt;/figure&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;먼저  $\theta_f$ 대해 classification loss $L$의 미분을 구함으로써, 사후확률 $p(f \vert D, m^{(k-1)})$를 가지는 $f^{(k)}$를 샘플링한다.&lt;/p&gt;
+
+\[\theta_{f^{(k)}} \leftarrow \theta_{f^{(k-1)}} - \eta_f \triangledown_{\theta_f} L(m^{(k-1)}, f^{(k-1)})\]
+
+        &lt;p&gt;이러한 방법은 &lt;a href=&quot;https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf&quot;&gt;Welling &amp;amp; Teh, 2011&lt;/a&gt;와 &lt;a href=&quot;https://arxiv.org/abs/1704.04289&quot;&gt;Mandt et al., 2017&lt;/a&gt; 연구에서 SGD에 noise를 일부 주면  Bayesian Posterior Inference를 수행할 수 있다는 점에서 착안했다. &lt;strong&gt;공부가 더 필요한 부분..&lt;/strong&gt;&lt;/p&gt;
+
+        &lt;p&gt;EM 알고리즘이랑 비슷한데, SGD로 한다는 점이 다른듯하다. 참고자료: &lt;a href=&quot;http://norman3.github.io/prml/docs/chapter09/4.html&quot;&gt;4. The EM Algorithm in General&lt;/a&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;업데이트된 파라미터 공간을 $F^{(k-1)}$와 합친뒤에 $F^{(k)}$에서 새로운 파라미터 $f’$를 샘플링한다.&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;새로운 모델을 score function $S$에 넣어서 다시 마스크 네트워크 $\theta_{m^{(k-1)}}$값을 $\theta_{m^{(k)}}$로 업데이트 한다.&lt;/p&gt;
+
+\[\theta_{m^{(k)}} \leftarrow \theta_{m^{(k-1)}} + \eta_m \triangledown_{\theta_m} S(m^{(k-1)}, f')\]
+      &lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&amp;lt;/p&amp;gt;&amp;lt;figcaption&amp;gt;Paper Algorithm 1&amp;lt;/figcaption&amp;gt;&amp;lt;/figure&amp;gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- 먼저  $\theta_f$ 대해 classification loss $L$의 미분을 구함으로써, 사후확률 $p(f \vert D, m^{(k-1)})$를 가지는 $f^{(k)}$를 샘플링한다.
-
-    $$\theta_{f^{(k)}} \leftarrow \theta_{f^{(k-1)}} - \eta_f \triangledown_{\theta_f} L(m^{(k-1)}, f^{(k-1)})$$ 
-
-    이러한 방법은 [Welling &amp;amp; Teh, 2011](https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf)와 [Mandt et al., 2017](https://arxiv.org/abs/1704.04289) 연구에서 SGD에 noise를 일부 주면  Bayesian Posterior Inference를 수행할 수 있다는 점에서 착안했다. **공부가 더 필요한 부분..**
-
-    EM 알고리즘이랑 비슷한데, SGD로 한다는 점이 다른듯하다. 참고자료: [4. The EM Algorithm in General](http://norman3.github.io/prml/docs/chapter09/4.html)
-
-- 업데이트된 파라미터 공간을 $F^{(k-1)}$와 합친뒤에 $F^{(k)}$에서 새로운 파라미터 $f'$를 샘플링한다.
-- 새로운 모델을 score function $S$에 넣어서 다시 마스크 네트워크 $\theta_{m^{(k-1)}}$값을 $\theta_{m^{(k)}}$로 업데이트 한다.
-
-    $$\theta_{m^{(k)}} \leftarrow \theta_{m^{(k-1)}} + \eta_m \triangledown_{\theta_m} S(m^{(k-1)}, f')$$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;score-function&quot;&gt;Score Function&lt;/h3&gt;
 
@@ -1871,19 +2430,18 @@ Further along this river, actual techniques, or better put, actual group of tech
 
 \[\text{precision} = \dfrac{TP}{TP + FP} \quad \text{recall}=\dfrac{TP}{TP+FN}\]
 
-    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1OEpXqK1p1lwdTLJHzHbliw_EScvBBjO2&quot; alt=&quot;Confusion Matrix&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;/figure&gt;
+    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1OEpXqK1p1lwdTLJHzHbliw_EScvBBjO2&quot; alt=&quot;Confusion Matrix&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Confusion Matrix&lt;/figcaption&gt;&lt;/figure&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Precision: 마킹된 픽셀들 중에서 연관된 픽셀이 얼마나 있는지&lt;/li&gt;
+      &lt;li&gt;Recall: 실제 연관된 픽셀들중에서 얼마나 정확하게 마킹되었는지&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&amp;lt;/p&amp;gt;&amp;lt;figcaption&amp;gt;Confusion Matrix&amp;lt;/figcaption&amp;gt;&amp;lt;/figure&amp;gt;&lt;/p&gt;
+  &lt;li&gt;
+    &lt;p&gt;기존의 score 함수를 살펴보면, $A$파트는 연관된 픽셀이 더 많이 마킹되게 만들어주는 항이다(high recall). 마스킹된 이미지를 넣어서 classification loss가 높아지면 분류에 도움되는 픽셀들을 잡아주고 있다는 뜻이고, 낮아지면 마스킹이 잘 안되고 있다는 뜻으로 해석할 수 있다.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- Precision: 마킹된 픽셀들 중에서 연관된 픽셀이 얼마나 있는지
-- Recall: 실제 연관된 픽셀들중에서 얼마나 정확하게 마킹되었는지 - 기존의 score 함수를 살펴보면, $A$파트는 연관된 픽셀이 더 많이 마킹되게 만들어주는 항이다(high recall). 마스킹된 이미지를 넣어서 classification loss가 높아지면 분류에 도움되는 픽셀들을 잡아주고 있다는 뜻이고, 낮아지면 마스킹이 잘 안되고 있다는 뜻으로 해석할 수 있다.
-
-$$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x_n))\odot x_n \big), y_n \Big)}_{A} + \underbrace{ R\big(m(x_n)\big) }_{B}\bigg] \qquad \cdots (2)$$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
+\[S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x_n))\odot x_n \big), y_n \Big)}_{A} + \underbrace{ R\big(m(x_n)\big) }_{B}\bigg] \qquad \cdots (2)\]
+  &lt;/li&gt;
   &lt;li&gt;하지만 단순히 $A$파트를 쓰기에는 문제가 있는데, sampling할때 마스킹된 입력을 넣어서 파라미터 $\theta_f$를 업데이트하기 때문에, 모델의 성능을 저하시킬 가능성이 있다. 변형된 파라미터에 같은 classification loss를 그대로 사용하는 것은 이치에 안맞을 수도 있다.&lt;/li&gt;
   &lt;li&gt;추가로 연관된 픽셀이 마스킹된 이미지를 분류기에게 넣었을 때, 정답 클래스가 아니라는 것만 판단해야지, 다른 클래스로 예측하면 안되기 때문에, classification loss를 그대로 사용하는 것은 문제가 있어 보인다.&lt;/li&gt;
   &lt;li&gt;따라서 저자들은 $A$파트를 $\mathcal{H}\big( f( (1-m(x)) \odot x_n) \big)$ Entropy로 바꿨다. 즉, 마스킹을 찾아내는 작업은 정확도를 최소화하는 것이 아닌 불확실성(uncertainty)을 최대화하는 방향으로 진행해야한다.&lt;/li&gt;
@@ -1942,8 +2500,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h3 id=&quot;classifier-f-and-mapping-m&quot;&gt;Classifier $f$ and mapping $m$&lt;/h3&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1FHVgUhAdmJqAlJ0UE1l55lbnna070zJq&quot; alt=&quot;Paper Figure 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Paper Figure 1&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1FHVgUhAdmJqAlJ0UE1l55lbnna070zJq&quot; alt=&quot;Paper Figure 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Figure 1&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;모델 $f$는 ResNet-50을 사용했다. 그리고 Encoder-Decoder 구조를 취해서 마스크 $m$를 생성한다.&lt;/li&gt;
@@ -2009,8 +2566,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h2 id=&quot;62-classification-by-multiple-classifiers&quot;&gt;6.2 Classification by multiple classifiers&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=11zPpcGsV3JDEPhvOBVGsIm9uO-mtIcGz&quot; alt=&quot;Paper Figure 3&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Paper Figure 3&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=11zPpcGsV3JDEPhvOBVGsIm9uO-mtIcGz&quot; alt=&quot;Paper Figure 3&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Figure 3&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;CASM이 정말로 classifier-agnostic인지 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torchvision.models&lt;/code&gt;에 있는 모델들로 주장을 확인해봤다. 자신들이 기대한 것은 CASM을 통해 만든 inpainted masked-out 이미지로 해당 모델들의 정확도를 깎아 내리고, masked-in 이미지들은 좋은 성능을 내는거다. 그리고 그 기대는 맞아 떨어졌다.&lt;/li&gt;
@@ -2019,20 +2575,14 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
       &lt;li&gt;&lt;strong&gt;코멘트&lt;/strong&gt;: 기존에 완전한 이미지로 모델을 학습 할 때, 주변 사물등 다른 정보를 사용하여 물체를 분류했을 가능성이 있는데, Baseline 모델은 일부 연관된 물체도 지워버리니까 오히려 더 CASM 보다 성능이 하락하는 것 같음. 예를 들어, 아래 그림 처럼 나무를 아예 지워버리니까, 판별을 더 못하는 듯. 어떻게 생각하면 훈련 데이터가 다양하지 못했다는 것이, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;f(나무 + 새) = 새&lt;/code&gt; 라는 것이 되니까, 주변 사물이 분류기에 많은 영향을 끼치는 것을 알 수 있음.&lt;/li&gt;
     &lt;/ul&gt;
 
-    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1UAR_h0c0RE4uLM5LK3SBu21qj3rcuQLL&quot; alt=&quot;Comparing CASM vs Baseline&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;/figure&gt;
+    &lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1UAR_h0c0RE4uLM5LK3SBu21qj3rcuQLL&quot; alt=&quot;Comparing CASM vs Baseline&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Comparing CASM vs Baseline&lt;/figcaption&gt;&lt;/figure&gt;
   &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&amp;lt;/p&amp;gt;&amp;lt;figcaption&amp;gt;Comparing CASM vs Baseline&amp;lt;/figcaption&amp;gt;&amp;lt;/figure&amp;gt;&lt;/p&gt;
-
-&lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;코멘트&lt;/strong&gt;: 자신들이 만든 baseline과 비교한것도 좋지만, 다른 방법(CAM방식) 등 하고 비교해보았어도 괜찮을 것 같음&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;63-object-localization&quot;&gt;6.3 Object localization&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1WZ6W1xGCCfgnpA-8irC-_l-3Fljbe3aY&quot; alt=&quot;Paper Table 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Paper Table 1&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1WZ6W1xGCCfgnpA-8irC-_l-3Fljbe3aY&quot; alt=&quot;Paper Table 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Table 1&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;saliency map으로 weakly supervised localization도 같이 수행했다.&lt;/li&gt;
@@ -2056,8 +2606,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h3 id=&quot;thinning-strategies--score-function--sharing-the-encoder-and-classifier&quot;&gt;Thinning strategies &amp;amp; Score function &amp;amp; Sharing the encoder and classifier&lt;/h3&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1YPJ_KmdfPrHgIeZOSAB1m0ZDi97zsamg&quot; alt=&quot;Paper Table 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Paper Table 2&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1YPJ_KmdfPrHgIeZOSAB1m0ZDi97zsamg&quot; alt=&quot;Paper Table 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Table 2&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;$S$: score function 의 선택 (E: entropy loss, C: classification loss)&lt;/li&gt;
@@ -2068,8 +2617,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h2 id=&quot;64-unseen-classes&quot;&gt;6.4 Unseen classes&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pyIiM1Np5OWJB85TAczggvXwdFl69pdX&quot; alt=&quot;Paper Table 3&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;Paper Table 3&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pyIiM1Np5OWJB85TAczggvXwdFl69pdX&quot; alt=&quot;Paper Table 3&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Paper Table 3&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;제안한 방법이 클래스의 정답을 필요로 하지 않기 때문에, 학습하지 않았던 데이터의 localization을 수행할 수 있다.&lt;/li&gt;
@@ -2229,8 +2777,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=12HUzuQzCWwkaO4B6H07EOkEIJlKpjMnv&quot; alt=&quot;[그림1] Example of parallel decoding&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림1] Example of parallel decoding&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=12HUzuQzCWwkaO4B6H07EOkEIJlKpjMnv&quot; alt=&quot;[그림1] Example of parallel decoding&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림1] Example of parallel decoding&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
 
@@ -2240,8 +2787,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;p&gt;&lt;strong&gt;문제점: Multi-modality Problem&lt;/strong&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VSrcpclqKZ5KxqJF7yKAw-AP8u-hIuFQ&quot; alt=&quot;[그림2] Paper Figure 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림2] Paper Figure 1&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VSrcpclqKZ5KxqJF7yKAw-AP8u-hIuFQ&quot; alt=&quot;[그림2] Paper Figure 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림2] Paper Figure 1&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;논문의 Figure 1 처럼, t=0 인 상황에서 중복된 단어가 생성 될 수가 있음(“completed”) 이는 non-autoregressive 모델에서 자주 등장하는 문제다. 이는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5.1&lt;/code&gt;에서 자세히 다룬다.&lt;/li&gt;
@@ -2254,8 +2800,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
   &lt;li&gt;확률이 가장 높은 길이를 여러개 뽑아서 배치 연산으로 3.2의 과정을 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1WPZ4xsitujEWF9yfeacc6V587DmjGZ2x&quot; alt=&quot;[그림3] Length Predict&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림3] Length Predict&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1WPZ4xsitujEWF9yfeacc6V587DmjGZ2x&quot; alt=&quot;[그림3] Length Predict&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림3] Length Predict&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;차후에 제일 높은 평균 로그 확률로 길이를 선택하게 된다(beam search 와 연관)&lt;/li&gt;
@@ -2292,8 +2837,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h2 id=&quot;42-translation-quality&quot;&gt;4.2 Translation Quality&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1sdffQlPXdG9Fgs_O_xgE1xfn-kxIPKmL&quot; alt=&quot;[그림4] Paper Table 1 &amp;amp; 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림4] Paper Table 1 &amp;amp; 2&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1sdffQlPXdG9Fgs_O_xgE1xfn-kxIPKmL&quot; alt=&quot;[그림4] Paper Table 1 &amp;amp; 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림4] Paper Table 1 &amp;amp; 2&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;같은 non-autoregressive 방법들 중에서 논문의 모델이 가장 높은 BLEU score를 달성했다고 주장하고 있다.&lt;/li&gt;
@@ -2308,8 +2852,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h2 id=&quot;43-decoding-speed&quot;&gt;4.3 Decoding Speed&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pqAa4SEq-SNleVeUp0IUkcTrzQFqpjLr&quot; alt=&quot;[그림5] Paper Figure 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림5] Paper Figure 2&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pqAa4SEq-SNleVeUp0IUkcTrzQFqpjLr&quot; alt=&quot;[그림5] Paper Figure 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림5] Paper Figure 2&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;파란점은 논문저자들의 실험 결과며, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;L2R b=1&lt;/code&gt;는 beam search(b=1)를 사용한 Left-to-Right(autoregressive) 모델이다.&lt;/li&gt;
@@ -2329,8 +2872,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
   &lt;li&gt;저자들은 예측한 토큰을 모델의 입력으로 사용하여, 반복적인 masking-predict 수행을 통해(multi-modal distribution을 uni-modal distribution으로 전환) 이 문제를 완화시키려고 했다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1G5DV3t-J1dp6-nOdx9Nh1Vwo-XXy6xpx&quot; alt=&quot;[그림6] Paper Table 3&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림6] Paper Table 3&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1G5DV3t-J1dp6-nOdx9Nh1Vwo-XXy6xpx&quot; alt=&quot;[그림6] Paper Table 3&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림6] Paper Table 3&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;가설을 검증하기 위해서, Proxy Metric으로 중복 된 예측 토큰의 개수가 몇 퍼센트를 차지하는지 살펴보았다. 확실히 $T$가 높아질 수록 해당 비율은 현저하게 줄어든다.&lt;/li&gt;
@@ -2339,8 +2881,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h2 id=&quot;52-do-longer-sequence-need-more-iterations&quot;&gt;5.2 Do Longer Sequence Need More Iterations?&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1qf97x-hNgWXtl8NbHJ-z7iUG0KZ-uNg2&quot; alt=&quot;[그림7] Paper Table 4&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림7] Paper Table 4&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1qf97x-hNgWXtl8NbHJ-z7iUG0KZ-uNg2&quot; alt=&quot;[그림7] Paper Table 4&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림7] Paper Table 4&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;긴 문장일 수록 더 많은 iteration이 도움이 되긴했다. 그러나 $T$가 많아질 수록 연산비용이 많아지는 것을 고려해야 할 것이다.&lt;/li&gt;
@@ -2348,8 +2889,7 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
 
 &lt;h2 id=&quot;53-do-more-length-candidates-help&quot;&gt;5.3 Do More Length Candidates Help?&lt;/h2&gt;
 
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=127K3YP4LlTrPHEiu9XO5v7U_rlrByMlA&quot; alt=&quot;[그림8] Paper Table 5&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림8] Paper Table 5&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=127K3YP4LlTrPHEiu9XO5v7U_rlrByMlA&quot; alt=&quot;[그림8] Paper Table 5&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림8] Paper Table 5&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;적당한 길이 후보($\mathcal{l}$)는 번역에 도움이 되지만 너무 많은 후보를 두면 도움이 안된다.&lt;/li&gt;
@@ -2438,139 +2978,6 @@ $$S(m, f) = \dfrac{1}{N} \sum_{n=1}^{N} \bigg[ \underbrace{ l\Big( f\big( (1-m(x
         
         
         <category>others</category>
-        
-      </item>
-    
-      <item>
-        <title>[Algorithms] Comparison Sort</title>
-        <description>&lt;h1 id=&quot;comparison-sort&quot;&gt;Comparison Sort&lt;/h1&gt;
-
-&lt;p&gt;지금까지 봐온 정렬 알고리즘들은 원소들간의 어떤 추상적인 비교연산을 통해 순서를 정하기 때문에 &lt;a href=&quot;https://en.wikipedia.org/wiki/Comparison_sort&quot;&gt;비교 정렬(comparison sort)&lt;/a&gt;이라고 한다. 이번 포스팅에서는 각 정렬방법들의 비교를 해보려고 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;각-정렬-방법들간-비교&quot;&gt;각 정렬 방법들간 비교&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Sort&lt;/th&gt;
-      &lt;th&gt;Worst $T(N)$&lt;/th&gt;
-      &lt;th&gt;Best $T(N)$&lt;/th&gt;
-      &lt;th&gt;Stability&lt;/th&gt;
-      &lt;th&gt;Inplace&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bubble&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Insertion&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Selection&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;No&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Merge&lt;/td&gt;
-      &lt;td&gt;$O(N\log N)$&lt;/td&gt;
-      &lt;td&gt;$O(N\log N)$&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-      &lt;td&gt;No&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Quick&lt;/td&gt;
-      &lt;td&gt;$O(N^2)$&lt;/td&gt;
-      &lt;td&gt;$O(N\log N)$&lt;/td&gt;
-      &lt;td&gt;No&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;각-정렬-방법들의-시간-복잡도-비교&quot;&gt;각 정렬 방법들의 시간 복잡도 비교&lt;/h2&gt;
-
-&lt;p&gt;각 정렬 방법들의 시간 복잡도를 비교하기 위해서 다음과 같은 실험을 하였다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;입력 리스트의 크기 n 은 2000 부터 시작하여 17000 까지 1000 개씩 추가하여, 총 16 개 크기로 진행한다.&lt;/li&gt;
-  &lt;li&gt;각 입력 크기마다 10회 실험을 진행하고, 리스트는 0 ~ 2000 사이의 숫자로 랜덤 샘플링을 하여 구성한다(2000 포함). 최종 수치는 10회 실험의 평균 값으로 결정한다.&lt;/li&gt;
-  &lt;li&gt;각 알고리즘이 실행되는 실제 시간(t로 표기)은 time 패키지로 시작시간과 끝나는 시간의 차이로 측정한다.&lt;/li&gt;
-  &lt;li&gt;입력크기에 따라 차이나 너무 크게 나서 기존 수치과 log로 변환한 수치를 같이 본다. 각 복잡도 수치를 log로 치환하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;그림1&lt;/code&gt;과 같다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=129gdSPce6z6nLokn6uJPZszfBt9Qa4G-&quot; alt=&quot;[그림1] Sorting Experiment&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림1] Sorting Experiment&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;실험진행의 결과는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;그림2&lt;/code&gt;와 같다. selection sort와 insertion sort는 비슷한 시간을 가진다는 것을 알 수있다. 반면 bubble sort는 두 번의 for문을 모두 꼭 돌아야하기 때문에 이들 보다 실행히간이 많이 걸린다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1dPN8TOjaW3wzEEz62i80fVOj0WOjmJQc&quot; alt=&quot;[그림2] 모든 알고리즘의 Time Complexity&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림2] 모든 알고리즘의 Time Complexity&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;merge sort와 quick sort는 비슷한 실행시간을 가진다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1HQsKgKLFKRSrK8hyRzIKtlyAK9gFP3fk&quot; alt=&quot;[그림3] merge sort와 quick sort의 Time Complexity&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림3] merge sort와 quick sort의 Time Complexity&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;stability&quot;&gt;Stability&lt;/h2&gt;
-
-&lt;p&gt;Stability는 Stable 과 Unstable 두 가지로 나뉘는데, 정렬 후에도 기존 입력 시퀀스의 특성 또한 그 순서을 유지하는 것이 stable sort, 그렇지 않은 것을 unstable sort라고 한다. 다음 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;그림4&lt;/code&gt;처럼 카드를 숫자의 순서대로 정렬하려고 한다. 각 카드는 고유의 문양이 같이 있다. 기존의 문양 순서대로 정렬되면 stable sort라고 한다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1fPY3iG4szY1UxiB6D6c_yn4x7aL_yFfr&quot; alt=&quot;[그림4] 카드 정렬하기&quot; width=&quot;110%&quot; height=&quot;auto&quot; /&gt;
-&lt;/p&gt;&lt;figcaption&gt;[그림4] 카드 정렬하기&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;각 정렬 알고리즘의 stability를 확인해보면 Bubble, Insertion, Merge는 stable sort고, Selection과 Quick은 unstable sort다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;colver&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;diamond&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;diamond&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;heart&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;spade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;spade&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bubble_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;insertion_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selection_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;merge_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quick_sort_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'diamond'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'heart'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'colver'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'spade'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;본 글은 기본적으로 서울대학교 이재진 교수님의 강의를 듣고 제가 공부한 것을 정리한 글입니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;관련-포스팅&quot;&gt;관련 포스팅:&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html&quot;&gt;Bubble Sort &amp;amp; Insertion Sort&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/02/selection.html&quot;&gt;Selection Sort&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/03/merge.html&quot;&gt;Merge Sort&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/python/2020/05/04/quick.html&quot;&gt;Quick Sort&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;(현재글)&lt;a href=&quot;https://simonjisu.github.io/python/2020/06/06/comparisonsort.html&quot;&gt;Comparsion Sort&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 06 Jun 2020 11:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/algorithms/2020/06/06/comparisonsort.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/algorithms/2020/06/06/comparisonsort.html</guid>
-        
-        
-        <category>algorithms</category>
         
       </item>
     

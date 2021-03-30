@@ -26,7 +26,7 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
     예를 들어 `그림 1`처럼 (검은색이 마스킹 위치) Decoder 의 입력 데이터 최대 길이가 4인 경우, <span style="color:#e25252">**Q**</span> 에서 0 번째 토큰은 1 번째 토큰을 예측해야 함으로 Self-Attention 시 <span style="color:#5470cc">**K**</span> 의 1, 2, 3 번째의 토큰의 관계를 무시해야한다. <span style="color:#e25252">**Q**</span> 의 1 번째 토큰을 입력시 2 번째 토큰을 예측하게 되는데, 자기 자신을 포함한 그 이전의 정보를 참조 할 수는 있지만 미래의 2, 3 번째의 정보를 미리 참고하면 안된다.
 
-    {% include image.html id="1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn" desc="[그림 1] Decoder Sub-sequence Attention Masking" width="75%" height="auto" %}
+{% include image.html id="1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn" desc="[그림 1] Decoder Sub-sequence Attention Masking" width="75%" height="auto" %}
 
 2. 실제 토큰의 길이
 
@@ -34,7 +34,7 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
     예를 들어 Decoder 에 들어가는 타겟 데이터의 최대 길이는 4이지만 실제 토큰의 길이가 3이라면 Attention Matrix 에 해당하는 마스킹은 `그림 2`와 같다. 여기서는 마지막 토큰이 `Padding` 토큰이기 때문에 Self Attention 시 마지막 토큰은 참조하지 않는다. Attention 코드([GitHub](https://github.com/simonjisu/annotated-transformer-kr/blob/master/transformer/modules.py) 참고) 구현하게 되면 3 번째 행은 Softmax 를 통과시 `nan` 값이 된다. 따라서 해당하는 값을 0으로 다시 마스킹하는 과정이 필요하다. 
 
-    {% include image.html id="1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2" desc="[그림 2] 실제 토큰 길이에 대한 Masking" width="75%" height="auto" %}
+{% include image.html id="1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2" desc="[그림 2] 실제 토큰 길이에 대한 Masking" width="75%" height="auto" %}
 
 해당 모듈(Module) 코드는 다음과 같다.
 * [Encoder Layer](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L11)
