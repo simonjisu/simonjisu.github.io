@@ -11,4 +11,4 @@ _site/
 vendor/
 
 # 올릴예정인 포스트
-_posts_draft/
+# _posts_draft/
