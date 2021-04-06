@@ -17,6 +17,8 @@ toc: true
 - [라온피플 blog: Decision Tree](https://m.blog.naver.com/laonple/220861527086)
 - [Scikit-Learn: Decision Tree](https://scikit-learn.org/stable/modules/tree.html)
 - [Scikit-Learn: Post Pruning](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html)
+- [Scikit-Learn: Permutation feature importance](https://scikit-learn.org/stable/modules/permutation_importance.html)
+- [Feature selection : feature importance vs permutation importance](https://hwi-doc.tistory.com/entry/Feature-selection-feature-importance-vs-permutation-importance)
 
 # 의사결정 나무(Decision Tree)
 
@@ -39,7 +41,7 @@ toc: true
 
 ## 학습의 기준: 불확실성
 
-학습의 기준은 불확실성을 나타내는 **엔트로피(entropy)** 혹은 **불순도(impurity)**가 최대로 감소하는 방향으로 진행된다. 이전 단계와 현재 단계의 불확실성의 차이를 **정보획득(information gain, 이하 IG)**이라고 하며, 정보획득이 많은 방향으로 학습을 진행한다고 말 할 수 있다. 
+학습의 기준은 불확실성을 나타내는 **엔트로피(entropy)** 혹은 **불순도(impurity)**가 최대로 감소하는 방향으로 진행된다(엔트로피 함수 혹은 Gini계수를 쓰지만 여기서는 엔트로피를 사용한다). 이전 단계와 현재 단계의 불확실성의 차이를 **정보획득(information gain, 이하 IG)**이라고 하며, 정보획득이 많은 방향으로 학습을 진행한다고 말 할 수 있다. 
 
 예를 들어 아래 그림처럼, 특정 영역내에 두 색상의 공을 분류하는 문제가 있고, 사각형의 수평 혹은 수직 변에서 특정 지점을 기준으로 반으로 나누는 것을 규칙이라고 해보자. 우리의 목적은 10개의 공을 잘 나누는 규칙들을 학습하는 것이며, 빨간공을 1, 초록공을 2로 표기한다.
 
@@ -154,22 +156,23 @@ print(f"Entropy is {entropy:.4f}")
 
 |Colname|Value|MaxIG|ClsCount|
 |---|---|---|---|
-|income|700|0.557332| {False: {0: 0, 1: 1}, True: {0: 4, 1: 1}}
-|existloan|0|0.432821| {False: {0: 1, 1: 0}, True: {0: 3, 1: 2}}
-|car|0|0.012657|{False: {0: 1, 1: 1}, True: {0: 3, 1: 1}}
+|income|700|0.677653| {False: {0: 0, 1: 1}, True: {0: 4, 1: 1}}
+|existloan|0|0.594646| {False: {0: 1, 1: 0}, True: {0: 3, 1: 2}}
+|car|0|-0.018797|{False: {0: 1, 1: 1}, True: {0: 3, 1: 1}}
 
-<details class="collaspe-article">
-<summary>전체 코드보기</summary>
-<div markdown="1">
+[expand]summary:전체코드 보기 👈
 
 ```python
 import numpy as np
 import pandas as pd
 
-def calculate_entropy(pks):
+def calculate_entropy(counts):
+    if counts.ndim == 1:
+        counts = np.expand_dims(counts, 0)
+    pks = counts / counts.sum(1, keepdims=True)
     log = np.log2(pks + 1e-10)
-    entropy = - 1/len(pks) * (pks * log).sum()
-    return entropy.round(6)
+    e = -(pks * log).sum(1)
+    return e
 
 def get_info_gain(df, E_base, x_col):
     df = df.sort_values(x_col).reset_index(drop=True)
@@ -181,8 +184,12 @@ def get_info_gain(df, E_base, x_col):
     for v in unique_x_values[:-1]:
         df["group"] = (df[x_col] <= v)
         counts = df.groupby(["group", "loan"]).size().unstack(fill_value=0)
-        pks = counts.div(counts.sum(1), axis=0).values
-        E_x_col = calculate_entropy(pks)
+        E_x_col = calculate_entropy(counts.values)
+        if len(E_x_col) >= 2:
+            weights = counts.values.sum(0) / counts.values.sum()
+            E_x_col = (E_x_col * weights).sum()
+        else:
+            E_x_col = E_x_col.sum()
         info_gain = E_base - E_x_col
         IG_candidates.append(info_gain)
         IG_counts.append(counts.T.to_dict())
@@ -192,7 +199,6 @@ def get_info_gain(df, E_base, x_col):
     IG_max = np.max(IG_candidates)
     idx_IG_max = np.argmax(IG_candidates)
     IG_value = df.loc[idx_IG_max, x_col]
-#     df["group"] = (df[x_col] <= IG_value)
     print(f"[Result] Max information gain is {IG_max:.4f} value: {IG_value}")
     print()
     del df["group"]
@@ -206,7 +212,7 @@ df = pd.DataFrame(
         loan=[1, 0, 0, 0, 0, 1]
     )
 )
-E_base = calculate_entropy((df["loan"].value_counts() / len(df)).values)
+E_base = calculate_entropy(df["loan"].value_counts().values).sum()
 IGs = []
 for x_col in ["car", "income", "existloan"]:
     IG_value, IG_max, IG_counts = get_info_gain(df, E_base, x_col)
@@ -216,32 +222,41 @@ df_res = pd.DataFrame({col: x for col, x in zip(
 df_res.sort_values("MaxIG", ascending=False)
 
 # [Start] Processing column: car: [0, 1]
-#   Testing Value <= 0 | Entropy: 0.9056 | IG: 0.0127
+# 0.9370927078645052
+#   Testing Value <= 0 | Entropy: 0.9371 | IG: -0.0188
 #   Counts: {False: {0: 1, 1: 1}, True: {0: 3, 1: 1}}
-# [Result] Max information gain is 0.0127 value: 0
+# [Result] Max information gain is -0.0188 value: 0
 
 # [Start] Processing column: income: [200, 425, 500, 650, 700, 900]
-#   Testing Value <= 200 | Entropy: 0.4855 | IG: 0.4328
+# 0.6473003960626632
+#   Testing Value <= 200 | Entropy: 0.6473 | IG: 0.2710
 #   Counts: {False: {0: 3, 1: 2}, True: {0: 1, 1: 0}}
-#   Testing Value <= 425 | Entropy: 0.5000 | IG: 0.4183
+# 0.6666666664262174
+#   Testing Value <= 425 | Entropy: 0.6667 | IG: 0.2516
 #   Counts: {False: {0: 2, 1: 2}, True: {0: 2, 1: 0}}
-#   Testing Value <= 500 | Entropy: 0.4591 | IG: 0.4591
+# 0.6121972224625437
+#   Testing Value <= 500 | Entropy: 0.6122 | IG: 0.3061
 #   Counts: {False: {0: 1, 1: 2}, True: {0: 3, 1: 0}}
-#   Testing Value <= 650 | Entropy: 0.9056 | IG: 0.0127
+# 0.9370927078645052
+#   Testing Value <= 650 | Entropy: 0.9371 | IG: -0.0188
 #   Counts: {False: {0: 1, 1: 1}, True: {0: 3, 1: 1}}
-#   Testing Value <= 700 | Entropy: 0.3610 | IG: 0.5573
+# 0.2406426981034281
+#   Testing Value <= 700 | Entropy: 0.2406 | IG: 0.6777
 #   Counts: {False: {0: 0, 1: 1}, True: {0: 4, 1: 1}}
-# [Result] Max information gain is 0.5573 value: 700
+# [Result] Max information gain is 0.6777 value: 700
 
 # [Start] Processing column: existloan: [0, 1, 3]
-#   Testing Value <= 0 | Entropy: 0.5000 | IG: 0.4183
+# 0.6666666664262174
+#   Testing Value <= 0 | Entropy: 0.6667 | IG: 0.2516
 #   Counts: {False: {0: 2, 1: 2}, True: {0: 2, 1: 0}}
-#   Testing Value <= 1 | Entropy: 0.4855 | IG: 0.4328
+# 0.32365019795919686
+#   Testing Value <= 1 | Entropy: 0.3237 | IG: 0.5946
 #   Counts: {False: {0: 1, 1: 0}, True: {0: 3, 1: 2}}
-# [Result] Max information gain is 0.4328 value: 0
+# [Result] Max information gain is 0.5946 value: 0
 
 ```
-</div></details>
+
+[/expand]
 
 위 코드와 표는 각 입력 피처로 하나씩 규칙을 찾은 결과다. 살펴보면 최대 정보획등량(MaxIG)은 $0.068056$ 으로 `소득 <= 700` 기준으로 나누는 첫번째 노드의 규칙이 된다. 만약 소득이 규칙인 700보다 작은 값이면, 대출여부가 0인 값은 4개, 1인 값은 1개가 되고, 700 보다 크다면 대출여부가 0인 값은 0개, 1인 값은 1개가 된다. 다시 풀어서 말하면, 만약에 당신의 소득이 700 보다 적다면, 학습된 데이터를 기반으로 보았을 때, 대출가능한 확률은 20%(1/5) 정도가 될것이다. 
 
@@ -303,6 +318,155 @@ $$R_{\alpha}(T) = R(T) + \alpha \vert \hat{T} \vert$$
 여기서 $\vert \hat{T} \vert$는 리프 노드의 개수, $R(T)$는 전체 리프 노드에서 계산된 오분류율이다. Scikit-learn에서는 $R(T)$를 전체 샘플로 가중치화된 리프 노드의 불순도(impurity)로 대신 계산한다. $\alpha$값이 올라 갈 수록, 훈련 데이터에서 의사 결정 나무 모델의 깊이와 노드의 개수가 점점 떨어진다. 따라서, $\alpha$값을 잘 조절하면, 검증 데이터에서 좋은 성능을 낼 수 있는 최적의 모델을 만들 수 있다.
 
 {% include image.html id="1Q_0g6iCs1sS7dvG1c7OA451PPrDUIMEF" desc="Alpha값에 따른 Train/Test 데이터에서 정확도 변화" width="90%" height="auto" %}
+
+
+<br>
+
+---
+
+## Feature Importance
+
+**피처 중요도(Feature Improtance)**란 의사결정 나무를 만드는데 기여한 피처의 정량적 평가라고 볼 수 있다. 재귀적 분리와 가지치기를 통해 의사결정 나무를 생성할 때, 불순도를 가장 많이 줄이는 피처가 곧 모델을 생성하는데 큰 공헌을 새운 피처라고 할 수 있으며, 중요도가 높다고 말 할 수 있다. 
+
+### Feature Importance 구하는 방법
+
+일반적인 Feature Importance를 구하는 방법은, 다름 의사결정 나무를 보고 계산하면서 알아보자.
+
+[expand]summary:전체코드 보기 👈
+
+```python
+import pandas as pd
+from sklearn import tree
+import graphviz
+
+df = pd.DataFrame(
+    dict(
+        car=[0, 0, 1, 0, 0, 1, 1],
+        income=[650, 200, 700, 500, 425, 900, 550],
+        existloan=[1, 0, 3, 0, 1, 1, 0],
+        loan=[1, 0, 0, 0, 0, 1, 1]
+    )
+)
+
+X, y = df.iloc[:, :-1], df.iloc[:, -1]
+
+clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3)
+clf = clf.fit(X, y)
+
+dot_data = tree.export_graphviz(
+    clf, out_file=None, 
+    feature_names=["car", "income", "existloan"], 
+    class_names=["대출 불가능", "대출 가능"], 
+    filled=True, rounded=True, 
+    special_characters=True
+)
+graph = graphviz.Source(dot_data)
+```
+
+[/expand]
+
+{% include image.html id="1KZS2M8IQDzULdVkRTIbkK1SlkkGBUWQu" desc="새로운 Tree" width="90%" height="auto" %}
+
+$i$번째 가지(feature)에서 노드가 $L$과 $R$로 분리 되었 다면 information gain 은 다음과 같이 구한다. 여기서 $N$은 전체 샘플의 개수, $N_i$는 분리 이전의 해당 노드에서 보유하고 있는 샘플의 개수, $N_{(i, L)}$는 좌측으로 분리된 샘플의 개수, $N_{(i, R)}$은 우측으로 분리된 샘플의 개수, $E_i$는 분리 이전의 엔트로피, $E_{(i, L)}$과, $E_{(i, R)}$은 각각 좌측과 우측의 엔트로피다.
+
+$$IG_{i} = \dfrac{N_i}{N} E_{i} - \dfrac{N_{(i, L)}}{N_i} E_{(i, L)} - \dfrac{N_{(i, R)}}{N_i} E_{(i, R)}$$
+
+지금 그래프는 두 개의 피처(income, existloan)으로 인해 나눠졌고, 먼저 income의 정보획득량을 구해보면 다음과 같다.
+
+$$\begin{aligned}
+IG_{income} &= \dfrac{N_{income}}{N} E_{income} - \dfrac{N_{(income, L)}}{N_{income}} E_{(income, L)} - \dfrac{N_{(income, R)}}{N_{income}} E_{(income, R)} \\
+&= \dfrac{7}{7} \times 0.9852 - \dfrac{3}{7} \times 0.0 - \dfrac{4}{7} \times 0.8113 \\
+&= 0.5216
+\end{aligned}$$
+
+나머지 existloan의 정보획득량은 다음과 같다.
+
+$$\begin{aligned}
+IG_{existloan} &= \dfrac{N_{existloan}}{N} E_{existloan} - \dfrac{N_{(existloan, L)}}{N_{existloan}} E_{(existloan, L)} - \dfrac{N_{(existloan, R)}}{N_{existloan}} E_{(existloan, R)} \\
+&= \dfrac{4}{7} \times 0.8113 - \dfrac{1}{4} \times 0.0 - \dfrac{3}{4} \times 0.0 \\
+&= 0.4636
+\end{aligned}$$
+
+car 칼럼은 쓰이지 않았기 때문에 피처 중요도는 0이 된다. 따라서 각각의 피처 중요도를 일반화(normalize) 시키면 `(car, income, existloan) = (0, 0.5295, 0.4705)`가 된다.
+
+[expand]summary:계산코드 보기 👈
+
+```python
+from scipy.stats import entropy
+
+def calculate_ig(x, x_left, x_right, n_samples):
+    e_base = entropy(x, base=2)
+    e_left = entropy(x_left, base=2)
+    e_right = entropy(x_right, base=2)
+    IG = x.sum()/n_samples * e_base - x_left.sum()/x.sum() * e_left - x_right.sum()/x.sum() * e_right
+    print(f"E Base: {e_base:.4f} | E Left {e_left:.4f} | E Right {e_right:.4f}")
+    print(f"Information Gain = {IG:.4f}")
+    return IG
+
+n_samples = 7
+# Income
+print("[Feature] Income")
+x_income = np.array([4, 3])
+x_income_left = np.array([3, 0])
+x_income_right = np.array([1, 3])
+IG_income = calculate_ig(x_income, x_income_left, x_income_right, n_samples)
+# Existloan
+print("[Feature] Existloan")
+x_existloan = np.array([1, 3])
+x_existloan_left = np.array([0, 3])
+x_existloan_right = np.array([1, 0])
+IG_existloan = calculate_ig(x_existloan, x_existloan_left, x_existloan_right, n_samples)
+print("[Feature Importance] Normalized (Car, Income, Existloan)")
+IG_car = 0
+x = np.array([IG_car, IG_income, IG_existloan])
+normed = x / x.sum()
+print(normed.round(4))
+print("[Feature Importance] in scikit-learn")
+print(clf.feature_importances_.round(4))
+
+# [Feature] Income
+# E Base: 0.9852 | E Left 0.0000 | E Right 0.8113
+# Information Gain = 0.5216
+# [Feature] Existloan
+# E Base: 0.8113 | E Left 0.0000 | E Right 0.0000
+# Information Gain = 0.4636
+# [Feature Importance] Normalized (Car, Income, Existloan)
+# [0.     0.5295 0.4705]
+# [Feature Importance] in scikit-learn
+# [0.     0.5295 0.4705]
+```
+
+[/expand]
+
+### 사용시 주의할 점
+
+사용시에 주의할 점이 있는데, 피처 중요도를 절대적인 지표로 사용하면 안 된다. 그 이유는 훈련 데이터에 최적화된 모델에서 보여주는 중요도이기 때문에, 특정 피처가 중요하지 않다고 할 수 없다. 위에서 설명한 자동차 보유 여부인 피처 car의 경우 모델에 고려되지 않았다고 해서 대출의 중요한 척도가 아니다. 실제로 어떤 사람이 차를 소유했다면, 보통은 그 유지비용을 감당할 수 있어서(즉, 어느정도의 현금 흐름이 있다)차를 샀다고 생각하기 때문에 중요하지 않다고 보기는 힘들다. 하지만 상대적으로 중요하다고는 말 할 수 있기 때문에 모델을 만들고 분석시에 유용하게 쓰인다.
+
+## Permutation Feature Importance 
+
+Permutation Feature Importance는 feature의 값을 임의로 치환했을 때 성능의 변화를 본다. 만약 해당 feature가 모델에서 크게 중요한 역할을 하고 있다면 값을 치환했을 때 성능이 크겍 떨어진다는 아이디어에서 시작한다. 입력 데이터 $X$, 타겟 데이터 $y$, 모델 $f$과 손실함수 $L$로 주어 졌을 때, 주요 알고리즘은 다음과 같다.
+
+1. 현재 모델의 성능 측정: $e^{original} = L\big(y, f(X)\big)$
+2. 데이터의 각 피처 $j$에 대해서 
+   1. $K$번 반복한다. ($k = 1, \cdots, K$)
+      1. 랜덤하게 피처 $j$의 데이터를 셔플하여 새로운 변형된 데이터 세트 $\hat{X}^{(j)}_k$를 만든다
+      2. 변형된 데이터 세트로 성능을 측정한다. $e^{(j)}_k = L\big(y, f(\hat{X}^{(j)}_k)\big)$
+   2. 피처 $k$의 중요도 $I^{(j)}$를 계산한다. $I^{(j)} = e^{original} - \dfrac{1}{K} \sum_{k=1}^{K} e^{(j)}_k$
+
+Scikit-learn에서 다음과 같이 제공하고 있다. 다만 모델이 커질 경우 실행시간이 꽤 오래 걸린다.
+
+```python
+from sklearn.inspection import permutation_importance
+
+r = permutation_importance(clf, X, y, n_repeats=30, random_state=0)
+
+for i in r.importances_mean.argsort()[::-1]:
+    print(f"{df.columns[i]}  {r.importances_mean[i]:.3f} +/- {r.importances_std[i]:.3f}")
+
+# income  0.462 +/- 0.180
+# existloan  0.195 +/- 0.078
+# car  0.000 +/- 0.000
+```
 
 ---
 
