@@ -94,7 +94,7 @@ Weakly supervised 임에도 불구하고, ILSVRC-2013 테스트 데이터에서 
 
 Deconvolution과 미분의 관계는 전에 작성한 포스트를 참고하길 바란다.
 
-- [[PyTorch] ConvTranspose2d 와 Conv2d 의 관계](https://simonjisu.github.io/datascience/2019/10/27/convtranspose2d.html)
+- [[PyTorch] ConvTranspose2d 와 Conv2d 의 관계](https://simonjisu.github.io/deeplearning/2019/10/27/convtranspose2d.html)
 
 ---
 
