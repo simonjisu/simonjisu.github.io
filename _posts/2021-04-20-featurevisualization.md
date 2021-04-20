@@ -66,7 +66,7 @@ optimization을 통해 예시를 만들때 주의해야할 점은 전체 그림�
 
 diversity를 이루는 방법은 "diversity" 항을 목적함수에 추가함으로써 심플하게 달성할 수 있다. diversity 항은 다양하게 구성할 수 있으며, 그 예시로 다른 클래스 데이터와의 cosine similarity를 패널티로 부여하여 달성 할 수 있다. 다른 예로는 style transfer([A neural algorithm of artistic style, Gatys et al. 2015](https://arxiv.org/abs/1508.06576))에서 보여준 피처로하여금 다른 스타일을 강제하는 방법이 있다.
 
-[expand]summary:add "diversity" term 👈 
+[expand]summary: add "diversity" term 👈 
 
 {% include image.html id="1eAqOW5e_zGMMRCfdrhbC-owHqpVl9hHs" desc="원문" width="100%" height="auto" %}
 
@@ -76,7 +76,7 @@ $G_{i,j} = \sum_{x,y} \text{layer}_n\text{[x, y, i]} \cdot \text{layer}_n\text{[
 
 여기서 diversity term을 계산할 수 있다. the negative pairwise cosine similarity of pairs of visualizations.
 
-$C_{\text{diversity}} = - \sum_{a} \sum_{b\neq a} ~ \frac{\text{vec}(G_a) \cdot \text{vec}(G_b)}{||\text{vec}(G_a)||~||\text{vec}(G_b)||}$
+$C_{\text{diversity}} = - \sum_{a} \sum_{b\neq a} \dfrac{\text{vec}(G_a) \cdot \text{vec}(G_b)}{\Vert\text{vec}(G_a)\Vert \Vert\text{vec}(G_b)\Vert}$
 
 이 후에 $C_{\text{diversity}}$를 optimization 목적함수에 패널티 항으로 추가하여 학습한다.
 
@@ -88,7 +88,7 @@ $C_{\text{diversity}} = - \sum_{a} \sum_{b\neq a} ~ \frac{\text{vec}(G_a) \cdot 
 
 다양한 피처 시각화는 무엇이 뉴런을 활성화하는지 자세히 들여다 볼 수 있게 해준다. 특히 데이터 세트로 본다면, 어떤 입력이 뉴런을 활성화 시키는지 더 다양하게 관찰하고 예측 할 수 있다. 예를 들어 다음 한 장의 optimization결과를 살펴본다.
 
-{% include image.html id="19yqLldmhfok_rt3pYP6L5fbu2S2jz_yd" desc="Simple optimization" width="100%" height="auto" %}
+{% include image.html id="19yqLldmhfok_rt3pYP6L5fbu2S2jz_yd" desc="Simple optimization" width="50%" height="auto" %}
 
 위 그림을 개의 머리 부분이 뉴런을 활성화 시킨 것으로 보인다. 그림의 일부를 보자면 개의 눈과 아래로 향하는 곡선으로 추측할 수 있다. 그러나 어떤 부분에서는 눈이 포함 안될 때도 있고, 아래로 향하는 곡선뿐만 아니라 위로 향하는 곡선도 있다. 따라서 이 뉴런이 활성화하는 것이 주로 모피 텍스처에 관한 것으로 가설을 세울 수 있다.
 
@@ -114,7 +114,7 @@ $C_{\text{diversity}} = - \sum_{a} \sum_{b\neq a} ~ \frac{\text{vec}(G_a) \cdot 
 
 예를 들어 **활성화 공간(activation space)**이라는 것을 정의해 보자, 그렇다면 개별 활성화된 뉴런은 활성화 공간의 **기저 벡터(basis vectors)**로 생각할 수 있다. 반대로, 활성화된 뉴런들의 조합들이 곧 활성화 공간이 된다.
 
-[expand]summary:선형 대수에서 기저(basis)란? 👈 
+[expand]summary: 선형 대수에서 기저(basis)란? 👈 
 
 [https://ko.wikipedia.org/wiki/기저_(선형대수학)](https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%A0%80_(%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99))
 
@@ -127,7 +127,7 @@ $C_{\text{diversity}} = - \sum_{a} \sum_{b\neq a} ~ \frac{\text{vec}(G_a) \cdot 
 [Intriguing properties of neural networks(Szegedy et al. 2014)](https://arxiv.org/abs/1312.6199)에서 저자들은 랜덤한 방향도 충분히 기저 벡터들의 방향만큼 의미가 있다는 것을 주장했다.
 
 
-[expand]summary:Intriguing properties of neural networks 👈 
+[expand]summary: Intriguing properties of neural networks 👈 
 
 Reference: [https://3ffr3s.github.io/2020-02-10-Intriguing_properties_of_neural_networks/](https://3ffr3s.github.io/2020-02-10-Intriguing_properties_of_neural_networks/)
 
@@ -159,7 +159,7 @@ $$x^{'} = \underset{x \in I}{\arg \max} \text{<}\phi(x), v \text{>}$$
 
 위 그림의 예시는 뉴런들이 조건부 결합으로 표현된 이미지다. 이 둘 사이에 보간법을 적용해 뉴런들의 상호작용을 더 잘 이해하게 만들 수있다. 생성 모델(generative models)에서 latent space에 보간법을 적용하는 것과 비슷하다. 
 
-[expand]summary:생성모델에서 latent space애 보간법 적용하는 방법 👈 
+[expand]summary: 생성모델에서 latent space애 보간법 적용하는 방법 👈 
 
 간단히 0.1만큼 선형 보간법을 적용한다면 다음과 같다.
 
@@ -218,7 +218,7 @@ def interpolate_points(p1, p2, n_steps=10):
 
 Frequency penalization는 고주파 노이즈를 직접 없에는 것을 목표로 한다. 명시적으로 근접 픽셀(total variation, [Understanding deep image representations by inverting them(Mahendran, Vedaldi, 2014)](https://arxiv.org/abs/1412.0035v1))에 패널티를 부여하거나, 암묵적으로 이미지를 각 최적화 스텝마다 블러 처리를 하는 방법([Deep neural networks are easily fooled: High confidence predictions for unrecognizable images(Nguyen et al. 2014)](https://arxiv.org/abs/1412.1897))등이 있다. 안타깝게도 이러한 접근법들은 노이즈가 더해진 엣지같은 높은 주파수를 가지는 피처를 억제한다(즉, 엣지를 없엔다). 이는 bilateral filter를 활용하면 약간 해소할 수 있다([Class visualization with bilateral filters, M. Tyka. 2016](https://mtyka.github.io/deepdream/2016/02/05/bilateral-class-vis.html)).
 
-[expand]summary:블러 처리에 대한 주석 👈 
+[expand]summary: 블러 처리에 대한 주석 👈 
 
 푸리에 공간에서 블러 처리를 한다면, 스케일링된 L2 정규항을 목적함수에 추가하는 것과 같다. 즉, 주파수에 기반해 각 푸리에 요소에 패널티를 부여하는 것과 같다. 
 

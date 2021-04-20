@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
-gem "github-pages", group: :jekyll_plugins
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# run 
-# $ bundle install
-# $ bundle exec jekyll serve
-# jekyll-sitemap
-# jekyll-feed
-# public_suffix
-# sassc
-# jekyll-sass-converter
+# gem "rails"
+
+gem "jekyll", "~> 4.2"
+
+group :jekyll_plugins do
+    gem 'jekyll-sitemap'
+    gem 'jekyll-feed'
+end
+gem "webrick", "~> 1.7"

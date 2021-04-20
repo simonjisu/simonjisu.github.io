@@ -12,3 +12,5 @@ vendor/
 
 # 올릴예정인 포스트
 # _posts_draft/
+
+.DS_Store
