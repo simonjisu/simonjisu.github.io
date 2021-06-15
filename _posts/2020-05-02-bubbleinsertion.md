@@ -132,7 +132,7 @@ for j in range(1, n):  # n-1
 
 # 관련 포스팅: 
 
-* (현재글)[Bubble Sort & Insertion Sort](https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html)
-* [Selection Sort](https://simonjisu.github.io/python/2020/05/02/selection.html)
-* [Merge Sort](https://simonjisu.github.io/python/2020/05/03/merge.html)
-* [Quick Sort](https://simonjisu.github.io/python/2020/05/04/quick.html)
+* (현재글)[Bubble Sort & Insertion Sort](https://simonjisu.github.io/algorithms/2020/05/02/bubbleinsertion.html)
+* [Selection Sort](https://simonjisu.github.io/algorithms/2020/05/02/selection.html)
+* [Merge Sort](https://simonjisu.github.io/algorithms/2020/05/03/merge.html)
+* [Quick Sort](https://simonjisu.github.io/algorithms/2020/05/04/quick.html)

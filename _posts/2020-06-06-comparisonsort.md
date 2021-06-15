@@ -74,8 +74,8 @@ Stability는 Stable 과 Unstable 두 가지로 나뉘는데, 정렬 후에도 �
 
 # 관련 포스팅: 
 
-* [Bubble Sort & Insertion Sort](https://simonjisu.github.io/python/2020/05/02/bubbleinsertion.html)
-* [Selection Sort](https://simonjisu.github.io/python/2020/05/02/selection.html)
-* [Merge Sort](https://simonjisu.github.io/python/2020/05/03/merge.html)
-* [Quick Sort](https://simonjisu.github.io/python/2020/05/04/quick.html)
-* (현재글)[Comparsion Sort](https://simonjisu.github.io/python/2020/06/06/comparisonsort.html)
+* [Bubble Sort & Insertion Sort](https://simonjisu.github.io/algorithms/2020/05/02/bubbleinsertion.html)
+* [Selection Sort](https://simonjisu.github.io/algorithms/2020/05/02/selection.html)
+* [Merge Sort](https://simonjisu.github.io/algorithms/2020/05/03/merge.html)
+* [Quick Sort](https://simonjisu.github.io/algorithms/2020/05/04/quick.html)
+* (현재글)[Comparsion Sort](https://simonjisu.github.io/algorithms/2020/06/06/comparisonsort.html)
