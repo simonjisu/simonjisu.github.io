@@ -6,9 +6,70 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Jun 2021 14:42:07 +0900</pubDate>
-    <lastBuildDate>Tue, 15 Jun 2021 14:42:07 +0900</lastBuildDate>
+    <pubDate>Mon, 19 Jul 2021 19:04:12 +0900</pubDate>
+    <lastBuildDate>Mon, 19 Jul 2021 19:04:12 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>[글또 6기] 포스트 작성계획 및 다짐</title>
+        <description>&lt;h1 id=&quot;글또-6기-참여를-시작하며&quot;&gt;글또 6기 참여를 시작하며&lt;/h1&gt;
+
+&lt;p&gt;지난 글또 3, 4기 이후 잠깐 대학원 생활 한다고 1회 쉬었던 글또를 다시 참여하게 됐다. 이번에는 무려 131 명이라고 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;글또 페이스북: https://www.facebook.com/groups/geultto/&lt;/li&gt;
+  &lt;li&gt;글또 노션 페이지: https://bit.ly/geultto&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;지난 번에 실행할 수 있는 계획을 쓰는게 중요하다고 생각해서 &lt;a href=&quot;https://simonjisu.github.io/others/2020/02/19/geultto4.html&quot;&gt;4기 때 썼던 다짐&lt;/a&gt;을 다시 보니, 그래도 나름 글을 꾸준히 쓴것 같다(12회/13회 글 작성, 패스 1회 사용, 피드백 1회 미달). 나름 시리즈로 기본적인 알고리즘에 대한 글도 써서 사람들에게 도움이 되서 나름 뿌듯했다. 그러나 사람은 목표를 높게 잡아야하는 법, 이번에는 패스를 한 번도 사용하지 않고, 매 회자마다 글을 작성해보려고 한다. 사실 지원할 때부터 미리 생각해둔 주제들이 있어서, 어떤 글을 쓸지는 이미 정해져있는데, 대학원 마지막 학기라 자기의 시간 관리를 잘 해야한다고 생각된다. 이번에도 잘 해보자!&lt;/p&gt;
+
+&lt;h1 id=&quot;포스트-작성-계획&quot;&gt;포스트 작성 계획&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Semantic Parsing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;대학원 학위 논문을 이 분야로 정해서 공부한 것을 잘 정리해보려고 한다. 나는 어떤 기술이던 사람에게 도움이 되어야 한다고 생각한다. 아무리 좋은 기술이라도, 현실에서 쓰이지 못하면 그것은 그림의 떡이라고 생각된다(물론 아직 어플리케이션 연구가 덜 되서 그런 것일 수도 있다). Text2SQL은 쿼리문을 잘 모르는 사람들에게 분명 유용한 기술이 될 것이라 생각한다. 주변 일반 회사를 다니는 사람들의 이야기를 들어보면 데이터 분석이 대세여서 해보려고 하는데, 데이터를 DB에서 불러오는 것 부터가 문제라고 한다. 매번 사내 개발자에게 도움을 청할 수도 없는 노릇이고 학원에 가서 SQL를 듣자니 흥미가 크게 나지 않는다고 한다. 나는 Text2SQL이 이런 사람들을 위한 기술이라 생각한다. 뿐만 아니라 조금 긴 시각으로 보면 Board Meeting 같은 곳에서 필요한 예측을 자연어로 질의하고 이에대한 추론을 해낼 수만 있다면, 더 효율적인 미팅이 되지 않을까 생각한다. 그래서 이 기술을 제대로 연구해 보고 싶다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Background Semantic Parsing &amp;amp; Text2SQL&lt;/li&gt;
+  &lt;li&gt;Datasets in Text2SQL&lt;/li&gt;
+  &lt;li&gt;Data Agumentation in NLP&lt;/li&gt;
+  &lt;li&gt;Models: Hybrid Ranking Network for Text-to-SQL&lt;/li&gt;
+  &lt;li&gt;Models: RYANSQL: Recursively Applying Sketch-based Slot Fillings for Complex Text-to-SQL in Cross-Domain Databases&lt;/li&gt;
+  &lt;li&gt;Beam Search decoding: Execution-Guided Neural Program Decoding&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Machine Learning &amp;amp; Computer Science&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;기본기를 항상 다지자고 했는데 막상 정리할 시간이 없었다. 다행이도 이번에 논문 자격시험을 통해 이를 한 번에 훑어볼 기회가 생겨서 이를 다시 정리해보려고 한다. 지식을 정리하는 이유는 항상 잊기 때문이고 나중에 정리 한 것을 보면 금방 떠오르기 때문이다. 면접에 갔을 때, 어떤 질문을 물어보면 한 번에 잘 대답한 적이 있는가? 정리를 한 번 했던 경우와 그렇지 않은 경우는 그 대답의 수준이 천지차이다. 정리를 한 경우, 부분 부분 나눠서 기억하고 있던 지식이 상위 계층으로 축약이 되면서, 두괄식 답변을 할 수 있게 만든다(물론 말 하는 스킬에도 연관이 있지만 도움이 되는 것은 사실). 두괄식으로 대답하지 못하는 경우는 해당 지식에 대해서 부분적으로 알고 있다는 반증이기도 하다. 그래서 나는 이번에 머신러닝 지식을 정리하고 이를 한 마디로 요약하는 연습을 해보려고 한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Bagging: Random Forest&lt;/li&gt;
+  &lt;li&gt;Evaluation Metrics Summary&lt;/li&gt;
+  &lt;li&gt;Loss Functions&lt;/li&gt;
+  &lt;li&gt;Linear &amp;amp; Logistic Regression&lt;/li&gt;
+  &lt;li&gt;Data structure summary&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Others&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;취업 할 준비가 되서 그런지, 요즘 회사에 지원 이력서를 쓰고 있는데, 이번 글또에서 사람들과 이런 경험을 같이 공유해봤으면 좋겠다. 나는 어떤 사람인지를 스스로 생각해보고, 내가 잘하는게 무엇인지를 잘 알아보면 좋을 것 같다. 이런 생각을 공유하면서 사람들은 어떤 생각을 가지고 있는지 내가 배울만한 점은 더 있는지 알아보고 싶다. 그리고 내가 생각했던 회사의 모습 혹은 회사가 내 이력서를 보고 생각한 나의 모습을 회사지원하면서 직접 경험하고, 취업을 준비한 사람들과 공유하면서 간접적으로 경험하고 싶다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;나를 뒤돌아 보는 연습: 메타인지&lt;/li&gt;
+  &lt;li&gt;나는 어떤 일을 하고 싶은가?&lt;/li&gt;
+  &lt;li&gt;채용 공고에서 회사가 원하는 사람, 세세한 차이를 구별해낼 수 있을까? 채용공고 분석하기&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;여기까지 쓰는데 한 시간 딱 걸렸다. 발표 해주신 이수진님이 말한대로, 매일 한 시간 정도 할애해서 한번 시도 해보는 것도 좋을 것 같다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 19 Jul 2021 17:49:01 +0900</pubDate>
+        <link>https://simonjisu.github.io/others/2021/07/19/geultto.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2021/07/19/geultto.html</guid>
+        
+        
+        <category>others</category>
+        
+      </item>
     
       <item>
         <title>[XAI] Feature Visualization</title>
@@ -3093,277 +3154,6 @@ Further along this river, actual techniques, or better put, actual group of tech
         <pubDate>Thu, 23 Jul 2020 11:38:38 +0900</pubDate>
         <link>https://simonjisu.github.io/paper/2020/07/23/casm.html</link>
         <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/07/23/casm.html</guid>
-        
-        
-        <category>paper</category>
-        
-      </item>
-    
-      <item>
-        <title>[NLP] Mask-Predict: Parallel Decoding of Conditional Masked Language Models</title>
-        <description>&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1904.09324&quot;&gt;Mask-Predict: Parallel Decoding of Conditional Masked Language Models&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;모두의 연구소에서 진행하는 “beyondBERT” 프로그램에서 참여하다가 본 논문을 정리해보려고 한다. 흥미롭게 생각했던 논문이라 중요 부분만 일단 정리했다.&lt;/p&gt;
-
-&lt;p&gt;기존의 기계번역등 작업을 진행할때 Seq2Seq 모델(with Attention)을 사용할 경우 보통 autoregressive하게 토큰을 하나씩 디코딩했다. 예를 들어, “내가 아이언맨이다.”라는 문장을 번역하려면, Encoder에 다음과 같이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source&lt;/code&gt; 토큰들을 넣어주고, Decoder는 문장의 시작을 알리는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;SOS&amp;gt;&lt;/code&gt; 토큰으로 시작하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;I&quot;&lt;/code&gt;를 예측하고, 예측한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;I&quot;&lt;/code&gt;로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;am&quot;&lt;/code&gt;을 예측하고, 마지막에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;&amp;lt;EOS&amp;gt;&quot;&lt;/code&gt; 토큰이 등장하면 끝나는 구조다. sudo-code로 다음과 같이 작성 할 수 있겠다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;나는&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;아이언맨&quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;이다&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;SOS&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;I&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;am&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;IronMan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;EOS&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;hiddens&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Encoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_tensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;EOS&amp;gt;&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;EOS&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Decoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hiddens&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 논문에서는 non-autoregressive하게 decoding하는 방법을 제시했는데, 구체적인 방법은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;그림1&lt;/code&gt;을 보면 단번에 이해가 되리라고 믿는다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;일부 스터디에서 나온 의견 및 개인 의견이 섞여서 들어가 있음을 밝힌다.&lt;/li&gt;
-    &lt;li&gt;Model Distillation 부분은 비교군이 적절하지 않다고 스터디에서 나온 의견이 있어서 다루지 않았다.&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
-
-&lt;p&gt;생략&lt;/p&gt;
-
-&lt;h1 id=&quot;2-cmlmconditional-masked-language-models&quot;&gt;2. CMLM(Conditional Masked Language Models)&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CMLM은 입력 토큰 $X$와 일부 타겟 토큰 $Y_{obs}$가 주어지면 마스크가 된 타겟 토큰 $Y_{mask}$를 맞추는 문제다.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;강한 가정: 마스크된 타겟 토큰들 $Y_{mask}$은 입력데이터에 대해서 조건부 독립이다.&lt;/p&gt;
-
-\[\text{Predict: } P(y \vert X, Y_{obs}) \ \forall y \in Y_{mask}\]
-
-    &lt;p&gt;이를 분해해보면 다음과 같다.&lt;/p&gt;
-
-\[\begin{aligned} P(Y_{mask} \vert X, Y_{obs}) &amp;amp;= P(Y_{mask}^{K};Y_{mask}^{1:(K-1)} \vert X, Y_{obs}) P(Y_{mask}^{1:(K-1)} \vert X, Y_{obs}) \\ &amp;amp;= P(Y_{mask}^{K};Y_{mask}^{1:(K-1)} \vert X, Y_{obs}) \cdots P(Y_{mask}^{2};Y_{mask}^{1} \vert X, Y_{obs}) P(Y_{mask}^{1} \vert X, Y_{obs}) \end{aligned} \\ \text{if } Y_{mask} \text{ is conditionally independent by each other } \rightarrow \\ \begin{aligned} P(Y_{mask} \vert X, Y_{obs}) &amp;amp;\approx P(Y_{mask}^{K} \vert X, Y_{obs}) P(Y_{mask}^{K-1} \vert X, Y_{obs}) \cdots P(Y_{mask}^{2} \vert X, Y_{obs}) P(Y_{mask}^{1} \vert X, Y_{obs}) \end{aligned}\]
-
-    &lt;p&gt;(beyondBERT 에서 나온 리뷰: 이러한 최종 예측파트에서는 가정이 맞지만, 훈련시킬때는 아닐 것이다)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;추가로 마스크 개수는 정해져 있기 때문에 토큰 길이에 대한 제약도 명시적으로 달려있는 셈이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;21-architecture&quot;&gt;2.1 Architecture&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;클래식한 Transformer에 Decoder만 Masked-self attention을 제거하기로함&lt;/li&gt;
-  &lt;li&gt;fair-style Transformer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;22-training-objective&quot;&gt;2.2 Training Objective&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$1$~$N$(토큰길이) 만큼의 uniform distribution에서 랜덤하게 숫자를 고른다음에 그 개수만큼 $Y_{mask}$를 선택&lt;/li&gt;
-  &lt;li&gt;Cross-entropy Loss로 최적화, parallel하게 할 수 있는 이유는 이전의 $Y_{mask}$에 취한 conditionally independent 가정 때문이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;23-predicting-target-sequence-length&quot;&gt;2.3 Predicting Target Sequence Length&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;전통적인 left-to-right 기계번역의 경우, 이전 예측 토큰이 다음 예측 토큰으로 들어가게 된다. 그리고 최종적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EOS&lt;/code&gt;이 나오면 종료가 되는 형태라서 자동적으로 문장의 길이를 알 수 있었지만 , CMLMs에서는 전체 시퀀스를 parallel하게 예측하기 때문에 타겟 문장 전체의 길이를 예측해야한다.&lt;/li&gt;
-  &lt;li&gt;논문에서는 BERT 의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CLS&lt;/code&gt; 토큰처럼, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LENGTH&lt;/code&gt; 토큰을 Encoder에 집어넣기로 한다. 해당 토큰의 loss도 마지막에 추가한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;3-decoding-with-mask-predict&quot;&gt;3. Decoding with Mask-Predict&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;요약하면 각 iteration마다 알고리즘은 토큰의 부분집합을 선택하여 masking하고, CMLM으로 예측한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;31-formal-description&quot;&gt;3.1 Formal Description&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;타겟 시퀀스 $(y_1, \cdots, y_N)$ 와 각 토큰의 확률 $(p_1, \cdots, p_N)$이라는 두 변수가 있고, 미러 정의된 $T$번 동안 알고리즘을 돌린다(이는 상수거나 $N$에 관련된 간단한 함수로 결정된다).&lt;/li&gt;
-  &lt;li&gt;각 iteration마다 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mask&lt;/code&gt; 작업을 수행하고, 예측(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;predict&lt;/code&gt;)한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mask&quot;&gt;&lt;strong&gt;Mask&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;첫 iteration에는 모든 토큰을 마스킹한다. 그 이후부터는 가장 낮은 확률을 가진 $n$개의 토큰을 masking한다.&lt;/p&gt;
-
-\[\begin{aligned} Y_{mask}^{(t)} &amp;amp;= \arg \underset{i}{\min} (p_i, n) \\ Y_{obs}^{(t)} &amp;amp;= Y \setminus Y_{mask}^{(t)}\end{aligned}\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;$n$은 $t$의 함수이며 논문에서는 $n=N \cdot \dfrac{T-t}{T}$를 사용했다($T$는 iteration 횟수).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;predict&quot;&gt;&lt;strong&gt;Predict&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Masking후, CMLM은 주어진 입력$X$와 masking 안된 $Y_{obs}^{(t)}$를 기반으로 $Y_{mask}^{(t)}$를 예측하는데, 각 마스킹된 토큰 $y_i \in Y_{mask}^{(t)}$에 대해서 확률이 가장 높은 것을 예측값으로 선택한다.&lt;/p&gt;
-
-\[\begin{aligned} y_i^{(t)} &amp;amp;= \arg \underset{w}{\max} P(y_i = w \vert X, Y_{obs}^{(t)} ) \\ p_i^{(t)} &amp;amp;= \underset{w}{\max} P(y_i = w \vert X, Y_{obs}^{(t)} ) \end{aligned}\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;마스크가 안된 token들은 이전 스텝의 값을 그대로 따라간다.&lt;/p&gt;
-
-\[\begin{aligned} y_i^{(t)} &amp;amp;=y_i^{(t-1)} \\ p_i^{(t)} &amp;amp;= p_i^{(t-1)} \end{aligned}\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;특정 토큰의 확률이 계속 희박하여 이러한 휴리스틱한 작업에도 불구하고 잘 작동했다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;32-example&quot;&gt;3.2 Example&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;그림으로 보면 조금더 이해가 쉬운데, 차후 3.3에서 이야기하는 Length predict 이후의 예시를 들은 것이다.&lt;/li&gt;
-  &lt;li&gt;그림에서 나오는 용어들이 있다.
-    &lt;ul&gt;
-      &lt;li&gt;각 $t$ 스텝 마다 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mask &amp;gt; Predict&lt;/code&gt; 의 과정을 반복한다.&lt;/li&gt;
-      &lt;li&gt;$t$: 현재 스텝&lt;/li&gt;
-      &lt;li&gt;$n$: masking 해야할 토큰의 수&lt;/li&gt;
-      &lt;li&gt;$probability$(보라색): 각 예측의 확률을 담는 container&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=12HUzuQzCWwkaO4B6H07EOkEIJlKpjMnv&quot; alt=&quot;[그림1] Example of parallel decoding&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림1] Example of parallel decoding&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;마스킹되지 않았던 것들도 차후에 확률이 다른 토큰에 비해 상대적으로 낮아지면 다시 마스킹될 수도 있다. 즉, 초기에 잘못 예측했더라도, iteration을 통해 점차 바른 예측으로 고쳐질 수도 있다는 것&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;문제점: Multi-modality Problem&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1VSrcpclqKZ5KxqJF7yKAw-AP8u-hIuFQ&quot; alt=&quot;[그림2] Paper Figure 1&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림2] Paper Figure 1&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;논문의 Figure 1 처럼, t=0 인 상황에서 중복된 단어가 생성 될 수가 있음(“completed”) 이는 non-autoregressive 모델에서 자주 등장하는 문제다. 이는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5.1&lt;/code&gt;에서 자세히 다룬다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;33-deciding-target-sequence-length&quot;&gt;3.3 Deciding Target Sequence Length&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;타켓 문장의 길이인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LENGTH&lt;/code&gt; 토큰을 예측하기 때문에 배치 연산을 할 수 있다.&lt;/li&gt;
-  &lt;li&gt;확률이 가장 높은 길이를 여러개 뽑아서 배치 연산으로 3.2의 과정을 할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1WPZ4xsitujEWF9yfeacc6V587DmjGZ2x&quot; alt=&quot;[그림3] Length Predict&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림3] Length Predict&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;차후에 제일 높은 평균 로그 확률로 길이를 선택하게 된다(beam search 와 연관)&lt;/li&gt;
-&lt;/ul&gt;
-
-\[\dfrac{1}{N} \sum_i \log p_i^{(T)}\]
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;experiments&quot;&gt;Experiments&lt;/h1&gt;
-
-&lt;h2 id=&quot;41-experimental-setup&quot;&gt;4.1 Experimental Setup&lt;/h2&gt;
-
-&lt;h3 id=&quot;translation-benchmarks&quot;&gt;Translation Benchmarks&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;총 3개의 데이터 세트를 사용: WMT’14 EN-DE (4.5M sentence pairs), WMT’16 EN-RO (610k pairs), WMT’17 EN-ZH (20M pairs)&lt;/li&gt;
-  &lt;li&gt;모든 데이터는 BPE로 인코딩했으며, 퍼포먼스는 BELU score를 계산했다.&lt;/li&gt;
-  &lt;li&gt;EN-ZH 만 ScareBLEU를 사용했다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;hyperparameters&quot;&gt;Hyperparameters&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Attention is All you Need 논문과 똑같이 각 stack마다 6개의 layer, 각 layer마다 8개의 attention heads, 모델 $h_{model}, h_{ffn}$ hidden size는 각 512, 2048로 진행했다.&lt;/li&gt;
-  &lt;li&gt;가중치 초기화는 BERT 논문에서 진행한 $\mathcal{N}(0, 0.02)$, bias는 0으로 초기화 했다.&lt;/li&gt;
-  &lt;li&gt;LayerNorm은 $\beta=0, \gamma=1$&lt;/li&gt;
-  &lt;li&gt;Regularization은 $\text{dropout}=0.3, \text{weight decay}=0.01$ 로 실험했다.&lt;/li&gt;
-  &lt;li&gt;Smoothed CV Loss $\varepsilon=0.1$&lt;/li&gt;
-  &lt;li&gt;훈련은 Adam에 $\beta=(0.9, 0.999), \varepsilon=10^{-6}$으로 진행, warm up 은 $10000$ 스텝에 $5\cdot 10^{-4}$까지 피크로 가다가 역제곱근의 형태로 내려간다.&lt;/li&gt;
-  &lt;li&gt;훈련 스텝은 300k 각 epoch 마다 validation 진행하고, 가장 좋은 5개의 checkpoint를 평균내서 최종모델을 만든다.&lt;/li&gt;
-  &lt;li&gt;Decoding을 비교하기 위해서 autoregressive 모델에서 beam search($b=5$), 논문의 모델은 $l=5$개의 후보를 사용해서 decoding했다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;42-translation-quality&quot;&gt;4.2 Translation Quality&lt;/h2&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1sdffQlPXdG9Fgs_O_xgE1xfn-kxIPKmL&quot; alt=&quot;[그림4] Paper Table 1 &amp;amp; 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림4] Paper Table 1 &amp;amp; 2&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;같은 non-autoregressive 방법들 중에서 논문의 모델이 가장 높은 BLEU score를 달성했다고 주장하고 있다.&lt;/li&gt;
-  &lt;li&gt;다른 non-autoregressive 방법들을 확인 해봐야 더 자세히 알것 같다.
-    &lt;ul&gt;
-      &lt;li&gt;NAT w/ Fertility (&lt;a href=&quot;https://arxiv.org/abs/1802.06901&quot;&gt;Gu et al., 2018&lt;/a&gt;)&lt;/li&gt;
-      &lt;li&gt;CTC Loss (&lt;a href=&quot;https://arxiv.org/abs/1811.04719&quot;&gt;Libovicky et al., 2018&lt;/a&gt;)&lt;/li&gt;
-      &lt;li&gt;Iterative Refinement(&lt;a href=&quot;https://www.aclweb.org/anthology/D18-1149/&quot;&gt;Lee et al., 2018&lt;/a&gt;)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;43-decoding-speed&quot;&gt;4.3 Decoding Speed&lt;/h2&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1pqAa4SEq-SNleVeUp0IUkcTrzQFqpjLr&quot; alt=&quot;[그림5] Paper Figure 2&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림5] Paper Figure 2&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;파란점은 논문저자들의 실험 결과며, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;L2R b=1&lt;/code&gt;는 beam search(b=1)를 사용한 Left-to-Right(autoregressive) 모델이다.&lt;/li&gt;
-  &lt;li&gt;Decoding 스피드와 퍼포먼스간의 trade-off 를 이야기하면, $T=4, l=2$인 경우 2 point의 퍼포먼스를 대가로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;L2R b=5&lt;/code&gt;모델 보다 3배의 스피드를 끌어 올릴 수 있다고 주장한다.&lt;/li&gt;
-  &lt;li&gt;beyondBERT에서 나온 리뷰중에 하나가 2 point BELU score 면 엄청나게 큰 점수라고 한다(quality 가 상당히 떨어질 수도?!).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;5-analysis&quot;&gt;5. Analysis&lt;/h1&gt;
-
-&lt;h2 id=&quot;51-why-are-multiple-iterataions-necessary&quot;&gt;5.1 Why Are Multiple Iterataions Necessary?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Various non-autoregressive 모델에서는 각 예측 토큰들이 서로 조건부 독립이라는 큰 가정이 들어간다. 때문에 예측할때 서로 다른 토큰에 영향을 받지 않아서 다른 위치라도 높은 확률로 같은 토큰을 반복적으로 예측하는 문제가 생긴다.&lt;/li&gt;
-  &lt;li&gt;이러한 문제를 Multi-modality 문제라고 &lt;a href=&quot;https://arxiv.org/abs/1711.02281&quot;&gt;Gu et al., 2018&lt;/a&gt;의 논문에서 이야기 한적이 있다.&lt;/li&gt;
-  &lt;li&gt;저자들은 예측한 토큰을 모델의 입력으로 사용하여, 반복적인 masking-predict 수행을 통해(multi-modal distribution을 uni-modal distribution으로 전환) 이 문제를 완화시키려고 했다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1G5DV3t-J1dp6-nOdx9Nh1Vwo-XXy6xpx&quot; alt=&quot;[그림6] Paper Table 3&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림6] Paper Table 3&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;가설을 검증하기 위해서, Proxy Metric으로 중복 된 예측 토큰의 개수가 몇 퍼센트를 차지하는지 살펴보았다. 확실히 $T$가 높아질 수록 해당 비율은 현저하게 줄어든다.&lt;/li&gt;
-  &lt;li&gt;$T$가 작을 수록(중복된 토큰 예측이 많아질 수록) BLEU score가 현저하게 낮아지는 것도 이해가 된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;52-do-longer-sequence-need-more-iterations&quot;&gt;5.2 Do Longer Sequence Need More Iterations?&lt;/h2&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1qf97x-hNgWXtl8NbHJ-z7iUG0KZ-uNg2&quot; alt=&quot;[그림7] Paper Table 4&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림7] Paper Table 4&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;긴 문장일 수록 더 많은 iteration이 도움이 되긴했다. 그러나 $T$가 많아질 수록 연산비용이 많아지는 것을 고려해야 할 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;53-do-more-length-candidates-help&quot;&gt;5.3 Do More Length Candidates Help?&lt;/h2&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=127K3YP4LlTrPHEiu9XO5v7U_rlrByMlA&quot; alt=&quot;[그림8] Paper Table 5&quot; width=&quot;75%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;[그림8] Paper Table 5&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;적당한 길이 후보($\mathcal{l}$)는 번역에 도움이 되지만 너무 많은 후보를 두면 도움이 안된다.&lt;/li&gt;
-  &lt;li&gt;상식적으로 후보들이 비슷한 길이를 가진다면 예측에 도움이 되겠지만, 많은 후보들 중에 비슷하지 않은 길이들이 있다면, 번역의 품질이 떨어질 수밖에 없을 것 같다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;개인적-리뷰-및-결론&quot;&gt;개인적 리뷰 및 결론&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;non-autoregressive 모델의 decoding은 실무에서 빠르게 decoding 할 수있기 때문에 앞으로 연구할 가치가 있는 분야인것 같다.&lt;/li&gt;
-  &lt;li&gt;이런 분야도 있다는 것을 처음 접해서 신선한 decoding 방법이라고 생각했다. 다른 decoding 방법들(&lt;a href=&quot;https://www.facebook.com/groups/ChatbotDevKR/permalink/1000241780393951/&quot;&gt;챗봇 코리아 게시물&lt;/a&gt;)도 참고하면 좋을 것 같다.&lt;/li&gt;
-  &lt;li&gt;그러나 해결되지 않은 몇 가지 문제(multi-modality)를 해결할 필요가 있어 보인다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 19 Jul 2020 11:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/07/19/maskpredict.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/07/19/maskpredict.html</guid>
         
         
         <category>paper</category>
