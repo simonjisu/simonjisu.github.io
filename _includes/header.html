@@ -39,7 +39,8 @@
                     {% capture cat %}{{ category | first }}{% endcapture %}
                     {% if cat == subcat %}
                       <li>
-                        <a href="{{ site.url }}{{ site.baseurl }}/archive#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a>
+                        <!-- <a href="{{ site.url }}{{ site.baseurl }}/archive#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a> -->
+                        <a href="./archive#{{ subcat }}" target="_self">{{ subcat | capitalize }}</a>
                       </li>
                     {% endif %}
                   {% endfor %}
@@ -50,7 +51,8 @@
           </ul>
         {% else %}
           <ul class="{{ class }}">
-            <li><a href="{{ site.url }}{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a></li>
+            <!-- <li><a href="{{ site.url }}{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a></li> -->
+            <li><a href="./{{ link.url }}">{{ link.title }}</a></li>
           </ul>
         {% endif %}
       {% endfor %}

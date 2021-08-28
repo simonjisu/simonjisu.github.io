@@ -6,9 +6,243 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 Aug 2021 23:37:16 +0900</pubDate>
-    <lastBuildDate>Fri, 13 Aug 2021 23:37:16 +0900</lastBuildDate>
+    <pubDate>Sat, 28 Aug 2021 14:47:32 +0900</pubDate>
+    <lastBuildDate>Sat, 28 Aug 2021 14:47:32 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Machine Learning: Evaluation</title>
+        <description>&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1rxOWFSNawoCtGJQLLpQzE90tYWCAtEEI&quot; alt=&quot;Reference: Pixabay&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Reference: Pixabay&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;confusion-matrix&quot;&gt;Confusion Matrix&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Confusion Matrix&lt;/strong&gt; 는 보통 supervised learning 관련 머신러닝 알고리즘의 퍼포먼스를 측정하기 위한 도구로 사용된다. 자주 사용되는 것인데 계속 잊어버려서 한 번 정리해보고 어떤 상황에서 사용되는지 알아보자.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;개념&quot;&gt;개념&lt;/h1&gt;
+
+&lt;p&gt;분류 문제에서 정확도를 평가지표로 사용할 때, 클래스의 불균형 문제가 있으면 잘못된 결과를 낳다. 예를 들어, 개/고양이를 분류하는 문제에서 95개의 고양이와 5개의 개 사진이 있고, 어떤 모델이 전부 고양이를 예측했다. 최종 정확도는 95%지만, 고양이의 검출율 은 100% (95개 중 95개 예측)이고 개의 검출율를 0% (5개 중 0개 예측)이다.&lt;/p&gt;
+
+&lt;p&gt;정확도로 탐지할 수 없는 모델의 문제점을 정보(informedness)로 표현을 하게되자 어떤 문제가 있는지 알게 되었다. 이 예시에서는 모델이 항상 고양이만 예측한다는 것이다.&lt;/p&gt;
+
+&lt;p&gt;두 개의 클래스가 있을 때 Confusion Matrix는 다음과 같이 정의 된다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Predicted&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Positive&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Negative&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Actual&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Positive&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;True Positive&lt;/td&gt;
+      &lt;td&gt;False Negative&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Negative&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;False Positive&lt;/td&gt;
+      &lt;td&gt;True Negative&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;여기서 행은 실제(Actual) 데이터의 레이블이고, 칼럼은 모델이 예측(Predict)한 레이블을 뜻한다. 표의 내용은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(앞)진위여부 (뒤)예측&lt;/code&gt;과 같이 해석하는게 좋다. 즉, True Positive는 예측(Predicted)는 Positive인데 실제(Actual)로 Positive라서 진위 여부는 True다. 하나더 예를 보면 False Negative면 예측은 Negative인데 실제로 Negative라 진위 여부는 False다.&lt;/p&gt;
+
+&lt;p&gt;Confusion Matrix에서 파생되는 여러가지 지표들이 있는데 지금부터 알아보겠다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;지표&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;공식&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Accuracy&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$\dfrac{(TP + TN)}{(TP + TN + FN + FP)}$&lt;/td&gt;
+      &lt;td&gt;전체 맞게 예측한 비율&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Precision&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$\dfrac{TP}{(TP + FP)}$&lt;/td&gt;
+      &lt;td&gt;예측한 Positive 중에 맞게(True) 예측한 비율&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Recall / Sensitivity&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$\dfrac{TP}{(TP + FN)}$&lt;/td&gt;
+      &lt;td&gt;실제 Positive 중에 맞게(True) 예측한 비율&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fall-out&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$\dfrac{FP}{(FP + TN)}$&lt;/td&gt;
+      &lt;td&gt;실제 Negative 중에 틀리게(False) 예측한 비율&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;F1 Score&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;$\dfrac{2}{(1/Precision + 1/Recall)} = \dfrac{2\times Precision\times Recall}{Precision + Recall}$&lt;/td&gt;
+      &lt;td&gt;Precision 과 Recall의 조화 평균, 데이터 분포가 불균형 일때 사용, 큰 비중이 끼치는 bias 가 줄어듦&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;예시&quot;&gt;예시&lt;/h1&gt;
+
+&lt;p&gt;예를 들어, 쇼핑몰의 머신러닝 개발자가 조금더 편한 태깅을 위해, 의류 사진를 보고 어떤 종류인지 예측해서 분류하는 머신러닝 모델을 만들었다고 생각해보자. 의류는 총 3가지 class 이며 다음과 같다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;cls_dict&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;상의&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;하의&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;신발&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그리고 신규 물품 사진에 대한 모델의 에측 결과를 다음과 같이 저장했다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 상의 6개
+&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 하의 10개
+&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 신발 9개
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그러면 Confusion matrix를 다음과 같이 만들 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#         Predict
+#        [[4 1 1]
+# Target  [6 2 2]
+#         [3 0 6]]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;accuracy&quot;&gt;Accuracy&lt;/h2&gt;
+
+&lt;p&gt;정확도는 전체에서 옳게 맞춘 비율임으로 다음과 같이 계산된다.&lt;/p&gt;
+
+\[\text{Accuracy} =\dfrac{4+2+6}{25}\]
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;total&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;true_positive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eye&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true_positive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;total&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 0.48
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;precision&quot;&gt;Precision&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;정밀도(Precision)&lt;/strong&gt; 는 Positive라고 예측한 것들 중에서 실제로 맞게 예측한 비율임으로 다음과 같이 계산된다.&lt;/p&gt;
+
+\[\begin{aligned} \text{Class 0} &amp;amp;= \dfrac{4}{4+6+3} \\ \text{Class 1} &amp;amp;= \dfrac{2}{1+2+0} \\ \text{Class 2} &amp;amp;= \dfrac{6}{1+2+6} \end{aligned}\]
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;predicted&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;precisions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true_positive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predicted&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;precisions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Macro Precision &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;precisions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;precisions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [0.3077 0.6667 0.6667]
+# Macro Precision 0.5470
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;recall--sensitivity&quot;&gt;Recall / Sensitivity&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;재현율(Recall/Sensitivity)&lt;/strong&gt; 은 실제 Positive 인것들 중에서 맞게 예측한 비율임으로 다음과 같이 계산된다.&lt;/p&gt;
+
+\[\begin{aligned} \text{Class 0} &amp;amp;= \dfrac{4}{4+1+1} \\ \text{Class 1} &amp;amp;= \dfrac{2}{6+2+2} \\ \text{Class 2} &amp;amp;= \dfrac{6}{3+0+6} \end{aligned}\]
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;actual_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;recalls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;true_positive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;actual_count&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recalls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Macro Recall &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recalls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recalls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [0.6667 0.2    0.6667]
+# Macro Recall 0.5111
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;fallout&quot;&gt;Fallout&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Fallout&lt;/strong&gt; 은 Negative라고 예측했는데 실제로 Positive라고 맞춘 비율임으로 다음과 같이 계산된다.&lt;/p&gt;
+
+\[\begin{aligned} \text{Class 0} &amp;amp;= \dfrac{6+3}{6+2+2+3+0+6} \\ \text{Class 1} &amp;amp;= \dfrac{1+0}{4+1+1+3+0+6} \\ \text{Class 2} &amp;amp;= \dfrac{1+2}{4+1+1+6+2+2} \end{aligned}\]
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;itertools&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;combinations&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cls_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;reversed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;combinations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;false_positive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cls_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;negative&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;confusion_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;neg_idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fpr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;false_positive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;negative&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+&lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Macro Fallout &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallouts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [0.4737 0.0667 0.1875]
+# Macro Fallout 0.2426
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;f1-score&quot;&gt;F1 Score&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;F1 Score&lt;/strong&gt; 는 다음과 같이 계산된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;f1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;precisions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recalls&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;precisions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recalls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Total F1 &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [0.4211 0.3077 0.6667]
+# Total F1 0.4651
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;scikit-learn&quot;&gt;Scikit-Learn&lt;/h1&gt;
+
+&lt;p&gt;Scikit-learn 패키지중 이를 한번에 구해주는 패키지가 있다. 이 표를 보고 모델의 성능을 한번 평가해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.metrics&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classification_report&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classification_report&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target_names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;상의&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;하의&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;신발&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#               precision    recall  f1-score   support
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#         상의       0.31      0.67      0.42         6
+#         하의       0.67      0.20      0.31        10
+#         신발       0.67      0.67      0.67         9
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#     accuracy                           0.48        25
+#    macro avg       0.55      0.51      0.47        25
+# weighted avg       0.58      0.48      0.46        25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;precision-1&quot;&gt;Precision&lt;/h3&gt;
+
+&lt;p&gt;정밀도는 Type-I Error와 연관있다. Type-I Error는 실제 Negative를 Positive라고 예측한 경우인데, 예를 들어 재판의 경우 죄를 짓지 않았는데 유죄 판결을 내리는 경우 피고인은 무고할 수가 있다.  Precision이 높을 수록 Type-I Error를 줄일 수 있다.&lt;/p&gt;
+
+&lt;p&gt;의류분류기 모델의 경우 “상의”에 대해서는 상의가 아닌데 상의라고 판별할 가능성이 높다는 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;recall&quot;&gt;Recall&lt;/h3&gt;
+
+&lt;p&gt;재현율은 Type-II Error와 연관있다. Type-II Error는 실제 Positive를 Negative라고 예측한 경우인데, 암 판정의 예시를 들면, 암이 있는데 암이 없다고 판정한 것이며, 이는 환자에게 치명적일 수가 있다. Recall이 높을 수록 Type-II Error를 줄 일 수 있다.&lt;/p&gt;
+
+&lt;p&gt;의류분류기 모델의 경우 “하의”에 대해서는 실제로 “하의”인데 다른 클래스라고 판별할 가능성이 높다는 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;f1-score-1&quot;&gt;F1 Score&lt;/h3&gt;
+
+&lt;p&gt;조화 평균인 F1 Score은 데이터 분포가 불균형 일때 사용되는데, 큰 비중이 끼치는 bias 가 줄어들게 된다. 예를 들어 recall이 $0.9$ 이고 precision이 $0.01$ 인 경우, 일반 평균을 구하면 $(0.9+0.01)/2 = 0.455$가 나오지만 조화 평균을 사용하게 되면, $2\times 0.9 \times 0.01 / (0.9 + 0.01) = 0.020$으로 굉장히 낮게 나온다.&lt;/p&gt;
+
+&lt;p&gt;의류분류기 모델의 경우 “신발”의 성능이 상대적으로 “하의”, “상의”보다는 더 나은 퍼포먼스를 보인다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 28 Aug 2021 12:13:01 +0900</pubDate>
+        <link>https://simonjisu.github.io/machinelearning/2021/08/28/mleval.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/machinelearning/2021/08/28/mleval.html</guid>
+        
+        
+        <category>machinelearning</category>
+        
+      </item>
     
       <item>
         <title>[NLP] Hybrid Ranking Network for Text-to-SQL</title>
@@ -2921,102 +3155,6 @@ Further along this river, actual techniques, or better put, actual group of tech
         
         
         <category>paper</category>
-        
-      </item>
-    
-      <item>
-        <title>Topics to think about</title>
-        <description>&lt;p&gt;공부를 하면서 앞으로 어떤것을 연구할지 생각할 시간을 가져봤다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1EFBMDgoDpcGadISMTbWMquvP0cJ80MUN&quot; alt=&quot;Img Source: https://pixabay.com/images/id-1868728/&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Img Source: https://pixabay.com/images/id-1868728/&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;1-misleading&quot;&gt;1. Misleading&lt;/h1&gt;
-
-&lt;p&gt;최근에 트럼프가 코로나 바이러스 대처에 대해서 “미국이 다른 나라들 보다 더 잘하고 있다”라고 주장했다. 6월 부터 이스라엘, 일본, 호주 등 국가들의 14배 심지어 35배 만큼 증가했다는 것을 근거로 들었다(아마 이전의 몇배를 측정).&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Since the beginning of June, daily new cases have increased by a factor of 14 times in Israel; 35 times — that’s 35 times — in Japan; and nearly 30 times in Australia, just to name a few. These were countries that were doing incredibly well; leadership was being praised.&lt;/p&gt;
-
-  &lt;p&gt;Source: whitehouse briefings - &lt;a href=&quot;https://www.whitehouse.gov/briefings-statements/remarks-president-trump-press-briefing-july-30-2020/&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;그러나 이는 함정이다. 기준을 6월부터 잡은 것은 기저효과가 깔려있는 문구다. 트럼프가 비교한 나라들의 6월 이전 코로나 수치를 살펴보자.&lt;/p&gt;
-
-&lt;iframe src=&quot;https://ourworldindata.org/coronavirus-data-explorer?zoomToSelection=true&amp;amp;country=ISR~JPN~AUS~USA&amp;amp;casesMetric=true&amp;amp;interval=smoothed&amp;amp;hideControls=true&amp;amp;perCapita=true&amp;amp;smoothing=7&amp;amp;pickerMetric=location&amp;amp;pickerSort=asc&quot; loading=&quot;lazy&quot; style=&quot;width: 100%; height: 600px; border: 0px none;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;5월에서 이 나라들은 미국보다 훨씬 더 적은 코로나 cases를 기록했다는 사실이다. 따라서 6월 들어서 코로나 수치가 급증했으면, 그 배수도 그만큼 훨씬 더 커질 것이다. 5월달에 미국 정부는 코로나 관리를 잘한게 아닌데, 이 나라들 보다 더 잘하고 있다고 이야기한 것은 명백하게 오도하는 것이다(일본도 통계를 조작하는 낌세가 있긴 하지만 언급은 안하기로함).&lt;/p&gt;
-
-&lt;p&gt;이처럼 사실인 정보를 자신의 입맛대로 바꿔서 전달하여 사람들을 호도하는 것은 분명 잘못된 것이다. 그래서 생각해본 연구주제로 도표에서 얻을 수 있는 정보를 제대로 서술하는 인공지능을 만들 수 있을까? 도표에 대해 잘못 서술하면 그 잘못된 원인과 고쳐야할 문구를 이야기할 수 있을까?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;관련 기사: &lt;a href=&quot;https://www.factcheck.org/2020/08/trumps-misleading-covid-19-comparisons-to-other-countries/&quot;&gt;Trump’s Misleading COVID-19 Comparisons to Other Countries&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;찾아보다 재밌게본 지금까지 트럼프가 한 거짓말 DataBase: &lt;a href=&quot;https://www.washingtonpost.com/graphics/politics/trump-claims-database/&quot;&gt;WashingtonPost-Trump-Claims-Database&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;2-trustability&quot;&gt;2. Trustability&lt;/h1&gt;
-
-&lt;p&gt;최근 친구들과 술자리에서 유튜브에 관련해 이야기를 하다가 재밌는 것을 들었다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;의사에게 진료하러가면, 최근에 어떤 환자들은 유튜브 이야기를 한다.&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;의사:&lt;/strong&gt; “이쪽 부위는 수술이 좀 필요해보입니다”&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;환자:&lt;/strong&gt; “그런데요, 요즘 xxx 유튜브 보니까, 이거 꼭 수술하지 않아도 된다던대요?”&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;의사:&lt;/strong&gt; “유튜브를 너무 신뢰하지 마시고, 제 의견상 이 부분은 ~~ 때문에 수술을 하지 않으면, 향후에 문제가 있을 것 같습니다.&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;환자&lt;/strong&gt;: “그런데, 의사 yyy 유튜브에서는 …”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;이런 대화를 듣다가, 생각한 것은 “전문가”인 의사가 “비전문가”인 환자에게 바로 신뢰를 얻지 못하는 이유가 무엇일까?&lt;/p&gt;
-
-&lt;p&gt;“비전문가”인 우리가 접하는 정보가 과거보다 훨씬 더 많아진 것이 원인 중 하나라고 생각한다. 위와 같은 현상의 원인은 “비전문가”인 내가 의사결정을 하기 전에 자신이 가지고 있는 지식과, “전문가”가 가지고 있는 지식의 gap을 메꾸려고하기 때문이다. 즉, 비전문가는 다양해진 정보소스로 인해 자신이 모르는 분야에서 해당정보를 듣고 어떤 불안감이 형성됐고, 이를 해소하려고 전문가에게 묻는 과정이고, 그 매개체가 유튜브가 된것이다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 생각하다보니 두 가지 질문이 떠올라 생각들을 적어봤다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;특정 분야에서 뛰어난 AI 전문가(컴퓨터)가 이 불안감을 해소시킬 수 있을까?&lt;/p&gt;
-
-    &lt;p&gt;AI 전문가(“모델”이라고 생각해도 될것 같다)가 사람에게 신뢰를 줄 수 있을 만큼이 되면, 불안감을 해소시킬수 있을 것이다. 어떻게 신뢰를 얻을 수 있을까? 어느 정도의 설명을 해야지 우리는 모델을 신뢰한다고 이야기 할 수 있을까? 일단 생각나는 것은 설명의 눈높이를 인간에게 맞추면, 조금더 신뢰가능한 모델이 될것이다. 단순히 모델의 내부 원리를 설명하는 것 보다, 인간의 눈높이에 맞춰서 이야기하는게 더 믿음이 가기 마련이다.&lt;/p&gt;
-
-    &lt;p&gt;한편으로 이런 생각도 든다, 이러한 정보의 gap이 존재하는 구도에서 한번 의심하기 시작하면, 본인이 경험을 하기 전까지는 믿기가 쉽지 않아지는게 사실이다. 마치 중고차를 사기 전에는 계속 의심하고, 어디 하자가 있는지 계속 체크하게 되지만, 사기로 결정하고 잘 타고 다니면, 이러한 의심은 싹 사라지는 법이다.&lt;/p&gt;
-
-    &lt;p&gt;문제는 본인이 경험을 하기 전에 의사결정을 꼭 해야되는 상황인 것이다. 중고차를 구매할지 말지, 수술을 할지 말지 등 결정을 하고나면, 그 후의 경험으로 그 때 이야기했던 말이 믿을 만했던것인지 알 수 있다는 점이다. 만약에 의사결정 후 상황이 돌이킬수 없는 것이라면? 전문가의 잘못된 설명이 해가 되면 그만큼 더 치명적이다. 따라서 AI 전문가가 사람 전문가 보다 뛰어난다고 해도, 사람 전문가와 같이 협업하는 그림을 그려야하지 않을까?라는 생각이 든다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;왜 유튜브가 사람들의 정보를 얻는(혹은 searching)의 최대 창구가 되었을까?&lt;/p&gt;
-
-    &lt;p&gt;유튜브로 정보를 취득하는 이유에 대해서는 다니엘 카너먼이 쓴 “생각에 관한 생각” 책에서 찾을 수 있을것 같다. 카너먼은 생각의 과정을 두 시스템을 비유로 이야기한다.&lt;/p&gt;
-
-    &lt;blockquote&gt;
-      &lt;p&gt;시스템 1과 시스템 2는 모두 우리가 깨어 있을 때 활성화 된다. 시스템1은 자동으로 작동하고, 시스템 2는 편안한 보통 상태에서는 별 노력을 요하지 않고 역량의 일부만 가동한다. 시스템 1은 시스템 2를 위해 인상, 직관, 의도, 느낌을 지속적으로 제안한다. 시스템 2의 승인을 받으면 인상과 직관은 믿음으로 바뀌고, 충동은 자발적 행위로 변한다. 실제 대부분의 경우가 그렇지만 이 모든 과정이 자연스럽게 진행될 때, 시스템 2는 거의 혹은 전혀 수정없이 시스템 1의 제안을 그대로 수용한다. 우리는 일반적으로 느낀 인상을 믿고, 자신의 바람에 따라 행동하는데 이는 일반적으로 우리에게 유익하고 양호하다.&lt;/p&gt;
-    &lt;/blockquote&gt;
-
-    &lt;p&gt;유튜브에서 정보를 시청하는 과정은 “시스템 1”에 해당한다고 할 수 있다. 궁금한 것에 대해서 별다른 생각없이 정보를 그대로 수용하고, “시스템 2” 또한 이를 그대로 수용하면 편하다. 반면 정보를 글로써 읽어야한다면, “시스템 1”이 이해하지 못한 내용에 대해서, “시스템 2”는 이를 해석해야하고, 이야말로 귀찮은 작업잉 아닐수가 없다. 따라서, 인간은 귀찮은 것을 피하는 존재로, 당연히 정보를 읽는 것보다 시청하는 쪽으로 기울어 질 수 밖에 없다고 생각한다(편리한 정도를 생각하면).&lt;/p&gt;
-
-    &lt;p&gt;헤비 유튜브 소비자로서, 사람들이 유튜브 내에서 사람들이 검색하는 정보들이 궁금하다. 한국에서 “탐색”란에서 등장하는 인기 급상승 동영상은 주로 논란이 되는 사회이슈(“죄송합니다”관련 내용들, 태극기부대 관련 채널), 아이돌 뮤직비디오, 예능 모음집 등등이 있다. 이런 영상들은 검색을 통한 정보다 아니라고 생각된다. 반대로 검색창에 검색하는 내용들이 진짜 사람들이 필요하고, 알고싶어하는 마음을 대변할 수 있는 데이터들이라고 생각한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;3-bias-in-ai&quot;&gt;3. Bias in AI&lt;/h1&gt;
-
-&lt;p&gt;글또에서 손영신님께서 쓰신 글(&lt;a href=&quot;https://pizza-thief.github.io/nlp-bias-against-person-with-disabilities/&quot;&gt;NLP 모델은 배리어 프리일까?&lt;/a&gt;)이  AI를 연구하는 사람으로서 생각해볼 만한 주제인것 같다. 완벽한 AI는 존재하지 않고, 데이터가 존재하는 사회의 Bias를 반영하기 마련이다. 실제 세상에 기술이 적용되기 전에, 이런 문제점을 꼭 고려하고 공론화를 통해 토론을 해야한다고 생각한다. 이 내용과 비슷하지만 관련된 조경현 교수님의 글(&lt;a href=&quot;https://kyunghyuncho.me/social-impacts-bias-of-ai/&quot;&gt;Social impacts &amp;amp; bias of AI&lt;/a&gt;)도 읽는 것을 추천한다.&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 16 Aug 2020 11:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/others/2020/08/16/aitopics.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/others/2020/08/16/aitopics.html</guid>
-        
-        
-        <category>others</category>
         
       </item>
     
