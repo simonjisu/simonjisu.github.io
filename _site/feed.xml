@@ -6,9 +6,112 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 28 Aug 2021 14:47:32 +0900</pubDate>
-    <lastBuildDate>Sat, 28 Aug 2021 14:47:32 +0900</lastBuildDate>
+    <pubDate>Sat, 25 Sep 2021 22:22:57 +0900</pubDate>
+    <lastBuildDate>Sat, 25 Sep 2021 22:22:57 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>카카오 블라인드 코딩테스트 후기</title>
+        <description>&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1kJshUGkeuqBEeUh8CQ3diK3L7Bqc4yiS&quot; alt=&quot;Reference: Pixabay&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Reference: Pixabay&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;지난 18일과 25일 양일간 2022 카카오 블라인드 코딩테스트를 마쳤다. 오늘은 그 후기를 써보고자 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://programmers.co.kr/competitions/1571/2022-kakao-blind-recruitment&quot;&gt;2022 KAKAO BLIND RECRUITMENT 링크&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;1차-테스트&quot;&gt;1차 테스트&lt;/h1&gt;
+
+&lt;p&gt;1차 테스트는 여차 다른 코딩테스트와 다른 것이 없었다. 시간은 대략 5시간 정도였고, 작년과 문제는 완전히 다르지만 대략 7문제 정도 출제됐다. 나는 4문제 정도 풀었다. 지금은 문제를 언급하면 문제가 됨으로 나중에 공개되면 하나씩 다시 돌아볼 예정이다.&lt;/p&gt;
+
+&lt;p&gt;코딩 테스트 공부는 나동빈 님의 “&lt;a href=&quot;http://www.yes24.com/Product/Goods/91433923&quot;&gt;&lt;strong&gt;이것이 취업을 위한 코딩테스트다 with 파이썬&lt;/strong&gt;&lt;/a&gt;” 책을 보면서 전체적인 느낌을 훑고, Leetcode 문제를 조금씩 풀어봤다. 책이 정말 많은 도움이 됐는데, 코딩 테스트를 어디서 부터 공부 할 지 모르겠다면 한 번 구매해서 보는 것을 강력히 추천한다. 이 책은 코딩테스트를 어떻게 준비하는지 부터 시작해서 어떤 문제가 있는 지 유형별로 알려준다.&lt;/p&gt;
+
+&lt;p&gt;다만 너무 늦게 시작해서 주요 알고리즘 이론만 공부한게 조금 아쉬웠다. 익숙하지 않으니 변형된 문제에 시간을 많이 소비했다. 내가 느낀 취업에서 코딩 테스트는 기초 체력과 같다. 복싱장에 가면 처음에 줄넘기부터 배워 체력을 키우듯이, 코딩 테스트도 매일 꾸준히 훈련하고 응용해야 수업시간에  배우는 알고리즘이 녹슬지 않는다.&lt;/p&gt;
+
+&lt;p&gt;그래서 새로운 목표를 새웠다. 앞으로 졸업전 남은 기간 동안 적어도 하루에 1시간은 코딩 테스트에 시간을 쏟을 것이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gmlwjd9405.github.io/2018/05/14/how-to-study-algorithms.html&quot;&gt;읽어두면 좋은 알고리즘을 공부하는 방법 관련 글&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tech.kakao.com/2021/01/25/2021-kakao-recruitment-round-1/&quot;&gt;2021년도 1차 코딩 테스트 해설&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;2차-테스트&quot;&gt;2차 테스트&lt;/h1&gt;
+
+&lt;p&gt;2차 테스트는 CS 테스트와 코딩 테스트가 준비 되어 있었다.&lt;/p&gt;
+
+&lt;h2 id=&quot;cs-테스트&quot;&gt;CS 테스트&lt;/h2&gt;
+
+&lt;p&gt;CS 테스트는 총 10개의 문제로 20분 정도 주어졌는데, 생각보다 어려웠다. 아무래도 일반 개발자도 아니고, 컴공 기초지식이 부족하다보니 은근히 쉬운 문제도 틀렸다. 비록 지금은 인공지능을 공부하고 있지만, 인공지능은 전체 시스템의 5% 정도만 차지 하고 있다(그림의 논문 참고). 다른 어플리케이션과 융합을 시키려면 적어도 기본적인 지식은 알아둬야 된다고 생각이 드는 하루였다. 이번에 공부하면서 좋은 &lt;a href=&quot;https://github.com/JaeYeopHan/Interview_Question_for_Beginner&quot;&gt;repository&lt;/a&gt; 하나 발견했는데, 앞으로 하나씩 내걸로 만들어야겠다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=12F8TOfwcA6GRbXprshHzhJeeIBCrrgMs&quot; alt=&quot;https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;코딩-테스트&quot;&gt;코딩 테스트&lt;/h2&gt;
+
+&lt;p&gt;코딩 테스트는 4시간 45분 동안 REST API를 활용하여 문제를 해결하는 것이다. 지문을 이해하고 구조화 할 줄 알아야 한다. REST API 호출 처리 모듈를 작년의 문제를 참고하여, python으로 Parser 모듈을 만들었다(&lt;a href=&quot;https://gist.github.com/simonjisu/c63f28d9740f3577a2a51ee2337790b3&quot;&gt;링크&lt;/a&gt;).&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tech.kakao.com/2021/02/16/2021-kakao-recruitment-round-2/&quot;&gt;2021 2차 코딩 테스트 해설&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;application/json&apos;&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&apos;/&apos;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그럼에도 불구하고 지문을 이해하는데 대략 30분정도 걸렸고, 이를 다시 지문에 맞게 구조화하는데 2시간 가량 걸렸다. 이 부분에서 너무 많은 시간을 쏟아서 뒤에 테스트 해보고 싶은 알고리즘을 구성하는데 시간이 부족했다.&lt;/p&gt;
+
+&lt;p&gt;이번의 문제는 매칭 시스템과 관련이 있었는데, 전혀 감을 잡지 못했다. 예전에 자주하던 게임중에 Clash of Clan 이라는 게임이 있었는데, 여기서도 타워레벨과 유저 rating간의 매칭이 불균형하다고 불평이 많았었다. 이런 문제를 커뮤니티에서 보면서 이런 점을 개선 시길 방안은 없을까 생각했었는데, 게임 회사에서는 많이 고민하는 문제 일 것 같다. 다음의 영상을 보면서 영감을 얻어 본다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;[NDC21-게임기획] 실력점수? 랭킹? 다 비슷한 거 아닌가요: &lt;a href=&quot;https://youtu.be/DbRr7X8B-Co&quot;&gt;https://youtu.be/DbRr7X8B-Co&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 25 Sep 2021 22:00:01 +0900</pubDate>
+        <link>https://simonjisu.github.io/others/2021/09/25/kakaocoding.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/others/2021/09/25/kakaocoding.html</guid>
+        
+        
+        <category>others</category>
+        
+      </item>
     
       <item>
         <title>Machine Learning: Evaluation</title>
@@ -3021,137 +3124,6 @@ Further along this river, actual techniques, or better put, actual group of tech
         <pubDate>Thu, 14 Jan 2021 11:38:38 +0900</pubDate>
         <link>https://simonjisu.github.io/paper/2021/01/14/xaitutorial2.html</link>
         <guid isPermaLink="true">https://simonjisu.github.io/paper/2021/01/14/xaitutorial2.html</guid>
-        
-        
-        <category>paper</category>
-        
-      </item>
-    
-      <item>
-        <title>[XAI] Explainable Artificial Intelligence (XAI) - 1 </title>
-        <description>&lt;h1 id=&quot;explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai&quot;&gt;Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI&lt;/h1&gt;
-
-&lt;p&gt;Paper Link: &lt;a href=&quot;https://arxiv.org/abs/1910.10045&quot;&gt;https://arxiv.org/abs/1910.10045&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;XAI에 대한 전반적인 소개를 정리한 논문이 나와서 차근 차근 요약 정리해보려고 한다(무려 115페이지, reference만 6페이지). 약간의 번역 어투와 생략된 것도 있으니 영어 원문을 참고하길 바란다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/paper/2020/12/31/xaitutorial1.html&quot;&gt;&lt;span style=&quot;color:#e25252&quot;&gt;Introduction(이번편)&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/paper/2021/01/14/xaitutorial2.html&quot;&gt;Explainability: What, why, what for and how?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://simonjisu.github.io/paper/2021/01/23/xaitutorial3.html&quot;&gt;Transparent machine learning models&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Post-hoc explainability techniques for machile learning models: Taxonomy, shallow models and deep learning&lt;/li&gt;
-  &lt;li&gt;XAI: Opportunities, challenges and future research needs&lt;/li&gt;
-  &lt;li&gt;Toward responsible AI: Principles of artificial intelligence, fairness, privacy and data fusion&lt;/li&gt;
-  &lt;li&gt;Conclusions and outlook&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;1-introduction&quot;&gt;1. Introduction&lt;/h1&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;Artificial Intelligence (AI) lies at the core of many activity sectors that have embraced new information technologies [1]. While the roots of AI trace back to several decades ago, there is a clear consensus on the paramount importance featured nowadays by intelligent machines endowed with learning, reasoning and adaptation capabilities. It is by virtue of these capabilities that AI methods are achieving unprecedented levels of performance when learning to solve increasingly complex computational tasks, making them pivotal for the future development of the human society [2]. The sophistication of AI-powered systems has lately increased to such an extent that almost no human intervention is required for their design and deployment. When decisions derived from such systems ultimately affect humans’ lives (as in e.g. medicine, law or defense), there is an emerging need for understanding how such decisions are furnished by AI methods [3].&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 인공지능이 정교해지면서 계산이 점점 복잡해지는 반면, 궁극적으로 인간의 삶에 영향을 미치는(의학, 법률, 국방) 시스템(기계)의 결정이 어떻게 내려졌는지, 우리는 이해할 필요가 있다.&lt;/p&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;While the very first AI systems were easily interpretable, the last years have witnessed the rise of opaque decision systems such as Deep Neural Networks (DNNs). The empirical success of Deep Learning (DL) models such as DNNs stems from a combination of efficient learning algorithms and their huge parametric space. The latter space comprises hundreds of layers and millions of parameters, which makes DNNs be considered as complex black-box models [4]. The opposite of black-box-ness is transparency, i.e., the search for a direct understanding of the mechanism by which a model works [5].&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 딥러닝 모델은 효율적인 학습 알고리즘과 거대한 파라미터 공간의 결합에서 비롯된다. 그리고 black-box 모델로 간주 된다. 이의 반대는 &lt;strong&gt;투명성(transparency)&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;As black-box Machine Learning (ML) models are increasingly being employed to make important predictions in critical contexts, the demand for transparency is increasing from the various stakeholders in AI [6]. The danger is on creating and using decisions that are not justifiable, legitimate, or that simply do not allow obtaining detailed explanations of their behaviour [7]. Explanations supporting the output of a model are crucial, e.g., in precision medicine, where experts require far more information from the model than a simple binary prediction for supporting their diagnosis [8]. Other examples include autonomous vehicles in transportation, security, and finance, among others.&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; Machine Learning 모델이 점점 많이 활용되면서, 이해관계자들로부터 투명성의 요구가 높아지고 있다. 예를 들어, 의료(진단), 교통(자율주행), 보안, 금융등 이 있다.&lt;/p&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;In general, humans are reticent to adopt techniques that are not directly interpretable, tractable and trustworthy [9], given the increasing demand for ethical AI [3]. It is customary to think that by focusing solely on performance, the systems will be increasingly opaque. This is true in the sense that there is a trade-off between the performance of a model and its transparency [10]. However, an improvement in the understanding of a system can lead to the correction of its deficiencies. When developing a ML model, the consideration of interpretability as an additional design driver can improve its implementability for 3 reasons:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Interpretability helps ensure impartiality in decision-making, i.e. to detect, and consequently, correct from bias in the training dataset.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Interpretability facilitates the provision of robustness by highlighting potential adversarial perturbations that could change the prediction.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Interpretability can act as an insurance that only meaningful variables infer the output, i.e., guaranteeing that an underlying truthful causality exists in the model reasoning.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;All these means that the interpretation of the system should, in order to be considered practical, provide either an understanding of the model mechanisms and predictions, a visualization of the model’s discrimination rules, or hints on what could perturb the model [11].&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 통상적으로 성과에만 치중할 수록 시스템은 점점 불투명해질 것이라 생각한다. 모델의 성능과 투명성 사이에 trade-off가 있다는 점은 사실이나, 모델에 대한 이해는 모델의 성능 향상을 이끌어 낼 수도 있다. 추가로 ML모델을 개발할 때, 해석 가능성을 모듈로 넣으면 세 가지 이유로 구현 가능성을 향상 시킬 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;해석가능성은 의사결정에서 공정성을 보장하는데 도움이 된다. 즉, 교육 데이터 집합의 편향성을 탐지하고 결과적으로 수정한다.&lt;/li&gt;
-  &lt;li&gt;해석가능성은 예측을 바꿀 수 있는 잠재적 적대적 섭동을 강조함으로써 건전성의 제공을 촉진한다.&lt;/li&gt;
-  &lt;li&gt;해석가능성은 유의미한 변수만으로 산출물을 유추하는 보험으로서, 즉 모형 추론에서 근본적인 진실적 인과관계가 존재함을 보증하는 보험으로 작용할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;즉, 해석가능한 시스템은 모델 매커니즘과 예측에 대한 이해, 모델의 판결 규칙 시각화, 또는 모델을 방해하는 것에 대한 힌트 등을 제공해야한다.&lt;/p&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;In order to avoid limiting the effectiveness of the current generation of AI systems, eXplainable AI (XAI) [7] proposes creating a suite of ML techniques that 1) produce more explainable models while maintaining a high level of learning performance (e.g., prediction accuracy), and 2) enable humans to understand, appropriately trust, and effectively manage the emerging generation of artificially intelligent partners. XAI draws as well insights from the Social Sciences [12] and considers the psychology of explanation.&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 현재의 효과적인 AI 시스템을 제한시키지 않는 선에서, eXplainable AI(XAI)은 1) 학습 퍼포먼스는 최대한으로 유지하면서 설명가능한 모델을 만들것을 제안 2) 사람이 이해하고, 적절하고 효과적으로 신뢰할 수 있도록 한다.&lt;/p&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;Fig. 1 displays the rising trend of contributions on XAI and related concepts. This literature outbreak shares its rationale with the research agendas of national governments and agencies. Although some recent surveys [8], [10], [13], [14], [15], [16], [17] summarize the upsurge of activity in XAI across sectors and disciplines, this overview aims to cover the creation of a complete unified framework of categories and concepts that allow for scrutiny and understanding of the field of XAI methods. Furthermore, we pose intriguing thoughts around the explainability of AI models in data fusion contexts with regards to data privacy and model confidentiality. This, along with other research opportunities and challenges identified throughout our study, serve as the pull factor toward Responsible Artificial Intelligence, term by which we refer to a series of AI principles to be necessarily met when deploying AI in real applications. As we will later show in detail, model explainability is among the most crucial aspects to be ensured within this methodological framework. All in all, the novel contributions of this overview can be summarized as follows:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Grounded on a first elaboration of concepts and terms used in XAI-related research, we propose a novel definition of explainability that places audience (Fig. 2) as a key aspect to be considered when explaining a ML model. We also elaborate on the diverse purposes sought when using XAI techniques, from trustworthiness to privacy awareness, which round up the claimed importance of purpose and targeted audience in model explainability.&lt;/li&gt;
-  &lt;li&gt;We define and examine the different levels of transparency that a ML model can feature by itself, as well as the diverse approaches to post-hoc explainability, namely, the explanation of ML models that are not transparent by design.&lt;/li&gt;
-  &lt;li&gt;We thoroughly analyze the literature on XAI and related concepts published to date, covering approximately 400 contributions arranged into two different taxonomies. The first taxonomy addresses the explainability of ML models using the previously made distinction between transparency and post-hoc explainability, including models that are transparent by themselves, Deep and non-Deep (i.e., shallow) learning models. The second taxonomy deals with XAI methods suited for the explanation of Deep Learning models, using classification criteria closely linked to this family of ML methods (e.g. layerwise explanations, representation vectors, attention).&lt;/li&gt;
-  &lt;li&gt;We enumerate a series of challenges of XAI that still remain insufficiently addressed to date. Specifically, we identify research needs around the concepts and metrics to evaluate the explainability of ML models, and outline research directions toward making Deep Learning models more understandable. We further augment the scope of our prospects toward the implications of XAI techniques in regards to confidentiality, robustness in adversarial settings, data diversity, and other areas intersecting with explainability.&lt;/li&gt;
-  &lt;li&gt;After the previous prospective discussion, we arrive at the concept of Responsible Artificial Intelligence, a manifold concept that imposes the systematic adoption of several AI principles for AI models to be of practical use. In addition to explainability, the guidelines behind Responsible AI establish that fairness, accountability and privacy should also be considered when implementing AI models in real environments.&lt;/li&gt;
-  &lt;li&gt;Since Responsible AI blends together model explainability and privacy/security by design, we call for a profound reflection around the benefits and risks of XAI techniques in scenarios dealing with sensitive information and/or confidential ML models. As we will later show, the regulatory push toward data privacy, quality, integrity and governance demands more efforts to assess the role of XAI in this arena. In this regard, we provide an insight on the implications of XAI in terms of privacy and security under different data fusion paradigms.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=119QnRBvYV4gHiuKz7kpaOVo_2b2tlhz5&quot; alt=&quot;Fig 1. 학계에서 XAI 및 연관된 개념의 기여도 추세&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Fig 1. 학계에서 XAI 및 연관된 개념의 기여도 추세&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fig 1&lt;/code&gt;에서 볼 수 있듯이 국가 정부 및 기관의 연구의제의 키워드 추세를 살펴보면 XAI관련 활동이 최근 급증했지만, 통일된 프레임워크가 없다. 이번 논문에서는 통일된 프레임워크의 작성하고, 개인정보 보호 및 모델 기밀성에 대해서 의견을 제시할 것이다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;지금까지 XAI 관련 연구에서 사용된 개념과 용어의 기초하여, ML 모델을 설명할 때 청중(audience)을 핵심으로 고려할 것이다(그림 2). 또한 XAI 기법을 사용할 때 추구하는 다양한 목적에 따라 세분화할 것이다. 그리고 설명가능성에서 목적과 타겟 청중의 중요함을 이야기 한다.&lt;/li&gt;
-  &lt;li&gt;다양한 레벨의 투명성을 정의하고 검토한다. 대상에는 사후(post-hoc) 설명이 가능한, 자체 설명가능한 혹은 설계에 의해 설명이 불가능한 모델들 등이 있다.&lt;/li&gt;
-  &lt;li&gt;XAI에 관한 문헌과 지금까지 출판된 관련 개념들을 철저하게 분석하여, 대략 400개의 기여를 두 개의 다른 분류법으로 배열하였다. 첫 번째 분류법은 이전에 만든 투명성(transparency)과 사후 설명성(post-hoc explainability) 사이의 구별을 사용하여 ML 모델의 설명가능성을 다루고 있으며, 여기에는 스스로 투명하고 깊지 않은(즉, shallow 얉은) 학습 모델이 포함된다. 두 번째 분류법은 딥러닝 모델의 설명에 적합한 XAI 방법을 다루며, 이 ML 방법 계열과 밀접하게 연계된 분류 기준(예: 계층적 설명 layer-wise explanations, 표현 벡터 representation vectors, 어텐션 attention)을 사용한다.&lt;/li&gt;
-  &lt;li&gt;지금까지도 불충분하게 다루어지지 않고 있는 XAI의 일련의 과제를 열거한다. 구체적으로는 ML 모델의 설명 가능성을 평가하기 위해 개념 및 메트릭스를 중심으로 연구 요구를 파악하고, 딥러닝 모델을 보다 이해할 수 있도록 연구 방향을 정리한다. 기밀성, 적대적 설정의 견고성, 데이터 다양성 및 설명 가능성과 교차하는 기타 영역에 관한 XAI 기법의 함축성을 향한 전망의 범위를 더욱 확대합니다.&lt;/li&gt;
-  &lt;li&gt;앞서의 장래의 논의를 거쳐, AI 모델이 실용화하기 위해 여러 가지 AI 원리를 체계적으로 채택하는 매니폴드 개념인 책임감 있는 인공지능의 개념에 도달한다. 책임 AI를 뒷받침하는 가이드라인은 설명가능성 외에도 실제 환경에서 AI 모델을 구현할 때 공정성, 책임성, 프라이버시 등도 고려해야 한다고 규정하고 있다.&lt;/li&gt;
-  &lt;li&gt;책임 있는 AI는 모델 설명 가능성과 개인 정보 보호/보안성을 설계별로 혼합하므로, 민감한 정보 및/또는 기밀 ML 모델을 다루는 시나리오에서 XAI 기법의 유익성과 위해성에 대해 심오한 반성을 요구한다. 나중에 보여드리겠지만, 데이터 개인 정보 보호, 품질, 무결성 및 거버넌스를 향한 규제는 이 분야에서 XAI의 역할을 평가하기 위한 더 많은 노력을 요구합니다. 이와 관련하여, 우리는 서로 다른 데이터 융합 패러다임 하에서의 프라이버시 및 보안 측면에서 XAI의 의미에 대한 통찰력을 제공한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;[expand]summary:영어원문 👈&lt;/p&gt;
-
-&lt;p&gt;The remainder of this overview is structured as follows: first, Section 2 and subsections therein open a discussion on the terminology and concepts revolving around explainability and interpretability in AI, ending up with the aforementioned novel definition of interpretability (Section 2.1 and 2.2), and a general criterion to categorize and analyze ML models from the XAI perspective. Sections 3 and 4 proceed by reviewing recent findings on XAI for ML models (on transparent models and post-hoc techniques respectively) that comprise the main division in the aforementioned taxonomy. We also include a review on hybrid approaches among the two, to attain XAI. Benefits and caveats of the synergies among the families of methods are discussed in Section 5, where we present a prospect of general challenges and some consequences to be cautious about. Finally, Section 6 elaborates on the concept of Responsible Artificial Intelligence. Section 7 concludes the survey with an outlook aimed at engaging the community around this vibrant research area, which has the potential to impact society, in particular those sectors that have progressively embraced ML as a core technology of their activity.&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:#e25252&quot;&gt;요약:&lt;/span&gt; 나머지 부분은 다음과 같이 구성되어 있다:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Section 2: 설명가능성(explainability)와 해석가능성(interpretability)의 새로운 정의, XAI 관점에서 ML 모델 분류 및 분석을 위한 용어 및 개념에 대한 이야기&lt;/li&gt;
-  &lt;li&gt;Section 3, 4: 최근 연구 결과와 하이브리드 방법&lt;/li&gt;
-  &lt;li&gt;Section 5: 해당 방법들에 대한 장단점 및 주의해야할 몇 가지 결과들 제시&lt;/li&gt;
-  &lt;li&gt;Section 6: “책임감 있는 인공지능” 개념에 대한 설명&lt;/li&gt;
-  &lt;li&gt;Section 7: 사회에 영향을 미칠 가능성이 있는 연구 영역인 만큼, ML 기술을 채택한 사람들을 커뮤니티를 참여시키는 목표로 결론을 내리고자 한다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 31 Dec 2020 11:38:38 +0900</pubDate>
-        <link>https://simonjisu.github.io/paper/2020/12/31/xaitutorial1.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/paper/2020/12/31/xaitutorial1.html</guid>
         
         
         <category>paper</category>
