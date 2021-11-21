@@ -322,7 +322,7 @@ body { min-height: 100%; height: auto; }
 
 .site-footer .left a:hover { color: red; border-bottom: 1px dotted; }
 
-.collaspe-article { padding-top: 5px; padding-bottom: 5px; padding-left: 5px; border-left: 2px solid #2e78b4; }
+.collaspe-article { padding-top: 5px; padding-bottom: 5px; padding-left: 5px; border-left: 2px solid #2e78b4; background-color: #f0f0f0; }
 
 .collaspe-content { padding-top: 5px; }
 
