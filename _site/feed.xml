@@ -6,9 +6,85 @@
 </description>
     <link>https://simonjisu.github.io/</link>
     <atom:link href="https://simonjisu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 22 Nov 2021 12:50:25 +0900</pubDate>
-    <lastBuildDate>Mon, 22 Nov 2021 12:50:25 +0900</lastBuildDate>
+    <pubDate>Sun, 05 Dec 2021 18:12:57 +0900</pubDate>
+    <lastBuildDate>Sun, 05 Dec 2021 18:12:57 +0900</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>&lt;온톨로지 과학자를 위한 지식 그래프&gt;를 읽기 시작하며</title>
+        <description>&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1bSmRJ5YblbW7J3hemnBkIFIhMue5veap&quot; alt=&quot;Reference: Pixabay&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Reference: Pixabay&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;기계학습-정보-처리의-동향-그리고-온톨로지&quot;&gt;기계학습 정보 처리의 동향 그리고 온톨로지&lt;/h1&gt;
+
+&lt;p&gt;최근 사람의 언어 혹은 이미지 등 정보를 처리하는 방식은 기존 입력데이터 보다 엄청나게 작은 차원의 벡터로 매핑하는 “임베딩” 방식이다. 그러나 이렇게 벡터로 매핑(혹은 표현)된 정보는 일반 사람이 어떤 의미를 알기가 쉽지 않다.&lt;/p&gt;
+
+&lt;p&gt;최근에 이에 관한 연구를 읽었는데, 해당 &lt;a href=&quot;https://simonjisu.github.io/paper/2021/11/21/nbdt.html&quot;&gt;논문&lt;/a&gt;에서 머신러닝 모델을 Decision Tree와 연관시켜서 설명하려는 시도였다. 딥러닝 모델에서 학습된 벡터를 Tree 재학습하는 과정인데, 각 Tree에서 분기점의 의미를 부여하기 위해서 사람이 구축한 단어의 분류 체계인 WordNet을 사용했다.&lt;/p&gt;
+
+&lt;p&gt;이처럼 모델 내부에 매핑된 의미를 사람이 알아볼 수 있게 만들거나 사용할 수 있게 하는 것이 앞으로 더 유용한 머신러닝 모델이 될 거라고 믿는다. 그래서 ‘사람이 기존에 구축해 놓은 지식과 머신러닝을 결합하면 어떻게 될까?’라는 생각하게 되었는데, 먼저 ‘인간의 지식’에 대해서 기원을 찾게 되었고 &lt;strong&gt;온톨로지(Ontology)&lt;/strong&gt;라는 것을 찾게 되었다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;온톨로지(Ontology)&lt;/strong&gt;란 사람들이 세상에 대하여 보고 듣고 느끼고 생각하는 것에 대하여 서로 간의 토론을 통하여 합의를 이룬 바를, 개념적이고 컴퓨터에서 다룰 수 있는 형태로 표현한 모델로, 개념의 타입이나 사용상의 제약조건들을 명시적으로 정의한 기술이다. 온톨로지는 일종의 지식표현(knowledge representation)으로, 컴퓨터는 온톨로지로 표현된 개념을 이해하고 지식처리를 할 수 있게 된다. 프로그램과 인간이 지식을 공유하는데 도움을 주기 위한 온톨로지는, 정보시스템의 대상이 되는 자원의 개념을 명확하게 정의하고 상세하게 기술하여 보다 정확한 정보를 찾을 수 있도록 하는데 목적이 있다. 온톨로지는 시맨틱 웹을 구현할 수 있는 도구로서, 지식개념을 의미적으로 연결할 수 있는 도구로서 RDF, OWL, SWRL 등의 언어를 이용해 표현한다.&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%98%A8%ED%86%A8%EB%A1%9C%EC%A7%80&quot;&gt;온톨로지 - 위키백과, 우리 모두의 백과사전&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;위키백과의 설명에 따르면 온톨로지는 ‘&lt;strong&gt;시멘틱 웹(Semantic Web)&lt;/strong&gt;‘을 구현하는 도구 중 하나다. 그렇다면 시멘틱 웹은 무엇인가?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%8B%9C%EB%A7%A8%ED%8B%B1_%EC%9B%B9&quot;&gt;시맨틱 웹 - 위키백과, 우리 모두의 백과사전&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://poiemaweb.com/html5-semantic-web&quot;&gt;Semantic Web에 관한 좋은 예시를 들은 블로그&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;요약하면 &lt;strong&gt;시맨틱 웹(Semantic Web)&lt;/strong&gt;은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/XML&quot;&gt;XML&lt;/a&gt;에 기반한 시맨틱 마크업 언어를 기반으로 하는 의미를 가진 &lt;strong&gt;웹(Web)&lt;/strong&gt;이다. 그렇다면 우리는 우선 형용사 뒤에 붙는 주체인 &lt;strong&gt;웹(Web)&lt;/strong&gt;이 무엇인지 알아봐야 한다.&lt;/p&gt;
+
+&lt;p&gt;웹이란 여기서 우리에게 친숙한 &lt;strong&gt;월드 와이드 웹(World Wide Web, WWW, W3)&lt;/strong&gt;을 말한다. 웹은 인터넷에 연결된 컴퓨터를 통해 사람들이 정보를 공유할 수 있는 전 세계적인 정보 공간을 말한다. 조금 더 어렵게 이야기하면, ‘인터넷에 &lt;strong&gt;하이퍼미디어(Hypermedia)&lt;/strong&gt;를 배포하기 위한 아키텍처’를 말한다.&lt;/p&gt;
+
+&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1EW7zzSPOyvx-pYGow7Xu93wfch_iv4RM&quot; alt=&quot;Web Architecture: 클라이언트(웹 브라우저, 어플리케이션)와 서버(문서와 데이터를 제공)로 구성된다.&quot; width=&quot;100%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;Web Architecture: 클라이언트(웹 브라우저, 어플리케이션)와 서버(문서와 데이터를 제공)로 구성된다.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;하이퍼미디어는 사실 어려운 개념이 아니다. &lt;strong&gt;하이퍼텍스트(Hypertext)&lt;/strong&gt;, 즉 링크를 이용해 문서 일부를 다른 문서와 연결된 문서들을 &lt;strong&gt;하이퍼미디어(Hypermedia)&lt;/strong&gt;라고 부른다.&lt;/p&gt;
+
+&lt;p&gt;그러나 웹의 문제점은 컴퓨터가 의미정보를 해석할 수 있는 메타 데이터보다는 사람의 눈으로 보기에 용이한 시각 정보에 대한 메타 데이터와 자연어로 기술된 문장으로 가득 차 있다. 아래 예시를 보면, 바나나의 속성을 나타내는 문장인데,  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;em&amp;gt;&lt;/code&gt;태그는 단지 감싸고 있는 단어를 시각적으로 강조하는 역할밖에 하지 못한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;em&amp;gt;&lt;/span&gt;바나나&lt;span class=&quot;nt&quot;&gt;&amp;lt;/em&amp;gt;&lt;/span&gt;는 &lt;span class=&quot;nt&quot;&gt;&amp;lt;em&amp;gt;&lt;/span&gt;노란색&lt;span class=&quot;nt&quot;&gt;&amp;lt;/em&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그러나 해당 형태를 시맨틱 웹의 방식 중 하나 인 RDF: &amp;lt;Subject, Predicate, Object&amp;gt;의 트리플 형태로 개념을 표현하면 다음과 같다(&lt;a href=&quot;https://en.wikipedia.org/wiki/Uniform_Resource_Name&quot;&gt;urn: uniform resource name&lt;/a&gt;).&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;urn:바나나, urn:색, urn:노랑&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이렇게 표현된 트리플을 컴퓨터가 해석하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;urn:바나나&lt;/code&gt; 라는 개념은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;urn:노랑&lt;/code&gt; 이라는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;urn:색&lt;/code&gt;을 가지고 있다는 개념을 해석하고 처리할 수 있게 된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;다시-돌아와서&quot;&gt;다시 돌아와서&lt;/h1&gt;
+
+&lt;p&gt;왜 작은 차원에 임베딩된 벡터의 의미를 살펴보려고 할까? 이는 Explainable AI하고도 연관이 있을 것 같다. 기존의 입력-출력만 있으면 학습할 수 있는 머신러닝 모델이 정말로 인간이 원하는 바를 학습했는지, 인간이 사용하기에 치명적인 오류는 없는지 확인하고 싶을 것이라는 생각이다. 더 나아가 이미 웹상에서 인간이 구축해 놓은 일부 온톨로지를 활용해 이를 해석하고, 결합하는 시도가 더 많아질 것이라고 생각한다.&lt;/p&gt;
+
+&lt;p&gt;그래서 나는 “&lt;a href=&quot;https://www.hanbit.co.kr/store/books/look.php?p_code=B5160362412&quot;&gt;온톨로지 과학자를 위한 지식그래프&lt;/a&gt;“라는 책을 읽기 시작했다. 이 책은 다음과 같은 것들을 제공한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;대상: 온톨로지 과학자(ontologist)&lt;/li&gt;
+  &lt;li&gt;목표: 시맨틱 웹으로 작업하는데 필요한 도구를 제공
+    &lt;ul&gt;
+      &lt;li&gt;W3C(World Wide Web Consortium)에서 추상 구문(abstract syntax)&lt;/li&gt;
+      &lt;li&gt;모델 기반 의미론(model-based semantics)&lt;/li&gt;
+      &lt;li&gt;참조 구현(reference implementations)&lt;/li&gt;
+      &lt;li&gt;테스트 케이스(test cases)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;설명: 기본 도구들을 사용해 시맨틱 웹 시스템을 구축하는 기술&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;약간 옛날 기술일 수도 있지만, 앞으로 필요한 지식을 조금씩 정리하여 공부해보려고 한다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 21 Nov 2021 21:00:01 +0900</pubDate>
+        <link>https://simonjisu.github.io/datascience/2021/11/21/ontology01.html</link>
+        <guid isPermaLink="true">https://simonjisu.github.io/datascience/2021/11/21/ontology01.html</guid>
+        
+        
+        <category>datascience</category>
+        
+      </item>
     
       <item>
         <title>[XAI] NBDT: Neural-Backed Decision Trees</title>
@@ -18,7 +94,7 @@
 
 &lt;h1 id=&quot;abstract&quot;&gt;Abstract&lt;/h1&gt;
 
-&lt;p&gt;금융, 의료 분야의 머신러닝은 정확도뿐만 아니라 납득이 가는 예측(justifiable predictions)이 필요할 때가 많다. 의사결정 나무와 딥러닝을 결합하는 시도는 많았으나, interpretability와 accuracyy중 한쪽을 희생해야 하는 trade-off가 항상 있었다. 이 논문이세는 이 둘을 함께 향상하는 Neural-Backed Decision Trees(NBDTs)를 제안한다. NBDTs는 네트워크의 마지막 linear classifier를 &lt;strong&gt;미분 가능한 의사결정 나무 시퀀스&lt;/strong&gt;와 &lt;strong&gt;대체 손실(Surrogate Loss)&lt;/strong&gt;로 대체한다. 이런 과정이 더 높은 레벨의 개념을 학습하고 불확실한 결정에 대한 의존도를 완화한다. 이로써 CIFAR, ImageNet 에서 높거나 비슷한 정확도를 달성했고, 한 번도 보지 못한 데이터에서 좋은 성능을 달성했다(최대 16% 향상). 그리고 제안한 surrogate loss가 2%의 정확도를 더 향상했다. 또한, 모델의 실수와 데이터 세트 디버깅을 도움으로써 신뢰성에서 향상을 도모했다.&lt;/p&gt;
+&lt;p&gt;금융, 의료 분야의 머신러닝은 정확도뿐만 아니라 납득이 가는 예측(justifiable predictions)이 필요할 때가 많다. 의사결정 나무와 딥러닝을 결합하는 시도는 많았으나, interpretability와 accuracy중 한쪽을 희생해야 하는 trade-off가 항상 있었다. 이 논문에서는 이 둘을 함께 향상하는 Neural-Backed Decision Trees(NBDTs)를 제안한다. NBDTs는 네트워크의 마지막 linear classifier를 &lt;strong&gt;미분 가능한 의사결정 나무 시퀀스&lt;/strong&gt;와 &lt;strong&gt;대체 손실(Surrogate Loss)&lt;/strong&gt;로 대체한다. 이런 과정이 더 높은 레벨의 개념을 학습하고 불확실한 결정에 대한 의존도를 완화한다. 이로써 CIFAR, ImageNet 에서 높거나 비슷한 정확도를 달성했고, 한 번도 보지 못한 데이터에서 좋은 성능을 달성했다(최대 16% 향상). 그리고 제안한 surrogate loss가 2%의 정확도를 더 향상했다. 또한, 모델의 실수와 데이터 세트 디버깅을 도움으로써 신뢰성에서 향상을 도모했다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2239,198 +2315,6 @@ $$1 + 1 = 3$$
         
         
         <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>Tree-based Ensemble: Boosting</title>
-        <description>&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EA%B2%B0%EC%A0%95_%ED%8A%B8%EB%A6%AC_%ED%95%99%EC%8A%B5%EB%B2%95&quot;&gt;위키백과: 결정 트리 학습법&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://brunch.co.kr/@snobberys/137&quot;&gt;Xgboost 사용하기&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://brunch.co.kr/@chris-song/98&quot;&gt;Ensemble: bagging, boosting&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://3months.tistory.com/368&quot;&gt;Gradient Boosting Algorithm의 직관적 이해&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rpmcruz/machine-learning/blob/master/ensemble/boosting/gboost.py&quot;&gt;rpmcruz의 gboost코드&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;ensemble&quot;&gt;Ensemble&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;앙상블(Ensemble)&lt;/strong&gt;의 사전적 의미는 2인 이상의 노래나 연주를 뜻하는데, 머신러닝에서 앙상블 학습이란 하나의 학습 알고리즘 보다 더 좋은 성능을 내기 위해 다수의 약한 성능을 가진 학습 알고리즘을 합쳐서 사용하는 방법이다. 이때, 약한 성능을 가진 학습 알고리즘을 &lt;strong&gt;약한 학습자(Weak Learner)&lt;/strong&gt;라고 부른다. 앙상블 학습은 일반적으로 &lt;strong&gt;배깅(Bagging)&lt;/strong&gt; 과 &lt;strong&gt;부스팅(Boosting)&lt;/strong&gt; 두 가지의 유형으로 나눌 수 있다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Bagging(Bootstrap Aggregation): 샘플을 여러번 뽑아(Bootstrap)서 여러 개의 약한 학습자를 병렬적으로 학습시켜 결과물을 집계(Aggregration)하는 방법. 결과물을 집계하는 방법으로 회귀 문제의 경우 평균을 내거나, 분류 문제의 경우 가장 많이 나온 클래스로 투표(Hard Voting) 혹은 클래스의 확률을 평균화해서 가장 높은 확률로 도출(Soft Voting)한다. 모델의 variance를 줄이는 방향을 원한다면 배깅방법이 적합하다.&lt;/li&gt;
-  &lt;li&gt;Boosting: 훈련 데이터를 샘플링하여 순차적으로 약한 학습자를 하나씩 추가시키면서 학습한다. 각 약한 학습자들은 가중치로 연결된다는 것이 특징이다. 다만 이전 약한 학습자가 틀린 데이터의 샘플링이 더 잘 되게 가중치를 부여하여 훈련 데이터를 생성하고 다시 학습한다. 모델의 bias를 줄이는 방향을 생각하고 있다면, 부스팅 방법이 적합하다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;boosting-ensemble&quot;&gt;Boosting Ensemble&lt;/h1&gt;
-
-&lt;p&gt;앙상블 방법론중 부스팅 방법에는 &lt;strong&gt;적응형 부스팅(Adaptive Boosting)&lt;/strong&gt;, &lt;strong&gt;경사 부스팅(Gradient Boosting)&lt;/strong&gt;이 있다. 이번 글에서는 Gradient Boosting을 중점적으로 다뤄본다.&lt;/p&gt;
-
-&lt;h2 id=&quot;gradient-boosting&quot;&gt;Gradient Boosting&lt;/h2&gt;
-
-&lt;p&gt;Gradient Boosting을 한마디로 하면 Pseudo-Residual Fitting이라고 할 수 있다. 예를 들어, 약한 학습자 $A$로 데이터($Y, X$)를 학습시킨 결과를 다음 수식으로 표현해본다.&lt;/p&gt;
-
-\[Y = A(X) + \epsilon_1\]
-
-&lt;p&gt;여기서 $\epsilon_1$은 &lt;strong&gt;오차(error)&lt;/strong&gt; 혹은 &lt;strong&gt;잔차(residual)&lt;/strong&gt;이라고 부른다. 그러면 남은 $\epsilon_1$에 대해서 다른 약한 학습자 $B$를 예측을 잘하게 학습시켜서 $Y$를 예측한다.&lt;/p&gt;
-
-\[\epsilon_1 = B(X) + \epsilon_2\]
-
-&lt;p&gt;이렇게 계속 잔차를 줄여나가면서 여러 개의 약한 학습자를 연결시키는 것이 Gradient Boosting이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;negative-gradient&quot;&gt;Negative Gradient&lt;/h3&gt;
-
-&lt;p&gt;그렇다면 왜 Gradient가 들어가는가? 그 해답은 손실함수(loss function)와 연결된다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어, Mean Squared Error를 손실함수로 설정하면, 다음과 같이 예측 값에 대해 경사(gradient)를 구할 수 있다.&lt;/p&gt;
-
-\[\begin{aligned} 
-\text{Loss} &amp;amp;= L \big(Y, f(X) \big) = \dfrac{1}{2} \big( Y - f(X) \big)^2 \\
-\text{gradient} &amp;amp;= \dfrac{\partial L}{\partial f(X)} = \dfrac{1}{2} \times 2 \big( Y - f(X) \big) \times (-1) = -\big( Y - f(X) \big) \\
-\text{residual} &amp;amp;= -\dfrac{\partial L}{\partial f(X)} = - \text{gradient}
-\end{aligned}\]
-
-&lt;p&gt;이때의 잔차는 음의 경사값이 되는 것을 알 수 있다. 이는 우리가 데이터를 남은 잔차에 대해서 학습하는 방법이 곧 전체 손실값을 줄이는 것과 같다는 이야기다.&lt;/p&gt;
-
-&lt;p&gt;[expand]summary:부연 설명보기 👈&lt;/p&gt;
-
-&lt;p&gt;부연 설명하자면, 두 개의 약한 학습자를 예로 들면 다음과 같다.&lt;/p&gt;
-
-\[\begin{aligned}
-\text{fitting: } Y &amp;amp;= f_1(X) + \epsilon_1 \\
-L_1 &amp;amp;= L\big(Y, f_1(X) \big) = \dfrac{1}{2}\big( Y - f_1(X)\big)^2 \\
-\dfrac{\partial L_1}{\partial f_1(X)} &amp;amp;= - \big( Y - f_1(X)\big) = - \epsilon_1 \\
-\\
-\text{fitting: } \epsilon_1 &amp;amp;= f_2(X) + \epsilon_2 \\
-L_2 &amp;amp;= L\big(\epsilon_1, f_2(X) \big) = \dfrac{1}{2}\big( \epsilon_1 - f_2(X)\big)^2 \\
-\dfrac{\partial L_2}{\partial f_2(X)} &amp;amp;= - \big( \epsilon_1 - f_2(X)\big) = - \epsilon_2 \\
-\end{aligned}\]
-
-&lt;p&gt;여기서 $\epsilon_1$을 $L_2$ 에 넣어보면&lt;/p&gt;
-
-\[\begin{aligned}
-L_2 &amp;amp;= \dfrac{1}{2}\big( Y - f_1(X) - f_2(X)\big)^2 \\
-\dfrac{\partial L_2}{\partial f_2(X)} &amp;amp;= - \big( Y - f_1(X) - f_2(X)\big) = - \epsilon_2
-\end{aligned}\]
-
-&lt;p&gt;가 되고, $F(X) = f_1(X) + f_2(X)$ 라고 하면, 약한 학습자를 여러 개를 더한 모델($f_1(X) + f_2(X)$)을 최적화 하는 것과 하나의 잘 예측하는 모델($F(X)$)를 최적화하는 것과 같다는 것을 알 수 있다(말장난 같지만, 이유는 같은 잔차$\epsilon_2$ 가 남기 때문).&lt;/p&gt;
-
-\[\begin{aligned}
-L &amp;amp;= \dfrac{1}{2}\big( Y - F(X)\big)^2 \\
-\dfrac{\partial L}{\partial F(X)} &amp;amp;= - \big( Y - F(X)\big) = - \epsilon_2
-\end{aligned}\]
-
-&lt;p&gt;또한, 원래 잔차를 구하려면 학습된 모델에 예측을 하고, 타겟값에 예측값을 빼줘야하는데, 미분으로 잔차를 구할 수 있으니 더 빠르게 학습이 가능하다.&lt;/p&gt;
-
-&lt;p&gt;[/expand]&lt;/p&gt;
-
-&lt;p&gt;결국에는 negative gradient가 잔차와 일치하기 때문에 Gradient 용어가 들어가는 것이다.&lt;/p&gt;
-
-&lt;p&gt;알고리즘은 다음과 같이 진행한다(&lt;a href=&quot;https://github.com/rpmcruz/machine-learning/blob/master/ensemble/boosting/gboost.py&quot;&gt;rpmcruz의 gboost코드&lt;/a&gt;를 빌려 약간의 변형후 해석해본다).&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# self.first_estimator = 더미모델
-# self.base_estimator = 약한 학습자
-# self.loss = residual 함수, 여기서는 y - y_pred
-# self.eta = Loss(y, y_pred)를 최소로 하는 eta값을 구하는데,
-# 여기서는 생략하고 하나의 값으로 통일
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first_estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# step 0
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first_estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# step 1
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# step 2
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_pred&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# step 3
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# step 4
-&lt;/span&gt;        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;f0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:]],&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Step 0.&lt;/strong&gt; dummy 모델(예를 들어 모든 예측값이 0인 모델)로 초기화 한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Step 1.&lt;/strong&gt; 모델의 개수 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt; 만큼 진행하며 항상 첫 스텝에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X&lt;/code&gt;에 대한 예측을 한다. 예측은 현재까지 저장해둔 약한 학습자의 예측값과 가중치(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self.eta&lt;/code&gt;)를 곱해서 합한 값으로 한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Step 2.&lt;/strong&gt; 예측값(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y_pred&lt;/code&gt;)과 타겟값(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt;)을 이용해 잔차(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;R&lt;/code&gt;)을 구한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Step 3.&lt;/strong&gt; 약한 학습자를 타겟값이 아닌 잔차값에 대해서 학습한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;tree-based-ensemble--cart&quot;&gt;Tree-Based Ensemble &amp;amp; CART&lt;/h1&gt;
-
-&lt;p&gt;의사결정 나무 계열의 앙상블중 부스팅 방법을 사용하는 패키지들은 많이 있으나, 그중에서 XGBoost를 소개하려고 한다. 그 전에 의사결정 나무의 &lt;strong&gt;CART(Classification And Regression Tree)&lt;/strong&gt; 알고리즘을 소개하고 넘어간다.&lt;/p&gt;
-
-&lt;p&gt;CART 알고리즘은 이름에서도 알 수 있듯이 분류와 회귀를 둘다 가능케하는 알고리즘이다. 분류의 경우 지니 계수(Gini Index)를 사용하고, 회귀의 경우 실제값과 예측값의 오차(MSE)를 사용해서 분기를 정한다. 일반적인 의사결정 나무와 다르게, 리프 노드(leaf node)에는 실제값 대신 결정값(decision values)을 보존하고 있다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어, 다음 그림과 같이 가족원 5명중 컴퓨터 게임을 좋아할 만한 사람을 분류하는 모델을 만들면 최종 리프 노드에는 해당 조건에 부합할 경우 양의 점수가 저장되고 그렇지 않으면 음의 점수가 저장된다. 이러한 결정값을 저장함으로써 더 유연한 비교와 추론을 할 수가 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=15_gKUfmzAV-oZaJ17uYDajhmGjIQc4Sc&quot; alt=&quot;출처: XGBoost Documentation&quot; width=&quot;80%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;출처: XGBoost Documentation&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;보통 하나의 의사결정 나무 모델을 쓰지 않고, 앙상블 학습법을 많이 쓰기 때문에, 예를 들어, 다음과 같이 두 개의 의사 결정나무를 예시로 어떻게 진행되는지 살펴보자.&lt;/p&gt;
-
-&lt;figure class=&quot;image&quot;&gt;&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?id=1APEjS1gHrcfJXR_W7BC29mV6dNIteVe9&quot; alt=&quot;출처: XGBoost Documentation&quot; width=&quot;80%&quot; height=&quot;auto&quot; /&gt;&lt;/p&gt;&lt;figcaption&gt;출처: XGBoost Documentation&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;각 샘플(가족원)의 최종 점수를 계산하려면 샘플이 속한 스코어를 전부 더하면 된다. 파란 옷을 입은 아들의 경우, 첫번째 모델에서 $+2$ 그리고 두번째 모델에서 $+0.9$의 결정값을 가짐으로 최종 결정값은 $+2.9$가 된다. 점수가 높을 수록 게임을 더 좋아한다는 뜻임으로, 아들은 게임을 좋아한다고 분류할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;여기에는 두 의사결정 나무 모델이 같은 가중치를 가지고 있다고 가정하고 있다. 물론 가중치를 다르게 줘서, 나이가 더 중요하다고 생각하면 첫번째 모델에 더 가중치를 줘서 높은 결정값을 가지게 할 수도 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;xgboost&quot;&gt;XGBoost&lt;/h1&gt;
-
-&lt;p&gt;Gradient Boosting 알고리즘에서 가장 유명한 패키지는 &lt;a href=&quot;https://xgboost.readthedocs.io/en/latest/index.html&quot;&gt;&lt;strong&gt;XGBoost&lt;/strong&gt;&lt;/a&gt;이다. XGBoost는 Extreme Gradient Boosting 의 약자로써, 말그대로 엄청나게 빠른 Boosting 학습을 지원한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;설치방법과 사용방법은 따로 다루지 않으며 아래 링크를 참고하길 바란다.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://xgboost.readthedocs.io/en/latest/parameter.html&quot;&gt;XGBoost 공식문서&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://brunch.co.kr/@snobberys/137&quot;&gt;브런치: Xgboost 사용하기&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://eagle705.github.io/articles/2018-06/XGBoost-정리&quot;&gt;eagle705님의 블로그: XGBoost-정리&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
-
-&lt;p&gt;정규화(regularization)를 도입해서 과적합을 피하고 있다. 목적함수에 의사결정 나무의 복잡도($\Omega$)를 구하여 이를 억제하는 방식으로 훈련한다.&lt;/p&gt;
-
-\[\begin{aligned}
-\text{Loss}^{(t)} = \sum_{i=1}^n L(y_i, y_i^{(t)}) + \sum_{j=1}^{t} \Omega(f_j)
-\end{aligned}\]
-
-&lt;p&gt;의사결정 나무를 (1)식과 같이 정의하면, 복잡도은 (2)식 처럼 정의할 수 있다. 여기서 $w$는 리프노드의 결정값 벡터이고, $q$는 각 데이터를 해당하는 $T$개의 모델의 리프노드에 배분하는 함수다. 모델 복잡도에서 $\gamma$는 정보획득(information gain)에 관한 변수이며, 정보획득량이 $\gamma$보다 낮은 경우 약한 학습자를 더하지 않는다. $\lambda$는 결정값에 관한 변수이며, 해당 값이 높을수록 결정값이 커지지 않게 더 큰 제약을 준다.&lt;/p&gt;
-
-\[\begin{aligned}
-f_t(x) &amp;amp;= w_{q(x)}, w \in R^T , q: R^d \rightarrow \{ 1, 2, \cdots, T\} &amp;amp; \cdots (1)\\
-\Omega(f) &amp;amp;= \gamma T + \dfrac{1}{2} \lambda \sum_{j=1}^T w_j^2 &amp;amp; \cdots (2)
-\end{aligned}\]
-
-&lt;h2 id=&quot;xgboost의-병렬처리&quot;&gt;XGBoost의 병렬처리&lt;/h2&gt;
-
-&lt;p&gt;원칙적으로 Boosting방법은 Additive 학습 방법이기 때문에, 학습 방법 자체는 병렬이 불가능한 구조다. 하지만, 의사결정 나무를 만드는 과정을 병렬화(하나의 모델 내에서 openMP로 개별 코어에게 분배해서 하위 브랜치를 만듦)함으로써 더 빠르게 학습을 완료시킬 수 있었다. 아래 레퍼런스를 참고하자.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://m.blog.naver.com/nicolechae0627/221811579005&quot;&gt;XGBoost vs GBM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://machinelearningkorea.com/2019/07/25/xgboost-의-병렬처리가-어떻게-가능할까/&quot;&gt;XGBoost의 병렬처리&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/34151051/how-does-xgboost-do-parallel-computation&quot;&gt;How does XGBoost do parallel computation?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 07 Mar 2021 17:13:01 +0900</pubDate>
-        <link>https://simonjisu.github.io/machinelearning/2021/03/07/treeboosting.html</link>
-        <guid isPermaLink="true">https://simonjisu.github.io/machinelearning/2021/03/07/treeboosting.html</guid>
-        
-        
-        <category>machinelearning</category>
         
       </item>
     
