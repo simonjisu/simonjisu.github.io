@@ -46,12 +46,13 @@ google_fonts: "Nanum+Gothic:400,700"
 # menu bar
 menu_contents: 
   - title: Home
-    url: /
+    url: 
   - title: Posts
     url: /archive
     subposts:
       - subcat: separator
       - subcat: nlp
+      - subcat: xai
       - subcat: math
       - subcat: paper
       - subcat: others
