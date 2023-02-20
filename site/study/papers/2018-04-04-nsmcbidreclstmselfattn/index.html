@@ -1,0 +1,1286 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://simonjisu.github.io/study/papers/2018-04-04-nsmcbidreclstmselfattn/">
+      
+      
+        <link rel="prev" href="../2017-08-04-E2EMN/">
+      
+      
+        <link rel="next" href="../2019-08-22-neuralnetworklm/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2">
+    
+    
+      
+        <title>A Structured Self-Attentive Sentence Embedding - Soopace</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.b6d2c4d8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-LJESYTRE7M"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-LJESYTRE7M",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LJESYTRE7M",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-structured-self-attentive-sentence-embedding" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../img/logo/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Soopace
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              A Structured Self-Attentive Sentence Embedding
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          
+  
+    
+  
+  Study
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
+          
+  
+    
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../img/logo/logo.png" alt="logo">
+
+    </a>
+    Soopace
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../blog/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    Study
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Study
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    
+  
+    PaperReadings
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PaperReadings
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Paper 정독 시리즈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2017-08-04-E2EMN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    End-to-End Memory Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    A Structured Self-Attentive Sentence Embedding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-08-22-neuralnetworklm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    A Neural Probabilistic Language Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-09-18-introxai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Explaining Explanations: An Overview of Interpretability of Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-01-14-attentionisallyouneed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Attention Is All You Need
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-03-12-deepinsidecnn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-19-maskpredict/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Mask-Predict: Parallel Decoding of Conditional Masked Language Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-23-casm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Classifier-agnostic saliency map extraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-12-31-xaitutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-04-12-spider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-04-20-featurevisualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature Visualization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-05-14-bridge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Bridging Textual and Tabular Data for Cross-Domain Text-to-SQL Semantic Parsing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-08-13-hybridranking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid Ranking Network for Text-to-SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-11-21-nbdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    NBDT: Neural-Backed Decision Trees
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../project/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        <span class="md-ellipsis">
+          About
+        </span>
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+    
+    
+      
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          <span class="md-ellipsis">
+            Study
+          </span>
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          <span class="md-ellipsis">
+            PaperReadings
+          </span>
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+  
+
+
+
+  
+  
+
+
+
+<h1 id="a-structured-self-attentive-sentence-embedding">A Structured Self-Attentive Sentence Embedding<a class="headerlink" href="#a-structured-self-attentive-sentence-embedding" title="Permanent link">&para;</a></h1>
+<p>네이버 영화 감성분류 with Bidirectional LSTM + Self Attention</p>
+<h1 id="_1">목표<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<ul>
+<li>영화 리뷰를 통해 긍정인지 부정인지 분류하는 문제 (Many-to-One)</li>
+<li>사용한 모델: Bidirectional LSTM with Self Attention Model</li>
+<li>이번 글은 논문과 제가 분석한 모델의 중요 요소를 곁들여 쓴 글입니다.</li>
+<li>GitHub Code Link: <a href="https://github.com/simonjisu/nsmc_study">nsmc_study</a></li>
+</ul>
+<p>Reference Paper: <a href="https://arxiv.org/pdf/1703.03130.pdf">A STRUCTURED SELF-ATTENTIVE SENTENCE EMBEDDING</a></p>
+<h1 id="_2">모델 핵심 부분 설명<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>그림과 수식을 함께 보면 이해하기 쉽다</p>
+<p>어떤 <span class="arithmatex">\(n\)</span> 개의 토근으로 이루어진 하나의 문장이 있다고 생각해보자.</p>
+<div class="arithmatex">\[S = (w_1, w_2, \cdots, w_n)\qquad\qquad (1)\]</div>
+<p>여기서 <span class="arithmatex">\(w_i\)</span> 는 one-hot 인코딩된 단어가 아닌, <span class="arithmatex">\(d\)</span> 차원에 임베딩된 문장에서 <span class="arithmatex">\(i\)</span> 번째 단어다.</p>
+<p>따라서 <span class="arithmatex">\(S\)</span> 는 단어 벡터들을 concat 한 <span class="arithmatex">\(n \times d\)</span> 형태를 가지는 매트릭스다.</p>
+<p>문장 <span class="arithmatex">\(S\)</span> 는 각기 다른 문장과는 독립적이다. (하나의 문장이 하나의 평점과 세트로 생각하면 된다.) 하나의 문장에서 단어들 간의 관계를 알기 위해서 우리는 bidirectional LSTM 으로 하나의 문장을 처리하게 된다.</p>
+<div class="arithmatex">\[\begin{aligned}
+\overrightarrow{h_t} &amp;= \overrightarrow{LSTM}(w_t, \overrightarrow{h_{t-1}})\qquad\qquad (2) \\
+\overleftarrow{h_t} &amp;= \overleftarrow{LSTM}(w_t, \overleftarrow{h_{t-1}})\qquad\qquad (3)
+\end{aligned}\]</div>
+<p>그후 우리는 각각의 <span class="arithmatex">\(\overrightarrow{h_t}\)</span> 과 <span class="arithmatex">\(\overleftarrow{h_t}\)</span> 를 concatenate 하여 하나의 히든 state <span class="arithmatex">\(h_t\)</span> 를 얻게 된다. 각 unidirectional LSTM(한 쪽 방향 LSTM)의 히든 유닛 크기를 <span class="arithmatex">\(u\)</span> 라고 하자. 조금 간단하게 표현하기 위해서 모든 <span class="arithmatex">\(n\)</span> 개의 <span class="arithmatex">\(h_t\)</span> 들을 <span class="arithmatex">\(H\)</span> 라고 하며, <span class="arithmatex">\(n \times 2u\)</span> 의 크기를 가진다.</p>
+<div class="arithmatex">\[H = (h_1, h_2, \cdots, h_n) \qquad\qquad (4) \]</div>
+<ul id="light-slider1">
+  <li><img src="/assets/ML/nsmc/Self_Attention0.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention1.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention2.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention3.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention4.png"></li>
+</ul>
+
+<p>우리의 목적은 길이가 변화하는 문장을 어떤 <strong>고정된 크기</strong> 의 임베딩으로 인코딩 하는 것이다. 이 목적을 달성하기 위해서 <span class="arithmatex">\(H\)</span> 와 attention 매커니즘이 요구되는 일종의 선형결합을 선택하게 된다. 즉, 아래와 같은 식과 <span class="arithmatex">\(H\)</span> 를 토대로, 어떤 벡터 <span class="arithmatex">\(a\)</span> 를 얻게 된다.</p>
+<div class="arithmatex">\[a = softmax(w_{s2} \tanh (W_{s1}H^T)) \qquad\qquad (5)\]</div>
+<p>여기서 <span class="arithmatex">\(W_{s1}\)</span> 는 <span class="arithmatex">\(d_a \times 2u\)</span> 형태를 가진 매트릭스, 그리고 <span class="arithmatex">\(w_{s2}\)</span> 는 <span class="arithmatex">\(d_a\)</span> 사이즈를 가진 벡터다. <span class="arithmatex">\(d_a\)</span> 는 하이퍼파라미터(hyperparameter)로 우리가 정할 수 잇는 변수다. <span class="arithmatex">\(H\)</span> 의 크기도 <span class="arithmatex">\(n \times 2u\)</span> 이기 때문에, 벡터 <span class="arithmatex">\(a\)</span> 는 <span class="arithmatex">\(n\)</span> 의 크기를 가진다. 또한 <span class="arithmatex">\(softmax()\)</span> 함수는 모든 weight들의 합을 1로 만들어 준다.</p>
+<p>그후 우리는 LSTM 의 히든상태들의 집합인 <span class="arithmatex">\(H\)</span> 를 주어진 <span class="arithmatex">\(a\)</span> 로 곱해서 한 문장을 임베딩한 벡터 <span class="arithmatex">\(m\)</span> 을 얻을 수 있다.</p>
+<p>이 벡터 <span class="arithmatex">\(m\)</span> 은 학습시 한 문장에서 어떤 단어를 중심적으로 보았는지 알 수 있다. 예를 들어 어떤 연관된 단어나 구문 등등.</p>
+<p>문장과 단어의 관계로 추가 설명하자면 아래와 같다.</p>
+<p>각 단어를 input으로 받은 hidden 상태의 노드들은 단어를 통과해서 각 단어의 숨겨진 특성을 대표하고 있다. 학습 시 Task 에 따라 다르겠지만, 분류라고 가정한다면 분류에 도움이 되는 히든 상태는 높은 값을 가지게 될 것이며, 이를 어떤 선형 변환 과정을 거쳐 softmax 취한다는 것은 한 문장에서 분류에 도움이 된 근거 단어 혹은 중요 단어의 확률을 구한다는 것이 된다. (그래서 attention 이라고 하는 것 같다.) 따라서 이는 한 문장에서 <strong>의미적인(semantic)</strong> 부분을 나타내고 있다고 할 수 있다.</p>
+<p>이 확률 <span class="arithmatex">\(a\)</span> 를 기존의 hidden 상태와 곱해서 의미부분을 조금더 강조하게 되는 벡터 <span class="arithmatex">\(m\)</span> 을 구했다고 보면 된다.</p>
+<ul id="light-slider2">
+  <li><img src="/assets/ML/nsmc/Self_Attention5.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention6.png"></li>
+</ul>
+
+<p>하지만 한 문장 내에서 중요한 부분 혹은 의미가 있는 부분은 여러군데 일 수가 있다. (여러 의미가 하나의 문장을 구성한다.) 특히 긴 문장일 수록 그렇다. 예를 들어 "아이언맨과 캡틴아메리카" 면 "과"로 이어진, "아이언맨", "캡틴아메리카" 두 단어는 중요한 의미가 있는 단어 일 수 있다. 따라서 한 문장에서 의미가 있는 부분을 나타내려면 <span class="arithmatex">\(m\)</span> 이란 벡터를 여러 번 수행해서 문장의 다른 부분까지 커버해야 한다. 이는 우리가 <strong>attention</strong> 을 <strong>여러번(hops)</strong> 하게 되는 이유다.</p>
+<p>따라서, 문장에서 우리가 정하는 어떤 수 <span class="arithmatex">\(r\)</span> 번의 다른 부분을 추출 해낸다고 하면, 기존의 <span class="arithmatex">\(w_{s2}\)</span> 는 <span class="arithmatex">\(r \times d_a\)</span> 크기를 가진 <span class="arithmatex">\(W_{s2}\)</span> 라는 매트릭스로 확장된다. 이에따라 기존에 <span class="arithmatex">\(a\)</span> 벡터도 <span class="arithmatex">\(r\)</span> 번을 수행해 concatenate 한 <span class="arithmatex">\(r \times n\)</span> 크기의 매트릭스 <span class="arithmatex">\(A\)</span> 가 된다.  </p>
+<div class="arithmatex">\[A=softmax(W_{s2}tanh(W_{s1}H^T))  \qquad\qquad (6)\]</div>
+<p>여기서 <span class="arithmatex">\(softmax()\)</span> 는 input <span class="arithmatex">\(W_{s2}tanh(W_{s1}H^T)\)</span> 의 2번째 차원을 기준으로 softmax 하게 된다. (즉, 각 row 별로 softmax 해줌)</p>
+<p>사실 <span class="arithmatex">\((6)\)</span> 번 수식은 bias 가 없는 2-Layers MLP 로 간주할 수도 있다.</p>
+<p>위에 식에 따라 임베딩된 벡터 <span class="arithmatex">\(m\)</span> 도 <span class="arithmatex">\(r \times 2u\)</span> 크기의 매트릭스 <span class="arithmatex">\(M\)</span> 로 확장된다. 가중치를 담은 매트릭스 <span class="arithmatex">\(A(r \times n)\)</span> 와 LSTM 의 히든 상태들인 <span class="arithmatex">\(H(n \times 2u)\)</span>를 곱해서 새로운 임베딩 매트릭스 <span class="arithmatex">\(M\)</span> 을 얻을 수 있다.</p>
+<div class="arithmatex">\[M=AH  \qquad\qquad (7)\]</div>
+<p>마지막으로 <span class="arithmatex">\(M\)</span>을 Fully Connected MLP 에 넣어서 하고 싶은 분류를 하면 된다.</p>
+<ul id="light-slider3">
+  <li><img src="/assets/ML/nsmc/Self_Attention7.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention8.png"></li>
+  <li><img src="/assets/ML/nsmc/Self_Attention9.png"></li>
+</ul>
+
+<p><br></p>
+<h2 id="penalization-term">Penalization Term<a class="headerlink" href="#penalization-term" title="Permanent link">&para;</a></h2>
+<p>임베딩된 매트릭스 <span class="arithmatex">\(M\)</span> 은 <span class="arithmatex">\(r\)</span> hops 동안 계속해서 같은 유사도 벡터 <span class="arithmatex">\(a\)</span> 를 곱하게 되면 <strong>중복 문제(redundancy problems)</strong> 가 생길 수 있다. 즉, 같은 단어 혹은 구문만 계속해서 attention 하게 되는 문제다.</p>
+<p><img src="/assets/ML/nsmc/penal.png"></p>
+<ul>
+<li>그림: 왼쪽(a)은 패널티를 안준 것, 오른쪽(b) 는 준것</li>
+</ul>
+<p>따라서, <span class="arithmatex">\(r\)</span> hops 동안 weight 벡터들의 합을 다양성을 높히는 일종의 패널티를 줘야한다.</p>
+<p>제일 좋은 방법은 <span class="arithmatex">\(r\)</span> hops 안에 있는 아무 두 벡터 간의 <strong><a href="https://ko.wikipedia.org/wiki/%EC%BF%A8%EB%B0%B1-%EB%9D%BC%EC%9D%B4%EB%B8%94%EB%9F%AC_%EB%B0%9C%EC%82%B0">쿨백-라이블러 발산 (Kullback–Leibler divergence)</a></strong> 함수를 쓰는 것이다. 매트릭스 <span class="arithmatex">\(A\)</span> 의 각각의 행(row) 벡터들이 하나의 의미(semantic)를 가지는 단어 혹은 구문이 될 확률분포이기 때문에, 다양한 분포에서 나오는 것은 우리의 목적이 된다. (문장은 여러 단어/구문으로 구성되어 있기때문) 그러므로 KL divergence 값을 <strong>최대</strong> 로 만들면 중복 문제는 해결된다.</p>
+<p>그러나 논문에서는 위와 같은 경우에 불안정(unstable) 한다는 것을 알아냈다. 논문 저자들은 어림짐작해 보았을 때, KL divergence 를 최대화 할때(보통의 경우 KLD를 최소화 하는 것을 한다.), 매트릭스 <span class="arithmatex">\(A\)</span> 구하는 단계에서 softmax 시 많은 값들이 0 이거나 아주 작은 값이라서 불안정한 학습을 야기했을 가능성이 있다는 것이다.</p>
+<p>따라서, 논문에서는 매트릭스의 <strong><a href="http://mathworld.wolfram.com/FrobeniusNorm.html">Frobenius norm</a></strong> 을 쓰게 되는데 아래와 같다. (<span class="arithmatex">\(Norm_2\)</span>와 비슷해 보이지만 다르다)</p>
+<div class="arithmatex">\[P ={ {\|AA^T - I\|}_F}^2\]</div>
+<p>이 패널티 값과 기존의 Loss 와 같이 최소화 하는 방향으로 간다. 이 패널티의 뜻은 무엇일까?</p>
+<p>두 개의 다른 유사도 벡터의 합 <span class="arithmatex">\(a^{i}\)</span> 과 <span class="arithmatex">\(a^{j}\)</span> 를 생각해보자. Softmax 로 인해서 모든 <span class="arithmatex">\(a\)</span> 값들의 합은 1이 될 것이다. 따라서 이들을 일종의 이산 확률분포 (discrete probability distribution)에서 나오는 확률질량 함수로 간주할 수 있다.</p>
+<p>매트릭스 <span class="arithmatex">\(AA^T\)</span> 중, 모든 비대각 <span class="arithmatex">\(a_{ij}\ (i \neq j)\)</span> 원소에 대해서, 원소의 곱(elementary product)은 아래 두개의 분포를 가지고 있다.</p>
+<div class="arithmatex">\[0&lt; a_{ij} = \sum_{k=1}^{n} a_k^i a_k^j &lt;1\]</div>
+<p>여기서 <span class="arithmatex">\(a_k^i, a_k^j\)</span> 는 각각 <span class="arithmatex">\(a^i, a^j\)</span> 의 k 번째 원소다. 제일 극단적인 경우를 생각해보면, <span class="arithmatex">\(a^i\)</span> 와 <span class="arithmatex">\(a^j\)</span> 가 일치하지 않다면 (혹은 다른 분포를 나타내고 있다면) 0 이 되고, 완전이 일치해서 같은 단어 혹은 구문을 이야기 하고 있다면 (혹은 같은 분포를 나타내고 있다면) 1 에서 최대값을 가지게 될 것이다.</p>
+<p>따라서, <span class="arithmatex">\(AA^T\)</span> 의 대각 행렬(같은 단어 혹은 구문)을 대략 1 이 되게 강제한다. <span class="arithmatex">\(I\)</span> (Identity) 매트릭스를 빼줌으로써 달성하는데, 이는 자기 자신을 제외한 각기 다른 <span class="arithmatex">\(a^i\)</span> 간 원소들의 합인 <span class="arithmatex">\(a_{ij}\)</span> 들이 0 으로 최소화되게 만들어 버린다. 즉, 최대한 <span class="arithmatex">\(a^i\)</span> 간의 분포가 일치하지 않게 만드려고 노력하는 것이다. 이렇게 함으로써 <span class="arithmatex">\(r\)</span> 번의 hops 마다 각각 다른 단어에 집중하게 만드는 효과를 낼 수 있어서, 중복문제를 해결 할 수가 있다.</p>
+<p><br></p>
+<h1 id="_3">네이버 영화 리뷰 테스트 결과 및 시각화<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<p>총 150000 개의 Train Set과 50000 개의 Test Set 으로 진행했고, 모델에서는 hyperparameter가 많기 때문에 몇 가지 실험을 진행 했다.</p>
+<p>간단한 실험을 위해서 사전에 단어들을 word2vec 으로 학습시키지 않고, mecab 으로 tokenizing 만해서 임베딩 시켰다. (실험을 안해봐서 사실 크게 상관있나 모르겠다. 나중에 여러가지로 실험해볼 예정)</p>
+<p>내가 주로 건드린건 LSTM 에서의 <strong>hidden layer의 갯수</strong> 와 hops 인 <strong><span class="arithmatex">\(r\)</span></strong> 을 바꾸어 보았다.</p>
+<h2 id="model-1-1-hidden-layer-5-hops">model 1: 1 개의 Hidden Layer 와 5번의 hops<a class="headerlink" href="#model-1-1-hidden-layer-5-hops" title="Permanent link">&para;</a></h2>
+<p><img src="/assets/ML/nsmc/model_1.png"></p>
+<h2 id="model-2-1-hidden-layer-20-hops">model 2: 1 개의 Hidden Layer 와 20번의 hops<a class="headerlink" href="#model-2-1-hidden-layer-20-hops" title="Permanent link">&para;</a></h2>
+<p><img src="/assets/ML/nsmc/model_2.png"></p>
+<p>hops 가 많아지면 긍정/부정을 판단하게 되는 근거도 많아지고, 모델의 정확도도 향상되는 것을 2번에서 볼 수 있다.</p>
+<h2 id="model-3-3-hidden-layer-5-hops">model 3: 3 개의 Hidden Layer 와 5번의 hops<a class="headerlink" href="#model-3-3-hidden-layer-5-hops" title="Permanent link">&para;</a></h2>
+<p><img src="/assets/ML/nsmc/model_3.png"></p>
+<p>3번째 모델은 조금 이상하다고 느껴진 것이 있다. 그림을 보면 기계가 문장의 앞뒤만 보고 리뷰가 긍정인지 부정인지 판단했다는 것이다. 그림만 보면 과최적화된 느낌? 정확히 각 층의 layer 값을 보지는 못했지만, 층이 깊어 질 수록 기계가 이전 단계의 layer 에서 추출한 특징들로 학습해서 긍부정을 판단 했을 가능성이 있다. 점수는 높게 나왔으나 사람이 판단하기에는 부적절한 모델</p>
+<h1 id="_4">향후 해볼 수 있는 과제들<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<ul>
+<li>전처리 단계에서 임베딩시 다양한 임베딩을 해볼 수 있을 것 같다. 예를 들어 word2vec으로 미리 선학습 후에 만든다던지, 아니면 N-hot 인코딩 (단어 원형 + 품사 + 어미) 등등 시도해볼 수 있는 것은 많다.</li>
+<li>LSTM Cell 로 구현</li>
+<li>이와 연관은 좀 덜하지만, CNN으로 분류하는 것과 비교해 성능이 더 잘나올지? <strong>김윤</strong> 님의 논문 참고 : <a href="http://emnlp2014.org/papers/pdf/EMNLP2014181.pdf">링크 </a></li>
+</ul>
+<hr />
+<p>공부에 도움 주신 분들 및 공부에 도움 되었던 싸이트:
+* 김성동님: https://github.com/DSKSD
+* 같은 논문을 Tensorflow로 구현하신 flrngel님: https://github.com/flrngel/Self-Attentive-tensorflow</p>
+<p>감사합니다.</p>
+
+
+
+  
+
+
+
+
+                
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+  <script src="https://giscus.app/client.js"
+        data-repo="simonjisu/comments_bot"
+        data-repo-id="R_kgDOHRhxjQ"
+        data-category="General"
+        data-category-id="DIC_kwDOHRhxjc4CQSuI"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "toc.follow", "navigation.prune", "navigation.path"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.fbce390c.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
