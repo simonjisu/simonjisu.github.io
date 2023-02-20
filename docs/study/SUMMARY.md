@@ -1,2 +1,0 @@
-* [PaperReadings](papers/)
-* [Tutorials](tutorials/)

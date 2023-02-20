@@ -31,82 +31,102 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://simonjisu.github.io/study/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/</loc>
+         <loc>https://simonjisu.github.io/study/paper/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2017-08-04-E2EMN/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2017-08-04-E2EMN/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2018-04-04-nsmcbidreclstmselfattn/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2018-04-04-nsmcbidreclstmselfattn/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2019-08-22-neuralnetworklm/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2019-08-22-neuralnetworklm/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2019-09-18-introxai/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2019-09-18-introxai/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2020-01-14-attentionisallyouneed/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2020-01-14-attentionisallyouneed/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2020-03-12-deepinsidecnn/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2020-03-12-deepinsidecnn/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2020-07-19-maskpredict/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2020-07-19-maskpredict/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2020-07-23-casm/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2020-07-23-casm/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2020-12-31-xaitutorial/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2020-12-31-xaitutorial/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2021-04-12-spider/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2021-04-12-spider/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2021-04-20-featurevisualization/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2021-04-20-featurevisualization/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2021-05-14-bridge/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2021-05-14-bridge/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2021-08-13-hybridranking/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2021-08-13-hybridranking/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://simonjisu.github.io/study/papers/2021-11-21-nbdt/</loc>
+         <loc>https://simonjisu.github.io/study/paper/2021-11-21-nbdt/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/study/tutorial/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/study/tutorial/algorithm/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/study/tutorial/deeplearning/</loc>
+         <lastmod>2023-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/study/tutorial/math/</loc>
          <lastmod>2023-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
