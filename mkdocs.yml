@@ -1,0 +1,91 @@
+site_name: Soopace
+site_url: https://simonjisu.github.io
+repo_url: https://github.com/simonjisu.github.io
+
+theme:
+  name: "material"
+  logo: img/logo/logo.png
+  custom_dir: overrides
+  palette:
+    primary: black # indigo
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    # - navigation.sections
+    # - navigation.tracking
+    - toc.follow
+    - navigation.prune
+    - navigation.path
+
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - attr_list
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - admonition
+  - pymdownx.details
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - meta
+  - tags
+  - search
+  # unable to use following plugins with blog
+  # - section-index
+  # https://oprypin.github.io/mkdocs-literate-nav/reference.html
+  - literate-nav:
+      nav_file: SUMMARY.md
+      implicit_index: false
+
+  - blog:
+      blog_dir: "blog"
+      post_url_format: "{date}/{slug}"
+      post_date_format: medium
+      post_url_date_format: yyyy/MM/dd
+      archive: true
+      archive_date_format: yyyy
+      archive_url_date_format: yyyy
+      archive_url_format: "archive/{date}"
+      # post_slugify
+      post_slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+      post_slugify_separator: "-"
+
+nav:
+  - About: index.md
+  - Blog:
+    - blog/index.md
+  - Study: study/
+  - Project: project/
+
+extra:
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/simonjisu
+  analytics:
+    provider: google
+    property: G-LJESYTRE7M

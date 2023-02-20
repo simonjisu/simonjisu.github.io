@@ -1,0 +1,20 @@
+# INHERIT: mkdocs.yml
+# theme:
+#   features:
+#     - navigation.prune
+#     - navigation.path
+# plugins:
+#   - blog:
+#       blog_dir: .
+#       post_url_format: "{date}/{slug}"
+#       post_date_format: medium
+#       post_url_date_format: yyyy/MM/dd
+#       archive: true
+#       archive_date_format: yyyy
+#       archive_url_date_format: yyyy
+#       archive_url_format: "archive/{date}"
+#       # post_slugify
+#       post_slugify: !!python/object/apply:pymdownx.slugs.slugify
+#         kwds:
+#           case: lower
+#       post_slugify_separator: "-"
