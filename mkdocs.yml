@@ -11,6 +11,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.indexes
     # - navigation.sections
     # - navigation.tracking
     - toc.follow
