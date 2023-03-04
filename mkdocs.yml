@@ -61,6 +61,19 @@ plugins:
   - meta
   - tags
   - search
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: none
+      slide_effect: slide
+      width: 70%
+      height: 100%
+      zoomable: false
+      draggable: false
+      skip_classes:
+        - skipglightbox
+      auto_caption: false
+      caption_position: bottom
   # unable to use following plugins with blog
   # - section-index
   # https://oprypin.github.io/mkdocs-literate-nav/reference.html

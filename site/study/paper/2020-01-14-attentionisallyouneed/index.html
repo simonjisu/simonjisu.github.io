@@ -1,193 +1,117 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-        <link rel="canonical" href="https://simonjisu.github.io/study/paper/2020-01-14-attentionisallyouneed/">
-      
-      
-        <link rel="prev" href="../2019-09-18-introxai/">
-      
-      
-        <link rel="next" href="../2020-03-12-deepinsidecnn/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0+insiders-4.32.2">
-    
-    
-      
-        <title>Attention Is All You Need - Soopace</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.24f010b1.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.6932e648.min.css">
-      
-      
+<!DOCTYPE html>
 
-    
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-  
-
-
-  
-  
-
-
-  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-
-  
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-  
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#1-introduction" class="md-skip">
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://simonjisu.github.io/study/paper/2020-01-14-attentionisallyouneed/" rel="canonical"/>
+<link href="../2019-09-18-introxai/" rel="prev"/>
+<link href="../2020-03-12-deepinsidecnn/" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.0+insiders-4.32.2" name="generator"/>
+<title>Attention Is All You Need - Soopace</title>
+<link href="../../../assets/stylesheets/main.24f010b1.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.6932e648.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#1-introduction">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
-      
-  <img src="../../../img/logo/logo.png" alt="logo">
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
+<img alt="logo" src="../../../img/logo/logo.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             Soopace
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               Attention Is All You Need
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-      </div>
-    
-  </nav>
-  
-    
-      
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../..">
         
   
     
@@ -195,18 +119,9 @@
   About
 
       </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../blog/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../blog/">
           
   
     
@@ -214,21 +129,9 @@
   Blog
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../" class="md-tabs__link md-tabs__link--active">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../../">
           
   
     
@@ -236,19 +139,9 @@
   Study
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../project/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../project/">
           
   
     
@@ -256,73 +149,38 @@
   Project
 
         </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
+</li>
+</ul>
+</div>
 </nav>
-    
-  
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
-      
-  <img src="../../../img/logo/logo.png" alt="logo">
-
-    </a>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
+<img alt="logo" src="../../../img/logo/logo.png"/>
+</a>
     Soopace
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
     
   
     About
@@ -330,44 +188,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../../blog/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../blog/">
+<span class="md-ellipsis">
     
   
     Blog
@@ -375,55 +200,14 @@
 
     
   </span>
-  
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
     
   
     Study
@@ -431,89 +215,26 @@
 
     
   </span>
-  
-  
-
-            </a>
-            
-              <label class="md-nav__link " for="__nav_3">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
+</a>
+<label class="md-nav__link" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
             
   
     Study
   
 
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-    
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
     
   
     Paper
@@ -521,40 +242,24 @@
 
     
   </span>
-  
-  
-
-            </a>
-            
-              <label class="md-nav__link " for="__nav_3_2">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
+</a>
+<label class="md-nav__link" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span>
             
   
     Paper
   
 
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2017-08-04-E2EMN/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2017-08-04-E2EMN/">
+<span class="md-ellipsis">
     
   
     End-to-End Memory Network
@@ -562,25 +267,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2018-04-04-nsmcbidreclstmselfattn/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2018-04-04-nsmcbidreclstmselfattn/">
+<span class="md-ellipsis">
     
   
     A Structured Self-Attentive Sentence Embedding
@@ -588,25 +279,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2019-08-22-neuralnetworklm/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2019-08-22-neuralnetworklm/">
+<span class="md-ellipsis">
     
   
     A Neural Probabilistic Language Model
@@ -614,25 +291,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2019-09-18-introxai/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2019-09-18-introxai/">
+<span class="md-ellipsis">
     
   
     Explaining Explanations: An Overview of Interpretability of Machine Learning
@@ -640,32 +303,12 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
     
   
     Attention Is All You Need
@@ -673,16 +316,10 @@
 
     
   </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
     
   
     Attention Is All You Need
@@ -690,349 +327,263 @@
 
     
   </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-introduction">
+<span class="md-ellipsis">
       
         1. Introduction
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Introduction">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="1. Introduction" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
       
         전체 모델구조
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#encoder" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#encoder">
+<span class="md-ellipsis">
       
         Encoder
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#decoder" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decoder">
+<span class="md-ellipsis">
       
         Decoder
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#2-scaled-dot-product-attention" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-scaled-dot-product-attention">
+<span class="md-ellipsis">
       
         2. Scaled Dot-Product Attention
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Scaled Dot-Product Attention">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#attention" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="2. Scaled Dot-Product Attention" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#attention">
+<span class="md-ellipsis">
       
         Attention
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+<span class="md-ellipsis">
       
         기계번역 문제
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+<span class="md-ellipsis">
       
         감성 분석 문제
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#scaled-dot-product-attention" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scaled-dot-product-attention">
+<span class="md-ellipsis">
       
         Scaled Dot-Product Attention
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#3-sub-layers" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-sub-layers">
+<span class="md-ellipsis">
       
         3. Sub Layers
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Sub Layers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#multi-head-attention" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="3. Sub Layers" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#multi-head-attention">
+<span class="md-ellipsis">
       
         Multi-Head Attention
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#position-wise-feed-forward-networks" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#position-wise-feed-forward-networks">
+<span class="md-ellipsis">
       
         Position-wise Feed-Forward Networks
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4-embeddings" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-embeddings">
+<span class="md-ellipsis">
       
         4. Embeddings
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Embeddings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#input-output" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="4. Embeddings" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#input-output">
+<span class="md-ellipsis">
       
         Input 과 Output
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#embedding" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#embedding">
+<span class="md-ellipsis">
       
         Embedding
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#positional-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#positional-encoding">
+<span class="md-ellipsis">
       
         Positional Encoding
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#5-models" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-models">
+<span class="md-ellipsis">
       
         5. Models
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Models">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#masking" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="5. Models" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#masking">
+<span class="md-ellipsis">
       
         Masking
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#transformer-model" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#transformer-model">
+<span class="md-ellipsis">
       
         Transformer Model
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#6-loss-function" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-loss-function">
+<span class="md-ellipsis">
       
         6. Loss Function
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Loss Function">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#label-smoothing" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="6. Loss Function" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#label-smoothing">
+<span class="md-ellipsis">
       
         Label Smoothing
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#7-optimizer" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-optimizer">
+<span class="md-ellipsis">
       
         7. Optimizer
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Optimizer">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#learning-rate-variation" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="7. Optimizer" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-rate-variation">
+<span class="md-ellipsis">
       
         Learning Rate Variation
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#8-training-multi30k-with-transformer" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8-training-multi30k-with-transformer">
+<span class="md-ellipsis">
       
         8. Training Multi30k with Transformer
       
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-03-12-deepinsidecnn/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-03-12-deepinsidecnn/">
+<span class="md-ellipsis">
     
   
     Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
@@ -1040,25 +591,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-07-19-maskpredict/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-07-19-maskpredict/">
+<span class="md-ellipsis">
     
   
     Mask-Predict: Parallel Decoding of Conditional Masked Language Models
@@ -1066,25 +603,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-07-23-casm/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-07-23-casm/">
+<span class="md-ellipsis">
     
   
     Classifier-agnostic saliency map extraction
@@ -1092,25 +615,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-12-31-xaitutorial/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-12-31-xaitutorial/">
+<span class="md-ellipsis">
     
   
     Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
@@ -1118,25 +627,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-04-12-spider/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-04-12-spider/">
+<span class="md-ellipsis">
     
   
     Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task
@@ -1144,25 +639,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-04-20-featurevisualization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-04-20-featurevisualization/">
+<span class="md-ellipsis">
     
   
     Feature Visualization
@@ -1170,25 +651,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-05-14-bridge/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-05-14-bridge/">
+<span class="md-ellipsis">
     
   
     Bridging Textual and Tabular Data for Cross-Domain Text-to-SQL Semantic Parsing
@@ -1196,25 +663,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-08-13-hybridranking/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-08-13-hybridranking/">
+<span class="md-ellipsis">
     
   
     Hybrid Ranking Network for Text-to-SQL
@@ -1222,25 +675,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-11-21-nbdt/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-11-21-nbdt/">
+<span class="md-ellipsis">
     
   
     NBDT: Neural-Backed Decision Trees
@@ -1248,57 +687,14 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../tutorial/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../tutorial/">
+<span class="md-ellipsis">
     
   
     Tutorial
@@ -1306,54 +702,15 @@
 
     
   </span>
-  
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../../project/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../project/">
+<span class="md-ellipsis">
     
   
     Project
@@ -1361,458 +718,307 @@
 
     
   </span>
-  
-  
-
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-introduction">
+<span class="md-ellipsis">
       
         1. Introduction
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Introduction">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="1. Introduction" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
       
         전체 모델구조
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#encoder" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#encoder">
+<span class="md-ellipsis">
       
         Encoder
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#decoder" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#decoder">
+<span class="md-ellipsis">
       
         Decoder
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#2-scaled-dot-product-attention" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-scaled-dot-product-attention">
+<span class="md-ellipsis">
       
         2. Scaled Dot-Product Attention
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Scaled Dot-Product Attention">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#attention" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="2. Scaled Dot-Product Attention" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#attention">
+<span class="md-ellipsis">
       
         Attention
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+<span class="md-ellipsis">
       
         기계번역 문제
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+<span class="md-ellipsis">
       
         감성 분석 문제
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#scaled-dot-product-attention" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scaled-dot-product-attention">
+<span class="md-ellipsis">
       
         Scaled Dot-Product Attention
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#3-sub-layers" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-sub-layers">
+<span class="md-ellipsis">
       
         3. Sub Layers
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Sub Layers">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#multi-head-attention" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="3. Sub Layers" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#multi-head-attention">
+<span class="md-ellipsis">
       
         Multi-Head Attention
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#position-wise-feed-forward-networks" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#position-wise-feed-forward-networks">
+<span class="md-ellipsis">
       
         Position-wise Feed-Forward Networks
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4-embeddings" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-embeddings">
+<span class="md-ellipsis">
       
         4. Embeddings
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Embeddings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#input-output" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="4. Embeddings" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#input-output">
+<span class="md-ellipsis">
       
         Input 과 Output
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#embedding" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#embedding">
+<span class="md-ellipsis">
       
         Embedding
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#positional-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#positional-encoding">
+<span class="md-ellipsis">
       
         Positional Encoding
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#5-models" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-models">
+<span class="md-ellipsis">
       
         5. Models
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Models">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#masking" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="5. Models" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#masking">
+<span class="md-ellipsis">
       
         Masking
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#transformer-model" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#transformer-model">
+<span class="md-ellipsis">
       
         Transformer Model
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#6-loss-function" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-loss-function">
+<span class="md-ellipsis">
       
         6. Loss Function
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Loss Function">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#label-smoothing" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="6. Loss Function" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#label-smoothing">
+<span class="md-ellipsis">
       
         Label Smoothing
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#7-optimizer" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-optimizer">
+<span class="md-ellipsis">
       
         7. Optimizer
       
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Optimizer">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#learning-rate-variation" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="7. Optimizer" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-rate-variation">
+<span class="md-ellipsis">
       
         Learning Rate Variation
       
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#8-training-multi30k-with-transformer" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8-training-multi30k-with-transformer">
+<span class="md-ellipsis">
       
         8. Training Multi30k with Transformer
       
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              
-                
-
-  
-
-
-
-  
-
-
-  <nav class="md-path" aria-label="Navigation" >
-    <ol class="md-path__list">
-      
-        
-  
-    <li class="md-path__item">
-      <a href="../../.." class="md-path__link">
-        <span class="md-ellipsis">
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<nav aria-label="Navigation" class="md-path">
+<ol class="md-path__list">
+<li class="md-path__item">
+<a class="md-path__link" href="../../..">
+<span class="md-ellipsis">
           About
         </span>
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../../" class="md-path__link">
-          <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../../">
+<span class="md-ellipsis">
             Study
           </span>
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../" class="md-path__link">
-          <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../">
+<span class="md-ellipsis">
             Paper
           </span>
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
-              
-              <article class="md-content__inner md-typeset">
-                
-  
-                  
-  
-  
-
-
-  <nav class="md-tags" hidden>
-    
-      
-      
-        <span class="md-tag">NLP</span>
-      
-    
-      
-      
-        <span class="md-tag">Transformer</span>
-      
-    
-      
-      
-        <span class="md-tag">Attention</span>
-      
-    
-  </nav>
-
-
-
-  
-  
-
-
-  <h1>Attention Is All You Need</h1>
-
+</a>
+</li>
+</ol>
+</nav>
+<article class="md-content__inner md-typeset">
+<nav class="md-tags" hidden="">
+<span class="md-tag">NLP</span>
+<span class="md-tag">Transformer</span>
+<span class="md-tag">Attention</span>
+</nav>
+<h1>Attention Is All You Need</h1>
 <p>Paper Link: <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a></p>
-<hr />
-<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<hr/>
+<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">¶</a></h2>
 <p>그 동안 LSTM(<a href="https://dl.acm.org/citation.cfm?id=1246450">Long Short-term Memory</a>, 1997) 과 GRU(<a href="https://arxiv.org/abs/1412.3555">Gated Recurrent Unit</a>, 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다. </p>
 <p>{% include image.html id="1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz" desc="[그림 1] RNN의 forward propagation" width="auto" height="auto" %}</p>
 <p><code>그림 1</code> 처럼 이전 스텝의 은닉층 유닛인 <span class="arithmatex">\(h_{t-1}\)</span> 를 현재 스텝의 은닉층 유닛 <span class="arithmatex">\(h_t\)</span> 로 전달하면서 자연스럽게 시퀀스 데이터의 특징을 유지하지만, 아쉽게도 병렬 처리를 원천적으로 배제한다는 단점이 존재한다. 따라서 만약에 문장이 길어질 수록 훈련 속도가 현저하게 느려진다.</p>
@@ -1823,23 +1029,23 @@
 <li><a href="https://arxiv.org/abs/1606.01933">A Decomposable Attention Model for Natural Language Inference, Ankur P. Parikh, 2016</a></li>
 </ul>
 <p>위 두 가지를 결합하여 저자들은 Attention 매커니즘만 활용하여 Input 과 Output 의 의존성을 글로벌하게 처리하고, 병렬화까지 가능한 <code>Transformer</code>라는 새로운 모델구조를 제안했다.</p>
-<h3 id="_1">전체 모델구조<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_1">전체 모델구조<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
 <p>대부분의 신경망 시퀀스 변환 모델(transduction models)들은 대체로 Encoder 와 Decoder 로 구성된다. Encoder는 심볼로 표현된 입력 시퀀스(비연속적인 토큰들) <span class="arithmatex">\(x\)</span> 를 연속 공간(Continuous Space) <span class="arithmatex">\(z\)</span> 로 맵핑 후, <span class="arithmatex">\(z\)</span> 를 바탕으로 출력 시퀀스 심볼인 <span class="arithmatex">\(y\)</span> 를 얻는다. 출력 시퀀스는 이전 타임 스텝(<span class="arithmatex">\(t-1\)</span>) 시퀀스를 입력으로 다음 타임 스텝(<span class="arithmatex">\(t\)</span>)을 출력하는 자기회귀(auto-regressive) 성격을 가진다. 수식으로 다음과 같다.</p>
 <div class="arithmatex">\[\begin{aligned} \mathbf{x}&amp;=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_1, z_2, \cdots, z_n)\\ \mathbf{y}&amp;=(y_1, y_2, \cdots, y_m)\ \text{for}\  y_{t}=f(y_{t-1}, \mathbf{z}) \end{aligned}\]</div>
 <p>{% include image.html id="15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97" desc="[그림 2] 모델구조: Encoder(좌), Decoder(우)" width="75%" height="auto" %}</p>
 <p>하지만 <strong>Transformer</strong> 에서는 한 타임 스텝마다 <span class="arithmatex">\(y\)</span> 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 <code>그림 2</code> 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).</p>
-<h3 id="encoder">Encoder<a class="headerlink" href="#encoder" title="Permanent link">&para;</a></h3>
+<h3 id="encoder">Encoder<a class="headerlink" href="#encoder" title="Permanent link">¶</a></h3>
 <p>Encoder는 각기 다른 N 개의 "Encoder Layer"라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 "Multi-Head Attention", 두번째는 일반적인 "Position-wise Feed Forward"로 구성되며, 각 서브층은 Residual Network(<a href="https://arxiv.org/abs/1512.03385">Kaiming He, 2015</a>)처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm(<a href="https://arxiv.org/abs/1607.06450">Jimmy Lei Ba, 2016</a>) 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.</p>
 <div class="arithmatex">\[\text{LayerNorm}(x + \text{SubLayer}(x))\]</div>
-<h3 id="decoder">Decoder<a class="headerlink" href="#decoder" title="Permanent link">&para;</a></h3>
+<h3 id="decoder">Decoder<a class="headerlink" href="#decoder" title="Permanent link">¶</a></h3>
 <p>Decoder도 Encoder와 마찬가지로 각기 다른 N 개의 "Decoder Layer" 라는 층으로 구성된다. 다만, Encoder의 출력을 받아서 "Multi-Head Attention"을 수행하는 3번째 서브층이 추가된다. Self Attention을 수행하는 첫번째 "Multi-Head Attention"에서는 뒤에 있는 시퀀스정보로 부터 예측을 하지 않게 이를 가리게 된다. 따라서 <span class="arithmatex">\(i\)</span> 번째 토큰은 <span class="arithmatex">\(i+1\)</span> 번째 이후의 토큰을 참조하지 않게 됩니다. 나머지는 Encoder와 마찬가지로 잔차 연결(residual connection)을 수행하고 LayerNorm을 통과하게 된다.</p>
 <p>이제부터 모델의 세부 사항을 살펴보면서 저자가 왜 이렇게 사용했는지, 의도가 무엇인지를 알아보려고 한다.</p>
-<h2 id="2-scaled-dot-product-attention">2. Scaled Dot-Product Attention<a class="headerlink" href="#2-scaled-dot-product-attention" title="Permanent link">&para;</a></h2>
-<h3 id="attention">Attention<a class="headerlink" href="#attention" title="Permanent link">&para;</a></h3>
+<h2 id="2-scaled-dot-product-attention">2. Scaled Dot-Product Attention<a class="headerlink" href="#2-scaled-dot-product-attention" title="Permanent link">¶</a></h2>
+<h3 id="attention">Attention<a class="headerlink" href="#attention" title="Permanent link">¶</a></h3>
 <p>Transformer 에서 Attention은 <span style="color:#e25252"><strong>query(Q)</strong></span> 와 <span style="color:#5470cc"><strong>key(K)</strong></span>-<span style="color:#cfb648"><strong>value(V)</strong></span> 세트를 입력으로 집중된 어떤 벡터를 출력하는 함수로 표현할 수 있다. 출력은 <span style="color:#e25252"><strong>Q</strong></span> 와 <span style="color:#5470cc"><strong>K</strong></span> 간의 관계(Attention), 즉 <span style="color:#e25252"><strong>Q</strong></span> 의 정보를 <span style="color:#5470cc"><strong>K</strong></span> 에 대조 했을 때, 어느 부분을 집중해서 볼 것인지를 계산하고 해당 관계를 <span style="color:#cfb648"><strong>V</strong></span> 와 결합하여 출력을 만든다. 수식으로 다음과 같다.</p>
 <div class="arithmatex">\[O = \text{Attention}(Q, K, V)\]</div>
 <p>직관적으로 잘 안떠오르는데, 이게 어떤 느낌인지 알아보기위해 예를 들어보면 다음과 같다.</p>
-<h3 id="_2">기계번역 문제<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h3 id="_2">기계번역 문제<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
 <p>영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. <span style="color:#e25252"><strong>query(Q)</strong></span>, <span style="color:#5470cc"><strong>key(K)</strong></span>, <span style="color:#cfb648"><strong>value(V)</strong></span> 관계는 <code>그림 3</code> 과같이 표현할 수 있다.</p>
 <p>{% include image.html id="14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G" desc="[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기" width="auto" height="auto" %}</p>
 <ul>
@@ -1847,10 +1053,10 @@
 <li><span style="color:#5470cc"><strong>key(K)</strong></span>-<span style="color:#cfb648"><strong>value(V)</strong></span> 세트: 인코딩된 영어 문장 정보, <span style="color:#5470cc"><strong>key(K)</strong></span> 와 <span style="color:#cfb648"><strong>value(V)</strong></span> 는 같은 벡터</li>
 </ul>
 <p><span style="color:#e25252"><strong>Q</strong></span> 는 우리가 알고 싶어하는 문제라고 생각할 수 있다. 명칭도 "query=질의" 그대로 <strong>"한국어로 변역하기 위해 영어 문장에서 집중적으로 봐야하는 단어는 어느 것인가?"</strong> 라는 질문을 인코딩된 영어 문장 정보인 <span style="color:#5470cc"><strong>K</strong></span>  한테 물어보게 된다. 그 방법은 이 다음에 소개하도록 하고, 그렇게 얻은 결과인 <strong>A</strong> 를 <span style="color:#cfb648"><strong>V</strong></span> 와 곱하여 그 단어를 집중적으로 보게한다. 그렇게 Attention의 결과물인 <span style="color:#49aa71"><strong>O</strong></span> 를 얻는다.</p>
-<h3 id="_3">감성 분석 문제<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3">감성 분석 문제<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
 <p>꼭 <span style="color:#e25252"><strong>Q</strong></span>, <span style="color:#5470cc"><strong>K</strong></span>-<span style="color:#cfb648"><strong>V</strong></span> 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 <span style="color:#e25252"><strong>Q</strong></span>, <span style="color:#5470cc"><strong>K</strong></span>, <span style="color:#cfb648"><strong>V</strong></span> 모두 같은 문장을 지정하여 <code>그림 4</code>처럼 Attention 을 사용할 수 있다. </p>
 <p>{% include image.html id="1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX" desc="[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기" width="auto" height="auto" %}</p>
-<h3 id="scaled-dot-product-attention">Scaled Dot-Product Attention<a class="headerlink" href="#scaled-dot-product-attention" title="Permanent link">&para;</a></h3>
+<h3 id="scaled-dot-product-attention">Scaled Dot-Product Attention<a class="headerlink" href="#scaled-dot-product-attention" title="Permanent link">¶</a></h3>
 <p>Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 제일 기본적인 "Dot Product" 를 사용했으며, 그 수식은 다음과 같으며, 배치크기를 제외한 Q, K, V 의 크기를 표기해서 <code>그림 5</code> 와 같다. </p>
 <div class="arithmatex">\[\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V\]</div>
 <p>{% include image.html id="1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM" desc="[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention" width="auto" height="auto" %}</p>
@@ -1858,74 +1064,74 @@
 <p>행렬 <strong>A</strong> 는 스케일링(Scaling), 마스킹(Masking) 후 Softmax 를 통해 확률값을 도출한다. 이 행렬의 뜻은 "문제를 해결하기 위해서 <span style="color:#e25252"><strong>Q</strong></span> 의 토큰이 <span style="color:#5470cc"><strong>K</strong></span> 의 어떤 토큰을 가장 많이 참고해야하는가?" 를 뜻한다. 따라서 확률이 높게 부여된 토큰은 <span style="color:#e25252"><strong>Q</strong></span> 의 해당하는 토큰과 연관성이 높다고 할 수 있다. 물론 이 모든 연산은 학습이 가능하도록 DAG(Directed acyclic graph)로 연결되어 있기 때문에 학습 스텝이 진행됨에 따라 풀고자하는 문제에 최적화된 확률을 계속 도출해낸다<span style="color:gray">((Masking 은 차후에 다룬다)</span>.</p>
 <p>스케일링 작업은 행렬 곱을 구한 <strong>A</strong> 를 <span class="arithmatex">\(\sqrt{d_k}\)</span> 로 나누는데, 그 이유는 다음과 같다. 차원의 크기인 <span class="arithmatex">\(d_k\)</span> 가 커질 수록 행렬의 곱의 수치는 점점 커지고 Softmax 수식에 의해서 그 확률 값 또한 커진다. 따라서 Softmax 의 경사(gradient) 값도 굉장히 작아지는데, 이를 막기위해서 <span class="arithmatex">\(\frac{1}{\sqrt{d_k}}\)</span> 값을 곱해줘야한다. </p>
 <p><strong>왜 <span class="arithmatex">\(\sqrt{d_k}\)</span> 를 나눌까?</strong> 평균이 0, 표준편차가 1인 랜덤한 값으로 <span style="color:#e25252"><strong>Q</strong></span> 와 <span style="color:#5470cc"><strong>K</strong></span> 로 초기화시키고 확률로 표현된 행렬값 <strong>A</strong> 의 경사를 구해보면 <span class="arithmatex">\(d_k\)</span> 가 커짐에 따라서 평균이 0, 분산이 <span class="arithmatex">\(d_k\)</span> 를 따르는 분포가 된다. 이러한 시뮬레이션을 다음 코드를 통해 알아 볼 수 있다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">torch</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span> <span class="nf">check_dotproduct_dist</span><span class="p">(</span><span class="n">d_k</span><span class="p">,</span> <span class="n">sampling_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    to check &quot;https://arxiv.org/abs/1706.03762&quot; Paper page 4, annotation 4</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    -------------------------------</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    To illustrate why the dot products get large, </span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    assume that the components of q and k are independent random variables </span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    with mean 0 and variance 1.</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    Then their dot product has mean 0 and variance d_k</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">    print(&quot;*** notice that the gradient of softmax is y(1-y) ***&quot;)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">    for d_k in [10, 100, 1000]:</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">        check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">def</span> <span class="nf">cal_grad</span><span class="p">(</span><span class="n">attn</span><span class="p">):</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="k">return</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">q</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">sampling_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">d_k</span><span class="p">)),</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">k</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">sampling_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">d_k</span><span class="p">)),</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">attn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bmm</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;size of vector d_k is </span><span class="si">{</span><span class="n">d_k</span><span class="si">}</span><span class="s2">, sampling result, dot product distribution has</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; - mean: </span><span class="si">{</span><span class="n">attn</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="se">\n</span><span class="s2"> - var: </span><span class="si">{</span><span class="n">attn</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">grad</span> <span class="o">=</span> <span class="n">cal_grad</span><span class="p">(</span><span class="n">attn</span><span class="p">)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">g_sum</span> <span class="o">=</span> <span class="n">grad</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">g_percent</span> <span class="o">=</span> <span class="n">g_sum</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">grad</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;count of gradients that smaller than threshod(</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="n">g_sum</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">g_percent</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="n">attn2</span> <span class="o">=</span> <span class="n">attn</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="n">grad2</span> <span class="o">=</span> <span class="n">cal_grad</span><span class="p">(</span><span class="n">attn2</span><span class="p">)</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">g_sum2</span> <span class="o">=</span> <span class="n">grad2</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="n">g_percent2</span> <span class="o">=</span> <span class="n">g_sum2</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">grad2</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;after divide by sqrt(d_k), count of gradients that smaller than threshod(</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="n">g_sum2</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">g_percent2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** notice that the gradient of softmax is y(1-y) ***&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="k">for</span> <span class="n">d_k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]:</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="n">check_dotproduct_dist</span><span class="p">(</span><span class="n">d_k</span><span class="p">,</span> <span class="n">sampling_size</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">torch</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="k">def</span> <span class="nf">check_dotproduct_dist</span><span class="p">(</span><span class="n">d_k</span><span class="p">,</span> <span class="n">sampling_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="sd">"""</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="sd">    to check "https://arxiv.org/abs/1706.03762" Paper page 4, annotation 4</span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="sd">    -------------------------------</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="sd">    To illustrate why the dot products get large, </span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="sd">    assume that the components of q and k are independent random variables </span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">    with mean 0 and variance 1.</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    Then their dot product has mean 0 and variance d_k</span>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">    print("*** notice that the gradient of softmax is y(1-y) ***")</span>
+<a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="sd">    for d_k in [10, 100, 1000]:</span>
+<a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="sd">        check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)</span>
+<a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>
+<a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">    """</span>
+<a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>
+<a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="k">def</span> <span class="nf">cal_grad</span><span class="p">(</span><span class="n">attn</span><span class="p">):</span>
+<a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>        <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="k">return</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>
+<a href="#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="n">q</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">sampling_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">d_k</span><span class="p">)),</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-0-24" id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="n">k</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="n">sampling_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">d_k</span><span class="p">)),</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-0-25" id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="n">attn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bmm</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<a href="#__codelineno-0-26" id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"size of vector d_k is </span><span class="si">{</span><span class="n">d_k</span><span class="si">}</span><span class="s2">, sampling result, dot product distribution has</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<a href="#__codelineno-0-27" id="__codelineno-0-27" name="__codelineno-0-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">" - mean: </span><span class="si">{</span><span class="n">attn</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="se">\n</span><span class="s2"> - var: </span><span class="si">{</span><span class="n">attn</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a href="#__codelineno-0-28" id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="n">grad</span> <span class="o">=</span> <span class="n">cal_grad</span><span class="p">(</span><span class="n">attn</span><span class="p">)</span>
+<a href="#__codelineno-0-29" id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="n">g_sum</span> <span class="o">=</span> <span class="n">grad</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a href="#__codelineno-0-30" id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="n">g_percent</span> <span class="o">=</span> <span class="n">g_sum</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">grad</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+<a href="#__codelineno-0-31" id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"count of gradients that smaller than threshod(</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="n">g_sum</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">g_percent</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+<a href="#__codelineno-0-32" id="__codelineno-0-32" name="__codelineno-0-32"></a>
+<a href="#__codelineno-0-33" id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="n">attn2</span> <span class="o">=</span> <span class="n">attn</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span>
+<a href="#__codelineno-0-34" id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">grad2</span> <span class="o">=</span> <span class="n">cal_grad</span><span class="p">(</span><span class="n">attn2</span><span class="p">)</span>
+<a href="#__codelineno-0-35" id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="n">g_sum2</span> <span class="o">=</span> <span class="n">grad2</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a href="#__codelineno-0-36" id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="n">g_percent2</span> <span class="o">=</span> <span class="n">g_sum2</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">grad2</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+<a href="#__codelineno-0-37" id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"after divide by sqrt(d_k), count of gradients that smaller than threshod(</span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">) is </span><span class="si">{</span><span class="n">g_sum2</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">g_percent2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% </span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<a href="#__codelineno-0-38" id="__codelineno-0-38" name="__codelineno-0-38"></a>
+<a href="#__codelineno-0-39" id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"*** notice that the gradient of softmax is y(1-y) ***"</span><span class="p">)</span>
+<a href="#__codelineno-0-40" id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="k">for</span> <span class="n">d_k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]:</span>
+<a href="#__codelineno-0-41" id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="n">check_dotproduct_dist</span><span class="p">(</span><span class="n">d_k</span><span class="p">,</span> <span class="n">sampling_size</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
 </code></pre></div>
 <p>시뮬레이션 결과: </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>*** notice that the gradient of softmax is y(1-y) ***
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>size of vector d_k is 10, sampling result, dot product distribution has
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> - mean: -0.0004, 
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> - var: 9.9979
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>count of gradients that smaller than threshod(1e-10) is 193, 0.01%
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>size of vector d_k is 100, sampling result, dot product distribution has
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a> - mean: -0.0028, 
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a> - var: 99.9868
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>count of gradients that smaller than threshod(1e-10) is 402283, 16.09%
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>size of vector d_k is 1000, sampling result, dot product distribution has
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a> - mean: 0.0029, 
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a> - var: 999.6312
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>count of gradients that smaller than threshod(1e-10) is 1737479, 69.50%
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00%
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>*** notice that the gradient of softmax is y(1-y) ***
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>size of vector d_k is 10, sampling result, dot product distribution has
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a> - mean: -0.0004, 
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a> - var: 9.9979
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>count of gradients that smaller than threshod(1e-10) is 193, 0.01%
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>size of vector d_k is 100, sampling result, dot product distribution has
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a> - mean: -0.0028, 
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a> - var: 99.9868
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>count of gradients that smaller than threshod(1e-10) is 402283, 16.09%
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00% 
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>size of vector d_k is 1000, sampling result, dot product distribution has
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a> - mean: 0.0029, 
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a> - var: 999.6312
+<a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a>count of gradients that smaller than threshod(1e-10) is 1737479, 69.50%
+<a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a>after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) is 0, 0.00%
 </code></pre></div>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/modules.py#L8"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<h2 id="3-sub-layers">3. Sub Layers<a class="headerlink" href="#3-sub-layers" title="Permanent link">&para;</a></h2>
-<h3 id="multi-head-attention">Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Permanent link">&para;</a></h3>
+<h2 id="3-sub-layers">3. Sub Layers<a class="headerlink" href="#3-sub-layers" title="Permanent link">¶</a></h2>
+<h3 id="multi-head-attention">Multi-Head Attention<a class="headerlink" href="#multi-head-attention" title="Permanent link">¶</a></h3>
 <p>{% include image.html id="1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_" desc="[그림 1] Multi-Head Attention" width="75%" height="auto" %}</p>
 <p>첫번째 서브층(SubLayer) Multi-Head Attention 의 구조는 <code>그림 1</code> 과 같다. 연구자들은 <span class="arithmatex">\(d_{model}\)</span> 크기의 <span style="color:#e25252"><strong>Q</strong></span>, <span style="color:#5470cc"><strong>K</strong></span>, <span style="color:#cfb648"><strong>V</strong></span> 를 한 번 수행하는 것보다 <span class="arithmatex">\(h\)</span> 개의 각기 다른 <strong>선형 투영(linear projection)</strong>을 시켜, 크기가 <span class="arithmatex">\(d_k\)</span>(<span style="color:#e25252"><strong>Q</strong></span>, <span style="color:#5470cc"><strong>K</strong></span>), <span class="arithmatex">\(d_v\)</span>(<span style="color:#cfb648"><strong>V</strong></span>) 인 텐서를 사용해서 Attention 을 병렬로 수행하는 것이 더 유리한 것을 찾아냈다. 각기 다른 Attention 을 수행한 <span class="arithmatex">\(h\)</span> 개의 출력값은 하나로 concatenate 후에 최종 선형결합을 통해 다시 <span class="arithmatex">\(d_{model}\)</span> 크기로 돌아오는데 이를 수식으로 표현하면 다음과 같다. </p>
 <div class="arithmatex">\[\begin{aligned} \text{MultiHead}(Q, K, V) &amp;= \text{Concat}(\text{head}_1, \cdots \text{head}_h)W^O  \\ \text{where head}_i &amp;= \text{Attention}(QW^Q_i, KW^K_i, VW^V_i)  \end{aligned}\]</div>
@@ -1934,14 +1140,14 @@
 <p>그렇다면 이렇게 큰 차원의 <span style="color:#e25252"><strong>Q</strong></span>, <span style="color:#5470cc"><strong>K</strong></span>, <span style="color:#cfb648"><strong>V</strong></span> 를 선형 변환 후에 <span class="arithmatex">\(h\)</span> 개의 Attention 을 나눠서 학습하게 했던 이유는 무엇 일까? 논문에서 이해한 것을 정리하면 다음과 같다.</p>
 <p>일단 선형 변환된 <span style="color:#e25252"><strong>Q</strong></span>, <span style="color:#5470cc"><strong>K</strong></span>, <span style="color:#cfb648"><strong>V</strong></span> 를 <span class="arithmatex">\(h\)</span> 개로 나눠버리는데, 이는 각 토큰을 표현하고 있던 큰 차원의 뉴런들을 <span class="arithmatex">\(h\)</span> 개의 블록으로 나눴다고 할 수 있다. 이렇게 위치가 상이한 각기 다른 표현 부분공간(representation subspaces) 블록들이 교차하면서(jointly) 정보를 얻게 된다. 이 말은 곧 <span class="arithmatex">\(h\)</span> 개의 Attention Matrix 가 생기면서 <span style="color:#e25252"><strong>Q</strong></span> 와 <span style="color:#5470cc"><strong>K</strong></span> 간의 토큰들이 더 다양한 관점으로 볼 수 있다는 말이다. 만약에 나누지 않았다면 단 하나의 Attention Matrix 를 생성하면서 이러한 효과를 뭉게버림으로, 선형 변환 층(linear projection)은 학습 과정을 반복하면서 최적의 <span class="arithmatex">\(h\)</span> 개의 Attention Matrix 를 생성하는 역할을 학습하게 된다.</p>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/sublayers.py#L11"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<h3 id="position-wise-feed-forward-networks">Position-wise Feed-Forward Networks<a class="headerlink" href="#position-wise-feed-forward-networks" title="Permanent link">&para;</a></h3>
+<h3 id="position-wise-feed-forward-networks">Position-wise Feed-Forward Networks<a class="headerlink" href="#position-wise-feed-forward-networks" title="Permanent link">¶</a></h3>
 <p>또 다른 서브층으로써 완전 연결층(Fully Connect Layer)인 네트워크를 Encoder, Decoder 뒤에 하나씩 추가했다. 이 완전 연결층은 두 개의 선형변환과 ReLU 활성화 함수를 사용했으며 그 수식은 다음과 같다.</p>
 <div class="arithmatex">\[\text{FFN}(x) = \max(0, xW_1+b_1)W_2+b_2\]</div>
 <p>아마도 입력 텐서가 각 토큰의 위치별로 차원이 커졌다가 다시 원래 모양으로 줄어들어서 이름이 Position-wise 라고 붙여진 것으로 추정되는데, 차원의 크기가 다음과 같이 변하기 때문이다.</p>
 <div class="arithmatex">\[(B, T, d_{model}) \rightarrow(B, T, d_{ff}) \rightarrow (B, T, d_{model})\]</div>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/sublayers.py#L91"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<h2 id="4-embeddings">4. Embeddings<a class="headerlink" href="#4-embeddings" title="Permanent link">&para;</a></h2>
-<h3 id="input-output">Input 과 Output<a class="headerlink" href="#input-output" title="Permanent link">&para;</a></h3>
+<h2 id="4-embeddings">4. Embeddings<a class="headerlink" href="#4-embeddings" title="Permanent link">¶</a></h2>
+<h3 id="input-output">Input 과 Output<a class="headerlink" href="#input-output" title="Permanent link">¶</a></h3>
 <p>Embedding 층과 Position Encoding 을 설명하기 전에 입출력이 어떻게 구성되어 있는지를 살펴봐야한다. 기계 번역 문제를 다시 예시로 들어보면, 다음과 같이 수치화된 문장들이 있다. 0 은 <code>Padding</code> 토큰으로써 데이터 처리를 위해 설정한 문장의 최대 길이에 맞춰서 넣은 인위적인 토큰이다.</p>
 <div class="arithmatex">\[\begin{aligned} \text{src} &amp;= \begin{bmatrix}3&amp;6&amp;4&amp;9 \\ 1&amp;3&amp;5&amp;0 \\ 3&amp;2&amp;0&amp;0 \end{bmatrix} \\ \text{trg} &amp;= \begin{bmatrix}2&amp;5&amp;4&amp;0 \\ 2&amp;5&amp;6&amp;0 \\ 2&amp;7&amp;4&amp;9 \end{bmatrix}  \end{aligned}\]</div>
 <p>즉, 위 행렬을 해석하면 현재 Input 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터, Target 데이터는 미니배치가 3, 문장의 최대 길이가 4인 데이터다. 각 문장의 토큰들에 순서 인덱스를 부여하여 포지션(Position) 데이터를 얻고자하면 다음과 같다. <code>Padding</code> 은 인위적으로 넣은 데이터기 때문에 순서가 없어야 한다.</p>
@@ -1949,42 +1155,42 @@
 <p>Decoder 의 경우 이전 타임 스텝(t-1)의 토큰들로 다음 타임 스텝(t)의 토큰을 예측하기 때문에 실질적으로 모델에 입력되는 데이터(<code>trg_input</code>)와 실제 예측해야하는 타겟 데이터(<code>gold</code>)는 다음과 같다. 즉, 예를 들어 1, 2, 3 포지션에 해당하는 타겟 값을 입력으로 주었을때 2, 3, 4 번 포지션에 해당하는 값을 예측하는 것이다.</p>
 <div class="arithmatex">\[\begin{aligned} \text{trg_input} &amp;= \begin{bmatrix} 2&amp;5&amp;4 \\ 2&amp;5&amp;6 \\ 2&amp;7&amp;4 \end{bmatrix} \\ \text{gold} &amp;= \begin{bmatrix}5&amp;4&amp;0 \\ 5&amp;6&amp;0 \\ 7&amp;4&amp;9 \end{bmatrix}  \end{aligned}\]</div>
 <p>토큰에 순서 정보인 포지션을 구하는 이유는 무엇일까? 그 해답은 RNN 의 구동원리에 있는데, RNN 을 Cell 단위로 만들면 다음 코드와 같다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    <span class="kn">import</span> <span class="nn">torch</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="c1"># create inputs tensor</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">seq_len</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">input_dimension</span> <span class="o">=</span> <span class="mi">7</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">input_dimension</span><span class="p">)</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="c1"># setting rnn cell</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">hidden_dimension</span> <span class="o">=</span> <span class="mi">6</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">rnn_cell</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">RNNCell</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">input_dimension</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_dimension</span><span class="p">)</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="c1"># RNN Layer</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">hidden</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">hidden_dimension</span><span class="p">)</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seq_len</span><span class="p">):</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn_cell</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hidden</span><span class="p">)</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hidden</span><span class="p">)</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="c1"># print: torch.Size([10, 2, 6])</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>    <span class="kn">import</span> <span class="nn">torch</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="c1"># create inputs tensor</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>    <span class="n">seq_len</span> <span class="o">=</span> <span class="mi">10</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>    <span class="n">input_dimension</span> <span class="o">=</span> <span class="mi">7</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>    <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">input_dimension</span><span class="p">)</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="c1"># setting rnn cell</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="n">hidden_dimension</span> <span class="o">=</span> <span class="mi">6</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="n">rnn_cell</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">RNNCell</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">input_dimension</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_dimension</span><span class="p">)</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="c1"># RNN Layer</span>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="n">hidden</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">hidden_dimension</span><span class="p">)</span>
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seq_len</span><span class="p">):</span>
+<a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn_cell</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hidden</span><span class="p">)</span>
+<a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hidden</span><span class="p">)</span>
+<a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>
+<a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>    <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+<a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a>    <span class="c1"># print: torch.Size([10, 2, 6])</span>
 </code></pre></div>
 <p>RNN 의 특징 중 하나는 시퀀스 길이에 상관없이 한 스텝씩 처리하기 때문에 아주 긴 시퀀스도 처리를 할 수 있다. 그러나 이러한 특징은 이전 타입스텝의 정보를 다음 타임스텝에게 전달할 수 있지만 병렬 처리가 불가능 하다. 하지만 Transformer 의 목표중 하나는 시퀀스 데이터의 병렬 처리인데, 즉, 한 번에 지정된 길이의 시퀀스를 모두 모델에게 전달하고 Forward 하게 된다. 그렇다면 시퀀스의 각 토큰간 순서 관계 정보를 모델은 어떻게 알아낼 수 있을까? 바로 <strong>Position Encoding</strong> 을 통해서 각 토큰의 순서 정보를 <strong>Embedding</strong> 된 벡터와 결합하여 모델로 전달하게 된다.</p>
-<h3 id="embedding">Embedding<a class="headerlink" href="#embedding" title="Permanent link">&para;</a></h3>
+<h3 id="embedding">Embedding<a class="headerlink" href="#embedding" title="Permanent link">¶</a></h3>
 <p>임베딩은 분절된 토큰들을 고정된 <span class="arithmatex">\(d_{model}\)</span> 차원의 공간으로 표현해주는 방법이다. Decoder 의 출력층에는 선형변환 층과 Softmax 를 섞어서 예측 토큰의 확률을 구하는 기법을 사용했으며, 임베딩된 벡터에 <span class="arithmatex">\(\sqrt{d_{model}}\)</span> 를 곱했다.</p>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L107"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<h3 id="positional-encoding">Positional Encoding<a class="headerlink" href="#positional-encoding" title="Permanent link">&para;</a></h3>
+<h3 id="positional-encoding">Positional Encoding<a class="headerlink" href="#positional-encoding" title="Permanent link">¶</a></h3>
 <p>Positional Encoding 은 상대적이거나 절대적인 위치정보를 부여하는 방법이다. 각 Position Encoding 의 차원의 크기는 더할 수 있게 임베딩된 텐서의 차원 크기인 <span class="arithmatex">\(d_{model}\)</span>과 같고 수식은 다음과 같다.</p>
 <div class="arithmatex">\[\begin{aligned} PE_{pos, 2i} &amp;= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{pos, 2i+1} &amp;= \cos(\frac{pos}{10000^{2i/d_{model}}})\end{aligned}\]</div>
 <p>결론을 말하자면 각 시퀀스의 순서 인덱서는 PE(Positonal Encoding) 테이블에서 각자의 위치를 조회후에 임베딩된 텐서와 결합하게 된다. pos 는 시퀀스의 위치정보, 예를 들어 텐서의 크기가 <span class="arithmatex">\(d_{model}\)</span> = 1024 의 경우, 각 1024의 짝수(2i)에 위치한 값들은 sin 함수를 적용하고, 홀수(2i+1) 에 위치한 값들은 cos 함수를 적용한다. PE 테이블을 그리면 <code>그림 2</code> 과 같은데, 자세히 보시면 각 포지션에 해당하는 1 줄(1024 크기의 벡터)값은 모두 차별화 되어있다. </p>
 <p>{% include image.html id="1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22" desc="[그림 2] 최대 길이가 51인 Positional Encoding Table" width="100%" height="auto" %}</p>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L82"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<h2 id="5-models">5. Models<a class="headerlink" href="#5-models" title="Permanent link">&para;</a></h2>
-<h3 id="masking">Masking<a class="headerlink" href="#masking" title="Permanent link">&para;</a></h3>
+<h2 id="5-models">5. Models<a class="headerlink" href="#5-models" title="Permanent link">¶</a></h2>
+<h3 id="masking">Masking<a class="headerlink" href="#masking" title="Permanent link">¶</a></h3>
 <p>지금까지 미뤄온 Attention 의 마스킹(Masking)을 이야기 해보려 한다. 마스킹이 필요한 이유는 두 가지다.</p>
 <ol>
 <li>
@@ -2007,12 +1213,12 @@
 * <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L42">Decoder Layer</a>
 * <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L10">Encoder</a>
 * <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L54">Decoder</a></p>
-<h3 id="transformer-model">Transformer Model<a class="headerlink" href="#transformer-model" title="Permanent link">&para;</a></h3>
+<h3 id="transformer-model">Transformer Model<a class="headerlink" href="#transformer-model" title="Permanent link">¶</a></h3>
 <p>특이한 점이라면 마지막 예측 토큰을 출력하는 선형 변환 층(<code>projection</code>)을 임베딩 층으로 치환하는 방법이 있는데 이를 논문에서 Linear Weight Sharing이라고 했다. 또한, 문제에 따라서 Encoder층의 임베딩과 Decoder층의 임베딩을 공유 할 수도 있는데 Language Modeling 같은 문제가 그 예시라고 할 수 있다. 이를 논문에서 Embed Weight Sharing이라고 했다.</p>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/models.py#L112"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<hr />
-<h2 id="6-loss-function">6. Loss Function<a class="headerlink" href="#6-loss-function" title="Permanent link">&para;</a></h2>
-<h3 id="label-smoothing">Label Smoothing<a class="headerlink" href="#label-smoothing" title="Permanent link">&para;</a></h3>
+<hr/>
+<h2 id="6-loss-function">6. Loss Function<a class="headerlink" href="#6-loss-function" title="Permanent link">¶</a></h2>
+<h3 id="label-smoothing">Label Smoothing<a class="headerlink" href="#label-smoothing" title="Permanent link">¶</a></h3>
 <p>Discrete한 분포를 예측하는 방법은 주로 Cross Entropy를 많이 사용하지만 논문에서는 <a href="https://arxiv.org/abs/1512.00567">Rethinking the inception architecture for computer vision</a> 논문에서 언급한 Label Smoothing 기법을 활용했다. </p>
 <p>예측 확률 분포를 <strong>P</strong>, 정답/타겟 확률 분포(ground-truth distribution)를 <strong>Q</strong>라고 하겠다. <span class="arithmatex">\(x\)</span> 를 입력으로 예측 확률 질량함수 <code>p(y=k|x)</code> 에서 구한 확률(Softmax)을 타겟 확률 질량함수 <code>q(y=k|x)=1</code> 처럼 만드는 것이 원래의 최종목표다. 이제부터 <span class="arithmatex">\(x\)</span>를 생략해서 쓰겠다. Cross Entropy의 수식은 다음과 같다.</p>
 <div class="arithmatex">\[Loss = -\sum_{k=1}^{K} \log\big(p(k) \big) q(k)\]</div>
@@ -2036,57 +1242,29 @@
 <p>LSR 은 기존에 Cross Entropy <code>H(q, p)</code>를 한 쌍의 <code>H(q, p)</code> 와 <code>H(u, p)</code>로 대체한 것이다. Smoothing Factor 인 <span class="arithmatex">\(\epsilon\)</span>의 크기의 여부에 따라 정규화의 정도가 달라진다.</p>
 <p><strong>Transformer</strong> 에서도 해당 방법을 정규화 목적으로 <span class="arithmatex">\(K\)</span> 는 타겟 단어장(vocab)의 크기, <span class="arithmatex">\(\epsilon\)</span>=0.1 로 사용했다.</p>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/labelsmooth.py#L5"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<h4 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h4>
+<h4 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h4>
 <ul>
 <li><a href="https://arxiv.org/abs/1512.00567">Rethinking the Inception Architecture for Computer Vision</a></li>
 <li><a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html#label-smoothing">The Annotated Transformer</a></li>
 </ul>
-<hr />
-<h2 id="7-optimizer">7. Optimizer<a class="headerlink" href="#7-optimizer" title="Permanent link">&para;</a></h2>
-<h3 id="learning-rate-variation">Learning Rate Variation<a class="headerlink" href="#learning-rate-variation" title="Permanent link">&para;</a></h3>
+<hr/>
+<h2 id="7-optimizer">7. Optimizer<a class="headerlink" href="#7-optimizer" title="Permanent link">¶</a></h2>
+<h3 id="learning-rate-variation">Learning Rate Variation<a class="headerlink" href="#learning-rate-variation" title="Permanent link">¶</a></h3>
 <p>논문에서는 Adam Optimizer 를 기반으로 다양한 학습률을 적용하여 사용했다. 학습률 변화의 수식은 다음과 같다.</p>
 <div class="arithmatex">\[lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \cdot \text{warmup_steps}^{-1.5} )\]</div>
 <p>해당 수식에 따르면 처음 warmup_steps 동안 학습률은 가파르게 상승하다가 차후에 천천히 하강하게 된다.</p>
 <p>{% include image.html id="1d0xw7_xjr1rv7-SjuxQKRmML4oio561j" desc="[그림 3] hidden 크기 및 warmup steps 에 따른 학습률의 변화" width="75%" height="auto" %}</p>
 <p>해당 모듈(Module) 코드는 <a href="https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/warmupoptim.py#L1"><strong>Link</strong></a> 에서 확인할 수 있다.</p>
-<hr />
-<h2 id="8-training-multi30k-with-transformer">8. Training Multi30k with Transformer<a class="headerlink" href="#8-training-multi30k-with-transformer" title="Permanent link">&para;</a></h2>
+<hr/>
+<h2 id="8-training-multi30k-with-transformer">8. Training Multi30k with Transformer<a class="headerlink" href="#8-training-multi30k-with-transformer" title="Permanent link">¶</a></h2>
 <p>PyTorch의 <code>torchtext</code>에 있는 Multi30k 데이터 세트(영어-독일어 번역)로 테스트 해보았다. 큰 데이터는 아니기 때문에, NVIDIA GTX 1080 ti 로 약 36분 훈련시켰다. 기존의 RNN 으로 훈련시키는 것 보다 월등히 빨랐다. 모델에서 Attention에 대한 그림도 <a href="https://github.com/simonjisu/annotated-transformer-kr">github</a>에 올려두었으니 확인해보길 바란다.</p>
 <p>{% include image.html id="1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa" desc="[그림 4] Multi30k 성능 테스트" width="100%" height="auto" %}</p>
-
-  
-  
-
-
-
-  
-
-
-  
-
-
-
-                
-
-  <!-- Giscus -->
-  <h2 id="__comments">Comments</h2>
-  <script src="https://giscus.app/client.js"
-        data-repo="simonjisu/comments_bot"
-        data-repo-id="R_kgDOHRhxjQ"
-        data-category="General"
-        data-category-id="DIC_kwDOHRhxjc4CQSuI"
-        data-mapping="pathname"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="light"
-        data-lang="ko"
-        crossorigin="anonymous"
-        async>
-  </script>
-
-  <!-- Synchronize Giscus theme with palette -->
-  <script>
+<!-- Giscus -->
+<h2 id="__comments">Comments</h2>
+<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
+</script>
+<!-- Synchronize Giscus theme with palette -->
+<script>
     var giscus = document.querySelector("script[src*=giscus]")
 
     /* Set palette on initial load */
@@ -2114,65 +1292,38 @@
       })
     })
   </script>
-
-              </article>
-            </div>
-          
-          
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
       Material for MkDocs Insiders
     </a>
-  
 </div>
-      
-        <div class="md-social">
-  
-    
-    
-    
-    
-      
-      
-    
-    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-    </a>
-  
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-    
-    
-      <script src="../../../assets/javascripts/bundle.96d2b699.min.js"></script>
-      
-        <script src="../../../javascripts/mathjax.js"></script>
-      
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-    
-  </body>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../assets/javascripts/bundle.96d2b699.min.js"></script>
+<script src="../../../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
 </html>

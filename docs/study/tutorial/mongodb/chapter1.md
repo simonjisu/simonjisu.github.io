@@ -7,7 +7,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?export=view&id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW){ width="100%" }
+  ![HeadImg](https://drive.google.com/uc?export=view&id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW){ class="skipglightbox" width="100%" }
   <figcaption>Reference: MongoDB</figcaption>
 </figure>
 
@@ -25,9 +25,12 @@ NoSQL이란 Not only SQL의 약자이며, 단순히 비관계형(Non-relational)
 
 ## Document-oriented
 
-MongoDB에서는 레코드(record)를 도큐먼트(document)라고 부른다. 도큐먼트는 **필드(field)** 와 **값(value)** 쌍으로 이루어진 데이터 구조를 가지고 있으며, 이는 JSON(JavaScript Object Notation)과 매우 유사하다. 필드는 **키(key)** 라고도 불리우며, 키값은 다른 도큐먼트, 배열 혹은 도큐먼트 배열을 포함할 수도 있다.
+MongoDB에서는 레코드(record)를 도큐먼트(document)라고 부른다. 도큐먼트는 **필드(field)** 와 **값(value)** 쌍으로 이루어진 데이터 구조를 가지고 있으며, 이는 JSON(JavaScript Object Notation)과 매우 유사하다. 필드는 **키(key)** 라고도 불리우며, 키값은 다른 도큐먼트, 배열 혹은 도큐먼트 배열을 포함할 수도 있다. MongoDB는 JSON Schema[^10]를 확장하여 BSON(binary JSON)를 만들어서 스키마로 사용하고 있다. 덧붙이면 스키마(Schema)는 데이터 오브젝트의 타입, 자료구조 등을 설명하는 명세서라고 생각하면 된다. [^11]
 
-``` javascript title="document"
+[^10]: [JSON Schema](https://json-schema.org/)
+[^11]: [MongoDB - Schemas](https://www.mongodb.com/docs/atlas/app-services/schemas/)
+
+``` javascript title="document object"
 {
   _id: ObjectID("35n2lkjald438"),  // (1)
   name: "soo",

@@ -7,7 +7,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?export=view&id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW){ width="100%" }
+  ![HeadImg](https://drive.google.com/uc?export=view&id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW){ class="skipglightbox" width="100%" }
   <figcaption>Reference: MongoDB</figcaption>
 </figure>
 
@@ -172,3 +172,4 @@ tags:
 
     1.  :man_raising_hand: `visit` 필드를 배열로 간주하고, 각 배열의 요소를 도큐먼트로 만든다.
     2.  :man_raising_hand: `visit` 필드를 기준으로 그룹을 만들고, `totalAge` 필드에 `age` 필드의 값을 더한다.
+

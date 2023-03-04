@@ -5,12 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/mongodb/chapter1/" rel="canonical"/>
-<link href="../" rel="prev"/>
-<link href="../chapter2/" rel="next"/>
+<link href="https://simonjisu.github.io/study/tutorial/mongodb/chapter3/" rel="canonical"/>
+<link href="../chapter2/" rel="prev"/>
+<link href="../../../../project/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.1.0+insiders-4.32.2" name="generator"/>
-<title>1. Introduction - Soopace</title>
+<title>3. Data Modeling Example - Soopace</title>
 <link href="../../../../assets/stylesheets/main.24f010b1.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.6932e648.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#nosql">
+<a class="md-skip" href="#create-database">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              1. Introduction
+              3. Data Modeling Example
             
           </span>
 </div>
@@ -333,13 +333,37 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter1/">
+<span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter2/">
+<span class="md-ellipsis">
+    
+  
+    2. Create Database / Collection / Document
+  
+
+    
+  </span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
     
   
-    1. Introduction
+    3. Data Modeling Example
   
 
     
@@ -350,7 +374,7 @@
 <span class="md-ellipsis">
     
   
-    1. Introduction
+    3. Data Modeling Example
   
 
     
@@ -363,47 +387,19 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#nosql">
+<a class="md-nav__link" href="#create-database">
 <span class="md-ellipsis">
       
-        NoSQL
+        Create Database
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#document-oriented">
+<a class="md-nav__link" href="#load-data-from-csv-file">
 <span class="md-ellipsis">
       
-        Document-oriented
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#collections-views-on-demand-materialized-views">
-<span class="md-ellipsis">
-      
-        Collections / Views / On-Demand Materialized Views
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#features">
-<span class="md-ellipsis">
-      
-        Features
-      
-    </span>
-</a>
-<nav aria-label="Features" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#high-performance">
-<span class="md-ellipsis">
-      
-        High Performance
+        Load Data from CSV file
       
     </span>
 </a>
@@ -418,61 +414,25 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#high-availability">
+<a class="md-nav__link" href="#aggregation-pipeline">
 <span class="md-ellipsis">
       
-        High Availability
+        Aggregation Pipeline
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#horizontal-scalability">
+<a class="md-nav__link" href="#indexing">
 <span class="md-ellipsis">
       
-        Horizontal Scalability
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
-      
-        참고하면 좋은 자료
+        Indexing
       
     </span>
 </a>
 </li>
 </ul>
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter2/">
-<span class="md-ellipsis">
-    
-  
-    2. Create Database / Collection / Document
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter3/">
-<span class="md-ellipsis">
-    
-  
-    3. Data Modeling Example
-  
-
-    
-  </span>
-</a>
 </li>
 </ul>
 </nav>
@@ -510,47 +470,19 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#nosql">
+<a class="md-nav__link" href="#create-database">
 <span class="md-ellipsis">
       
-        NoSQL
+        Create Database
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#document-oriented">
+<a class="md-nav__link" href="#load-data-from-csv-file">
 <span class="md-ellipsis">
       
-        Document-oriented
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#collections-views-on-demand-materialized-views">
-<span class="md-ellipsis">
-      
-        Collections / Views / On-Demand Materialized Views
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#features">
-<span class="md-ellipsis">
-      
-        Features
-      
-    </span>
-</a>
-<nav aria-label="Features" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#high-performance">
-<span class="md-ellipsis">
-      
-        High Performance
+        Load Data from CSV file
       
     </span>
 </a>
@@ -565,31 +497,19 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#high-availability">
+<a class="md-nav__link" href="#aggregation-pipeline">
 <span class="md-ellipsis">
       
-        High Availability
+        Aggregation Pipeline
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#horizontal-scalability">
+<a class="md-nav__link" href="#indexing">
 <span class="md-ellipsis">
       
-        Horizontal Scalability
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
-      
-        참고하면 좋은 자료
+        Indexing
       
     </span>
 </a>
@@ -636,153 +556,127 @@
 <nav class="md-tags" hidden="">
 <span class="md-tag">mongodb</span>
 </nav>
-<h1>1. Introduction</h1>
+<h1>3. Data Modeling Example</h1>
 <figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?export=view&amp;id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW" width="100%">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW" width="100%">
 </img></p>
 <figcaption>Reference: MongoDB</figcaption>
 </figure>
-<blockquote>
-<p>MongoDB is a document database designed for ease of application development and scaling.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> </p>
-</blockquote>
-<p>MongoDB는 유명한 NoSQL, 도큐먼트 지향(document-oriented) 데이터베이스 시스템 중 하나다. </p>
-<h2 id="nosql">NoSQL<a class="headerlink" href="#nosql" title="Permanent link">¶</a></h2>
-<p>NoSQL이란 Not only SQL의 약자이며, 단순히 비관계형(Non-relational)을 지향하는 것이 아니라 기존의 관계형 DBMS가 가지고 있는 특성에 다른 특성을 부가적으로 지원한다는 것을 의미한다. 기존에 많은 데이터들이 테이블의 형태로 존재했지만, 빅데이터 시대가 되면서 비정형 데이터를 유연하게 저장하고 처리하고 싶어서 이러한 NoSQL 데이터베이스가 각광을 받기 시작했다.</p>
-<p>테이블 간의 JOIN 기능 없고 데이터의 스키마와 속성들을 다양하게 정의할 수 있다. 또한 데이터 처리의 완결성을 미보장하지만 폭 넓은 확장성을 제공한다는 특징이 있다. </p>
-<h2 id="document-oriented">Document-oriented<a class="headerlink" href="#document-oriented" title="Permanent link">¶</a></h2>
-<p>MongoDB에서는 레코드(record)를 도큐먼트(document)라고 부른다. 도큐먼트는 <strong>필드(field)</strong> 와 <strong>값(value)</strong> 쌍으로 이루어진 데이터 구조를 가지고 있으며, 이는 JSON(JavaScript Object Notation)과 매우 유사하다. 필드는 <strong>키(key)</strong> 라고도 불리우며, 키값은 다른 도큐먼트, 배열 혹은 도큐먼트 배열을 포함할 수도 있다. MongoDB는 JSON Schema<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">2</a></sup>를 확장하여 BSON(binary JSON)를 만들어서 스키마로 사용하고 있다. 덧붙이면 스키마(Schema)는 데이터 오브젝트의 타입, 자료구조 등을 설명하는 명세서라고 생각하면 된다. <sup id="fnref:11"><a class="footnote-ref" href="#fn:11">3</a></sup></p>
-<div class="highlight"><span class="filename">document object</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span>
-<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="nx">ObjectID</span><span class="p">(</span><span class="s2">"35n2lkjald438"</span><span class="p">),</span><span class="w">  </span><span class="c1">// (1)</span>
-<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"soo"</span><span class="p">,</span>
-<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="mf">34</span><span class="p">,</span>
-<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="nx">grade</span><span class="o">:</span><span class="w"> </span><span class="s2">"A+"</span>
-<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">  </span><span class="nx">hobby</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"game"</span><span class="p">,</span><span class="w"> </span><span class="s2">"golf"</span><span class="p">],</span>
-<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="nx">image</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s2">"https://simonjisu.github.io"</span><span class="p">,</span>
-<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="nx">caption</span><span class="o">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span>
-<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">"jpg"</span>
-<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">  </span><span class="p">}</span>
-<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="p">}</span>
+<p>GitHub Dataset<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>를 사용하여 데이터 모델링을 실습해본다. 기존의 RDBMS의 디자인이라면 다음과 같다.</p>
+<ul>
+<li>GitHub 사용자 테이블(USER): 한 명의 사용자는 여러 개의 repository를 만들 수 있다.</li>
+<li>GitHub Repository 테이블(REPO): Repository이름 등 정보와 주 작성언어(없을 수도 있음)를 기록한다.</li>
+<li>Language 테이블(LANG): 작성언어 </li>
+</ul>
+<pre class="mermaid"><code>erDiagram
+    USER ||--o{ REPO : ""
+    USER {
+        int uid PK
+        string name
+    }
+    REPO |o--|| LANG : ""
+    REPO {
+        int rid PK
+        int uid FK
+        string name
+        int stars_count
+        int forks_count
+        int issues_count
+        int pull_requests
+        int contributors
+        int lid FK
+    }
+    LANG {
+        int lid
+        string name
+    }</code></pre>
+<p>NoSQL로는 다음과 같이 하나의 도큐먼트로 만들 수 있다.</p>
+<div class="highlight"><span class="filename">document</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_RID</span><span class="p">,</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="nx">user</span><span class="o">:</span><span class="w"> </span><span class="nx">USER_NAME</span><span class="p">,</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_NAME</span><span class="p">,</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="nx">stars_count</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_STARS_COUNT</span><span class="p">,</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="nx">forks_count</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_FORKS_COUNT</span><span class="p">,</span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nx">issues_count</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_ISSUES_COUNT</span><span class="p">,</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="nx">pull_requests</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_PULL_REQUESTS</span><span class="p">,</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="nx">contributors</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_CONTRIBUTORS</span><span class="p">,</span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="nx">language</span><span class="o">:</span><span class="w"> </span><span class="nx">LANG_NAME</span><span class="p">,</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="p">}</span>
 </code></pre></div>
-<ol>
-<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"> <code>_id</code> 필드가 primary key 가 된다.</img></li>
-</ol>
-<p>이런 형태는 많은 다른 프로그래밍 언어의 기본 데이터 유형에 해당하여 매우 친숙하다(e.g., Python - <code>dict</code>). 그리고 다양한 스키마를 유연하게 정의할 수 있다.</p>
-<h2 id="collections-views-on-demand-materialized-views">Collections / Views / On-Demand Materialized Views<a class="headerlink" href="#collections-views-on-demand-materialized-views" title="Permanent link">¶</a></h2>
-<p>콜렉션(collections)은 도큐먼트들(documents)의 그룹이다. RDBMS에서 Table에 해당한다. 뿐만 아니라 standard views와 on-demand materialized view를 제공한다. 둘의 차이점은 다음과 같다.<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">4</a></sup></p>
-<ul>
-<li>standard views는 view를 읽을때 계산되며, 디스크에 저장되지 않는다.</li>
-<li>on-demand materialized views는 디스트에 저장어 읽는다. <code>$merge</code> 혹은 <code>$out</code> 스테이지를 사용하여 저장된 데이터를 업데이트 한다.</li>
-</ul>
-<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">¶</a></h2>
-<h3 id="high-performance">High Performance<a class="headerlink" href="#high-performance" title="Permanent link">¶</a></h3>
-<ul>
-<li>Embedded Data Modeling 지원하여 I/O(Input/Output) activity을 줄인다. 아래 예제 처럼 하나의 도큐먼트에 담을 수 있는 내용을 일반적인 Normalized Data Modeling에서 읽고 쓰려면 2~3 개의 도큐먼트를 사용해야 한다.</li>
-</ul>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Embedded Data Model</label><label for="__tabbed_1_2">Normalized Data Model</label></div>
+<h2 id="create-database">Create Database<a class="headerlink" href="#create-database" title="Permanent link">¶</a></h2>
+<p>이번에는 MongDB Compass로 여러 작업을 수행해보도록 하겠다. 우선 데이터베이스 <code>github</code>라는 데이터베이스와 <code>repo</code>라는 컬렉션을 만들고 데이터를 불러오자.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Create DB 1</label><label for="__tabbed_1_2">Create DB 2</label><label for="__tabbed_1_3">Create DB 3</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><span class="filename">document</span><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
-<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectId1</span><span class="o">&gt;</span><span class="p">,</span>
-<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"soopace"</span><span class="p">,</span>
-<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nx">contact</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// (1)</span>
-<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="nx">phone</span><span class="o">:</span><span class="w"> </span><span class="s2">"010-1234-1234"</span><span class="p">,</span>
-<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">"simonjisu@gmail.com"</span>
-<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="p">},</span>
-<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nx">register</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// (2)</span>
-<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="nx">class_names</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Big Data"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Machine Learning"</span><span class="p">]</span>
-<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="p">}</span>
-<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">}</span>
-</code></pre></div>
-<ol>
-<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> Embedded <code>contact</code> sub-document</li>
-<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> Embedded <code>register</code> sub-document</li>
-</ol>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=11BosWHGm-tn_i_5-DaQSiD0kwR0cVfys"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=11BosWHGm-tn_i_5-DaQSiD0kwR0cVfys" width="30%"/></a></p>
+<p>MongoDB Compass 좌측 상단에서 <code>+</code>를 눌러 새로운 데이터 베이스를 생성하자.</p>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><span class="filename">`user` document</span><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="p">{</span>
-<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectId1</span><span class="o">&gt;</span><span class="p">,</span>
-<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"soopace"</span>
-<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><span class="filename">`contact` document</span><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
-<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectId2</span><span class="o">&gt;</span><span class="p">,</span>
-<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="nx">user_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectId1</span><span class="o">&gt;</span><span class="p">,</span><span class="w">  </span><span class="c1">// (1)</span>
-<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nx">phone</span><span class="o">:</span><span class="w"> </span><span class="s2">"010-1234-1234"</span><span class="p">,</span>
-<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">"simonjisu@gmail.com"</span>
-<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="p">}</span>
-</code></pre></div>
-<ol>
-<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> foreign key of <code>user</code> document</li>
-</ol>
-<div class="highlight"><span class="filename">`register` document</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="p">{</span>
-<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectId3</span><span class="o">&gt;</span><span class="p">,</span>
-<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="nx">user_id</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectId1</span><span class="o">&gt;</span><span class="p">,</span><span class="w">  </span><span class="c1">// (1)</span>
-<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="nx">class_names</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Big Data"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Machine Learning"</span><span class="p">]</span>
-<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="p">}</span>
-</code></pre></div>
-<ol>
-<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> foreign key of <code>user</code> document</li>
-</ol>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=11Eut57Ecz5PaWUq4_Yop_XH6HR2ruvum"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=11Eut57Ecz5PaWUq4_Yop_XH6HR2ruvum" width="50%"/></a></p>
+<p>새로운 데이터 베이스 이름을 지어주자 Database Name은 <code>github</code> Collection Name은 <code>repo</code>로 한다.</p>
+</div>
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=11UZTu5VM9npLBW53ttZEPk91fol4QxlX"><img align="left" alt="Image title" src="https://drive.google.com/uc?export=view&amp;id=11UZTu5VM9npLBW53ttZEPk91fol4QxlX" width="30%"/></a></p>
+<p>좌측 패널에 데이터베이스가 생기면서 컬렉션도 같이 만들어 졌다.</p>
 </div>
 </div>
-</input></input></div>
+</input></input></input></div>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=11Z9cQO7IoZWFgRvBEelju84dknXanB3K"><img align="right" alt="Image title" src="https://drive.google.com/uc?id=11Z9cQO7IoZWFgRvBEelju84dknXanB3K" width="40%"/></a></p>
+<h2 id="load-data-from-csv-file">Load Data from CSV file<a class="headerlink" href="#load-data-from-csv-file" title="Permanent link">¶</a></h2>
+<p><code>repo</code> collection을 클린한 후에 중앙에 <code>Import Data</code>를 눌러서 데이터를 불러오자. 이번 실습에 필요한 데이터는 <a href="https://github.com/simonjisu/bkms2_2023spring/blob/59d5e7b8e7268c623e9950ffef8a31c7d3e916a7/00_mongodb/datasets/github/github.csv">여기</a>에서 다운 받을 수 있다. 데이터를 불러오면 우측과 같은 화면이 보이는데, 여기서 스키마 설정을 함께 할 수 있다.
+문자열 타입인 <code>String</code>을 제외하고는 대부분 숫자형인 <code>Number</code> 타입을 설정하면 된다. <code>Number</code> 타입은 "number", "int", "long", "double", "decimal" 을 포함한다. 자세한 내용은 공식문서 스키마를 참고하길 바란다. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<p><br/></p>
+<h2 id="query-api">Query API<a class="headerlink" href="#query-api" title="Permanent link">¶</a></h2>
+<p>이제 불러온 도큐먼트들을 쿼리 해볼 시간이다. MongoDB Compass 제일 하단에 있는 <code>mongosh</code>를 눌러서 쉘을 실행시키자</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Example 1</label><label for="__tabbed_2_2">Example 2</label><label for="__tabbed_2_3">Example 3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<blockquote>
+<p>총 유저의 수는 어떻게 될까?</p>
+</blockquote>
+<ul>
+<li><code>distinct</code> 메소드로 필드의 중복된 데이터를 걸러낼 수 있다.</li>
+<li><code>length</code> 속성은 배열의 길이를 반환한다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>&gt;<span class="w"> </span>db.repo.distinct<span class="o">(</span><span class="s1">'user_name'</span><span class="o">)</span>.length
+</code></pre></div>
 </div>
+<div class="tabbed-block">
+<blockquote>
+<p><code>stars_count</code>가 10개 이상 인 유저는 몇 명 일까?</p>
+</blockquote>
 <ul>
-<li>MongoDB는 다양한 Indexes를 지원하여 더 빠르게 검색을 수행할 수 있게 도와준다.<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">5</a></sup> Indexes의 데이터 구조는 B-Tree로 구현되어 있다.</li>
+<li><code>countDocuments</code> 메서드로 쿼리조건의 해당하는 도큐먼트의 개수를 셀 수 있다.</li>
+<li><code>$gte</code> 연산자로 x보다 큰 연산을 수행할 수 있다. </li>
 </ul>
-<h3 id="query-api">Query API<a class="headerlink" href="#query-api" title="Permanent link">¶</a></h3>
-<p>CRUD(create, read, update, and delete)<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">6</a></sup> Operation 을 지원한다. 뿐만아니라 Data Aggregation<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">7</a></sup>, Text Search<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">8</a></sup> 그리고 Geospatial Queries<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">9</a></sup> 도 수행할 수 있다.</p>
-<h3 id="high-availability">High Availability<a class="headerlink" href="#high-availability" title="Permanent link">¶</a></h3>
-<p>MongoDB의 레플리케이션(복제, Replication)은 "replica set"<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">10</a></sup>라는 것을 통해서 이루어 진다. 보통 서버, 네트워크 장애가 발생할 때를 대비해 데이터를 중복하여 저장하는 방식을 레플리케이션이라고 한다. 예를 들어 서비스 사용자가 많아져 Database의 부하가 커질 때를 대비해, 복사본에서만 Select작업을 수행하고, 다른 명령어는 기존 Master 노드에서 처리하게 할 수도 있다. Replica Set을 통해서 MongoDB 또한 여타 다른 데이터 베이스와 마찬가지로 자동 장애 조치(automatic failover), 데이터 중복성(data redundancy) 특징을 제공한다.</p>
-<h3 id="horizontal-scalability">Horizontal Scalability<a class="headerlink" href="#horizontal-scalability" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>&gt;<span class="w"> </span>db.repo.countDocuments<span class="o">({</span><span class="w"> </span><span class="s1">'stars_count'</span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$gte</span>:<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">})</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<blockquote>
+<p>총 유저 별로 만든 repository는 몇 개 일까? 상위 10개만 뽑아보자.</p>
+</blockquote>
 <ul>
-<li>샤딩(Sharding)<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">11</a></sup>을 통해 데이터를 클러스터에 분산시킬 수 있다. </li>
+<li><code>$group</code> 연산자로 aggregation을 수행할 수 있다.</li>
 </ul>
-<h2 id="_1">참고하면 좋은 자료<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>
+</code></pre></div>
 <ul>
-<li><a href="https://velopert.com/436">오래된 좋은 MongoDB 강좌</a></li>
-<li><a href="https://hoing.io/archives/1379">MongoDB란 - 역사, 설계 목표, 핵심 기능, 몽고DB를 사용하는 이유</a></li>
-<li><a href="https://hevodata.com/learn/mongodb-data-modeling/">MongoDB Data Modeling</a></li>
-<li><a href="https://nesoy.github.io/articles/2018-05/Database-Shard">Database의 샤딩(Sharding)이란?</a></li>
+<li><code>$filter</code> 연산자로 필터링을 수행할 수 있다.</li>
 </ul>
+</div>
+</div>
+</input></input></input></div>
+<h2 id="aggregation-pipeline">Aggregation Pipeline<a class="headerlink" href="#aggregation-pipeline" title="Permanent link">¶</a></h2>
+<h2 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">¶</a></h2>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://www.mongodb.com/docs/manual/">MongoDB - Docs</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-<li id="fn:10">
-<p><a href="https://json-schema.org/">JSON Schema</a> <a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 2 in the text">↩</a></p>
-</li>
-<li id="fn:11">
-<p><a href="https://www.mongodb.com/docs/atlas/app-services/schemas/">MongoDB - Schemas</a> <a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 3 in the text">↩</a></p>
+<p><a href="https://www.kaggle.com/datasets/nikhil25803/github-dataset">Kaggle-GitHub Dataset Version 1</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 <li id="fn:2">
-<p><a href="https://www.mongodb.com/docs/manual/core/materialized-views/">Mongo-DB - Materialzed Views</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 4 in the text">↩</a></p>
-</li>
-<li id="fn:3">
-<p><a href="https://www.mongodb.com/docs/manual/indexes/">Mongo-DB - Indexes</a> <a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 5 in the text">↩</a></p>
-</li>
-<li id="fn:4">
-<p><a href="https://www.mongodb.com/docs/manual/crud/">Mongo-DB - CRUD</a> <a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 6 in the text">↩</a></p>
-</li>
-<li id="fn:5">
-<p><a href="https://www.mongodb.com/docs/manual/core/aggregation-pipeline/">Mongo-DB - Aggregation</a> <a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 7 in the text">↩</a></p>
-</li>
-<li id="fn:6">
-<p><a href="https://www.mongodb.com/docs/manual/text-search/">Mongo-DB - Text Search</a> <a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 8 in the text">↩</a></p>
-</li>
-<li id="fn:7">
-<p><a href="https://www.mongodb.com/docs/manual/tutorial/geospatial-tutorial/">Mongo-DB - Geospatial Tutorial</a> <a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 9 in the text">↩</a></p>
-</li>
-<li id="fn:8">
-<p><a href="https://www.mongodb.com/docs/manual/replication/">Mongo-DB - Replication</a> <a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 10 in the text">↩</a></p>
-</li>
-<li id="fn:9">
-<p><a href="https://www.mongodb.com/docs/manual/sharding/">Mongo-DB - Sharding</a> <a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 11 in the text">↩</a></p>
+<p><a href="https://www.mongodb.com/docs/atlas/app-services/schemas/">MongoDB - Schemas</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>

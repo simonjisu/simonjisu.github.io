@@ -1,193 +1,117 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-        <link rel="canonical" href="https://simonjisu.github.io/study/paper/2017-08-04-E2EMN/">
-      
-      
-        <link rel="prev" href="../">
-      
-      
-        <link rel="next" href="../2018-04-04-nsmcbidreclstmselfattn/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0+insiders-4.32.2">
-    
-    
-      
-        <title>End-to-End Memory Network - Soopace</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.24f010b1.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.6932e648.min.css">
-      
-      
+<!DOCTYPE html>
 
-    
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-  
-
-
-  
-  
-
-
-  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-
-  
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-  
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#end-to-end-memory-network" class="md-skip">
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://simonjisu.github.io/study/paper/2017-08-04-E2EMN/" rel="canonical"/>
+<link href="../" rel="prev"/>
+<link href="../2018-04-04-nsmcbidreclstmselfattn/" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.0+insiders-4.32.2" name="generator"/>
+<title>End-to-End Memory Network - Soopace</title>
+<link href="../../../assets/stylesheets/main.24f010b1.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.6932e648.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#end-to-end-memory-network">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
+</div>
+<div data-md-component="announce">
+</div>
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
-      
-  <img src="../../../img/logo/logo.png" alt="logo">
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
+<img alt="logo" src="../../../img/logo/logo.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             Soopace
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               End-to-End Memory Network
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-    
-    
-    
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-      </div>
-    
-  </nav>
-  
-    
-      
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../..">
         
   
     
@@ -195,18 +119,9 @@
   About
 
       </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../blog/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../blog/">
           
   
     
@@ -214,21 +129,9 @@
   Blog
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-    
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../" class="md-tabs__link md-tabs__link--active">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../../">
           
   
     
@@ -236,19 +139,9 @@
   Study
 
         </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../project/" class="md-tabs__link">
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../project/">
           
   
     
@@ -256,71 +149,38 @@
   Project
 
         </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
+</li>
+</ul>
+</div>
 </nav>
-    
-  
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-  
-
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
-      
-  <img src="../../../img/logo/logo.png" alt="logo">
-
-    </a>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
+<img alt="logo" src="../../../img/logo/logo.png"/>
+</a>
     Soopace
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
     GitHub
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../..">
+<span class="md-ellipsis">
     
   
     About
@@ -328,44 +188,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../../blog/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../blog/">
+<span class="md-ellipsis">
     
   
     Blog
@@ -373,55 +200,14 @@
 
     
   </span>
-  
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
     
   
     Study
@@ -429,89 +215,26 @@
 
     
   </span>
-  
-  
-
-            </a>
-            
-              <label class="md-nav__link " for="__nav_3">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
+</a>
+<label class="md-nav__link" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
             
   
     Study
   
 
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-    
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
     
   
     Paper
@@ -519,49 +242,25 @@
 
     
   </span>
-  
-  
-
-            </a>
-            
-              <label class="md-nav__link " for="__nav_3_2">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
+</a>
+<label class="md-nav__link" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span>
             
   
     Paper
   
 
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
     
   
     End-to-End Memory Network
@@ -569,26 +268,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2018-04-04-nsmcbidreclstmselfattn/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2018-04-04-nsmcbidreclstmselfattn/">
+<span class="md-ellipsis">
     
   
     A Structured Self-Attentive Sentence Embedding
@@ -596,25 +280,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2019-08-22-neuralnetworklm/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2019-08-22-neuralnetworklm/">
+<span class="md-ellipsis">
     
   
     A Neural Probabilistic Language Model
@@ -622,25 +292,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2019-09-18-introxai/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2019-09-18-introxai/">
+<span class="md-ellipsis">
     
   
     Explaining Explanations: An Overview of Interpretability of Machine Learning
@@ -648,25 +304,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-01-14-attentionisallyouneed/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-01-14-attentionisallyouneed/">
+<span class="md-ellipsis">
     
   
     Attention Is All You Need
@@ -674,25 +316,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-03-12-deepinsidecnn/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-03-12-deepinsidecnn/">
+<span class="md-ellipsis">
     
   
     Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
@@ -700,25 +328,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-07-19-maskpredict/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-07-19-maskpredict/">
+<span class="md-ellipsis">
     
   
     Mask-Predict: Parallel Decoding of Conditional Masked Language Models
@@ -726,25 +340,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-07-23-casm/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-07-23-casm/">
+<span class="md-ellipsis">
     
   
     Classifier-agnostic saliency map extraction
@@ -752,25 +352,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2020-12-31-xaitutorial/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2020-12-31-xaitutorial/">
+<span class="md-ellipsis">
     
   
     Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
@@ -778,25 +364,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-04-12-spider/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-04-12-spider/">
+<span class="md-ellipsis">
     
   
     Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task
@@ -804,25 +376,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-04-20-featurevisualization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-04-20-featurevisualization/">
+<span class="md-ellipsis">
     
   
     Feature Visualization
@@ -830,25 +388,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-05-14-bridge/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-05-14-bridge/">
+<span class="md-ellipsis">
     
   
     Bridging Textual and Tabular Data for Cross-Domain Text-to-SQL Semantic Parsing
@@ -856,25 +400,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-08-13-hybridranking/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-08-13-hybridranking/">
+<span class="md-ellipsis">
     
   
     Hybrid Ranking Network for Text-to-SQL
@@ -882,25 +412,11 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2021-11-21-nbdt/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../2021-11-21-nbdt/">
+<span class="md-ellipsis">
     
   
     NBDT: Neural-Backed Decision Trees
@@ -908,57 +424,14 @@
 
     
   </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../tutorial/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../tutorial/">
+<span class="md-ellipsis">
     
   
     Tutorial
@@ -966,54 +439,15 @@
 
     
   </span>
-  
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../../project/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../project/">
+<span class="md-ellipsis">
     
   
     Project
@@ -1021,125 +455,57 @@
 
     
   </span>
-  
-  
-
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              
-                
-
-
-
-  
-
-
-  <nav class="md-path" aria-label="Navigation" >
-    <ol class="md-path__list">
-      
-        
-  
-    <li class="md-path__item">
-      <a href="../../.." class="md-path__link">
-        <span class="md-ellipsis">
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<nav aria-label="Navigation" class="md-path">
+<ol class="md-path__list">
+<li class="md-path__item">
+<a class="md-path__link" href="../../..">
+<span class="md-ellipsis">
           About
         </span>
-      </a>
-    </li>
-  
-
-      
-      
-        
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../../" class="md-path__link">
-          <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../../">
+<span class="md-ellipsis">
             Study
           </span>
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-    
-    
-      <li class="md-path__item">
-        <a href="../" class="md-path__link">
-          <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../">
+<span class="md-ellipsis">
             Paper
           </span>
-        </a>
-      </li>
-    
-  
-
-      
-    </ol>
-  </nav>
-
-              
-              <article class="md-content__inner md-typeset">
-                
-  
-                  
-  
-
-
-
-  
-  
-
-
-<h1 id="end-to-end-memory-network">End-to-End Memory Network<a class="headerlink" href="#end-to-end-memory-network" title="Permanent link">&para;</a></h1>
+</a>
+</li>
+</ol>
+</nav>
+<article class="md-content__inner md-typeset">
+<h1 id="end-to-end-memory-network">End-to-End Memory Network<a class="headerlink" href="#end-to-end-memory-network" title="Permanent link">¶</a></h1>
 <ul>
 <li>Pytorch 구현 코드: <a href="https://github.com/simonjisu/E2EMN">https://github.com/simonjisu/E2EMN</a></li>
 </ul>
 <p>memN2N 검색하면 다른 패키지로 구현한 repo 들이 많음으로 한번 찾아 볼것
 facebook: <a href="https://github.com/facebook/MemNN">https://github.com/facebook/MemNN</a></p>
-<hr />
-<h1 id="a-single-layer">A. Single layer<a class="headerlink" href="#a-single-layer" title="Permanent link">&para;</a></h1>
-<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">&para;</a></h2>
+<hr/>
+<h1 id="a-single-layer">A. Single layer<a class="headerlink" href="#a-single-layer" title="Permanent link">¶</a></h1>
+<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">¶</a></h2>
 <ol>
 <li><span class="arithmatex">\(T_c\)</span> 개의 단어가 포함된 한 <strong>문장 sentence i</strong> 는 <span class="arithmatex">\(x_i = [x_{i1}, x_{i2}, \cdots, x_{iT_c}]\)</span> 로 표현 할 수 있으며, 하나의 단어 는 BoW(Bag-of-Words)방식으로 인코딩 하여 vector로 바꿔준다. (<strong>단어 사전의 index</strong>), 이렇게 구성된 여러 문장들의 집합을 Context(Sentences) <span class="arithmatex">\(\{x_i\}\)</span>라고 한다. 실제 구현 시, 길이를 맞추기 위해서 batch 에서 최대 문장의 길이를 <span class="arithmatex">\(T_c\)</span> 로 기억한 다음에 <span class="arithmatex">\(T_c\)</span> 보다 짧은 문장의 뒷 부분은 <span class="arithmatex">\(0\)</span> 으로 패딩(padding)해준다.</li>
 </ol>
@@ -1147,7 +513,7 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
 <ol>
 <li><span class="arithmatex">\(T_q\)</span> 개의 단어가 포함된 질문 question q도 마찬가지로 BoW방식으로 인코딩해준다.</li>
 </ol>
-<h2 id="input-memory">Input Memory<a class="headerlink" href="#input-memory" title="Permanent link">&para;</a></h2>
+<h2 id="input-memory">Input Memory<a class="headerlink" href="#input-memory" title="Permanent link">¶</a></h2>
 <ol>
 <li>하나의 문장 <span class="arithmatex">\(x_i\)</span> 각각의 단어에 Embedding matrix <span class="arithmatex">\(A\)</span>를 곱하여 각각의 단어를 Embedding Vectors로 변환하고 이를 모두 더하여 메모리 벡터(Memory Vector) <span class="arithmatex">\(m_i\)</span>를 구한다. 이렇게 총 <span class="arithmatex">\(n\)</span>개의 메모리가 만들어 진다. 조금 더 설명 하자면, 임베딩 후 <span class="arithmatex">\(Ax_{ij}\)</span> 의 사이즈는 <span class="arithmatex">\((T_c \times d)\)</span> 가 되고 이를 <span class="arithmatex">\(T_c\)</span> 차원으로 summation 하게 되면 문장 하나에 대한 메모리 <span class="arithmatex">\(m_i\)</span> 의 사이즈는 <span class="arithmatex">\((1\times d)\)</span> 가 된다.</li>
 </ol>
@@ -1162,7 +528,7 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
 <div class="arithmatex">\[p_i = Softmax(u^Tm_i)\]</div>
 <p>즉 <span class="arithmatex">\(p_i\)</span>가 높을 수록 높은 유사성을 띈다.</p>
 <p>이러한 과정을 통해서 <strong>Input Memory</strong> 에는 Context 문장들(<span class="arithmatex">\(\{x_i\}\)</span>)과 질문(<span class="arithmatex">\(q\)</span>)의 축약된 정보가 들어가게 된다.</p>
-<h2 id="output-memory">Output Memory<a class="headerlink" href="#output-memory" title="Permanent link">&para;</a></h2>
+<h2 id="output-memory">Output Memory<a class="headerlink" href="#output-memory" title="Permanent link">¶</a></h2>
 <ol>
 <li>모든 Context 문장들 <span class="arithmatex">\({x_i}\)</span> 의 각각의 단어에  다시 Embedding matrix C를 곱하고 더하여 <span class="arithmatex">\(c_i\)</span>로 변환한다.</li>
 </ol>
@@ -1171,16 +537,16 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
 <li>이는 출력으로 나오는 Response vector 인<span class="arithmatex">\(o\)</span> 를 구하기 위해서 인데, <span class="arithmatex">\(o\)</span>는 아래와 같이 Input Memory에서 나오는 유사성(match, <span class="arithmatex">\(p_i\)</span>)와 가중평균합을 진행한다.</li>
 </ol>
 <div class="arithmatex">\[o = \sum_{i} p_i \otimes c_i\]</div>
-<h2 id="final-prediction">Final Prediction<a class="headerlink" href="#final-prediction" title="Permanent link">&para;</a></h2>
+<h2 id="final-prediction">Final Prediction<a class="headerlink" href="#final-prediction" title="Permanent link">¶</a></h2>
 <p>output <span class="arithmatex">\(o\)</span>와 질문으로부터 추출한 Internal state <span class="arithmatex">\(u\)</span>에 가중치값 <span class="arithmatex">\(W\)</span>를 곱하여 더한뒤에 Softmax Function을 적용하여 답 <span class="arithmatex">\(\hat{a}\)</span>을 추론한다.</p>
 <div class="arithmatex">\[\hat{a} = Softmax(W(o+u))\]</div>
-<h2 id="weight-updating">Weight Updating<a class="headerlink" href="#weight-updating" title="Permanent link">&para;</a></h2>
+<h2 id="weight-updating">Weight Updating<a class="headerlink" href="#weight-updating" title="Permanent link">¶</a></h2>
 <p>Loss Function은 standard cross-entropy loss를 사용하여 예측치 <span class="arithmatex">\(\hat{a}\)</span> 와 정답인 true 값 <span class="arithmatex">\(a\)</span> 간의 오차를 최소화해서 학습 시킨다.</p>
 <p>Input에서 Output까지 함수들은 무한정미분가능(function is smooth)하기 때문에, 손쉽게 Gradient와 back-propagate을 진행할 수 있다.</p>
 <p>업데이트 되는 weight Matrix는 <span class="arithmatex">\(A\)</span>, <span class="arithmatex">\(B\)</span>, <span class="arithmatex">\(C\)</span> 그리고 <span class="arithmatex">\(W\)</span>다.</p>
-<p><br></p>
-<hr />
-<h1 id="b-multiple-layers">B. Multiple layers<a class="headerlink" href="#b-multiple-layers" title="Permanent link">&para;</a></h1>
+<p><br/></p>
+<hr/>
+<h1 id="b-multiple-layers">B. Multiple layers<a class="headerlink" href="#b-multiple-layers" title="Permanent link">¶</a></h1>
 <p>위와 같은 Final Prediction 전 단계까지를 1 hop라고 규정하며, Multiple layers <span class="arithmatex">\(K\)</span> hops까지 확장 시킨다.</p>
 <ul>
 <li>첫번째, k번째 layer에서 나온 output으로 나온 <span class="arithmatex">\(o^k\)</span>과 input <span class="arithmatex">\(u^k\)</span> 는 합쳐져서 새로운 input <span class="arithmatex">\(u^{k+1}\)</span> 가 되어서 k + 1 layer로 들어가게 된다.</li>
@@ -1195,7 +561,7 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
 </li>
 </ul>
 <div class="arithmatex">\[\hat{a} = Softmax(Wu^{K+1})\]</div>
-<h2 id="_1">두 가지 가중치 버젼<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1">두 가지 가중치 버젼<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <ol>
 <li>
 <p>Adjacent:
@@ -1207,9 +573,9 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
 </li>
 </ol>
 <p>층별로 가중치를 묶는 두 번째 방법은, tranditional 한 RNN 방식으로 생각할 수가 있다. Internal output(<span class="arithmatex">\(u\)</span>)을 내보내는 것은 memory에 해당하고, external outputs(<span class="arithmatex">\(\hat{a}\)</span>)는 라벨을 예측하는 것과 같다. RNN 관점에서 보면, <span class="arithmatex">\(u\)</span>, <span class="arithmatex">\(u^{k+1}\)</span> 은 hidden state고, 모델은 <span class="arithmatex">\(A\)</span> 를 사용하여internal output <span class="arithmatex">\(p\)</span> 를 생성한다. 모델은 <span class="arithmatex">\(C\)</span> 를 사용해서 <span class="arithmatex">\(p\)</span> 의 정보를 흡수하고, hidden state를 업데이트면서 이런 식으로 계속 진행한다. 여기서 표준 RNN과 다르게 output들을 <span class="arithmatex">\(K\)</span> hops 동안 계속 메모리에 저장하고, sampling하는 대신에 soft하게 둔다. 그렇게 하여 답변이 "진짜 세상"에 나오기 전에 여러번 계산을 거치게 된다.</p>
-<p><br></p>
-<hr />
-<h1 id="c-synthetic-question-and-answering-experiments">C. Synthetic Question and Answering Experiments<a class="headerlink" href="#c-synthetic-question-and-answering-experiments" title="Permanent link">&para;</a></h1>
+<p><br/></p>
+<hr/>
+<h1 id="c-synthetic-question-and-answering-experiments">C. Synthetic Question and Answering Experiments<a class="headerlink" href="#c-synthetic-question-and-answering-experiments" title="Permanent link">¶</a></h1>
 <ul>
 <li>예시1:<blockquote>
 <p>Sam walks into the kitchen.</p>
@@ -1240,63 +606,40 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
 </li>
 </ul>
 <p>예시에도 보듯이 문장의 일부만 답변의 정답정보를 가지고 있다. 이를 support subset이라고 하며, training 할때 support subset을 명시한다. 그러나 실제 테스트할 때는 이 support subset이 표시되지 않는다.</p>
-<h2 id="model-details">Model details<a class="headerlink" href="#model-details" title="Permanent link">&para;</a></h2>
+<h2 id="model-details">Model details<a class="headerlink" href="#model-details" title="Permanent link">¶</a></h2>
 <p><span class="arithmatex">\(K=3\)</span> hops이고 weight sharing(Layer-wise) 모델을 쓸 것이다.  모든 output lists(답변에 여러 단어가 있는 경우)에 대하여 단어별로 분리하여 가능성을 나타낸다.</p>
-<h2 id="sentence-representaion">Sentence Representaion:<a class="headerlink" href="#sentence-representaion" title="Permanent link">&para;</a></h2>
+<h2 id="sentence-representaion">Sentence Representaion:<a class="headerlink" href="#sentence-representaion" title="Permanent link">¶</a></h2>
 <p>문장들을 표현할 때 두 가지 방법을 쓰기로 한다. 첫번째로는 BoW가 하나의 문장을 표현하는 것인데, 이 방법은 문장에서 단어의 순서(the order of the words in sentence)라는 특징을 잡을 수가 없다. 따라서 두 번째 방법으로, 문장에서 단어의 순서(the position of words)를 인코딩 한다. <span class="arithmatex">\(m_i = \sum_{j} l_j \otimes Ax_{ij}\)</span> 여기서 <span class="arithmatex">\(l_j\)</span> 연산은 element-wise multiplication이다.</p>
 <p>또한, <span class="arithmatex">\(l_j\)</span> 는 <span class="arithmatex">\(l_{kj} = (1-j/J) - (k/d)(1-2j/J)\)</span>, J는 문장에 있는 단어 갯수인 column vector 구조를 가지고 있다. 이것을 <span class="arithmatex">\(PE\)</span> (position encoding)이라고 하며, 이는 단어의 순서가 얼만큼 문장<span class="arithmatex">\(m_i\)</span>에 영향을 주는지 알려준다. 나머지 question, memory inputs 그리고 memory outputs에서도 두 번째 방법으로 문장을 표현할 것이다.</p>
-<h2 id="temporal-encoding">Temporal Encoding:<a class="headerlink" href="#temporal-encoding" title="Permanent link">&para;</a></h2>
+<h2 id="temporal-encoding">Temporal Encoding:<a class="headerlink" href="#temporal-encoding" title="Permanent link">¶</a></h2>
 <p>많은 QA tasks에서는 temporal context라는 개념이 필요한데, 예를 들어 첫 번째 예시에서 Sam이 kitchen에 간 다음에 bedroom에 들어간 것을 알 수 있다. 이것을 모델에 적용하려면, memory vector를 약간 변형시킨다. <span class="arithmatex">\(m_i = \sum_{j} Ax_{ij} + T_A(i)\)</span>, 여기서 <span class="arithmatex">\(T_A(i)\)</span> 는 일시적인 정보를 저장할 특별한 행렬 <span class="arithmatex">\(T_A\)</span> 의 i 번째 행이다. Ouput embedding할 때도 마찬가지로 해준다. <span class="arithmatex">\(c_i = \sum_{j} Cx_{ij} + T_C(i)\)</span>. <span class="arithmatex">\(T_A\)</span> 와 <span class="arithmatex">\(T_C\)</span> 둘다 training 할 때 갱신한다. 그리고 A 와 C 랑 마찬가지로 제약 또한 같이 공유한다. 여기서 주의할 점은 문장들이 역순으로 인덱싱되어있다.  문장이 질문으로부터 상대적인 거리를 반영한다, 즉 <span class="arithmatex">\(x_1\)</span> 은 이야기의 마지막 문장이 된다.</p>
-<h2 id="learning-time-invariance-by-injecting-random-noise">Learning time invariance by injecting random noise:<a class="headerlink" href="#learning-time-invariance-by-injecting-random-noise" title="Permanent link">&para;</a></h2>
+<h2 id="learning-time-invariance-by-injecting-random-noise">Learning time invariance by injecting random noise:<a class="headerlink" href="#learning-time-invariance-by-injecting-random-noise" title="Permanent link">¶</a></h2>
 <p><span class="arithmatex">\(T_A\)</span> 를 정규화 시킬때 더미 변수를 넣는 것이 도움이 된다. 즉, 트레이닝할 때는 랜덤으로 10%의 빈 메모리를 스토리에 넣는 것이다. 여기서 이를 Random Noise (RN)라고 한다</p>
-<h2 id="training-details">Training Details<a class="headerlink" href="#training-details" title="Permanent link">&para;</a></h2>
+<h2 id="training-details">Training Details<a class="headerlink" href="#training-details" title="Permanent link">¶</a></h2>
 <p>bAbI training set중 10%는 Validation용으로 쓴다. 이는 optimal model architecture 과 hyperparameters를 선택하기 위해서다. Learning rate <span class="arithmatex">\(\eta\)</span>는 0.01로 설정하고, 100번째 epoch가 될때 까지, 매 25번째 epochs 마다, <span class="arithmatex">\(\eta\)</span> 를 2로 나눠준다. Momentum 이나 weight decay는 사용되지 않았다. 가중치들은 <span class="arithmatex">\(\mu = 0\)</span>, <span class="arithmatex">\(\sigma = 0.1\)</span> 인 가우시안 정규분포로 초기값을 설정했다. 모든 training에 사용된 batch size는 32 이며, gradients는 L2로 정규화해서 40이 넘으면 어떤 스칼라를 나눠서 norm을 40으로 만들어준다.</p>
 <p>어떤 모델에서는 처음시작에 softmax를 안쓰다가 (linear하게 만드는 것) 나중에 최종 예측시에 softmax를 썼다. 그러다 validation loss가 더 이상 떨어지지 않을 때, 다시 softmax 층이 다시 입력이 되서 트레이닝을 한다. 이를 Linear Start (LS) training이라고 하며, 이때 초기 learning rate 를 <span class="arithmatex">\(\eta = 0.005\)</span> 로 설정한다.</p>
-<h2 id="baselines">Baselines<a class="headerlink" href="#baselines" title="Permanent link">&para;</a></h2>
+<h2 id="baselines">Baselines<a class="headerlink" href="#baselines" title="Permanent link">¶</a></h2>
 <ul>
 <li>MemNN: strongly supervised, softmax대신 max operation사용</li>
 <li>MemNN-WSH: weakly supervised, 트레이닝시 supporting sentence labels를 안씀</li>
 <li>LSTM: weakly supervised</li>
 </ul>
-<h2 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h2>
+<h2 id="result">Result<a class="headerlink" href="#result" title="Permanent link">¶</a></h2>
 <p>모델 선택을 다양하게 했다.</p>
 <p>1) BoW vs Position Encoding</p>
 <p>2) 20 tasks를 독립적으로 트레이닝공유(<span class="arithmatex">\(d = 20\)</span>) vs joint 트레이닝 (<span class="arithmatex">\(d = 50\)</span>)</p>
 <p>3) Linear Start Training(Softmax처음에 없엔 것) vs Softmax가 처음부터 있는 것</p>
 <p>4) hops를 1 ~ 3까지 설정</p>
 <p>결과는 논문 참조. 퍼포먼스는 supervised models이 제일 좋게 나왔으나, MemN2N with position encoding + linear start + random noise, jointly trained 도 근접하게 나옴</p>
-<h2 id="_2"><br><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h1 id="d">D.참고문헌<a class="headerlink" href="#d" title="Permanent link">&para;</a></h1>
+<h2 id="_2"><br/><a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<h1 id="d">D.참고문헌<a class="headerlink" href="#d" title="Permanent link">¶</a></h1>
 <p><a href="https://arxiv.org/abs/1503.08895">End-To-End Memory Networks: Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus</a></p>
-
-
-
-  
-
-
-
-
-                
-
-  <!-- Giscus -->
-  <h2 id="__comments">Comments</h2>
-  <script src="https://giscus.app/client.js"
-        data-repo="simonjisu/comments_bot"
-        data-repo-id="R_kgDOHRhxjQ"
-        data-category="General"
-        data-category-id="DIC_kwDOHRhxjc4CQSuI"
-        data-mapping="pathname"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="light"
-        data-lang="ko"
-        crossorigin="anonymous"
-        async>
-  </script>
-
-  <!-- Synchronize Giscus theme with palette -->
-  <script>
+<!-- Giscus -->
+<h2 id="__comments">Comments</h2>
+<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
+</script>
+<!-- Synchronize Giscus theme with palette -->
+<script>
     var giscus = document.querySelector("script[src*=giscus]")
 
     /* Set palette on initial load */
@@ -1324,65 +667,38 @@ facebook: <a href="https://github.com/facebook/MemNN">https://github.com/faceboo
       })
     })
   </script>
-
-              </article>
-            </div>
-          
-          
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
       Material for MkDocs Insiders
     </a>
-  
 </div>
-      
-        <div class="md-social">
-  
-    
-    
-    
-    
-      
-      
-    
-    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-    </a>
-  
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-    
-    
-      <script src="../../../assets/javascripts/bundle.96d2b699.min.js"></script>
-      
-        <script src="../../../javascripts/mathjax.js"></script>
-      
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
-    
-  </body>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../assets/javascripts/bundle.96d2b699.min.js"></script>
+<script src="../../../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
 </html>
