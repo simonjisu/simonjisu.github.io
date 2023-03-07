@@ -12,6 +12,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.indexes
+    - navigation.top
     # - navigation.sections
     # - navigation.tracking
     - toc.follow

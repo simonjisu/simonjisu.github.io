@@ -10,7 +10,7 @@
 <link href="../../../../project/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>3. Data Modeling Example - Soopace</title>
+<title>3. Data Modeling - Soopace</title>
 <link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#create-database">
+<a class="md-skip" href="#_1">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              3. Data Modeling Example
+              3. Data Modeling
             
           </span>
 </div>
@@ -295,6 +295,18 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../docker/">
+<span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
 <a class="md-nav__link" href="../../math/">
 <span class="md-ellipsis">
     
@@ -307,7 +319,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_5" type="checkbox"/>
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_6" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -319,12 +331,12 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_3_5">
+<label class="md-nav__link" for="__nav_3_3_6">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_5_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_5">
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_6_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_6">
 <span class="md-nav__icon md-icon"></span>
             
   
@@ -363,7 +375,7 @@
 <span class="md-ellipsis">
     
   
-    3. Data Modeling Example
+    3. Data Modeling
   
 
     
@@ -374,7 +386,7 @@
 <span class="md-ellipsis">
     
   
-    3. Data Modeling Example
+    3. Data Modeling
   
 
     
@@ -387,46 +399,59 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#create-database">
+<a class="md-nav__link" href="#_1">
 <span class="md-ellipsis">
       
-        Create Database
+        데이터 모델링 예시
+      
+    </span>
+</a>
+<nav aria-label="데이터 모델링 예시" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mongodb-compass">
+<span class="md-ellipsis">
+      
+        MongoDB Compass
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#load-data-from-csv-file">
+<a class="md-nav__link" href="#one-to-one-relationships-with-embedded-documents">
 <span class="md-ellipsis">
       
-        Load Data from CSV file
+        One-to-One Relationships with Embedded Documents
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#query-api">
+<a class="md-nav__link" href="#one-to-many-relationships-with-embedded-documents">
 <span class="md-ellipsis">
       
-        Query API
+        One-to-Many Relationships with Embedded Documents
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#aggregation-pipeline">
+<a class="md-nav__link" href="#one-to-many-relationships-with-document-references">
 <span class="md-ellipsis">
       
-        Aggregation Pipeline
+        One-to-Many Relationships with Document References
       
     </span>
 </a>
 </li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#indexing">
+<a class="md-nav__link" href="#_2">
 <span class="md-ellipsis">
       
-        Indexing
+        참고하면 좋은 자료
       
     </span>
 </a>
@@ -470,46 +495,59 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#create-database">
+<a class="md-nav__link" href="#_1">
 <span class="md-ellipsis">
       
-        Create Database
+        데이터 모델링 예시
+      
+    </span>
+</a>
+<nav aria-label="데이터 모델링 예시" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mongodb-compass">
+<span class="md-ellipsis">
+      
+        MongoDB Compass
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#load-data-from-csv-file">
+<a class="md-nav__link" href="#one-to-one-relationships-with-embedded-documents">
 <span class="md-ellipsis">
       
-        Load Data from CSV file
+        One-to-One Relationships with Embedded Documents
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#query-api">
+<a class="md-nav__link" href="#one-to-many-relationships-with-embedded-documents">
 <span class="md-ellipsis">
       
-        Query API
+        One-to-Many Relationships with Embedded Documents
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#aggregation-pipeline">
+<a class="md-nav__link" href="#one-to-many-relationships-with-document-references">
 <span class="md-ellipsis">
       
-        Aggregation Pipeline
+        One-to-Many Relationships with Document References
       
     </span>
 </a>
 </li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#indexing">
+<a class="md-nav__link" href="#_2">
 <span class="md-ellipsis">
       
-        Indexing
+        참고하면 좋은 자료
       
     </span>
 </a>
@@ -556,127 +594,333 @@
 <nav class="md-tags" hidden="">
 <span class="md-tag">mongodb</span>
 </nav>
-<h1>3. Data Modeling Example</h1>
+<h1>3. Data Modeling</h1>
 <figure>
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW" width="100%">
 </img></p>
 <figcaption>Reference: MongoDB</figcaption>
 </figure>
-<p>GitHub Dataset<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>를 사용하여 데이터 모델링을 실습해본다. 기존의 RDBMS의 디자인이라면 다음과 같다.</p>
+<p>어플리케이션에 따라 데이터를 조회하는 패턴이 다르고 퍼포먼스도 이에 따라 달라진다. 따라서 데이터 모델링을 할 때는 데이터를 어떻게 사용하는지를 봐야한다.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 이번 시간에는 MongoDB에서 데이터 모델링 예시와 패턴들을 알아본다.</p>
+<p>기존의 RDBMS 데이터베이스와 다르게 MongoDB는 유연한 스키마(Flexible Schema) 구조를 가지고 있다. 각 컬렉션(Collections)에 들어가는 도큐먼트(Documents)들은 꼭 같은 스키마가 들어갈 필요가 없다. 이는 즉:</p>
 <ul>
-<li>GitHub 사용자 테이블(USER): 한 명의 사용자는 여러 개의 repository를 만들 수 있다.</li>
-<li>GitHub Repository 테이블(REPO): Repository이름 등 정보와 주 작성언어(없을 수도 있음)를 기록한다.</li>
-<li>Language 테이블(LANG): 작성언어 </li>
-</ul>
-<pre class="mermaid"><code>erDiagram
-    USER ||--o{ REPO : ""
-    USER {
-        int uid PK
-        string name
-    }
-    REPO |o--|| LANG : ""
-    REPO {
-        int rid PK
-        int uid FK
-        string name
-        int stars_count
-        int forks_count
-        int issues_count
-        int pull_requests
-        int contributors
-        int lid FK
-    }
-    LANG {
-        int lid
-        string name
-    }</code></pre>
-<p>NoSQL로는 다음과 같이 하나의 도큐먼트로 만들 수 있다.</p>
-<div class="highlight"><span class="filename">document</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span>
-<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_RID</span><span class="p">,</span>
-<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="nx">user</span><span class="o">:</span><span class="w"> </span><span class="nx">USER_NAME</span><span class="p">,</span>
-<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_NAME</span><span class="p">,</span>
-<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="nx">stars_count</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_STARS_COUNT</span><span class="p">,</span>
-<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="nx">forks_count</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_FORKS_COUNT</span><span class="p">,</span>
-<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nx">issues_count</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_ISSUES_COUNT</span><span class="p">,</span>
-<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="nx">pull_requests</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_PULL_REQUESTS</span><span class="p">,</span>
-<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="nx">contributors</span><span class="o">:</span><span class="w"> </span><span class="nx">REPO_CONTRIBUTORS</span><span class="p">,</span>
-<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="nx">language</span><span class="o">:</span><span class="w"> </span><span class="nx">LANG_NAME</span><span class="p">,</span>
-<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="p">}</span>
+<li>
+<p>하나의 컬렉션에 포함된 도큐먼트들 꼭 같은 필드가 들어갈 필요가 없고, 같은 필드라도 다른 데이터 타입을 가질 수 있다. 즉, 아래와 같이 데이터를 삽입할 수도 있다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectID1</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s2">"a"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="p">{</span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectID2</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="p">{</span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">ObjectID3</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="o">:</span><span class="w"> </span><span class="s2">"new"</span><span class="p">}</span>
 </code></pre></div>
-<h2 id="create-database">Create Database<a class="headerlink" href="#create-database" title="Permanent link">¶</a></h2>
-<p>이번에는 MongDB Compass로 여러 작업을 수행해보도록 하겠다. 우선 데이터베이스 <code>github</code>라는 데이터베이스와 <code>repo</code>라는 컬렉션을 만들고 데이터를 불러오자.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Create DB 1</label><label for="__tabbed_1_2">Create DB 2</label><label for="__tabbed_1_3">Create DB 3</label></div>
+</li>
+<li>
+<p>새로은 필드 추가, 기존 필드 제거 혹은 필드 값 타입의 변경등으로 도큐먼트의 구조를 쉽게 변경할 수 있다.</p>
+</li>
+</ul>
+<p>개발 초기에는 이러한 점이 장점이 될 수 있다. 그러나, 실제 어플리케이션에서는 주로 같은 컬렉션에 있는 도큐먼트들은 같은 필드를 공유하고, document validation rules를 사용하여 데이터 삽입 시 문제가 없는지 진단하는 경우가 많다. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Example of Schema Validation 1</label><label for="__tabbed_1_2">Example of Schema Validation 2</label><label for="__tabbed_1_3">Example of Schema Validation 3</label></div>
 <div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1CbzFfzlSDHKWBrWMh2IZh5KwDdRA8zHq"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=1CbzFfzlSDHKWBrWMh2IZh5KwDdRA8zHq" width="50%"/></a></p>
+<p>Schema Validation을 적용하기전 <code>b</code> 필드에는 <code>int</code> 타입과 <code>string</code> 타입이 들어 갈 수 있었다.</p>
+</div>
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1q5Smz36LKgzn4Eeqcw2Ado5-Bkpqgp4k"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=1q5Smz36LKgzn4Eeqcw2Ado5-Bkpqgp4k" width="50%"/></a></p>
+<p><code>b</code> 필드에 Schema Validation을 적용하여 <code>int</code> 타입만 받게 한다.</p>
+</div>
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1DpIFemooBVtvt4N8-RLcbYjAfxlZweLV"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=1DpIFemooBVtvt4N8-RLcbYjAfxlZweLV" width="50%"/></a></p>
+<p>더 이상 <code>string</code> 타입의 데이터를 삽입할 수 없게 된다.</p>
+</div>
+</div>
+</input></input></input></div>
+<h2 id="_1">데이터 모델링 예시<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<h3 id="mongodb-compass">MongoDB Compass<a class="headerlink" href="#mongodb-compass" title="Permanent link">¶</a></h3>
+<p>이번에는 MongoDB Compass(<a href="https://www.mongodb.com/ko-kr/products/compass">다운로드 링크</a>)로 여러 작업을 수행해보도록 하겠다. 우선 데이터베이스 <code>mydb</code> 라는 데이터베이스와 <code>test</code>라는 컬렉션을 만들고 데이터를 불러오자.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Connect to DB</label><label for="__tabbed_2_2">Create DB 1</label><label for="__tabbed_2_3">Create DB 2</label><label for="__tabbed_2_4">Create DB 3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1o-qs6KQAoEWxK7BXI1JnUyAil_9Oiz5V"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=1o-qs6KQAoEWxK7BXI1JnUyAil_9Oiz5V" width="50%"/></a></p>
+<p>MongoDB Compass를 로컬에서 구동 중인 DB를 연결하는 방법은 아래와 같이 URI를 연결하면 된다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>mongodb://[계정명]:[비밀번호]@localhost:27017
+</code></pre></div>
+</div>
 <div class="tabbed-block">
 <p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=11BosWHGm-tn_i_5-DaQSiD0kwR0cVfys"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=11BosWHGm-tn_i_5-DaQSiD0kwR0cVfys" width="30%"/></a></p>
 <p>MongoDB Compass 좌측 상단에서 <code>+</code>를 눌러 새로운 데이터 베이스를 생성하자.</p>
 </div>
 <div class="tabbed-block">
 <p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=11Eut57Ecz5PaWUq4_Yop_XH6HR2ruvum"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=11Eut57Ecz5PaWUq4_Yop_XH6HR2ruvum" width="50%"/></a></p>
-<p>새로운 데이터 베이스 이름을 지어주자 Database Name은 <code>github</code> Collection Name은 <code>repo</code>로 한다.</p>
+<p>새로운 데이터 베이스 이름을 지어주자 Database Name은 <code>mydb</code> Collection Name은 <code>test</code>로 한다.</p>
 </div>
 <div class="tabbed-block">
 <p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=11UZTu5VM9npLBW53ttZEPk91fol4QxlX"><img align="left" alt="Image title" src="https://drive.google.com/uc?export=view&amp;id=11UZTu5VM9npLBW53ttZEPk91fol4QxlX" width="30%"/></a></p>
 <p>좌측 패널에 데이터베이스가 생기면서 컬렉션도 같이 만들어 졌다.</p>
 </div>
 </div>
-</input></input></input></div>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=11Z9cQO7IoZWFgRvBEelju84dknXanB3K"><img align="right" alt="Image title" src="https://drive.google.com/uc?id=11Z9cQO7IoZWFgRvBEelju84dknXanB3K" width="40%"/></a></p>
-<h2 id="load-data-from-csv-file">Load Data from CSV file<a class="headerlink" href="#load-data-from-csv-file" title="Permanent link">¶</a></h2>
-<p><code>repo</code> collection을 클린한 후에 중앙에 <code>Import Data</code>를 눌러서 데이터를 불러오자. 이번 실습에 필요한 데이터는 <a href="https://github.com/simonjisu/bkms2_2023spring/blob/59d5e7b8e7268c623e9950ffef8a31c7d3e916a7/00_mongodb/datasets/github/github.csv">여기</a>에서 다운 받을 수 있다. 데이터를 불러오면 우측과 같은 화면이 보이는데, 여기서 스키마 설정을 함께 할 수 있다.
-문자열 타입인 <code>String</code>을 제외하고는 대부분 숫자형인 <code>Number</code> 타입을 설정하면 된다. <code>Number</code> 타입은 "number", "int", "long", "double", "decimal" 을 포함한다. 자세한 내용은 공식문서 스키마를 참고하길 바란다. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
-<p><br/></p>
-<h2 id="query-api">Query API<a class="headerlink" href="#query-api" title="Permanent link">¶</a></h2>
-<p>이제 불러온 도큐먼트들을 쿼리 해볼 시간이다. MongoDB Compass 제일 하단에 있는 <code>mongosh</code>를 눌러서 쉘을 실행시키자</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Example 1</label><label for="__tabbed_2_2">Example 2</label><label for="__tabbed_2_3">Example 3</label></div>
+</input></input></input></input></div>
+<h3 id="one-to-one-relationships-with-embedded-documents">One-to-One Relationships with Embedded Documents<a class="headerlink" href="#one-to-one-relationships-with-embedded-documents" title="Permanent link">¶</a></h3>
+<p>일대일 대응관계가 있을 때 임베디드 도큐먼트를 사용하는 데이터 모델링 예제를 다룬다. 도큐먼트 안에 데이터를 연결 경우 읽기 작업을 줄일 수가 있다. </p>
+<p>예시로 후원자(patron)와 후원자의 주소가있는 두 개의 도큐먼트가 있다. Normalized 데이터 모델에서는 <code>address</code> 도큐먼트의 <code>patron_id</code> 스키마가 <code>patron</code> 도큐먼트를 참조(reference)한다. </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1">// patron document</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="p">{</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"Joe Bookreader"</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="p">}</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="c1">// address document</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="p">{</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nx">patron_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span><span class="w"> </span><span class="c1">// (1) </span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nx">street</span><span class="o">:</span><span class="w"> </span><span class="s2">"123 Fake Street"</span><span class="p">,</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="nx">city</span><span class="o">:</span><span class="w"> </span><span class="s2">"Faketon"</span><span class="p">,</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="nx">zip</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> reference to patron document</li>
+</ol>
+<p>만약에 <code>address</code> 데이터를 <code>name</code>과 함께 자주 조회해야 하는 상황이라면 계속 해당 <code>name</code>을 조회할 때마다 JOIN operation을 수행해야한다. 따라서 아래와 같이 embedded document로 정보를 하나의 도큐먼트에 담는 것이 도움이 된다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"Joe Bookreader"</span><span class="p">,</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">              </span><span class="nx">street</span><span class="o">:</span><span class="w"> </span><span class="s2">"123 Fake Street"</span><span class="p">,</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">              </span><span class="nx">city</span><span class="o">:</span><span class="w"> </span><span class="s2">"Faketon"</span><span class="p">,</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">              </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">              </span><span class="nx">zip</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">            </span><span class="p">}</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>그러나 이러한 패턴의 단점도 명확하다. 우리가 필요하지 않은 정보를 모두 한 도큐먼트에 담아서 도큐먼트의 크기가 커진다(참고로 하나의 도큐먼트의 최대 크기는 16MB다). 예를 들어 영화 정보를 보여주는 어플리케이션의 경우:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="p">{</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="s2">"title"</span><span class="o">:</span><span class="w"> </span><span class="s2">"The Arrival of a Train"</span><span class="p">,</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="s2">"year"</span><span class="o">:</span><span class="w"> </span><span class="mf">1896</span><span class="p">,</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span><span class="s2">"runtime"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="s2">"released"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"01-25-1896"</span><span class="p">),</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="s2">"poster"</span><span class="o">:</span><span class="w"> </span><span class="s2">"http://ia.media-imdb.com/images/M/MV5BMjEyNDk5MDYzOV5BMl5BanBnXkFtZTgwNjIxMTEwMzE@._V1_SX300.jpg"</span><span class="p">,</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="s2">"plot"</span><span class="o">:</span><span class="w"> </span><span class="s2">"A group of people are standing in a straight line along the platform of a railway station, waiting for a train, which is seen coming at some distance. When the train stops at the platform, ..."</span><span class="p">,</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="s2">"fullplot"</span><span class="o">:</span><span class="w"> </span><span class="s2">"A group of people are standing in a straight line along the platform of a railway station, waiting for a train, which is seen coming at some distance. When the train stops at the platform, the line dissolves. The doors of the railway-cars open, and people on the platform help passengers to get off."</span><span class="p">,</span>
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="s2">"lastupdated"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2015-08-15T10:06:53"</span><span class="p">),</span>
+<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="s2">"type"</span><span class="o">:</span><span class="w"> </span><span class="s2">"movie"</span><span class="p">,</span>
+<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="s2">"directors"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Auguste Lumière"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Louis Lumière"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">    </span><span class="s2">"imdb"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">        </span><span class="s2">"rating"</span><span class="o">:</span><span class="w"> </span><span class="mf">7.3</span><span class="p">,</span>
+<a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">        </span><span class="s2">"votes"</span><span class="o">:</span><span class="w"> </span><span class="mf">5043</span><span class="p">,</span>
+<a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">        </span><span class="s2">"id"</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span>
+<a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">    </span><span class="s2">"countries"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"France"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">    </span><span class="s2">"genres"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Documentary"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Short"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">    </span><span class="s2">"tomatoes"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">        </span><span class="s2">"viewer"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">            </span><span class="s2">"rating"</span><span class="o">:</span><span class="w"> </span><span class="mf">3.7</span><span class="p">,</span>
+<a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">            </span><span class="s2">"numReviews"</span><span class="o">:</span><span class="w"> </span><span class="mf">59</span>
+<a href="#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">    </span><span class="s2">"lastUpdated"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2020-01-09T00:02:53"</span><span class="p">)</span>
+<a href="#__codelineno-4-26" id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-4-27" id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="p">}</span>
+</code></pre></div>
+<p>하나의 도큐먼트에 다 담지 말고 영화의 간단한 정보만 보여주는 <code>movie</code> 컬렉션과 자세한 정보를 보여주는 <code>movie_details</code> 컬렌션을 분리하여 담아두는 것이 좋다. 예를 들어 사람들이 영화를 검색할 때 제목, 연도, 장르 혹은 감독/연출자로 검색을 한 후에 디테일한 정보를 나중에 보기 때문에, 주로 자주 조회되는 요약된 정보를 하나의 콜렉션으로 담고, 나머지 디테일한 정보는 참조 형태로 만드는 것이 더 유용하다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"/><input id="__tabbed_3_2" name="__tabbed_3" type="radio"/><div class="tabbed-labels"><label for="__tabbed_3_1"><code>movie</code> Collection</label><label for="__tabbed_3_2"><code>movie_details</code> Collection</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<blockquote>
-<p>총 유저의 수는 어떻게 될까?</p>
-</blockquote>
-<ul>
-<li><code>distinct</code> 메소드로 필드의 중복된 데이터를 걸러낼 수 있다.</li>
-<li><code>length</code> 속성은 배열의 길이를 반환한다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>&gt;<span class="w"> </span>db.repo.distinct<span class="o">(</span><span class="s1">'user_name'</span><span class="o">)</span>.length
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="p">{</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">    </span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="s2">"title"</span><span class="o">:</span><span class="w"> </span><span class="s2">"The Arrival of a Train"</span><span class="p">,</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="s2">"year"</span><span class="o">:</span><span class="w"> </span><span class="mf">1896</span><span class="p">,</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="s2">"runtime"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="s2">"released"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"1896-01-25"</span><span class="p">),</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="s2">"type"</span><span class="o">:</span><span class="w"> </span><span class="s2">"movie"</span><span class="p">,</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="s2">"directors"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Auguste Lumière"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Louis Lumière"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="s2">"countries"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"France"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="s2">"genres"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Documentary"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Short"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="p">}</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<blockquote>
-<p><code>stars_count</code>가 10개 이상 인 유저는 몇 명 일까?</p>
-</blockquote>
-<ul>
-<li><code>countDocuments</code> 메서드로 쿼리조건의 해당하는 도큐먼트의 개수를 셀 수 있다.</li>
-<li><code>$gte</code> 연산자로 x보다 큰 연산을 수행할 수 있다. </li>
-</ul>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>&gt;<span class="w"> </span>db.repo.countDocuments<span class="o">({</span><span class="w"> </span><span class="s1">'stars_count'</span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">$gte</span>:<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">})</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="p">{</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">156</span><span class="p">,</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="s2">"movie_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// (1)</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">    </span><span class="s2">"poster"</span><span class="o">:</span><span class="w"> </span><span class="s2">"http://ia.media-imdb.com/images/M/MV5BMjEyNDk5MDYzOV5BMl5BanBnXkFtZTgwNjIxMTEwMzE@._V1_SX300.jpg"</span><span class="p">,</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="s2">"plot"</span><span class="o">:</span><span class="w"> </span><span class="s2">"A group of people are standing in a straight line along the platform of a railway station, waiting for a train, which is seen coming at some distance. When the train stops at the platform, ..."</span><span class="p">,</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="s2">"fullplot"</span><span class="o">:</span><span class="w"> </span><span class="s2">"A group of people are standing in a straight line along the platform of a railway station, waiting for a train, which is seen coming at some distance. When the train stops at the platform, the line dissolves. The doors of the railway-cars open, and people on the platform help passengers to get off."</span><span class="p">,</span>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="s2">"lastupdated"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2015-08-15T10:06:53"</span><span class="p">),</span>
+<a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="s2">"imdb"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">        </span><span class="s2">"rating"</span><span class="o">:</span><span class="w"> </span><span class="mf">7.3</span><span class="p">,</span>
+<a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">        </span><span class="s2">"votes"</span><span class="o">:</span><span class="w"> </span><span class="mf">5043</span><span class="p">,</span>
+<a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">        </span><span class="s2">"id"</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span>
+<a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="p">},</span>
+<a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">    </span><span class="s2">"tomatoes"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">    </span><span class="s2">"viewer"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">        </span><span class="s2">"rating"</span><span class="o">:</span><span class="w"> </span><span class="mf">3.7</span><span class="p">,</span>
+<a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">        </span><span class="s2">"numReviews"</span><span class="o">:</span><span class="w"> </span><span class="mf">59</span>
+<a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">    </span><span class="s2">"lastUpdated"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2020-01-29T00:02:53"</span><span class="p">)</span>
+<a href="#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> reference to the movie collection</li>
+</ol>
+</div>
+</div>
+</div>
+<h3 id="one-to-many-relationships-with-embedded-documents">One-to-Many Relationships with Embedded Documents<a class="headerlink" href="#one-to-many-relationships-with-embedded-documents" title="Permanent link">¶</a></h3>
+<p>이번에는 일대다 대응관계의 상황을 살펴본다. 아래와 같이 한 후원자가 두 개의 주소를 가질 수 있다. 마찬가지로 이름과 모든 주소를 함께 조회하려면 각 도큐먼트에 JOIN operation을 한 다음에 모든 주소를 가져올 수 있다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1">// patron document</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="p">{</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"Joe Bookreader"</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="p">}</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1">// address documents</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="p">{</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">    </span><span class="nx">patron_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span><span class="w"> </span><span class="c1">// (1)</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">    </span><span class="nx">street</span><span class="o">:</span><span class="w"> </span><span class="s2">"123 Fake Street"</span><span class="p">,</span>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">    </span><span class="nx">city</span><span class="o">:</span><span class="w"> </span><span class="s2">"Faketon"</span><span class="p">,</span>
+<a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">    </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">    </span><span class="nx">zip</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="p">}</span>
+<a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a>
+<a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="p">{</span>
+<a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">    </span><span class="nx">patron_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="w">    </span><span class="nx">street</span><span class="o">:</span><span class="w"> </span><span class="s2">"1 Some Other Street"</span><span class="p">,</span>
+<a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="w">    </span><span class="nx">city</span><span class="o">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span>
+<a href="#__codelineno-7-20" id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="w">    </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-7-21" id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="w">    </span><span class="nx">zip</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-7-22" id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><img alt="🙋‍♂️" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> reference to patron document</li>
+</ol>
+<p>해당 경우는 배열의 형태로 모든 주소를 담는 것이 더 효율적이다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">{</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">   </span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">   </span><span class="s2">"name"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Joe Bookreader"</span><span class="p">,</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">   </span><span class="s2">"addresses"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">            </span><span class="s2">"street"</span><span class="o">:</span><span class="w"> </span><span class="s2">"123 Fake Street"</span><span class="p">,</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">            </span><span class="s2">"city"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Faketon"</span><span class="p">,</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">            </span><span class="s2">"state"</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">            </span><span class="s2">"zip"</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">            </span><span class="s2">"street"</span><span class="o">:</span><span class="w"> </span><span class="s2">"1 Some Other Street"</span><span class="p">,</span>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">            </span><span class="s2">"city"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">            </span><span class="s2">"state"</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">            </span><span class="s2">"zip"</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">    </span><span class="p">]</span>
+<a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="p">}</span>
+</code></pre></div>
+<p>이전과 마찬가지로 embedded document 패턴의 단점은 문서가 길어질 수가 있다는 점이다. 예를 들어 후원자의 최근 10개의 후원 내역을 보여주는 어플리케이션을 만든다고 가정해보자. 만약 하나의 도큐먼트에 임베디드 형태로 만들 었을 때, 해당 후원자를 조회 할 때 마다 모든 후원내역을 가져와야함으로 비효율적이다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="p">{</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">   </span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">   </span><span class="s2">"name"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Joe Bookreader"</span><span class="p">,</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">   </span><span class="s2">"addresses"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">            </span><span class="s2">"street"</span><span class="o">:</span><span class="w"> </span><span class="s2">"123 Fake Street"</span><span class="p">,</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">            </span><span class="s2">"city"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Faketon"</span><span class="p">,</span>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">            </span><span class="s2">"state"</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">            </span><span class="s2">"zip"</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">            </span><span class="s2">"street"</span><span class="o">:</span><span class="w"> </span><span class="s2">"1 Some Other Street"</span><span class="p">,</span>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">            </span><span class="s2">"city"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span>
+<a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">            </span><span class="s2">"state"</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">            </span><span class="s2">"zip"</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-9-17" id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">    </span><span class="p">],</span>
+<a href="#__codelineno-9-18" id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">    </span><span class="s2">"donations"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-9-19" id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-9-20" id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="w">            </span><span class="s2">"donate_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">786</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-9-21" id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">            </span><span class="s2">"date"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2023-03-12"</span><span class="p">),</span><span class="w"> </span>
+<a href="#__codelineno-9-22" id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="w">            </span><span class="s2">"amount"</span><span class="o">:</span><span class="w"> </span><span class="s2">"3.05"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-9-23" id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="w">            </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"dollar"</span>
+<a href="#__codelineno-9-24" id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-9-25" id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="w">        </span><span class="p">...</span>
+<a href="#__codelineno-9-26" id="__codelineno-9-26" name="__codelineno-9-26"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-9-27" id="__codelineno-9-27" name="__codelineno-9-27"></a><span class="w">            </span><span class="s2">"donate_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-9-28" id="__codelineno-9-28" name="__codelineno-9-28"></a><span class="w">            </span><span class="s2">"date"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2019-01-03"</span><span class="p">),</span><span class="w"> </span>
+<a href="#__codelineno-9-29" id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="w">            </span><span class="s2">"amount"</span><span class="o">:</span><span class="w"> </span><span class="s2">"1.05"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-9-30" id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="w">            </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"dollar"</span>
+<a href="#__codelineno-9-31" id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-9-32" id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="w">    </span><span class="p">]</span>
+<a href="#__codelineno-9-33" id="__codelineno-9-33" name="__codelineno-9-33"></a><span class="p">}</span>
+</code></pre></div>
+<p>이때는 과거의 모든 내역을 보여주는 것 보다 최근 10개의 내역을 하나의 도큐먼트에 담고, 이전 내역은 분리된 콜렉션에 두는 것이 더 좋다. </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"/><input id="__tabbed_4_2" name="__tabbed_4" type="radio"/><div class="tabbed-labels"><label for="__tabbed_4_1"><code>patron</code> Collection</label><label for="__tabbed_4_2"><code>donation</code> Collection</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="p">{</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="s2">"_id"</span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="s2">"name"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Joe Bookreader"</span><span class="p">,</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="s2">"addresses"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">            </span><span class="s2">"street"</span><span class="o">:</span><span class="w"> </span><span class="s2">"123 Fake Street"</span><span class="p">,</span>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">            </span><span class="s2">"city"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Faketon"</span><span class="p">,</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">            </span><span class="s2">"state"</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">            </span><span class="s2">"zip"</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">            </span><span class="s2">"street"</span><span class="o">:</span><span class="w"> </span><span class="s2">"1 Some Other Street"</span><span class="p">,</span>
+<a href="#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">            </span><span class="s2">"city"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span>
+<a href="#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">            </span><span class="s2">"state"</span><span class="o">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span>
+<a href="#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">            </span><span class="s2">"zip"</span><span class="o">:</span><span class="w"> </span><span class="s2">"12345"</span>
+<a href="#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">    </span><span class="p">],</span>
+<a href="#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">    </span><span class="s2">"donations"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<a href="#__codelineno-10-19" id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-10-20" id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">            </span><span class="s2">"donate_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">786</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-10-21" id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="w">            </span><span class="s2">"date"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2023-03-12"</span><span class="p">),</span><span class="w"> </span>
+<a href="#__codelineno-10-22" id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">            </span><span class="s2">"amount"</span><span class="o">:</span><span class="w"> </span><span class="s2">"3.05"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-10-23" id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">            </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"dollar"</span>
+<a href="#__codelineno-10-24" id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-10-25" id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">        </span><span class="p">...</span>
+<a href="#__codelineno-10-26" id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="w">        </span><span class="p">{</span>
+<a href="#__codelineno-10-27" id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">            </span><span class="s2">"donate_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">776</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-10-28" id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="w">            </span><span class="s2">"date"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2023-01-09"</span><span class="p">),</span><span class="w"> </span>
+<a href="#__codelineno-10-29" id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">            </span><span class="s2">"amount"</span><span class="o">:</span><span class="w"> </span><span class="s2">"5.25"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-10-30" id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="w">            </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"dollar"</span>
+<a href="#__codelineno-10-31" id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">        </span><span class="p">},</span>
+<a href="#__codelineno-10-32" id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="w">    </span><span class="p">]</span>
+<a href="#__codelineno-10-33" id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="p">}</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<blockquote>
-<p>총 유저 별로 만든 repository는 몇 개 일까? 상위 10개만 뽑아보자.</p>
-</blockquote>
-<ul>
-<li><code>$group</code> 연산자로 aggregation을 수행할 수 있다.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>
+<p><code>patron_id</code>로 <code>patron</code> 콜렌션을 참조한다. </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="p">{</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="s2">"donate_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">786</span><span class="p">,</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="s2">"patron_id"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="s2">"date"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2023-03-12"</span><span class="p">),</span><span class="w"> </span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="s2">"amount"</span><span class="o">:</span><span class="w"> </span><span class="s2">"3.05"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"dollar"</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="p">},</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="p">...</span>
+<a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="p">{</span>
+<a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">    </span><span class="s2">"donate_id"</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-11" id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="s2">"patron_id"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"joe"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-12" id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="s2">"date"</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2019-01-03"</span><span class="p">),</span><span class="w"> </span>
+<a href="#__codelineno-11-13" id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="s2">"amount"</span><span class="o">:</span><span class="w"> </span><span class="s2">"1.05"</span><span class="p">,</span><span class="w"> </span>
+<a href="#__codelineno-11-14" id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"dollar"</span>
+<a href="#__codelineno-11-15" id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+</div>
+</div>
+<p>더 작은 크기의 도큐먼트로 자주 접근하는 데이터 구조를 설계하면 읽기 속도를 향상 시키지만, 단점으로 중복된 데이터가 저장 될 수 있다는 단점이 있다. 위 예시에서 최근 10개의 리뷰는 항상 새로운 후원이 들어올 경우 <code>patron</code>과 <code>donation</code> 콜렉션이 함께 업데이트가 되어야한다. 물론 <code>patron</code> 컬렉션의 최근 10개 내역을 <code>donation</code>의 가장 최근 10 개로 보장하는 로직을 설계할 수도 있다.</p>
+<h3 id="one-to-many-relationships-with-document-references">One-to-Many Relationships with Document References<a class="headerlink" href="#one-to-many-relationships-with-document-references" title="Permanent link">¶</a></h3>
+<h2 id="_2">참고하면 좋은 자료<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <ul>
-<li><code>$filter</code> 연산자로 필터링을 수행할 수 있다.</li>
+<li><a href="https://www.mongodb.com/docs/manual/core/data-modeling-introduction/">MongoDB - Data Modeling Introduction</a></li>
+<li><a href="https://meetup.nhncloud.com/posts/276">NHN Cloud - MongoDB 데이터 모델링</a></li>
+<li><a href="https://blog.voidmainvoid.net/241">데브원영님 - MongoDB 데이터 모델링</a></li>
 </ul>
-</div>
-</div>
-</input></input></input></div>
-<h2 id="aggregation-pipeline">Aggregation Pipeline<a class="headerlink" href="#aggregation-pipeline" title="Permanent link">¶</a></h2>
-<h2 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">¶</a></h2>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://www.kaggle.com/datasets/nikhil25803/github-dataset">Kaggle-GitHub Dataset Version 1</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://www.mongodb.com/docs/manual/core/data-modeling-introduction/">MongoDB - Data Modeling Introduction</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 <li id="fn:2">
-<p><a href="https://www.mongodb.com/docs/atlas/app-services/schemas/">MongoDB - Schemas</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+<p><a href="https://www.mongodb.com/docs/manual/core/schema-validation/">MongoDB - Schema Validation</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -717,6 +961,10 @@
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
+<a class="md-top md-icon" data-md-component="top" hidden="" href="#">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </a>
 </main>
 <footer class="md-footer">
 <div class="md-footer-meta md-typeset">
@@ -741,7 +989,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
 <script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
 <script src="../../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
