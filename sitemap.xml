@@ -161,6 +161,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://simonjisu.github.io/study/tutorial/mongodb/chapter4/</loc>
+         <lastmod>2023-03-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://simonjisu.github.io/blog/archive/2020/</loc>
          <lastmod>2023-03-08</lastmod>
          <changefreq>daily</changefreq>
