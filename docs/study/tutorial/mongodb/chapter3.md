@@ -359,6 +359,72 @@ tags:
 
 ### One-to-Many Relationships with Document References
 
+마지막으로 일대다의 대응관계를 가질때 Embedded Documents가 아닌 Reference 형태로 데이터를 연결을 해본다. 예시로 출판사와 책의 관계를 모델링 하려고한다. 책 도큐먼트에서 출판사의 정보가 현재 Embedded Documents 형태로 연결되어 있으며 중복된 데이터가 존재한다.
+
+``` javascript hl_lines="7 8 9 10 11 20 21 22 23 24"
+{
+    title: "MongoDB: The Definitive Guide",
+    author: [ "Kristina Chodorow", "Mike Dirolf" ],
+    published_date: ISODate("2010-09-24"),
+    pages: 216,
+    language: "English",
+    publisher: {
+              name: "O'Reilly Media",
+              founded: 1980,
+              location: "CA"
+            }
+}
+
+{
+    title: "50 Tips and Tricks for MongoDB Developer",
+    author: "Kristina Chodorow",
+    published_date: ISODate("2011-05-06"),
+    pages: 68,
+    language: "English",
+    publisher: {
+              name: "O'Reilly Media",
+              founded: 1980,
+              location: "CA"
+            }
+}
+```
+
+이러한 경우에는 출판사와 책을 두 개의 컬렉션으로 만드는 것이 효율적이다. 여러 개의 출판사와 여러 권의 책 도큐먼트를 별 개의 컬렉션에 담는 것이다.
+
+=== "`publishers` Collection"
+
+    ``` javascript hl_lines="5"
+    {
+        name: "O'Reilly Media",
+        founded: 1980,
+        location: "CA",
+        books: [123456789, 234567890, ...]
+    }
+    ```
+
+=== "`books` Collection" 
+
+    ``` javascript hl_lines="8 18"
+    {
+        _id: 123456789,
+        title: "MongoDB: The Definitive Guide",
+        author: [ "Kristina Chodorow", "Mike Dirolf" ],
+        published_date: ISODate("2010-09-24"),
+        pages: 216,
+        language: "English"
+        publisher_id: "oreilly"
+    }
+
+    {
+        _id: 234567890,
+        title: "50 Tips and Tricks for MongoDB Developer",
+        author: "Kristina Chodorow",
+        published_date: ISODate("2011-05-06"),
+        pages: 68,
+        language: "English"
+        publisher_id: "oreilly"
+    }
+    ```
 
 ## 참고하면 좋은 자료
 

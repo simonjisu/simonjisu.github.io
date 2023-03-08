@@ -45,7 +45,7 @@ MongoDB에서는 레코드(record)를 도큐먼트(document)라고 부른다. �
 }
 ```
 
-1.  :man_raising_hand: `_id` 필드가 primary key 가 된다.
+1.  :man_raising_hand: `_id` 필드가 primary key 가 된다. 알아서 생성되거나 직접 부여할 수도 있다.
 
 이런 형태는 많은 다른 프로그래밍 언어의 기본 데이터 유형에 해당하여 매우 친숙하다(e.g., Python - `dict`). 그리고 다양한 스키마를 유연하게 정의할 수 있다.
 
