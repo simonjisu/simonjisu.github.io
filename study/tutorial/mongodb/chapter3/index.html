@@ -907,6 +907,69 @@
 </div>
 <p>더 작은 크기의 도큐먼트로 자주 접근하는 데이터 구조를 설계하면 읽기 속도를 향상 시키지만, 단점으로 중복된 데이터가 저장 될 수 있다는 단점이 있다. 위 예시에서 최근 10개의 리뷰는 항상 새로운 후원이 들어올 경우 <code>patron</code>과 <code>donation</code> 콜렉션이 함께 업데이트가 되어야한다. 물론 <code>patron</code> 컬렉션의 최근 10개 내역을 <code>donation</code>의 가장 최근 10 개로 보장하는 로직을 설계할 수도 있다.</p>
 <h3 id="one-to-many-relationships-with-document-references">One-to-Many Relationships with Document References<a class="headerlink" href="#one-to-many-relationships-with-document-references" title="Permanent link">¶</a></h3>
+<p>마지막으로 일대다의 대응관계를 가질때 Embedded Documents가 아닌 Reference 형태로 데이터를 연결을 해본다. 예시로 출판사와 책의 관계를 모델링 하려고한다. 책 도큐먼트에서 출판사의 정보가 현재 Embedded Documents 형태로 연결되어 있으며 중복된 데이터가 존재한다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="p">{</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">"MongoDB: The Definitive Guide"</span><span class="p">,</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Kristina Chodorow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Mike Dirolf"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="nx">published_date</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2010-09-24"</span><span class="p">),</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="nx">pages</span><span class="o">:</span><span class="w"> </span><span class="mf">216</span><span class="p">,</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">    </span><span class="nx">language</span><span class="o">:</span><span class="w"> </span><span class="s2">"English"</span><span class="p">,</span>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="hll"><span class="w">    </span><span class="nx">publisher</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="hll"><span class="w">              </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"O'Reilly Media"</span><span class="p">,</span>
+</span><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="hll"><span class="w">              </span><span class="nx">founded</span><span class="o">:</span><span class="w"> </span><span class="mf">1980</span><span class="p">,</span>
+</span><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="hll"><span class="w">              </span><span class="nx">location</span><span class="o">:</span><span class="w"> </span><span class="s2">"CA"</span>
+</span><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
+</span><a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="p">}</span>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a>
+<a href="#__codelineno-12-14" id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="p">{</span>
+<a href="#__codelineno-12-15" id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">"50 Tips and Tricks for MongoDB Developer"</span><span class="p">,</span>
+<a href="#__codelineno-12-16" id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="s2">"Kristina Chodorow"</span><span class="p">,</span>
+<a href="#__codelineno-12-17" id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="nx">published_date</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2011-05-06"</span><span class="p">),</span>
+<a href="#__codelineno-12-18" id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="nx">pages</span><span class="o">:</span><span class="w"> </span><span class="mf">68</span><span class="p">,</span>
+<a href="#__codelineno-12-19" id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">    </span><span class="nx">language</span><span class="o">:</span><span class="w"> </span><span class="s2">"English"</span><span class="p">,</span>
+<a href="#__codelineno-12-20" id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="hll"><span class="w">    </span><span class="nx">publisher</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+</span><a href="#__codelineno-12-21" id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="hll"><span class="w">              </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"O'Reilly Media"</span><span class="p">,</span>
+</span><a href="#__codelineno-12-22" id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="hll"><span class="w">              </span><span class="nx">founded</span><span class="o">:</span><span class="w"> </span><span class="mf">1980</span><span class="p">,</span>
+</span><a href="#__codelineno-12-23" id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="hll"><span class="w">              </span><span class="nx">location</span><span class="o">:</span><span class="w"> </span><span class="s2">"CA"</span>
+</span><a href="#__codelineno-12-24" id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="hll"><span class="w">            </span><span class="p">}</span>
+</span><a href="#__codelineno-12-25" id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="p">}</span>
+</code></pre></div>
+<p>이러한 경우에는 출판사와 책을 두 개의 컬렉션으로 만드는 것이 효율적이다. 여러 개의 출판사와 여러 권의 책 도큐먼트를 별 개의 컬렉션에 담는 것이다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"/><input id="__tabbed_5_2" name="__tabbed_5" type="radio"/><div class="tabbed-labels"><label for="__tabbed_5_1"><code>publishers</code> Collection</label><label for="__tabbed_5_2"><code>books</code> Collection</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="p">{</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">"O'Reilly Media"</span><span class="p">,</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="nx">founded</span><span class="o">:</span><span class="w"> </span><span class="mf">1980</span><span class="p">,</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">    </span><span class="nx">location</span><span class="o">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="hll"><span class="w">    </span><span class="nx">books</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="mf">123456789</span><span class="p">,</span><span class="w"> </span><span class="mf">234567890</span><span class="p">,</span><span class="w"> </span><span class="p">...]</span>
+</span><a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="p">{</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="mf">123456789</span><span class="p">,</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">"MongoDB: The Definitive Guide"</span><span class="p">,</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">    </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"Kristina Chodorow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Mike Dirolf"</span><span class="w"> </span><span class="p">],</span>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="nx">published_date</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2010-09-24"</span><span class="p">),</span>
+<a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">    </span><span class="nx">pages</span><span class="o">:</span><span class="w"> </span><span class="mf">216</span><span class="p">,</span>
+<a href="#__codelineno-14-7" id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">    </span><span class="nx">language</span><span class="o">:</span><span class="w"> </span><span class="s2">"English"</span>
+<a href="#__codelineno-14-8" id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="hll"><span class="w">    </span><span class="nx">publisher_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"oreilly"</span>
+</span><a href="#__codelineno-14-9" id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="p">}</span>
+<a href="#__codelineno-14-10" id="__codelineno-14-10" name="__codelineno-14-10"></a>
+<a href="#__codelineno-14-11" id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="p">{</span>
+<a href="#__codelineno-14-12" id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="nx">_id</span><span class="o">:</span><span class="w"> </span><span class="mf">234567890</span><span class="p">,</span>
+<a href="#__codelineno-14-13" id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">"50 Tips and Tricks for MongoDB Developer"</span><span class="p">,</span>
+<a href="#__codelineno-14-14" id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">    </span><span class="nx">author</span><span class="o">:</span><span class="w"> </span><span class="s2">"Kristina Chodorow"</span><span class="p">,</span>
+<a href="#__codelineno-14-15" id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">    </span><span class="nx">published_date</span><span class="o">:</span><span class="w"> </span><span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2011-05-06"</span><span class="p">),</span>
+<a href="#__codelineno-14-16" id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">    </span><span class="nx">pages</span><span class="o">:</span><span class="w"> </span><span class="mf">68</span><span class="p">,</span>
+<a href="#__codelineno-14-17" id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="w">    </span><span class="nx">language</span><span class="o">:</span><span class="w"> </span><span class="s2">"English"</span>
+<a href="#__codelineno-14-18" id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="hll"><span class="w">    </span><span class="nx">publisher_id</span><span class="o">:</span><span class="w"> </span><span class="s2">"oreilly"</span>
+</span><a href="#__codelineno-14-19" id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="_2">참고하면 좋은 자료<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://www.mongodb.com/docs/manual/core/data-modeling-introduction/">MongoDB - Data Modeling Introduction</a></li>
