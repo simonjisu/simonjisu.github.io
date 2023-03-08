@@ -361,7 +361,7 @@ tags:
 
 마지막으로 일대다의 대응관계를 가질때 Embedded Documents가 아닌 Reference 형태로 데이터를 연결을 해본다. 예시로 출판사와 책의 관계를 모델링 하려고한다. 책 도큐먼트에서 출판사의 정보가 현재 Embedded Documents 형태로 연결되어 있으며 중복된 데이터가 존재한다.
 
-``` javascript hl_lines="7 8 9 10 11 20 21 22 23 24"
+``` javascript hl_lines="7-11 20-24"
 {
     title: "MongoDB: The Definitive Guide",
     author: [ "Kristina Chodorow", "Mike Dirolf" ],
