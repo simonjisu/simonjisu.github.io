@@ -17,6 +17,11 @@ Google Cloud Platform(GCP)[^1]는 아마존의 AWS[^2], 마이크로소프트의
 [^2]: [Amazon Web Cloud](https://aws.amazon.com/ko/?nc2=h_lg)
 [^3]: [Microsoft Azure](https://azure.microsoft.com/ko-kr/)
 
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1AACALNGjAVutIsEWiULu8iaQWTZTTEbS){ class="skipglightbox" width="100%" }
+  <figcaption> 클라우스 서비스 3 대장 </figcaption>
+</figure>
+
 ## 클라우드 플랫폼 서비스
 
 > 클라우드 서비스란 타사 제공업체가 호스팅하여 인터넷을 통해 사용자에게 제공하는 인프라, 플랫폼 또는 소프트웨어를 말합니다[^4].
