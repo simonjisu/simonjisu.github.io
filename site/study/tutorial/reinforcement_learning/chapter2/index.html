@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#multi-armed-bandits">
+<a class="md-skip" href="#k-armed-bandit-problem">
           Skip to content
         </a>
 </div>
@@ -401,10 +401,10 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#multi-armed-bandits">
+<a class="md-nav__link" href="#k-armed-bandit-problem">
 <span class="md-ellipsis">
       
-        Multi-armed Bandits
+        K-armed Bandit Problem
       
     </span>
 </a>
@@ -448,10 +448,10 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#multi-armed-bandits">
+<a class="md-nav__link" href="#k-armed-bandit-problem">
 <span class="md-ellipsis">
       
-        Multi-armed Bandits
+        K-armed Bandit Problem
       
     </span>
 </a>
@@ -499,15 +499,29 @@
 <span class="md-tag">reinforcement learning</span>
 </nav>
 <h1>2. Multi-armed Bandits</h1>
-<blockquote>
-<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
-</blockquote>
-<h2 id="multi-armed-bandits">Multi-armed Bandits<a class="headerlink" href="#multi-armed-bandits" title="Permanent link">¶</a></h2>
 <figure>
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1pptc4MA_slesmfXtkRZJjjFeuAkGWO2r" width="100%">
 </img></p>
 <figcaption>Reference: Pixabay</figcaption>
 </figure>
+<blockquote>
+<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
+</blockquote>
+<p>John이라는 외국인이 카지도 슬롯머신(한국에서는 사적으로 하면 불법이지만, 일본에서는 길거리에 빠칭코 가게들이 많다)에 들어가서 슬롯 머신으로 게임을 진행하려고 한다. 수 많은 슬롯 머신 기기들이 있는데 어떤 기기에서 칩을 벌 수 있는 확률이 높을까?</p>
+<p><strong>Multi-armed Bandits</strong> 은 이러한 여러 대(multi)의 레버(armed)를 가진 슬롯 머신(bandits)를 이야기한다. 이 문제는 State 간에 전환(transit)이 없기 때문에 Reinforcement Learning의 제일 간단한 상황이다. </p>
+<h2 id="k-armed-bandit-problem">K-armed Bandit Problem<a class="headerlink" href="#k-armed-bandit-problem" title="Permanent link">¶</a></h2>
+<figure>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1T8eAgwwVHfEzMWtpkVk0sQFx5ak3rZ7B" width="100%">
+</img></p>
+<figcaption>Reference: Pixabay</figcaption>
+</figure>
+<p>만약 여러분이 친구랑 두 개의 코인(확률이 공정하고 0.5가 아님)을 가지고 내기를 하는데, 여러분이 선택한 코인이 윗면(head)이 나오면 $1를 여러분이 가지고 아랫면(tail)이 나오면 $1를 친구가 가져간다.</p>
+<p>이러한 문제를 <strong>K-armed bandit</strong> 문제라고 한다. 여기서 K는 두 개의 코인 중 선택 해야하는 행동, armed bandit는 코인의 앞면, 뒷면이 나올 수 있는 상황이다. </p>
+<p>Formal한 정의를 하자면, 각 time-step <span class="arithmatex">\(t\)</span>에서 <span class="arithmatex">\(k\)</span> 개 행동(Actions)중에 선택된 행동을 <span class="arithmatex">\(A_t\)</span>라고 하며, 선택에 따라서 기대되는(혹은 평균) 보상을 <span class="arithmatex">\(R_t\)</span>라고 한다. 따라서 어떤 행동 <span class="arithmatex">\(a\)</span>의 가치(Value) <span class="arithmatex">\(q_{*}(a)\)</span>는 선택된 행동의 보상 기댓값과 같으며 수식으로 다음과 같다.</p>
+<div class="arithmatex">\[q_{*}(a) \coloneqq \Bbb{E} \lbrack R_t \vert A_t = a \rbrack \]</div>
+<p>다만, 우리는 선택된 행동의 가치는 모른다(만약에 알면 모든 사람은 복권에 당첨되었을 것이다). 따라서 선택한 행동의 가치를 추정해야하며, time-step <span class="arithmatex">\(t\)</span>에서 선택한 행동 <span class="arithmatex">\(a\)</span>의 <strong>가치 추정값(estimated value of action)</strong>을 <span class="arithmatex">\(Q_t(a)\)</span>라고 한다. 우리의 목적은 <span class="arithmatex">\(Q_t(a)\)</span>가 <span class="arithmatex">\(q_{*}(a)\)</span>에 가장 근접하게만 만들면 최적의 결과를 얻을 수 있다.</p>
+<p>그렇다면 <span class="arithmatex">\(Q_t(a)\)</span>는 어떻게 계산할 수 있을까? 가장 간단한 방법은 현재 실행 했 던 기록을 가지고 계산하는 <strong>sample-average</strong> 방법이다.</p>
+<div class="arithmatex">\[\begin{aligned}Q_t(a) = \coloneqq \end{aligned}\]</div>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
