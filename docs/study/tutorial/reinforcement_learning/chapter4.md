@@ -44,9 +44,9 @@ $$ v_{k+1}(s) \leftarrow \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert 
     * Actions $\mathcal{A} = \lbrace \uparrow, \downarrow, \rightarrow, \leftarrow \rbrace$
     * Uniformly random policy $\pi(a \vert s) = 0.25$ for all $a \in \mathcal{A}$ and for all non-terminal states $s \in \mathcal{S}$
     * Deterministic state transition & reward model $p(s', r \vert s, a)$
-        * 예시1: $p(s'=6, r=-1 \vert s=5, a=\rightarrow)=1$, grid 5에서 우측 행동($\righrarrow$) 선택 시 grid 6으로 가고 보상도 $-1$을 얻을 확률은 1. 
-        * 예시2: $p(s'=7, r=-1 \vert s=7, a=\rightarrow)=1$, grid 7에서 우측 행동($\righrarrow$) 선택 시 grid 7으로 가고 보상도 $-1$을 얻을 확률은 1. 
-        * 예시3: $p(s'=10, r=r' \vert s=5, a=\rightarrow)=0 \ \forall r' \in \mathcal{R}$, grid 5에서 우측 행동($\righrarrow$) 선택 시 grid 10으로 갈 수 있는 확률은 0. 
+        * 예시1: $p(s'=6, r=-1 \vert s=5, a=\rightarrow)=1$, grid 5에서 우측 행동($\rightarrow$) 선택 시 grid 6으로 가고 보상도 $-1$을 얻을 확률은 1. 
+        * 예시2: $p(s'=7, r=-1 \vert s=7, a=\rightarrow)=1$, grid 7에서 우측 행동($\rightarrow$) 선택 시 grid 7으로 가고 보상도 $-1$을 얻을 확률은 1. 
+        * 예시3: $p(s'=10, r=r' \vert s=5, a=\rightarrow)=0 \ \forall r' \in \mathcal{R}$, grid 5에서 우측 행동($\rightarrow$) 선택 시 grid 10으로 갈 수 있는 확률은 0. 
     * $\gamma=1.0$를 가정한다.
 
 그렇다면 이러한 MDP 환경에서 최대의 보상은 무엇일까? 당연히 제일 적은 스텝으로 terminal state에 도달하는 것이다.

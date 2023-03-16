@@ -622,9 +622,9 @@
 <li>Actions <span class="arithmatex">\(\mathcal{A} = \lbrace \uparrow, \downarrow, \rightarrow, \leftarrow \rbrace\)</span></li>
 <li>Uniformly random policy <span class="arithmatex">\(\pi(a \vert s) = 0.25\)</span> for all <span class="arithmatex">\(a \in \mathcal{A}\)</span> and for all non-terminal states <span class="arithmatex">\(s \in \mathcal{S}\)</span></li>
 <li>Deterministic state transition &amp; reward model <span class="arithmatex">\(p(s', r \vert s, a)\)</span><ul>
-<li>예시1: <span class="arithmatex">\(p(s'=6, r=-1 \vert s=5, a=\rightarrow)=1\)</span>, grid 5에서 우측 행동(<span class="arithmatex">\(\righrarrow\)</span>) 선택 시 grid 6으로 가고 보상도 <span class="arithmatex">\(-1\)</span>을 얻을 확률은 1. </li>
-<li>예시2: <span class="arithmatex">\(p(s'=7, r=-1 \vert s=7, a=\rightarrow)=1\)</span>, grid 7에서 우측 행동(<span class="arithmatex">\(\righrarrow\)</span>) 선택 시 grid 7으로 가고 보상도 <span class="arithmatex">\(-1\)</span>을 얻을 확률은 1. </li>
-<li>예시3: <span class="arithmatex">\(p(s'=10, r=r' \vert s=5, a=\rightarrow)=0 \ \forall r' \in \mathcal{R}\)</span>, grid 5에서 우측 행동(<span class="arithmatex">\(\righrarrow\)</span>) 선택 시 grid 10으로 갈 수 있는 확률은 0. </li>
+<li>예시1: <span class="arithmatex">\(p(s'=6, r=-1 \vert s=5, a=\rightarrow)=1\)</span>, grid 5에서 우측 행동(<span class="arithmatex">\(\rightarrow\)</span>) 선택 시 grid 6으로 가고 보상도 <span class="arithmatex">\(-1\)</span>을 얻을 확률은 1. </li>
+<li>예시2: <span class="arithmatex">\(p(s'=7, r=-1 \vert s=7, a=\rightarrow)=1\)</span>, grid 7에서 우측 행동(<span class="arithmatex">\(\rightarrow\)</span>) 선택 시 grid 7으로 가고 보상도 <span class="arithmatex">\(-1\)</span>을 얻을 확률은 1. </li>
+<li>예시3: <span class="arithmatex">\(p(s'=10, r=r' \vert s=5, a=\rightarrow)=0 \ \forall r' \in \mathcal{R}\)</span>, grid 5에서 우측 행동(<span class="arithmatex">\(\rightarrow\)</span>) 선택 시 grid 10으로 갈 수 있는 확률은 0. </li>
 </ul>
 </li>
 <li><span class="arithmatex">\(\gamma=1.0\)</span>를 가정한다.</li>
