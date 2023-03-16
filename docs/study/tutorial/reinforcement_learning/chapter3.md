@@ -52,17 +52,19 @@ $$\Bbb{P}\lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace = \Bbb{P} 
 
 MDP dynamics $p(s', r \vert s, a)$를 사용하여 다른 항들을 계산 할 수 있다.
 
-=== "State-trainsition"
+!!! info "MDP calculation from dynamics"
 
-    $$p(s' \vert s, a) := \Bbb{P}\lbrace S_t = s', \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} p(s', r \vert s, a) $$
+    === "State-trainsition"
 
-=== "Expected rewards for state–action pair"
+        $$p(s' \vert s, a) := \Bbb{P}\lbrace S_t = s', \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} p(s', r \vert s, a) $$
 
-    $$r(s, a) := \Bbb{E} \lbrace R_t \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r \vert s, a) $$
+    === "Expected rewards for state–action pair"
 
-=== "Expected rewards for state–action-next-state triple"
+        $$r(s, a) := \Bbb{E} \lbrace R_t \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r \vert s, a) $$
 
-    $$r(s, a, s') := \Bbb{E} \lbrace R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrace = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}$$
+    === "Expected rewards for state–action-next-state triple"
+
+        $$r(s, a, s') := \Bbb{E} \lbrace R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrace = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}$$
 
 ![HeadImg](https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O){ class="skipglightbox" width="50%" }
 
@@ -86,23 +88,25 @@ Agent의 최종 목적은 **보상 합의 기댓값**을 최대화 하는 것이
 
 Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 **기대 수익(expected return)**을 $G_t$ 라고 하면 두 가지 시나리오에서 수식으로 다음과 같이 정의 할 수 있다.
 
-=== "Episodic"
+!!! info "Expected Reward from difference scenario"
 
-    $$G_t := R_{t+1} + R_{t+1} + \cdots + R_T$$
+    === "Episodic"
 
-=== "Continuing"
+        $$G_t := R_{t+1} + R_{t+1} + \cdots + R_T$$
 
-    $$G_t := R_{t+1} + \gamma R_{t+1} + \cdots + = \sum_{k=1}^{\infty} \gamma^k R_{t+k+1}$$
+    === "Continuing"
 
-    여기서 $\gamma \in \lbrack 0, 1 \rbrack$는 할인율(discount rate)이라고 한다. 
+        $$G_t := R_{t+1} + \gamma R_{t+1} + \cdots + = \sum_{k=1}^{\infty} \gamma^k R_{t+k+1}$$
 
-=== "Episodic + Continuning"
+        여기서 $\gamma \in \lbrack 0, 1 \rbrack$는 할인율(discount rate)이라고 한다. 
 
-    ![HeadImg](https://drive.google.com/uc?id=175964pau-XWCIuiz7u4DJItFDrf-sEGJ){ class="skipglightbox" width="50%" }
+    === "Episodic + Continuning"
 
-    이러한 모형을 absorbing state라고 한다. $T = \infty$ 혹은 $\gamma = 1$
+        ![HeadImg](https://drive.google.com/uc?id=175964pau-XWCIuiz7u4DJItFDrf-sEGJ){ class="skipglightbox" width="50%" }
 
-    $$G_t := \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k $$
+        이러한 모형을 absorbing state라고 한다. $T = \infty$ 혹은 $\gamma = 1$
+
+        $$G_t := \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k $$
 
 ## Policies and Value Functions
 

@@ -735,6 +735,8 @@
 <p>Markov의 중요한 특성은 현 시점에서 모든 과거는 미래와 독립적인 관계라는 것이다. 상태 <span class="arithmatex">\(s\)</span>가 Markov 특성을 지녔다라는 것은 다음과 같다. 모든 과거 정보 <span class="arithmatex">\(\lbrace S_0, A_0, \cdots, S_{t-1}, A_{t-1} \rbrace\)</span>는  이미 상태에서 내포되어 있기 때문이라는 가정이 숨겨져 있다.</p>
 <div class="arithmatex">\[\Bbb{P}\lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace = \Bbb{P} \lbrace S_t = s', R_t = r \vert S_0, A_0, \cdots, S_{t-1}=s, A_{t-1}=a \rbrace\]</div>
 <p>MDP dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 사용하여 다른 항들을 계산 할 수 있다.</p>
+<div class="admonition info">
+<p class="admonition-title">MDP calculation from dynamics</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">State-trainsition</label><label for="__tabbed_1_2">Expected rewards for state–action pair</label><label for="__tabbed_1_3">Expected rewards for state–action-next-state triple</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -748,6 +750,7 @@
 </div>
 </div>
 </input></input></input></div>
+</div>
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O" width="50%"/></p>
 <p>이 그림은 세 개의 State <span class="arithmatex">\(\mathcal{S} = \lbrace s_0, s_1, s_3 \rbrace\)</span>, 두 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace a_0, a_1 \rbrace\)</span> 이 존재한다. 또한, <span class="arithmatex">\(+5\)</span>와 <span class="arithmatex">\(-1\)</span>을 제외하고 나머지는 모두 <span class="arithmatex">\(0\)</span>의 보상을 가진다. 몇 가지 예제로 MDP를 이해해보자.</p>
 <ol>
@@ -767,6 +770,8 @@
 </blockquote>
 <p>Agent의 최종 목적은 <strong>보상 합의 기댓값</strong>을 최대화 하는 것이다. 목적을 달성하기 위해서 sub-goal를 추가하는 것이 도움이 될까? 도움이 될 수도 있고 안될 수 도 있다. 예를 들어, 체스게임에서 퀸을 잡는 것이 중요하다는 것을 sub-goal로 두어서 왕을 제외한 다른 모든 말들을 희생시켰다면, 이는 최종 목표인 게임 승리에 도움이 안된다(물론 적은 말들로 달성 했을 수도 있지만...).</p>
 <p>Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 <strong>기대 수익(expected return)</strong>을 <span class="arithmatex">\(G_t\)</span> 라고 하면 두 가지 시나리오에서 수식으로 다음과 같이 정의 할 수 있다.</p>
+<div class="admonition info">
+<p class="admonition-title">Expected Reward from difference scenario</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Episodic</label><label for="__tabbed_2_2">Continuing</label><label for="__tabbed_2_3">Episodic + Continuning</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -783,6 +788,7 @@
 </div>
 </div>
 </input></input></input></div>
+</div>
 <h2 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">¶</a></h2>
 <p><strong>Policy</strong>는 주어진 상태 <span class="arithmatex">\(S_t = s\)</span> 에서 가능한 행동 <span class="arithmatex">\(A_t = a\)</span>으로 매핑하는 함수 <span class="arithmatex">\(\pi_t(a \vert s)\)</span>다. 꼭 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다.</p>
 <div class="arithmatex">\[ \pi_t(a \vert s) = \begin{cases} 1 &amp; \text{where } a=a' \\ 0 &amp; \text{where } a\neq a' \end{cases}\]</div>
