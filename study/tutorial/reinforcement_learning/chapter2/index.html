@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter2/" rel="canonical"/>
 <link href="../chapter1/" rel="prev"/>
-<link href="../../../../project/" rel="next"/>
+<link href="../chapter3/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
 <title>2. Multi-armed Bandits - Soopace</title>
@@ -409,8 +409,117 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#exploitation-vs-exploration">
+<span class="md-ellipsis">
+      
+        Exploitation vs. Exploration
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#epsilon-greedy">
+<span class="md-ellipsis">
+      
+        Epsilon-Greedy
+      
+    </span>
+</a>
+<nav aria-label="Epsilon-Greedy" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10-armed-testbed">
+<span class="md-ellipsis">
+      
+        10-armed Testbed
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#incremental-implementation">
+<span class="md-ellipsis">
+      
+        Incremental Implementation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-size-and-convergence">
+<span class="md-ellipsis">
+      
+        Step Size and Convergence
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optimistic-initial-values">
+<span class="md-ellipsis">
+      
+        Optimistic Initial Values
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ucb-action-selection">
+<span class="md-ellipsis">
+      
+        UCB Action Selection
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gradient-bandit-algorithms">
+<span class="md-ellipsis">
+      
+        Gradient Bandit Algorithms
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#non-stationary-rewards">
+<span class="md-ellipsis">
+      
+        Non-stationary Rewards
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter3/">
+<span class="md-ellipsis">
+    
+  
+    3. Finite Markov Decision Processes
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter4/">
+<span class="md-ellipsis">
+    
+  
+    4. Dynamic Programming
+  
+
+    
+  </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -456,6 +565,91 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#exploitation-vs-exploration">
+<span class="md-ellipsis">
+      
+        Exploitation vs. Exploration
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#epsilon-greedy">
+<span class="md-ellipsis">
+      
+        Epsilon-Greedy
+      
+    </span>
+</a>
+<nav aria-label="Epsilon-Greedy" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#10-armed-testbed">
+<span class="md-ellipsis">
+      
+        10-armed Testbed
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#incremental-implementation">
+<span class="md-ellipsis">
+      
+        Incremental Implementation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-size-and-convergence">
+<span class="md-ellipsis">
+      
+        Step Size and Convergence
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optimistic-initial-values">
+<span class="md-ellipsis">
+      
+        Optimistic Initial Values
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ucb-action-selection">
+<span class="md-ellipsis">
+      
+        UCB Action Selection
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gradient-bandit-algorithms">
+<span class="md-ellipsis">
+      
+        Gradient Bandit Algorithms
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#non-stationary-rewards">
+<span class="md-ellipsis">
+      
+        Non-stationary Rewards
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -497,6 +691,7 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
+<span class="md-tag">multi-armed bandits</span>
 </nav>
 <h1>2. Multi-armed Bandits</h1>
 <figure>
@@ -518,10 +713,388 @@
 <p>만약 여러분이 친구랑 두 개의 코인(확률이 공정하고 0.5가 아님)을 가지고 내기를 하는데, 여러분이 선택한 코인이 윗면(head)이 나오면 $1를 여러분이 가지고 아랫면(tail)이 나오면 $1를 친구가 가져간다.</p>
 <p>이러한 문제를 <strong>K-armed bandit</strong> 문제라고 한다. 여기서 K는 두 개의 코인 중 선택 해야하는 행동, armed bandit는 코인의 앞면, 뒷면이 나올 수 있는 상황이다. </p>
 <p>Formal한 정의를 하자면, 각 time-step <span class="arithmatex">\(t\)</span>에서 <span class="arithmatex">\(k\)</span> 개 행동(Actions)중에 선택된 행동을 <span class="arithmatex">\(A_t\)</span>라고 하며, 선택에 따라서 기대되는(혹은 평균) 보상을 <span class="arithmatex">\(R_t\)</span>라고 한다. 따라서 어떤 행동 <span class="arithmatex">\(a\)</span>의 가치(Value) <span class="arithmatex">\(q_{*}(a)\)</span>는 선택된 행동의 보상 기댓값과 같으며 수식으로 다음과 같다.</p>
-<div class="arithmatex">\[q_{*}(a) \coloneqq \Bbb{E} \lbrack R_t \vert A_t = a \rbrack \]</div>
+<div class="arithmatex">\[q_{*}(a) := \Bbb{E} \lbrack R_t \vert A_t = a \rbrack \]</div>
 <p>다만, 우리는 선택된 행동의 가치는 모른다(만약에 알면 모든 사람은 복권에 당첨되었을 것이다). 따라서 선택한 행동의 가치를 추정해야하며, time-step <span class="arithmatex">\(t\)</span>에서 선택한 행동 <span class="arithmatex">\(a\)</span>의 <strong>가치 추정값(estimated value of action)</strong>을 <span class="arithmatex">\(Q_t(a)\)</span>라고 한다. 우리의 목적은 <span class="arithmatex">\(Q_t(a)\)</span>가 <span class="arithmatex">\(q_{*}(a)\)</span>에 가장 근접하게만 만들면 최적의 결과를 얻을 수 있다.</p>
-<p>그렇다면 <span class="arithmatex">\(Q_t(a)\)</span>는 어떻게 계산할 수 있을까? 가장 간단한 방법은 현재 실행 했 던 기록을 가지고 계산하는 <strong>sample-average</strong> 방법이다.</p>
-<div class="arithmatex">\[\begin{aligned}Q_t(a) = \coloneqq \end{aligned}\]</div>
+<p>그렇다면 <span class="arithmatex">\(Q_t(a)\)</span>는 어떻게 계산할 수 있을까? 가장 간단한 방법은 현재까지 실행했던 기록을 가지고 계산하는 <strong>sample-average</strong> 방법이다. </p>
+<div class="arithmatex">\[
+Q_t(a) := \dfrac{\sum_{i=1}^{t-1} R_i \cdot \Bbb{1}_{A_i=a} }{\sum_{i=1}^{t-1} \Bbb{1}_{A_i=a}} 
+\]</div>
+<p>코인을 선택하는 문제에서 다른 사람들이 던져본 기록이 있다면, 우리는 쉽게 두 코인의 <span class="arithmatex">\(Q_t(a)\)</span>를 계산 할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">실행 index</th>
+<th align="center"><img alt="🪙" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1fa99.svg" title=":coin:"/> <code>1</code></th>
+<th align="center"><img alt="🪙" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1fa99.svg" title=":coin:"/> <code>2</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">T</td>
+<td align="center">H</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">H</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">H</td>
+<td align="center">H</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">T</td>
+<td align="center">H</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">T</td>
+<td align="center">H</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">T</td>
+<td align="center">T</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[\begin{aligned} 
+Q_t(\text{coin 1}) &amp;= \dfrac{-1+1+1-1-1-1}{6} = -\dfrac{1}{3}\\
+Q_t(\text{coin 2}) &amp;= \dfrac{+1-1+1+1+1-1}{6} = \dfrac{1}{3}
+\end{aligned}\]</div>
+<h2 id="exploitation-vs-exploration">Exploitation vs. Exploration<a class="headerlink" href="#exploitation-vs-exploration" title="Permanent link">¶</a></h2>
+<p><strong>활용(Exploitation)</strong>과 <strong>탐색(Exploration)</strong>은 강화학습에서 자주 이야기하는 키워드다. 활용(Exploitation)은 현재 주어진 정보를 가지고 최대의 효용을 취하는 것이며 <strong>최적화(Optimization)</strong>과 연관이 있다. 반면 탐색(Exploration)은 미래의 더 높은 효용(Reward)을 얻기위해 정보를 더 취득하는 과정이며 <strong>학습(Learning)</strong>과 연관이 있다.  </p>
+<h2 id="epsilon-greedy">Epsilon-Greedy<a class="headerlink" href="#epsilon-greedy" title="Permanent link">¶</a></h2>
+<p>행동의 선택 또한 다양한 방법들이 있는데, 제일 간단한 방법은 탐욕적인(Greedy) 방법이다. 현재 주어진 정보에서 최적의 행동만 선택하는 방법이며 수식으로 다음과 같다.</p>
+<div class="arithmatex">\[A_t = \underset{a}{\arg \max} Q_t(a)\]</div>
+<p><span class="arithmatex">\(\epsilon\)</span>-Greedy는 <span class="arithmatex">\(\epsilon\)</span>의 확률로 탐색(랜덤으로 행동 선택)을 하고, <span class="arithmatex">\(1-\epsilon\)</span> 확률로 활용(최적의 행동 선택)한다. </p>
+<h3 id="10-armed-testbed">10-armed Testbed<a class="headerlink" href="#10-armed-testbed" title="Permanent link">¶</a></h3>
+<figure>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16OTEhabzmwcn0lfilsqBW5Rqxi6ZkMtw" width="100%"/>
+</p>
+<figcaption>Figure 1: 10-armed Testbed</figcaption>
+</figure>
+<details class="info">
+<summary>code for Figure 1</summary>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">'ggplot'</span><span class="p">)</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of arms</span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="n">q_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">q_true</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Action"</span><span class="p">)</span>
+<a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Reward distribution"</span><span class="p">)</span>
+<a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<p>위 그림과 같이 각 Action(<span class="arithmatex">\(\{ 0, \cdots, 9\}\)</span>)에 해당하는 평균 다르고, 분산이 <span class="arithmatex">\(1\)</span>인 실제 가치 <span class="arithmatex">\(q_{*}(a)\)</span> 분포가 있다. 이러한 보상을 <strong>probabilistic reward</strong>라고 한다. 만약에 우리가 이 분포를 알고 있고 계속 10개의 슬롯머신을 돌린다는 상황에서 최적의 선택은 당연히 <strong>2</strong>번 슬롯일 것이다(평균적으로 기댓값이 높기 때문에). </p>
+<p>Sample average 방법으로 각기 다른 <span class="arithmatex">\(\epsilon\)</span> 을 취해서 최적의 전략(policy)을 찾아보자. 일부 코드는 <a href="https://github.com/ShangtongZhang/reinforcement-learning-an-introduction">ShangtongZhang - reinforcement-learning-an-introduction</a>를 많이 참고하였다. 한 번의 실험 <strong>run</strong>이라고 부르고, 한 번의 run에서 bandit(즉, <span class="arithmatex">\(q_{*}(a)\)</span>)을 새로 세팅하고 <span class="arithmatex">\(T\)</span> 만큼 k-armed bandit을 경험해 볼 수 있다. </p>
+<details class="info">
+<summary>code for <code>Bandit</code>, <code>simulate</code> and figures</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">figure</label><label for="__tabbed_1_2">class <code>Bandit</code></label><label for="__tabbed_1_3">function <code>simulate</code></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">n_run</span> <span class="o">=</span> <span class="mi">2000</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">n_time</span> <span class="o">=</span> <span class="mi">1000</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">epsilons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">bandits</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bandit</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">sample_average</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">epsilons</span><span class="p">]</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">rewards</span><span class="p">,</span> <span class="n">best_action_counts</span><span class="p">,</span> <span class="n">best_actions</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">n_run</span><span class="p">,</span> <span class="n">n_time</span><span class="p">,</span> <span class="n">bandits</span><span class="p">,</span> <span class="n">rt_raw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'$\epsilon=</span><span class="si">{</span><span class="n">eps</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">$'</span> <span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">epsilons</span><span class="p">]</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>    <span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_actions</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> 
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>    <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">common_bins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s1">'fill'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)])</span>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Percentage of best action'</span><span class="p">)</span>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Actions'</span><span class="p">)</span>
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+<a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span>
+<a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_action_counts</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Steps'</span><span class="p">)</span>
+<a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Average reward'</span><span class="p">)</span>
+<a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Steps'</span><span class="p">)</span>
+<a href="#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Percentage of Optimal action'</span><span class="p">)</span>
+<a href="#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">class</span> <span class="nc">Bandit</span><span class="p">:</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>            <span class="bp">self</span><span class="p">,</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>            <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>            <span class="n">epsilon</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>            <span class="n">initial</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>            <span class="n">true_reward</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>            <span class="n">step_size</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> 
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>            <span class="n">sample_average</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>            <span class="n">ucb_param</span><span class="p">:</span> <span class="nb">float</span><span class="o">|</span><span class="kc">None</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>            <span class="n">gradient</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>            <span class="n">gradient_baseline</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>        <span class="p">):</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">initial</span> <span class="o">=</span> <span class="n">initial</span>
+<a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">true_reward</span> <span class="o">=</span> <span class="n">true_reward</span>
+<a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
+<a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">average_reward</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>
+<a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sample_average</span> <span class="o">=</span> <span class="n">sample_average</span>
+<a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">ucb_param</span> <span class="o">=</span> <span class="n">ucb_param</span>
+<a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gradient</span> <span class="o">=</span> <span class="n">gradient</span>
+<a href="#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_baseline</span> <span class="o">=</span> <span class="n">gradient_baseline</span>
+<a href="#__codelineno-2-26" id="__codelineno-2-26" name="__codelineno-2-26"></a>
+<a href="#__codelineno-2-27" id="__codelineno-2-27" name="__codelineno-2-27"></a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a href="#__codelineno-2-28" id="__codelineno-2-28" name="__codelineno-2-28"></a>        <span class="c1"># real reward for each action at time t</span>
+<a href="#__codelineno-2-29" id="__codelineno-2-29" name="__codelineno-2-29"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">q_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">true_reward</span>
+<a href="#__codelineno-2-30" id="__codelineno-2-30" name="__codelineno-2-30"></a>
+<a href="#__codelineno-2-31" id="__codelineno-2-31" name="__codelineno-2-31"></a>        <span class="c1"># estimation for each action at time t</span>
+<a href="#__codelineno-2-32" id="__codelineno-2-32" name="__codelineno-2-32"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial</span>
+<a href="#__codelineno-2-33" id="__codelineno-2-33" name="__codelineno-2-33"></a>
+<a href="#__codelineno-2-34" id="__codelineno-2-34" name="__codelineno-2-34"></a>        <span class="c1"># # of chosen times for each action</span>
+<a href="#__codelineno-2-35" id="__codelineno-2-35" name="__codelineno-2-35"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">action_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+<a href="#__codelineno-2-36" id="__codelineno-2-36" name="__codelineno-2-36"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">best_action</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_true</span><span class="p">)</span>
+<a href="#__codelineno-2-37" id="__codelineno-2-37" name="__codelineno-2-37"></a>
+<a href="#__codelineno-2-38" id="__codelineno-2-38" name="__codelineno-2-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+<a href="#__codelineno-2-39" id="__codelineno-2-39" name="__codelineno-2-39"></a>
+<a href="#__codelineno-2-40" id="__codelineno-2-40" name="__codelineno-2-40"></a>    <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a href="#__codelineno-2-41" id="__codelineno-2-41" name="__codelineno-2-41"></a>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">:</span>
+<a href="#__codelineno-2-42" id="__codelineno-2-42" name="__codelineno-2-42"></a>            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+<a href="#__codelineno-2-43" id="__codelineno-2-43" name="__codelineno-2-43"></a>
+<a href="#__codelineno-2-44" id="__codelineno-2-44" name="__codelineno-2-44"></a>        <span class="n">q_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span><span class="p">)</span>
+<a href="#__codelineno-2-45" id="__codelineno-2-45" name="__codelineno-2-45"></a>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span> <span class="o">==</span> <span class="n">q_best</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<a href="#__codelineno-2-46" id="__codelineno-2-46" name="__codelineno-2-46"></a>
+<a href="#__codelineno-2-47" id="__codelineno-2-47" name="__codelineno-2-47"></a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<a href="#__codelineno-2-48" id="__codelineno-2-48" name="__codelineno-2-48"></a>        <span class="c1"># give reward at time t by choosing action</span>
+<a href="#__codelineno-2-49" id="__codelineno-2-49" name="__codelineno-2-49"></a>        <span class="n">reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">q_true</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+<a href="#__codelineno-2-50" id="__codelineno-2-50" name="__codelineno-2-50"></a>        <span class="c1"># update records</span>
+<a href="#__codelineno-2-51" id="__codelineno-2-51" name="__codelineno-2-51"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">+=</span> <span class="mi">1</span>
+<a href="#__codelineno-2-52" id="__codelineno-2-52" name="__codelineno-2-52"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">action_count</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<a href="#__codelineno-2-53" id="__codelineno-2-53" name="__codelineno-2-53"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">average_reward</span> <span class="o">+=</span> <span class="p">(</span><span class="n">reward</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">average_reward</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span>   <span class="c1"># incremental update</span>
+<a href="#__codelineno-2-54" id="__codelineno-2-54" name="__codelineno-2-54"></a>
+<a href="#__codelineno-2-55" id="__codelineno-2-55" name="__codelineno-2-55"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_average</span><span class="p">:</span>
+<a href="#__codelineno-2-56" id="__codelineno-2-56" name="__codelineno-2-56"></a>            <span class="c1"># update estimation using sample averages</span>
+<a href="#__codelineno-2-57" id="__codelineno-2-57" name="__codelineno-2-57"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">reward</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span><span class="p">[</span><span class="n">action</span><span class="p">])</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_count</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+<a href="#__codelineno-2-58" id="__codelineno-2-58" name="__codelineno-2-58"></a>        <span class="k">else</span><span class="p">:</span>
+<a href="#__codelineno-2-59" id="__codelineno-2-59" name="__codelineno-2-59"></a>            <span class="c1"># update estimation with constant step size</span>
+<a href="#__codelineno-2-60" id="__codelineno-2-60" name="__codelineno-2-60"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">*</span> <span class="p">(</span><span class="n">reward</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+<a href="#__codelineno-2-61" id="__codelineno-2-61" name="__codelineno-2-61"></a>
+<a href="#__codelineno-2-62" id="__codelineno-2-62" name="__codelineno-2-62"></a>        <span class="k">return</span> <span class="n">reward</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">n_run</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bandits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Bandit</span><span class="p">]):</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""Simulate multi-armed bandit experiment</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="sd">    Args:</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="sd">        n_run (int): number of run, each run means using a k-armed bandit with n_times</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="sd">        n_time (int): number of time to experience for each bandit</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="sd">        bandits (list[Bandit]): bandits list, each bandit has different experiment settings</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="sd">    """</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a>    <span class="n">rewards</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">bandits</span><span class="p">),</span> <span class="n">n_run</span><span class="p">,</span> <span class="n">n_time</span><span class="p">))</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="n">best_action_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a>    <span class="n">best_actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">bandits</span><span class="p">),</span> <span class="n">n_run</span><span class="p">))</span>
+<a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">bandit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bandits</span><span class="p">):</span>
+<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a>        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_run</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="n">n_run</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s1">'Simulating Exp-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span><span class="p">):</span>
+<a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a>            <span class="n">bandit</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>  <span class="c1"># reset bandit: the same bandit can be used for multiple runs</span>
+<a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a>            <span class="n">best_actions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">bandit</span><span class="o">.</span><span class="n">best_action</span>
+<a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a>            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_time</span><span class="p">):</span>
+<a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a>                <span class="n">action</span> <span class="o">=</span> <span class="n">bandit</span><span class="o">.</span><span class="n">act</span><span class="p">()</span>
+<a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a>                <span class="n">reward</span> <span class="o">=</span> <span class="n">bandit</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+<a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a>                <span class="n">rewards</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">reward</span>
+<a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a>                <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="n">bandit</span><span class="o">.</span><span class="n">best_action</span><span class="p">:</span>
+<a href="#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a>                    <span class="n">best_action_counts</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<a href="#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a>
+<a href="#__codelineno-3-22" id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="n">mean_best_action_counts</span> <span class="o">=</span> <span class="n">best_action_counts</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-3-23" id="__codelineno-3-23" name="__codelineno-3-23"></a>    <span class="n">mean_rewards</span> <span class="o">=</span> <span class="n">rewards</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a href="#__codelineno-3-24" id="__codelineno-3-24" name="__codelineno-3-24"></a>    <span class="k">return</span> <span class="n">mean_rewards</span><span class="p">,</span> <span class="n">mean_best_action_counts</span><span class="p">,</span> <span class="n">best_actions</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></input></div>
+</details>
+<figure>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16PxBqC4xZFeJFpxB09Ko_R4tFNNofiKr" width="100%"/>
+</p>
+<figcaption>Figure: epsilon greedy</figcaption>
+</figure>
+<p>실험 결과 초깃값이 모두 동일(<span class="arithmatex">\(q_0(a) = 0.0\)</span>)할 때, greey policy는 평균적으로 <span class="arithmatex">\(1\)</span>의 보상을 얻었다. <span class="arithmatex">\(\epsilon\)</span>이 높을 수록 탐색 초기에는 보상이 높았으나, 시간이 점점 지날 수록 작은 <span class="arithmatex">\(\epsilon\)</span>과 큰 <span class="arithmatex">\(\epsilon\)</span>간의 간극이 줄어든 것을 볼 수 있다. 다만, 최적의 선택을 고른 비율에서는 탐색을 상대적으로 많이 하는 경우 경험을 많이 할 수록 더 높다는 것을 알 수 있다. 높은 <span class="arithmatex">\(\epsilon\)</span>의 문제점은 최적의 선택이 어떤 것인지 대략 안 상황에서 계속해서 10% 확률로 다른 것을 탐색한 다는 것이다. 즉, 효율적이지 않다는 것이다.</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16ae6JejpJXHKrxMlEJIqANDdWGJYaTyA" width="60%"/></p>
+<p>행여나 실험에서 Best Action이 불균형하게 세팅될 수도 있다는 걱정이 있었는데, 각 실험 Bandit의 best action histogram을 그려보니, 모든 action이 거의 균등하게 세팅되어 있었다(3개 실험의 bar의 길이가 비슷비슷하다). </p>
+<p>만약에 보상에 더 많은 노이즈(noise)가 있다고 하면, greedy 보다 <span class="arithmatex">\(\epsilon\)</span>-greedy가 더 좋은 전략이 될 수 있을까? 물론 그렇다, 더 많은 탐색을 할 수록 더 높은 보상을 취할 수 있을 것이다. 이런 점이 탐색(exploration)을 <strong>"학습한다"</strong>라고 말하는 이유다. 그렇다면 determinsitic reward이면 어떻게 될까? 이때 최적의 전략은 각 action을 한 번씩 취한 다음에 greedy 전략으로 가는 것이다.</p>
+<h3 id="incremental-implementation">Incremental Implementation<a class="headerlink" href="#incremental-implementation" title="Permanent link">¶</a></h3>
+<p>기존의 sample average 방법은 간단하지만, 모든 선택을 저장해야 된다는 단점이 있다(공간 복잡도: <span class="arithmatex">\(O(N)\)</span>). 아래와 같은 방법으로 공간복잡도를 <span class="arithmatex">\(O(1)\)</span>로 해결 할 수 있다. </p>
+<div class="arithmatex">\[Q_{t+1}(a) = Q_t(a) + \dfrac{1}{N_t(a)}\lbrack R_t(a) - Q_t(a) \rbrack\]</div>
+<h3 id="step-size-and-convergence">Step Size and Convergence<a class="headerlink" href="#step-size-and-convergence" title="Permanent link">¶</a></h3>
+<p>Incremental update에서 <span class="arithmatex">\(\dfrac{1}{N_t(a)}\)</span>은 <strong>step size</strong>(혹은 Learning Rate)라고 하는데, 이를 함수 <span class="arithmatex">\(\alpha_t(a)\)</span>로 치환 할 수 있다. 단, 수렴(convergenence)해야하는 제약 조건이 있다. </p>
+<div class="arithmatex">\[
+\sum_{t=1}^{\infty} \alpha_t(a) = \infty \quad \text{and} \quad \sum_{t=1}^{\infty} \alpha_t^2(a) &lt; \infty \]</div>
+<h3 id="optimistic-initial-values">Optimistic Initial Values<a class="headerlink" href="#optimistic-initial-values" title="Permanent link">¶</a></h3>
+<p>초깃값도 최적의 선택에 영향을 준다. 아래 그림에서 <span style="color:red">greedy</span> 전략은 초깃값이 5이지만 초깃값이 0인 <span style="color:blue"><span class="arithmatex">\(\epsilon\)</span>-greedy</span> 전략보다 더 낮은 보상을 얻었다.</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16ajGe7dJG6ybQ-lo8Qyt9h1VEBEgqj1-" width="100%"/></p>
+<h2 id="ucb-action-selection">UCB Action Selection<a class="headerlink" href="#ucb-action-selection" title="Permanent link">¶</a></h2>
+<p>행동 선택시 고정된 특정 확률로 선택하는 것이 아니라 보상 upper-bound가 높은 행동을 선택하면 더 좋지 않을까? <strong>Upper-Confidence-Bound (UCB)</strong> 알고리즘은 이러한 점을 반영한다. <span class="arithmatex">\(N_t(a)\)</span>는 <span class="arithmatex">\(a\)</span> 행동이 선택된 횟수, <span class="arithmatex">\(c\)</span>는 탐색의 정도를 조절한다.</p>
+<div class="arithmatex">\[A_t := \underset{a}{\arg \max} \Bigg\lbrack Q_t(a) + c \sqrt{\dfrac{\ln t}{N_t(a)}} \Bigg\rbrack \]</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">구현 방법: act method</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="c1"># ...</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ucb_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>        <span class="c1"># A_t = arg max_a ( Q_t + c * sqrt(ln(t) / n) )</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>        <span class="n">ucb_estimation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span> <span class="o">+</span> \
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">ucb_params</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_count</span> <span class="o">+</span> <span class="mf">1e-5</span><span class="p">))</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>        <span class="n">q_best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ucb_estimation</span><span class="p">)</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ucb_estimation</span> <span class="o">==</span> <span class="n">q_best</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="c1"># ...</span>
+</code></pre></div>
+</div>
+</div>
+</input></div>
+<details class="info">
+<summary>code for figures</summary>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'$\epsilon=</span><span class="si">{</span><span class="n">eps</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, ucb=</span><span class="si">{</span><span class="n">ucb_param</span><span class="si">}</span><span class="s1">$'</span> <span class="k">for</span> <span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">ucb_param</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">epsilons</span><span class="p">,</span> <span class="n">ucb_params</span><span class="p">)]</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_action_counts</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Steps'</span><span class="p">)</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Average reward'</span><span class="p">)</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Steps'</span><span class="p">)</span>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Percentage of Optimal action'</span><span class="p">)</span>
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16bnqh78hTMnDBMe_iJqz6r18ptcIed6R" width="100%"/></p>
+<p>시뮬레이션 결과 UCB를 사용한 <span style="color:red">greedy</span> 전략이 UCB를 사용하지 않은 <span style="color:blue"><span class="arithmatex">\(\epsilon\)</span>-greedy</span> 전략 보다 더 낮은 평균 보상을 획득했다.</p>
+<p><span class="arithmatex">\(t=1000\)</span> 일때의 <span class="arithmatex">\(Q_t(a)\)</span>를 보면 다음과 같다. 선택된 actions 횟수를 다음과 같은 테이블에 정리해뒀다. 아래 그림을 보면 탐색을 많이 한 3번 action에 대해서 upper bound가 많이 줄어든 모습을 볼 수 있다. 즉, 점점 해당 선택에 대한 불확실성이 줄어들었다고 볼 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">action</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">count</td>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">5</td>
+<td align="center">842</td>
+<td align="center">71</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">55</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16mezLe0bWgGd4umK_2TAMQw8dMbuzL7J" width="100%"/></p>
+<h2 id="gradient-bandit-algorithms">Gradient Bandit Algorithms<a class="headerlink" href="#gradient-bandit-algorithms" title="Permanent link">¶</a></h2>
+<p><strong>Gradient Bandit 알고리즘</strong>은 각 행동에 대한 선호도 <span class="arithmatex">\(H_t(a) \in \Bbb{R}\)</span>를 학습하는 하는 방법이다. 큰 선호도를 가지면 더 자주 선택되며, 보상과는 전혀 상관성이 없다. 그 중 하나로, Soft-max (Boltzmann) distribution 방법이 있다. 수식을 보면 사실상 보상을 확률화해서 반영한 알고리즘이다.</p>
+<div class="arithmatex">\[\Bbb{P}\lbrace A_t = a \rbrace := \dfrac{\exp(H_t(a))}{\sum_{b=1}^k \exp(H_t(b))} =: \pi_t(a)\]</div>
+<p>행동 <span class="arithmatex">\(A_t\)</span>을 선택하고 보상 <span class="arithmatex">\(R_t\)</span>을 받으면 그때 선호도를 업데이트 한다. <span class="arithmatex">\(\bar{R}_t\)</span>는 <span class="arithmatex">\(t\)</span> 시점 이전의 평균 보상값, <span class="arithmatex">\(\alpha\)</span>는 step size다. </p>
+<div class="arithmatex">\[\begin{cases}
+H_{t+1}(A_t) &amp;:= H_t(A_t) + \alpha (R_t - \bar{R}_t)(1 - \pi_t(A_t)) &amp; \text{where } A_t\\
+H_{t+1}(a) &amp;:= H_t(a) + \alpha (R_t - \bar{R}_t)( - \pi_t(A_t) ) &amp; \text{where } \forall a \neq A_t \\
+\end{cases}\]</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">구현 방법: act method</label><label for="__tabbed_3_2">구현 방법: step method</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>    <span class="c1"># ...</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient</span><span class="p">:</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>        <span class="n">exp_estimation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span><span class="p">)</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">action_prob</span> <span class="o">=</span> <span class="n">exp_estimation</span> <span class="o">/</span> <span class="n">exp_estimation</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">action_prob</span><span class="p">)</span>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a>    <span class="c1"># ...</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>    <span class="c1"># ...</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient</span><span class="p">:</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>        <span class="n">one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>        <span class="n">one_hot</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradient_baseline</span><span class="p">:</span>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>            <span class="n">baseline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">average_reward</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>        <span class="k">else</span><span class="p">:</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>            <span class="n">baseline</span> <span class="o">=</span> <span class="mi">0</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">q_estimation</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">*</span> <span class="p">(</span><span class="n">reward</span> <span class="o">-</span> <span class="n">baseline</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">one_hot</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_prob</span><span class="p">)</span>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="c1"># ...</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></div>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16n3h97z9hPOFrfWzyrae2iJTB-QNz_8f" width="100%"/></p>
+<details class="info">
+<summary>code for figures</summary>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># np.random.seed(1234)</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">n_run</span> <span class="o">=</span> <span class="mi">2000</span>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="n">n_time</span> <span class="o">=</span> <span class="mi">1000</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">step_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="n">gradient_baselines</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="n">bandits</span> <span class="o">=</span> <span class="p">[</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>    <span class="n">Bandit</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span> <span class="n">gradient_baseline</span><span class="o">=</span><span class="n">gradient_baseline</span><span class="p">,</span> <span class="n">true_reward</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> 
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>    <span class="k">for</span> <span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="n">gradient_baseline</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">,</span> <span class="n">gradient_baselines</span><span class="p">)</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="p">]</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">rewards</span><span class="p">,</span> <span class="n">best_action_counts</span><span class="p">,</span> <span class="n">best_actions</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">n_run</span><span class="p">,</span> <span class="n">n_time</span><span class="p">,</span> <span class="n">bandits</span><span class="p">)</span>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">alpha=</span><span class="si">{</span><span class="n">step_size</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, baseline=</span><span class="si">{</span><span class="n">gradient_baseline</span><span class="si">}</span><span class="s1">$'</span> 
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a>        <span class="k">for</span> <span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="n">gradient_baseline</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">step_sizes</span><span class="p">,</span> <span class="n">gradient_baselines</span><span class="p">)]</span>
+<a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span>
+<a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rewards</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_action_counts</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span> <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<a href="#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Steps'</span><span class="p">)</span>
+<a href="#__codelineno-8-20" id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Average reward'</span><span class="p">)</span>
+<a href="#__codelineno-8-21" id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Steps'</span><span class="p">)</span>
+<a href="#__codelineno-8-22" id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Percentage of Optimal action'</span><span class="p">)</span>
+<a href="#__codelineno-8-23" id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="#__codelineno-8-24" id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<a href="#__codelineno-8-25" id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<a href="#__codelineno-8-26" id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</details>
+<p>Baseline은 <span class="arithmatex">\(\bar{R}_t\)</span>의 사용 여부다. 큰 step size를 사용할 수록 초기에는 탐색을 하여 빠른 최적의 선택을 할 수 있지만, 작은 step size와 <span class="arithmatex">\(\bar{R}_t\)</span>를 사용하여 느리지만 더 많은 최적의 선택을 할 수 있게 만들 수 있다.</p>
+<h2 id="non-stationary-rewards">Non-stationary Rewards<a class="headerlink" href="#non-stationary-rewards" title="Permanent link">¶</a></h2>
+<p><strong>Stationary reward</strong>란 시간이 지나도 보상의 변동이 일정한 것(혹은 분포가 일정)을 말한다. 이때 step size는 보통 시간에 따라서 작아진다.</p>
+<div class="arithmatex">\[Q_{t+1}(a) := Q_t(a) + \alpha_t(a) \lbrack R_t(a) - Q_t(a)\rbrack\]</div>
+<p><strong>Non-stationary reward</strong>는 시간에 따라서 보상의 변동이 일정하지 않은 것(혹은 분포가 달라짐)을 말한다. 이때 step size는 보통 일정한 값을 사용한다.</p>
+<div class="arithmatex">\[Q_{t+1}(a) := Q_t(a) + \alpha \lbrack R_t(a) - Q_t(a)\rbrack\]</div>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
