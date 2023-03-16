@@ -5,12 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter1/" rel="canonical"/>
-<link href="../" rel="prev"/>
-<link href="../chapter2/" rel="next"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter4/" rel="canonical"/>
+<link href="../chapter3/" rel="prev"/>
+<link href="../../../../project/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>1. Introduction - Soopace</title>
+<title>4. Dynamic Programming - Soopace</title>
 <link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#reinforcement-learning">
+<a class="md-skip" href="#policy-evaluation-policy-improvement">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              1. Introduction
+              4. Dynamic Programming
             
           </span>
 </div>
@@ -359,46 +359,17 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    1. Introduction
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
-    
-  
-    1. Introduction
-  
-
-    
-  </span>
-</a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reinforcement-learning">
+<a class="md-nav__link" href="../chapter1/">
 <span class="md-ellipsis">
-      
-        Reinforcement Learning
-      
-    </span>
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
 </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../chapter2/">
@@ -424,8 +395,20 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter4/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    4. Dynamic Programming
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -435,6 +418,54 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#policy-evaluation-policy-improvement">
+<span class="md-ellipsis">
+      
+        Policy Evaluation &amp; Policy Improvement
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#iterative-policy-evaluation">
+<span class="md-ellipsis">
+      
+        Iterative Policy Evaluation
+      
+    </span>
+</a>
+<nav aria-label="Iterative Policy Evaluation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example-4-x-4-grid-world">
+<span class="md-ellipsis">
+      
+        Example: 4 x 4 Grid-World
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#policy-improvement">
+<span class="md-ellipsis">
+      
+        Policy Improvement
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -472,10 +503,41 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reinforcement-learning">
+<a class="md-nav__link" href="#policy-evaluation-policy-improvement">
 <span class="md-ellipsis">
       
-        Reinforcement Learning
+        Policy Evaluation &amp; Policy Improvement
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#iterative-policy-evaluation">
+<span class="md-ellipsis">
+      
+        Iterative Policy Evaluation
+      
+    </span>
+</a>
+<nav aria-label="Iterative Policy Evaluation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#example-4-x-4-grid-world">
+<span class="md-ellipsis">
+      
+        Example: 4 x 4 Grid-World
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#policy-improvement">
+<span class="md-ellipsis">
+      
+        Policy Improvement
       
     </span>
 </a>
@@ -521,33 +583,264 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
+<span class="md-tag">dynamic programming</span>
 </nav>
-<h1>1. Introduction</h1>
-<figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1WdmT_ynavkgaz-Ur0uKGdEQE_GnjF734" width="80%">
-</img></p>
-<figcaption>Refernece: Pixabay</figcaption>
-</figure>
+<h1>4. Dynamic Programming</h1>
 <blockquote>
 <p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
 </blockquote>
-<h2 id="reinforcement-learning">Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permanent link">¶</a></h2>
+<h2 id="policy-evaluation-policy-improvement">Policy Evaluation &amp; Policy Improvement<a class="headerlink" href="#policy-evaluation-policy-improvement" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>Reinforcement learning is learning what to do—how to map situations to actions—so
-as to maximize a numerical reward signal. 
-- From Chapter 1 in Reinforcement Learning: An Introduction<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>The term dynamic programming (DP) refers to a collection of algorithms that can be used to compute optimal policies given a perfect model of the environment as a Markov decision process (MDP)</p>
 </blockquote>
-<p>강화학습(Reinforcement Learning)은 수치적으로 측정가능한 최대한의 보상을 받기 위해서 상황(situations)과 행동(actions)를 매핑하는 방법을 배우는 것이다. 예시:</p>
-<ol>
-<li></li>
-</ol>
-<div class="footnote">
-<hr/>
-<ol>
-<li id="fn:1">
-<p><a href="http://incompleteideas.net/book/the-book-2nd.html">Reinforcement Learning: An Introduction</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>강화학습에서 DP를 다음 두 가지 문제를 해결하기위해 사용한다. </p>
+<ul>
+<li><strong>Policy Evaluation(prediction problem)</strong>: 주어진 policy에서 value fuction을 반복적으로 연산하는 과정(MDP, <span class="arithmatex">\(\pi \rightarrow v_{\pi}\)</span>)  </li>
+<li><strong>Policy Improvement(control)</strong>: value function이 주어졌을 때, 향상된 policy를 계산하는 것(MDP, <span class="arithmatex">\(v_{\pi} \rightarrow \pi'\)</span>)</li>
+</ul>
+<p>Policy Evaluation Update Rule은 다음과 같으며, 여기서 <span class="arithmatex">\(k\)</span>는 <span class="arithmatex">\(k\)</span> 시점의 policy다.</p>
+<div class="arithmatex">\[ v_{k+1}(s) \leftarrow \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{k}(s') \rbrack\]</div>
+<h2 id="iterative-policy-evaluation">Iterative Policy Evaluation<a class="headerlink" href="#iterative-policy-evaluation" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Iterative Policy Evaluation</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">pseduo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17NvdzduDS2oGvzrxtWJSSLz3JZHqSUIJ" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<h3 id="example-4-x-4-grid-world">Example: 4 x 4 Grid-World<a class="headerlink" href="#example-4-x-4-grid-world" title="Permanent link">¶</a></h3>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17QDTYlqN6vnyEf7hPzi72wugJZY35XQ1" width="80%"/></p>
+<p>이번 Grid-World 예시는 다음과 같다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>Non-terminal states <span class="arithmatex">\(S = \lbrace 1, 2, \cdots, 14 \rbrace\)</span>, 회색 영역은 terminal state.</li>
+<li>State Transition(<span class="arithmatex">\(s \rightarrow s'\)</span>)은 <span class="arithmatex">\(-1\)</span>의 보상을 얻고, grid밖을 벗어나면 이전 state에 있는 것으로 간주한다. 즉, 많이 움직일 수록 안좋다.</li>
+<li>Actions <span class="arithmatex">\(\mathcal{A} = \lbrace \uparrow, \downarrow, \rightarrow, \leftarrow \rbrace\)</span></li>
+<li>Uniformly random policy <span class="arithmatex">\(\pi(a \vert s) = 0.25\)</span> for all <span class="arithmatex">\(a \in \mathcal{A}\)</span> and for all non-terminal states <span class="arithmatex">\(s \in \mathcal{S}\)</span></li>
+<li>Deterministic state transition &amp; reward model <span class="arithmatex">\(p(s', r \vert s, a)\)</span><ul>
+<li>예시1: <span class="arithmatex">\(p(s'=6, r=-1 \vert s=5, a=\rightarrow)=1\)</span>, grid 5에서 우측 행동(<span class="arithmatex">\(\righrarrow\)</span>) 선택 시 grid 6으로 가고 보상도 <span class="arithmatex">\(-1\)</span>을 얻을 확률은 1. </li>
+<li>예시2: <span class="arithmatex">\(p(s'=7, r=-1 \vert s=7, a=\rightarrow)=1\)</span>, grid 7에서 우측 행동(<span class="arithmatex">\(\righrarrow\)</span>) 선택 시 grid 7으로 가고 보상도 <span class="arithmatex">\(-1\)</span>을 얻을 확률은 1. </li>
+<li>예시3: <span class="arithmatex">\(p(s'=10, r=r' \vert s=5, a=\rightarrow)=0 \ \forall r' \in \mathcal{R}\)</span>, grid 5에서 우측 행동(<span class="arithmatex">\(\righrarrow\)</span>) 선택 시 grid 10으로 갈 수 있는 확률은 0. </li>
+</ul>
 </li>
-</ol>
+<li><span class="arithmatex">\(\gamma=1.0\)</span>를 가정한다.</li>
+</ul>
+</div>
+<p>그렇다면 이러한 MDP 환경에서 최대의 보상은 무엇일까? 당연히 제일 적은 스텝으로 terminal state에 도달하는 것이다.</p>
+<p>따라서 Initial State <span class="arithmatex">\(V(s)=0\)</span>를 만들고 계속해서 policy evaluation을 진행해보자. 메모리에 상관없이 각 좌표에서 replace하지 않고 두 개의 matrix로 업데이트 한다고 가정한다.</p>
+<div class="admonition note">
+<p class="admonition-title">과정 풀어쓰기</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">k=0</label><label for="__tabbed_2_2">k=1</label><label for="__tabbed_2_3">k=2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th align="center">(i, j)</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>초기 상태 가치는 모두 0.0이다.</p>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th align="center">(i, j)</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">-1.0</td>
+<td align="center">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>각 state <span class="arithmatex">\(s \in \mathcal{S}\)</span> 에서 Bellman equation을 사용하여 업데이트 하면 위의 표와 같다. </p>
+<div class="arithmatex">\[ v_{k+1}(s) \leftarrow \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{k}(s') \rbrack\]</div>
+<p>예를 들어, 좌표 <code>(0, 2)</code> <span class="arithmatex">\(s=2\)</span>에서 <span class="arithmatex">\(s' \in \lbrace 1, 2, 3, 6 \rbrace\)</span>의 transition을 제외하고 모두 확률이 0이 되기 때문에 다음과 같이 <span class="arithmatex">\(v_{k+1}(s)\)</span>를 계산할 수 있다. </p>
+<div class="arithmatex">\[\begin{aligned}
+v_{k+1}(s=2) 
+&amp; = 0.25 \times 1.0 \times ( -1 + 1.0 \times 0 ) &amp; s(2) \rightarrow s(1) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times 0 ) &amp; s(2) \rightarrow s(2) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times 0 ) &amp; s(2) \rightarrow s(3) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times 0 ) &amp; s(2) \rightarrow s(6) 
+\end{aligned}\]</div>
+<p>다른 예시로 terminal state 중 하나인 좌표 <code>(0, 0)</code>은 모든 transition에 대하여 확률이 0이기 때문에 계속 <span class="arithmatex">\(0.0\)</span> 이다. </p>
+</div>
+<div class="tabbed-block">
+<table>
+<thead>
+<tr>
+<th align="center">(i, j)</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">-1.75</td>
+<td align="center">-2.0</td>
+<td align="center">-2.0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">-1.75</td>
+<td align="center">-2.0</td>
+<td align="center">-2.0</td>
+<td align="center">-2.0</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">-2.0</td>
+<td align="center">-2.0</td>
+<td align="center">-2.0</td>
+<td align="center">-1.75</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">-2.0</td>
+<td align="center">-2.0</td>
+<td align="center">-1.75</td>
+<td align="center">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>각 state <span class="arithmatex">\(s \in \mathcal{S}\)</span> 에서 Bellman equation을 사용하여 업데이트 하면 위의 표와 같다. </p>
+<div class="arithmatex">\[ v_{k+1}(s) \leftarrow \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{k}(s') \rbrack\]</div>
+<p>예를 들어, 좌표 <code>(1, 2)</code> <span class="arithmatex">\(s=6\)</span>에서 <span class="arithmatex">\(s' \in \lbrace 5, 2, 7, 10 \rbrace\)</span>를 제외하고 모두 확률이 0이 되기 때문에 다음과 같이 <span class="arithmatex">\(v_{k+1}(s)\)</span>를 계산할 수 있다. </p>
+<div class="arithmatex">\[\begin{aligned}
+v_{k+1}(s=2) 
+&amp; = 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(6) \rightarrow s(5) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(6) \rightarrow s(2) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(6) \rightarrow s(7) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(6) \rightarrow s(10) 
+\end{aligned}\]</div>
+<p>다른 예시로, 좌표 <code>(0, 1)</code> <span class="arithmatex">\(s=1\)</span>에서 <span class="arithmatex">\(s' \in \lbrace \text{terminate}, 1, 2, 5 \rbrace\)</span>를 제외하고 모두 확률이 0이 되기 때문에 다음과 같이 <span class="arithmatex">\(v_{k+1}(s)\)</span>를 계산할 수 있다. </p>
+<div class="arithmatex">\[\begin{aligned}
+v_{k+1}(s=1) 
+&amp; = 0.25 \times 1.0 \times ( -1 + 1.0 \times  0 ) &amp; s(1) \rightarrow s(\text{terminate}) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(1) \rightarrow s(1) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(1) \rightarrow s(2) \\
+&amp; + 0.25 \times 1.0 \times ( -1 + 1.0 \times -1 ) &amp; s(1) \rightarrow s(5) 
+\end{aligned}\]</div>
+</div>
+</div>
+</input></input></input></div>
+</div>
+<h2 id="policy-improvement">Policy Improvement<a class="headerlink" href="#policy-improvement" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Policy Improvement Theorem</p>
+<p>Let <span class="arithmatex">\(\pi\)</span> and <span class="arithmatex">\(\pi'\)</span> be any pair of deterministic policies such that, for all <span class="arithmatex">\(s \in \mathcal{S}\)</span>, <span class="arithmatex">\(q_{\pi}\big(s, \pi'(s) \big) \geq v_{\pi}(s)\)</span>.</p>
+<p>Then the policy <span class="arithmatex">\(\pi'\)</span> must be as good as, or better than <span class="arithmatex">\(\pi\)</span>.</p>
+</div>
+<p>Theorm을 풀어 쓰자면, 새로운 policy <span class="arithmatex">\(\pi'\)</span> 에서의 action-value가 state-value 보다 같거나 높다면, <span class="arithmatex">\(\pi'\)</span>는 <span class="arithmatex">\(\pi\)</span>보다 같거나 좋은 policy다. 따라서 improved policy <span class="arithmatex">\(\pi'\)</span>를 얻기 위해서는 action-value function을 최대화 하는 policy를 선택하면 된다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+\pi'(s) &amp;\leftarrow \underset{a}{\arg \max} q_{\pi}(s, a) \\
+&amp;= \underset{a}{\arg \max} \Bbb{E} \lbrack R_{t+1} + \gamma v_{\pi}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
+&amp;= \underset{a}{\arg \max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
+\end{aligned}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Grid-World Improved Policy</p>
+<p>최종적으로 improved policy는 action-value가 최대가 되는 action을 선택하는 policy가 된다. 예: <span class="arithmatex">\(s=1\)</span>에서 improved policy는 <span class="arithmatex">\(\leftarrow\)</span></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><input id="__tabbed_3_4" name="__tabbed_3" type="radio"/><input id="__tabbed_3_5" name="__tabbed_3" type="radio"/><input id="__tabbed_3_6" name="__tabbed_3" type="radio"/><div class="tabbed-labels"><label for="__tabbed_3_1">k=0</label><label for="__tabbed_3_2">k=1</label><label for="__tabbed_3_3">k=2</label><label for="__tabbed_3_4">k=3</label><label for="__tabbed_3_5">k=10</label><label for="__tabbed_3_6">k=<span class="arithmatex">\(\infty\)</span></label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17W5pqlZIONGTR8oBUCFIMeMBZ5U7Olhy" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=189FEVAOcDiCEImfFE2WYbbOCJUIlii4n" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17ytTGG3lRTeA2F5xSjd_qWpxOKv14n7-" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17hp-bIDCtR7XStEKcFwbqwkEn36smgu7" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17aHKAkMl2neVZG0BAShwL4xM7hOKjqui" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17ZhEEgot21PUxlMuKoO6LwJptlecPbxd" width="80%"/></p>
+</div>
+</div>
+</input></input></input></div>
 </div>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
