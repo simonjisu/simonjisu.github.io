@@ -194,8 +194,8 @@ Sample average 방법으로 각기 다른 $\epsilon$ 을 취해서 최적의 전
                 # update records
                 self.time += 1
                 self.action_count[action] += 1
-                self.average_reward += (reward - self.average_reward) / self.time   # incremental update
-
+                self.average_reward += (reward - self.average_reward) / self.time
+                
                 if self.sample_average:
                     # update estimation using sample averages
                     self.q_estimation[action] += (reward - self.q_estimation[action]) / self.action_count[action]
