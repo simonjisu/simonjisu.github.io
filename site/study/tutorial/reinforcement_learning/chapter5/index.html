@@ -5,12 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter1/" rel="canonical"/>
-<link href="../" rel="prev"/>
-<link href="../chapter2/" rel="next"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter5/" rel="canonical"/>
+<link href="../chapter4/" rel="prev"/>
+<link href="../../../../project/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>1. Introduction - Soopace</title>
+<title>5. Monte Carlo Method - Soopace</title>
 <link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#reinforcement-learning">
+<a class="md-skip" href="#monte-carlo-method">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              1. Introduction
+              5. Monte Carlo Method
             
           </span>
 </div>
@@ -359,46 +359,17 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    1. Introduction
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
-    
-  
-    1. Introduction
-  
-
-    
-  </span>
-</a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reinforcement-learning">
+<a class="md-nav__link" href="../chapter1/">
 <span class="md-ellipsis">
-      
-        Reinforcement Learning
-      
-    </span>
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
 </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../chapter2/">
@@ -436,8 +407,20 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter5/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    5. Monte Carlo Method
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -447,6 +430,54 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-method">
+<span class="md-ellipsis">
+      
+        Monte Carlo Method
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-prediction">
+<span class="md-ellipsis">
+      
+        Monte Carlo Prediction
+      
+    </span>
+</a>
+<nav aria-label="Monte Carlo Prediction" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#first-visit-mc">
+<span class="md-ellipsis">
+      
+        First-visit MC
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#every-visit-mc">
+<span class="md-ellipsis">
+      
+        Every-visit MC
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -484,13 +515,44 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reinforcement-learning">
+<a class="md-nav__link" href="#monte-carlo-method">
 <span class="md-ellipsis">
       
-        Reinforcement Learning
+        Monte Carlo Method
       
     </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-prediction">
+<span class="md-ellipsis">
+      
+        Monte Carlo Prediction
+      
+    </span>
+</a>
+<nav aria-label="Monte Carlo Prediction" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#first-visit-mc">
+<span class="md-ellipsis">
+      
+        First-visit MC
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#every-visit-mc">
+<span class="md-ellipsis">
+      
+        Every-visit MC
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -533,34 +595,104 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
+<span class="md-tag">monte carlo</span>
 </nav>
-<h1>1. Introduction</h1>
-<figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1WdmT_ynavkgaz-Ur0uKGdEQE_GnjF734" width="80%">
-</img></p>
-<figcaption>Refernece: Pixabay</figcaption>
-</figure>
+<h1>5. Monte Carlo Method</h1>
 <blockquote>
 <p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
 </blockquote>
-<h2 id="reinforcement-learning">Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>Reinforcement learning is learning what to do—how to map situations to actions—so
-as to maximize a numerical reward signal. 
-- From Chapter 1 in Reinforcement Learning: An Introduction<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
-</blockquote>
-<p>강화학습(Reinforcement Learning)은 수치적으로 측정가능한 최대한의 보상을 받기 위해서 상황(situations)과 행동(actions)를 매핑하는 방법을 배우는 것이다. 예시:</p>
-<ol>
-<li></li>
-</ol>
-<div class="footnote">
-<hr/>
-<ol>
-<li id="fn:1">
-<p><a href="http://incompleteideas.net/book/the-book-2nd.html">Reinforcement Learning: An Introduction</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-</ol>
+<h2 id="monte-carlo-method">Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permanent link">¶</a></h2>
+<p><strong>Monte Carlo</strong> 방법은 여러 곳에서 쓰이는 용어로 전체를 알기 위해 random sampling을 통해 근사해서 추정하는 방법이다. 강화학습에서 어떻게 사용이 되는지 알아본다.</p>
+<p>지금까지는 complete model, 즉, MDP의 dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 완전히 아는 상태를 가정했지만, 현실은 그렇지 않다. 현실에서 우리는 <strong>경험(experience)</strong>으로부터 배운다. 경험이란 상태, 행동, 그리고 보상으로 이루어진 <span class="arithmatex">\(\lbrace s, a, r, s' \rbrace\)</span> 일련의 시퀀스다. </p>
+<p>우선 이번 챕터에서 episodic, undiscounted(<span class="arithmatex">\(\gamma = 1\)</span>), 그리고 episode-by-episode incremental update를 진행한다고 가정해보자. 또한, bandit 알고리즘 처럼 각 state-action pair 별로 평균 수익(average return)을 구한다고 가정한다.</p>
+<h2 id="monte-carlo-prediction">Monte Carlo Prediction<a class="headerlink" href="#monte-carlo-prediction" title="Permanent link">¶</a></h2>
+<p>예를 들어 <span class="arithmatex">\(A, B, T\)</span> 세 개의 state(<span class="arithmatex">\(T\)</span>는 종료)가 존재하고, Agent가 경험한 두 개의 episode가 관찰되었다. </p>
+<table>
+<thead>
+<tr>
+<th align="center">Episode</th>
+<th align="center"><span class="arithmatex">\(s_0\)</span></th>
+<th align="center"><span class="arithmatex">\(r_0\)</span></th>
+<th align="center"><span class="arithmatex">\(s_1\)</span></th>
+<th align="center"><span class="arithmatex">\(r_1\)</span></th>
+<th align="center"><span class="arithmatex">\(s_2\)</span></th>
+<th align="center"><span class="arithmatex">\(r_2\)</span></th>
+<th align="center"><span class="arithmatex">\(s_3\)</span></th>
+<th align="center"><span class="arithmatex">\(r_3\)</span></th>
+<th align="center"><span class="arithmatex">\(s_4\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">A</td>
+<td align="center">+3</td>
+<td align="center">A</td>
+<td align="center">+2</td>
+<td align="center">B</td>
+<td align="center">-4</td>
+<td align="center">A</td>
+<td align="center">+4</td>
+<td align="center">B</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="center">-2</td>
+<td align="center">A</td>
+<td align="center">+3</td>
+<td align="center">B</td>
+<td align="center">-3</td>
+<td align="center">T</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Return을 계산하는 방법에 따라 두 개의 알고리즘으로 나뉜다.   </p>
+<div class="admonition info">
+<p class="admonition-title">First-visit MC prediction</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">pseduo code</label><label for="__tabbed_1_2">every-visit 차이</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18PPPbW18TSVP6lLKpWar-2HMGDt90mCA" width="100%"/></p>
 </div>
+<div class="tabbed-block">
+<p><a href="https://ai.stackexchange.com/questions/10812/what-is-the-difference-between-first-visit-monte-carlo-and-every-visit-monte-car">StackExchange</a></p>
+</div>
+</div>
+</input></input></div>
+</div>
+<h3 id="first-visit-mc">First-visit MC<a class="headerlink" href="#first-visit-mc" title="Permanent link">¶</a></h3>
+<p><span class="arithmatex">\(\gamma = 1\)</span>, episodic return을 사용해서 계산시(<a href="../chapter3/#reward-hypothesis">3. Finite Markov Decision Processes</a> 참고) A의 가치를 first-visit MC로 계산하는 방법: 각 episode 별로 처음 A라는 state가 등장 했을 때 부터 계산하면 된다. 따라서 다음과 같이 계산된다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+G^{e_1} &amp;= 3 + 2 - 4 + 4 - 3 = 2 \\
+G^{e_2} &amp;= 3 - 3 = 0 \\
+V(A) &amp;= \dfrac{G^{e_1} + G^{e_2}}{2} = \dfrac{2 + 0}{2} = 1
+\end{aligned}\]</div>
+<p>마찬가지로 B의 가치를 계산하면 다음과 같다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+G^{e_1} &amp;= -4 + 4 - 3 = -3 \\
+G^{e_2} &amp;= 3 - 3 = 0 \\
+V(B) &amp;= \dfrac{G^{e_1} + G^{e_2}}{2} = \dfrac{-3 - 2}{2} = -2.5
+\end{aligned}\]</div>
+<h3 id="every-visit-mc">Every-visit MC<a class="headerlink" href="#every-visit-mc" title="Permanent link">¶</a></h3>
+<p>Every-visit MC로 계산하는 방법은 매번 해당 state가 나올 때 마다 계산 해준다는 뜻이다. episode의 return을 계산시 매번 state가 나올 때 마다 해당 시퀀스를 return 계산에 포함하게 되는데, A의 가치를 예를 들면 다음과 같다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+G^{e_1}_1 &amp;= 3 + 2 - 4 + 4 - 3 = 2 \\
+G^{e_1}_2 &amp;= 2 - 4 + 4 - 3 = -1 \\
+G^{e_1}_3 &amp;= 4 - 3 = 1 \\
+G^{e_2} &amp;= 3 - 3 = 0 \\
+V(A) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_1}_3 + G^{e_2}}{4} = \dfrac{2 -1 + 1 + 0}{4} = 0.5
+\end{aligned}\]</div>
+<p>마찬가지로 B의 가치를 계산하면 다음과 같다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+G^{e_1}_1 &amp;= -4 + 4 - 3 = -3 \\
+G^{e_1}_2 &amp;= -3 \\
+G^{e_2}_1 &amp;= 3 - 3 = 0 \\
+G^{e_2}_1 &amp;= 3 \\
+V(B) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_2}_1 + G^{e_2}}{4} = \dfrac{-3 -3 -2 - 3}{4} = -2.75
+\end{aligned}\]</div>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">

@@ -60,11 +60,11 @@ MDP dynamics $p(s', r \vert s, a)$를 사용하여 다른 항들을 계산 할 �
 
     === "Expected rewards for state–action pair"
 
-        $$r(s, a) := \Bbb{E} \lbrace R_t \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r \vert s, a) $$
+        $$r(s, a) := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a \rbrack = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r \vert s, a) $$
 
     === "Expected rewards for state–action-next-state triple"
 
-        $$r(s, a, s') := \Bbb{E} \lbrace R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrace = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}$$
+        $$r(s, a, s') := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrack = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}$$
 
 ![HeadImg](https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O){ class="skipglightbox" width="50%" }
 
