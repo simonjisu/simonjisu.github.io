@@ -140,9 +140,9 @@ $$ v_{k+1}(s) \leftarrow \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert 
 Theorm을 풀어 쓰자면, 새로운 policy $\pi'$ 에서의 action-value가 state-value 보다 같거나 높다면, $\pi'$는 $\pi$보다 같거나 좋은 policy다. 따라서 improved policy $\pi'$를 얻기 위해서는 action-value function을 최대화 하는 policy를 선택하면 된다.
 
 $$\begin{aligned} 
-\pi'(s) &\leftarrow \underset{a}{\arg \max} q_{\pi}(s, a) \\
-&= \underset{a}{\arg \max} \Bbb{E} \lbrack R_{t+1} + \gamma v_{\pi}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
-&= \underset{a}{\arg \max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
+\pi'(s) &\leftarrow \underset{a}{\arg \max}\ q_{\pi}(s, a) \\
+&= \underset{a}{\arg \max}\ \Bbb{E} \lbrack R_{t+1} + \gamma v_{\pi}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
+&= \underset{a}{\arg \max}\ \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
 \end{aligned}$$
 
 !!! note "Grid-World Improved Policy"
@@ -173,7 +173,7 @@ $$\begin{aligned}
     === "k=5" 
 
         좌: $v_k$, 우: greedy policy with $v_k$
-        https://drive.google.com/open?id=&authuser=simonjisu%40gmail.com&usp=drive_fs
+        
         ![HeadImg](https://drive.google.com/uc?id=18P1ZaLI-84XRUwmjeEDM42nTVEb9jFQz){ class="skipglightbox" width="80%" }
 
 
@@ -230,8 +230,13 @@ Policy Iteration의 단점은 매 스텝마다 policy evaluation이 포함된다
 
 ## Generalized Policy Iteration
 
-![HeadImg](https://drive.google.com/uc?id=18ZWmwU39nqzio5lhW7yvbhz9tvwOazFx){ align=left class="skipglightbox" width="30%" }
+![HeadImg](https://drive.google.com/uc?id=18ZWmwU39nqzio5lhW7yvbhz9tvwOazFx){ align=left class="skipglightbox" width="20%" }
 
 > the general idea of letting policy-evaluation and policyimprovement processes interact, independent of the granularity and other details of the two processes
 
 Policy evaluation과 policy imporvement의 반복이라 볼 수 있다. 그리고 매 스텝마다 최적만 찾을 필요는 없다. approximate policy and approximate value function를 통해서 적당히 좋은 최적값을 찾으면 최종적으로 최적의 값을 찾게 된다.
+
+
+
+
+

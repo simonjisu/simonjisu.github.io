@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter5/" rel="canonical"/>
 <link href="../chapter4/" rel="prev"/>
-<link href="../../../../project/" rel="next"/>
+<link href="../chapter6/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
 <title>5. Monte Carlo Method - Soopace</title>
@@ -332,8 +332,21 @@
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../pgm/">
+<span class="md-ellipsis">
+    
+  
+    Pgm
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_7" type="checkbox"/>
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -345,12 +358,12 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_3_7">
+<label class="md-nav__link" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_7_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_7">
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
             
   
@@ -476,8 +489,100 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-prediction-of-action-values">
+<span class="md-ellipsis">
+      
+        Monte Carlo Prediction of Action Values
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-control">
+<span class="md-ellipsis">
+      
+        Monte Carlo Control
+      
+    </span>
+</a>
+<nav aria-label="Monte Carlo Control" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-with-exploring-starts">
+<span class="md-ellipsis">
+      
+        Monte carlo with Exploring Starts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-policy-and-off-policy">
+<span class="md-ellipsis">
+      
+        On-policy and Off-policy
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#policy-improvement-guarantees-with-soft-policy">
+<span class="md-ellipsis">
+      
+        Policy Improvement Guarantees with ε-soft Policy
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#off-policy-prediction">
+<span class="md-ellipsis">
+      
+        Off-policy Prediction
+      
+    </span>
+</a>
+<nav aria-label="Off-policy Prediction" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#importance-sampling">
+<span class="md-ellipsis">
+      
+        Importance Sampling
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#off-policy-prediction-using-importance-sampling">
+<span class="md-ellipsis">
+      
+        Off-policy Prediction using Importance sampling
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter6/">
+<span class="md-ellipsis">
+    
+  
+    6. Temporal-Difference Learning
+  
+
+    
+  </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -554,6 +659,86 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-prediction-of-action-values">
+<span class="md-ellipsis">
+      
+        Monte Carlo Prediction of Action Values
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-control">
+<span class="md-ellipsis">
+      
+        Monte Carlo Control
+      
+    </span>
+</a>
+<nav aria-label="Monte Carlo Control" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#monte-carlo-with-exploring-starts">
+<span class="md-ellipsis">
+      
+        Monte carlo with Exploring Starts
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-policy-and-off-policy">
+<span class="md-ellipsis">
+      
+        On-policy and Off-policy
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#policy-improvement-guarantees-with-soft-policy">
+<span class="md-ellipsis">
+      
+        Policy Improvement Guarantees with ε-soft Policy
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#off-policy-prediction">
+<span class="md-ellipsis">
+      
+        Off-policy Prediction
+      
+    </span>
+</a>
+<nav aria-label="Off-policy Prediction" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#importance-sampling">
+<span class="md-ellipsis">
+      
+        Importance Sampling
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#off-policy-prediction-using-importance-sampling">
+<span class="md-ellipsis">
+      
+        Off-policy Prediction using Importance sampling
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
 </ul>
 </nav>
 </div>
@@ -606,6 +791,7 @@
 <p>지금까지는 complete model, 즉, MDP의 dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 완전히 아는 상태를 가정했지만, 현실은 그렇지 않다. 현실에서 우리는 <strong>경험(experience)</strong>으로부터 배운다. 경험이란 상태, 행동, 그리고 보상으로 이루어진 <span class="arithmatex">\(\lbrace s, a, r, s' \rbrace\)</span> 일련의 시퀀스다. </p>
 <p>우선 이번 챕터에서 episodic, undiscounted(<span class="arithmatex">\(\gamma = 1\)</span>), 그리고 episode-by-episode incremental update를 진행한다고 가정해보자. 또한, bandit 알고리즘 처럼 각 state-action pair 별로 평균 수익(average return)을 구한다고 가정한다.</p>
 <h2 id="monte-carlo-prediction">Monte Carlo Prediction<a class="headerlink" href="#monte-carlo-prediction" title="Permanent link">¶</a></h2>
+<p>Monte Carlo Prediction를 수행하려면 <a href="../chapter4/#policy-evaluation">Policy Evaluation</a>, 즉, 주어진 policy <span class="arithmatex">\(\pi\)</span> 에서 state-value function을 학습하면 된다.</p>
 <p>예를 들어 <span class="arithmatex">\(A, B, T\)</span> 세 개의 state(<span class="arithmatex">\(T\)</span>는 종료)가 존재하고, Agent가 경험한 두 개의 episode가 관찰되었다. </p>
 <table>
 <thead>
@@ -620,6 +806,8 @@
 <th align="center"><span class="arithmatex">\(s_3\)</span></th>
 <th align="center"><span class="arithmatex">\(r_3\)</span></th>
 <th align="center"><span class="arithmatex">\(s_4\)</span></th>
+<th align="center"><span class="arithmatex">\(r_4\)</span></th>
+<th align="center"><span class="arithmatex">\(s_5\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -634,6 +822,8 @@
 <td align="center">A</td>
 <td align="center">+4</td>
 <td align="center">B</td>
+<td align="center">-3</td>
+<td align="center">T</td>
 </tr>
 <tr>
 <td align="center">1</td>
@@ -644,6 +834,8 @@
 <td align="center">B</td>
 <td align="center">-3</td>
 <td align="center">T</td>
+<td align="center"></td>
+<td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
 </tr>
@@ -679,20 +871,124 @@ V(B) &amp;= \dfrac{G^{e_1} + G^{e_2}}{2} = \dfrac{-3 - 2}{2} = -2.5
 <h3 id="every-visit-mc">Every-visit MC<a class="headerlink" href="#every-visit-mc" title="Permanent link">¶</a></h3>
 <p>Every-visit MC로 계산하는 방법은 매번 해당 state가 나올 때 마다 계산 해준다는 뜻이다. episode의 return을 계산시 매번 state가 나올 때 마다 해당 시퀀스를 return 계산에 포함하게 되는데, A의 가치를 예를 들면 다음과 같다.</p>
 <div class="arithmatex">\[\begin{aligned} 
-G^{e_1}_1 &amp;= 3 + 2 - 4 + 4 - 3 = 2 \\
-G^{e_1}_2 &amp;= 2 - 4 + 4 - 3 = -1 \\
-G^{e_1}_3 &amp;= 4 - 3 = 1 \\
-G^{e_2} &amp;= 3 - 3 = 0 \\
+G^{e_1}_1 &amp;= 3 + 2 - 4 + 4 - 3 = 2 ,\quad G^{e_1}_2 = 2 - 4 + 4 - 3 = -1 \\
+G^{e_1}_3 &amp;= 4 - 3 = 1 ,\quad G^{e_2} = 3 - 3 = 0 \\
 V(A) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_1}_3 + G^{e_2}}{4} = \dfrac{2 -1 + 1 + 0}{4} = 0.5
 \end{aligned}\]</div>
 <p>마찬가지로 B의 가치를 계산하면 다음과 같다.</p>
 <div class="arithmatex">\[\begin{aligned} 
-G^{e_1}_1 &amp;= -4 + 4 - 3 = -3 \\
-G^{e_1}_2 &amp;= -3 \\
-G^{e_2}_1 &amp;= 3 - 3 = 0 \\
-G^{e_2}_1 &amp;= 3 \\
+G^{e_1}_1 &amp;= -4 + 4 - 3 = -3 ,\quad G^{e_1}_2 = -3 \\
+G^{e_2}_1 &amp;= 3 - 3 = 0 ,\quad G^{e_2}_1 = 3 \\
 V(B) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_2}_1 + G^{e_2}}{4} = \dfrac{-3 -3 -2 - 3}{4} = -2.75
 \end{aligned}\]</div>
+<h2 id="monte-carlo-prediction-of-action-values">Monte Carlo Prediction of Action Values<a class="headerlink" href="#monte-carlo-prediction-of-action-values" title="Permanent link">¶</a></h2>
+<p>만약에 model이 불분명하다면(=dynamics를 이용할 수 없다면), state-value function <span class="arithmatex">\(v_\pi(s)\)</span> 대신 action-value function <span class="arithmatex">\(q_\pi(s, a)\)</span>를 사용해야한다. State <span class="arithmatex">\(s\)</span>에서 action <span class="arithmatex">\(a\)</span>를 선택하고 기대 수익을 계산하면 된다.</p>
+<div class="arithmatex">\[q_{\pi}(s, a) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s, A_t = a\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s, A_t = a \Bigg\rbrack\]</div>
+<p>그러나 어떤 state-action 쌍은 한번도 선택되지 않을 수 있는 경우가 생길 수 있다. 따라서 state-action 쌍에 0이 아닌 확률을 부여하여 <strong>탐색(exploration)</strong>할 수 있게 해야한다. 이러한 결과로 policy도 확률적(stochastic)으로 선택하게 된다. </p>
+<h2 id="monte-carlo-control">Monte Carlo Control<a class="headerlink" href="#monte-carlo-control" title="Permanent link">¶</a></h2>
+<p>기본적으로 <a href="../chapter4/#generalized-policy-iteration">Generalized Policy Iteration(GPI)</a>와 같은 패턴을 가진다. 여기서 <span class="arithmatex">\(E\)</span>는 policy evaluation, <span class="arithmatex">\(I\)</span>는 policy improvement다.</p>
+<div class="arithmatex">\[\pi_0 \xrightarrow[]{E} q_{\pi_0} \xrightarrow[]{I} \pi_1 \xrightarrow[]{E} q_{\pi_1} \cdots \xrightarrow[]{I} \pi_* \xrightarrow[]{E} q_{\pi_*} \]</div>
+<p>그러나 GPI 과 다른점은 (1) 평가시 epidosic 하게 업데이트, (2) <span class="arithmatex">\(v_\pi\)</span> 대신에 <span class="arithmatex">\(q_\pi\)</span>를 사용, 그리고 (3) <span class="arithmatex">\(I\)</span> 과정에서 <span class="arithmatex">\(q(s,a)\)</span>를 이용해 최적의 행동을 선택하여 policy를 선택한다. </p>
+<div class="arithmatex">\[\pi_{k+1}(s)=\underset{a}{\arg \max}\ q_{\pi_k}(s, a)\]</div>
+<p>또한 policy improvement은 모든 <span class="arithmatex">\(s\in \mathcal{S}\)</span>에서 현재 주어진 policy <span class="arithmatex">\(\pi_k\)</span>의 value function을 최대화 하는 action을 선택하면 된다.</p>
+<div class="arithmatex">\[\begin{aligned}q_{\pi_k} \big(s, \pi_{k+1}(s) \big) &amp;= q_{\pi_k} \big(s, \underset{a}{\arg \max}\ q_{\pi_k}(s, a) \big) \\
+&amp;= \underset{a}{\max}\ q_{\pi_k}(s, a) \geq q_{\pi_k}\big(s, \pi_k(s)\big) \geq v_{\pi_k}(s)
+\end{aligned}\]</div>
+<h3 id="monte-carlo-with-exploring-starts">Monte carlo with Exploring Starts<a class="headerlink" href="#monte-carlo-with-exploring-starts" title="Permanent link">¶</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Monte Carlo ES</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">pseduo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18hhd4TQyk1o5BAY6ChUvl9Vszub3eWlI" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<p>Exploring starts는 확률이 0이 상인 state-action 쌍을 고른다는 뜻이다. 그러나 해당 알고리즘은 실용적이지 않다. 모든 state-action 쌍마다 모든 return을 유지하고 중복적으로 평균을 계산하기 때문이다. </p>
+<h3 id="on-policy-and-off-policy">On-policy and Off-policy<a class="headerlink" href="#on-policy-and-off-policy" title="Permanent link">¶</a></h3>
+<p><strong>On-policy</strong> 방법은 의사 결정에 사용되는 policy를 평가하거나 개선하려고 시도한다. 즉, 업데이트 하려는 policy와 최종 의사결정에 사용되는 policy가 같다고 보면 된다. <strong>Off-policy</strong> 방법은 데이터 생성에 사용되는 것과 다른 정책을 평가하거나 개선한다. 이 개념은 차후에 behavior policy와 target policy 연결지어서 설명된다.</p>
+<p>보통 on-policy 방법에서 policy 는 soft한 성격을 듸고 있다. 즉, 모든 state <span class="arithmatex">\(s \in \mathcal{S}\)</span> 와 action <span class="arithmatex">\(a \in \mathcal{A}\)</span>에 대해서 <span class="arithmatex">\(\pi(a \vert s) &gt; 0\)</span> 이며, 점진적으로 deterministic optimal policy에 다가간다는 뜻이다. 예로 <span class="arithmatex">\(\epsilon\)</span>-greedy policy를 들 수가 있다.</p>
+<div class="arithmatex">\[\begin{cases}
+\dfrac{\epsilon}{\vert \mathcal{A}(s) \vert} &amp; \text{non-greedy action} \\
+1 - \epsilon + \dfrac{\epsilon}{\vert \mathcal{A}(s) \vert} &amp; \text{greedy action}
+\end{cases}\]</div>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18mpw3St6NI0TP9vBLgG6E1lIE62vQsBE" width="65%"/></p>
+<p>이러니저러니해도 on-policy MC control 는 GPI의 한 종류다. Exploring starts 이라는 가정 없이는 policy를 개선 시킬 수 없는데 왜냐면 non-greedy actions의 선택을 방지 해주기 때문이다. 다행이 GPI는 policy가 greedy policy로 향하게 끔만 하면되지 강제로 greedy policy가 되어야 한다는 필요 조건이 없다. 어떠한 <span class="arithmatex">\(\epsilon\)</span>-soft policy <span class="arithmatex">\(\pi\)</span>에 대해서 <span class="arithmatex">\(\epsilon\)</span>-greedy policy에 관한 <span class="arithmatex">\(q_\pi\)</span>는 <span class="arithmatex">\(\pi\)</span> 보다 항상 좋다는 것을 보장한다.</p>
+<div class="admonition info">
+<p class="admonition-title">On-policy first-visit MC control <span class="arithmatex">\(\epsilon\)</span>-soft policies</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">pseduo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18mZ2An-k0x9p-t29lxpgyvUWwUukEsIP" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<h3 id="policy-improvement-guarantees-with-soft-policy">Policy Improvement Guarantees with ε-soft Policy<a class="headerlink" href="#policy-improvement-guarantees-with-soft-policy" title="Permanent link">¶</a></h3>
+<p>왜 보장되는지 살펴보자. <span class="arithmatex">\(\epsilon\)</span>-greedy policy인 <span class="arithmatex">\(\pi'(a \vert s)\)</span>가 있다.</p>
+<ul>
+<li>Greedy: <span class="arithmatex">\(1 - \epsilon + \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert}\)</span> 확률로 <span class="arithmatex">\(A=\underset{a}{\arg \max}\ q_\pi(s, a)\)</span> 선택</li>
+<li>Exploration: <span class="arithmatex">\(\dfrac{\epsilon}{\vert \mathcal{A}(s)\vert}\)</span> 확률로 <span class="arithmatex">\(A \neq \underset{a}{\arg \max}\ q_\pi(s, a)\)</span> 선택하지 않음</li>
+</ul>
+<div class="arithmatex">\[\begin{aligned}q_\pi \big(s, \pi'(s) \big) &amp;= \sum_a \pi'(a \vert s) q_\pi(s, a) \\
+&amp;= \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert} \sum_a q_\pi(s, a) + (1 - \epsilon) \cdot \underset{a}{\max}\ q_\pi(s, a) \\
+&amp;\geq \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert} \sum_a q_\pi(s, a) + (1 - \epsilon) \sum_a \dfrac{\pi(a \vert s) - \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert}}{1 - \epsilon} q_\pi(s, a) \\
+&amp;= \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert} \sum_a q_\pi(s, a) - \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert} \sum_a q_\pi(s, a) + \sum_a \pi(a \vert s) q_\pi(s, a) \\
+&amp;= \sum_a \pi(a \vert s) q_\pi(s, a)  = v_\pi(s), \quad \forall s \in \mathcal{S}
+\end{aligned}\]</div>
+<p>즉, <a href="../chapter4/#policy-improvement">policy improvement theorem</a>에 의해서 action-value가 state-value보다 같거나 높기 때문에 <span class="arithmatex">\(\pi'\)</span>는 <span class="arithmatex">\(\pi\)</span>보다 좋은 policy이며, action-value function을 최대화 하는 policy가 결국에 좋은 policy를 선택하는 것과 같게 된다. 그림으로 개념을 표현하면 다음과 같다.</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18n6jlc2x6iGZwMiPuFVX_wcD2Ta3alzp" width="65%"/></p>
+<h2 id="off-policy-prediction">Off-policy Prediction<a class="headerlink" href="#off-policy-prediction" title="Permanent link">¶</a></h2>
+<p><strong>Off-policy</strong>는 <ins class="critic">target</ins> policy <span class="arithmatex">\(\pi(a\vert s)\)</span> 를 평가 혹은 개선하는데 다른 <ins class="critic">behavior</ins> policy <span class="arithmatex">\(b(a\vert s)\)</span>가 생성하는 데이터를 바탕으로 진행한다는 점에서 On-policy와 다르다. 즉, target policy는 학습되고 최적화의 대상이라면, behavior policy는 환경과 상호작용한다. 사실 On-policy는 Off-policy의 특별한 케이스다 <span class="arithmatex">\(\pi(a \vert s) = b(a \vert s)\)</span>.</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18rD0i1KAgszxddFRTHOi8AQEXFy1z-OQ" width="100%"/></p>
+<p>Grid-World 예를 들자면, 그림과 같다. 우리의 목적은 behavior policy로 target policy <span class="arithmatex">\(\pi\)</span>의 value function <span class="arithmatex">\(v_\pi\)</span>을 학습하고자 한다. 조건으로 모든 action <span class="arithmatex">\(a \in \mathcal{A}(s), \pi(a \vert s) &gt; 0\)</span> 에 대해서 <span class="arithmatex">\(b(a \vert s) &gt; 0\)</span>이어야 한다.</p>
+<h3 id="importance-sampling">Importance Sampling<a class="headerlink" href="#importance-sampling" title="Permanent link">¶</a></h3>
+<p><strong>Importance Sampling</strong>은 behavior policy로부터 <span class="arithmatex">\(v_\pi\)</span>를 학습시킬 수 있는 방법 중 하나다. Behavior policy로부터 random sampling을 한 후에 <ins class="critic">중요도 가중치(importance weight)</ins> <span class="arithmatex">\(\rho\)</span>를 사용하여 분포를 조정한다(=policy control). Random variable <span class="arithmatex">\(X \backsim b\)</span>이 있고, <span class="arithmatex">\(\Bbb{E}_\pi \lbrack X \rbrack\)</span>가 목적인 상황에서 <span class="arithmatex">\(\rho\)</span>를 도출 할 수 있다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+\Bbb{E}_\pi \lbrack X \rbrack &amp;= \sum_{x\in \mathcal{X}} \pi(x) \cdot x = \sum_{x\in \mathcal{X}} \dfrac{b(x)}{b(x)}\pi(x) \cdot x = \sum_{x\in \mathcal{X}} \dfrac{\pi(x)}{b(x)} b(x) \cdot x \\
+&amp; := \sum_{x\in \mathcal{X}} \rho(x) b(x) \cdot x = \Bbb{E}_b\lbrack \rho(X)X \rbrack \\
+&amp;\approx \dfrac{1}{n} \sum_{i=1}^n \rho(x_i) x_i \quad \text{with } x_i \backsim b
+\end{aligned}\]</div>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18v3YCtLF3cJ9jidOjiQ1L-y6EdME9TrC" width="100%"/></p>
+<p>예를 들어, 확률이 균일한 파란 주사위와 균일하지 않은 빨간 주사위가 있다. 우리의 목적은 파란색 주사위를 굴려서 빨간색 주사위의 기댓값을 알려고한다. 3번 굴렸을 때 R.V. 의 realization은 다음과 같다.</p>
+<ol>
+<li><span class="arithmatex">\(X_1^{blue} = 1, \pi(1)=0.7, b(1)=0.167\)</span></li>
+<li><span class="arithmatex">\(X_2^{blue} = 2, \pi(1)=0.1, b(2)=0.167\)</span></li>
+<li><span class="arithmatex">\(X_3^{blue} = 1, \pi(1)=0.7, b(1)=0.167\)</span></li>
+</ol>
+<p>따라서 기댓값은 다음과 같이 계산할 수 있다.</p>
+<div class="arithmatex">\[\Bbb{E}_\pi\lbrack X\rbrack \approx \dfrac{1}{n}\sum_{i=1}^n \rho(x_i) x_i = \dfrac{1}{3}\big( (1\times \dfrac{0.7}{0.167}) + (2\times \dfrac{0.1}{0.167}) + (1\times \dfrac{0.7}{0.167})\big) = 3.2\]</div>
+<h3 id="off-policy-prediction-using-importance-sampling">Off-policy Prediction using Importance sampling<a class="headerlink" href="#off-policy-prediction-using-importance-sampling" title="Permanent link">¶</a></h3>
+<p>Policy <span class="arithmatex">\(\pi\)</span> 하에서 어떤 trajectory(어떤 시나리오 시퀀스)의 likelihood와 importance weight <span class="arithmatex">\(rho\)</span>는 다음과 같다.</p>
+<div class="arithmatex">\[\begin{aligned}
+Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \rbrace = \prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k}) \\
+\rho_{t:T-1} = \dfrac{\prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k})}{\prod_{k=t}^{T-1}b(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k})} = \prod_{k=t}^{T-1}\dfrac{\pi(A_k \vert S_k)}{b(A_k \vert S_k)} 
+\end{aligned}\]</div>
+<p>그리고 value function는 두 가지 방법으로 계산 할 수 있다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">ordinary</label><label for="__tabbed_4_2">weighted</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="arithmatex">\[V(S) = \dfrac{\sum_{t\in \mathcal{J}(s)} \rho_{t:T(t)-1} G_t}{\vert \mathcal{J}(s) \vert}\]</div>
+</div>
+<div class="tabbed-block">
+<div class="arithmatex">\[V(S) = \dfrac{\sum_{t\in \mathcal{J}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t\in \mathcal{J}(s)} \rho_{t:T(t)-1}}\]</div>
+</div>
+</div>
+</input></input></div>
+<div class="admonition info">
+<p class="admonition-title">Off-policy MC prediction and control</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"/><div class="tabbed-labels"><label for="__tabbed_5_1">Off-policy MC prediction (policy evaluation)</label><label for="__tabbed_5_2">Off-policy MC control</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18y-Ddxcy20MULt0ualdtc6iZby6A5WWo" width="100%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18zGTpS0DVK7Jphd_4QwVmRwRgYtL8lka" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">

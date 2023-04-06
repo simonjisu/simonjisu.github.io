@@ -332,8 +332,21 @@
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../pgm/">
+<span class="md-ellipsis">
+    
+  
+    Pgm
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_7" type="checkbox"/>
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -345,12 +358,12 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_3_7">
+<label class="md-nav__link" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_7_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_7">
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
             
   
@@ -500,6 +513,18 @@
     
   
     5. Monte Carlo Method
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter6/">
+<span class="md-ellipsis">
+    
+  
+    6. Temporal-Difference Learning
   
 
     
@@ -876,9 +901,9 @@ v_{k+1}(s=1)
 </div>
 <p>Theorm을 풀어 쓰자면, 새로운 policy <span class="arithmatex">\(\pi'\)</span> 에서의 action-value가 state-value 보다 같거나 높다면, <span class="arithmatex">\(\pi'\)</span>는 <span class="arithmatex">\(\pi\)</span>보다 같거나 좋은 policy다. 따라서 improved policy <span class="arithmatex">\(\pi'\)</span>를 얻기 위해서는 action-value function을 최대화 하는 policy를 선택하면 된다.</p>
 <div class="arithmatex">\[\begin{aligned} 
-\pi'(s) &amp;\leftarrow \underset{a}{\arg \max} q_{\pi}(s, a) \\
-&amp;= \underset{a}{\arg \max} \Bbb{E} \lbrack R_{t+1} + \gamma v_{\pi}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
-&amp;= \underset{a}{\arg \max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
+\pi'(s) &amp;\leftarrow \underset{a}{\arg \max}\ q_{\pi}(s, a) \\
+&amp;= \underset{a}{\arg \max}\ \Bbb{E} \lbrack R_{t+1} + \gamma v_{\pi}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
+&amp;= \underset{a}{\arg \max}\ \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
 \end{aligned}\]</div>
 <div class="admonition note">
 <p class="admonition-title">Grid-World Improved Policy</p>
@@ -898,9 +923,8 @@ v_{k+1}(s=1)
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18SclBIzSNGxltIyLd9PcKrImB6NpD2Jr" width="80%"/></p>
 </div>
 <div class="tabbed-block">
-<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span>
-https://drive.google.com/open?id=&amp;authuser=simonjisu%40gmail.com&amp;usp=drive_fs
-<img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18P1ZaLI-84XRUwmjeEDM42nTVEb9jFQz" width="80%"/></p>
+<p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18P1ZaLI-84XRUwmjeEDM42nTVEb9jFQz" width="80%"/></p>
 </div>
 <div class="tabbed-block">
 <p>좌: <span class="arithmatex">\(v_k\)</span>, 우: greedy policy with <span class="arithmatex">\(v_k\)</span></p>
@@ -961,7 +985,7 @@ https://drive.google.com/open?id=&amp;authuser=simonjisu%40gmail.com&amp;usp=dri
 </div>
 </div>
 <h2 id="generalized-policy-iteration">Generalized Policy Iteration<a class="headerlink" href="#generalized-policy-iteration" title="Permanent link">¶</a></h2>
-<p><img align="left" alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18ZWmwU39nqzio5lhW7yvbhz9tvwOazFx" width="30%"/></p>
+<p><img align="left" alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18ZWmwU39nqzio5lhW7yvbhz9tvwOazFx" width="20%"/></p>
 <blockquote>
 <p>the general idea of letting policy-evaluation and policyimprovement processes interact, independent of the granularity and other details of the two processes</p>
 </blockquote>

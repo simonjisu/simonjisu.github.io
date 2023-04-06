@@ -1,0 +1,84 @@
+---
+title: "6. Temporal-Difference Learning"
+hide:
+  - tags
+tags:
+  - "reinforcement learning"
+  - "temporal difference"
+---
+
+> 데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.
+
+**Temporal Difference Learning** 방법은 [Monte Carlo(MC)](../chapter5/)와 [Dynamic Programming(DP)](../chapter4/)의 아이디어를 결합한 방식이다. MC와 비슷하게 경험으로부터 직접 배우고, DP처럼 학습된 추정치(V, Q, ...)로 다른 추정치를 업데이트 한다. 
+
+## TD Prediction
+
+Monte Carlo 업데이트 규칙(every-visit)을 생각해보면 다음과 같다.
+
+$$V(S_t) \leftarrow V(S_t) + \alpha \lbrack G_t - V(S_t) \rbrack$$
+
+여기서 $G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots \gamma^{T-t-1} R_{T}$다. 그리고 확인할 수 있는 것은 MC 방법은 $V(S_t)$를 결정하기 위해서 항상 에피소드의 끝까지 기다려야 한다.
+
+하지만, TD는 다르다. **One-step TD**, TD(0)의 업데이트 규칙은 다음과 같다.
+
+$$V(S_t) \leftarrow V(S_t) + \alpha \lbrack R_{t+1} + \gamma V(S_{t+1}) - V(S_t) \rbrack$$
+
+따라서 one-step TD 방법은 하나의 타임 스텝만 기다리면 업데이트 할 수 있다. 
+
+
+!!! info "Tabular TD(0)"
+
+    === "pseudo code"
+
+        ![HeadImg](https://drive.google.com/uc?id=192F6SuvRtuevZNYf8BTWaLOrTRdNW1H9){ class="skipglightbox" width="100%" }
+
+TD(0)가 기존에 추정된 값들을 기반으로 업데이트 하기 때문에 **bootstrapping** 방법이라고도 한다. 그러기에 오차(TD Error)도 존재한다. 오차는 현재의 추정치 $V(S_t)$와 TD의 목표인 $R_{t+1} + \gamma V(S_{t+1})$의 차이로 계산된다.
+
+$$\delta_t := R_{t+1} + \gamma V(S_{t+1}) - V(S_t)$$
+
+다만, $t+1$ 시점에서 이 오차를 확인 할 수 있다.
+
+!!! note "Example: Driving-Home"
+
+    ![HeadImg](https://drive.google.com/uc?id=199Y4Lb6Ps237IIIlxbWjaBCZ70F7-pt9){ class="skipglightbox" width="100%" }
+
+    책에서 소개한 차를 타고 집으로가는 예제를 보자. 집으로 가는데 얼마나 걸리는 지를 예측하고 싶다. 그림과 같이 6개의 state가 있고, 실제 걸린 시간(Elapsed Time)과 예측된 남은 시간(Predicted Time to Go)이 있다. 매 State가 변할 때마다 예측된 남은 시간은 달라진다. 여기서 Reward는 실제 걸린시간이 된다.
+
+    ![HeadImg](https://drive.google.com/uc?id=19E5_EMYFU46_VHGmvqpt3v0eZWC2gkB6){ class="skipglightbox" width="100%" }
+
+    위 그림은 MC 방법과 TD 방법의 차이를 극명하게 보여주고 있다. y 축은 예측된 전체 소모 시간(=$V(S_t)$)을 나타나는데, 빨간색 화살표가 가르치는 것은 각각 MC의 $G_t$와 TD(0)의 $R_{t+1}+\gamma V(S_{t+1})$를 나타낸다($\gamma=1$). 예를 들어, Reach Car 상태에서 MC 방법의 $G_t$는 해당 에피소드의 최종 시간 43분이 return이 되는데, TD(0)의 경우 다음 타임스텝의 $R_{t+1}=20$과 $V(S_{t+1})=15$의 합이 된다. 따라서, 집에 도착 할 때까지 기다릴 필요없이 value를 업데이트 할 수 있다.
+
+!!! note "Example: Chain MDP"
+
+    ![HeadImg](https://drive.google.com/uc?id=19HPcKQVTI1MXYd2fBeZV-FrcEV8dvBCh){ class="skipglightbox" width="100%" }
+
+    두 번째 예시로 5개의 state를 가지고, $C$ 에서 시작하는 Markove reward process(MRP)가 있다. $E$ 오른쪽 Terminal state $T$ 에 도달할 경우만 1의 보상을 얻고 나머지는 0을 얻는다.
+
+    해당 MRP의 true value는 bellman equation $V_\pi(s) = \sum_{r, s'} p(r, s' \vert s) (r + V(s'))$을 이용할 수 있다. 여기서 policy $\pi$는 deterministic하기 때문에 어떤 액션을 취하든 $\pi(a \vert s)=1$ 이다. 그리고 state transition probability $p(r, s' \vert s)=0.5$이다(좌로 가든 우로가든 반반이다). 또한, $V(T)=0$이다. 따라서 다음과 같이 계산된다[^1]
+
+    $$\begin{aligned} 
+    V(A) &= 0.5 \big( V(T_L) + V(B) \big) =  0.5 V(B) \\
+    V(B) &= 0.5 \big( V(A) + V(C) \big) \\
+    V(C) &= 0.5 \big( V(B) + V(D) \big) \\
+    V(D) &= 0.5 \big( V(C) + V(E) \big) \\
+    V(E) &= 0.5 \big( V(D) + V(T_R) \big) = 0.5 V(D) + 0.5\\
+    \end{aligned}$$
+
+    따라서 $V(A)$를 차례대로 $V(E)$까지 대입하면 $V(A) = 1/6$이 된다.
+
+    아래 있는 그림 중 왼쪽은 TD(0) 방법을 사용 했을 때, 경험을 반복 할 때마다 emsimated 한 value function이 실제 값(검은선)에 근접하는 것을 확인 할 수 있다. 오른쪽 그림은 MC 방법과 TD 방법이 learning rate $\alpha$의 차이에 따라 실제 값의 차이를 episode의 흐름에 따라 표시한 것이다.
+
+    
+## TD Learning Control
+
+## SARSA
+
+### GLIE
+
+### Convergence of SARSA
+
+## Q-Learning
+
+
+[^1]: [Reinforcement Learning - How are these state values in MRP calculated?](https://datascience.stackexchange.com/questions/40899/reinforcement-learning-how-are-these-state-values-in-mrp-calculated)
+

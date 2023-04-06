@@ -5,21 +5,21 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/gcp/" rel="canonical"/>
-<link href="../deeplearning/" rel="prev"/>
-<link href="big_query/" rel="next"/>
-<link href="../../../assets/images/favicon.png" rel="icon"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter6/" rel="canonical"/>
+<link href="../chapter5/" rel="prev"/>
+<link href="../../../../project/" rel="next"/>
+<link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>Learning Google Cloud Platform - Soopace</title>
-<link href="../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<title>6. Temporal-Difference Learning - Soopace</title>
+<link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
 <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -30,13 +30,13 @@
                 body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
                 body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
                 body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#_1">
+<a class="md-skip" href="#td-prediction">
           Skip to content
         </a>
 </div>
@@ -44,8 +44,8 @@
 </div>
 <header class="md-header md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Learning Google Cloud Platform
+              6. Temporal-Difference Learning
             
           </span>
 </div>
@@ -111,7 +111,7 @@
 <div class="md-grid">
 <ul class="md-tabs__list">
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../..">
+<a class="md-tabs__link" href="../../../..">
         
   
     
@@ -121,7 +121,7 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../blog/">
+<a class="md-tabs__link" href="../../../../blog/">
           
   
     
@@ -131,7 +131,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link md-tabs__link--active" href="../../">
+<a class="md-tabs__link md-tabs__link--active" href="../../../">
           
   
     
@@ -141,7 +141,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../project/">
+<a class="md-tabs__link" href="../../../../project/">
           
   
     
@@ -162,8 +162,8 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
 </a>
     Soopace
   </label>
@@ -179,7 +179,7 @@
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../..">
+<a class="md-nav__link" href="../../../..">
 <span class="md-ellipsis">
     
   
@@ -191,7 +191,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/">
+<a class="md-nav__link" href="../../../../blog/">
 <span class="md-ellipsis">
     
   
@@ -206,7 +206,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../../../">
 <span class="md-ellipsis">
     
   
@@ -231,7 +231,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../paper/">
+<a class="md-nav__link" href="../../../paper/">
 <span class="md-ellipsis">
     
   
@@ -246,7 +246,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
+<a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
     
   
@@ -271,7 +271,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../algorithm/">
+<a class="md-nav__link" href="../../algorithm/">
 <span class="md-ellipsis">
     
   
@@ -283,7 +283,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../deeplearning/">
+<a class="md-nav__link" href="../../deeplearning/">
 <span class="md-ellipsis">
     
   
@@ -294,10 +294,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_4" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../gcp/">
 <span class="md-ellipsis">
     
   
@@ -306,38 +304,11 @@
 
     
   </span>
-</a>
-<label class="md-nav__link md-nav__link--active" for="__nav_3_3_4">
 <span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_4">
-<span class="md-nav__icon md-icon"></span>
-            
-  
-    Gcp
-  
-
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="big_query/">
-<span class="md-ellipsis">
-    
-  
-    Big Query
-  
-
-    
-  </span>
 </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../math/">
+<a class="md-nav__link" href="../../math/">
 <span class="md-ellipsis">
     
   
@@ -349,7 +320,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../mongodb/">
+<a class="md-nav__link" href="../../mongodb/">
 <span class="md-ellipsis">
     
   
@@ -362,7 +333,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../pgm/">
+<a class="md-nav__link" href="../../pgm/">
 <span class="md-ellipsis">
     
   
@@ -374,8 +345,10 @@
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../reinforcement_learning/">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
 <span class="md-ellipsis">
     
   
@@ -384,7 +357,166 @@
 
     
   </span>
+</a>
+<label class="md-nav__link" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Reinforcement learning
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter1/">
+<span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter2/">
+<span class="md-ellipsis">
+    
+  
+    2. Multi-armed Bandits
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter3/">
+<span class="md-ellipsis">
+    
+  
+    3. Finite Markov Decision Processes
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter4/">
+<span class="md-ellipsis">
+    
+  
+    4. Dynamic Programming
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter5/">
+<span class="md-ellipsis">
+    
+  
+    5. Monte Carlo Method
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    6. Temporal-Difference Learning
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    6. Temporal-Difference Learning
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#td-prediction">
+<span class="md-ellipsis">
+      
+        TD Prediction
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#td-learning-control">
+<span class="md-ellipsis">
+      
+        TD Learning Control
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sarsa">
+<span class="md-ellipsis">
+      
+        SARSA
+      
+    </span>
+</a>
+<nav aria-label="SARSA" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#glie">
+<span class="md-ellipsis">
+      
+        GLIE
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#convergence-of-sarsa">
+<span class="md-ellipsis">
+      
+        Convergence of SARSA
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#q-learning">
+<span class="md-ellipsis">
+      
+        Q-Learning
+      
+    </span>
 </a>
 </li>
 </ul>
@@ -393,8 +525,14 @@
 </ul>
 </nav>
 </li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../project/">
+<a class="md-nav__link" href="../../../../project/">
 <span class="md-ellipsis">
     
   
@@ -420,47 +558,47 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
+<a class="md-nav__link" href="#td-prediction">
 <span class="md-ellipsis">
       
-        클라우드 플랫폼 서비스
+        TD Prediction
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_2">
+<a class="md-nav__link" href="#td-learning-control">
 <span class="md-ellipsis">
       
-        어떤 서비스를 제공?
+        TD Learning Control
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_3">
+<a class="md-nav__link" href="#sarsa">
 <span class="md-ellipsis">
       
-        구성요소
+        SARSA
       
     </span>
 </a>
-<nav aria-label="구성요소" class="md-nav">
+<nav aria-label="SARSA" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#service-resource">
+<a class="md-nav__link" href="#glie">
 <span class="md-ellipsis">
       
-        서비스(Service)와 리소스(Resource)
+        GLIE
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#project">
+<a class="md-nav__link" href="#convergence-of-sarsa">
 <span class="md-ellipsis">
       
-        프로젝트(Project)
+        Convergence of SARSA
       
     </span>
 </a>
@@ -469,10 +607,10 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#_4">
+<a class="md-nav__link" href="#q-learning">
 <span class="md-ellipsis">
       
-        참고하면 좋은 자료
+        Q-Learning
       
     </span>
 </a>
@@ -486,30 +624,30 @@
 <nav aria-label="Navigation" class="md-path">
 <ol class="md-path__list">
 <li class="md-path__item">
-<a class="md-path__link" href="../../..">
+<a class="md-path__link" href="../../../..">
 <span class="md-ellipsis">
           About
         </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="../../">
+<a class="md-path__link" href="../../../">
 <span class="md-ellipsis">
             Study
           </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="../">
+<a class="md-path__link" href="../../">
 <span class="md-ellipsis">
             Tutorial
           </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="./">
+<a class="md-path__link" href="../">
 <span class="md-ellipsis">
-            Gcp
+            Reinforcement learning
           </span>
 </a>
 </li>
@@ -517,61 +655,66 @@
 </nav>
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
-<span class="md-tag">google cloud platform</span>
+<span class="md-tag">reinforcement learning</span>
+<span class="md-tag">temporal difference</span>
 </nav>
-<h1>Learning Google Cloud Platform</h1>
-<figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1fnSskBrNmd90GnsYoD2tjlcuw2eT2k7o" width="100%">
-</img></p>
-<figcaption>Reference: Google Cloud Platform</figcaption>
-</figure>
-<p>Google Cloud Platform(GCP)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>는 아마존의 AWS<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, 마이크로소프트의 Azure<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>와 더불어 현재 삼 대(<del>unofficial</del>) 클라우드 플랫폼 서비스 중에 하나다. </p>
-<figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1AACALNGjAVutIsEWiULu8iaQWTZTTEbS" width="100%">
-</img></p>
-<figcaption> 클라우스 서비스 3 대장 </figcaption>
-</figure>
-<h2 id="_1">클라우드 플랫폼 서비스<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<h1>6. Temporal-Difference Learning</h1>
 <blockquote>
-<p>클라우드 서비스란 타사 제공업체가 호스팅하여 인터넷을 통해 사용자에게 제공하는 인프라, 플랫폼 또는 소프트웨어를 말합니다<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
 </blockquote>
-<p>즉, 회사에서 물리적 하드웨어(컴퓨터, 하드 디스크 등등)를 이용자에게 인터넷을 통해 서비스하는 형태다. 구글은 전 세계에 여러 곳에 데이터 센터(<a href="https://www.google.com/about/datacenters/locations/">구글의 데이터 센터의 위치보기</a>)를 두고 이를 서비스하고 있는데 이러한 데이터 센터의 위치를 <strong>리전(region)</strong>이라고 부른다. 당연히 통신 등 환경을 고려하여 자신의 위치와 가까운 곳에 리전을 선택하는 것이 좋지만 회사에서 유지보수 등의 이유로 비용의 차이도 발생한다(체감상 크게 차이는 나지 않는다고 한다).</p>
-<p>클라우스 서비스를 사용하는 이유는 기업에서 직접 인프라를 관리할 필요 없이 사용에만 집중 할 수 있다. 하드웨어를 구입하고 설치하는 투자 비용을 정량적으로 계산할 수 있고, 개발환경을 구성하는 시간을 단축 시킬 수 있다. 기업의 입장에서 인프라 관리비용 또한 줄일 수 있어서 비용절감을 체험할 수 있다. 돈(<img alt="💰" class="twemoji" src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f4b0.svg" title=":moneybag:"/>)만 있다면 아주 큰 컴퓨팅 클러스터를 사용하여 파라미터가 많은 딥러닝 모델을 훈련시킬 수도 있다.</p>
-<h2 id="_2">어떤 서비스를 제공?<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
-<p>인프라부터 시작해서 플랫폼, 완성형 소프트웨어등 다양한 서비스를 제공하고 있다. 구글 클라우드 플랫폼에서는 계산을 위한 Compute Engine, 빠르게 어플리케이션을 만들어주는 App Engine, 저장된 데이터를 검색, 분석하여 의사결정을 돕는 BigQuery 등 서비스를 제공하고 있다. 다양한 서비스와 타사의 주요 서비스를 비교한 문서는 <a href="https://cloud.google.com/free/docs/aws-azure-gcp-service-comparison?hl=ko">여기</a>를 참고하길 바란다.</p>
-<h2 id="_3">구성요소<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
-<h3 id="service-resource">서비스(Service)와 리소스(Resource)<a class="headerlink" href="#service-resource" title="Permanent link">¶</a></h3>
-<p>클라우드 서비스에서는 소프트웨어 혹은 하드웨어 제품 등의 요소들이 <strong>서비스(service)</strong>라는 형태로 불리게 된다. 서비스를 통해 기반 리소스에 접근 할 수 있다. 다만 모든 리소스가 전역에서 공유되는 형태는 아니다. 같은 영역에서만 엑세스 가능한 일부 서비스들이 있다.</p>
-<ul>
-<li><strong>전역(Global) 리소스</strong>: 사전에 구성된 디스크 이미지, 네트워크 등, 전역에서 엑세스 가능</li>
-<li><strong>리전(Region) 리소스</strong>: 고정 외부 IP 주소 등, 같은 리전 내에서만 엑세스 가능</li>
-<li><strong>영역(Zone) 리소스</strong>: VM 인스턴스, 디스크 등, 같은 영역 내에서만 엑세스 가능</li>
-</ul>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1UTCMkWU-VXtwuLovioU9_GN44r8laLe-"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=1UTCMkWU-VXtwuLovioU9_GN44r8laLe-" width="100%"/></a></p>
-<h3 id="project">프로젝트(Project)<a class="headerlink" href="#project" title="Permanent link">¶</a></h3>
-<p>프로젝트는 모든 구글 클라우드 서비스와 리소스를 담는 공간이다. 프로젝트 이름을 설정하면 고유의 번호, ID를 부여 받음며, 프로젝트가 사용하는 리소스에 따라 요금이 부과된다. 처음 사용하게 되면 $300 상당의 크레딧을 제공하고 있으며 서비스에 따라 무료 할당량도 존재한다.</p>
-<p>조금 자세히 얘기하면 조직(Organization)에서 결제계정이 있고, 각 프로젝트 마다 결제계정을 설정하여 리소스를 관리 가능하다. </p>
-<h2 id="_4">참고하면 좋은 자료<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
-<ul>
-<li><a href="https://youtu.be/CpPEJyWwIgY">사물궁이 잡학지식 - 클라우드란 무엇일까?</a></li>
-<li><a href="https://velopert.com/3543">서버리스 아키텍쳐란?</a></li>
-<li><a href="https://stackoverflow.com/questions/47057770/when-to-choose-app-engine-over-cloud-functions">When to choose App Engine over Cloud Functions?</a></li>
-<li><a href="https://youtu.be/YSudWlx0o9I">기술노트 - 서버 클라우드 / IT 인프라 / 서버리스</a></li>
-</ul>
+<p><strong>Temporal Difference Learning</strong> 방법은 <a href="../chapter5/">Monte Carlo(MC)</a>와 <a href="../chapter4/">Dynamic Programming(DP)</a>의 아이디어를 결합한 방식이다. MC와 비슷하게 경험으로부터 직접 배우고, DP처럼 학습된 추정치(V, Q, ...)로 다른 추정치를 업데이트 한다. </p>
+<h2 id="td-prediction">TD Prediction<a class="headerlink" href="#td-prediction" title="Permanent link">¶</a></h2>
+<p>Monte Carlo 업데이트 규칙(every-visit)을 생각해보면 다음과 같다.</p>
+<div class="arithmatex">\[V(S_t) \leftarrow V(S_t) + \alpha \lbrack G_t - V(S_t) \rbrack\]</div>
+<p>여기서 <span class="arithmatex">\(G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots \gamma^{T-t-1} R_{T}\)</span>다. 그리고 확인할 수 있는 것은 MC 방법은 <span class="arithmatex">\(V(S_t)\)</span>를 결정하기 위해서 항상 에피소드의 끝까지 기다려야 한다.</p>
+<p>하지만, TD는 다르다. <strong>One-step TD</strong>, TD(0)의 업데이트 규칙은 다음과 같다.</p>
+<div class="arithmatex">\[V(S_t) \leftarrow V(S_t) + \alpha \lbrack R_{t+1} + \gamma V(S_{t+1}) - V(S_t) \rbrack\]</div>
+<p>따라서 one-step TD 방법은 하나의 타임 스텝만 기다리면 업데이트 할 수 있다. </p>
+<div class="admonition info">
+<p class="admonition-title">Tabular TD(0)</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">pseudo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=192F6SuvRtuevZNYf8BTWaLOrTRdNW1H9" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<p>TD(0)가 기존에 추정된 값들을 기반으로 업데이트 하기 때문에 <strong>bootstrapping</strong> 방법이라고도 한다. 그러기에 오차(TD Error)도 존재한다. 오차는 현재의 추정치 <span class="arithmatex">\(V(S_t)\)</span>와 TD의 목표인 <span class="arithmatex">\(R_{t+1} + \gamma V(S_{t+1})\)</span>의 차이로 계산된다.</p>
+<div class="arithmatex">\[\delta_t := R_{t+1} + \gamma V(S_{t+1}) - V(S_t)\]</div>
+<p>다만, <span class="arithmatex">\(t+1\)</span> 시점에서 이 오차를 확인 할 수 있다.</p>
+<div class="admonition note">
+<p class="admonition-title">Example: Driving-Home</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=199Y4Lb6Ps237IIIlxbWjaBCZ70F7-pt9" width="100%"/></p>
+<p>책에서 소개한 차를 타고 집으로가는 예제를 보자. 집으로 가는데 얼마나 걸리는 지를 예측하고 싶다. 그림과 같이 6개의 state가 있고, 실제 걸린 시간(Elapsed Time)과 예측된 남은 시간(Predicted Time to Go)이 있다. 매 State가 변할 때마다 예측된 남은 시간은 달라진다. 여기서 Reward는 실제 걸린시간이 된다.</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=19E5_EMYFU46_VHGmvqpt3v0eZWC2gkB6" width="100%"/></p>
+<p>위 그림은 MC 방법과 TD 방법의 차이를 극명하게 보여주고 있다. y 축은 예측된 전체 소모 시간(=<span class="arithmatex">\(V(S_t)\)</span>)을 나타나는데, 빨간색 화살표가 가르치는 것은 각각 MC의 <span class="arithmatex">\(G_t\)</span>와 TD(0)의 <span class="arithmatex">\(R_{t+1}+\gamma V(S_{t+1})\)</span>를 나타낸다(<span class="arithmatex">\(\gamma=1\)</span>). 예를 들어, Reach Car 상태에서 MC 방법의 <span class="arithmatex">\(G_t\)</span>는 해당 에피소드의 최종 시간 43분이 return이 되는데, TD(0)의 경우 다음 타임스텝의 <span class="arithmatex">\(R_{t+1}=20\)</span>과 <span class="arithmatex">\(V(S_{t+1})=15\)</span>의 합이 된다. 따라서, 집에 도착 할 때까지 기다릴 필요없이 value를 업데이트 할 수 있다.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Example: Chain MDP</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=19HPcKQVTI1MXYd2fBeZV-FrcEV8dvBCh" width="100%"/></p>
+<p>두 번째 예시로 5개의 state를 가지고, <span class="arithmatex">\(C\)</span> 에서 시작하는 Markove reward process(MRP)가 있다. <span class="arithmatex">\(E\)</span> 오른쪽 Terminal state <span class="arithmatex">\(T\)</span> 에 도달할 경우만 1의 보상을 얻고 나머지는 0을 얻는다.</p>
+<p>해당 MRP의 true value는 bellman equation <span class="arithmatex">\(V_\pi(s) = \sum_{r, s'} p(r, s' \vert s) (r + V(s'))\)</span>을 이용할 수 있다. 여기서 policy <span class="arithmatex">\(\pi\)</span>는 deterministic하기 때문에 어떤 액션을 취하든 <span class="arithmatex">\(\pi(a \vert s)=1\)</span> 이다. 그리고 state transition probability <span class="arithmatex">\(p(r, s' \vert s)=0.5\)</span>이다(좌로 가든 우로가든 반반이다). 또한, <span class="arithmatex">\(V(T)=0\)</span>이다. 따라서 다음과 같이 계산된다<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<div class="arithmatex">\[\begin{aligned} 
+V(A) &amp;= 0.5 \big( V(T_L) + V(B) \big) =  0.5 V(B) \\
+V(B) &amp;= 0.5 \big( V(A) + V(C) \big) \\
+V(C) &amp;= 0.5 \big( V(B) + V(D) \big) \\
+V(D) &amp;= 0.5 \big( V(C) + V(E) \big) \\
+V(E) &amp;= 0.5 \big( V(D) + V(T_R) \big) = 0.5 V(D) + 0.5\\
+\end{aligned}\]</div>
+<p>따라서 <span class="arithmatex">\(V(A)\)</span>를 차례대로 <span class="arithmatex">\(V(E)\)</span>까지 대입하면 <span class="arithmatex">\(V(A) = 1/6\)</span>이 된다.</p>
+<p>아래 있는 그림 중 왼쪽은 TD(0) 방법을 사용 했을 때, 경험을 반복 할 때마다 emsimated 한 value function이 실제 값(검은선)에 근접하는 것을 확인 할 수 있다. 오른쪽 그림은 MC 방법과 TD 방법이 learning rate <span class="arithmatex">\(\alpha\)</span>의 차이에 따라 실제 값의 차이를 episode의 흐름에 따라 표시한 것이다.</p>
+</div>
+<h2 id="td-learning-control">TD Learning Control<a class="headerlink" href="#td-learning-control" title="Permanent link">¶</a></h2>
+<h2 id="sarsa">SARSA<a class="headerlink" href="#sarsa" title="Permanent link">¶</a></h2>
+<h3 id="glie">GLIE<a class="headerlink" href="#glie" title="Permanent link">¶</a></h3>
+<h3 id="convergence-of-sarsa">Convergence of SARSA<a class="headerlink" href="#convergence-of-sarsa" title="Permanent link">¶</a></h3>
+<h2 id="q-learning">Q-Learning<a class="headerlink" href="#q-learning" title="Permanent link">¶</a></h2>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://cloud.google.com/?hl=ko">Google Cloud Platform</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-<li id="fn:2">
-<p><a href="https://aws.amazon.com/ko/?nc2=h_lg">Amazon Web Cloud</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
-</li>
-<li id="fn:3">
-<p><a href="https://azure.microsoft.com/ko-kr/">Microsoft Azure</a> <a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">↩</a></p>
-</li>
-<li id="fn:4">
-<p><a href="https://www.redhat.com/ko/topics/cloud-computing/what-are-cloud-services">RedHat - What are Cloud Services</a> <a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">↩</a></p>
+<p><a href="https://datascience.stackexchange.com/questions/40899/reinforcement-learning-how-are-these-state-values-in-mrp-calculated">Reinforcement Learning - How are these state values in MRP calculated?</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -640,9 +783,9 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.fbce390c.min.js"></script>
-<script src="../../../javascripts/mathjax.js"></script>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
+<script src="../../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
