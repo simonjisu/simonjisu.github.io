@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://simonjisu.github.io/study/tutorial/gcp/geospatial/" rel="canonical"/>
+<link href="../big_query/" rel="prev"/>
+<link href="../../math/" rel="next"/>
+<link href="../../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
+<title>Big Query Geospatial Data - Soopace</title>
+<link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#1">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Soopace
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Big Query Geospatial Data
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../..">
+        
+  
+    
+  
+  About
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../../blog/">
+          
+  
+    
+  
+  Blog
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="../../../">
+          
+  
+    
+  
+  Study
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../../project/">
+          
+  
+    
+  
+  Project
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
+</a>
+    Soopace
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../..">
+<span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../../blog/">
+<span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../../">
+<span class="md-ellipsis">
+    
+  
+    Study
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Study
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../paper/">
+<span class="md-ellipsis">
+    
+  
+    Paper
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../algorithm/">
+<span class="md-ellipsis">
+    
+  
+    Algorithm
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../deeplearning/">
+<span class="md-ellipsis">
+    
+  
+    Deeplearning
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    
+  
+    Gcp
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3_3_4">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Gcp
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../big_query/">
+<span class="md-ellipsis">
+    
+  
+    Big Query
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Big Query Geospatial Data
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Big Query Geospatial Data
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1">
+<span class="md-ellipsis">
+      
+        예제1: 허리케인 경로 표시
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2">
+<span class="md-ellipsis">
+      
+        예제2: 스타벅스와 생활인구 데이터 시각화
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../math/">
+<span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../mongodb/">
+<span class="md-ellipsis">
+    
+  
+    Mongodb
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../pgm/">
+<span class="md-ellipsis">
+    
+  
+    Pgm
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../reinforcement_learning/">
+<span class="md-ellipsis">
+    
+  
+    Reinforcement learning
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../../project/">
+<span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1">
+<span class="md-ellipsis">
+      
+        예제1: 허리케인 경로 표시
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2">
+<span class="md-ellipsis">
+      
+        예제2: 스타벅스와 생활인구 데이터 시각화
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<nav aria-label="Navigation" class="md-path">
+<ol class="md-path__list">
+<li class="md-path__item">
+<a class="md-path__link" href="../../../..">
+<span class="md-ellipsis">
+          About
+        </span>
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../../../">
+<span class="md-ellipsis">
+            Study
+          </span>
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../../">
+<span class="md-ellipsis">
+            Tutorial
+          </span>
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../">
+<span class="md-ellipsis">
+            Gcp
+          </span>
+</a>
+</li>
+</ol>
+</nav>
+<article class="md-content__inner md-typeset">
+<nav class="md-tags" hidden="">
+<span class="md-tag">bigquery</span>
+<span class="md-tag">google cloud platform</span>
+</nav>
+<h1>Big Query Geospatial Data</h1>
+<p>구글 빅쿼리에서 지리정보 데이터를 다루는 방법에 대해 알아본다. <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=ko#geography_type">GEOGRAPHY</a>라는 타입의 데이터를 사용해서 좌표계의 점, 선, 면등을 다룬다. </p>
+<p>지구상의 한 점은 위도와 경도로 표현할 수 있다. 위도는 북쪽으로부터의 각도이고, 경도는 동쪽으로부터의 각도이다. 위도와 경도는 각각 -90도에서 90도 사이의 값을 가진다. 경도는 -180도에서 180도 사이의 값을 가진다.</p>
+<p>예를 들어 미국의 자유 여신상의 좌표는 <code>(40.69046171976406, -74.04444975893499)</code>으로 표현된다. <del>우리나라는 지도 데이터 반출 이슈 때문인지 좌표 조회가 안된다.</del></p>
+<iframe allowfullscreen="" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17616.10519528353!2d-74.04616637254513!3d40.68577575847555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2z7Iqk7YWM7LiEIOyYpOu4jCDrpqzrsoTti7Ag6rWt6rCA6riw64WQ66y8!5e0!3m2!1sko!2skr!4v1680954842727!5m2!1sko!2skr" style="border:0;" width="600"></iframe>
+<p>GeoJSON<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>은 지리 정보데이터를 저장하는 방법 중에 하나며, JSON 형식으로 표현된다. GeoJSON은 지리 정보데이터를 표현하는데 필요한 기본적인 요소들을 정의하고 있다. 여기 뿐만 아니라 다른 곳에서도 많이 쓰이기 때문에 알아 두는 것이 좋다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w"> </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">-121</span><span class="p">,</span><span class="mi">41</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="1">예제1: 허리케인 경로 표시<a class="headerlink" href="#1" title="Permanent link">¶</a></h2>
+<p>Big Query에서 제공하는 공개 데이터세트 Global Hurricane Tracks (IBTrACS)로 허리케인의 경로를 표시해보자. 이 데이터세트는 1851년부터 2019년까지의 허리케인의 경로를 저장하고 있다. 튜토리얼은 <a href="https://cloud.google.com/bigquery/docs/visualize-geospatial-data?hl=ko">여기</a>를 참고했다.</p>
+<p>Big Query 탐색기에서 <code>+추가</code>를 누르고 공개 데이터 세트에서 Global Hurricane Tracks를 검색하여 데이터를 추가한다.</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=19N7VANFTk-YNqfNGi16NJhcOEGqgNowb"><img align="left" alt="Image title" src="https://drive.google.com/uc?id=19N7VANFTk-YNqfNGi16NJhcOEGqgNowb" width="40%"/></a></p>
+<p>공개 데이터 세트 <code>noaa_hurricanes</code>의 <code>hurricanes</code> 테이블을 선택하고 <code>스키마</code>를 눌러 데이터의 타입을 확인한다. 그리고 <code>쿼리</code>를 눌러서 아래의 쿼리를 실행한다. </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">-- # SELECT 절은 폭풍의 모든 날씨 데이터를 선택하고 ST_GeogPoint 함수를 사용하여 latitude 및 longitude 열의 값을 GEOGRAPHY 유형(점)으로 변환합니다.</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">SELECT</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="n">ST_GeogPoint</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">point</span><span class="p">,</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="n">name</span><span class="p">,</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="n">iso_time</span><span class="p">,</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="n">dist2land</span><span class="p">,</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="n">usa_wind</span><span class="p">,</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">  </span><span class="n">usa_pressure</span><span class="p">,</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">  </span><span class="n">usa_sshs</span><span class="p">,</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">  </span><span class="p">(</span><span class="n">usa_r34_ne</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_nw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_se</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_sw</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">radius_34kt</span><span class="p">,</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="p">(</span><span class="n">usa_r50_ne</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_nw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_se</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_sw</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">radius_50kt</span>
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="k">FROM</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">  </span><span class="o">`</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">.</span><span class="n">noaa_hurricanes</span><span class="p">.</span><span class="n">hurricanes</span><span class="o">`</span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="c1">-- WHERE 절은 2017년 허리케인 시즌의 허리케인 마리아를 따라 이 데이터를 대서양의 점으로 필터링합니다.</span>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="k">WHERE</span>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%MARIA%'</span>
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">season</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2017'</span>
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">ST_DWithin</span><span class="p">(</span><span class="n">ST_GeogFromText</span><span class="p">(</span><span class="s1">'POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'</span><span class="p">),</span>
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">    </span><span class="n">ST_GeogPoint</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="c1">-- ORDER BY 절은 점을 순서대로 나열하여 폭풍의 경로를 시간순으로 형성합니다.</span>
+<a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
+<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">  </span><span class="n">iso_time</span><span class="w"> </span><span class="k">ASC</span>
+</code></pre></div>
+<p>실행 후 해당 데이터를 <a href="https://bigquerygeoviz.appspot.com/?hl=ko">Geo Viz</a>에서 쿼리 결과를 시각화한다. 쿼리를 실행하고 시각화 형식을 지정할 수 있다. 옵션은 다음과 같다.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>fillColor</strong></td>
+<td>다각형 또는 점의 채우기 색상. 예를 들어 'linear' 또는 'interval' 함수는 숫자 값을 색상 그라디언트에 매핑하는 데 사용할 수 있음.</td>
+</tr>
+<tr>
+<td><strong>fillOpacity</strong></td>
+<td>다각형 또는 점의 채우기 불투명도. 값은 0에서 1 사이. 여기서 0은 투명이고, 1은 불투명.</td>
+</tr>
+<tr>
+<td><strong>strokeColor</strong></td>
+<td>다각형 또는 선의 획이나 윤곽선 색상.</td>
+</tr>
+<tr>
+<td><strong>strokeOpacity</strong></td>
+<td>다각형 또는 선의 획이나 윤곽선 불투명도. 값은 0에서 1 사이. 여기서 0은 투명이고, 1은 불투명.</td>
+</tr>
+<tr>
+<td><strong>strokeWeight</strong></td>
+<td>다각형 또는 선의 획 또는 윤곽선 너비(픽셀 단위).</td>
+</tr>
+<tr>
+<td><strong>circleRadius</strong></td>
+<td>점을 나타내는 원의 반지름(미터 단위). 예를 들어 산점도 스타일을 만들기 위해 'linear' 함수를 사용하여 숫자 값을 점 크기에 매핑할 수 있음.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">설정</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">fillColor</label><label for="__tabbed_1_2">fillOpacity</label><label for="__tabbed_1_3">circleRadius</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19R4YTCWSw7GbQA5z7wqJ88r5ICuPSOqS" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19UI6-JHAGc0YqU9OkVz_1bNcxDg0UsvL" width="100%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19RES057I0jjPzi5GY2BnlVhIo1_xLAZp" width="80%"/></p>
+</div>
+</div>
+</input></input></input></div>
+</div>
+<h2 id="2">예제2: 스타벅스와 생활인구 데이터 시각화<a class="headerlink" href="#2" title="Permanent link">¶</a></h2>
+<p>스타벅스 매장의 위치 데이터와 생활인구를 시각화해보자. 생활인구란 통신데이터로 특정 시점에 개인이 위치한 지역을 집계한 '현주인구'를 말한다. 시간대에 따라 변화하는 인구의 규모로 지역간 특성을 추측해 볼 수 있는 유용한 데이터다. 서울 열린데이터 광장<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>에서 데이터를 받을 수 있다.</p>
+<p>2022년 데이터를 받아서 12월 25일 오후 3시대 각 20대 남녀 생활인구를 스타벅스 매장의 좌표 위치에 시각화해본다. 전처리 된 데이터는 <a href="https://github.com/simonjisu/bkms2_2023spring/tree/main/03_geospatial">여기</a>에서 받을 수 있다.</p>
+<p><code>starbucks</code>라는 데이터 세트를 생성해주고 두 개의 데이터를 업로드한다. 각각 테이블의 이름은 <code>starbucks_kr</code>와 <code>people_1225</code>으로 한다. 그리고 시각화 데이터를 준비하기 위해 다음의 쿼리를 실행한다.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">project_id</span><span class="p">]</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">starbucks</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">new_view</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="n">ST_GEOGPOINT</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">lat</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">point</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 좌표</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="n">s</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 매장 이름</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="k">time</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 시간</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="n">s</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 시/군/구</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">region_cat</span><span class="p">,</span><span class="w">  </span><span class="c1">--  시/군/구 카테고리</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">m2024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">m2529</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">w2024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">w2529</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p20</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 20대 남녀 인구</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">project_id</span><span class="p">].</span><span class="n">starbucks</span><span class="p">.</span><span class="n">starbucks_kr</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">s</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">project_id</span><span class="p">].</span><span class="n">starbucks</span><span class="p">.</span><span class="n">people_1225</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="k">ON</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">region</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"서울특별시"</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="k">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"2022-12-25 15:00:00"</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="p">)</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">설정</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">fillColor</label><label for="__tabbed_2_2">fillOpacity</label><label for="__tabbed_2_3">circleRadius</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19sk0mFPKCWNlR4l5FOQs-un4TnqEUyxz" width="80%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19sLrIOmItqEqU9CzQgLQVSV18JgIkKtp" width="100%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19sywjCFLpbUH6dyTq2Pi7wRkopqRz3Lz" width="80%"/></p>
+</div>
+</div>
+</input></input></input></div>
+</div>
+<p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19YzCpliuViyYzOhOW99eCiXbbGKuP4wG" width="100%"/></p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="https://geojson.org/">https://geojson.org/</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do">서울 열린데이터 광장 - 서울 생활인구</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+<!-- Giscus -->
+<h2 id="__comments">Comments</h2>
+<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
+</script>
+<!-- Synchronize Giscus theme with palette -->
+<script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<a class="md-top md-icon" data-md-component="top" hidden="" href="#">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </a>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs Insiders
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
+<script src="../../../../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
+</html>
