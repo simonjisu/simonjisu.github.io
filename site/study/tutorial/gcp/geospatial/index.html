@@ -379,6 +379,19 @@
       
     </span>
 </a>
+<nav aria-label="예제2: 스타벅스와 생활인구 데이터 시각화" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+      
+        최종 시각화 결과물
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -486,6 +499,19 @@
       
     </span>
 </a>
+<nav aria-label="예제2: 스타벅스와 생활인구 데이터 시각화" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+      
+        최종 시각화 결과물
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -545,26 +571,26 @@
 <p>공개 데이터 세트 <code>noaa_hurricanes</code>의 <code>hurricanes</code> 테이블을 선택하고 <code>스키마</code>를 눌러 데이터의 타입을 확인한다. 그리고 <code>쿼리</code>를 눌러서 아래의 쿼리를 실행한다. </p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">-- # SELECT 절은 폭풍의 모든 날씨 데이터를 선택하고 ST_GeogPoint 함수를 사용하여 latitude 및 longitude 열의 값을 GEOGRAPHY 유형(점)으로 변환합니다.</span>
 <a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">SELECT</span>
-<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="n">ST_GeogPoint</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">point</span><span class="p">,</span>
-<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">  </span><span class="n">name</span><span class="p">,</span>
-<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="n">iso_time</span><span class="p">,</span>
-<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="n">dist2land</span><span class="p">,</span>
-<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="n">usa_wind</span><span class="p">,</span>
-<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">  </span><span class="n">usa_pressure</span><span class="p">,</span>
-<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">  </span><span class="n">usa_sshs</span><span class="p">,</span>
-<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">  </span><span class="p">(</span><span class="n">usa_r34_ne</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_nw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_se</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_sw</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">radius_34kt</span><span class="p">,</span>
-<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="p">(</span><span class="n">usa_r50_ne</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_nw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_se</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_sw</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">radius_50kt</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="n">ST_GeogPoint</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">point</span><span class="p">,</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="n">name</span><span class="p">,</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="n">iso_time</span><span class="p">,</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="n">dist2land</span><span class="p">,</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="n">usa_wind</span><span class="p">,</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="n">usa_pressure</span><span class="p">,</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="n">usa_sshs</span><span class="p">,</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="p">(</span><span class="n">usa_r34_ne</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_nw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_se</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r34_sw</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">radius_34kt</span><span class="p">,</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="p">(</span><span class="n">usa_r50_ne</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_nw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_se</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">usa_r50_sw</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">radius_50kt</span>
 <a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="k">FROM</span>
-<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">  </span><span class="o">`</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">.</span><span class="n">noaa_hurricanes</span><span class="p">.</span><span class="n">hurricanes</span><span class="o">`</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="o">`</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">.</span><span class="n">noaa_hurricanes</span><span class="p">.</span><span class="n">hurricanes</span><span class="o">`</span>
 <a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="c1">-- WHERE 절은 2017년 허리케인 시즌의 허리케인 마리아를 따라 이 데이터를 대서양의 점으로 필터링합니다.</span>
 <a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="k">WHERE</span>
-<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%MARIA%'</span>
-<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">season</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2017'</span>
-<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">ST_DWithin</span><span class="p">(</span><span class="n">ST_GeogFromText</span><span class="p">(</span><span class="s1">'POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'</span><span class="p">),</span>
-<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">    </span><span class="n">ST_GeogPoint</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'%MARIA%'</span>
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">season</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2017'</span>
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">ST_DWithin</span><span class="p">(</span><span class="n">ST_GeogFromText</span><span class="p">(</span><span class="s1">'POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'</span><span class="p">),</span>
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">        </span><span class="n">ST_GeogPoint</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
 <a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="c1">-- ORDER BY 절은 점을 순서대로 나열하여 폭풍의 경로를 시간순으로 형성합니다.</span>
 <a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
-<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">  </span><span class="n">iso_time</span><span class="w"> </span><span class="k">ASC</span>
+<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">    </span><span class="n">iso_time</span><span class="w"> </span><span class="k">ASC</span>
 </code></pre></div>
 <p>실행 후 해당 데이터를 <a href="https://bigquerygeoviz.appspot.com/?hl=ko">Geo Viz</a>에서 쿼리 결과를 시각화한다. 쿼리를 실행하고 시각화 형식을 지정할 수 있다. 옵션은 다음과 같다.</p>
 <table>
@@ -622,13 +648,13 @@
 <p>2022년 데이터를 받아서 12월 25일 오후 3시대 각 20대 남녀 생활인구를 스타벅스 매장의 좌표 위치에 시각화해본다. 전처리 된 데이터는 <a href="https://github.com/simonjisu/bkms2_2023spring/tree/main/03_geospatial">여기</a>에서 받을 수 있다.</p>
 <p><code>starbucks</code>라는 데이터 세트를 생성해주고 두 개의 데이터를 업로드한다. 각각 테이블의 이름은 <code>starbucks_kr</code>와 <code>people_1225</code>으로 한다. 그리고 시각화 데이터를 준비하기 위해 다음의 쿼리를 실행한다.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">project_id</span><span class="p">]</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">starbucks</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">new_view</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span>
-<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="n">ST_GEOGPOINT</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">lat</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">point</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 좌표</span>
-<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="n">s</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 매장 이름</span>
-<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="k">time</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 시간</span>
-<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="n">s</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 시/군/구</span>
-<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">region_cat</span><span class="p">,</span><span class="w">  </span><span class="c1">--  시/군/구 카테고리</span>
-<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">m2024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">m2529</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">w2024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">w2529</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p20</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 20대 남녀 인구</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="n">ST_GEOGPOINT</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">lat</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">point</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 좌표</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 매장 이름</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="k">time</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 시간</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">region</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 시/군/구</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">region_cat</span><span class="p">,</span><span class="w">  </span><span class="c1">--  시/군/구 카테고리</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">m2024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">m2529</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">w2024</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">w2529</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p20</span><span class="p">,</span><span class="w">  </span><span class="c1">-- 20대 남녀 인구</span>
 <a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">project_id</span><span class="p">].</span><span class="n">starbucks</span><span class="p">.</span><span class="n">starbucks_kr</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">s</span>
 <a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">project_id</span><span class="p">].</span><span class="n">starbucks</span><span class="p">.</span><span class="n">people_1225</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span>
 <a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="k">ON</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">region</span>
@@ -641,6 +667,8 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19sk0mFPKCWNlR4l5FOQs-un4TnqEUyxz" width="80%"/></p>
+<p>각 카테고리는 서울시 자치구역 통합 계획에 따라 부여했다. </p>
+<p><img align="left" alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19zn8qnF8PgFe5iw_lbrbXu8lxFqX_L_x" width="80%"/></p>
 </div>
 <div class="tabbed-block">
 <p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19sLrIOmItqEqU9CzQgLQVSV18JgIkKtp" width="100%"/></p>
@@ -651,6 +679,8 @@
 </div>
 </input></input></input></div>
 </div>
+<h3 id="_1">최종 시각화 결과물<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<p>꼭 구글로 써야한다면 해당 툴을 쓰지만 조금 더 자유롭게 하려면 Python의 Folium 패키지 등 다른 툴을 쓰는 것이 좋아보인다.</p>
 <p><img alt="Image title" class="skipglightbox" src="https://drive.google.com/uc?id=19YzCpliuViyYzOhOW99eCiXbbGKuP4wG" width="100%"/></p>
 <div class="footnote">
 <hr/>

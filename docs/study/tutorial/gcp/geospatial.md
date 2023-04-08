@@ -36,26 +36,26 @@ Big Query 탐색기에서 `+추가`를 누르고 공개 데이터 세트에서 G
 ```sql
 -- # SELECT 절은 폭풍의 모든 날씨 데이터를 선택하고 ST_GeogPoint 함수를 사용하여 latitude 및 longitude 열의 값을 GEOGRAPHY 유형(점)으로 변환합니다.
 SELECT
-  ST_GeogPoint(longitude, latitude) AS point,
-  name,
-  iso_time,
-  dist2land,
-  usa_wind,
-  usa_pressure,
-  usa_sshs,
-  (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
-  (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
+    ST_GeogPoint(longitude, latitude) AS point,
+    name,
+    iso_time,
+    dist2land,
+    usa_wind,
+    usa_pressure,
+    usa_sshs,
+    (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
+    (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
 FROM
-  `bigquery-public-data.noaa_hurricanes.hurricanes`
+    `bigquery-public-data.noaa_hurricanes.hurricanes`
 -- WHERE 절은 2017년 허리케인 시즌의 허리케인 마리아를 따라 이 데이터를 대서양의 점으로 필터링합니다.
 WHERE
-  name LIKE '%MARIA%'
-  AND season = '2017'
-  AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
-    ST_GeogPoint(longitude, latitude), 10)
+    name LIKE '%MARIA%'
+    AND season = '2017'
+    AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
+        ST_GeogPoint(longitude, latitude), 10)
 -- ORDER BY 절은 점을 순서대로 나열하여 폭풍의 경로를 시간순으로 형성합니다.
 ORDER BY
-  iso_time ASC
+    iso_time ASC
 ```
 
 실행 후 해당 데이터를 [Geo Viz](https://bigquerygeoviz.appspot.com/?hl=ko)에서 쿼리 결과를 시각화한다. 쿼리를 실행하고 시각화 형식을 지정할 수 있다. 옵션은 다음과 같다.
@@ -95,13 +95,13 @@ ORDER BY
 
 ```sql
 CREATE VIEW `[project_id]`.`starbucks`.`new_view` AS (
-  SELECT 
-  ST_GEOGPOINT(s.long, s.lat) AS point,  -- 좌표
-  s.name,  -- 매장 이름
-  p.time,  -- 시간
-  s.region,  -- 시/군/구
-  p.region_cat,  --  시/군/구 카테고리
-  p.m2024 + p.m2529 + p.w2024 + p.w2529 AS p20,  -- 20대 남녀 인구
+    SELECT 
+    ST_GEOGPOINT(s.long, s.lat) AS point,  -- 좌표
+    s.name,  -- 매장 이름
+    p.time,  -- 시간
+    s.region,  -- 시/군/구
+    p.region_cat,  --  시/군/구 카테고리
+    p.m2024 + p.m2529 + p.w2024 + p.w2529 AS p20,  -- 20대 남녀 인구
 FROM `[project_id].starbucks.starbucks_kr` AS s
 JOIN `[project_id].starbucks.people_1225` AS p
 ON s.region = p.region
@@ -115,6 +115,10 @@ WHERE s.city = "서울특별시" AND p.time = "2022-12-25 15:00:00"
 
         ![Image title](https://drive.google.com/uc?id=19sk0mFPKCWNlR4l5FOQs-un4TnqEUyxz){ class="skipglightbox" width=80% }
 
+        각 카테고리는 서울시 자치구역 통합 계획에 따라 부여했다. 
+
+        ![Image title](https://drive.google.com/uc?id=19zn8qnF8PgFe5iw_lbrbXu8lxFqX_L_x){ class="skipglightbox" align=left width=80% }
+
     === "fillOpacity"
 
         ![Image title](https://drive.google.com/uc?id=19sLrIOmItqEqU9CzQgLQVSV18JgIkKtp){ class="skipglightbox" width=100% }
@@ -122,5 +126,9 @@ WHERE s.city = "서울특별시" AND p.time = "2022-12-25 15:00:00"
     === "circleRadius"
 
         ![Image title](https://drive.google.com/uc?id=19sywjCFLpbUH6dyTq2Pi7wRkopqRz3Lz){ class="skipglightbox" width=80% }
+
+### 최종 시각화 결과물
+
+꼭 구글로 써야한다면 해당 툴을 쓰지만 조금 더 자유롭게 하려면 Python의 Folium 패키지 등 다른 툴을 쓰는 것이 좋아보인다.
 
 ![Image title](https://drive.google.com/uc?id=19YzCpliuViyYzOhOW99eCiXbbGKuP4wG){ class="skipglightbox" width=100% }
