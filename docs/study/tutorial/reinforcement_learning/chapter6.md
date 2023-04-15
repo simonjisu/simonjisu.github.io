@@ -69,13 +69,54 @@ $$\delta_t := R_{t+1} + \gamma V(S_{t+1}) - V(S_t)$$
     아래 있는 그림 중 왼쪽은 TD(0) 방법을 사용 했을 때, 경험을 반복 할 때마다 emsimated 한 value function이 실제 값(검은선)에 근접하는 것을 확인 할 수 있다. 오른쪽 그림은 MC 방법과 TD 방법이 learning rate $\alpha$의 차이에 따라 실제 값의 차이를 episode의 흐름에 따라 표시한 것이다.
 
     
-## TD Learning Control
-
 ## SARSA
 
-### GLIE
+보통 우리는 진짜 모델을 모르기 때문에, $v_\pi(s)$ 보다 대신에 $q_\pi(s, a)$ 학습할 수 있게 한다. SARSA의 업데이트 방식은 다음과 같다.
+
+$$Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \lbrack R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t) \rbrack$$
+
+!!! info "Sarsa (on-policy TD Control)"
+
+    === "pseduo code"
+
+        ![HeadImg](https://drive.google.com/uc?id=11e37aCLYIU-KLd_AKp36bwmyrfgpGOgh){ class="skipglightbox" width="100%" }
+
+여기서 Greedy in the Limit with Infinite Exploration(GLIE)라는 가정이 들어간다. 
+
+1. 모든 state-action 쌍은 무한의 횟수로 탐색이 가능하다는 것이다. 
+
+    $$\lim_{t \rightarrow \infty} N_t(s, a) = \infty$$
+
+2. 또한, policy는 greedy policy으로 수렴한다. 즉, state-action 쌍의 추정치가 개선됨에 따라 policy가 점점 결정론적으로 항상 최대의 가치를 가지는 policy가 된다는 뜻이다. 
+
+    $$\lim_{t \rightarrow \infty} \pi_t(a \vert s) = \Bbb{1} \bigg\lbrack a = \underset{a'}{\arg\max}  Q_k(s, a') \bigg\rbrack $$
+
+예를 들어, $\epsilon$-greedy에서 $\epsilon = \dfrac{1}{t}$으로 설정하면 이는 GLIE를 만족하는 방법이다. 
 
 ### Convergence of SARSA
+
+아래의 조건하에 SARSA는 최적의 action-value function으로 수렴한다 $Q(s, a) \rightarrow q_*(s, a)$:
+* $\pi_t(a \vert s)$ 가 GLIE를 만족한다.
+* 학습률(learning rate = step size)가 확률적 수렴에 만족한다.
+
+    $$\begin{aligned} \sum_{t=1}^\infty \alpha_t &= \infty \\ \sum_{t=1}^\infty \alpha_t^2 < \infty \end{aligned}$$
+
+!!! note "Windy grid world"
+
+    ![HeadImg](https://drive.google.com/uc?id=11fSZyEHIOpnG80j6ym1KGOXYKck5WOE1){ class="skipglightbox" width="100%" }
+
+    한번 움직일 때마다 $-1$의 보상, $\gamma = 1$인 바람이 부는 grid world 예제다. 뒤에 있는 빨강색 그래프는 에피소드가 끝날 때까지 걸린 Time steps를 $x$축, episode는 $y$ 축에 드려지고 있다. 예를 들어 그래프 처럼 첫번째 eposide는 거의 1500대에 종료가 되었고 그 다음 에피소드는 대략 2100번 초반에 위치한 것으로 보인다. Pseudo Code로 다음과 같이 쓸 수 있다.
+
+    ```python
+    import matplotlib.pyplot as plt
+    episodes = [[1]*1500 + [2]*600 + ... [episode번호]*종료까지_걸린_횟수 ]
+    plt.plot(episodes)
+    plt.xlabel('time steps')
+    plt.ylabel('episodes')
+    plt.show()
+    ```
+
+    $\epsilon = 0.1, \alpha = 0.5$를 적용했을 시, 우리는 시간이 지날 수록 목적에 더 빨리 도달함을 알 수 있다. 
 
 ## Q-Learning
 
