@@ -5,21 +5,21 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/" rel="canonical"/>
-<link href="../pgm/hmms/" rel="prev"/>
-<link href="chapter1/" rel="next"/>
-<link href="../../../assets/images/favicon.png" rel="icon"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter8/" rel="canonical"/>
+<link href="../chapter7/" rel="prev"/>
+<link href="../../../../project/" rel="next"/>
+<link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>Reinforcement Learning - Soopace</title>
-<link href="../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<title>8. Planning and Learning with Tabular Methods - Soopace</title>
+<link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
 <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -30,19 +30,22 @@
                 body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
                 body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
                 body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#planning">
+          Skip to content
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
 <header class="md-header md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
@@ -57,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Reinforcement Learning
+              8. Planning and Learning with Tabular Methods
             
           </span>
 </div>
@@ -108,7 +111,7 @@
 <div class="md-grid">
 <ul class="md-tabs__list">
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../..">
+<a class="md-tabs__link" href="../../../..">
         
   
     
@@ -118,7 +121,7 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../blog/">
+<a class="md-tabs__link" href="../../../../blog/">
           
   
     
@@ -128,7 +131,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link md-tabs__link--active" href="../../">
+<a class="md-tabs__link md-tabs__link--active" href="../../../">
           
   
     
@@ -138,7 +141,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../project/">
+<a class="md-tabs__link" href="../../../../project/">
           
   
     
@@ -159,8 +162,8 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
 </a>
     Soopace
   </label>
@@ -176,7 +179,7 @@
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../..">
+<a class="md-nav__link" href="../../../..">
 <span class="md-ellipsis">
     
   
@@ -188,7 +191,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/">
+<a class="md-nav__link" href="../../../../blog/">
 <span class="md-ellipsis">
     
   
@@ -203,7 +206,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../../../">
 <span class="md-ellipsis">
     
   
@@ -228,7 +231,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../paper/">
+<a class="md-nav__link" href="../../../paper/">
 <span class="md-ellipsis">
     
   
@@ -243,7 +246,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
+<a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
     
   
@@ -268,7 +271,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../algorithm/">
+<a class="md-nav__link" href="../../algorithm/">
 <span class="md-ellipsis">
     
   
@@ -280,7 +283,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../deeplearning/">
+<a class="md-nav__link" href="../../deeplearning/">
 <span class="md-ellipsis">
     
   
@@ -292,7 +295,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../gcp/">
+<a class="md-nav__link" href="../../gcp/">
 <span class="md-ellipsis">
     
   
@@ -305,7 +308,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../math/">
+<a class="md-nav__link" href="../../math/">
 <span class="md-ellipsis">
     
   
@@ -317,7 +320,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../mongodb/">
+<a class="md-nav__link" href="../../mongodb/">
 <span class="md-ellipsis">
     
   
@@ -330,7 +333,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../pgm/">
+<a class="md-nav__link" href="../../pgm/">
 <span class="md-ellipsis">
     
   
@@ -345,7 +348,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link md-nav__link--active" href="./">
+<a class="md-nav__link" href="../">
 <span class="md-ellipsis">
     
   
@@ -355,7 +358,7 @@
     
   </span>
 </a>
-<label class="md-nav__link md-nav__link--active" for="__nav_3_3_8">
+<label class="md-nav__link" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -370,7 +373,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter1/">
+<a class="md-nav__link" href="../chapter1/">
 <span class="md-ellipsis">
     
   
@@ -382,7 +385,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter2/">
+<a class="md-nav__link" href="../chapter2/">
 <span class="md-ellipsis">
     
   
@@ -394,7 +397,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter3/">
+<a class="md-nav__link" href="../chapter3/">
 <span class="md-ellipsis">
     
   
@@ -406,7 +409,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter4/">
+<a class="md-nav__link" href="../chapter4/">
 <span class="md-ellipsis">
     
   
@@ -418,7 +421,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter5/">
+<a class="md-nav__link" href="../chapter5/">
 <span class="md-ellipsis">
     
   
@@ -430,7 +433,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter6/">
+<a class="md-nav__link" href="../chapter6/">
 <span class="md-ellipsis">
     
   
@@ -442,7 +445,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter7/">
+<a class="md-nav__link" href="../chapter7/">
 <span class="md-ellipsis">
     
   
@@ -453,8 +456,20 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="chapter8/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    8. Planning and Learning with Tabular Methods
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -464,6 +479,72 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#planning">
+<span class="md-ellipsis">
+      
+        Planning
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#planning-learning">
+<span class="md-ellipsis">
+      
+        Planning &amp; Learning
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dyna-q-integrated-planning-and-learning">
+<span class="md-ellipsis">
+      
+        Dyna-Q: Integrated Planning and Learning
+      
+    </span>
+</a>
+<nav aria-label="Dyna-Q: Integrated Planning and Learning" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#when-the-model-is-wrong">
+<span class="md-ellipsis">
+      
+        When the Model is Wrong
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dyna-q">
+<span class="md-ellipsis">
+      
+        Dyna-Q+
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prioritized-sweeping">
+<span class="md-ellipsis">
+      
+        Prioritized Sweeping
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -475,7 +556,7 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../project/">
+<a class="md-nav__link" href="../../../../project/">
 <span class="md-ellipsis">
     
   
@@ -495,6 +576,70 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#planning">
+<span class="md-ellipsis">
+      
+        Planning
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#planning-learning">
+<span class="md-ellipsis">
+      
+        Planning &amp; Learning
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dyna-q-integrated-planning-and-learning">
+<span class="md-ellipsis">
+      
+        Dyna-Q: Integrated Planning and Learning
+      
+    </span>
+</a>
+<nav aria-label="Dyna-Q: Integrated Planning and Learning" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#when-the-model-is-wrong">
+<span class="md-ellipsis">
+      
+        When the Model is Wrong
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#dyna-q">
+<span class="md-ellipsis">
+      
+        Dyna-Q+
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prioritized-sweeping">
+<span class="md-ellipsis">
+      
+        Prioritized Sweeping
+      
+    </span>
+</a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -503,28 +648,28 @@
 <nav aria-label="Navigation" class="md-path">
 <ol class="md-path__list">
 <li class="md-path__item">
-<a class="md-path__link" href="../../..">
+<a class="md-path__link" href="../../../..">
 <span class="md-ellipsis">
           About
         </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="../../">
+<a class="md-path__link" href="../../../">
 <span class="md-ellipsis">
             Study
           </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="../">
+<a class="md-path__link" href="../../">
 <span class="md-ellipsis">
             Tutorial
           </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="./">
+<a class="md-path__link" href="../">
 <span class="md-ellipsis">
             Reinforcement learning
           </span>
@@ -535,7 +680,114 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
+<span class="md-tag">planning</span>
 </nav>
+<h1>8. Planning and Learning with Tabular Methods</h1>
+<blockquote>
+<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
+</blockquote>
+<p>지금까지는 model-based와 model-free 방법들을 다루어 보았다. </p>
+<ul>
+<li>Model-based (e.g., Dynamic Programming)은 planning에 초점이 맞춰져있다.</li>
+<li>Model-free (e.g., Monte Carlo, Temporal Difference)은 learning에 초점이 맞춰져있다.</li>
+</ul>
+<h2 id="planning">Planning<a class="headerlink" href="#planning" title="Permanent link">¶</a></h2>
+<p><strong>planning</strong>은 model을 입력으로하고 policy를 출력으로하는 어떤 계산 프로세스로 정의된다. </p>
+<div class="arithmatex">\[\text{model} \xrightarrow[]{\text{planning}} \text{policy}\]</div>
+<ul>
+<li>State-space planning: state space에서 optimal policy를 찾는 과정. Actions는 state과 state 사이의 transition을 야기하며, value function는 state로 계산된다.</li>
+<li>Plan-space planning: plan space를 찾는 과정. 하나의 plan에서 다른 plan으로 변경하는 연산(operators)을 찾는 것이다.</li>
+</ul>
+<p>우선 같은 structure을 공유하는 state-space planning만 알아본다. Policy를 개선하기 위해서 value function을 계산하고, simulated experiences가 value function을 계산하는데 근거가 되어준다.</p>
+<div class="arithmatex">\[\text{model} \xrightarrow[]{} \text{simulated experience} \xrightarrow[]{\text{backups}} \text{values} \xrightarrow[]{} \text{policy}\]</div>
+<h2 id="planning-learning">Planning &amp; Learning<a class="headerlink" href="#planning-learning" title="Permanent link">¶</a></h2>
+<p>Planning과 Learning의 차이점은 학습에 사용되는 경험 종류다. Planning은 model에서 생성된 simulated experience를 사용하고, Learning은 환경에서 생성된 real experience를 사용한다. 보통 두 방법을 결합해서 사용하는데 대표적인 예로 "the planning method based on Q-learning"이 있다.</p>
+<div class="admonition info">
+<p class="admonition-title">random-sample one-step tabular Q-planning</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">pseudo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1B5ouTXjMSO0A2wJxkFeHP2UPL67MYe-E" width="100%"/></p>
+<ul>
+<li>2번에서 보통 real experience를 쓰지만, sample method가 사용되었다.</li>
+</ul>
+</div>
+</div>
+</input></div>
+</div>
+<h2 id="dyna-q-integrated-planning-and-learning">Dyna-Q: Integrated Planning and Learning<a class="headerlink" href="#dyna-q-integrated-planning-and-learning" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th align="center">Dyna</th>
+<th align="center">General Dyna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BHRiar1J0oJMe0ZrHF9pKFO54I_7jPPp" width="100%"/></td>
+<td align="center"><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BMxCdEq2dTAnaD6dOgg1JwLWVJjSE0Qi" width="100%"/></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dyna-Q</strong>는 online planning agent의 주요 functions을 포함하는 간단한 아키텍쳐다. Online 상황에서 planning, acting, learning을 결합한 방법이다. </p>
+<ul>
+<li><strong>Model-Learning</strong>: real experience로 model을 학습하는 것으로, 환경을 조금 더 잘 정확하게 따라할 수 있도록 한다.</li>
+<li><strong>Direct RL</strong>: 강화학습으로 value function과 policy 을 개선하는 과정.</li>
+<li><strong>Indirect RL</strong>: model을 통해 value function과 policy를 개선하는 과정.</li>
+<li><strong>Planning</strong>: model을 통해 simulated experience를 생성하고, 이를 통해 value function과 policy을 개선한다.</li>
+<li><strong>Search Control</strong>: simulated experience를 생성하기 위해 starting state와 action을 선택해서 model에 입력하는 과정.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Tabular Dyna-Q</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">pseudo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BOyzRDso-Lw8HrBjBIlxIhbH0YJL1Pb4" width="100%"/></p>
+<ul>
+<li>여기서 (e) 와 (f) 과정이 없으면 one-step tabular Q-learning과 동일하다.</li>
+</ul>
+</div>
+</div>
+</input></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Dyna Maze</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BXGoERyTg6R1Q1YURb2rVxhCXFRIowd7" width="100%"/></p>
+<p>미로 문제에서 Dyna-Q를 적용한 결과다. Dyna-Q는 planning을 통해 더 많은 경험을 얻어서 더 빠르게 optimal policy를 찾을 수 있다.</p>
+<ul>
+<li>모든 episode는 <span class="arithmatex">\(S\)</span>에서 시작한다. 미로의 밖같과 검은 장애물은 지나갈 수 없다.</li>
+<li>Actions = 상, 하, 좌, 우</li>
+<li>Reward = <span class="arithmatex">\(G\)</span>에 도착시 <span class="arithmatex">\(+1\)</span>, 나머지는 <span class="arithmatex">\(0\)</span>.</li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BXQ7GQ__7ov2V_7RAP48kf6RRMRUOCfc" width="100%"/></p>
+<p>위 그림은 두번째 episode에서 Planning 유무에 다른 policy 차이를 보여준다. Planning의 유무에 따라서 optimal policy를 찾는 속도가 달라진다.</p>
+</div>
+<h3 id="when-the-model-is-wrong">When the Model is Wrong<a class="headerlink" href="#when-the-model-is-wrong" title="Permanent link">¶</a></h3>
+<p>Model이 항상 옳은 것은 아니다. 예를 들어, (1) 환경이 stochastic하고, 경험의 갯수가 충분치 않을 때, (2) 일반화가 잘 되지 않을 때, (3) 환경이 변했는데 model이 관찰하지 못하는 경우 등이 있다. 다음 예제를 한 번 보자. Dyna-Q+는 조금 있다 다룬다.</p>
+<div class="admonition note">
+<p class="admonition-title">Example: Blocking and Shorcut Maze</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Blocking Maze</label><label for="__tabbed_3_2">Shortcut Maze</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BZ_NWxjrRoukE0kaZ1X7vKl3OgksSsAO" width="80%"/></p>
+<p>간단한 미로이지만 1000 time steps 이후에 장벽으로 생긴 블록이 오른쪽으로 한칸 이동한다. 처음에 최적의 경로는 오른쪽으로 탐색하는 것이고 블록이 옮겨지면 왼쪽으로 찾는 것이 최적의 경로다. </p>
+</div>
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1BgPlwrHxWAv-Eni7UvGx0qO2Nrpk9tf3" width="80%"/></p>
+<p>간단한 미로이지만 3000 time steps 이후에 장벽의 오른쪽이 뚫리며 숏컷이 생긴다. 처음에 최적의 경로는 왼쪽으로  탐색하는 것이고 블록이 사라지면 오른쪽으로 찾는 것이 최적의 경로다. 그러나 Dyna-Q는 블록이 사라지고 나서 최적의 경로를 찾지 못하고 이전의 경로에 만족하는 모습을 보인다(cumulateive reward의 기울기가 급격하게 상승하지 않는다). Exploration-exploitation trade-off가 존재한다.</p>
+</div>
+</div>
+</input></input></div>
+</div>
+<h3 id="dyna-q">Dyna-Q+<a class="headerlink" href="#dyna-q" title="Permanent link">¶</a></h3>
+<p>Dyna-Q+는 각 state-action 쌍이 지난번 시도 이후로 얼만큼 오랫동안 경과했는지 기록하는 휴리스틱한 방법이다. 시간이 오래되었을 수록 해당 state-action 쌍에 대한 모델의 지식이 잘못 되었다는 것을 알려주기 위함이다. 그래서 보상에 경과된 시간을 추가하여 업데이트 한다. </p>
+<div class="arithmatex">\[Q(S, A) \leftarrow Q(S, A) + \alpha \left[ (R + \kappa \sqrt{\tau}) + \gamma \max_{a} Q(S', a) - Q(S, A) \right]\]</div>
+<ul>
+<li><span class="arithmatex">\(\kappa\)</span>는 경과된 시간에 대한 보상의 가중치이다. <span class="arithmatex">\(\kappa\)</span>가 크면 경과된 시간이 길어질수록 보상이 커지고, <span class="arithmatex">\(\kappa\)</span>가 작으면 경과된 시간이 길어질수록 보상이 작아진다.</li>
+</ul>
+<h2 id="prioritized-sweeping">Prioritized Sweeping<a class="headerlink" href="#prioritized-sweeping" title="Permanent link">¶</a></h2>
+<p>Dyan-Q 에서 Planning</p>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
@@ -601,9 +853,9 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.fbce390c.min.js"></script>
-<script src="../../../javascripts/mathjax.js"></script>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
+<script src="../../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>

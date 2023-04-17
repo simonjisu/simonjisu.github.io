@@ -7,12 +7,12 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter6/" rel="canonical"/>
 <link href="../chapter5/" rel="prev"/>
-<link href="../../../../project/" rel="next"/>
+<link href="../chapter7/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.1.6+insiders-4.32.5" name="generator"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
 <title>6. Temporal-Difference Learning - Soopace</title>
-<link href="../../../../assets/stylesheets/main.dc5b59cc.min.css" rel="stylesheet"/>
-<link href="../../../../assets/stylesheets/palette.6932e648.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -42,7 +42,7 @@
 </div>
 <div data-md-component="announce">
 </div>
-<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<header class="md-header md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
 <a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
 <img alt="logo" src="../../../../img/logo/logo.png"/>
@@ -99,7 +99,7 @@
 <div class="md-header__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -170,7 +170,7 @@
 <div class="md-nav__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -501,8 +501,41 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#expected-sarsa">
+<span class="md-ellipsis">
+      
+        Expected SARSA
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter7/">
+<span class="md-ellipsis">
+    
+  
+    7. n-step Bootstrapping
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter8/">
+<span class="md-ellipsis">
+    
+  
+    8. Planning and Learning with Tabular Methods
+  
+
+    
+  </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -579,6 +612,15 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#expected-sarsa">
+<span class="md-ellipsis">
+      
+        Expected SARSA
+      
+    </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -590,29 +632,29 @@
 <li class="md-path__item">
 <a class="md-path__link" href="../../../..">
 <span class="md-ellipsis">
-    About
-  </span>
+          About
+        </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../../../">
 <span class="md-ellipsis">
-    Study
-  </span>
+            Study
+          </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../../">
 <span class="md-ellipsis">
-    Tutorial
-  </span>
+            Tutorial
+          </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../">
 <span class="md-ellipsis">
-    Reinforcement learning
-  </span>
+            Reinforcement learning
+          </span>
 </a>
 </li>
 </ol>
@@ -714,6 +756,38 @@ V(E) &amp;= 0.5 \big( V(D) + V(T_R) \big) = 0.5 V(D) + 0.5\\
 <p><span class="arithmatex">\(\epsilon = 0.1, \alpha = 0.5\)</span>를 적용했을 시, 우리는 시간이 지날 수록 목적에 더 빨리 도달함을 알 수 있다. </p>
 </div>
 <h2 id="q-learning">Q-Learning<a class="headerlink" href="#q-learning" title="Permanent link">¶</a></h2>
+<p>Q-Learning은 SARSA와 비슷하지만, 다음 state의 action을 greedy하게 선택한다는 점이 다르다. 즉, <span class="arithmatex">\(Q(S_{t+1}, A_{t+1})\)</span> 대신에 <span class="arithmatex">\(Q(S_{t+1}, \underset{a'}{\arg\max} Q(S_{t+1}, a'))\)</span>를 사용한다. 다음 policy에 관계없이 최적의 action-value function을 추정한다.</p>
+<div class="arithmatex">\[Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \lbrack R_{t+1} + \gamma \underset{a}{\max} Q(S_{t+1}, a) - Q(S_t, A_t) \rbrack\]</div>
+<div class="admonition info">
+<p class="admonition-title">Q-Learning (off-policy TD Control)</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">pseduo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1AZylxL_ByZJaBzaG6NnV5iDxfZY7Bj0U" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<p>Q-Learning이 off policy이다. 학습하고자 하는 target policy는 <span class="arithmatex">\(\pi(a \vert S_t) = \underset{a'}{\arg \max}\ Q(S_t, a')\)</span>이며, action을 선택하는 behavior policy는 <span class="arithmatex">\(\pi\)</span>과 같지 않다. 예를 들어, <span class="arithmatex">\(\epsilon\)</span>-greedy가 될 수가 있다. 즉, Q-Learning에서의 state-action쌍에 대한 return은 greedy policy을 가정하여 업데이트 하는데, 실제로는 greedy 하지 않기 때문이다. 반면에 SARSA가 on policy인 이유는 Q-values를 다음 state <span class="arithmatex">\(s'\)</span>와 현재 policy에 의해 결정되는 action <span class="arithmatex">\(a'\)</span> 를 사용하여 업데이트하기 때문이다.</p>
+<div class="arithmatex">\[\begin{aligned}R_{t+1} + \gamma Q(S_{t+1}, A') &amp;= R_{t+1} + \gamma Q \big(S_{t+1}, \underset{a'}{\arg \max}\ Q(S_t, a') \big) \\ &amp;= R_{t+1} + \gamma \underset{a'}{\max}\ Q(S_{t+1}, a') \end{aligned}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Cliff Walking</p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1A_vlajqkBNErD91Mr4Mw831-vLBvD9Tt" width="100%"/></p>
+<ul>
+<li>조건: undiscounted, episodic, deterministic environment</li>
+<li>Action: 4개(상, 하, 좌, 우)</li>
+<li>Reward: 모든 state에서 -1 이지만, "The Cliff"에서는 -100의 보상을 받고 즉시 Start state <span class="arithmatex">\(S\)</span>로 돌아간다.</li>
+<li><span class="arithmatex">\(\epsilon\)</span>-greedy policy를 사용하며 <span class="arithmatex">\(\epsilon = 0.1\)</span>로 설정한다.</li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1Agtb17w3Vo6Uty1okdqEVG01inYLm5VZ" width="80%"/></p>
+<p>위 그림은 Sarsa와 Q-Learning을 비교한 것이다. Q-Learning이 각 에피소드 별로 더 많은 negative reward를 얻는 것을 볼 수 있다. 이는 고정적인 <span class="arithmatex">\(\epsilon\)</span>을 사용하기도 하고, Q-Learning이 항상 최대의 Q-value에 근거하여 action을 선택하기 때문에, 더 많이 cliff로 떨어질 가능성도 높다. </p>
+<p>다만, <span class="arithmatex">\(\epsilon\)</span>을 줄이는 전략을 택했다면, 두 방법다 optimal policy에 접근할 수 있다. </p>
+</div>
+<h2 id="expected-sarsa">Expected SARSA<a class="headerlink" href="#expected-sarsa" title="Permanent link">¶</a></h2>
+<p>Expected SARSA의 업데이트 규칙은 다음과 같다.</p>
+<div class="arithmatex">\[\begin{aligned} Q(S_t, A_t) &amp;\leftarrow Q(S_t, A_t) + \alpha \big\lbrack R_{t+1} + \gamma \Bbb{E}_\pi \lbrack Q(S_{t+1}, a) \vert S_{t+1} \rbrack - Q(S_t, A_t) \big\rbrack \\
+&amp;\leftarrow Q(S_t, A_t) + \alpha \big\lbrack R_{t+1} + \gamma \sum_{a} \pi(a \vert S_{t+1}) Q(S_{t+1}, a) - Q(S_t, A_t) \big\rbrack  \end{aligned}\]</div>
+<p>Expected SARSA는 SARSA 보다 계산적으로 복잡하지만, action 선택에 있어서 variance 줄여주기 때문에 조금 더 안정적이다.</p>
 <div class="footnote">
 <hr/>
 <ol>
@@ -759,10 +833,10 @@ V(E) &amp;= 0.5 \big( V(D) + V(T_R) \big) = 0.5 V(D) + 0.5\\
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<a class="md-top md-icon" data-md-component="top" hidden="" href="#">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
             Back to top
-          </button>
+          </a>
 </main>
 <footer class="md-footer">
 <div class="md-footer-meta md-typeset">
@@ -777,7 +851,7 @@ V(E) &amp;= 0.5 \big( V(D) + V(T_R) \big) = 0.5 V(D) + 0.5\\
 </div>
 <div class="md-social">
 <a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
 </a>
 </div>
 </div>
@@ -788,7 +862,7 @@ V(E) &amp;= 0.5 \big( V(D) + V(T_R) \big) = 0.5 V(D) + 0.5\\
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../../assets/javascripts/bundle.803ed251.min.js"></script>
+<script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
 <script src="../../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
