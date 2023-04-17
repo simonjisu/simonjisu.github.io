@@ -112,7 +112,7 @@ Exploring starts는 확률이 0이 상인 state-action 쌍을 고른다는 뜻�
 
 ### On-policy and Off-policy
 
-**On-policy** 방법은 의사 결정에 사용되는 policy를 평가하거나 개선하려고 시도한다. 즉, 업데이트 하려는 policy와 최종 의사결정에 사용되는 policy가 같다고 보면 된다. **Off-policy** 방법은 데이터 생성에 사용되는 것과 다른 정책을 평가하거나 개선한다. 이 개념은 차후에 behavior policy와 target policy 연결지어서 설명된다.
+**On-policy** 방법은 의사 결정에 사용되는 policy를 평가하거나 개선하려고 시도한다. 즉, 업데이트 하려는 policy와 최종 의사결정에 사용되는 policy(action 선택)가 같다고 보면 된다. **Off-policy** 방법은 데이터 생성에 사용되는 것과 다른 정책을 평가하거나 개선한다. 이 개념은 차후에 behavior policy와 target policy 연결지어서 설명된다.
 
 보통 on-policy 방법에서 policy 는 soft한 성격을 듸고 있다. 즉, 모든 state $s \in \mathcal{S}$ 와 action $a \in \mathcal{A}$에 대해서 $\pi(a \vert s) > 0$ 이며, 점진적으로 deterministic optimal policy에 다가간다는 뜻이다. 예로 $\epsilon$-greedy policy를 들 수가 있다.
 
@@ -181,7 +181,7 @@ $$\Bbb{E}_\pi\lbrack X\rbrack \approx \dfrac{1}{n}\sum_{i=1}^n \rho(x_i) x_i = \
 
 ### Off-policy Prediction using Importance sampling 
 
-Policy $\pi$ 하에서 어떤 trajectory(어떤 시나리오 시퀀스)의 likelihood와 importance weight $rho$는 다음과 같다.
+Policy $\pi$ 하에서 어떤 trajectory(어떤 시나리오 시퀀스)의 likelihood와 importance weight $\rho$는 다음과 같다.
 
 $$\begin{aligned}
 Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \rbrace = \prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k}) \\

@@ -9,10 +9,10 @@
 <link href="../2021-08-13-hybridranking/" rel="prev"/>
 <link href="../../tutorial/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.1.6+insiders-4.32.5" name="generator"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
 <title>NBDT: Neural-Backed Decision Trees - Soopace</title>
-<link href="../../../assets/stylesheets/main.dc5b59cc.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.6932e648.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -42,7 +42,7 @@
 </div>
 <div data-md-component="announce">
 </div>
-<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<header class="md-header md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
 <a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
 <img alt="logo" src="../../../img/logo/logo.png"/>
@@ -99,7 +99,7 @@
 <div class="md-header__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -170,7 +170,7 @@
 <div class="md-nav__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -831,22 +831,22 @@
 <li class="md-path__item">
 <a class="md-path__link" href="../../..">
 <span class="md-ellipsis">
-    About
-  </span>
+          About
+        </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../../">
 <span class="md-ellipsis">
-    Study
-  </span>
+            Study
+          </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../">
 <span class="md-ellipsis">
-    Paper
-  </span>
+            Paper
+          </span>
 </a>
 </li>
 </ol>
@@ -883,7 +883,7 @@
 <p>Neural-Backed Decision Trees(NBDTs)는 네트워크의 마지막 linear 층을 <strong>의사결정 나무(Decision Trees)</strong>로 대체한다. 다른 전통적인 의사결정 나무와 달리, (Sec 3.1) 추론 시에는 path probabilities<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>를 사용해서 불확실한 중간 결정을 줄인다. 이를 통해, 학습된 모델의 가중치로부터 계층(hierarchy)을 만들어(Sec 3.2, 3.3) 과적합을 피한다. 그리고 훈련은 계층적 손실(Sec 3.4)을 사용해서 높은 레벨의 결정을 학습할 수 있게 한다.</p>
 <h3 id="31-inference">3.1 Inference<a class="headerlink" href="#31-inference" title="Permanent link">¶</a></h3>
 <p>네트워크의 뼈대는 마지막 linear 층을 제외한 네트워크로 유지하고, fully-connected 층을 유사 의사결정 나무(oblique decision tree, 이하 "유사 트리")로 실행한다. 하지만 전통적인 트리는 두 가지 문제점: (a) 초기 단계에서 한 번 잘못 분류하면 계속 틀린다는 점, (b) 정확도가 하락(최대 11%)이 되기 때문에 변형된 결정 규칙을 정한다(Fig 1, B).</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5"><img alt="Figure1" src="https://drive.google.com/uc?export=view&amp;id=1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5"><img alt="Figure1" src="https://drive.google.com/uc?export=view&amp;id=1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5" width="100%"/></a></p>
 <ol>
 <li>
 <p><strong>유사 트리의 규칙 weights를 네트워크의 weights로 초기화</strong></p>
@@ -912,7 +912,7 @@
 <p>기존의 전통적 의사결정 나무를 만드는 방식은 (a) 데이터 의존성이 강한(e.g. information gain) 방법 혹은 (b) WordNet과 같이 사람이 이미 만든 계층이 있다. 그러나 전자는 과적합의 문제가 있고, 후자는 유사성보다는 개념을 더 중요시한다. 예를 들어, WordNet에서 animal에 속하는 것 중 bird는 cat과 더 가깝고, plane과는 멀어야 한다. 그러나 sky에 존재하는 것으로 가면 bird는 cat과 멀고, plane과 가까워야 한다.</p>
 <p>여기서 미리학습된 모델에서 가중치가 필요하다. 마지막 fully-connected layer의 가중치 매트릭스 <span class="arithmatex">\(W\)</span>의 행 벡터 <span class="arithmatex">\(w_k : k \in [1, K]\)</span>를 가지고 노말라이즈된 클래스 representations <span class="arithmatex">\(w_k / \Vert w_k \Vert_2\)</span>을 agglomerative clustering<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">4</a></sup>한다.</p>
 <p>Sec 3.1에서 언급 했듯이, 각 리프 노드들의 가중치 <span class="arithmatex">\(w_k \in W\)</span>와 리프 노드의 평균인 내부 노드의 가중치 <span class="arithmatex">\(n_i\)</span> 로 Agglomerative clustering를 수행해서, Figure 2 처럼 각 노드들이 묶인다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g"><img alt="Figure2" src="https://drive.google.com/uc?export=view&amp;id=1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g"><img alt="Figure2" src="https://drive.google.com/uc?export=view&amp;id=1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g" width="100%"/></a></p>
 <h3 id="33-labeling-decision-nodes-with-wordnet">3.3 Labeling Decision Nodes with WordNet<a class="headerlink" href="#33-labeling-decision-nodes-with-wordnet" title="Permanent link">¶</a></h3>
 <p>WordNet은 영어 명사로 구성된 계층이다. 명사를 노드에 할당하기 위해서 서브 트리에서 가장 가까운 공통된 조상(ancestor)을 참고한다. 예를 들어, 개와 고양이 경우, WordNet에서 모든 조상을 찾는다. "Mammal", "Animal", "Living Thing"이 있는데, 제일 가까운 "Mammal"을 선택한다. 내부 노드도 이처럼 선택한다.</p>
 <details class="example">
@@ -983,30 +983,30 @@
 <hr/>
 <h2 id="4-experiments">4. Experiments<a class="headerlink" href="#4-experiments" title="Permanent link">¶</a></h2>
 <h3 id="41-results">4.1 Results<a class="headerlink" href="#41-results" title="Permanent link">¶</a></h3>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=13afAiJrncapvrJbFaGeBf4XeblOkPpeo"><img alt="Table3" src="https://drive.google.com/uc?export=view&amp;id=13afAiJrncapvrJbFaGeBf4XeblOkPpeo" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=13afAiJrncapvrJbFaGeBf4XeblOkPpeo"><img alt="Table3" src="https://drive.google.com/uc?export=view&amp;id=13afAiJrncapvrJbFaGeBf4XeblOkPpeo" width="100%"/></a></p>
 <p>Small-scale Datasets에서 기존 모델보다 약 1%의 성능 향상이 있었으며, 설명 가능한 특성도 보존하고 있다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw"><img alt="Figure3" src="https://drive.google.com/uc?export=view&amp;id=1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw"><img alt="Figure3" src="https://drive.google.com/uc?export=view&amp;id=1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw" width="100%"/></a></p>
 <p>Large-scale Dataset의 Top-1 Accuracy에서 동일 Backbone을 가진 기존 SOTA와 비슷하거나 좋은 성능을 냈다. 다만 여기서 explainable accuracy가 무슨 것인지 나오지는 않아서 애매모호하다.</p>
 <h3 id="42-analysis">4.2 Analysis<a class="headerlink" href="#42-analysis" title="Permanent link">¶</a></h3>
 <p>높은 계층의 컨셉(e.g., Animal vs. Vehicle)에서 성능 향상이 있었다.</p>
 <h4 id="comparison-of-hierarchies">Comparison of Hierarchies<a class="headerlink" href="#comparison-of-hierarchies" title="Permanent link">¶</a></h4>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy"><img alt="Table2" src="https://drive.google.com/uc?export=view&amp;id=1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy"><img alt="Table2" src="https://drive.google.com/uc?export=view&amp;id=1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy" width="100%"/></a></p>
 <p>Tree를 어떤 방식으로 훈련 시켰는지 비교를 하자면, class weight로 Tree(Fig 1의 Soft)를 구성하는 것이 가장 좋은 성능을 보였다. OCI는 Fig 1의 Hard 방법, Info Gain은 고전적인 트리 그리고 WordNet은 사람이 구축한 계층 방법이다.</p>
 <h4 id="comparison-of-losses">Comparison of Losses<a class="headerlink" href="#comparison-of-losses" title="Permanent link">¶</a></h4>
 <p>Hierarchical softmax 보다 좋은 성능을 보였다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq"><img alt="Table3" src="https://drive.google.com/uc?export=view&amp;id=1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq"><img alt="Table3" src="https://drive.google.com/uc?export=view&amp;id=1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq" width="100%"/></a></p>
 <p>Hard Tree Supervision Loss 와 Soft Tree Supervision Loss의 차이</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX"><img alt="Figure12" src="https://drive.google.com/uc?export=view&amp;id=1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX"><img alt="Figure12" src="https://drive.google.com/uc?export=view&amp;id=1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX" width="100%"/></a></p>
 <h4 id="original-neural-network">Original Neural Network<a class="headerlink" href="#original-neural-network" title="Permanent link">¶</a></h4>
 <p>Tree supervision loss를 결합을 했을때 약간의 성능향상이 있었다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN"><img alt="Table5" height="40%" src="https://drive.google.com/uc?export=view&amp;id=1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN"><img alt="Table5" height="40%" src="https://drive.google.com/uc?export=view&amp;id=1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN"/></a></p>
 <h4 id="zero-shot-superclass-generalization">Zero-Shot Superclass Generalization<a class="headerlink" href="#zero-shot-superclass-generalization" title="Permanent link">¶</a></h4>
 <p>WordNet을 이용해 여러 개 클래스의 상위어(hypernym)로 Superclass를 정의했다. 그래서 unseen data가 내부 노드에서 잘 나뉘어 지는지 살펴보았다. 예를 들어, Turtle은 Animal vs. Vehicle 분기에서 Animal을 선택해야 한다.</p>
 <p>비교를 위해 일반적인 신경망 네트워크는, 예측 레이블이 속한 superclass를 사용했다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA"><img alt="Table6" height="40%" src="https://drive.google.com/uc?export=view&amp;id=1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA"><img alt="Table6" height="40%" src="https://drive.google.com/uc?export=view&amp;id=1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA"/></a></p>
 <p>다만 노드의 비쥬얼 의미를 자세히 살펴볼 필요가 있다(Appendix B.2)</p>
 <p>Induced hierarchy(Soft Tree)는 모델의 가중치를 사용하기 때문에, 중간 단계의 노드가 꼭 분리를 위한 특정 객체를 가르칠 필요가 없다. 즉, 아무 의미가 없을 수도 있다는 말이다. 게다가 WordNet을 사용했을 때, 예상치 못한 의미로 분리될 수가 있다. 이를 진단하기 위해 다음과 같이 4개의 스텝을 거친다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW"><img alt="Figure9" src="https://drive.google.com/uc?export=view&amp;id=1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW"><img alt="Figure9" src="https://drive.google.com/uc?export=view&amp;id=1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW" width="100%"/></a></p>
 <ol>
 <li>노드의 의미에 대한 가설을 세운다(e.g., Animal vs. Vehicle). 이 가설은 주어진 분류법에서 자동으로 계산되거나 각 자식 노드에 대해 자동으로 추론한다(Fig 9).</li>
 <li>1단계에서 가정을 테스트하는 새로운 클래스로 데이터 세트를 수집한다. 수집한 데이터는 별도의 레이블에서 추출하기 때문에 OOD(Out-of-Distribution) 샘플이라고 한다.</li>
@@ -1016,7 +1016,7 @@
 <p>Fig 9b에서 WordNet의 가설은 Animal(파랑) vs. Vehicle(빨강)이다. CIFAR100의 validation 세트로 OOD 샘플로 구성하여 CIFAR10데이터 세트를 사용해 훈련한 Tree를 테스트했다. 측정된 정확도는 가설과 Tree에서 분류된 superclass가 정확한지 검증 정확도라고 할 수 있다.</p>
 <h4 id="mid-training-hierarchy">Mid-Training Hierarchy<a class="headerlink" href="#mid-training-hierarchy" title="Permanent link">¶</a></h4>
 <p>미리 훈련된 가중치를 사용하지 않은 것을 비교했다. </p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15"><img alt="Table4" src="https://drive.google.com/uc?export=view&amp;id=11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15"><img alt="Table4" src="https://drive.google.com/uc?export=view&amp;id=11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15" width="100%"/></a></p>
 <hr/>
 <h2 id="5-interpretability">5. Interpretability<a class="headerlink" href="#5-interpretability" title="Permanent link">¶</a></h2>
 <p>복잡한 의사결정을 보다 작은 중간 단계의 의사결정으로 나눔으로써 Decision Tree는 인사이트를 제공한다. 그러나 중간 단계의 의사결정이 뉴럴 네트워크이기 때문에, 인사이트를 추출하기에 많은 어려움이 있다. 이를 해결하기 위해 Poursabzi-Sangdeh et al. (2018)<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">6</a></sup>에서 제한 벤치마크와 interpretability 정의를 가져왔다.</p>
@@ -1048,7 +1048,7 @@
 <p><em>"To what extent do people follow a model’s predictions when it is beneficial to do so?"</em></p>
 <p><em>사람들은 모델의 예측이 유익하다고 판단할때 이를 어느 정도까지 따를까?</em></p>
 </blockquote>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL"><img alt="Figure4" src="https://drive.google.com/uc?export=view&amp;id=1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL"><img alt="Figure4" src="https://drive.google.com/uc?export=view&amp;id=1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL" width="100%"/></a></p>
 <p>첫 번째 서베이에서 유저들은 여러 블러 처리된 이미지(Fig 4)를 분류하게 된다. 600개의 이미지 중 163개만 맞춰서 저자들은 해당 과제가 어렵다는 것을 확인했다.</p>
 <p>그다음 서베이로, 블러 처리된 이미지와 2개의 자료를 제공했다.</p>
 <ol>
@@ -1060,12 +1060,12 @@
 <p>주의할 점은 비록 모델이 40%나 틀린 예측을 했음에도 불구하고 대부분의 유저가 대략 80% 정도 두 모델을 신뢰했다는 점이다. 이는 모델을 의존할 만큼 준비한 이미지가 충분히 흐렸다는 것을 증명해준다. 게다가 NBDT가 30%의 샘플만 맞췄음에도 불구하고, 52%의 응답자들은 NBDT 결정에 동의했는데(saliency maps는 28%), 이는 모델의 신뢰성에 향상을 의미한다.</p>
 <h3 id="53-survey-human-diagnosed-level-of-trust">5.3 Survey: Human-Diagnosed Level of Trust<a class="headerlink" href="#53-survey-human-diagnosed-level-of-trust" title="Permanent link">¶</a></h3>
 <p>NBDT의 예측 설명은 path를 순회(traverse)하는 것과 같다. 저자들은 참가자들에게 Figure 13처럼 믿을 만한 둘 중 하나의 전문가를 고르라고 했다(혹은 둘 다 안고를 수도 있음). 원래 모델과 NBDT 모델이 모두 같은 클래스를 예측한 데이터 샘플을 사용했다. 374개의 응답 중, 둘 중 어느 게 더 나았냐는 질문에는 65.9%가 NBDT의 설명을 더 선호했다. 잘못 분류된 샘플들에서 73.5%가 NBDT를 더 선호했다. 이는 사람은 NBDT를 더 선호한다는 이전의 서베이 결과들을 증명해주었다(Expert A. ResNet18, GradCAM / Expert B. NBDT).</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB"><img alt="Figure13" src="https://drive.google.com/uc?export=view&amp;id=1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB"><img alt="Figure13" src="https://drive.google.com/uc?export=view&amp;id=1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB" width="100%"/></a></p>
 <h3 id="54-analysis-identifying-faulty-dataset-labels">5.4 Analysis: Identifying Faulty Dataset Labels<a class="headerlink" href="#54-analysis-identifying-faulty-dataset-labels" title="Permanent link">¶</a></h3>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=149YlpXOZCzSlqWx8DvylaPy27trepOy9"><img alt="Figure5" src="https://drive.google.com/uc?export=view&amp;id=149YlpXOZCzSlqWx8DvylaPy27trepOy9" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=149YlpXOZCzSlqWx8DvylaPy27trepOy9"><img alt="Figure5" src="https://drive.google.com/uc?export=view&amp;id=149YlpXOZCzSlqWx8DvylaPy27trepOy9" width="100%"/></a></p>
 <p>Fig 5처럼 모델의 퍼포먼스를 해치는 애매모호한 데이터들이 있다. 이런 데이터들을 찾아내기 위해서 NBDT의 결정 중 Entropy를 살펴보았다. 이는 원래 모델의 Entropy보다 애매모호함을 나타내기 위한 더 좋은 지표였다.</p>
 <p>인사이트는 다음과 같다. 만약에 몇 가지 결정을 제외한 중간 결정 과정에서 높은 확실성을 가진다면, 그 결정들은 여러 동등하게 타당한 케이스 중에서 결정된 것이다. 따라서, 높은 "path entropy"를 가진 혹은 이질적인 entropy를 가진 샘플들을 애매모호한 레이블로 선정한다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=13DWwJjGFt1QgUp7cnhczmL84NumH8Bja"><img alt="Figure6" src="https://drive.google.com/uc?export=view&amp;id=13DWwJjGFt1QgUp7cnhczmL84NumH8Bja" width="100%"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=13DWwJjGFt1QgUp7cnhczmL84NumH8Bja"><img alt="Figure6" src="https://drive.google.com/uc?export=view&amp;id=13DWwJjGFt1QgUp7cnhczmL84NumH8Bja" width="100%"/></a></p>
 <p>Fig 6에서 NBDT는 ImageNet의 애매모호한 레이블을 찾아낼 수 있다는 것을 보여준다. TinyImagenet200데이터로 훈련된 모델을 사용해서 가장 많은 혼돈을 유발하는 2개 클래스를 그렸다.</p>
 <p>좌측에는 ResNet18를 실행 시켜 상위 2개의 클래스 엔트로피를 최대화하고 상위 2개의 클래스 엔트로피를 평균시킨 모든 클래스에서 엔트로피를 최소화한 샘플을 찾는다. 높은 불확실성을 가짐에도 불구하고, 절반의 클래스들이 "벌, 오렌지, 다리, 바나나, 리모컨"에서 생겼는데, 사람이 보았을 때 전혀 애매모호한 점이 없다.</p>
 <p>우측에는 NBDT의 결과를 보여주는데, 각 노드 예측 분포의 엔트로피를 계산한다. 그리고 가장 큰 값과 가장 작은 값의 차이를 가지는 샘플을 선택한다. 그 결과, 절반의 이미지가 정말로 애매모호한 이미지들이 선택됐다. 이는 NBDT의 entropy가 더 많은 정보를 가지고 있다는 것을 보여준다.</p>
@@ -1139,10 +1139,10 @@
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<a class="md-top md-icon" data-md-component="top" hidden="" href="#">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
             Back to top
-          </button>
+          </a>
 </main>
 <footer class="md-footer">
 <div class="md-footer-meta md-typeset">
@@ -1157,7 +1157,7 @@
 </div>
 <div class="md-social">
 <a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
 </a>
 </div>
 </div>
@@ -1168,7 +1168,7 @@
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.803ed251.min.js"></script>
+<script src="../../../assets/javascripts/bundle.fbce390c.min.js"></script>
 <script src="../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

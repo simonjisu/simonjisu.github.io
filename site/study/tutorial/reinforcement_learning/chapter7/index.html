@@ -5,21 +5,21 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/" rel="canonical"/>
-<link href="../pgm/hmms/" rel="prev"/>
-<link href="chapter1/" rel="next"/>
-<link href="../../../assets/images/favicon.png" rel="icon"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter7/" rel="canonical"/>
+<link href="../chapter6/" rel="prev"/>
+<link href="../chapter8/" rel="next"/>
+<link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>Reinforcement Learning - Soopace</title>
-<link href="../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<title>7. n-step Bootstrapping - Soopace</title>
+<link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
 <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -30,19 +30,22 @@
                 body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
                 body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
                 body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
 <body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#n-step-td-target">
+          Skip to content
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
 <header class="md-header md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
@@ -57,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Reinforcement Learning
+              7. n-step Bootstrapping
             
           </span>
 </div>
@@ -108,7 +111,7 @@
 <div class="md-grid">
 <ul class="md-tabs__list">
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../..">
+<a class="md-tabs__link" href="../../../..">
         
   
     
@@ -118,7 +121,7 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../blog/">
+<a class="md-tabs__link" href="../../../../blog/">
           
   
     
@@ -128,7 +131,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link md-tabs__link--active" href="../../">
+<a class="md-tabs__link md-tabs__link--active" href="../../../">
           
   
     
@@ -138,7 +141,7 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../project/">
+<a class="md-tabs__link" href="../../../../project/">
           
   
     
@@ -159,8 +162,8 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
 </a>
     Soopace
   </label>
@@ -176,7 +179,7 @@
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../..">
+<a class="md-nav__link" href="../../../..">
 <span class="md-ellipsis">
     
   
@@ -188,7 +191,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/">
+<a class="md-nav__link" href="../../../../blog/">
 <span class="md-ellipsis">
     
   
@@ -203,7 +206,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
+<a class="md-nav__link" href="../../../">
 <span class="md-ellipsis">
     
   
@@ -228,7 +231,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../paper/">
+<a class="md-nav__link" href="../../../paper/">
 <span class="md-ellipsis">
     
   
@@ -243,7 +246,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
+<a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
     
   
@@ -268,7 +271,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../algorithm/">
+<a class="md-nav__link" href="../../algorithm/">
 <span class="md-ellipsis">
     
   
@@ -280,7 +283,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../deeplearning/">
+<a class="md-nav__link" href="../../deeplearning/">
 <span class="md-ellipsis">
     
   
@@ -292,7 +295,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../gcp/">
+<a class="md-nav__link" href="../../gcp/">
 <span class="md-ellipsis">
     
   
@@ -305,7 +308,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../math/">
+<a class="md-nav__link" href="../../math/">
 <span class="md-ellipsis">
     
   
@@ -317,7 +320,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../mongodb/">
+<a class="md-nav__link" href="../../mongodb/">
 <span class="md-ellipsis">
     
   
@@ -330,7 +333,7 @@
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../pgm/">
+<a class="md-nav__link" href="../../pgm/">
 <span class="md-ellipsis">
     
   
@@ -345,7 +348,7 @@
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
-<a class="md-nav__link md-nav__link--active" href="./">
+<a class="md-nav__link" href="../">
 <span class="md-ellipsis">
     
   
@@ -355,7 +358,7 @@
     
   </span>
 </a>
-<label class="md-nav__link md-nav__link--active" for="__nav_3_3_8">
+<label class="md-nav__link" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -370,7 +373,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter1/">
+<a class="md-nav__link" href="../chapter1/">
 <span class="md-ellipsis">
     
   
@@ -382,7 +385,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter2/">
+<a class="md-nav__link" href="../chapter2/">
 <span class="md-ellipsis">
     
   
@@ -394,7 +397,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter3/">
+<a class="md-nav__link" href="../chapter3/">
 <span class="md-ellipsis">
     
   
@@ -406,7 +409,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter4/">
+<a class="md-nav__link" href="../chapter4/">
 <span class="md-ellipsis">
     
   
@@ -418,7 +421,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter5/">
+<a class="md-nav__link" href="../chapter5/">
 <span class="md-ellipsis">
     
   
@@ -430,7 +433,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter6/">
+<a class="md-nav__link" href="../chapter6/">
 <span class="md-ellipsis">
     
   
@@ -441,8 +444,20 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="chapter7/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    7. n-step Bootstrapping
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -452,9 +467,44 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#n-step-td-target">
+<span class="md-ellipsis">
+      
+        n-step TD Target
+      
+    </span>
+</a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="chapter8/">
+<a class="md-nav__link" href="#n-step-sarsa">
+<span class="md-ellipsis">
+      
+        n-step SARSA
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#n-step-off-policy-learning">
+<span class="md-ellipsis">
+      
+        n-step Off-Policy Learning
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter8/">
 <span class="md-ellipsis">
     
   
@@ -475,7 +525,7 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../project/">
+<a class="md-nav__link" href="../../../../project/">
 <span class="md-ellipsis">
     
   
@@ -495,6 +545,39 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#n-step-td-target">
+<span class="md-ellipsis">
+      
+        n-step TD Target
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#n-step-sarsa">
+<span class="md-ellipsis">
+      
+        n-step SARSA
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#n-step-off-policy-learning">
+<span class="md-ellipsis">
+      
+        n-step Off-Policy Learning
+      
+    </span>
+</a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -503,28 +586,28 @@
 <nav aria-label="Navigation" class="md-path">
 <ol class="md-path__list">
 <li class="md-path__item">
-<a class="md-path__link" href="../../..">
+<a class="md-path__link" href="../../../..">
 <span class="md-ellipsis">
           About
         </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="../../">
+<a class="md-path__link" href="../../../">
 <span class="md-ellipsis">
             Study
           </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="../">
+<a class="md-path__link" href="../../">
 <span class="md-ellipsis">
             Tutorial
           </span>
 </a>
 </li>
 <li class="md-path__item">
-<a class="md-path__link" href="./">
+<a class="md-path__link" href="../">
 <span class="md-ellipsis">
             Reinforcement learning
           </span>
@@ -535,7 +618,104 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
+<span class="md-tag">bootstrapping</span>
 </nav>
+<h1>7. n-step Bootstrapping</h1>
+<blockquote>
+<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
+</blockquote>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1AxWcB2C1jSotrHuh5PkU6B6u5zVDRyBo" width="80%"/></p>
+<p><strong>n-step TD</strong> 방법은 MC와 one-step TD 사이의 있는 방법이다. n-step TD는 n-step 만큼 bootstrapping 한다. Bootstrap이란 추정된 가치 혹은 수익을 기반으로 value function을 업데이트 한다는 뜻이다.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>n</th>
+<th>equation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TD(0)</td>
+<td>1</td>
+<td><span class="arithmatex">\(G_t^{(1)} = R_{t+1} + \gamma V(S_{t+1})\)</span></td>
+</tr>
+<tr>
+<td>TD(1)</td>
+<td>2</td>
+<td><span class="arithmatex">\(G_t^{(2)} = R_{t+1} + \gamma R_{t+2} + \gamma^2 V(S_{t+2})\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\vdots\)</span></td>
+<td><span class="arithmatex">\(\vdots\)</span></td>
+<td><span class="arithmatex">\(\vdots\)</span></td>
+</tr>
+<tr>
+<td>MC</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(G_t^{\infty} = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{t-1} R_T\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="n-step-td-target">n-step TD Target<a class="headerlink" href="#n-step-td-target" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[G_t^{(n)} = G_{t:t+n} = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n V_{t+n-1}(S_{t+n})\]</div>
+<p>n-step return 계산시 <span class="arithmatex">\(t\)</span>에서 <span class="arithmatex">\(t+1\)</span>으로 transition될 때 접근할 수 없는 future reward 항이 포함되어 있다 <span class="arithmatex">\(( R_{t+1}, \cdots, R_{t+n} )\)</span>. 따라서 <span class="arithmatex">\(t+n\)</span> 시점에서 업데이트가 진행된다. </p>
+<div class="arithmatex">\[V_{t+n}(S_t) := V_{t+n-1}(S_t) + \alpha \lbrack G_t^{(n)} - V_{t+n-1}(S_t) \rbrack, \quad 0 \leq t \lt T\]</div>
+<div class="admonition info">
+<p class="admonition-title">n-step TD</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">pseudo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1B0fVo-qOjWvIqDiq391FULmJnvtiOGjZ" width="100%"/></p>
+</div>
+</div>
+</input></div>
+<p><span class="arithmatex">\(\tau\)</span>는 <span class="arithmatex">\(t \geq n-1\)</span>를 체크하려고 하는 것이다. 즉, <span class="arithmatex">\(t\)</span>가 <span class="arithmatex">\(n\)</span> 이후에 업데이트를 시작한다. <span class="arithmatex">\(R_{t+n}\)</span> 이후의 값은 value function <span class="arithmatex">\(V_{t+n-1}(S_{t+n})\)</span>의 값으로 계산된다. 최악의 경우에도 n-step return의 기댓값이 <span class="arithmatex">\(V_{t+n-1}(s)\)</span>에서 추정정되는 값보다 작거나 같다는 특성을 가지고 있으며 이를 <strong>error reduction property</strong>라고 한다. </p>
+<div class="arithmatex">\[\underset{s}{\max} \vert \Bbb{E}_\pi \lbrack G_t^{(n)} \vert S_t = s \rbrack - v_\pi(s) \vert \leq \gamma^n \underset{s}{\max} \vert V_{t+n-1}(s) - v_\pi(s) \vert \]</div>
+</div>
+<h2 id="n-step-sarsa">n-step SARSA<a class="headerlink" href="#n-step-sarsa" title="Permanent link">¶</a></h2>
+<p>n-step return 계산시 state value 대신 action value를 사용한다.</p>
+<div class="arithmatex">\[G_t^{(n)} = G_{t:t+n} = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n Q_{t+n-1}(S_{t+n}, A_{t+n})\]</div>
+<p>그리고 GPI update에도 마찬가지로 q-value function으로 업데이트 한다.</p>
+<div class="arithmatex">\[Q_{t+n}(S_t, A_t) := Q_{t+n-1}(S_t, A_t) + \alpha \lbrack G_t^{(n)} - Q_{t+n-1}(S_t, A_t) \rbrack, \quad 0 \leq t \lt T\]</div>
+<p>다른 states에서는 <span class="arithmatex">\(Q_{t+n}(s, a) = Q_{t+n-1}(s, a)\)</span>로 업데이트 되지 않는다.</p>
+<div class="admonition info">
+<p class="admonition-title">n-step SARSA</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">pseudo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1B2QfrizFauDMcnt4VzUDSEod8UyP29T3" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<p>Expected SARSA의 경우에는 <span class="arithmatex">\(\bar{V}_{t+n-1}(S_{t+n}) := \sum_a \pi(a\vert s) Q_t(s, a)\)</span>를 사용한다.</p>
+<h2 id="n-step-off-policy-learning">n-step Off-Policy Learning<a class="headerlink" href="#n-step-off-policy-learning" title="Permanent link">¶</a></h2>
+<p>n-step importance sampling ratio를 통해 off-policy learning을 할 수 있다.</p>
+<div class="arithmatex">\[\rho_{t:h} = \prod_{k=t}^{\min(h, T-1)} \frac{\pi(A_k \Vert S_k)}{b(A_k \Vert S_k)}\]</div>
+<p>이를 업데이트 규칙에 대입하면 다음과 같다.</p>
+<div class="arithmatex">\[V_{t+n}(S_t) \leftarrow V_{t+n-1}(S_t) + \alpha \rho_{t:t+n-1} \lbrack G_{t:t+n} - V_{t+n-1}(S_t) \rbrack, \quad 0 \leq t \lt T\]</div>
+<p>n-step SARSA의 경우에는 다음과 같다.</p>
+<div class="arithmatex">\[Q_{t+n}(S_t, A_t) \leftarrow Q_{t+n-1}(S_t, A_t) + \alpha \rho_{t+1:t+n-1} \lbrack G_{t:t+n} - Q_{t+n-1}(S_t, A_t) \rbrack, \quad 0 \leq t \lt T\]</div>
+<div class="admonition info">
+<p class="admonition-title">n-step SARSA off-policy learning</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">pseudo code</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1B4TKtCqEDa8ljUcwsyAX68aV4n3akSVt" width="100%"/></p>
+</div>
+</div>
+</input></div>
+</div>
+<p>그렇다면 Q-learning은 off-policy 알고리즘인데 왜 importance sampling ratio를 사용하지 않는가<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>? 두 policy 간의 차이를 줄이기 위해서 importance sampling을 하는데, Q-Learning은 해당 상태에서 주어진 모든 action을 확률적으로 사용하는 것이 아니라 greedy 하게 선택하기 때문에 필요가 없다. 즉, 선택되는 action <span class="arithmatex">\(a'\)</span>의 <span class="arithmatex">\(\pi(a' \vert s') = 1\)</span>이 되고 나머지는 <span class="arithmatex">\(0\)</span>이 되기 때문이다. </p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="https://talkingaboutme.tistory.com/entry/RL-Q-learning-Off-policy-TD-Control">Q-Learning: off-policy TD control</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
@@ -601,9 +781,9 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.fbce390c.min.js"></script>
-<script src="../../../javascripts/mathjax.js"></script>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
+<script src="../../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>

@@ -2,237 +2,247 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://simonjisu.github.io/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/2017/08/14/pycon-2017-후기/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/2017/08/18/박스앤위스커---박장시님-강연-후기/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/2020/04/12/the-question-of-why/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/project/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>None</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2017-08-04-E2EMN/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2018-04-04-nsmcbidreclstmselfattn/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2019-08-22-neuralnetworklm/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2019-09-18-introxai/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2020-01-14-attentionisallyouneed/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2020-03-12-deepinsidecnn/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2020-07-19-maskpredict/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2020-07-23-casm/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2020-12-31-xaitutorial/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2021-04-12-spider/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2021-04-20-featurevisualization/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2021-05-14-bridge/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2021-08-13-hybridranking/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/paper/2021-11-21-nbdt/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/algorithm/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/deeplearning/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/gcp/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/gcp/big_query/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/gcp/geospatial/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/math/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/mongodb/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/mongodb/chapter1/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/mongodb/chapter2/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/mongodb/chapter3/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/mongodb/chapter4/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/pgm/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/pgm/hmms/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter1/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter2/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter3/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter4/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter5/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter6/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter7/</loc>
+         <lastmod>2023-04-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter8/</loc>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/archive/2020/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/archive/2017/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://simonjisu.github.io/blog/category/lifelog/</loc>
-         <lastmod>2023-04-15</lastmod>
+         <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

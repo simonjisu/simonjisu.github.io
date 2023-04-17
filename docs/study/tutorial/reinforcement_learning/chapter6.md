@@ -120,6 +120,44 @@ $$Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \lbrack R_{t+1} + \gamma Q(S_{t+1}
 
 ## Q-Learning
 
+Q-Learning은 SARSA와 비슷하지만, 다음 state의 action을 greedy하게 선택한다는 점이 다르다. 즉, $Q(S_{t+1}, A_{t+1})$ 대신에 $Q(S_{t+1}, \underset{a'}{\arg\max} Q(S_{t+1}, a'))$를 사용한다. 다음 policy에 관계없이 최적의 action-value function을 추정한다.
+
+$$Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \lbrack R_{t+1} + \gamma \underset{a}{\max} Q(S_{t+1}, a) - Q(S_t, A_t) \rbrack$$
+
+!!! info "Q-Learning (off-policy TD Control)"
+
+    === "pseduo code"
+
+        ![HeadImg](https://drive.google.com/uc?id=1AZylxL_ByZJaBzaG6NnV5iDxfZY7Bj0U){ class="skipglightbox" width="100%" }
+
+Q-Learning이 off policy이다. 학습하고자 하는 target policy는 $\pi(a \vert S_t) = \underset{a'}{\arg \max}\ Q(S_t, a')$이며, action을 선택하는 behavior policy는 $\pi$과 같지 않다. 예를 들어, $\epsilon$-greedy가 될 수가 있다. 즉, Q-Learning에서의 state-action쌍에 대한 return은 greedy policy을 가정하여 업데이트 하는데, 실제로는 greedy 하지 않기 때문이다. 반면에 SARSA가 on policy인 이유는 Q-values를 다음 state $s'$와 현재 policy에 의해 결정되는 action $a'$ 를 사용하여 업데이트하기 때문이다.
+
+$$\begin{aligned}R_{t+1} + \gamma Q(S_{t+1}, A') &= R_{t+1} + \gamma Q \big(S_{t+1}, \underset{a'}{\arg \max}\ Q(S_t, a') \big) \\ &= R_{t+1} + \gamma \underset{a'}{\max}\ Q(S_{t+1}, a') \end{aligned}$$
+
+!!! note "Cliff Walking"
+
+    ![HeadImg](https://drive.google.com/uc?id=1A_vlajqkBNErD91Mr4Mw831-vLBvD9Tt){ class="skipglightbox" width="100%" }
+
+    * 조건: undiscounted, episodic, deterministic environment
+    * Action: 4개(상, 하, 좌, 우)
+    * Reward: 모든 state에서 -1 이지만, "The Cliff"에서는 -100의 보상을 받고 즉시 Start state $S$로 돌아간다.
+    * $\epsilon$-greedy policy를 사용하며 $\epsilon = 0.1$로 설정한다.
+
+    ![HeadImg](https://drive.google.com/uc?id=1Agtb17w3Vo6Uty1okdqEVG01inYLm5VZ){ class="skipglightbox" width="80%" }
+
+    위 그림은 Sarsa와 Q-Learning을 비교한 것이다. Q-Learning이 각 에피소드 별로 더 많은 negative reward를 얻는 것을 볼 수 있다. 이는 고정적인 $\epsilon$을 사용하기도 하고, Q-Learning이 항상 최대의 Q-value에 근거하여 action을 선택하기 때문에, 더 많이 cliff로 떨어질 가능성도 높다. 
+    
+    다만, $\epsilon$을 줄이는 전략을 택했다면, 두 방법다 optimal policy에 접근할 수 있다. 
+
+## Expected SARSA
+
+Expected SARSA의 업데이트 규칙은 다음과 같다.
+
+
+$$\begin{aligned} Q(S_t, A_t) &\leftarrow Q(S_t, A_t) + \alpha \big\lbrack R_{t+1} + \gamma \Bbb{E}_\pi \lbrack Q(S_{t+1}, a) \vert S_{t+1} \rbrack - Q(S_t, A_t) \big\rbrack \\
+&\leftarrow Q(S_t, A_t) + \alpha \big\lbrack R_{t+1} + \gamma \sum_{a} \pi(a \vert S_{t+1}) Q(S_{t+1}, a) - Q(S_t, A_t) \big\rbrack  \end{aligned}$$
+
+Expected SARSA는 SARSA 보다 계산적으로 복잡하지만, action 선택에 있어서 variance 줄여주기 때문에 조금 더 안정적이다.
+
 
 [^1]: [Reinforcement Learning - How are these state values in MRP calculated?](https://datascience.stackexchange.com/questions/40899/reinforcement-learning-how-are-these-state-values-in-mrp-calculated)
-
