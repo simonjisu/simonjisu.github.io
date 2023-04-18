@@ -184,8 +184,8 @@ $$\Bbb{E}_\pi\lbrack X\rbrack \approx \dfrac{1}{n}\sum_{i=1}^n \rho(x_i) x_i = \
 Policy $\pi$ 하에서 어떤 trajectory(어떤 시나리오 시퀀스)의 likelihood와 importance weight $\rho$는 다음과 같다.
 
 $$\begin{aligned}
-Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \rbrace = \prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k}) \\
-\rho_{t:T-1} = \dfrac{\prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k})}{\prod_{k=t}^{T-1}b(A_k \vert S_k) \cdot p(S_{k+1 \vert S_k, A_k})} = \prod_{k=t}^{T-1}\dfrac{\pi(A_k \vert S_k)}{b(A_k \vert S_k)} 
+Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \rbrace = \prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1}\vert S_k, A_k) \\
+\rho_{t:T-1} = \dfrac{\prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1}\vert S_k, A_k)}{\prod_{k=t}^{T-1}b(A_k \vert S_k) \cdot p(S_{k+1} \vert S_k, A_k)} = \prod_{k=t}^{T-1}\dfrac{\pi(A_k \vert S_k)}{b(A_k \vert S_k)} 
 \end{aligned}$$
 
 그리고 value function는 두 가지 방법으로 계산 할 수 있다.

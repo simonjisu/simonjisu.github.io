@@ -308,7 +308,7 @@ $$A_t := \underset{a}{\arg \max} \Bigg\lbrack Q_t(a) + c \sqrt{\dfrac{\ln t}{N_t
 
 ![HeadImg](https://drive.google.com/uc?id=16bnqh78hTMnDBMe_iJqz6r18ptcIed6R){ class="skipglightbox" width="100%" }
 
-시뮬레이션 결과 UCB를 사용한 <span style="color:red">greedy</span> 전략이 UCB를 사용하지 않은 <span style="color:blue">$\epsilon$-greedy</span> 전략 보다 더 낮은 평균 보상을 획득했다.
+시뮬레이션 결과 UCB를 사용한 <span style="color:red">greedy</span> 전략이 UCB를 사용하지 않은 <span style="color:blue">$\epsilon$-greedy</span> 전략 보다 더 높은 평균 보상을 획득했다.
 
 $t=1000$ 일때의 $Q_t(a)$를 보면 다음과 같다. 선택된 actions 횟수를 다음과 같은 테이블에 정리해뒀다. 아래 그림을 보면 탐색을 많이 한 3번 action에 대해서 upper bound가 많이 줄어든 모습을 볼 수 있다. 즉, 점점 해당 선택에 대한 불확실성이 줄어들었다고 볼 수 있다.
 

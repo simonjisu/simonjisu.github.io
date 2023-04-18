@@ -96,10 +96,11 @@ $$Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \lbrack R_{t+1} + \gamma Q(S_{t+1}
 ### Convergence of SARSA
 
 아래의 조건하에 SARSA는 최적의 action-value function으로 수렴한다 $Q(s, a) \rightarrow q_*(s, a)$:
+
 * $\pi_t(a \vert s)$ 가 GLIE를 만족한다.
 * 학습률(learning rate = step size)가 확률적 수렴에 만족한다.
 
-    $$\begin{aligned} \sum_{t=1}^\infty \alpha_t &= \infty \\ \sum_{t=1}^\infty \alpha_t^2 < \infty \end{aligned}$$
+$$\begin{aligned} \sum_{t=1}^\infty \alpha_t &= \infty \\ \sum_{t=1}^\infty \alpha_t^2 < \infty \end{aligned}$$
 
 !!! note "Windy grid world"
 
@@ -130,7 +131,7 @@ $$Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \lbrack R_{t+1} + \gamma \underset
 
         ![HeadImg](https://drive.google.com/uc?id=1AZylxL_ByZJaBzaG6NnV5iDxfZY7Bj0U){ class="skipglightbox" width="100%" }
 
-Q-Learning이 off policy이다. 학습하고자 하는 target policy는 $\pi(a \vert S_t) = \underset{a'}{\arg \max}\ Q(S_t, a')$이며, action을 선택하는 behavior policy는 $\pi$과 같지 않다. 예를 들어, $\epsilon$-greedy가 될 수가 있다. 즉, Q-Learning에서의 state-action쌍에 대한 return은 greedy policy을 가정하여 업데이트 하는데, 실제로는 greedy 하지 않기 때문이다. 반면에 SARSA가 on policy인 이유는 Q-values를 다음 state $s'$와 현재 policy에 의해 결정되는 action $a'$ 를 사용하여 업데이트하기 때문이다.
+Q-Learning은 off policy이다. 학습하고자 하는 target policy는 $\pi(a \vert S_t) = \underset{a'}{\arg \max}\ Q(S_t, a')$이며, action을 선택하는 behavior policy는 $\pi$과 같지 않다. 예를 들어, $\epsilon$-greedy가 될 수가 있다. 즉, Q-Learning에서의 state-action쌍에 대한 return은 greedy policy을 가정하여 업데이트 하는데, 실제로는 greedy 하지 않기 때문이다. 반면에 SARSA가 on policy인 이유는 Q-values를 다음 state $s'$와 현재 policy에 의해 결정되는 action $a'$ 를 사용하여 업데이트하기 때문이다.
 
 $$\begin{aligned}R_{t+1} + \gamma Q(S_{t+1}, A') &= R_{t+1} + \gamma Q \big(S_{t+1}, \underset{a'}{\arg \max}\ Q(S_t, a') \big) \\ &= R_{t+1} + \gamma \underset{a'}{\max}\ Q(S_{t+1}, a') \end{aligned}$$
 
