@@ -5,12 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter3/" rel="canonical"/>
-<link href="../chapter2/" rel="prev"/>
-<link href="../chapter4/" rel="next"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/CS285_L20/" rel="canonical"/>
+<link href="../CS285_L19/" rel="prev"/>
+<link href="../chapter1/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>3. Finite Markov Decision Processes - Soopace</title>
+<title>CS 285: Lecture 20, Inverse Reinforcement Learning - Soopace</title>
 <link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#markov-decision-processes-mdps">
+<a class="md-skip" href="#why-should-we-worry-about-learning-rewards">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              3. Finite Markov Decision Processes
+              CS 285: Lecture 20, Inverse Reinforcement Learning
             
           </span>
 </div>
@@ -372,8 +372,20 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L20/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    CS 285: Lecture 20, Inverse Reinforcement Learning
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -383,6 +395,113 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#why-should-we-worry-about-learning-rewards">
+<span class="md-ellipsis">
+      
+        Why should we worry about learning rewards?
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#inverse-reinforcement-learning">
+<span class="md-ellipsis">
+      
+        Inverse Reinforcement Learning
+      
+    </span>
+</a>
+<nav aria-label="Inverse Reinforcement Learning" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#feature-matching-irl">
+<span class="md-ellipsis">
+      
+        Feature matching IRL
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-the-reward-function">
+<span class="md-ellipsis">
+      
+        Learning the Reward Function
+      
+    </span>
+</a>
+<nav aria-label="Learning the Reward Function" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-irl-particion-function">
+<span class="md-ellipsis">
+      
+        The IRL Particion function
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estimating-the-expectation">
+<span class="md-ellipsis">
+      
+        Estimating the expectation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#the-maxent-irl-algorithm1">
+<span class="md-ellipsis">
+      
+        The MaxEnt IRL algorithm1
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#approximations-in-high-dimensions">
+<span class="md-ellipsis">
+      
+        Approximations in High Dimensions
+      
+    </span>
+</a>
+<nav aria-label="Approximations in High Dimensions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#guided-cost-learning-algorithm2">
+<span class="md-ellipsis">
+      
+        Guided cost learning algorithm2
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../chapter1/">
@@ -408,20 +527,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    3. Finite Markov Decision Processes
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter3/">
 <span class="md-ellipsis">
     
   
@@ -431,112 +538,6 @@
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-decision-processes-mdps">
-<span class="md-ellipsis">
-      
-        Markov Decision Processes (MDPs)
-      
-    </span>
-</a>
-<nav aria-label="Markov Decision Processes (MDPs)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#agentenvironment-interface">
-<span class="md-ellipsis">
-      
-        Agent–Environment Interface
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#dynamics-of-mdp">
-<span class="md-ellipsis">
-      
-        Dynamics of MDP
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-property">
-<span class="md-ellipsis">
-      
-        Markov Property
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#reward-hypothesis">
-<span class="md-ellipsis">
-      
-        Reward Hypothesis
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policies-and-value-functions">
-<span class="md-ellipsis">
-      
-        Policies and Value Functions
-      
-    </span>
-</a>
-<nav aria-label="Policies and Value Functions" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-equation">
-<span class="md-ellipsis">
-      
-        Bellman Equation
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-policies-and-optimal-value-functions">
-<span class="md-ellipsis">
-      
-        Optimal Policies and Optimal Value Functions
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-optimality">
-<span class="md-ellipsis">
-      
-        Bellman Optimality
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#etc">
-<span class="md-ellipsis">
-      
-        ETC
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../chapter4/">
@@ -634,38 +635,29 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#markov-decision-processes-mdps">
+<a class="md-nav__link" href="#why-should-we-worry-about-learning-rewards">
 <span class="md-ellipsis">
       
-        Markov Decision Processes (MDPs)
+        Why should we worry about learning rewards?
       
     </span>
 </a>
-<nav aria-label="Markov Decision Processes (MDPs)" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#inverse-reinforcement-learning">
+<span class="md-ellipsis">
+      
+        Inverse Reinforcement Learning
+      
+    </span>
+</a>
+<nav aria-label="Inverse Reinforcement Learning" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#agentenvironment-interface">
+<a class="md-nav__link" href="#feature-matching-irl">
 <span class="md-ellipsis">
       
-        Agent–Environment Interface
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#dynamics-of-mdp">
-<span class="md-ellipsis">
-      
-        Dynamics of MDP
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-property">
-<span class="md-ellipsis">
-      
-        Markov Property
+        Feature matching IRL
       
     </span>
 </a>
@@ -674,62 +666,72 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reward-hypothesis">
+<a class="md-nav__link" href="#learning-the-reward-function">
 <span class="md-ellipsis">
       
-        Reward Hypothesis
+        Learning the Reward Function
       
     </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policies-and-value-functions">
-<span class="md-ellipsis">
-      
-        Policies and Value Functions
-      
-    </span>
-</a>
-<nav aria-label="Policies and Value Functions" class="md-nav">
+<nav aria-label="Learning the Reward Function" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-equation">
+<a class="md-nav__link" href="#the-irl-particion-function">
 <span class="md-ellipsis">
       
-        Bellman Equation
+        The IRL Particion function
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-policies-and-optimal-value-functions">
+<a class="md-nav__link" href="#estimating-the-expectation">
 <span class="md-ellipsis">
       
-        Optimal Policies and Optimal Value Functions
+        Estimating the expectation
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-optimality">
+<a class="md-nav__link" href="#the-maxent-irl-algorithm1">
 <span class="md-ellipsis">
       
-        Bellman Optimality
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#etc">
-<span class="md-ellipsis">
-      
-        ETC
+        The MaxEnt IRL algorithm1
       
     </span>
 </a>
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#approximations-in-high-dimensions">
+<span class="md-ellipsis">
+      
+        Approximations in High Dimensions
+      
+    </span>
+</a>
+<nav aria-label="Approximations in High Dimensions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#guided-cost-learning-algorithm2">
+<span class="md-ellipsis">
+      
+        Guided cost learning algorithm2
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+</span>
+</a>
 </li>
 </ul>
 </nav>
@@ -772,158 +774,119 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
-<span class="md-tag">mdp</span>
+<span class="md-tag">inverse reinforcement learning</span>
 </nav>
-<h1>3. Finite Markov Decision Processes</h1>
-<blockquote>
-<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
-</blockquote>
-<h2 id="markov-decision-processes-mdps">Markov Decision Processes (MDPs)<a class="headerlink" href="#markov-decision-processes-mdps" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>Markov decision process (MDP) is a discrete-time stochastic control process. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
-</blockquote>
-<p>마르코프 결정 프로세스에서 Actions은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.</p>
-<h3 id="agentenvironment-interface">Agent–Environment Interface<a class="headerlink" href="#agentenvironment-interface" title="Permanent link">¶</a></h3>
-<figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt" width="100%">
-</img></p>
-<figcaption>Agent-Environment Interface</figcaption>
-</figure>
-<p>Agent-Environment Interface에서는 다음과 같은 상황을 서술한다. 매 time stamp <span class="arithmatex">\(t=0, 1, 2, \cdots\)</span> 마다</p>
-<ol>
-<li>Agent는 상태(State) 정보 <span class="arithmatex">\(S_t \in \mathcal{S}\)</span>를 받는다.</li>
-<li>Agent는 행동(Action) <span class="arithmatex">\(A_t \in \mathcal{A(s_t)}\)</span>을 취한다.</li>
-<li>한 스텝 이후(<span class="arithmatex">\(t+1\)</span>), Agent는 보상 <span class="arithmatex">\(R_{t+1}\)</span>을 받고 다음 상태 <span class="arithmatex">\(S_{t+1}\)</span>가 결정된다.</li>
-</ol>
-<p>따라서 이러한 상호작용은 일련의 시퀀스(혹은 trajectory) <span class="arithmatex">\(S_0, A_0, R_1, S_1, A_1, R_2, A_2, R_3, \cdots\)</span> 를 생성한다.</p>
-<h3 id="dynamics-of-mdp">Dynamics of MDP<a class="headerlink" href="#dynamics-of-mdp" title="Permanent link">¶</a></h3>
-<p><strong>Dynamics function</strong>은 두 개의 현재와 다음 상태(<span class="arithmatex">\(S_t\)</span>, <span class="arithmatex">\(S_{t+1}\)</span>), 보상(<span class="arithmatex">\(R_t\)</span>), 그리고 행동(<span class="arithmatex">\(A_t\)</span>)를 받아서 <span class="arithmatex">\(0\)</span>과 <span class="arithmatex">\(1\)</span>로 사이의 확률로 매핑해주는 함수다.</p>
-<div class="arithmatex">\[p: \mathcal{S} \times \mathcal{R} \times \mathcal{S} \times \mathcal{A} \rightarrow \lbrack 0, 1 \rbrack\]</div>
-<p>이 함수는 현재 상태, 행동이 주어졌을 때 다음 상태와 보상을 기술한다. <span class="arithmatex">\(s', s \in \mathcal{S}, r \in \mathcal{R}, a \in \mathcal{A(s)}\)</span> 일때 확률은 다음과 같다.</p>
-<div class="arithmatex">\[p(s', r \vert s, a) := \Bbb{P} \lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace\]</div>
-<h3 id="markov-property">Markov Property<a class="headerlink" href="#markov-property" title="Permanent link">¶</a></h3>
-<blockquote>
-<p>"The future is independent of the past given the present."</p>
-</blockquote>
-<p>Markov의 중요한 특성은 현 시점에서 모든 과거는 미래와 독립적인 관계라는 것이다. 상태 <span class="arithmatex">\(s\)</span>가 Markov 특성을 지녔다라는 것은 다음과 같다. 모든 과거 정보 <span class="arithmatex">\(\lbrace S_0, A_0, \cdots, S_{t-1}, A_{t-1} \rbrace\)</span>는  이미 상태에서 내포되어 있기 때문이라는 가정이 숨겨져 있다.</p>
-<div class="arithmatex">\[\Bbb{P}\lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace = \Bbb{P} \lbrace S_t = s', R_t = r \vert S_0, A_0, \cdots, S_{t-1}=s, A_{t-1}=a \rbrace\]</div>
-<p>MDP dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 사용하여 다른 항들을 계산 할 수 있다.</p>
+<h1>CS 285: Lecture 20, Inverse Reinforcement Learning</h1>
+<p>영상링크: <a href="https://youtu.be/EcxpbhDeuZw">https://youtu.be/EcxpbhDeuZw</a></p>
+<h2 id="why-should-we-worry-about-learning-rewards">Why should we worry about learning rewards?<a class="headerlink" href="#why-should-we-worry-about-learning-rewards" title="Permanent link">¶</a></h2>
+<ul>
+<li>Imitation Learning 관점: 로봇과 다르게 사람은 모방하는 과정에서는 행동(action)을 모방하지 않고, 의도(intent)를 모방하려고 함. 이는 다양한 다른 행동을 만들어 낼 수 있음.</li>
+</ul>
+<h2 id="inverse-reinforcement-learning">Inverse Reinforcement Learning<a class="headerlink" href="#inverse-reinforcement-learning" title="Permanent link">¶</a></h2>
+<ul>
+<li>IRL은 demonstrations으로부터 reward function을 학습하는 것을 목표로 함.</li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HVV-y_kFh2XxnkWTRmYQ4TMxLz4gMi6t" width="100%"/></p>
+<h3 id="feature-matching-irl">Feature matching IRL<a class="headerlink" href="#feature-matching-irl" title="Permanent link">¶</a></h3>
+<ul>
+<li>Linear reward function: $r_\psi(s, a) = \sum_i \psi_i f_i(s,a) = \psi f(s, a) $</li>
+<li>중요한 feature의 expectation을 매칭하는 과정</li>
+<li><span class="arithmatex">\(\pi^{r_\psi}\)</span> 를 optimal policy 라고하면 원하는 것은 <span class="arithmatex">\(\Bbb{E}_{\pi^{r_\psi}}[f(s, a)] = \Bbb{E}_{\pi^{*}}[f(s, a)]\)</span> 를 만족하는 <span class="arithmatex">\(\psi\)</span> 를 찾는 것. </li>
+</ul>
 <div class="admonition info">
-<p class="admonition-title">MDP calculation from dynamics</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">State-trainsition</label><label for="__tabbed_1_2">Expected rewards for state–action pair</label><label for="__tabbed_1_3">Expected rewards for state–action-next-state triple</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="arithmatex">\[p(s' \vert s, a) := \Bbb{P}\lbrace S_t = s', \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} p(s', r \vert s, a) \]</div>
+<p class="admonition-title">maximum margin priciple</p>
+<div class="arithmatex">\[ \underset{\psi, m}{\max}\ m \quad \text{s.t.} \quad \psi^T \Bbb{E}_{\pi^{*}}[f(s, a)] \geq \underset{\pi in \Pi}{\max}\ \psi^T \Bbb{E}_\pi \lbrack f(s, a) + m \rbrack \]</div>
+<ul>
+<li>휴리스틱함</li>
+<li>그래서 SVM으로 해결해보려고 함</li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HVvCDJIbnVbFHw3NBP-xvHocj3odl2vD" width="100%"/></p>
 </div>
-<div class="tabbed-block">
-<div class="arithmatex">\[r(s, a) := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a \rbrack = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r \vert s, a) \]</div>
-</div>
-<div class="tabbed-block">
-<div class="arithmatex">\[r(s, a, s') := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrack = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}\]</div>
-</div>
-</div>
-</input></input></input></div>
-</div>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O" width="50%"/></p>
-<p>이 그림은 세 개의 State <span class="arithmatex">\(\mathcal{S} = \lbrace s_0, s_1, s_3 \rbrace\)</span>, 두 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace a_0, a_1 \rbrace\)</span> 이 존재한다. 또한, <span class="arithmatex">\(+5\)</span>와 <span class="arithmatex">\(-1\)</span>을 제외하고 나머지는 모두 <span class="arithmatex">\(0\)</span>의 보상을 가진다. 몇 가지 예제로 MDP를 이해해보자.</p>
-<ol>
-<li><span class="arithmatex">\(s_1\)</span> 상태에서 시작하여 <span class="arithmatex">\(a_0\)</span>의 행동을 취한 경우, <span class="arithmatex">\(s_0\)</span> 와 보상 <span class="arithmatex">\(r=5\)</span>를 얻을 확률은 <span class="arithmatex">\(p(s_0, 5 \vert s_1, a_0) = 0.7\)</span>. </li>
-<li><span class="arithmatex">\(s_1\)</span> 상태에서 행동 <span class="arithmatex">\(a_0\)</span>을 취했을 때, <span class="arithmatex">\(s_2\)</span>로 전환될 확률은 <span class="arithmatex">\(p(s_2 \vert s_1, a_0) = 0.2\)</span>.</li>
-<li>
-<p><span class="arithmatex">\(s_1\)</span> 상태에서 행동 <span class="arithmatex">\(a_0\)</span>의 기댓값:</p>
-<div class="arithmatex">\[\begin{aligned} r(s_1, a_0) &amp;= 5 \cdot p(s_0, 5 \vert s_1, a_0) + 0 \cdot p(s_1, 0 \vert s_1, a_0) + 0 \cdot p(s_2, 0 \vert s_1, a_0) \\
-&amp;= 5 \cdot 0.7 + 0 \cdot 0.1 + 0 \cdot 0.2 = 3.5
-\end{aligned}\]</div>
+<h2 id="learning-the-reward-function">Learning the Reward Function<a class="headerlink" href="#learning-the-reward-function" title="Permanent link">¶</a></h2>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H_wQTy8E6kVAMHT4s7C8U_otdUNX_W7U" width="100%"/></p>
+<ul>
+<li>The optimality variable를 학습하여 reward function을 추정하자</li>
+<li><span class="arithmatex">\(p(\mathcal{O}_t \vert s_t, a_t, \psi) = \exp \big( r_\psi (s_t, a_t) \big)\)</span> </li>
+<li>demonstations from <span class="arithmatex">\(\pi^*(\tau)\)</span>: <span class="arithmatex">\(\lbrace \tau_i \rbrace\)</span></li>
+<li><span class="arithmatex">\(p(\tau \vert \mathcal{O}_{1:T}, \psi) \propto p(\tau) \exp \big( \sum_t r_\psi (s_t, a_t) \big)\)</span>, 여기서 <span class="arithmatex">\(p(\tau)\)</span>는 <span class="arithmatex">\(\psi\)</span>과 독립이기 때문에 생략 가능 </li>
+<li>Maximum likelihood learning: <span class="arithmatex">\(\underset{\psi}{\max}\ \dfrac{1}{N}\sum_{i=1}^N \log p(\tau_i \vert \mathcal{O}_{1:T}, \psi) = \underset{\psi}{\max}\ \dfrac{1}{N}\sum_{i=1}^N r_\psi (\tau_i) - \log Z\)</span></li>
+<li><span class="arithmatex">\(Z\)</span>가 학습을 힘들게함</li>
+</ul>
+<h3 id="the-irl-particion-function">The IRL Particion function<a class="headerlink" href="#the-irl-particion-function" title="Permanent link">¶</a></h3>
+<ul>
+<li><span class="arithmatex">\(Z = \int p(\tau) \exp \big( \sum_t r_\psi (s_t, a_t) \big)\)</span>,  <span class="arithmatex">\(\underset{\psi}{\max}\ \dfrac{1}{N}\sum_{i=1}^N r_\psi (\tau_i) - \log Z\)</span></li>
+<li>gradient: <span class="arithmatex">\(\triangledown_\psi L = \dfrac{1}{N} \sum_{i=1}^N \triangledown_\psi r_\psi (\tau_i) - \dfrac{1}{Z} \int p(\tau) \exp \big( \sum_t r_\psi (s_t, a_t) \big) \triangledown_\psi r_\psi (\tau) d\tau\)</span><ul>
+<li><span class="arithmatex">\(\dfrac{1}{Z} \int p(\tau) \exp \big( \sum_t r_\psi (s_t, a_t) \big) = p(\tau \vert \mathcal{O}_{1:T}, \psi)\)</span> 이기 때문에</li>
+</ul>
 </li>
-</ol>
-<p>MDP 프레임워크에서 경계값은 꼭 Agent의 물리적 경계값 일 필요는 없다. 또한, MDP 프레임워크에서 Agent는 환경(Environment)을 임의대로 변경 할 수 없다.</p>
-<h2 id="reward-hypothesis">Reward Hypothesis<a class="headerlink" href="#reward-hypothesis" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>The goal of the agent is the maximization of the expected value of the cumulative sum of a received scalar (reward) signal.</p>
-</blockquote>
-<p>Agent의 최종 목적은 <strong>보상 합의 기댓값</strong>을 최대화 하는 것이다. 목적을 달성하기 위해서 sub-goal를 추가하는 것이 도움이 될까? 도움이 될 수도 있고 안될 수 도 있다. 예를 들어, 체스게임에서 퀸을 잡는 것이 중요하다는 것을 sub-goal로 두어서 왕을 제외한 다른 모든 말들을 희생시켰다면, 이는 최종 목표인 게임 승리에 도움이 안된다(물론 적은 말들로 달성 했을 수도 있지만...).</p>
-<p>Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 <strong>기대 수익(expected return)</strong>을 <span class="arithmatex">\(G_t\)</span> 라고 하면 두 가지 시나리오에서 수식으로 다음과 같이 정의 할 수 있다.</p>
-<div class="admonition info">
-<p class="admonition-title">Expected Reward from difference scenario</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Episodic</label><label for="__tabbed_2_2">Continuing</label><label for="__tabbed_2_3">Episodic + Continuning</label></div>
+<li><span class="arithmatex">\(\triangledown_\psi L = \Bbb{E}_{\tau \sim \pi^*(\tau)} \lbrack \triangledown_\psi r_\psi(\tau_i) \rbrack - \Bbb{E}_{\tau \sim \pi^*(\tau \vert \mathcal{O}_{1:T}, \psi)} \lbrack \triangledown_\psi r_\psi(\tau) \rbrack\)</span><ul>
+<li>앞의 항은 expert samples의 추정치이고, 뒤의 항은 현재 reward 하에서 soft optimal policy 다.</li>
+</ul>
+</li>
+<li>이를 풀어쓰면 backward message(<span class="arithmatex">\(\beta\)</span>)와 forward message(<span class="arithmatex">\(\alpha\)</span>)와 연관시킬 수 있음</li>
+</ul>
+<h3 id="estimating-the-expectation">Estimating the expectation<a class="headerlink" href="#estimating-the-expectation" title="Permanent link">¶</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">1</label><label for="__tabbed_1_2">2</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="arithmatex">\[G_t := R_{t+1} + R_{t+1} + \cdots + R_T\]</div>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HdR5npwIB3fxGyaiYJ4A5fQp-qaHxrnG" width="100%"/></p>
 </div>
 <div class="tabbed-block">
-<div class="arithmatex">\[G_t := R_{t+1} + \gamma R_{t+1} + \cdots + = \sum_{k=1}^{\infty} \gamma^k R_{t+k+1}\]</div>
-<p>여기서 <span class="arithmatex">\(\gamma \in \lbrack 0, 1 \rbrack\)</span>는 할인율(discount rate)이라고 한다. </p>
-</div>
-<div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=175964pau-XWCIuiz7u4DJItFDrf-sEGJ" width="50%"/></p>
-<p>이러한 모형을 absorbing state라고 한다. <span class="arithmatex">\(T = \infty\)</span> 혹은 <span class="arithmatex">\(\gamma = 1\)</span></p>
-<div class="arithmatex">\[G_t := \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k \]</div>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HgBUymH94DE3_K_5bi8qw1fYJE-stGlS" width="100%"/></p>
 </div>
 </div>
-</input></input></input></div>
-</div>
-<h2 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">¶</a></h2>
-<p><strong>Policy</strong>는 주어진 상태 <span class="arithmatex">\(S_t = s\)</span> 에서 가능한 행동 <span class="arithmatex">\(A_t = a\)</span>으로 매핑하는 함수 <span class="arithmatex">\(\pi_t(a \vert s)\)</span>다. 꼭 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다.</p>
-<div class="arithmatex">\[ \pi_t(a \vert s) = \begin{cases} 1 &amp; \text{where } a=a' \\ 0 &amp; \text{where } a\neq a' \end{cases}\]</div>
-<p><strong>Value Function</strong>은 <mark class="critic">Policy가 주어졌을 때</mark>, 상태(혹은 상태-행동 쌍)가 얼마나 좋은 지를 평가하는 함수다. 왜 좋은지를 평가해야하고 좋은 평가는 무엇인지는 앞으로 차차 알아가 본다.</p>
+</input></input></div>
+<h3 id="the-maxent-irl-algorithm1">The MaxEnt IRL algorithm<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup><a class="headerlink" href="#the-maxent-irl-algorithm1" title="Permanent link">¶</a></h3>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HgKERyg7tJP9_Z67QuwGx3In64TGMYm5" width="100%"/></p>
 <ul>
 <li>
-<p>policy <span class="arithmatex">\(\pi\)</span>하에 State-value function:</p>
-<div class="arithmatex">\[v_{\pi}(s) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s \Bigg\rbrack\]</div>
+<p>필요:</p>
+<ul>
+<li>Solving for (soft) optimal policy in the inner loop</li>
+<li>Enumerating all state-action tuples for visitation frequency and gradient</li>
+</ul>
 </li>
 <li>
-<p>policy <span class="arithmatex">\(\pi\)</span>하에 Action-value function:</p>
-<div class="arithmatex">\[q_{\pi}(s, a) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s, A_t = a\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s, A_t = a \Bigg\rbrack\]</div>
+<p>단점 및 한계점: </p>
+<ul>
+<li>Large and continuous state and action spaces</li>
+<li>States obtained via sampling only</li>
+<li>Unknown dynamics</li>
+</ul>
 </li>
 </ul>
-<h3 id="bellman-equation">Bellman Equation<a class="headerlink" href="#bellman-equation" title="Permanent link">¶</a></h3>
-<p><strong>벨만 방정식(Bellman Equation)</strong>은 현재 상태(<span class="arithmatex">\(s\)</span>)의 value와 다음 상태(<span class="arithmatex">\(s'\)</span>)의 value 관계를 보여주는 식이다.</p>
-<div class="arithmatex">\[\begin{aligned}
-v_{\pi}(s) &amp; := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
-&amp;= \Bbb{E}_{\pi} \lbrack R_{t+1} + \gamma G_{t+1} \vert S_t = s\rbrack \\
-&amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \big\lbrack r + \gamma \Bbb{E}_{\pi} \lbrack G_{t+1} \vert S_{t+1} = s' \rbrack \big\rbrack \\
-&amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
-\end{aligned}\]</div>
-<p>아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy <span class="arithmatex">\(\pi\)</span> 하에 현재 상태 가치(state-value) <span class="arithmatex">\(v_{\pi}(s)\)</span> 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태 가치 <span class="arithmatex">\(\gamma v_{\pi}(s')\)</span> 와 다음 보상 <span class="arithmatex">\(r\)</span>의 합을 가중 평균함으로써 구할 수 있다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17ErRNwcyluBH0eRffR-NmGqm-VXYRnor" width="40%"/></p>
-<div class="admonition note">
-<p class="admonition-title">Example: Grid-World</p>
-<p>아래의 좌측 그림 처럼 지도가 있는데, 네 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace N, S, E, W \rbrace\)</span>을 취할 수 있다. 그리고 웜홀이 있어서 <span class="arithmatex">\(A\)</span> 에서 <span class="arithmatex">\(A'\)</span>로 전송하는 웜홀을 타면 <span class="arithmatex">\(+10\)</span>, <span class="arithmatex">\(B\)</span> 에서 <span class="arithmatex">\(B'\)</span>로가는 웜홀을 타면 <span class="arithmatex">\(+5\)</span>, 그리고 지도 밖을 벗어나면 <span class="arithmatex">\(-1\)</span>를 받는 보상 상황이 주어졌다. 여기서 각각의 grid(네모칸)은 state라고 할 수 있다. 따라서, state transition은 결정적이다. 우측 그림은 state value를 구한 것이다. 우측 그림에서 볼 수 있듯이 A와 B grid(state)에서 높은 value를 갖는다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1779PnyTHiERWiXWWAChWpukv5ujz1g5f" width="80%"/></p>
+<h2 id="approximations-in-high-dimensions">Approximations in High Dimensions<a class="headerlink" href="#approximations-in-high-dimensions" title="Permanent link">¶</a></h2>
+<h3 id="guided-cost-learning-algorithm2">Guided cost learning algorithm<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup><a class="headerlink" href="#guided-cost-learning-algorithm2" title="Permanent link">¶</a></h3>
+<ul>
+<li>Unknown dynamics &amp; large state/action spaces 일 경우 일반 강화학습처엄 sample 할 수 있음</li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HlXbXT41U8W1DfmlwWm6GX2JktIUFlKo" width="100%"/></p>
+<ul>
+<li>sample-based 방법으로 효율적인 업데이트가능</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">More efficient sample-based updates</label><label for="__tabbed_2_2">Importance sampling</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1Hl_EE7Z8fS0cDSXjqjSuoWAHSq7ks-R8" width="100%"/></p>
 </div>
-<h3 id="optimal-policies-and-optimal-value-functions">Optimal Policies and Optimal Value Functions<a class="headerlink" href="#optimal-policies-and-optimal-value-functions" title="Permanent link">¶</a></h3>
-<p>Policy의 비교는 주어진 policy <span class="arithmatex">\(\pi\)</span>하에서 state-value <span class="arithmatex">\(v_{\pi}(s)\)</span> 가 높으면 좋은 것이다 <span style="color:gray">(주의: state-value function이 항상 monotic한 것은 아니다)</span>. 따라서 최적의 policy <span class="arithmatex">\(\pi_{*}\)</span>는 주어진 상태 <span class="arithmatex">\(s\)</span>에서 다른 <ins class="critic">모든 policy</ins> 보다 좋은 state-value를 가지면 된다. 이 최적의 state-value를 <strong>optimal state-value function</strong> 이라고 하며 다음과 같이 정의 된다. </p>
-<div class="arithmatex">\[v_{*}(s) := \underset{\pi}{max} \ v_{\pi}(s) \quad \forall s \in \mathcal{s}\]</div>
-<p>또한, 최적의 <strong>action-value function</strong>도 같이 정의할 수 있다.</p>
-<div class="arithmatex">\[\begin{aligned} q_{*}(s, a) &amp; := \underset{\pi}{max} \ q_{\pi}(s, a) \quad \forall s \in \mathcal{s}, a \in \mathcal{A} \\ 
-&amp;= \Bbb{E} \lbrack R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_t = s, A_t = a \rbrack
-\end{aligned}\]</div>
-<h3 id="bellman-optimality">Bellman Optimality<a class="headerlink" href="#bellman-optimality" title="Permanent link">¶</a></h3>
-<blockquote>
-<p>"The value of a state under an optimal policy must equal the expected return for the best action from that state."</p>
-</blockquote>
-<p><span class="arithmatex">\(v_{*}\)</span>를 구하기 위한 <strong>Bellman Optimality Equation</strong>은 다음 수식과 같이 정의된다. 이 수식의 뜻은 최적의 policy <span class="arithmatex">\(\pi_{*}\)</span> 하에 상태의 가치 <span class="arithmatex">\(v_{*}\)</span>는 해당 상태에서 나오는 최적 행동의 기대 수익이다.</p>
-<div class="arithmatex">\[\begin{aligned}
-v_{*}(s) &amp; := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
-&amp;= \underset{a}{\max} \Bbb{E}_{\pi_{*}} \lbrack G_t \vert S_t = s\rbrack \\
-&amp;= \underset{a}{\max} \Bbb{E}_{\pi} \lbrack R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
-&amp;= \underset{a}{\max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi_{*}}(s') \rbrack
-\end{aligned}\]</div>
-<p>이전의 Bellman backup diagram과 다르게 최적 상태 가치(optimal state-value)를 구하기 위해서 <span class="arithmatex">\(v_{*}\)</span> 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태 가치를 보상에 대한 가중 평균 하면 되는 것이다. </p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r" width="80%"/></p>
-<p>또한 Bellman optimality equation은 <span class="arithmatex">\(v_*\)</span>에 대해 단 하나의 유일한 솔루션을 가진다. </p>
-<div class="admonition note">
-<p class="admonition-title">Example: Grid-World 에서의 optimal value function과 policy</p>
-<p>중간의 그림이 optimal state-value 이고 우측은 optimal policy다. 각 state에서 여러 optimal policy를 가질 수 있지만, optimal state-value는 단 하나다. 예를 들어, 좌표 <code>(4, 0)</code>에서는 N으로 이동하던 E로 이동하던 모두 최적의 <span class="arithmatex">\(v_{*}\)</span>를 얻을 수 있다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17HM0n2h1sWSan32R-2zD3xkHXnoCrD9Z" width="80%"/></p>
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HpBM1xSfZ3o7GvJ6LVoJG-4OJskvAGB1" width="100%"/></p>
 </div>
-<h3 id="etc">ETC<a class="headerlink" href="#etc" title="Permanent link">¶</a></h3>
-<p>두 개의 policy <span class="arithmatex">\(\pi_A\)</span>, <span class="arithmatex">\(\pi_B\)</span>가 있는데, 어떤 state에서 optimal state-value가 <span class="arithmatex">\(\pi_A\)</span>가 더 큰 경우가 있고, 어떤 state에서는 <span class="arithmatex">\(\pi_B\)</span>가 더 크다. 그렇다면 optimal policy는 없는 것일까? 아니다. 각 state에서 state-value가 큰 policy를 선택해서 새로운 policy <span class="arithmatex">\(\pi_C\)</span>를 만들면 된다. 따라서, 항상 <span class="arithmatex">\(v_{\pi}(s) \geq v_{\pi^{'}}(s)\)</span>를 만족하는 <span class="arithmatex">\(\pi\)</span>를 찾을 수 있다.</p>
+</div>
+</input></input></div>
+<ul>
+<li>policy samples를 먼저 생성 <span class="arithmatex">\(\rightarrow\)</span> 사람 demonstrations과 같이 reward function을 추정 <span class="arithmatex">\(\rightarrow\)</span> policy를 업데이트</li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1Hru-Bbpa585QzRwCEGnhL-_QEr_OFAtC" width="100%"/></p>
+<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://en.wikipedia.org/wiki/Markov_decision_process">Wikipedia - Markove Decision Processes</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://cdn.aaai.org/AAAI/2008/AAAI08-227.pdf">Maximum Entropy Inverse Reinforcement Learning - Brian D. Ziebart, Andrew Maas, J.Andrew Bagnell, and Anind K. Dey</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://arxiv.org/abs/1603.00448">Guided Cost Learning: Deep Inverse Optimal Control via Policy Optimization - Chelsea Finn, Sergey Levine, Pieter Abbeel</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
