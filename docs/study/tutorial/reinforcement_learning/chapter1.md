@@ -21,7 +21,5 @@ as to maximize a numerical reward signal.
 
 [^1]: [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
 
-강화학습(Reinforcement Learning)은 수치적으로 측정가능한 최대한의 보상을 받기 위해서 상황(situations)과 행동(actions)를 매핑하는 방법을 배우는 것이다. 예시:
-
-1. 
+강화학습(Reinforcement Learning)은 수치적으로 측정가능한 최대한의 보상을 받기 위해서 상황(situations)과 행동(actions)를 매핑하는 방법을 배우는 것이다.
 

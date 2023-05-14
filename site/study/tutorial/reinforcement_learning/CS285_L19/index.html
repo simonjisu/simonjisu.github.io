@@ -5,12 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter3/" rel="canonical"/>
-<link href="../chapter2/" rel="prev"/>
-<link href="../chapter4/" rel="next"/>
+<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/CS285_L19/" rel="canonical"/>
+<link href="../" rel="prev"/>
+<link href="../CS285_L20/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
-<title>3. Finite Markov Decision Processes - Soopace</title>
+<title>CS 285: Lecture 19, Control as Inference - Soopace</title>
 <link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#markov-decision-processes-mdps">
+<a class="md-skip" href="#optimal-control-as-a-model-of-human-behavior">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              3. Finite Markov Decision Processes
+              CS 285: Lecture 19, Control as Inference
             
           </span>
 </div>
@@ -360,8 +360,20 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L19/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    CS 285: Lecture 19, Control as Inference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -371,6 +383,112 @@
     
   </span>
 </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#optimal-control-as-a-model-of-human-behavior">
+<span class="md-ellipsis">
+      
+        Optimal control as a Model of Human Behavior
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#control-as-inference">
+<span class="md-ellipsis">
+      
+        Control as Inference
+      
+    </span>
+</a>
+<nav aria-label="Control as Inference" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#backward-messages">
+<span class="md-ellipsis">
+      
+        Backward Messages
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#policy-computation">
+<span class="md-ellipsis">
+      
+        Policy Computation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#forward-messages">
+<span class="md-ellipsis">
+      
+        Forward Messages
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#message-intersection">
+<span class="md-ellipsis">
+      
+        Message Intersection
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#control-as-variational-inference">
+<span class="md-ellipsis">
+      
+        Control as Variational Inference
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#algorithms-for-rl-as-inference">
+<span class="md-ellipsis">
+      
+        Algorithms for RL as Inference
+      
+    </span>
+</a>
+<nav aria-label="Algorithms for RL as Inference" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#q-learning-with-soft-optimality">
+<span class="md-ellipsis">
+      
+        Q-Learning with soft optimality
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#benefits-of-soft-optimality">
+<span class="md-ellipsis">
+      
+        Benefits of Soft Optimality
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../CS285_L20/">
@@ -408,20 +526,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    3. Finite Markov Decision Processes
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../chapter3/">
 <span class="md-ellipsis">
     
   
@@ -431,112 +537,6 @@
     
   </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-decision-processes-mdps">
-<span class="md-ellipsis">
-      
-        Markov Decision Processes (MDPs)
-      
-    </span>
-</a>
-<nav aria-label="Markov Decision Processes (MDPs)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#agentenvironment-interface">
-<span class="md-ellipsis">
-      
-        Agent–Environment Interface
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#dynamics-of-mdp">
-<span class="md-ellipsis">
-      
-        Dynamics of MDP
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-property">
-<span class="md-ellipsis">
-      
-        Markov Property
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#reward-hypothesis">
-<span class="md-ellipsis">
-      
-        Reward Hypothesis
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policies-and-value-functions">
-<span class="md-ellipsis">
-      
-        Policies and Value Functions
-      
-    </span>
-</a>
-<nav aria-label="Policies and Value Functions" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-equation">
-<span class="md-ellipsis">
-      
-        Bellman Equation
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-policies-and-optimal-value-functions">
-<span class="md-ellipsis">
-      
-        Optimal Policies and Optimal Value Functions
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-optimality">
-<span class="md-ellipsis">
-      
-        Bellman Optimality
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#etc">
-<span class="md-ellipsis">
-      
-        ETC
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../chapter4/">
@@ -634,38 +634,47 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#markov-decision-processes-mdps">
+<a class="md-nav__link" href="#optimal-control-as-a-model-of-human-behavior">
 <span class="md-ellipsis">
       
-        Markov Decision Processes (MDPs)
+        Optimal control as a Model of Human Behavior
       
     </span>
 </a>
-<nav aria-label="Markov Decision Processes (MDPs)" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#control-as-inference">
+<span class="md-ellipsis">
+      
+        Control as Inference
+      
+    </span>
+</a>
+<nav aria-label="Control as Inference" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#agentenvironment-interface">
+<a class="md-nav__link" href="#backward-messages">
 <span class="md-ellipsis">
       
-        Agent–Environment Interface
+        Backward Messages
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#dynamics-of-mdp">
+<a class="md-nav__link" href="#policy-computation">
 <span class="md-ellipsis">
       
-        Dynamics of MDP
+        Policy Computation
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#markov-property">
+<a class="md-nav__link" href="#forward-messages">
 <span class="md-ellipsis">
       
-        Markov Property
+        Forward Messages
       
     </span>
 </a>
@@ -674,56 +683,47 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reward-hypothesis">
+<a class="md-nav__link" href="#message-intersection">
 <span class="md-ellipsis">
       
-        Reward Hypothesis
+        Message Intersection
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#policies-and-value-functions">
+<a class="md-nav__link" href="#control-as-variational-inference">
 <span class="md-ellipsis">
       
-        Policies and Value Functions
+        Control as Variational Inference
       
     </span>
 </a>
-<nav aria-label="Policies and Value Functions" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#algorithms-for-rl-as-inference">
+<span class="md-ellipsis">
+      
+        Algorithms for RL as Inference
+      
+    </span>
+</a>
+<nav aria-label="Algorithms for RL as Inference" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-equation">
+<a class="md-nav__link" href="#q-learning-with-soft-optimality">
 <span class="md-ellipsis">
       
-        Bellman Equation
+        Q-Learning with soft optimality
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-policies-and-optimal-value-functions">
+<a class="md-nav__link" href="#benefits-of-soft-optimality">
 <span class="md-ellipsis">
       
-        Optimal Policies and Optimal Value Functions
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-optimality">
-<span class="md-ellipsis">
-      
-        Bellman Optimality
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#etc">
-<span class="md-ellipsis">
-      
-        ETC
+        Benefits of Soft Optimality
       
     </span>
 </a>
@@ -772,158 +772,161 @@
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
 <span class="md-tag">reinforcement learning</span>
-<span class="md-tag">mdp</span>
+<span class="md-tag">control</span>
 </nav>
-<h1>3. Finite Markov Decision Processes</h1>
+<h1>CS 285: Lecture 19, Control as Inference</h1>
+<p>영상링크: <a href="https://youtu.be/MzVlYYGtg0M">https://youtu.be/MzVlYYGtg0M</a></p>
+<h2 id="optimal-control-as-a-model-of-human-behavior">Optimal control as a Model of Human Behavior<a class="headerlink" href="#optimal-control-as-a-model-of-human-behavior" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
+<p>Optimal control is a mathematical framework for computing control policies that optimize a given objective.</p>
 </blockquote>
-<h2 id="markov-decision-processes-mdps">Markov Decision Processes (MDPs)<a class="headerlink" href="#markov-decision-processes-mdps" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>Markov decision process (MDP) is a discrete-time stochastic control process. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
-</blockquote>
-<p>마르코프 결정 프로세스에서 Actions은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.</p>
-<h3 id="agentenvironment-interface">Agent–Environment Interface<a class="headerlink" href="#agentenvironment-interface" title="Permanent link">¶</a></h3>
-<figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt" width="100%">
-</img></p>
-<figcaption>Agent-Environment Interface</figcaption>
-</figure>
-<p>Agent-Environment Interface에서는 다음과 같은 상황을 서술한다. 매 time stamp <span class="arithmatex">\(t=0, 1, 2, \cdots\)</span> 마다</p>
-<ol>
-<li>Agent는 상태(State) 정보 <span class="arithmatex">\(S_t \in \mathcal{S}\)</span>를 받는다.</li>
-<li>Agent는 행동(Action) <span class="arithmatex">\(A_t \in \mathcal{A(s_t)}\)</span>을 취한다.</li>
-<li>한 스텝 이후(<span class="arithmatex">\(t+1\)</span>), Agent는 보상 <span class="arithmatex">\(R_{t+1}\)</span>을 받고 다음 상태 <span class="arithmatex">\(S_{t+1}\)</span>가 결정된다.</li>
-</ol>
-<p>따라서 이러한 상호작용은 일련의 시퀀스(혹은 trajectory) <span class="arithmatex">\(S_0, A_0, R_1, S_1, A_1, R_2, A_2, R_3, \cdots\)</span> 를 생성한다.</p>
-<h3 id="dynamics-of-mdp">Dynamics of MDP<a class="headerlink" href="#dynamics-of-mdp" title="Permanent link">¶</a></h3>
-<p><strong>Dynamics function</strong>은 두 개의 현재와 다음 상태(<span class="arithmatex">\(S_t\)</span>, <span class="arithmatex">\(S_{t+1}\)</span>), 보상(<span class="arithmatex">\(R_t\)</span>), 그리고 행동(<span class="arithmatex">\(A_t\)</span>)를 받아서 <span class="arithmatex">\(0\)</span>과 <span class="arithmatex">\(1\)</span>로 사이의 확률로 매핑해주는 함수다.</p>
-<div class="arithmatex">\[p: \mathcal{S} \times \mathcal{R} \times \mathcal{S} \times \mathcal{A} \rightarrow \lbrack 0, 1 \rbrack\]</div>
-<p>이 함수는 현재 상태, 행동이 주어졌을 때 다음 상태와 보상을 기술한다. <span class="arithmatex">\(s', s \in \mathcal{S}, r \in \mathcal{R}, a \in \mathcal{A(s)}\)</span> 일때 확률은 다음과 같다.</p>
-<div class="arithmatex">\[p(s', r \vert s, a) := \Bbb{P} \lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace\]</div>
-<h3 id="markov-property">Markov Property<a class="headerlink" href="#markov-property" title="Permanent link">¶</a></h3>
-<blockquote>
-<p>"The future is independent of the past given the present."</p>
-</blockquote>
-<p>Markov의 중요한 특성은 현 시점에서 모든 과거는 미래와 독립적인 관계라는 것이다. 상태 <span class="arithmatex">\(s\)</span>가 Markov 특성을 지녔다라는 것은 다음과 같다. 모든 과거 정보 <span class="arithmatex">\(\lbrace S_0, A_0, \cdots, S_{t-1}, A_{t-1} \rbrace\)</span>는  이미 상태에서 내포되어 있기 때문이라는 가정이 숨겨져 있다.</p>
-<div class="arithmatex">\[\Bbb{P}\lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace = \Bbb{P} \lbrace S_t = s', R_t = r \vert S_0, A_0, \cdots, S_{t-1}=s, A_{t-1}=a \rbrace\]</div>
-<p>MDP dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 사용하여 다른 항들을 계산 할 수 있다.</p>
-<div class="admonition info">
-<p class="admonition-title">MDP calculation from dynamics</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">State-trainsition</label><label for="__tabbed_1_2">Expected rewards for state–action pair</label><label for="__tabbed_1_3">Expected rewards for state–action-next-state triple</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="arithmatex">\[p(s' \vert s, a) := \Bbb{P}\lbrace S_t = s', \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} p(s', r \vert s, a) \]</div>
-</div>
-<div class="tabbed-block">
-<div class="arithmatex">\[r(s, a) := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a \rbrack = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r \vert s, a) \]</div>
-</div>
-<div class="tabbed-block">
-<div class="arithmatex">\[r(s, a, s') := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrack = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}\]</div>
-</div>
-</div>
-</input></input></input></div>
-</div>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O" width="50%"/></p>
-<p>이 그림은 세 개의 State <span class="arithmatex">\(\mathcal{S} = \lbrace s_0, s_1, s_3 \rbrace\)</span>, 두 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace a_0, a_1 \rbrace\)</span> 이 존재한다. 또한, <span class="arithmatex">\(+5\)</span>와 <span class="arithmatex">\(-1\)</span>을 제외하고 나머지는 모두 <span class="arithmatex">\(0\)</span>의 보상을 가진다. 몇 가지 예제로 MDP를 이해해보자.</p>
-<ol>
-<li><span class="arithmatex">\(s_1\)</span> 상태에서 시작하여 <span class="arithmatex">\(a_0\)</span>의 행동을 취한 경우, <span class="arithmatex">\(s_0\)</span> 와 보상 <span class="arithmatex">\(r=5\)</span>를 얻을 확률은 <span class="arithmatex">\(p(s_0, 5 \vert s_1, a_0) = 0.7\)</span>. </li>
-<li><span class="arithmatex">\(s_1\)</span> 상태에서 행동 <span class="arithmatex">\(a_0\)</span>을 취했을 때, <span class="arithmatex">\(s_2\)</span>로 전환될 확률은 <span class="arithmatex">\(p(s_2 \vert s_1, a_0) = 0.2\)</span>.</li>
-<li>
-<p><span class="arithmatex">\(s_1\)</span> 상태에서 행동 <span class="arithmatex">\(a_0\)</span>의 기댓값:</p>
-<div class="arithmatex">\[\begin{aligned} r(s_1, a_0) &amp;= 5 \cdot p(s_0, 5 \vert s_1, a_0) + 0 \cdot p(s_1, 0 \vert s_1, a_0) + 0 \cdot p(s_2, 0 \vert s_1, a_0) \\
-&amp;= 5 \cdot 0.7 + 0 \cdot 0.1 + 0 \cdot 0.2 = 3.5
-\end{aligned}\]</div>
-</li>
-</ol>
-<p>MDP 프레임워크에서 경계값은 꼭 Agent의 물리적 경계값 일 필요는 없다. 또한, MDP 프레임워크에서 Agent는 환경(Environment)을 임의대로 변경 할 수 없다.</p>
-<h2 id="reward-hypothesis">Reward Hypothesis<a class="headerlink" href="#reward-hypothesis" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>The goal of the agent is the maximization of the expected value of the cumulative sum of a received scalar (reward) signal.</p>
-</blockquote>
-<p>Agent의 최종 목적은 <strong>보상 합의 기댓값</strong>을 최대화 하는 것이다. 목적을 달성하기 위해서 sub-goal를 추가하는 것이 도움이 될까? 도움이 될 수도 있고 안될 수 도 있다. 예를 들어, 체스게임에서 퀸을 잡는 것이 중요하다는 것을 sub-goal로 두어서 왕을 제외한 다른 모든 말들을 희생시켰다면, 이는 최종 목표인 게임 승리에 도움이 안된다(물론 적은 말들로 달성 했을 수도 있지만...).</p>
-<p>Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 <strong>기대 수익(expected return)</strong>을 <span class="arithmatex">\(G_t\)</span> 라고 하면 두 가지 시나리오에서 수식으로 다음과 같이 정의 할 수 있다.</p>
-<div class="admonition info">
-<p class="admonition-title">Expected Reward from difference scenario</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Episodic</label><label for="__tabbed_2_2">Continuing</label><label for="__tabbed_2_3">Episodic + Continuning</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="arithmatex">\[G_t := R_{t+1} + R_{t+1} + \cdots + R_T\]</div>
-</div>
-<div class="tabbed-block">
-<div class="arithmatex">\[G_t := R_{t+1} + \gamma R_{t+1} + \cdots + = \sum_{k=1}^{\infty} \gamma^k R_{t+k+1}\]</div>
-<p>여기서 <span class="arithmatex">\(\gamma \in \lbrack 0, 1 \rbrack\)</span>는 할인율(discount rate)이라고 한다. </p>
-</div>
-<div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=175964pau-XWCIuiz7u4DJItFDrf-sEGJ" width="50%"/></p>
-<p>이러한 모형을 absorbing state라고 한다. <span class="arithmatex">\(T = \infty\)</span> 혹은 <span class="arithmatex">\(\gamma = 1\)</span></p>
-<div class="arithmatex">\[G_t := \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k \]</div>
-</div>
-</div>
-</input></input></input></div>
-</div>
-<h2 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">¶</a></h2>
-<p><strong>Policy</strong>는 주어진 상태 <span class="arithmatex">\(S_t = s\)</span> 에서 가능한 행동 <span class="arithmatex">\(A_t = a\)</span>으로 매핑하는 함수 <span class="arithmatex">\(\pi_t(a \vert s)\)</span>다. 꼭 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다.</p>
-<div class="arithmatex">\[ \pi_t(a \vert s) = \begin{cases} 1 &amp; \text{where } a=a' \\ 0 &amp; \text{where } a\neq a' \end{cases}\]</div>
-<p><strong>Value Function</strong>은 <mark class="critic">Policy가 주어졌을 때</mark>, 상태(혹은 상태-행동 쌍)가 얼마나 좋은 지를 평가하는 함수다. 왜 좋은지를 평가해야하고 좋은 평가는 무엇인지는 앞으로 차차 알아가 본다.</p>
 <ul>
-<li>
-<p>policy <span class="arithmatex">\(\pi\)</span>하에 State-value function:</p>
-<div class="arithmatex">\[v_{\pi}(s) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s \Bigg\rbrack\]</div>
-</li>
-<li>
-<p>policy <span class="arithmatex">\(\pi\)</span>하에 Action-value function:</p>
-<div class="arithmatex">\[q_{\pi}(s, a) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s, A_t = a\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s, A_t = a \Bigg\rbrack\]</div>
-</li>
+<li><span class="arithmatex">\(r(s_t, a_t)\)</span> 함수를 찾아서 데이터를 설명하려고함. 기본적 세팅은 다음과 같음.</li>
 </ul>
-<h3 id="bellman-equation">Bellman Equation<a class="headerlink" href="#bellman-equation" title="Permanent link">¶</a></h3>
-<p><strong>벨만 방정식(Bellman Equation)</strong>은 현재 상태(<span class="arithmatex">\(s\)</span>)의 value와 다음 상태(<span class="arithmatex">\(s'\)</span>)의 value 관계를 보여주는 식이다.</p>
+<div class="arithmatex">\[\begin{aligned} 
+a_1, \dots, a_T &amp;= \underset{a_1, \dots, a_T}{\arg \max} \sum_{t=1}^T r(s_t, a_t) \\
+s_{t+1} &amp;= f(s_t, a_t) \\
+\pi &amp;= \underset{\pi}{\arg \max} \mathbb{E}_{s_{t+1} \sim p(s_{t+1} \vert s_t, a_t), a_t \sim \pi(a_t \vert s_t)} \lbrack r(s_t, a_t) \rbrack \\
+a_t &amp;\sim \pi(a_t \vert s_t) 
+\end{aligned}\]</div>
+<ul>
+<li>하지만 이는 적용하기 쉽지 않음. 우리는 목표에 최적화된 행동을 항상 하지 않음. 같은 목표라도 직진하는 경우도 있고, 멀리 돌아갈 때도 있음(결국에 목적에 도달함). 현 프레임워크에서 이를 설정하거나 설명하기 어려움. 어떤 행동이 최적화된 행동인지에 대한 변수자체가 없음.</li>
+<li>그래서 이를 설명하기 위해 binary 변수 <span class="arithmatex">\(\mathcal{O}\)</span> 도입함. 최적화인 행동일 때 1, 그렇지 아니할 때 0의 값을 가짐. </li>
+</ul>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1Gz6gRWt-SPcNthouYTtUBPCezg_ikEi-" width="100%"/></p>
 <div class="arithmatex">\[\begin{aligned}
-v_{\pi}(s) &amp; := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
-&amp;= \Bbb{E}_{\pi} \lbrack R_{t+1} + \gamma G_{t+1} \vert S_t = s\rbrack \\
-&amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \big\lbrack r + \gamma \Bbb{E}_{\pi} \lbrack G_{t+1} \vert S_{t+1} = s' \rbrack \big\rbrack \\
-&amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
+p(\mathcal{O}_{1:T}) &amp;= \exp \big( r(s_t, a_t) \big) \\
+p(\tau \vert \mathcal{O}_{1:T}) &amp;= \dfrac{p(\tau, \mathcal{O}_{1:T})}{p(\mathcal{O}_{1:T})} \\
+&amp;\propto p(\tau) \prod_t \exp \big( r(s_t, a_t) \big)  = p(\tau) \exp \big( \sum_t r(s_t, a_t) \big)
 \end{aligned}\]</div>
-<p>아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy <span class="arithmatex">\(\pi\)</span> 하에 현재 상태 가치(state-value) <span class="arithmatex">\(v_{\pi}(s)\)</span> 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태 가치 <span class="arithmatex">\(\gamma v_{\pi}(s')\)</span> 와 다음 보상 <span class="arithmatex">\(r\)</span>의 합을 가중 평균함으로써 구할 수 있다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17ErRNwcyluBH0eRffR-NmGqm-VXYRnor" width="40%"/></p>
-<div class="admonition note">
-<p class="admonition-title">Example: Grid-World</p>
-<p>아래의 좌측 그림 처럼 지도가 있는데, 네 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace N, S, E, W \rbrace\)</span>을 취할 수 있다. 그리고 웜홀이 있어서 <span class="arithmatex">\(A\)</span> 에서 <span class="arithmatex">\(A'\)</span>로 전송하는 웜홀을 타면 <span class="arithmatex">\(+10\)</span>, <span class="arithmatex">\(B\)</span> 에서 <span class="arithmatex">\(B'\)</span>로가는 웜홀을 타면 <span class="arithmatex">\(+5\)</span>, 그리고 지도 밖을 벗어나면 <span class="arithmatex">\(-1\)</span>를 받는 보상 상황이 주어졌다. 여기서 각각의 grid(네모칸)은 state라고 할 수 있다. 따라서, state transition은 결정적이다. 우측 그림은 state value를 구한 것이다. 우측 그림에서 볼 수 있듯이 A와 B grid(state)에서 높은 value를 갖는다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1779PnyTHiERWiXWWAChWpukv5ujz1g5f" width="80%"/></p>
-</div>
-<h3 id="optimal-policies-and-optimal-value-functions">Optimal Policies and Optimal Value Functions<a class="headerlink" href="#optimal-policies-and-optimal-value-functions" title="Permanent link">¶</a></h3>
-<p>Policy의 비교는 주어진 policy <span class="arithmatex">\(\pi\)</span>하에서 state-value <span class="arithmatex">\(v_{\pi}(s)\)</span> 가 높으면 좋은 것이다 <span style="color:gray">(주의: state-value function이 항상 monotic한 것은 아니다)</span>. 따라서 최적의 policy <span class="arithmatex">\(\pi_{*}\)</span>는 주어진 상태 <span class="arithmatex">\(s\)</span>에서 다른 <ins class="critic">모든 policy</ins> 보다 좋은 state-value를 가지면 된다. 이 최적의 state-value를 <strong>optimal state-value function</strong> 이라고 하며 다음과 같이 정의 된다. </p>
-<div class="arithmatex">\[v_{*}(s) := \underset{\pi}{max} \ v_{\pi}(s) \quad \forall s \in \mathcal{s}\]</div>
-<p>또한, 최적의 <strong>action-value function</strong>도 같이 정의할 수 있다.</p>
-<div class="arithmatex">\[\begin{aligned} q_{*}(s, a) &amp; := \underset{\pi}{max} \ q_{\pi}(s, a) \quad \forall s \in \mathcal{s}, a \in \mathcal{A} \\ 
-&amp;= \Bbb{E} \lbrack R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_t = s, A_t = a \rbrack
+<ul>
+<li>이렇게 함으로써 suboptimal behavior를 모델링 할 수 있고, inference 알고리즘을 적용하여 control과 planning 문제를 해결할 수 있음. 그리고 stochastic behavior가 왜 선호되는지 설명할 수 있음. 이는 exploration과 transfer learning을 아는데 도움이 됨.</li>
+<li>
+<p>그러면 어떻게 inference할까?</p>
+</li>
+<li>
+<p>Backward Messeage 계산: <span class="arithmatex">\(\beta(s_t, a_t) = p(\mathcal{O}_{1:T} \vert s_t, a_t)\)</span></p>
+</li>
+<li>Policy 계산: <span class="arithmatex">\(\pi(a_t \vert s_t, \mathcal{O}_{1:T})\)</span></li>
+<li>Forward Message 계산: <span class="arithmatex">\(\alpha(s_t) = p(s_t \vert \mathcal{O}_{1:t-1})\)</span></li>
+</ul>
+<h2 id="control-as-inference">Control as Inference<a class="headerlink" href="#control-as-inference" title="Permanent link">¶</a></h2>
+<h3 id="backward-messages">Backward Messages<a class="headerlink" href="#backward-messages" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[\begin{aligned} 
+\beta(s_t, a_t) &amp;= p(\mathcal{O}_{t:T} \vert s_t, a_t) \\
+&amp;= \int p(\mathcal{O}_{t:T}, s_{t+1} \vert s_t, a_t) ds_{t+1} \\
+&amp;= \int p(\mathcal{O}_{t+1:T} \vert s_{t+1}) p(s_{t+1} \vert s_t, a_t) p(\mathcal{O}_t \vert s_t, a_t) ds_{t+1}
 \end{aligned}\]</div>
-<h3 id="bellman-optimality">Bellman Optimality<a class="headerlink" href="#bellman-optimality" title="Permanent link">¶</a></h3>
-<blockquote>
-<p>"The value of a state under an optimal policy must equal the expected return for the best action from that state."</p>
-</blockquote>
-<p><span class="arithmatex">\(v_{*}\)</span>를 구하기 위한 <strong>Bellman Optimality Equation</strong>은 다음 수식과 같이 정의된다. 이 수식의 뜻은 최적의 policy <span class="arithmatex">\(\pi_{*}\)</span> 하에 상태의 가치 <span class="arithmatex">\(v_{*}\)</span>는 해당 상태에서 나오는 최적 행동의 기대 수익이다.</p>
+<ul>
+<li><span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t)\)</span>는 transition dynamics이고, <span class="arithmatex">\(p(\mathcal{O}_t \vert s_t, a_t)\)</span>는 observation likelihood임.</li>
+<li>그러면 제일 앞에 있는 <span class="arithmatex">\(p(\mathcal{O}_{t+1:T} \vert s_{t+1})\)</span>를 풀어서 쓰면 다음과 같음.</li>
+</ul>
 <div class="arithmatex">\[\begin{aligned}
-v_{*}(s) &amp; := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
-&amp;= \underset{a}{\max} \Bbb{E}_{\pi_{*}} \lbrack G_t \vert S_t = s\rbrack \\
-&amp;= \underset{a}{\max} \Bbb{E}_{\pi} \lbrack R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
-&amp;= \underset{a}{\max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi_{*}}(s') \rbrack
+p(\mathcal{O}_{t+1:T} \vert s_{t+1}) &amp;= \int p(\mathcal{O}_{1:T} \vert s_{t+1}, a_{t+1}) p(a_{t+1}\vert s_{t+1}) da_{t+1}
 \end{aligned}\]</div>
-<p>이전의 Bellman backup diagram과 다르게 최적 상태 가치(optimal state-value)를 구하기 위해서 <span class="arithmatex">\(v_{*}\)</span> 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태 가치를 보상에 대한 가중 평균 하면 되는 것이다. </p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r" width="80%"/></p>
-<p>또한 Bellman optimality equation은 <span class="arithmatex">\(v_*\)</span>에 대해 단 하나의 유일한 솔루션을 가진다. </p>
-<div class="admonition note">
-<p class="admonition-title">Example: Grid-World 에서의 optimal value function과 policy</p>
-<p>중간의 그림이 optimal state-value 이고 우측은 optimal policy다. 각 state에서 여러 optimal policy를 가질 수 있지만, optimal state-value는 단 하나다. 예를 들어, 좌표 <code>(4, 0)</code>에서는 N으로 이동하던 E로 이동하던 모두 최적의 <span class="arithmatex">\(v_{*}\)</span>를 얻을 수 있다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17HM0n2h1sWSan32R-2zD3xkHXnoCrD9Z" width="80%"/></p>
+<ul>
+<li>여기서 <span class="arithmatex">\(p(\mathcal{O}_{1:T} \vert s_{t+1}, a_{t+1})\)</span> 를 다시 <span class="arithmatex">\(\beta(s_{t+1}, a_{t+1})\)</span>로 바꿔서 쓸수 있음.</li>
+<li>그리고 <span class="arithmatex">\(p(a_{t+1}\vert s_{t+1})\)</span>는 <strong>action prior</strong>이라고 하는데 (policy는 아님) 우선은 uniform distribution으로 가정함. 왜냐면 아무도 어떤 행동을 할지 모르기 때문임. 게다가 수학적으로 해당 항을 지울 수 있음<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</li>
+<li>따라서 Backward message passing은 다음과 같이 진행된다. </li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Backward Message Passing</p>
+<div class="arithmatex">\[\begin{aligned}
+\text{for } \ t = T-1, &amp;\dots, 1: \\
+\beta(s_t, a_t) &amp;= p(\mathcal{O}_t \vert s_t, a_t) \Bbb{E}_{s_{t+1} \sim p(s_{t+1} \vert s_t, a_t)} \big\lbrack \beta_{t+1}(s_{t+1}) \big\rbrack\\
+\beta(s_t) &amp;= \Bbb{E}_{a_t \sim p(a_t \vert s_t)} \big\lbrack \beta(s_t, a_t) \big\rbrack\\
+\end{aligned}\]</div>
 </div>
-<h3 id="etc">ETC<a class="headerlink" href="#etc" title="Permanent link">¶</a></h3>
-<p>두 개의 policy <span class="arithmatex">\(\pi_A\)</span>, <span class="arithmatex">\(\pi_B\)</span>가 있는데, 어떤 state에서 optimal state-value가 <span class="arithmatex">\(\pi_A\)</span>가 더 큰 경우가 있고, 어떤 state에서는 <span class="arithmatex">\(\pi_B\)</span>가 더 크다. 그렇다면 optimal policy는 없는 것일까? 아니다. 각 state에서 state-value가 큰 policy를 선택해서 새로운 policy <span class="arithmatex">\(\pi_C\)</span>를 만들면 된다. 따라서, 항상 <span class="arithmatex">\(v_{\pi}(s) \geq v_{\pi^{'}}(s)\)</span>를 만족하는 <span class="arithmatex">\(\pi\)</span>를 찾을 수 있다.</p>
+<ul>
+<li><span class="arithmatex">\(V_t(s_t) = \log \beta(s_t)\)</span>, <span class="arithmatex">\(Q_t(s_t, a_t) = \log \beta(s_t, a_t)\)</span> 라고 재정의 하자. 따라서 <span class="arithmatex">\(V_t(s_t) = \log \int \exp \big( Q_t(s_t, a_t) \big) da_t\)</span>로 쓸 수 있으며, 이는 <strong>soft value function</strong>이라고 함.</li>
+<li><span class="arithmatex">\(Q_t(s_t, a_t)\)</span>가 커짐에 다라서 <span class="arithmatex">\(V_t(s_t)\)</span> 도 커짐. <span class="arithmatex">\(V_t(s_t) \rightarrow \underset{a_t}{\max} Q_(s_t, a_t)\)</span>.</li>
+<li><span class="arithmatex">\(Q_t(s_t, a_t) = r(s_t, a_t) + \log \Bbb{E} \big\lbrack \exp( V_{t+1}(s_{t+1}) ) \big\rbrack\)</span><ul>
+<li>deterministic transition: <span class="arithmatex">\(Q_t(s_t, a_t) = r(s_t, a_t) + V_{t+1}(s_{t+1})\)</span></li>
+<li>sthocastic case는 차후에 다룸</li>
+</ul>
+</li>
+<li>Log domain에서 알고리즘을 다시 쓰면 다음과 같음.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Backward Message Passing(Log Domain)</p>
+<div class="arithmatex">\[\begin{aligned}
+\text{for } \ t = T-1, &amp;\dots, 1: \\
+Q_t(s_t, a_t) &amp;= r(s_t, a_t) + \log \Bbb{E}\big\lbrack \exp( V_{t+1}(s_{t+1}) ) \big\rbrack \\
+V_t(s_t) &amp;= \log \int \exp \big( Q_t(s_t, a_t) \big) da_t \\
+\end{aligned}\]</div>
+</div>
+<h3 id="policy-computation">Policy Computation<a class="headerlink" href="#policy-computation" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[\begin{aligned}
+p(a_t \vert s_t, \mathcal{O}_{1:T}) &amp;= \pi(a_t \vert s_t) = p(a \vert s_t, \mathcal{O}_{t:T}) \\
+&amp;= \dfrac{p(a_t, s_t \vert \mathcal{O}_{t:T})}{p(s_t \vert \mathcal{O}_{t:T})} \\
+&amp;= \dfrac{p(a_t, s_t \vert \mathcal{O}_{t:T})p(a_t, s_t) / p(\mathcal{O}_{t:T}) }{p(\mathcal{O}_{t:T} \vert s_t) p(s_t) / p(\mathcal{O}_{t:T}) } \\
+&amp;= \dfrac{p(a_t, s_t \vert \mathcal{O}_{t:T})}{p(\mathcal{O}_{t:T} \vert s_t) } \dfrac{p(a_t, s_t)}{p(s_t)} = \dfrac{\beta_t(s_t, a_t)}{\beta_t(s_t)} p(a_t \vert s_t)
+\end{aligned}\]</div>
+<ul>
+<li><span class="arithmatex">\(p(a_t \vert s_t)\)</span>는 action prior이라 무시하고, policy <span class="arithmatex">\(\pi(a_t \vert s_t) = \dfrac{\beta_t(s_t, a_t)}{\beta_t(s_t)}\)</span>를 얻을 수 있음.</li>
+<li>Log domain에서 <span class="arithmatex">\(\pi(a_t \vert s_t) = \exp \big( Q_t(s_t, a_t) - V_t(s_t) \big) = \exp \big( A_t(s_t, a_t) \big)\)</span> 로 쓸 수 있음.</li>
+<li>Temperature <span class="arithmatex">\(\alpha\)</span> 를 도입하면 <span class="arithmatex">\(\pi(a_t \vert s_t) = \exp \big( \dfrac{1}{\alpha} Q_t(s_t, a_t) - \dfrac{1}{\alpha} V_t(s_t) \big) = \exp \big( \dfrac{1}{\alpha} A_t(s_t, a_t) \big)\)</span></li>
+<li><span class="arithmatex">\(\alpha\)</span> 가 0으로 갈 수록 deterministic policy가 되고 greedy policy에 가까움.</li>
+</ul>
+<h3 id="forward-messages">Forward Messages<a class="headerlink" href="#forward-messages" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[\begin{aligned}
+\alpha(s_t) &amp;= p(s_t \vert \mathcal{O}_{1:t-1} ) \\
+&amp;= \int p(s_t, s_{t-1}, a_{t-1} \vert \mathcal{O}_{1:t-1}) da_{t-1} ds_{t-1} = \int p(s_t \vert s_{t-1}, a_{t-1}, \mathcal{O}_{1:t-1}) p(a_{t-1} \vert s_{t-1}, \mathcal{O}_{1:t-1}) p(s_{t-1} \vert \mathcal{O}_{1:t-1} ) da_{t-1} ds_{t-1} \\
+&amp;= \int p(s_t \vert s_{t-1}, a_{t-1}) p(a_{t-1} \vert s_{t-1}, \mathcal{O}_{1:t-1}) p(s_{t-1} \vert \mathcal{O}_{1:t-1} ) da_{t-1} ds_{t-1}
+\end{aligned}\]</div>
+<ul>
+<li><span class="arithmatex">\(p(s_t \vert s_{t-1}, a_{t-1}, \mathcal{O}_{1:t-1})\)</span> 에서 <span class="arithmatex">\(\mathcal{O}_{1:t-1}\)</span>는 <span class="arithmatex">\(s_{t-1}\)</span>과 <span class="arithmatex">\(a_{t-1}\)</span>에 의존하지 않으므로 생략 가능.</li>
+<li><span class="arithmatex">\(\alpha_1(s_1) = p(s_1)\)</span> 보통 알고 시작함.</li>
+<li><span class="arithmatex">\(p(s_t \vert \mathcal{O}_{1:T})\)</span> 를 계산하고 싶으면?</li>
+</ul>
+<div class="arithmatex">\[p(s_t \vert \mathcal{O}_{1:T}) = \dfrac{ p(s_t, \mathcal{O}_{1:T}) }{ p(\mathcal{O}_{1:T}) } = \dfrac{p(\mathcal{O}_{t:T} \vert s_t) p(s_t, \mathcal{O}_{1:t-1})}{p(\mathcal{O}_{1:T})} \propto \beta_t(s_t) \alpha_t(s_t) \]</div>
+<h2 id="message-intersection">Message Intersection<a class="headerlink" href="#message-intersection" title="Permanent link">¶</a></h2>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H-xkwcHqXyKbBtFqVwWyLpB2Q_X03P3u" width="100%"/></p>
+<ul>
+<li>예를 들어 그림과 같이 목표지점에 공을 가져다 놓는 Task가 있다.</li>
+<li>Backward message는 목표지점에 도달하기 위한 상태의 확률을 나타내고, Forward message는 처음 상태에서 목표지점에 도달되는 상태를 표현한다(높은 reward 와 함께).</li>
+<li>그리고 두 메시지의 곱은 목표지점에 도달하기 위한 상태의 확률을 나타낸다.</li>
+</ul>
+<h2 id="control-as-variational-inference">Control as Variational Inference<a class="headerlink" href="#control-as-variational-inference" title="Permanent link">¶</a></h2>
+<ul>
+<li>Inference Problem: <span class="arithmatex">\(p(s_{1:T}, a_{1:T} \vert \mathcal{O}_{1:T})\)</span></li>
+<li>Marginalizaing과 conditioning을 통해 목적 policy <span class="arithmatex">\(p(a_t \vert s_t, \mathcal{O}_{1:T})\)</span> 를 계산하고 싶음. "높은 리워드가 주어졌을 때, action probability가 어떻게 되는가?"</li>
+<li><span class="arithmatex">\(q(s_{1:T}, a_{1:T})\)</span> 분포로 <span class="arithmatex">\(p(s_{1:T}, a_{1:T} \vert \mathcal{O}_{1:T})\)</span> 를 근사하면 어떻까(단 dynamics <span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t)\)</span> 하에서)?</li>
+<li><span class="arithmatex">\(x = \mathcal{O}_{1:T}\)</span>, <span class="arithmatex">\(z = (s_{1:T}, a_{1:T})\)</span> 로 두어서 <span class="arithmatex">\(p(z \vert x)\)</span> 를 <span class="arithmatex">\(q(z)\)</span> 로 근사해보자! </li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">과정<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">1</label><label for="__tabbed_1_2">2</label><label for="__tabbed_1_3">3</label><label for="__tabbed_1_4">4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H0dW_tU8kTzz3jlzowFNJQlQwmZcmai2" width="100%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H3afCl4d1HC5Lk3SUhWv0FupT20t79PK" width="100%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H4ZVOYG5Jk1gPeI7bqxt3lhyAYHjF9bg" width="100%"/></p>
+</div>
+<div class="tabbed-block">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HId1TGidfizjX-fn4EkgQIDubMfyZZKC" width="100%"/></p>
+</div>
+</div>
+</input></input></input></input></div>
+</div>
+<h2 id="algorithms-for-rl-as-inference">Algorithms for RL as Inference<a class="headerlink" href="#algorithms-for-rl-as-inference" title="Permanent link">¶</a></h2>
+<h3 id="q-learning-with-soft-optimality">Q-Learning with soft optimality<a class="headerlink" href="#q-learning-with-soft-optimality" title="Permanent link">¶</a></h3>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HJ8Rg5E_JTrVSc3leWtvwCWYStO-ZbBu" width="100%"/></p>
+<h3 id="benefits-of-soft-optimality">Benefits of Soft Optimality<a class="headerlink" href="#benefits-of-soft-optimality" title="Permanent link">¶</a></h3>
+<ul>
+<li>exploration을 향상시키고 entropy collapse를 방지할 수 있음</li>
+<li>policies를 더 쉽게 fine-tuning 할 수 있음</li>
+<li>더 로버스트함. 더 많은 state를 커버하기 때문</li>
+</ul>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://en.wikipedia.org/wiki/Markov_decision_process">Wikipedia - Markove Decision Processes</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-19.pdf">CS 285 L19 - LectureNote</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
