@@ -9,10 +9,10 @@
 <link href="../" rel="prev"/>
 <link href="../CS285_L20/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.0.12+insiders-4.30.2" name="generator"/>
+<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
 <title>CS 285: Lecture 19, Control as Inference - Soopace</title>
-<link href="../../../../assets/stylesheets/main.b6d2c4d8.min.css" rel="stylesheet"/>
-<link href="../../../../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -31,7 +31,7 @@
                 body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
                 body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
                 </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
@@ -42,7 +42,7 @@
 </div>
 <div data-md-component="announce">
 </div>
-<header class="md-header md-header--lifted" data-md-component="header">
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
 <a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
 <img alt="logo" src="../../../../img/logo/logo.png"/>
@@ -99,7 +99,7 @@
 <div class="md-header__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -130,8 +130,8 @@
 
         </a>
 </li>
-<li class="md-tabs__item">
-<a class="md-tabs__link md-tabs__link--active" href="../../../">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../../../">
           
   
     
@@ -170,7 +170,7 @@
 <div class="md-nav__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -190,7 +190,9 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../../../../blog/">
 <span class="md-ellipsis">
     
@@ -200,10 +202,51 @@
 
     
   </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../../blog/archive/2020/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../../blog/category/lifelog/">
+<span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../../../">
@@ -216,7 +259,7 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3">
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -256,7 +299,7 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_3">
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -280,6 +323,7 @@
 
     
   </span>
+<span class="md-nav__icon md-icon"></span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
@@ -292,6 +336,7 @@
 
     
   </span>
+<span class="md-nav__icon md-icon"></span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
@@ -346,7 +391,7 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_3_7">
+<label class="md-nav__link" for="__nav_3_3_7" id="__nav_3_3_7_label" tabindex="0">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -487,15 +532,6 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#reinforcement-learning-and-control-as-probabilistic-inference-tutorial-and-review2">
-<span class="md-ellipsis">
-      
-        논문 맛보기: Reinforcement Learning and Control as Probabilistic Inference: Tutorial and Review2
-      
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -616,7 +652,9 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../../../../project/">
 <span class="md-ellipsis">
     
@@ -627,6 +665,19 @@
     
   </span>
 </a>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -740,15 +791,6 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#reinforcement-learning-and-control-as-probabilistic-inference-tutorial-and-review2">
-<span class="md-ellipsis">
-      
-        논문 맛보기: Reinforcement Learning and Control as Probabilistic Inference: Tutorial and Review2
-      
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </div>
@@ -760,29 +802,29 @@
 <li class="md-path__item">
 <a class="md-path__link" href="../../../..">
 <span class="md-ellipsis">
-          About
-        </span>
+    About
+  </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../../../">
 <span class="md-ellipsis">
-            Study
-          </span>
+    Study
+  </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../../">
 <span class="md-ellipsis">
-            Tutorial
-          </span>
+    Tutorial
+  </span>
 </a>
 </li>
 <li class="md-path__item">
 <a class="md-path__link" href="../">
 <span class="md-ellipsis">
-            Reinforcement learning
-          </span>
+    Reinforcement learning
+  </span>
 </a>
 </li>
 </ol>
@@ -799,7 +841,7 @@
 <p>Optimal control is a mathematical framework for computing control policies that optimize a given objective.</p>
 </blockquote>
 <ul>
-<li><span class="arithmatex">\(r(s_t, a_t)\)</span> 함수를 찾아서 데이터(trajactories)를 설명하려고함. 기본적 세팅은 다음과 같음.</li>
+<li><span class="arithmatex">\(r(s_t, a_t)\)</span> 함수를 찾아서 데이터를 설명하려고함. 기본적 세팅은 다음과 같음.</li>
 </ul>
 <div class="arithmatex">\[\begin{aligned} 
 a_1, \dots, a_T &amp;= \underset{a_1, \dots, a_T}{\arg \max} \sum_{t=1}^T r(s_t, a_t) \\
@@ -857,7 +899,7 @@ p(\mathcal{O}_{t+1:T} \vert s_{t+1}) &amp;= \int p(\mathcal{O}_{1:T} \vert s_{t+
 </div>
 <ul>
 <li><span class="arithmatex">\(V_t(s_t) = \log \beta(s_t)\)</span>, <span class="arithmatex">\(Q_t(s_t, a_t) = \log \beta(s_t, a_t)\)</span> 라고 재정의 하자. 따라서 <span class="arithmatex">\(V_t(s_t) = \log \int \exp \big( Q_t(s_t, a_t) \big) da_t\)</span>로 쓸 수 있으며, 이는 <strong>soft value function</strong>이라고 함.</li>
-<li><span class="arithmatex">\(Q_t(s_t, a_t)\)</span>가 커짐에 다라서 <span class="arithmatex">\(V_t(s_t)\)</span> 도 커짐. <span class="arithmatex">\(V_t(s_t) \rightarrow \underset{a_t}{\max} Q(s_t, a_t)\)</span>.</li>
+<li><span class="arithmatex">\(Q_t(s_t, a_t)\)</span>가 커짐에 다라서 <span class="arithmatex">\(V_t(s_t)\)</span> 도 커짐. <span class="arithmatex">\(V_t(s_t) \rightarrow \underset{a_t}{\max} Q_(s_t, a_t)\)</span>.</li>
 <li><span class="arithmatex">\(Q_t(s_t, a_t) = r(s_t, a_t) + \log \Bbb{E} \big\lbrack \exp( V_{t+1}(s_{t+1}) ) \big\rbrack\)</span><ul>
 <li>deterministic transition: <span class="arithmatex">\(Q_t(s_t, a_t) = r(s_t, a_t) + V_{t+1}(s_{t+1})\)</span></li>
 <li>sthocastic case는 차후에 다룸</li>
@@ -940,144 +982,11 @@ p(a_t \vert s_t, \mathcal{O}_{1:T}) &amp;= \pi(a_t \vert s_t) = p(a \vert s_t, \
 <li>policies를 더 쉽게 fine-tuning 할 수 있음</li>
 <li>더 로버스트함. 더 많은 state를 커버하기 때문</li>
 </ul>
-<hr/>
-<h1 id="reinforcement-learning-and-control-as-probabilistic-inference-tutorial-and-review2">논문 맛보기: Reinforcement Learning and Control as Probabilistic Inference: Tutorial and Review<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup><a class="headerlink" href="#reinforcement-learning-and-control-as-probabilistic-inference-tutorial-and-review2" title="Permanent link">¶</a></h1>
-<p>논문을 통해서 위에 내용을 다시 복습해본다.</p>
-<ul>
-<li>문제: Optimal Control Problem</li>
-<li>Task: policy <span class="arithmatex">\(p(a_t \vert s_t, \theta)\)</span> 를 구하려고함</li>
-<li>보통의 rl policy search 문제: 파라미터 <span class="arithmatex">\(\theta\)</span>를 찾기</li>
-</ul>
-<div class="arithmatex">\[\theta^* = \underset{\theta}{\arg \max}\ \sum_{t=1}^T \Bbb{E}_{(s_t, a_t \vert \theta) \sim p(s_t, a_t \vert \theta)} \lbrack r(s_t, a_t) \rbrack\]</div>
-<ul>
-<li>Optimization 문제: 보상의 기대합 <span class="arithmatex">\(\sum_t r(s_t, a_t)\)</span> 을 최대화 할 수 있는 파라미터 <span class="arithmatex">\(\theta\)</span> 찾기</li>
-</ul>
-<div class="arithmatex">\[p(\tau) = p(s_1, a_t, \dots, s_T, a_T \vert \theta) = p(s_1) \prod_{t=1}^T p(a_t \vert s_t, \theta) p(s_{t+1} \vert s_t, a_t) \quad \cdots (1)\]</div>
-<ul>
-<li>문제를 standard planning 문제로 대입, <span class="arithmatex">\(\theta\)</span> 뉴럴넷을 사용하는 대신, 일련의 액션으로 정의함(open-loop plan?)</li>
-<li>optimal policy로 부터 생성된 trajectory가 그럴듯하게 되도록 PGM을 구현해야함</li>
-<li>이를 위해 binary variable <span class="arithmatex">\(\mathcal{O}_t\)</span> 를 도입함. <span class="arithmatex">\(\mathcal{O}_t = 1\)</span> 이면 optimal action을 취한 것임. <span class="arithmatex">\(\mathcal{O}_t = 0\)</span> 이면 not optimal action을 취한 것임. 아래와 같은 분포로 정의함.</li>
-</ul>
-<div class="arithmatex">\[p(\mathcal{O}_t=1 \vert s_t, a_t) = \exp \big( r(s_t, a_t) \big)\]</div>
-<ul>
-<li>휴리스틱해보이지만 자연스럽게 actions에 대한 posterior distribution 정의 가능(강의의 graph model 확인). 모든 optimal action(<span class="arithmatex">\(\mathcal{O}_t=1\)</span>)에 대해서:</li>
-</ul>
-<div class="arithmatex">\[\begin{aligned} p(\tau \vert \mathbf{o}_{1:T}) \propto p(\tau, \mathbf{o}_{1:T}) 
-&amp;= p(s_1) \prod_{t=1}^T p(\mathcal{O}_t=1 \vert s_t, a_t) p(s_{t+1} \vert s_t, a_t) \\
-&amp;= p(s_1) \prod_{t=1}^T \exp \big( r(s_t, a_t) \big) p(s_{t+1} \vert s_t, a_t)\\
-&amp;= \bigg\lbrack p(s_1) \prod_{t=1}^T p(s_{t+1} \vert s_t, a_t) \bigg\rbrack \exp \big( \sum_{t=1}^T r(s_t, a_t) \big) 
-\end{aligned}\]</div>
-<ul>
-<li>앞부분은 dynamics의 가능성, 뒷부분은 exponential 보상총합으로 나타낼 수 있음. deterministic dynamics에서(첫 항을 알고 있다고 할 때), 높은 리워드를 가지는 trajectory는 높은 확률(<span class="arithmatex">\(p(\tau \vert \mathbf{o}_{1:T})\)</span>)을 가지고, 낮은 리워드를 가지는 trajectory는 exponential 하게 낮은 확률을 가짐.</li>
-<li>이 PGM에서 optimal policy는 <span class="arithmatex">\(p(a_t \vert s_t, \mathcal{O}_{1:T})\)</span>로 씀. <span class="arithmatex">\(\mathcal{O}_{1:T}=1\)</span> 에서 1 생략. 이는 <span class="arithmatex">\(p(a_t \vert s_t, \theta)\)</span>와 굉장히 유사하지만 두가지 다른 점이 있음.<ol>
-<li>파라미터 <span class="arithmatex">\(\theta\)</span>와 상관이 없음</li>
-<li>omptimization objective가 다름 (뒤에서 이야기함)</li>
-</ol>
-</li>
-<li>sum-product inference inference algorithm으로 optimal policy를 계산할 수 있음. 이는 backward message passing과 forward message passing으로 구성됨.</li>
-<li>
-<p>Beta: 상태 <span class="arithmatex">\(s_t\)</span> 혹은 상태 <span class="arithmatex">\(s_t\)</span>와 행동 <span class="arithmatex">\(a_t\)</span> 쌍이 주어졌을 때 앞으로 <span class="arithmatex">\(t\)</span>부터 <span class="arithmatex">\(T\)</span>까지 trajactory가 optimal일 확률</p>
-<ul>
-<li><span class="arithmatex">\(\beta(s_t, a_t) = p(\mathcal{O}_{t:T} \vert s_t, a_t) = \int_{\mathcal{B}} \beta_{t+1}(s_{t+1}) p(s_{t+1} \vert s_t, a_t) p(\mathcal{O}_t \vert s_t, a_t) ds_{t+1}\)</span></li>
-<li><span class="arithmatex">\(\beta(s_t) = p(\mathcal{O}_{t:T} \vert s_t) = \int_{\mathcal{A}} p(\mathcal{O}_{1:T} \vert s_t, a_t) p(a_t \vert s_t) da_t = \int_{\mathcal{A}} \beta(s_t, a_t) p(a_t \vert s_t) da_t\)</span></li>
-<li><span class="arithmatex">\(p(a_t \vert s_t) = \frac{1}{\vert \mathcal{A} \vert}\)</span> 는 action prior이며, 간단하게 하기위해 uniform distribution으로 가정함. 꼭, uniform은 아니라도 상관없다. 차후에 <span class="arithmatex">\(p(\mathcal{O}_{t:T} \vert s_t, a_t)\)</span> 에 포함된다.</li>
-<li>따라서 optimal action distribution은 <span class="arithmatex">\(p(a_t \vert s_t, \mathcal{O}_{1:T}) \propto \frac{\beta(s_t, a_t)}{\beta(s_t)}\)</span> 로 표현할 수 있음. <span class="arithmatex">\(p(a_t \vert s_t)\)</span> 은 uniform이라 가정하여 사라짐.</li>
-<li>이것의 intuition은 log를 취함으로사 나타남.</li>
-<li><span class="arithmatex">\(Q(s_t, a_t) = \log \beta(s_t, a_t)\)</span>, <span class="arithmatex">\(V(s_t) = \log \beta(s_t)\)</span> 로 정의하면 <span class="arithmatex">\(V(s_t) = \log \int_{\mathcal{A}} \exp \big( Q(s_t, a_t) \big) da_t\)</span> 로 쓸 수 있음. 이는 soft value function이라고 함. </li>
-<li><span class="arithmatex">\(Q(s_t, a_t)\)</span>가 큰 경우, 수식에 따라 <span class="arithmatex">\(\mathcal{A}\)</span>로 <span class="arithmatex">\(Q\)</span>를 marginalize하면 <span class="arithmatex">\(\underset{a_t}{\max}\ Q(s_t, a_t)\)</span>로 근사됨. 즉, 최대 Q-value가 결국에 제일 좋은 상태의 value가된다는 뜻임.</li>
-<li><span class="arithmatex">\(Q(s_t, a_t)\)</span>가 작은 경우 maximum은 soft한 특징을 가짐. 그래서 <span class="arithmatex">\(V\)</span> 함수를 soft value function이라고 함.</li>
-<li>
-<p>Bellman Backup: </p>
-<div class="arithmatex">\[Q(s_t, a_t) = \begin{cases}(s_t, a_t) + V(s_{t+1}) &amp; \text{deterministic dynamics}\\ r(s_t, a_t) + \log \Bbb{E}_{s_{t+1} \sim p(s_{t+1} \vert s_t, a_t)} \big\lbrack \exp \big( V(s_{t+1}) \big) \big\rbrack &amp; \text{stochastic dynamics}\end{cases}\]</div>
-</li>
-<li>
-<p>근데 stochastic dynamics 상태의 식을 보면 약간 이상하다. 다음 상태의 value 기댓값이 아니라 softmax를 취한 기대 value값이다. 만약에 가능한 출력값 중에 하나가 엄청 높은 값이 생성되면 다른 모든 값을 압도하게 된다. 다른 가치는 낮지만 가능성이 높은 상태가 있더라도 말이다. 이는 risk seeking behavior를 생성하며 대부분의 경우에 원하지 않는 케이스다.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>어떤 objective를 policy가 optimize 하는가?</p>
-<ul>
-<li>
-<p><span class="arithmatex">\((1)\)</span>번식을 inference framework 하에 다시 쓰면 아래와 같이 된다.</p>
-<div class="arithmatex">\[p(\tau) = \bigg\lbrack p(s_1) \prod_{t=1}^T p(s_{t+1} \vert s_t, a_t) \bigg\rbrack \exp \big( \sum_{t=1}^T r(s_t, a_t) \big)\]</div>
-</li>
-<li>
-<p>만약 deterministic 한 세팅이라면 다음과 같다.</p>
-<div class="arithmatex">\[p(\tau) \propto \Bbb{1}[p(\tau \neq 0)] \exp \big( \sum_{t=1}^T r(s_t, a_t) \big)\]</div>
-</li>
-<li>
-<p>다시 상기해볼 것은 policy <span class="arithmatex">\(p(a_t \vert s_t, \mathcal{O}_{1:T}) \propto \frac{\beta(s_t, a_t)}{\beta(s_t)}\)</span> 인데, <span class="arithmatex">\(\beta(s_t, a_t) = p(\mathcal{O_{t:T}} \vert s_t, a_t)\)</span> 정의를 생각하면 policy와 연관 지을 수 있다.</p>
-</li>
-<li>
-<p>이전에 말한 optimal policy <span class="arithmatex">\(p(a_t \vert s_t, \mathcal{O}_{1:T})\)</span> 를 optimization-based approach를 사용해 <span class="arithmatex">\(\pi(a_t \vert s_t)\)</span> 로 근사 해서 같은지 확인</p>
-<div class="arithmatex">\[\hat{p}(\tau) \propto \Bbb{1}[p(\tau \neq 0)] \prod_{t=1}^T \pi(a_t \vert s_t)\]</div>
-</li>
-<li>
-<p>그러면 이제 KLD로 두 분포를 최대한 같게 만들어 본다. 그러면 추정하는 분포의 보상 기댓값과 conditional entropy를 최대화해야하는 식이 도출된다. 이는 보상만 최대화하는 <span class="arithmatex">\((1)\)</span> 식과 대조된다. 그래서 이러한 control objective를 maximum entropy RL 혹은 maximum entropy control이라고 한다.</p>
-<div class="arithmatex">\[\begin{aligned} -D_{KL} (\hat{p}(\tau) \Vert p(\tau)) &amp;= \Bbb{E}_{\tau \sim \hat{p}(\tau)} [\log p(\tau) - \log \hat{p}(\tau)] \\ &amp;= \sum_{t=1}^T \Bbb{E}_{(s_t, a_t) \sim \hat{p}(s_t, a_t)} \lbrack r(s_t, a_t) \rbrack + \Bbb{E}_{s_t \sim \hat{p}(s_t)} \lbrack \mathcal{H} \big( \pi(s_t \vert a_t) \big) \rbrack
-\end{aligned}\]</div>
-</li>
-<li>
-<p>stochastic 세팅에서는 약간 복잡하다. 왜냐면 초기 상태의 확률과 dynamics가 <span class="arithmatex">\(\mathcal{O}_{1:T}\)</span>에 conditional 하기 때문이다. 이는 <span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t, \mathcal{O}_{1:T})\)</span> 가 true dynamics <span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t)\)</span> 와 같이 않을 수도 있다는 뜻이다. 그래서 agent는 제한적으로 dynamics를 영향줄 수 있다고 생각한다.</p>
-<div class="arithmatex">\[\hat{p}(\tau) = p(s_1 \vert \mathcal{O}_{1:T}) \prod_{t=1}^T p(s_{t+1} \vert s_t, a_t, \mathcal{O}_{1:T})p(a_t \vert s_t, \mathcal{O}_{1:T})\]</div>
-</li>
-<li>
-<p>그래서 KL-Divergence Term도 다음과 같이 바뀌며 <span class="arithmatex">\(\log p(s_{t+1} \vert s_t, a_t)\)</span> 항 때문에 model-free setting에서 optimize 하기 어렵다.</p>
-<div class="arithmatex">\[\begin{aligned} -D_{KL} (\hat{p}(\tau) \Vert p(\tau)) &amp;= \Bbb{E}_{\tau \sim \hat{p}(\tau)} \bigg\lbrack 
-\log p(s_1) + \sum_{t=1}^T r(s_t, a_t) + \log p(s_{t+1} \vert s_t, a_t) \bigg\rbrack \\
-&amp; \quad + \mathcal{H} \big( \hat{p}(\tau) \big)
-\end{aligned}\]</div>
-</li>
-<li>
-<p>그래서 vairational inference 과정을 통해 objective function의 불편함과 이전에 이야기한 risk-seeking behavior 를 줄이고자 한다.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Maximum Entropy RL with Fixed Dynamics</p>
-<ul>
-<li>
-<p>Dynamics가 <span class="arithmatex">\(\mathcal{O}_{1:T}\)</span>에 conditional 한 문제를 해결하기 위해서 posterior dynamics와 초기상태의 분포를 <span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t)\)</span> 와 <span class="arithmatex">\(p(s_1)\)</span>으로 고정시킨다.</p>
-<div class="arithmatex">\[\hat{p}(\tau) = p(s_1) \prod_{t=1}^T p(s_{t+1} \vert s_t, a_t)\pi(a_t \vert s_t)\]</div>
-</li>
-<li>
-<p>그러면 KL-Divergence Term은 다음과 같이 바뀐다. </p>
-<div class="arithmatex">\[\begin{aligned} -D_{KL} (\hat{p}(\tau) \Vert p(\tau)) &amp;= \sum_{t=1}^T \Bbb{E}_{(s_t, a_t) \sim \hat{p}(s_t, a_t)} \lbrack r(s_t, a_t) + \mathcal{H} \big( \pi(s_t \vert a_t) \big) \rbrack
-\end{aligned}\]</div>
-</li>
-<li>
-<p>여전히 보상과 entropy를 최대화 하는 형태지만 stochastic transition dynamics 하에서 진행된다. 이러한 형태의 objective면 DP를 이용해 backward message를 계산할 수 있다. 우선 <span class="arithmatex">\(\pi(a_T \vert s_T)\)</span>를 최적화 하면, 즉 아래의 식을 최대화 하는 것이다.</p>
-<div class="arithmatex">\[\begin{aligned} \Bbb{E}_{(s_T, a_T) \sim \hat{p}(s_T, a_T)} \lbrack r(s_T, a_T) - \log \pi(a_T \vert s_T) \rbrack \\ = \Bbb{E}_{(s_T) \sim \hat{p}(s_T)} \bigg\lbrack -D_{KL} \big( \pi(a_T \vert s_T) \Vert \dfrac{\exp( r(s_T, a_T))}{exp(V(s_T))} \big) + V(S_T) \bigg\rbrack
-\end{aligned}\]</div>
-</li>
-<li>
-<p>잘보면 <span class="arithmatex">\(D_{KL}\)</span> 항에 우측은 soft maximization 형태를 취하고 있다. <span class="arithmatex">\(V(s_T) = \log \int_\mathcal{A} \exp \big( r(s_T, a_T) \big)\)</span>. 그래서 최대화 한다는 것은 <span class="arithmatex">\(-D_{KL}\)</span>항이 최소화 되기 때문에 optimal policy는 <span class="arithmatex">\(\pi(a_T \vert s_T) = \exp \big( r(s_T, a_T) - V(s_T) \big)\)</span> 로 표현할 수 있다.</p>
-</li>
-<li>
-<p>나머지 <span class="arithmatex">\(t\)</span>에서 <span class="arithmatex">\(\pi(a_t \vert s_t)\)</span>는 항상 두 파트를 최대화 해야한다. 앞에 항은 원래의 objective function이고, 뒤에 항은 <span class="arithmatex">\(\pi(a_t \vert s_t)\)</span> 가 기여하는 부분</p>
-<div class="arithmatex">\[\begin{aligned} \Bbb{E}_{(s_t, a_t) \sim \hat{p}(s_t, a_t)} \lbrack r(s_t, a_t) - \log \pi(a_t \vert s_t) \rbrack 
-+ \Bbb{E}_{(s_t, a_t) \sim \hat{p}(s_t, a_t)} \big\lbrack \Bbb{E}_{s_{t+1} \sim \hat{p}(s_{t+1} \vert s_t, a_t)} \lbrack V(s_{t+1}) \rbrack \big\rbrack
-\\ = \Bbb{E}_{(s_t) \sim \hat{p}(s_t)} \bigg\lbrack -D_{KL} \big( \pi(a_t \vert s_t) \Vert \dfrac{\exp( r(s_t, a_t))}{exp(V(s_t))} \big) + V(S_t) \bigg\rbrack
-\end{aligned}\]</div>
-</li>
-<li>
-<p>그래서 <span class="arithmatex">\(Q\)</span>와 <span class="arithmatex">\(V\)</span>를 그리고 <span class="arithmatex">\(\pi(s_t \vert a_t)\)</span> 재정의함</p>
-<div class="arithmatex">\[\begin{aligned} Q(s_t, a_t) &amp;= r(s_t, a_t) + \Bbb{E}_{s_{t+1} \sim p(s_{t+1} \vert s_t, a_t)} \lbrack V(s_{t+1})\rbrack \\ V(s_t) &amp;= \log \int_\mathcal{A} \exp \big( Q(s_t, a_t) \big) da_t \\
-\pi(a_t \vert s_t) &amp;= \exp \big( Q(s_t, a_t) - V(s_t) \big)
-\end{aligned}\]</div>
-</li>
-</ul>
-</li>
-</ul>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
 <p><a href="https://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-19.pdf">CS 285 L19 - LectureNote</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">↩</a></p>
-</li>
-<li id="fn:2">
-<p><a href="https://arxiv.org/abs/1805.00909">Reinforcement Learning and Control as Probabilistic Inference: Tutorial and Review</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -1118,10 +1027,10 @@ p(a_t \vert s_t, \mathcal{O}_{1:T}) &amp;= \pi(a_t \vert s_t) = p(a \vert s_t, \
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
 </div>
-<a class="md-top md-icon" data-md-component="top" hidden="" href="#">
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
             Back to top
-          </a>
+          </button>
 </main>
 <footer class="md-footer">
 <div class="md-footer-meta md-typeset">
@@ -1136,7 +1045,7 @@ p(a_t \vert s_t, \mathcal{O}_{1:T}) &amp;= \pi(a_t \vert s_t) = p(a \vert s_t, \
 </div>
 <div class="md-social">
 <a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
 </a>
 </div>
 </div>
@@ -1146,8 +1055,8 @@ p(a_t \vert s_t, \mathcal{O}_{1:T}) &amp;= \pi(a_t \vert s_t) = p(a \vert s_t, \
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../../assets/javascripts/bundle.fbce390c.min.js"></script>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../../assets/javascripts/bundle.65061dd4.min.js"></script>
 <script src="../../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
