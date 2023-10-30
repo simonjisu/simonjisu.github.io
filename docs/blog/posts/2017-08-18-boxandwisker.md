@@ -1,6 +1,6 @@
 ---
 draft: false
-date: "2017-08-18"
+date: 2017-08-18T12:00:00
 authors:
   - simonjisu
 categories:

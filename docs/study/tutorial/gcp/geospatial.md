@@ -9,7 +9,7 @@ tags:
 
 구글 빅쿼리에서 지리정보 데이터를 다루는 방법에 대해 알아본다. [GEOGRAPHY](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types?hl=ko#geography_type)라는 타입의 데이터를 사용해서 좌표계의 점, 선, 면등을 다룬다. 
 
-지구상의 한 점은 위도와 경도로 표현할 수 있다. 위도는 북쪽으로부터의 각도이고, 경도는 동쪽으로부터의 각도이다. 위도와 경도는 각각 -90도에서 90도 사이의 값을 가진다. 경도는 -180도에서 180도 사이의 값을 가진다.
+지구상의 한 점은 **위도(latitude)**와 **경도(longtitude)**로 표현할 수 있다. 위도는 북쪽으로부터의 각도이고, 경도는 동쪽으로부터의 각도이다. 위도와 경도는 각각 -90도에서 90도 사이의 값을 가진다. 경도는 -180도에서 180도 사이의 값을 가진다.
 
 예를 들어 미국의 자유 여신상의 좌표는 `(40.69046171976406, -74.04444975893499)`으로 표현된다. ~~우리나라는 지도 데이터 반출 이슈 때문인지 좌표 조회가 안된다.~~
 
@@ -36,27 +36,53 @@ Big Query 탐색기에서 `+추가`를 누르고 공개 데이터 세트에서 G
 ```sql
 -- # SELECT 절은 폭풍의 모든 날씨 데이터를 선택하고 ST_GeogPoint 함수를 사용하여 latitude 및 longitude 열의 값을 GEOGRAPHY 유형(점)으로 변환합니다.
 SELECT
-    ST_GeogPoint(longitude, latitude) AS point,
-    name,
-    iso_time,
-    dist2land,
-    usa_wind,
-    usa_pressure,
-    usa_sshs,
-    (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
-    (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
+    ST_GeogPoint(longitude, latitude) AS point,  -- 위도, 경도
+    name, -- 허리케인 이름
+    iso_time,  -- 시간
+    dist2land,  --육지와의 거리
+    usa_wind,  -- 최대 지속 풍속(노트): 0 - 300 kts.
+    usa_pressure,  -- 최소 중심 기압(밀리바)
+    usa_sshs,  -- Saffir-Simpson Hurricane Wind Scale: -5 ~ 5
+    (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt, -- 34kt 속도 평균 반경
+    (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt -- 50kt 속도 평균 반경
 FROM
     `bigquery-public-data.noaa_hurricanes.hurricanes`
 -- WHERE 절은 2017년 허리케인 시즌의 허리케인 마리아를 따라 이 데이터를 대서양의 점으로 필터링합니다.
 WHERE
-    name LIKE '%MARIA%'
-    AND season = '2017'
-    AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
-        ST_GeogPoint(longitude, latitude), 10)
+    name LIKE '%MARIA%'  -- 마리아
+    AND season = '2017'  -- 2017년
+    AND ST_DWithin(
+        -- 폴리곤 안의 모든 점들: https://wktmap.com/?484becc9
+        ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'), 
+        ST_GeogPoint(longitude, latitude),  -- 좌표들2
+        10  -- 거리
+    )
 -- ORDER BY 절은 점을 순서대로 나열하여 폭풍의 경로를 시간순으로 형성합니다.
 ORDER BY
     iso_time ASC
 ```
+
+* `ST_GeogPoint`[^2]: 좌표, (경도 longtitude, 위도 latitude)로 지정
+* `ST_DWithin`[^3]: 두 Geometry가 지정된 거리 내에 있는지 판별, 거리 내에 있으면 TRUE, 아니면 FALSE 반환
+* `ST_GeogFromText`[^4]: WKT(Well-Known Text)[^6] 형식의 문자열을 지정된 GEOGRAPHY 유형으로 변환
+
+[^2]: [ST_GeogPoint](https://cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint)
+[^3]: [ST_DWithin](https://cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_dwithin)
+[^4]: [ST_GeogFromText](https://cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext)
+[^6]: [Well-known text representation of geometry](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry)
+
+??? note "Quadraphonic Wind[^2]"
+
+    ![Image title](https://www.noaa.gov/sites/default/files/2022-11//ll_quadwind_soln5.png){ align=left width=50% }
+
+    노트(kn 혹은 kt): 1시간에 1 해리(nm 혹은 nmile)를 진행하는 속도
+
+    * 파랑색 원: 태풍의 눈
+    * 초록색: 64노트(118km/h)의 방향별 풍속 최대 영향 반경
+    * 노랑색: 50노트(93km/h)의 방향별 풍속 최대 영향 반경
+    * 보라색: 34노트(63km/h)의 방향별 풍속 최대 영향 반경
+
+[^5]: [Learning Lesson: Quadraphonic Wind](https://www.noaa.gov/jetstream/tc-tcm/learning-lesson-quadraphonic-wind)
 
 실행 후 해당 데이터를 [Geo Viz](https://bigquerygeoviz.appspot.com/?hl=ko)에서 쿼리 결과를 시각화한다. 쿼리를 실행하고 시각화 형식을 지정할 수 있다. 옵션은 다음과 같다.
 
@@ -87,7 +113,7 @@ ORDER BY
 
 스타벅스 매장의 위치 데이터와 생활인구를 시각화해보자. 생활인구란 통신데이터로 특정 시점에 개인이 위치한 지역을 집계한 '현주인구'를 말한다. 시간대에 따라 변화하는 인구의 규모로 지역간 특성을 추측해 볼 수 있는 유용한 데이터다. 서울 열린데이터 광장[^2]에서 데이터를 받을 수 있다.
 
-[^2]: [서울 열린데이터 광장 - 서울 생활인구](https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do)
+[^7]: [서울 열린데이터 광장 - 서울 생활인구](https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do)
 
 2022년 데이터를 받아서 12월 25일 오후 3시대 각 20대 남녀 생활인구를 스타벅스 매장의 좌표 위치에 시각화해본다. 전처리 된 데이터는 [여기](https://github.com/simonjisu/bkms2_2023spring/tree/main/03_geospatial)에서 받을 수 있다.
 

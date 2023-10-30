@@ -1,6 +1,6 @@
 ---
 draft: false
-date: "2020-04-12"
+date: 2020-04-12T12:00:00
 authors:
   - simonjisu
 categories:

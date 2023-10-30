@@ -9,10 +9,10 @@
 <link href="../2017-08-04-E2EMN/" rel="prev"/>
 <link href="../2019-08-22-neuralnetworklm/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.1.6+insiders-4.32.5" name="generator"/>
+<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
 <title>A Structured Self-Attentive Sentence Embedding - Soopace</title>
-<link href="../../../assets/stylesheets/main.dc5b59cc.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.6932e648.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -31,7 +31,7 @@
                 body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
                 body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
                 </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
@@ -99,7 +99,7 @@
 <div class="md-header__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -130,8 +130,8 @@
 
         </a>
 </li>
-<li class="md-tabs__item">
-<a class="md-tabs__link md-tabs__link--active" href="../../">
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../../">
           
   
     
@@ -170,7 +170,7 @@
 <div class="md-nav__source">
 <a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
 <div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
 </div>
 <div class="md-source__repository">
     GitHub
@@ -190,7 +190,9 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../../../blog/">
 <span class="md-ellipsis">
     
@@ -200,10 +202,51 @@
 
     
   </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../blog/archive/2020/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../blog/category/lifelog/">
+<span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../../">
@@ -216,7 +259,7 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3">
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -243,7 +286,7 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_2">
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
@@ -445,7 +488,9 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../../../project/">
 <span class="md-ellipsis">
     
@@ -456,6 +501,19 @@
     
   </span>
 </a>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -521,11 +579,11 @@
 <p>그후 우리는 각각의 <span class="arithmatex">\(\overrightarrow{h_t}\)</span> 과 <span class="arithmatex">\(\overleftarrow{h_t}\)</span> 를 concatenate 하여 하나의 히든 state <span class="arithmatex">\(h_t\)</span> 를 얻게 된다. 각 unidirectional LSTM(한 쪽 방향 LSTM)의 히든 유닛 크기를 <span class="arithmatex">\(u\)</span> 라고 하자. 조금 간단하게 표현하기 위해서 모든 <span class="arithmatex">\(n\)</span> 개의 <span class="arithmatex">\(h_t\)</span> 들을 <span class="arithmatex">\(H\)</span> 라고 하며, <span class="arithmatex">\(n \times 2u\)</span> 의 크기를 가진다.</p>
 <div class="arithmatex">\[H = (h_1, h_2, \cdots, h_n) \qquad\qquad (4) \]</div>
 <ul id="light-slider1">
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention0.png"><img src="/assets/ML/nsmc/Self_Attention0.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention1.png"><img src="/assets/ML/nsmc/Self_Attention1.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention2.png"><img src="/assets/ML/nsmc/Self_Attention2.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention3.png"><img src="/assets/ML/nsmc/Self_Attention3.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention4.png"><img src="/assets/ML/nsmc/Self_Attention4.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention0.png"><img src="/assets/ML/nsmc/Self_Attention0.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention1.png"><img src="/assets/ML/nsmc/Self_Attention1.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention2.png"><img src="/assets/ML/nsmc/Self_Attention2.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention3.png"><img src="/assets/ML/nsmc/Self_Attention3.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention4.png"><img src="/assets/ML/nsmc/Self_Attention4.png"/></a></li>
 </ul>
 <p>우리의 목적은 길이가 변화하는 문장을 어떤 <strong>고정된 크기</strong> 의 임베딩으로 인코딩 하는 것이다. 이 목적을 달성하기 위해서 <span class="arithmatex">\(H\)</span> 와 attention 매커니즘이 요구되는 일종의 선형결합을 선택하게 된다. 즉, 아래와 같은 식과 <span class="arithmatex">\(H\)</span> 를 토대로, 어떤 벡터 <span class="arithmatex">\(a\)</span> 를 얻게 된다.</p>
 <div class="arithmatex">\[a = softmax(w_{s2} \tanh (W_{s1}H^T)) \qquad\qquad (5)\]</div>
@@ -536,8 +594,8 @@
 <p>각 단어를 input으로 받은 hidden 상태의 노드들은 단어를 통과해서 각 단어의 숨겨진 특성을 대표하고 있다. 학습 시 Task 에 따라 다르겠지만, 분류라고 가정한다면 분류에 도움이 되는 히든 상태는 높은 값을 가지게 될 것이며, 이를 어떤 선형 변환 과정을 거쳐 softmax 취한다는 것은 한 문장에서 분류에 도움이 된 근거 단어 혹은 중요 단어의 확률을 구한다는 것이 된다. (그래서 attention 이라고 하는 것 같다.) 따라서 이는 한 문장에서 <strong>의미적인(semantic)</strong> 부분을 나타내고 있다고 할 수 있다.</p>
 <p>이 확률 <span class="arithmatex">\(a\)</span> 를 기존의 hidden 상태와 곱해서 의미부분을 조금더 강조하게 되는 벡터 <span class="arithmatex">\(m\)</span> 을 구했다고 보면 된다.</p>
 <ul id="light-slider2">
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention5.png"><img src="/assets/ML/nsmc/Self_Attention5.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention6.png"><img src="/assets/ML/nsmc/Self_Attention6.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention5.png"><img src="/assets/ML/nsmc/Self_Attention5.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention6.png"><img src="/assets/ML/nsmc/Self_Attention6.png"/></a></li>
 </ul>
 <p>하지만 한 문장 내에서 중요한 부분 혹은 의미가 있는 부분은 여러군데 일 수가 있다. (여러 의미가 하나의 문장을 구성한다.) 특히 긴 문장일 수록 그렇다. 예를 들어 "아이언맨과 캡틴아메리카" 면 "과"로 이어진, "아이언맨", "캡틴아메리카" 두 단어는 중요한 의미가 있는 단어 일 수 있다. 따라서 한 문장에서 의미가 있는 부분을 나타내려면 <span class="arithmatex">\(m\)</span> 이란 벡터를 여러 번 수행해서 문장의 다른 부분까지 커버해야 한다. 이는 우리가 <strong>attention</strong> 을 <strong>여러번(hops)</strong> 하게 되는 이유다.</p>
 <p>따라서, 문장에서 우리가 정하는 어떤 수 <span class="arithmatex">\(r\)</span> 번의 다른 부분을 추출 해낸다고 하면, 기존의 <span class="arithmatex">\(w_{s2}\)</span> 는 <span class="arithmatex">\(r \times d_a\)</span> 크기를 가진 <span class="arithmatex">\(W_{s2}\)</span> 라는 매트릭스로 확장된다. 이에따라 기존에 <span class="arithmatex">\(a\)</span> 벡터도 <span class="arithmatex">\(r\)</span> 번을 수행해 concatenate 한 <span class="arithmatex">\(r \times n\)</span> 크기의 매트릭스 <span class="arithmatex">\(A\)</span> 가 된다.  </p>
@@ -548,14 +606,14 @@
 <div class="arithmatex">\[M=AH  \qquad\qquad (7)\]</div>
 <p>마지막으로 <span class="arithmatex">\(M\)</span>을 Fully Connected MLP 에 넣어서 하고 싶은 분류를 하면 된다.</p>
 <ul id="light-slider3">
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention7.png"><img src="/assets/ML/nsmc/Self_Attention7.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention8.png"><img src="/assets/ML/nsmc/Self_Attention8.png"/></a></li>
-<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/Self_Attention9.png"><img src="/assets/ML/nsmc/Self_Attention9.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention7.png"><img src="/assets/ML/nsmc/Self_Attention7.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention8.png"><img src="/assets/ML/nsmc/Self_Attention8.png"/></a></li>
+<li><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/Self_Attention9.png"><img src="/assets/ML/nsmc/Self_Attention9.png"/></a></li>
 </ul>
 <p><br/></p>
 <h2 id="penalization-term">Penalization Term<a class="headerlink" href="#penalization-term" title="Permanent link">¶</a></h2>
 <p>임베딩된 매트릭스 <span class="arithmatex">\(M\)</span> 은 <span class="arithmatex">\(r\)</span> hops 동안 계속해서 같은 유사도 벡터 <span class="arithmatex">\(a\)</span> 를 곱하게 되면 <strong>중복 문제(redundancy problems)</strong> 가 생길 수 있다. 즉, 같은 단어 혹은 구문만 계속해서 attention 하게 되는 문제다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/penal.png"><img src="/assets/ML/nsmc/penal.png"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/penal.png"><img src="/assets/ML/nsmc/penal.png"/></a></p>
 <ul>
 <li>그림: 왼쪽(a)은 패널티를 안준 것, 오른쪽(b) 는 준것</li>
 </ul>
@@ -576,12 +634,12 @@
 <p>간단한 실험을 위해서 사전에 단어들을 word2vec 으로 학습시키지 않고, mecab 으로 tokenizing 만해서 임베딩 시켰다. (실험을 안해봐서 사실 크게 상관있나 모르겠다. 나중에 여러가지로 실험해볼 예정)</p>
 <p>내가 주로 건드린건 LSTM 에서의 <strong>hidden layer의 갯수</strong> 와 hops 인 <strong><span class="arithmatex">\(r\)</span></strong> 을 바꾸어 보았다.</p>
 <h2 id="model-1-1-hidden-layer-5-hops">model 1: 1 개의 Hidden Layer 와 5번의 hops<a class="headerlink" href="#model-1-1-hidden-layer-5-hops" title="Permanent link">¶</a></h2>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/model_1.png"><img src="/assets/ML/nsmc/model_1.png"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/model_1.png"><img src="/assets/ML/nsmc/model_1.png"/></a></p>
 <h2 id="model-2-1-hidden-layer-20-hops">model 2: 1 개의 Hidden Layer 와 20번의 hops<a class="headerlink" href="#model-2-1-hidden-layer-20-hops" title="Permanent link">¶</a></h2>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/model_2.png"><img src="/assets/ML/nsmc/model_2.png"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/model_2.png"><img src="/assets/ML/nsmc/model_2.png"/></a></p>
 <p>hops 가 많아지면 긍정/부정을 판단하게 되는 근거도 많아지고, 모델의 정확도도 향상되는 것을 2번에서 볼 수 있다.</p>
 <h2 id="model-3-3-hidden-layer-5-hops">model 3: 3 개의 Hidden Layer 와 5번의 hops<a class="headerlink" href="#model-3-3-hidden-layer-5-hops" title="Permanent link">¶</a></h2>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-type="image" data-width="70%" href="/assets/ML/nsmc/model_3.png"><img src="/assets/ML/nsmc/model_3.png"/></a></p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="/assets/ML/nsmc/model_3.png"><img src="/assets/ML/nsmc/model_3.png"/></a></p>
 <p>3번째 모델은 조금 이상하다고 느껴진 것이 있다. 그림을 보면 기계가 문장의 앞뒤만 보고 리뷰가 긍정인지 부정인지 판단했다는 것이다. 그림만 보면 과최적화된 느낌? 정확히 각 층의 layer 값을 보지는 못했지만, 층이 깊어 질 수록 기계가 이전 단계의 layer 에서 추출한 특징들로 학습해서 긍부정을 판단 했을 가능성이 있다. 점수는 높게 나왔으나 사람이 판단하기에는 부적절한 모델</p>
 <h1 id="_4">향후 해볼 수 있는 과제들<a class="headerlink" href="#_4" title="Permanent link">¶</a></h1>
 <ul>
@@ -649,7 +707,7 @@
 </div>
 <div class="md-social">
 <a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
 </a>
 </div>
 </div>
@@ -659,8 +717,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.6c7302c4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.803ed251.min.js"></script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../assets/javascripts/bundle.65061dd4.min.js"></script>
 <script src="../../../javascripts/mathjax.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
