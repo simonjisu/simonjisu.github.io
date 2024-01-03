@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://simonjisu.github.io/study/tutorial/algorithm/2023-12-20-lsh/" rel="canonical"/>
+<link href="../" rel="prev"/>
+<link href="../../deeplearning/" rel="next"/>
+<link href="../../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
+<title>Locality Sensitive Hashing - Soopace</title>
+<link href="../../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
+<link href="../../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#preliminaries-minhash-maxhash">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Soopace
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Locality Sensitive Hashing
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../..">
+        
+  
+    
+  
+  About
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../../blog/">
+          
+  
+    
+  
+  Blog
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../../../">
+          
+  
+    
+  
+  Study
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../../../project/">
+          
+  
+    
+  
+  Project
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
+<img alt="logo" src="../../../../img/logo/logo.png"/>
+</a>
+    Soopace
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../..">
+<span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../../../blog/">
+<span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../../blog/archive/2020/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../../blog/category/lifelog/">
+<span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../../">
+<span class="md-ellipsis">
+    
+  
+    Study
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Study
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../../paper/">
+<span class="md-ellipsis">
+    
+  
+    Paper
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    
+  
+    Algorithm
+  
+
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_2_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithm
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Locality Sensitive Hashing
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Locality Sensitive Hashing
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preliminaries-minhash-maxhash">
+<span class="md-ellipsis">
+      
+        Preliminaries: MinHash &amp; MaxHash
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lsh-for-similarity-search">
+<span class="md-ellipsis">
+      
+        LSH for Similarity Search
+      
+    </span>
+</a>
+<nav aria-label="LSH for Similarity Search" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-shingling">
+<span class="md-ellipsis">
+      
+        1. Shingling
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-vocabulary">
+<span class="md-ellipsis">
+      
+        2. Vocabulary
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-one-hot-encoding">
+<span class="md-ellipsis">
+      
+        3. One-Hot Encoding
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-signature">
+<span class="md-ellipsis">
+      
+        4. Signature
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-lsh-process">
+<span class="md-ellipsis">
+      
+        5. LSH Process
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../deeplearning/">
+<span class="md-ellipsis">
+    
+  
+    Deeplearning
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../gcp/">
+<span class="md-ellipsis">
+    
+  
+    Gcp
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../math/">
+<span class="md-ellipsis">
+    
+  
+    Math
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../mongodb/">
+<span class="md-ellipsis">
+    
+  
+    Mongodb
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../nlp/">
+<span class="md-ellipsis">
+    
+  
+    Nlp
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../reinforcement_learning/">
+<span class="md-ellipsis">
+    
+  
+    Reinforcement learning
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../../../project/">
+<span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+</a>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#preliminaries-minhash-maxhash">
+<span class="md-ellipsis">
+      
+        Preliminaries: MinHash &amp; MaxHash
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lsh-for-similarity-search">
+<span class="md-ellipsis">
+      
+        LSH for Similarity Search
+      
+    </span>
+</a>
+<nav aria-label="LSH for Similarity Search" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-shingling">
+<span class="md-ellipsis">
+      
+        1. Shingling
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-vocabulary">
+<span class="md-ellipsis">
+      
+        2. Vocabulary
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-one-hot-encoding">
+<span class="md-ellipsis">
+      
+        3. One-Hot Encoding
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-signature">
+<span class="md-ellipsis">
+      
+        4. Signature
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-lsh-process">
+<span class="md-ellipsis">
+      
+        5. LSH Process
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<nav aria-label="Navigation" class="md-path">
+<ol class="md-path__list">
+<li class="md-path__item">
+<a class="md-path__link" href="../../../..">
+<span class="md-ellipsis">
+    About
+  </span>
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../../../">
+<span class="md-ellipsis">
+    Study
+  </span>
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../../">
+<span class="md-ellipsis">
+    Tutorial
+  </span>
+</a>
+</li>
+<li class="md-path__item">
+<a class="md-path__link" href="../">
+<span class="md-ellipsis">
+    Algorithm
+  </span>
+</a>
+</li>
+</ol>
+</nav>
+<article class="md-content__inner md-typeset">
+<nav class="md-tags" hidden="">
+<span class="md-tag">locality sensitive hashing</span>
+<span class="md-tag">lsh</span>
+</nav>
+<h1>Locality Sensitive Hashing</h1>
+<p>Locality Sensitive Hashing(LSH)는 유사한 데이터를 빠르게 찾는 방법론이다. LSH는 데이터를 해시(hash) 함수를 통해서 해시 테이블에 저장하고, 유사한 데이터는 동일한 해시 테이블에 저장되도록 한다. 이렇게 해서 유사한 데이터를 빠르게 찾을 수 있다. LSH는 유사도 검색(Similarity Search)에서 많이 사용되며, 최근에는 벡터 데이터베이스(Vector Database)에서도 많이 사용되고 있다.</p>
+<h2 id="preliminaries-minhash-maxhash">Preliminaries: MinHash &amp; MaxHash<a class="headerlink" href="#preliminaries-minhash-maxhash" title="Permanent link">¶</a></h2>
+<p>해시 함수(hash function)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>는 데이터를 고정된 길이의 해시 값으로 변환하는 함수이다. 이를 활용하여 만든 것이 해시 테이블(hash table)이며, key와 value를 가진 자료구조가 된다. 해시 함수는 주로 인덱싱등에 활용이 되는데, 예를 들어 <code>"Simon"</code> 이라는 사람을 <code>"01"</code> 로 매핑하였다면 앞으로 <code>"Simon"</code> 이라는 사람을 찾을 때 <code>"01"</code>만 찾으면 된다. </p>
+<p>만약에 비슷한 이름인데 같은 공간에 매핑이 되면, 이러한 상황을 collision이라고 한다. 보통은 collision을 최소화 하도록 해시 함수를 설계한다. 그러나 LSH는 collision을 적절하게 활용하여 비슷한 데이터를 찾는데 활용한다.</p>
+<div class="grid">
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1osZ-tXT7qoF9tpx3rhWfwvi68dnmj6nq" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1oad-iOLvYDNvHQw4IJpMD2IgTcV0EtFq" width="100%"/></p>
+</div>
+<p>매핑된 값들이 최대한 다른 공간에 분포하도록 하는 것이 MinHash 다. 반대로 매핑된 값들이 최대한 비슷한 공간에 분포하도록 하는 것이 MaxHash 다. 이를 활용해서 비슷한 문서는 비슷한 공간에 매핑되도록 하는 것이 LSH의 핵심이다.</p>
+<h2 id="lsh-for-similarity-search">LSH for Similarity Search<a class="headerlink" href="#lsh-for-similarity-search" title="Permanent link">¶</a></h2>
+<p>아래와 같이 문서들이 있다고 하자. 우리의 목표는 각 문서별로 유사함의 정도를 측정하는 것이다.</p>
+<div class="highlight"><span class="filename">Documents</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">docs</span> <span class="o">=</span> <span class="p">[</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="s2">"flying fish flew by the space station"</span><span class="p">,</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="s2">"the fish was caught by the fisherman"</span><span class="p">,</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="s2">"soaring fish soared past the orbital station"</span><span class="p">,</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="s2">"cooked fish was in the space"</span><span class="p">,</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">]</span>
+</code></pre></div>
+<p>전체 프로세스는 다음과 같다(그림에는 첫 두개의 문서를 예시로 들었다). </p>
+<div class="admonition note">
+<p class="admonition-title">Process</p>
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1pMARUaKIi_V3ps1jHkgmJpvfYGkByI6b"><img alt="HeadImg" src="https://drive.google.com/uc?id=1pMARUaKIi_V3ps1jHkgmJpvfYGkByI6b" width="100%"/></a></p>
+<ol>
+<li>문장을 Shingling<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>(혹은 N-Gram)으로 나눈다. 고전적인 자연어 데이터 전처리 방법으로 주어진 <span class="arithmatex">\(K\)</span>에 따라 문자열을 나누는 방법이다. </li>
+<li>각 고유한 shingle을 단어장(Vocabulary)로 만든다.</li>
+<li>각 shingle를 원-핫 인코딩(one-hot encoding)으로 변환한다.</li>
+<li>MinHash 함수를 적용하여 Signature를 생성한다.</li>
+<li>Banding method를 이용하여, LSH를 적용한다.</li>
+</ol>
+</div>
+<h3 id="1-shingling">1. Shingling<a class="headerlink" href="#1-shingling" title="Permanent link">¶</a></h3>
+<p>Shingling은 문자열을 <span class="arithmatex">\(k\)</span> 길이의 shingle <ins class="critic">set</ins>로 나누는 과정이다. 예를 들어 <span class="arithmatex">\(k=2\)</span>이라면 다음과 같이 나눌 수 있다. 이 방법은 단어의 빈도수와 순서를 고려하지 않는 방법임을 유의해야 한다.</p>
+<div class="highlight"><span class="filename">W-Shingling</span><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">def</span> <span class="nf">shingling</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="n">s</span> <span class="o">=</span> <span class="s2">"_"</span> <span class="o">+</span> <span class="n">s</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">)</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="n">shingles</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>        <span class="n">shingles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">])</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>    <span class="k">return</span> <span class="n">shingles</span>
+</code></pre></div>
+<p>두 문장의 유사도는 어떻게 될까? 이때 우리는 Jaccard 유사도를 사용할 수 있다. Jaccard 유사도는 두 집합의 교집합을 합집합으로 나눈 값으로 정의된다. 자세한 내용은 <a href="../../math/2023-12-21-similarity/#jaccard-similarity">Jaccard 유사도</a>를 참고하자. </p>
+<div class="highlight"><span class="filename">W-Shinling Result</span><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="k">def</span> <span class="nf">formatting</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>        <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>        <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>    <span class="k">return</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"..."</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">def</span> <span class="nf">jaccard</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">set</span><span class="p">):</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="n">shared</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="n">union</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">shared</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">union</span><span class="p">)</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="k">def</span> <span class="nf">get_docs_similarity</span><span class="p">(</span><span class="n">docs_set</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">]):</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">docs_set</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">set</span><span class="p">):</span>
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a>        <span class="n">docs_set</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">docs_set</span><span class="p">]</span>
+<a href="#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a>
+<a href="#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a>    <span class="n">n_docs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">docs_set</span><span class="p">)</span>
+<a href="#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="n">docs_similarity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_docs</span><span class="p">,</span> <span class="n">n_docs</span><span class="p">))</span> 
+<a href="#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_docs</span><span class="p">):</span>
+<a href="#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_docs</span><span class="p">):</span>
+<a href="#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a>            <span class="n">docs_similarity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">jaccard</span><span class="p">(</span><span class="n">docs_set</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">docs_set</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<a href="#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a>            <span class="n">docs_similarity</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">docs_similarity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+<a href="#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a>    <span class="k">return</span> <span class="n">docs_similarity</span>
+<a href="#__codelineno-2-26" id="__codelineno-2-26" name="__codelineno-2-26"></a>
+<a href="#__codelineno-2-27" id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<a href="#__codelineno-2-28" id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="n">docs_shingling</span> <span class="o">=</span> <span class="p">[</span><span class="n">shingling</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">]</span>
+<a href="#__codelineno-2-29" id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">shingles</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">docs_shingling</span><span class="p">):</span>
+<a href="#__codelineno-2-30" id="__codelineno-2-30" name="__codelineno-2-30"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"doc</span><span class="si">{}</span><span class="s2"> = {{</span><span class="si">{}</span><span class="s2">}}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">formatting</span><span class="p">(</span><span class="n">shingles</span><span class="p">)))</span>
+<a href="#__codelineno-2-31" id="__codelineno-2-31" name="__codelineno-2-31"></a><span class="c1"># matrix jaccard similarity</span>
+<a href="#__codelineno-2-32" id="__codelineno-2-32" name="__codelineno-2-32"></a><span class="n">docs_similarity</span> <span class="o">=</span> <span class="n">get_docs_similarity</span><span class="p">(</span><span class="n">docs_shingling</span><span class="p">)</span>
+<a href="#__codelineno-2-33" id="__codelineno-2-33" name="__codelineno-2-33"></a>
+<a href="#__codelineno-2-34" id="__codelineno-2-34" name="__codelineno-2-34"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Jaccard similarity matrix:"</span><span class="p">)</span>
+<a href="#__codelineno-2-35" id="__codelineno-2-35" name="__codelineno-2-35"></a><span class="nb">print</span><span class="p">(</span><span class="n">docs_similarity</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<a href="#__codelineno-2-36" id="__codelineno-2-36" name="__codelineno-2-36"></a><span class="c1"># doc1 = {pac, fle, w_b, ..., sh_, _th, by_}</span>
+<a href="#__codelineno-2-37" id="__codelineno-2-37" name="__codelineno-2-37"></a><span class="c1"># doc2 = {_ca, ht_, erm, ..., _th, h_w, by_}</span>
+<a href="#__codelineno-2-38" id="__codelineno-2-38" name="__codelineno-2-38"></a><span class="c1"># doc3 = {e_o, tio, tal, ..., ast, sh_, _th}</span>
+<a href="#__codelineno-2-39" id="__codelineno-2-39" name="__codelineno-2-39"></a><span class="c1"># doc4 = {pac, oke, in_, ..., as_, _th, h_w}</span>
+<a href="#__codelineno-2-40" id="__codelineno-2-40" name="__codelineno-2-40"></a><span class="c1"># Jaccard similarity matrix:</span>
+<a href="#__codelineno-2-41" id="__codelineno-2-41" name="__codelineno-2-41"></a><span class="c1"># [[0.     0.1923 0.2759 0.2449]</span>
+<a href="#__codelineno-2-42" id="__codelineno-2-42" name="__codelineno-2-42"></a><span class="c1">#  [0.1923 0.     0.1148 0.25  ]</span>
+<a href="#__codelineno-2-43" id="__codelineno-2-43" name="__codelineno-2-43"></a><span class="c1">#  [0.2759 0.1148 0.     0.1356]</span>
+<a href="#__codelineno-2-44" id="__codelineno-2-44" name="__codelineno-2-44"></a><span class="c1">#  [0.2449 0.25   0.1356 0.    ]]</span>
+</code></pre></div>
+<p>문서가 많아지거나 커지면, 각 문서의 크기(차원) 또한 커진다. 그래서 각 문서를 조금더 컴팩트하게 작은 차원으로 표현하고 싶다. 그러면 어떤 방법으로 유사한 문서를 유사한 공간에 매핑할 수 있을까? 다음 일련의 과정에서 이를 설명한다.</p>
+<h3 id="2-vocabulary">2. Vocabulary<a class="headerlink" href="#2-vocabulary" title="Permanent link">¶</a></h3>
+<p>Shingling을 통해서 나눈 shingle들을 단어장(Vocabulary)으로 만든다. 이때 단어장은 고유한 shingle들의 집합이며, 전체 데이터를 사용하여 만든다. 단어장은 순서가 있어야 함으로 set이 아닌 list로 만든다.</p>
+<div class="highlight"><span class="filename">Vocabularize</span><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">vocabulary</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="n">docs_shingling</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="3-one-hot-encoding">3. One-Hot Encoding<a class="headerlink" href="#3-one-hot-encoding" title="Permanent link">¶</a></h3>
+<p class="annotate">Shingling을 통해서 나눈 shingle들을 하나씩 대조하여 단어장에 존재하는 경우 해당 단어장 인덱스에 1을 부여한다. 이를 원-핫 인코딩(one-hot encoding)(1) 이라고 한다. 이를 통해서 단어장의 크기 <span class="arithmatex">\(V\)</span> 만큼의 sparse vector를를 얻을 수 있다.</p>
+<ol>
+<li><img alt="🙋‍♂️" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:"/> one-hot encoding은 보통 자연어 처리에서 전체 시퀀스의 길이(=토큰의 개수 <span class="arithmatex">\(N\)</span>)를  단어장의 크기 <span class="arithmatex">\(V\)</span> 길이 만큼 변환 하여 <span class="arithmatex">\(N \times V\)</span> 의 Matrix 형태로 표현하지만, 여기서는 단어장의 크기 만큼의 벡터로 표현하는 방식이다.</li>
+</ol>
+<div class="highlight"><span class="filename">One-Hot Encoding</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">def</span> <span class="nf">one_hot_encode</span><span class="p">(</span><span class="n">shingles</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">shingles</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">vocabulary</span><span class="p">]</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">return</span> <span class="n">vector</span>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">docs_vectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">one_hot_encode</span><span class="p">(</span><span class="n">shingles</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">)</span> <span class="k">for</span> <span class="n">shingles</span> <span class="ow">in</span> <span class="n">docs_shingling</span><span class="p">]</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"The shape of doc vectors ="</span><span class="p">,</span> <span class="n">docs_vectors</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="c1"># The shape of doc vectors = (4, 86)</span>
+</code></pre></div>
+<h3 id="4-signature">4. Signature<a class="headerlink" href="#4-signature" title="Permanent link">¶</a></h3>
+<p>시그니처(Signature)는 sparse vector를 dense vector로 변환하는 과정이며, MinHash 함수를 적용한 결과다. 각 데이터의 특징을 표현하는 방법이기 때문에 feature vector라고 할 수도 있다. 여기서 해시 테이블(맵)은 단어장 길이의 만큼의 숫자 매번 셔플로 하여 생성한다. 이러한 과정을 permutation이라고 한다. 총 <span class="arithmatex">\(N\)</span> 길이 만큼의 signature를 만들고 싶다면 <span class="arithmatex">\(N\)</span>번의 loop을 통해 signature를 찾아내며, 우리는 <span class="arithmatex">\(V\)</span> 크기의 sparse vector를 <span class="arithmatex">\(N\)</span> 크기의 dense vector로 변환할 수 있다. </p>
+<p>```py title="Permutation
+def create_hashes(N: int, V: int) -&gt; np.ndarray:
+    hashes = np.zeros((N, V), dtype=int)
+    for i in range(N):
+        permutation = np.random.permutation(V) + 1
+        hashes[i, :] = permutation.copy()
+    return hashes  # N x V</p>
+<p>```</p>
+<p>아래 그림은 signature를 만드는 과정 중 첫 번째와 두 번째 iteration을 보여준다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Algorithm Example</label><label for="__tabbed_1_2">Code for Signature</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1pP2b0P3iCWbQQOKhYUR8HhYeDVi2CxdL"><img alt="HeadImg" src="https://drive.google.com/uc?id=1pP2b0P3iCWbQQOKhYUR8HhYeDVi2CxdL" width="75%"/></a></p>
+</div>
+<div class="tabbed-block">
+<p>순수 파이썬으로 구현시 다음과 같이 구현 가능하다.</p>
+<p>```py title="Signature"
+def create_signature(
+    vector: np.ndarray, 
+    hashses: np.ndarray, 
+    vocabulary: list[str]
+):
+    signature = []
+    for k, func in enumerate(hashses):
+        for i in range(1, len(vocabulary)+1):
+            idx = list(func).index(i)  # search hash value index in hash map
+            signature_val = vector[idx]
+            if signature_val == 1:
+                signature.append(idx)
+                break
+    return signature</p>
+<p>def create_signatures_plain(hashes: np.ndarray, docs_vectors: np.ndarray) -&gt; np.ndarray:
+    signatures = []
+    for vector in docs_vectors:
+        signature = create_signature(vector, hashes, vocabulary)
+        signatures.append(signature)
+    return np.array(signatures)
+```</p>
+<p>여러 문서를 한번에 처리하기 위해 NumPy를 활용하면 다음과 같이 구현 가능하다.</p>
+<p><code>py title="Signature NumPy"
+def create_signatures(hashes, docs_vectors):
+    argsorted_hashes_index = np.argsort(hashes) # N x V
+    check_is_one = docs_vectors[:, argsorted_hashes_index]  # num_docs x N x V
+    first_nonzero_idx = np.argmax(check_is_one, axis=2, keepdims=True)  # num_docs x N x 1
+    signatures = np.take_along_axis(
+        np.tile(argsorted_hashes_index, (len(docs_vectors), 1, 1)), 
+        first_nonzero_idx, axis=2
+        ).squeeze(-1)  # num_docs x N
+    signatures
+    return signatures</code></p>
+</div>
+</div>
+</input></input></div>
+<p>비슷한 의미를 가진 문서는 비슷한 signature를 가진다. 그렇다면 적절한 <span class="arithmatex">\(N\)</span>은 어떻게 정해야할까? 같은 Hash Function 내에서 <span class="arithmatex">\(N\)</span>이 커질수록, 각 문서가 가지고 있는 원래의 단어장 인덱스 집합에 가까워지기 때문에, 점점 원래 문서의 유사도에 가까워진다. 아래 실험은 <span class="arithmatex">\(N\)</span>이 커질수록 원래 문서의 유사도에 가까워지는 것을 보여준다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Figure: Experiment of N</label><label for="__tabbed_2_2">Code: Experiment of N</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?id=1paHyo1XaG4y__Qs1xLdcErOug9cLeCyX"><img alt="HeadImg" src="https://drive.google.com/uc?id=1paHyo1XaG4y__Qs1xLdcErOug9cLeCyX" width="100%"/></a></p>
+</div>
+<div class="tabbed-block">
+<p>```py title="Experiment of N"
+import matplotlib.pyplot as plt
+import seaborn as sns</p>
+<p>def run_exp(n_exp, candidates_of_N, vocab_length, docs_vectors, rows, cols):
+    max_N = candidates_of_N[-1]
+    print(max_N)
+    exp_res = []  # n_exp x len(candidates_of_N) x len(combination of (rows and cols))
+    for _ in range(n_exp):
+        hashes = create_hashes(max_N, V=vocab_length)
+        current_exp = []
+        for N in candidates_of_N:
+            # create signatures
+            signatures = create_signatures(hashes[:N], docs_vectors)
+            docs_similarity_lsh = get_docs_similarity(signatures)
+            current_exp.append(docs_similarity_lsh[rows, cols])
+        exp_res.append(np.array(current_exp))
+    exp_res = np.array(exp_res)</p>
+<div class="highlight"><pre><span></span><code>mean_exp_res = np.mean(exp_res, axis=0)
+std_exp_res = np.std(exp_res, axis=0)
+return mean_exp_res, std_exp_res
+</code></pre></div>
+<p>def draw(rows, cols, candidates_of_N, mean_exp_res, std_exp_res, docs_similarity):
+    palette = sns.color_palette("tab10", len(rows)).as_hex()
+    plt.style.use("ggplot")
+    fig, ax = plt.subplots(1, 1, figsize=(10, 8))</p>
+<div class="highlight"><pre><span></span><code>for i_rc, (row, col) in enumerate(zip(rows, cols)):
+    sns.lineplot(x=candidates_of_N, y=mean_exp_res[:, i_rc], c=palette[i_rc], 
+                linewidth=1.5, label=f"doc{row+1} vs doc{col+1}", ax=ax)
+    ax.fill_between(candidates_of_N, mean_exp_res[:, i_rc]-std_exp_res[:, i_rc], mean_exp_res[:, i_rc]+std_exp_res[:, i_rc], 
+                    color=palette[i_rc], alpha=0.1)
+
+    y = [docs_similarity[row, col]]*len(candidates_of_N)
+    ax.plot(candidates_of_N, y, color=palette[i_rc], linewidth=0.75, linestyle='--')
+
+ax.set_xticks(candidates_of_N)
+ax.set_xticklabels(candidates_of_N)
+ax.set_title("Jaccard similarity between docs by each N")
+ax.set_xlabel("N")
+ax.set_ylabel("Jaccard similarity")
+ax.legend()
+plt.show()
+</code></pre></div>
+<p>def main(docs_shingling, docs_vectors, vocabulary, n_exp=30, interval=5):
+    candidates_of_N = np.arange(interval, 50+interval, interval)
+    docs_similarity = get_docs_similarity(docs_shingling)
+    rows, cols = np.tril_indices(docs_similarity.shape[0], k=-1)  # lower triangle index
+    vocab_length = len(vocabulary)
+    mean_exp_res, std_exp_res = run_exp(
+        n_exp, candidates_of_N, vocab_length, docs_vectors, rows, cols
+    )
+    draw(rows, cols, candidates_of_N, mean_exp_res, std_exp_res, docs_similarity)</p>
+<p>main(docs_shingling, docs_vectors, vocabulary, n_exp=30, interval=5)
+```</p>
+</div>
+</div>
+</input></input></div>
+<h3 id="5-lsh-process">5. LSH Process<a class="headerlink" href="#5-lsh-process" title="Permanent link">¶</a></h3>
+<p>이제 드디어 LSH를 적용할 차례다. 여기서 banding method를 적용한다. banding method는 signature를 여러개의 밴드(band)로 나누어서 비교하는 방법이다. 예를 들어 <span class="arithmatex">\(N=20\)</span>이고, <span class="arithmatex">\(b=5\)</span>이면, 20개의 signature를 5개의 밴드로 나누어서 비교한다. 이때 각 밴드는 4개의 signature를 가지게 된다.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="https://ko.wikipedia.org/wiki/해시_함수">Hash Function - Wikipedia</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://en.wikipedia.org/wiki/W-shingling">Shingling - Wikipedia</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+<form class="md-feedback" hidden="" name="feedback">
+<fieldset>
+<legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+<div class="md-feedback__inner">
+<div class="md-feedback__list">
+<button class="md-feedback__icon md-icon" data-md-value="1" title="This page was helpful" type="submit">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
+</button>
+<button class="md-feedback__icon md-icon" data-md-value="0" title="This page could be improved" type="submit">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
+</button>
+</div>
+<div class="md-feedback__note">
+<div data-md-value="1" hidden="">
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+<div data-md-value="0" hidden="">
+</div>
+</div>
+</div>
+</fieldset>
+</form>
+<!-- Giscus -->
+<h2 id="__comments">Comments</h2>
+<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
+</script>
+<!-- Synchronize Giscus theme with palette -->
+<script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </button>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs Insiders
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../../../../assets/javascripts/bundle.65061dd4.min.js"></script>
+<script src="../../../../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
+</html>

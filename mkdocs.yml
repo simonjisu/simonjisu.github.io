@@ -20,7 +20,7 @@ theme:
     - navigation.path
     - content.tooltips
     - content.code.annotate
-
+    
 markdown_extensions:
   - toc:
       permalink: true
@@ -46,8 +46,8 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - admonition
   - pymdownx.details
   - pymdownx.tabbed:
@@ -80,7 +80,7 @@ plugins:
   # https://oprypin.github.io/mkdocs-literate-nav/reference.html
   - literate-nav:
       nav_file: SUMMARY.md
-      implicit_index: false
+      implicit_index: true
 
   - blog:
       blog_dir: "blog"
@@ -111,3 +111,19 @@ extra:
   analytics:
     provider: google
     property: G-2D0S4P2SJ9
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+
+validation:
+  absolute_links: warn
+  unrecognized_links: ignore

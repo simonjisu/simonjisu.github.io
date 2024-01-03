@@ -14,17 +14,27 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 ## 1. Introduction
 
-그 동안 LSTM([Long Short-term Memory](https://dl.acm.org/citation.cfm?id=1246450), 1997) 과 GRU([Gated Recurrent Unit](https://arxiv.org/abs/1412.3555), 2014) 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다. 
+그 동안 LSTM(Long Short-term Memory, 1997)[^1] 과 GRU(Gated Recurrent Unit, 2014)[^2] 등의 RNN 계열은 언어 모델링, 기계번역 등의 문제와 같이 시퀀스 모델링(sequence modeling)을 하기에 최고의 알고리즘이었다. 
 
-{% include image.html id="1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz" desc="[그림 1] RNN의 forward propagation" width="auto" height="auto" %}
+[^1]: [Long Short-term Memory](https://dl.acm.org/citation.cfm?id=1246450)
+[^2]: [Gated Recurrent Unit](https://arxiv.org/abs/1412.3555) 
+
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz){ class="skipglightbox" width="75%" }
+  <figcaption>[그림 1] RNN의 forward propagation</figcaption>
+</figure>
 
 `그림 1` 처럼 이전 스텝의 은닉층 유닛인 $h_{t-1}$ 를 현재 스텝의 은닉층 유닛 $h_t$ 로 전달하면서 자연스럽게 시퀀스 데이터의 특징을 유지하지만, 아쉽게도 병렬 처리를 원천적으로 배제한다는 단점이 존재한다. 따라서 만약에 문장이 길어질 수록 훈련 속도가 현저하게 느려진다.
 
 Input 과 Output 문장의 길이와 관계없이 의존성(dependencies)을 해결해주는 **Attention** 매커니즘은 시퀀스 모델링 혹은 변환 모델링<span style="color:gray">(transduction modeling: 각기 다른 특성을 가진 입력-출력 데이터를 변환하는 문제들, 예를 들어 기계번역)</span>에서 필수적인 요소가 됐다. 예시로 다음 논문들을 참고하면 좋다.
 
-- [Neural Machine Translation by Jointly Learning to Align and Translate, Dzmitry Bahdanau 2014](https://arxiv.org/abs/1409.0473)
-- [Structured Attention Networks, Yoon Kim, 2017](https://arxiv.org/abs/1702.00887)
-- [A Decomposable Attention Model for Natural Language Inference, Ankur P. Parikh, 2016](https://arxiv.org/abs/1606.01933)
+- Neural Machine Translation by Jointly Learning to Align and Translate, Dzmitry Bahdanau 2014[^3]
+- Structured Attention Networks, Yoon Kim, 2017[^4]
+- A Decomposable Attention Model for Natural Language Inference, Ankur P. Parikh, 2016[^5]
+
+[^3]: [Neural Machine Translation by Jointly Learning to Align and Translate, Dzmitry Bahdanau 2014](https://arxiv.org/abs/1409.0473)
+[^4]: [Structured Attention Networks, Yoon Kim, 2017](https://arxiv.org/abs/1702.00887)
+[^5]: [A Decomposable Attention Model for Natural Language Inference, Ankur P. Parikh, 2016](https://arxiv.org/abs/1606.01933)
 
 위 두 가지를 결합하여 저자들은 Attention 매커니즘만 활용하여 Input 과 Output 의 의존성을 글로벌하게 처리하고, 병렬화까지 가능한 `Transformer`라는 새로운 모델구조를 제안했다.
 
@@ -34,13 +44,19 @@ Input 과 Output 문장의 길이와 관계없이 의존성(dependencies)을 해
 
 $$\begin{aligned} \mathbf{x}&=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_1, z_2, \cdots, z_n)\\ \mathbf{y}&=(y_1, y_2, \cdots, y_m)\ \text{for}\  y_{t}=f(y_{t-1}, \mathbf{z}) \end{aligned}$$
 
-{% include image.html id="15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97" desc="[그림 2] 모델구조: Encoder(좌), Decoder(우)" width="75%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97){ class="skipglightbox" width="50%" }
+  <figcaption>[그림 2] 모델구조: Encoder(좌), Decoder(우)</figcaption>
+</figure>
 
 하지만 **Transformer** 에서는 한 타임 스텝마다 $y$ 를 출력하지 않고 한번에 처리한다. 저자들이 제안한 전체적인 모델구조는 `그림 2` 와 같다(전체적인 느낌만 보고 다음으로 넘어가도록 한다).
 
 ### Encoder
 
-Encoder는 각기 다른 N 개의 "Encoder Layer"라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 "Multi-Head Attention", 두번째는 일반적인 "Position-wise Feed Forward"로 구성되며, 각 서브층은 Residual Network([Kaiming He, 2015](https://arxiv.org/abs/1512.03385))처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm([Jimmy Lei Ba, 2016](https://arxiv.org/abs/1607.06450)) 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.
+Encoder는 각기 다른 N 개의 "Encoder Layer"라는 층으로 구성되며, 각 층에는 두 개의 서브층(SubLayer)이 존재한다. 첫번째는 Self Attention을 수행하는 "Multi-Head Attention", 두번째는 일반적인 "Position-wise Feed Forward"로 구성되며, 각 서브층은 Residual Network[^6]처럼 서브층의 입력과 출력을 결합하고, 그 결괏값을 다시 LayerNorm[^7] 을 통과시켜 출력을 얻는다. 수식으로 다음과 같다.
+
+[^6]: [Kaiming He, 2015](https://arxiv.org/abs/1512.03385)
+[^7]: [Jimmy Lei Ba, 2016](https://arxiv.org/abs/1607.06450)
 
 $$\text{LayerNorm}(x + \text{SubLayer}(x))$$
 
@@ -64,7 +80,10 @@ $$O = \text{Attention}(Q, K, V)$$
 
 영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. <span style="color:#e25252">**query(Q)**</span>, <span style="color:#5470cc">**key(K)**</span>, <span style="color:#cfb648">**value(V)**</span> 관계는 `그림 3` 과같이 표현할 수 있다.
 
-{% include image.html id="14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G" desc="[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기" width="auto" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G){ class="skipglightbox" width="65%" }
+  <figcaption>[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기</figcaption>
+</figure>
 
 - <span style="color:#e25252">**query(Q)**</span>: 한국어 문장 정보
 - <span style="color:#5470cc">**key(K)**</span>-<span style="color:#cfb648">**value(V)**</span> 세트: 인코딩된 영어 문장 정보, <span style="color:#5470cc">**key(K)**</span> 와 <span style="color:#cfb648">**value(V)**</span> 는 같은 벡터
@@ -75,7 +94,10 @@ $$O = \text{Attention}(Q, K, V)$$
 
 꼭 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>-<span style="color:#cfb648">**V**</span> 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>, <span style="color:#cfb648">**V**</span> 모두 같은 문장을 지정하여 `그림 4`처럼 Attention 을 사용할 수 있다. 
 
-{% include image.html id="1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX" desc="[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기" width="auto" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX){ class="skipglightbox" width="65%" }
+  <figcaption>[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기</figcaption>
+</figure>
 
 ### Scaled Dot-Product Attention
 
@@ -83,7 +105,10 @@ Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 �
 
 $$\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V$$
 
-{% include image.html id="1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM" desc="[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention" width="auto" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM){ class="skipglightbox" width="65%" }
+  <figcaption>[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention</figcaption>
+</figure>
 
 여기서 주의할 점은 $T_k$ 과 $T_v$가 같다는 점이다. 기계 번역을 예로 들면 소스 문장이 <span style="color:#5470cc">**K**</span>-<span style="color:#cfb648">**V**</span> 세트이기 때문에 같은 길이의 내용을 담고 있지만 각 토큰이 표현하고 있는 차원만 다를 뿐이다. <span style="color:#e25252">**Q**</span> 와 <span style="color:#5470cc">**K**</span> 의 길이는 다를 수 있지만 차원 $d_k$ 로 같다. 두 행렬은 행렬의 곱(matrix multiplication)을 통해서 크기가 $(T_q, T_v)$ 인 점수 행렬 **A** 를 만들어 낸다. 
 
@@ -93,49 +118,51 @@ $$\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V$$
 
 **왜 $\sqrt{d_k}$ 를 나눌까?** 평균이 0, 표준편차가 1인 랜덤한 값으로 <span style="color:#e25252">**Q**</span> 와 <span style="color:#5470cc">**K**</span> 로 초기화시키고 확률로 표현된 행렬값 **A** 의 경사를 구해보면 $d_k$ 가 커짐에 따라서 평균이 0, 분산이 $d_k$ 를 따르는 분포가 된다. 이러한 시뮬레이션을 다음 코드를 통해 알아 볼 수 있다.
 
-```python
-import torch
-import torch.nn as nn
+??? info "Simulation Code"
 
-def check_dotproduct_dist(d_k, sampling_size=1, seq_len=1, threshold=1e-10):
-    """
-    to check "https://arxiv.org/abs/1706.03762" Paper page 4, annotation 4
-    -------------------------------
-    To illustrate why the dot products get large, 
-    assume that the components of q and k are independent random variables 
-    with mean 0 and variance 1.
-    Then their dot product has mean 0 and variance d_k
-    
+    ```python
+    import torch
+    import torch.nn as nn
+
+    def check_dotproduct_dist(d_k, sampling_size=1, seq_len=1, threshold=1e-10):
+        """
+        to check "https://arxiv.org/abs/1706.03762" Paper page 4, annotation 4
+        -------------------------------
+        To illustrate why the dot products get large, 
+        assume that the components of q and k are independent random variables 
+        with mean 0 and variance 1.
+        Then their dot product has mean 0 and variance d_k
+        
+        print("*** notice that the gradient of softmax is y(1-y) ***")
+        for d_k in [10, 100, 1000]:
+            check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)
+        
+        """
+
+        def cal_grad(attn):
+            y = torch.softmax(attn, dim=2)
+            return y * (1-y)
+        
+        q = nn.init.normal_(torch.rand((sampling_size, seq_len, d_k)), mean=0, std=1)
+        k = nn.init.normal_(torch.rand((sampling_size, seq_len, d_k)), mean=0, std=1)
+        attn = torch.bmm(q, k.transpose(1, 2))
+        print(f"size of vector d_k is {d_k}, sampling result, dot product distribution has\n")
+        print(f" - mean: {attn.mean().item():.4f}, \n - var: {attn.var().item():.4f}")
+        grad = cal_grad(attn)
+        g_sum = grad.le(threshold).sum()
+        g_percent = g_sum.item()/grad.view(-1).size(0)*100
+        print(f"count of gradients that smaller than threshod({threshold}) is {g_sum}, {g_percent:.2f}%")
+        
+        attn2 = attn / torch.sqrt(torch.as_tensor(d_k).float())
+        grad2 = cal_grad(attn2)
+        g_sum2 = grad2.le(threshold).sum()
+        g_percent2 = g_sum2.item()/grad2.view(-1).size(0)*100
+        print(f"after divide by sqrt(d_k), count of gradients that smaller than threshod({threshold}) is {g_sum2}, {g_percent2:.2f}% \n")
+
     print("*** notice that the gradient of softmax is y(1-y) ***")
     for d_k in [10, 100, 1000]:
         check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)
-    
-    """
-
-    def cal_grad(attn):
-        y = torch.softmax(attn, dim=2)
-        return y * (1-y)
-    
-    q = nn.init.normal_(torch.rand((sampling_size, seq_len, d_k)), mean=0, std=1)
-    k = nn.init.normal_(torch.rand((sampling_size, seq_len, d_k)), mean=0, std=1)
-    attn = torch.bmm(q, k.transpose(1, 2))
-    print(f"size of vector d_k is {d_k}, sampling result, dot product distribution has\n")
-    print(f" - mean: {attn.mean().item():.4f}, \n - var: {attn.var().item():.4f}")
-    grad = cal_grad(attn)
-    g_sum = grad.le(threshold).sum()
-    g_percent = g_sum.item()/grad.view(-1).size(0)*100
-    print(f"count of gradients that smaller than threshod({threshold}) is {g_sum}, {g_percent:.2f}%")
-    
-    attn2 = attn / torch.sqrt(torch.as_tensor(d_k).float())
-    grad2 = cal_grad(attn2)
-    g_sum2 = grad2.le(threshold).sum()
-    g_percent2 = g_sum2.item()/grad2.view(-1).size(0)*100
-    print(f"after divide by sqrt(d_k), count of gradients that smaller than threshod({threshold}) is {g_sum2}, {g_percent2:.2f}% \n")
-
-print("*** notice that the gradient of softmax is y(1-y) ***")
-for d_k in [10, 100, 1000]:
-    check_dotproduct_dist(d_k, sampling_size=100000, seq_len=5, threshold=1e-10)
-```
+    ```
 
 시뮬레이션 결과: 
 
@@ -170,9 +197,12 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 
 ### Multi-Head Attention
 
-{% include image.html id="1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_" desc="[그림 1] Multi-Head Attention" width="75%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_){ class="skipglightbox" width="65%" }
+  <figcaption>[그림 6] Multi-Head Attention</figcaption>
+</figure>
 
-첫번째 서브층(SubLayer) Multi-Head Attention 의 구조는 `그림 1` 과 같다. 연구자들은 $d_{model}$ 크기의 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>, <span style="color:#cfb648">**V**</span> 를 한 번 수행하는 것보다 $h$ 개의 각기 다른 **선형 투영(linear projection)**을 시켜, 크기가 $d_k$(<span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>), $d_v$(<span style="color:#cfb648">**V**</span>) 인 텐서를 사용해서 Attention 을 병렬로 수행하는 것이 더 유리한 것을 찾아냈다. 각기 다른 Attention 을 수행한 $h$ 개의 출력값은 하나로 concatenate 후에 최종 선형결합을 통해 다시 $d_{model}$ 크기로 돌아오는데 이를 수식으로 표현하면 다음과 같다. 
+첫번째 서브층(SubLayer) Multi-Head Attention 의 구조는 `그림 6` 과 같다. 연구자들은 $d_{model}$ 크기의 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>, <span style="color:#cfb648">**V**</span> 를 한 번 수행하는 것보다 $h$ 개의 각기 다른 **선형 투영(linear projection)**을 시켜, 크기가 $d_k$(<span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>), $d_v$(<span style="color:#cfb648">**V**</span>) 인 텐서를 사용해서 Attention 을 병렬로 수행하는 것이 더 유리한 것을 찾아냈다. 각기 다른 Attention 을 수행한 $h$ 개의 출력값은 하나로 concatenate 후에 최종 선형결합을 통해 다시 $d_{model}$ 크기로 돌아오는데 이를 수식으로 표현하면 다음과 같다. 
 
 $$\begin{aligned} \text{MultiHead}(Q, K, V) &= \text{Concat}(\text{head}_1, \cdots \text{head}_h)W^O  \\ \text{where head}_i &= \text{Attention}(QW^Q_i, KW^K_i, VW^V_i)  \end{aligned}$$
 
@@ -258,9 +288,12 @@ Positional Encoding 은 상대적이거나 절대적인 위치정보를 부여�
 
 $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{pos, 2i+1} &= \cos(\frac{pos}{10000^{2i/d_{model}}})\end{aligned}$$
 
-결론을 말하자면 각 시퀀스의 순서 인덱서는 PE(Positonal Encoding) 테이블에서 각자의 위치를 조회후에 임베딩된 텐서와 결합하게 된다. pos 는 시퀀스의 위치정보, 예를 들어 텐서의 크기가 $d_{model}$ = 1024 의 경우, 각 1024의 짝수(2i)에 위치한 값들은 sin 함수를 적용하고, 홀수(2i+1) 에 위치한 값들은 cos 함수를 적용한다. PE 테이블을 그리면 `그림 2` 과 같은데, 자세히 보시면 각 포지션에 해당하는 1 줄(1024 크기의 벡터)값은 모두 차별화 되어있다. 
+결론을 말하자면 각 시퀀스의 순서 인덱서는 PE(Positonal Encoding) 테이블에서 각자의 위치를 조회후에 임베딩된 텐서와 결합하게 된다. pos 는 시퀀스의 위치정보, 예를 들어 텐서의 크기가 $d_{model}$ = 1024 의 경우, 각 1024의 짝수(2i)에 위치한 값들은 sin 함수를 적용하고, 홀수(2i+1) 에 위치한 값들은 cos 함수를 적용한다. PE 테이블을 그리면 `그림 7` 과 같은데, 자세히 보시면 각 포지션에 해당하는 1 줄(1024 크기의 벡터)값은 모두 차별화 되어있다. 
 
-{% include image.html id="1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22" desc="[그림 2] 최대 길이가 51인 Positional Encoding Table" width="100%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22){ class="skipglightbox" width="100%" }
+  <figcaption>[그림 7] 최대 길이가 51인 Positional Encoding Table</figcaption>
+</figure>
 
 해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L82) 에서 확인할 수 있다.
 
@@ -275,17 +308,23 @@ $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{
 
     Decoder 에서는 이전의 타임 스텝(t-1)의 정보를 활용하여 다음 타임 스텝(t)의 정보를 예측하게 되는데 이를 **자기회귀(auto-regressive)**특성이라고 한다. 이러한 특성을 보존하기 위해서 이전 타임 스텝(t-1)을 입력으로 현재 타임 스텝(t)를 예측하려고 할 때, 다음 타임 스텝(t+1)의 정보를 참조하면 안된다. 따라서 이를 Scaled Dot-Product Attention 에서 마스킹을 통해, 음의 무한대(`-np.inf`) 값을 주어서 Softmax 값을 0으로 만들어 준다. 
 
-    예를 들어 `그림 1`처럼 (검은색이 마스킹 위치) Decoder 의 입력 데이터 최대 길이가 4인 경우, <span style="color:#e25252">**Q**</span> 에서 0 번째 토큰은 1 번째 토큰을 예측해야 함으로 Self-Attention 시 <span style="color:#5470cc">**K**</span> 의 1, 2, 3 번째의 토큰의 관계를 무시해야한다. <span style="color:#e25252">**Q**</span> 의 1 번째 토큰을 입력시 2 번째 토큰을 예측하게 되는데, 자기 자신을 포함한 그 이전의 정보를 참조 할 수는 있지만 미래의 2, 3 번째의 정보를 미리 참고하면 안된다.
+    예를 들어 `그림 8`처럼 (검은색이 마스킹 위치) Decoder 의 입력 데이터 최대 길이가 4인 경우, <span style="color:#e25252">**Q**</span> 에서 0 번째 토큰은 1 번째 토큰을 예측해야 함으로 Self-Attention 시 <span style="color:#5470cc">**K**</span> 의 1, 2, 3 번째의 토큰의 관계를 무시해야한다. <span style="color:#e25252">**Q**</span> 의 1 번째 토큰을 입력시 2 번째 토큰을 예측하게 되는데, 자기 자신을 포함한 그 이전의 정보를 참조 할 수는 있지만 미래의 2, 3 번째의 정보를 미리 참고하면 안된다.
 
-{% include image.html id="1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn" desc="[그림 1] Decoder Sub-sequence Attention Masking" width="75%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn){ class="skipglightbox" width="75%" }
+  <figcaption>[그림 8] Decoder Sub-sequence Attention Masking</figcaption>
+</figure>
 
 2. 실제 토큰의 길이
 
     앞서 말했듯이 RNN 처럼 recurrance 하지 않기 때문에 최대 입력/출력 길이를 정해야한다. 따라서 실제 문장은 길이가 4인데도 설정한 최대 길이 때문에 그 길이만큼 `Padding`을 하게 되는데, Attention 계산시 `Padding` 은 인위적으로 넣은 토큰이기 때문에 이를 무시해야 한다. 
 
-    예를 들어 Decoder 에 들어가는 타겟 데이터의 최대 길이는 4이지만 실제 토큰의 길이가 3이라면 Attention Matrix 에 해당하는 마스킹은 `그림 2`와 같다. 여기서는 마지막 토큰이 `Padding` 토큰이기 때문에 Self Attention 시 마지막 토큰은 참조하지 않는다. Attention 코드([GitHub](https://github.com/simonjisu/annotated-transformer-kr/blob/master/transformer/modules.py) 참고) 구현하게 되면 3 번째 행은 Softmax 를 통과시 `nan` 값이 된다. 따라서 해당하는 값을 0으로 다시 마스킹하는 과정이 필요하다. 
+    예를 들어 Decoder 에 들어가는 타겟 데이터의 최대 길이는 4이지만 실제 토큰의 길이가 3이라면 Attention Matrix 에 해당하는 마스킹은 `그림 9`와 같다. 여기서는 마지막 토큰이 `Padding` 토큰이기 때문에 Self Attention 시 마지막 토큰은 참조하지 않는다. Attention 코드([GitHub](https://github.com/simonjisu/annotated-transformer-kr/blob/master/transformer/modules.py) 참고) 구현하게 되면 3 번째 행은 Softmax 를 통과시 `nan` 값이 된다. 따라서 해당하는 값을 0으로 다시 마스킹하는 과정이 필요하다. 
 
-{% include image.html id="1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2" desc="[그림 2] 실제 토큰 길이에 대한 Masking" width="75%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2){ class="skipglightbox" width="75%" }
+  <figcaption>[그림 9] 실제 토큰 길이에 대한 Masking</figcaption>
+</figure>
 
 해당 모듈(Module) 코드는 다음과 같다.
 * [Encoder Layer](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/layers.py#L11)
@@ -305,7 +344,9 @@ $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{
 
 ### Label Smoothing
 
-Discrete한 분포를 예측하는 방법은 주로 Cross Entropy를 많이 사용하지만 논문에서는 [Rethinking the inception architecture for computer vision](https://arxiv.org/abs/1512.00567) 논문에서 언급한 Label Smoothing 기법을 활용했다. 
+Discrete한 분포를 예측하는 방법은 주로 Cross Entropy를 많이 사용하지만 논문에서는 Rethinking the inception architecture for computer vision[^8] 논문에서 언급한 Label Smoothing 기법을 활용했다. 
+
+[^8]: [Rethinking the inception architecture for computer vision](https://arxiv.org/abs/1512.00567)
 
 예측 확률 분포를 **P**, 정답/타겟 확률 분포(ground-truth distribution)를 **Q**라고 하겠다. $x$ 를 입력으로 예측 확률 질량함수 `p(y=k|x)` 에서 구한 확률(Softmax)을 타겟 확률 질량함수 `q(y=k|x)=1` 처럼 만드는 것이 원래의 최종목표다. 이제부터 $x$를 생략해서 쓰겠다. Cross Entropy의 수식은 다음과 같다.
 
@@ -342,11 +383,6 @@ LSR 은 기존에 Cross Entropy `H(q, p)`를 한 쌍의 `H(q, p)` 와 `H(u, p)`�
 
 해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/labelsmooth.py#L5) 에서 확인할 수 있다.
 
-#### References
-
-* [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567)
-* [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html#label-smoothing)
-
 ---
 
 ## 7. Optimizer
@@ -359,7 +395,10 @@ $$lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \c
 
 해당 수식에 따르면 처음 warmup_steps 동안 학습률은 가파르게 상승하다가 차후에 천천히 하강하게 된다.
 
-{% include image.html id="1d0xw7_xjr1rv7-SjuxQKRmML4oio561j" desc="[그림 3] hidden 크기 및 warmup steps 에 따른 학습률의 변화" width="75%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1d0xw7_xjr1rv7-SjuxQKRmML4oio561j){ class="skipglightbox" width="75%" }
+  <figcaption>[그림 10] hidden 크기 및 warmup steps 에 따른 학습률의 변화</figcaption>
+</figure>
 
 해당 모듈(Module) 코드는 [**Link**](https://github.com/simonjisu/annotated-transformer-kr/blob/9c1e4988e5aba3d2b971074590ce49e50c3aa823/transformer/warmupoptim.py#L1) 에서 확인할 수 있다.
 
@@ -369,4 +408,10 @@ $$lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \c
 
 PyTorch의 `torchtext`에 있는 Multi30k 데이터 세트(영어-독일어 번역)로 테스트 해보았다. 큰 데이터는 아니기 때문에, NVIDIA GTX 1080 ti 로 약 36분 훈련시켰다. 기존의 RNN 으로 훈련시키는 것 보다 월등히 빨랐다. 모델에서 Attention에 대한 그림도 [github](https://github.com/simonjisu/annotated-transformer-kr)에 올려두었으니 확인해보길 바란다.
 
-{% include image.html id="1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa" desc="[그림 4] Multi30k 성능 테스트" width="100%" height="auto" %}
+<figure markdown>
+  ![HeadImg](https://drive.google.com/uc?id=1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa){ class="skipglightbox" width="100%" }
+  <figcaption>[그림 11] Multi30k 성능 테스트</figcaption>
+</figure>
+
+<!-- References -->
+[^9]: [The Annotated Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html#label-smoothing)

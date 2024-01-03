@@ -7,15 +7,17 @@ tags:
   - "mdp"
 ---
 
-> 데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.
+> 데이터사이언스 대학원 강화학습 수업, Deep RL Bootcamp[^1] 를 듣고 정리한 내용입니다.
+
+[^1]: [Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
 
 ## Markov Decision Processes (MDPs)
 
-> Markov decision process (MDP) is a discrete-time stochastic control process. [^1]
+> Markov decision process (MDP) is a discrete-time stochastic control process. [^2]
 
-[^1]: [Wikipedia - Markove Decision Processes](https://en.wikipedia.org/wiki/Markov_decision_process)
+[^2]: [Wikipedia - Markove Decision Processes](https://en.wikipedia.org/wiki/Markov_decision_process)
 
-마르코프 결정 프로세스에서 Actions은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.
+마르코프 결정 프로세스에서 행동(Actions)은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.
 
 ### Agent–Environment Interface
 
@@ -110,9 +112,13 @@ Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 **�
 
 ## Policies and Value Functions
 
-**Policy**는 주어진 상태 $S_t = s$ 에서 가능한 행동 $A_t = a$으로 매핑하는 함수 $\pi_t(a \vert s)$다. 꼭 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다.
+**Policy**는 주어진 상태 $S_t = s$ 에서 가능한 행동 $A_t = a$으로 매핑하는 함수 $\pi_t(a \vert s)$다. Policy 함수는 항상 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다. 
 
 $$ \pi_t(a \vert s) = \begin{cases} 1 & \text{where } a=a' \\ 0 & \text{where } a\neq a' \end{cases}$$
+
+Policy가 확률 함수의 경우 선택된 행동의 실패 확률을 보통 noise라고 한다. 예를 들어, 특정 상태 $s$에서 $a, a'$ 두 개의 행동을 선택할 수 있는 경우, $\pi_t(a \vert s) = 0.9$ 이면 $a$를 선택할 확률이 90%이고, $a'$를 선택할 확률은 10%이다(noise). 
+
+$\gamma$는 할인율으로써 $0 \leq \gamma \leq 1$의 값을 가지며, 돈의 미래가치를 생각하면 이해가 된다. 현재 1만원을 가지고 있으면 지금은 1만원의 가치가 있지만, 내년에는 할인율에 따라 1만원 보다 적은 가치를 가지게 된다$(10000 \times gamma)$. 
 
 **Value Function**은 {==Policy가 주어졌을 때==}, 상태(혹은 상태-행동 쌍)가 얼마나 좋은 지를 평가하는 함수다. 왜 좋은지를 평가해야하고 좋은 평가는 무엇인지는 앞으로 차차 알아가 본다.
 
@@ -123,6 +129,8 @@ $$ \pi_t(a \vert s) = \begin{cases} 1 & \text{where } a=a' \\ 0 & \text{where } 
 * policy $\pi$하에 Action-value function:
 
     $$q_{\pi}(s, a) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s, A_t = a\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s, A_t = a \Bigg\rbrack$$
+
+
 
 ### Bellman Equation
 
@@ -135,7 +143,7 @@ v_{\pi}(s) & := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
 &= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
 \end{aligned}$$
 
-아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy $\pi$ 하에 현재 상태 가치(state-value) $v_{\pi}(s)$ 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태 가치 $\gamma v_{\pi}(s')$ 와 다음 보상 $r$의 합을 가중 평균함으로써 구할 수 있다.
+아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy $\pi$ 하에 현재 상태-가치(state-value) $v_{\pi}(s)$ 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태-가치 $\gamma v_{\pi}(s')$ 와 다음 보상 $r$의 합을 가중 평균함으로써 구할 수 있다.
 
 ![HeadImg](https://drive.google.com/uc?id=17ErRNwcyluBH0eRffR-NmGqm-VXYRnor){ class="skipglightbox" width="40%" }
 
@@ -170,7 +178,7 @@ v_{*}(s) & := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
 &= \underset{a}{\max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi_{*}}(s') \rbrack
 \end{aligned}$$
 
-이전의 Bellman backup diagram과 다르게 최적 상태 가치(optimal state-value)를 구하기 위해서 $v_{*}$ 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태 가치를 보상에 대한 가중 평균 하면 되는 것이다. 
+이전의 Bellman backup diagram과 다르게 최적 상태-가치(optimal state-value)를 구하기 위해서 $v_{*}$ 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태-가치를 보상에 대한 가중 평균 하면 되는 것이다. 
 
 ![HeadImg](https://drive.google.com/uc?id=17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r){ class="skipglightbox" width="80%" }
 

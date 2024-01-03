@@ -19,7 +19,7 @@ hide:
 
     일상, 데이터에 관한 생각, 동기부여 등의 이야기를 담은 공간.
 
-    [:octicons-arrow-right-24: Go To Blog](./blog)
+    [:octicons-arrow-right-24: Go To Blog](blog/index.md)
 
 -   :projector:{ .lg .middle } __Project__
 
@@ -27,7 +27,7 @@ hide:
 
     내가 경험한 프로젝트 발자취를 따라 돌아보는 공간.
 
-    [:octicons-arrow-right-24: Go To Project](./project)
+    [:octicons-arrow-right-24: Go To Project](project/index.md)
 
 -   :blue_book:{ .lg .middle } __Study__
 
@@ -35,6 +35,6 @@ hide:
 
     공부한 것을 기록하는 공간.
 
-    [:octicons-arrow-right-24: Go To Study](./study)
+    [:octicons-arrow-right-24: Go To Study](study/index.md)
 
 </div>

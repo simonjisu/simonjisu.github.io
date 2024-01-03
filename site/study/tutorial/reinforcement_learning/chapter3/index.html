@@ -378,8 +378,21 @@
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../nlp/">
+<span class="md-ellipsis">
+    
+  
+    Nlp
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</a>
+</li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_7" type="checkbox"/>
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
 <div class="md-nav__link md-nav__container">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
@@ -391,12 +404,12 @@
     
   </span>
 </a>
-<label class="md-nav__link" for="__nav_3_3_7" id="__nav_3_3_7_label" tabindex="0">
+<label class="md-nav__link" for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
 <span class="md-nav__icon md-icon"></span>
 </label>
 </div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_7_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_7">
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_8">
 <span class="md-nav__icon md-icon"></span>
             
   
@@ -836,13 +849,13 @@
 </nav>
 <h1>3. Finite Markov Decision Processes</h1>
 <blockquote>
-<p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
+<p>데이터사이언스 대학원 강화학습 수업, Deep RL Bootcamp<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 를 듣고 정리한 내용입니다.</p>
 </blockquote>
 <h2 id="markov-decision-processes-mdps">Markov Decision Processes (MDPs)<a class="headerlink" href="#markov-decision-processes-mdps" title="Permanent link">¶</a></h2>
 <blockquote>
-<p>Markov decision process (MDP) is a discrete-time stochastic control process. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>Markov decision process (MDP) is a discrete-time stochastic control process. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
 </blockquote>
-<p>마르코프 결정 프로세스에서 Actions은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.</p>
+<p>마르코프 결정 프로세스에서 행동(Actions)은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.</p>
 <h3 id="agentenvironment-interface">Agent–Environment Interface<a class="headerlink" href="#agentenvironment-interface" title="Permanent link">¶</a></h3>
 <figure>
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt" width="100%">
@@ -923,8 +936,10 @@
 </input></input></input></div>
 </div>
 <h2 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">¶</a></h2>
-<p><strong>Policy</strong>는 주어진 상태 <span class="arithmatex">\(S_t = s\)</span> 에서 가능한 행동 <span class="arithmatex">\(A_t = a\)</span>으로 매핑하는 함수 <span class="arithmatex">\(\pi_t(a \vert s)\)</span>다. 꼭 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다.</p>
+<p><strong>Policy</strong>는 주어진 상태 <span class="arithmatex">\(S_t = s\)</span> 에서 가능한 행동 <span class="arithmatex">\(A_t = a\)</span>으로 매핑하는 함수 <span class="arithmatex">\(\pi_t(a \vert s)\)</span>다. Policy 함수는 항상 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다. </p>
 <div class="arithmatex">\[ \pi_t(a \vert s) = \begin{cases} 1 &amp; \text{where } a=a' \\ 0 &amp; \text{where } a\neq a' \end{cases}\]</div>
+<p>Policy가 확률 함수의 경우 선택된 행동의 실패 확률을 보통 noise라고 한다. 예를 들어, 특정 상태 <span class="arithmatex">\(s\)</span>에서 <span class="arithmatex">\(a, a'\)</span> 두 개의 행동을 선택할 수 있는 경우, <span class="arithmatex">\(\pi_t(a \vert s) = 0.9\)</span> 이면 <span class="arithmatex">\(a\)</span>를 선택할 확률이 90%이고, <span class="arithmatex">\(a'\)</span>를 선택할 확률은 10%이다(noise). </p>
+<p><span class="arithmatex">\(\gamma\)</span>는 할인율으로써 <span class="arithmatex">\(0 \leq \gamma \leq 1\)</span>의 값을 가지며, 돈의 미래가치를 생각하면 이해가 된다. 현재 1만원을 가지고 있으면 지금은 1만원의 가치가 있지만, 내년에는 할인율에 따라 1만원 보다 적은 가치를 가지게 된다<span class="arithmatex">\((10000 \times gamma)\)</span>. </p>
 <p><strong>Value Function</strong>은 <mark class="critic">Policy가 주어졌을 때</mark>, 상태(혹은 상태-행동 쌍)가 얼마나 좋은 지를 평가하는 함수다. 왜 좋은지를 평가해야하고 좋은 평가는 무엇인지는 앞으로 차차 알아가 본다.</p>
 <ul>
 <li>
@@ -944,7 +959,7 @@ v_{\pi}(s) &amp; := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
 &amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \big\lbrack r + \gamma \Bbb{E}_{\pi} \lbrack G_{t+1} \vert S_{t+1} = s' \rbrack \big\rbrack \\
 &amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
 \end{aligned}\]</div>
-<p>아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy <span class="arithmatex">\(\pi\)</span> 하에 현재 상태 가치(state-value) <span class="arithmatex">\(v_{\pi}(s)\)</span> 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태 가치 <span class="arithmatex">\(\gamma v_{\pi}(s')\)</span> 와 다음 보상 <span class="arithmatex">\(r\)</span>의 합을 가중 평균함으로써 구할 수 있다.</p>
+<p>아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy <span class="arithmatex">\(\pi\)</span> 하에 현재 상태-가치(state-value) <span class="arithmatex">\(v_{\pi}(s)\)</span> 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태-가치 <span class="arithmatex">\(\gamma v_{\pi}(s')\)</span> 와 다음 보상 <span class="arithmatex">\(r\)</span>의 합을 가중 평균함으로써 구할 수 있다.</p>
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17ErRNwcyluBH0eRffR-NmGqm-VXYRnor" width="40%"/></p>
 <div class="admonition note">
 <p class="admonition-title">Example: Grid-World</p>
@@ -969,7 +984,7 @@ v_{*}(s) &amp; := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
 &amp;= \underset{a}{\max} \Bbb{E}_{\pi} \lbrack R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_t = s, A_t = a \rbrack \\
 &amp;= \underset{a}{\max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi_{*}}(s') \rbrack
 \end{aligned}\]</div>
-<p>이전의 Bellman backup diagram과 다르게 최적 상태 가치(optimal state-value)를 구하기 위해서 <span class="arithmatex">\(v_{*}\)</span> 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태 가치를 보상에 대한 가중 평균 하면 되는 것이다. </p>
+<p>이전의 Bellman backup diagram과 다르게 최적 상태-가치(optimal state-value)를 구하기 위해서 <span class="arithmatex">\(v_{*}\)</span> 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태-가치를 보상에 대한 가중 평균 하면 되는 것이다. </p>
 <p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r" width="80%"/></p>
 <p>또한 Bellman optimality equation은 <span class="arithmatex">\(v_*\)</span>에 대해 단 하나의 유일한 솔루션을 가진다. </p>
 <div class="admonition note">
@@ -983,10 +998,41 @@ v_{*}(s) &amp; := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://en.wikipedia.org/wiki/Markov_decision_process">Wikipedia - Markove Decision Processes</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://sites.google.com/view/deep-rl-bootcamp/lectures">Deep RL Bootcamp</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://en.wikipedia.org/wiki/Markov_decision_process">Wikipedia - Markove Decision Processes</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
+<form class="md-feedback" hidden="" name="feedback">
+<fieldset>
+<legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+<div class="md-feedback__inner">
+<div class="md-feedback__list">
+<button class="md-feedback__icon md-icon" data-md-value="1" title="This page was helpful" type="submit">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
+</button>
+<button class="md-feedback__icon md-icon" data-md-value="0" title="This page could be improved" type="submit">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
+</button>
+</div>
+<div class="md-feedback__note">
+<div data-md-value="1" hidden="">
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+<div data-md-value="0" hidden="">
+</div>
+</div>
+</div>
+</fieldset>
+</form>
 <!-- Giscus -->
 <h2 id="__comments">Comments</h2>
 <script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
