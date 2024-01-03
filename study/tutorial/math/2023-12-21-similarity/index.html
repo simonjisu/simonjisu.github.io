@@ -5,12 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/CS285_L19/" rel="canonical"/>
+<link href="https://simonjisu.github.io/study/tutorial/math/2023-12-21-similarity/" rel="canonical"/>
 <link href="../" rel="prev"/>
-<link href="../CS285_L20/" rel="next"/>
+<link href="../../mongodb/" rel="next"/>
 <link href="../../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
-<title>CS 285: Lecture 19, Control as Inference - Soopace</title>
+<title>All about similarity - Soopace</title>
 <link href="../../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
 <link href="../../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#optimal-control-as-a-model-of-human-behavior">
+<a class="md-skip" href="#jaccard-similarity">
           Skip to content
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              CS 285: Lecture 19, Control as Inference
+              All about similarity
             
           </span>
 </div>
@@ -352,8 +352,10 @@
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../math/">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_5" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
 <span class="md-ellipsis">
     
   
@@ -362,8 +364,73 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
 </a>
+<label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_3_3_5_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Math
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    All about similarity
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    All about similarity
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#jaccard-similarity">
+<span class="md-ellipsis">
+      
+        Jaccard Similarity
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#levenshtein-distance">
+<span class="md-ellipsis">
+      
+        Levenshtein Distance
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
 <a class="md-nav__link" href="../../mongodb/">
@@ -391,10 +458,8 @@
 <span class="md-nav__icon md-icon"></span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
+<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+<a class="md-nav__link" href="../../reinforcement_learning/">
 <span class="md-ellipsis">
     
   
@@ -403,261 +468,8 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
 <span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_8">
-<span class="md-nav__icon md-icon"></span>
-            
-  
-    Reinforcement learning
-  
-
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
-    
-  
-    CS 285: Lecture 19, Control as Inference
-  
-
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
-    
-  
-    CS 285: Lecture 19, Control as Inference
-  
-
-    
-  </span>
 </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-control-as-a-model-of-human-behavior">
-<span class="md-ellipsis">
-      
-        Optimal control as a Model of Human Behavior
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#control-as-inference">
-<span class="md-ellipsis">
-      
-        Control as Inference
-      
-    </span>
-</a>
-<nav aria-label="Control as Inference" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#backward-messages">
-<span class="md-ellipsis">
-      
-        Backward Messages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policy-computation">
-<span class="md-ellipsis">
-      
-        Policy Computation
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#forward-messages">
-<span class="md-ellipsis">
-      
-        Forward Messages
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#message-intersection">
-<span class="md-ellipsis">
-      
-        Message Intersection
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#control-as-variational-inference">
-<span class="md-ellipsis">
-      
-        Control as Variational Inference
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#algorithms-for-rl-as-inference">
-<span class="md-ellipsis">
-      
-        Algorithms for RL as Inference
-      
-    </span>
-</a>
-<nav aria-label="Algorithms for RL as Inference" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#q-learning-with-soft-optimality">
-<span class="md-ellipsis">
-      
-        Q-Learning with soft optimality
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#benefits-of-soft-optimality">
-<span class="md-ellipsis">
-      
-        Benefits of Soft Optimality
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L20/">
-<span class="md-ellipsis">
-    
-  
-    CS 285: Lecture 20, Inverse Reinforcement Learning
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter1/">
-<span class="md-ellipsis">
-    
-  
-    1. Introduction
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter2/">
-<span class="md-ellipsis">
-    
-  
-    2. Multi-armed Bandits
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter3/">
-<span class="md-ellipsis">
-    
-  
-    3. Finite Markov Decision Processes
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter4/">
-<span class="md-ellipsis">
-    
-  
-    4. Dynamic Programming
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter5/">
-<span class="md-ellipsis">
-    
-  
-    5. Monte Carlo Method
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter6/">
-<span class="md-ellipsis">
-    
-  
-    6. Temporal-Difference Learning
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter7/">
-<span class="md-ellipsis">
-    
-  
-    7. n-step Bootstrapping
-  
-
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter8/">
-<span class="md-ellipsis">
-    
-  
-    8. Planning and Learning with Tabular Methods
-  
-
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -707,102 +519,22 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-control-as-a-model-of-human-behavior">
+<a class="md-nav__link" href="#jaccard-similarity">
 <span class="md-ellipsis">
       
-        Optimal control as a Model of Human Behavior
+        Jaccard Similarity
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#control-as-inference">
+<a class="md-nav__link" href="#levenshtein-distance">
 <span class="md-ellipsis">
       
-        Control as Inference
+        Levenshtein Distance
       
     </span>
 </a>
-<nav aria-label="Control as Inference" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#backward-messages">
-<span class="md-ellipsis">
-      
-        Backward Messages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policy-computation">
-<span class="md-ellipsis">
-      
-        Policy Computation
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#forward-messages">
-<span class="md-ellipsis">
-      
-        Forward Messages
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#message-intersection">
-<span class="md-ellipsis">
-      
-        Message Intersection
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#control-as-variational-inference">
-<span class="md-ellipsis">
-      
-        Control as Variational Inference
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#algorithms-for-rl-as-inference">
-<span class="md-ellipsis">
-      
-        Algorithms for RL as Inference
-      
-    </span>
-</a>
-<nav aria-label="Algorithms for RL as Inference" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#q-learning-with-soft-optimality">
-<span class="md-ellipsis">
-      
-        Q-Learning with soft optimality
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#benefits-of-soft-optimality">
-<span class="md-ellipsis">
-      
-        Benefits of Soft Optimality
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -836,7 +568,7 @@
 <li class="md-path__item">
 <a class="md-path__link" href="../">
 <span class="md-ellipsis">
-    Reinforcement learning
+    Math
   </span>
 </a>
 </li>
@@ -844,162 +576,102 @@
 </nav>
 <article class="md-content__inner md-typeset">
 <nav class="md-tags" hidden="">
-<span class="md-tag">reinforcement learning</span>
-<span class="md-tag">control</span>
+<span class="md-tag">similarity</span>
+<span class="md-tag">jaccard</span>
+<span class="md-tag">cosine</span>
+<span class="md-tag">euclidean</span>
+<span class="md-tag">levenshtein</span>
+<span class="md-tag">hamming</span>
 </nav>
-<h1>CS 285: Lecture 19, Control as Inference</h1>
-<p>영상링크: <a href="https://youtu.be/MzVlYYGtg0M">https://youtu.be/MzVlYYGtg0M</a></p>
-<h2 id="optimal-control-as-a-model-of-human-behavior">Optimal control as a Model of Human Behavior<a class="headerlink" href="#optimal-control-as-a-model-of-human-behavior" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>Optimal control is a mathematical framework for computing control policies that optimize a given objective.</p>
-</blockquote>
-<ul>
-<li><span class="arithmatex">\(r(s_t, a_t)\)</span> 함수를 찾아서 데이터를 설명하려고함. 기본적 세팅은 다음과 같음.</li>
-</ul>
-<div class="arithmatex">\[\begin{aligned} 
-a_1, \dots, a_T &amp;= \underset{a_1, \dots, a_T}{\arg \max} \sum_{t=1}^T r(s_t, a_t) \\
-s_{t+1} &amp;= f(s_t, a_t) \\
-\pi &amp;= \underset{\pi}{\arg \max} \mathbb{E}_{s_{t+1} \sim p(s_{t+1} \vert s_t, a_t), a_t \sim \pi(a_t \vert s_t)} \lbrack r(s_t, a_t) \rbrack \\
-a_t &amp;\sim \pi(a_t \vert s_t) 
-\end{aligned}\]</div>
-<ul>
-<li>하지만 이는 적용하기 쉽지 않음. 우리는 목표에 최적화된 행동을 항상 하지 않음. 같은 목표라도 직진하는 경우도 있고, 멀리 돌아갈 때도 있음(결국에 목적에 도달함). 현 프레임워크에서 이를 설정하거나 설명하기 어려움. 어떤 행동이 최적화된 행동인지에 대한 변수자체가 없음.</li>
-<li>그래서 이를 설명하기 위해 binary 변수 <span class="arithmatex">\(\mathcal{O}\)</span> 도입함. 최적화인 행동일 때 1, 그렇지 아니할 때 0의 값을 가짐. </li>
-</ul>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1Gz6gRWt-SPcNthouYTtUBPCezg_ikEi-" width="100%"/></p>
-<div class="arithmatex">\[\begin{aligned}
-p(\mathcal{O}_{1:T}) &amp;= \exp \big( r(s_t, a_t) \big) \\
-p(\tau \vert \mathcal{O}_{1:T}) &amp;= \dfrac{p(\tau, \mathcal{O}_{1:T})}{p(\mathcal{O}_{1:T})} \\
-&amp;\propto p(\tau) \prod_t \exp \big( r(s_t, a_t) \big)  = p(\tau) \exp \big( \sum_t r(s_t, a_t) \big)
-\end{aligned}\]</div>
-<ul>
-<li>이렇게 함으로써 suboptimal behavior를 모델링 할 수 있고, inference 알고리즘을 적용하여 control과 planning 문제를 해결할 수 있음. 그리고 stochastic behavior가 왜 선호되는지 설명할 수 있음. 이는 exploration과 transfer learning을 아는데 도움이 됨.</li>
-<li>
-<p>그러면 어떻게 inference할까?</p>
-</li>
-<li>
-<p>Backward Messeage 계산: <span class="arithmatex">\(\beta(s_t, a_t) = p(\mathcal{O}_{1:T} \vert s_t, a_t)\)</span></p>
-</li>
-<li>Policy 계산: <span class="arithmatex">\(\pi(a_t \vert s_t, \mathcal{O}_{1:T})\)</span></li>
-<li>Forward Message 계산: <span class="arithmatex">\(\alpha(s_t) = p(s_t \vert \mathcal{O}_{1:t-1})\)</span></li>
-</ul>
-<h2 id="control-as-inference">Control as Inference<a class="headerlink" href="#control-as-inference" title="Permanent link">¶</a></h2>
-<h3 id="backward-messages">Backward Messages<a class="headerlink" href="#backward-messages" title="Permanent link">¶</a></h3>
-<div class="arithmatex">\[\begin{aligned} 
-\beta(s_t, a_t) &amp;= p(\mathcal{O}_{t:T} \vert s_t, a_t) \\
-&amp;= \int p(\mathcal{O}_{t:T}, s_{t+1} \vert s_t, a_t) ds_{t+1} \\
-&amp;= \int p(\mathcal{O}_{t+1:T} \vert s_{t+1}) p(s_{t+1} \vert s_t, a_t) p(\mathcal{O}_t \vert s_t, a_t) ds_{t+1}
-\end{aligned}\]</div>
-<ul>
-<li><span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t)\)</span>는 transition dynamics이고, <span class="arithmatex">\(p(\mathcal{O}_t \vert s_t, a_t)\)</span>는 observation likelihood임.</li>
-<li>그러면 제일 앞에 있는 <span class="arithmatex">\(p(\mathcal{O}_{t+1:T} \vert s_{t+1})\)</span>를 풀어서 쓰면 다음과 같음.</li>
-</ul>
-<div class="arithmatex">\[\begin{aligned}
-p(\mathcal{O}_{t+1:T} \vert s_{t+1}) &amp;= \int p(\mathcal{O}_{1:T} \vert s_{t+1}, a_{t+1}) p(a_{t+1}\vert s_{t+1}) da_{t+1}
-\end{aligned}\]</div>
-<ul>
-<li>여기서 <span class="arithmatex">\(p(\mathcal{O}_{1:T} \vert s_{t+1}, a_{t+1})\)</span> 를 다시 <span class="arithmatex">\(\beta(s_{t+1}, a_{t+1})\)</span>로 바꿔서 쓸수 있음.</li>
-<li>그리고 <span class="arithmatex">\(p(a_{t+1}\vert s_{t+1})\)</span>는 <strong>action prior</strong>이라고 하는데 (policy는 아님) 우선은 uniform distribution으로 가정함. 왜냐면 아무도 어떤 행동을 할지 모르기 때문임. 게다가 수학적으로 해당 항을 지울 수 있음<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</li>
-<li>따라서 Backward message passing은 다음과 같이 진행된다. </li>
-</ul>
-<div class="admonition info">
-<p class="admonition-title">Backward Message Passing</p>
-<div class="arithmatex">\[\begin{aligned}
-\text{for } \ t = T-1, &amp;\dots, 1: \\
-\beta(s_t, a_t) &amp;= p(\mathcal{O}_t \vert s_t, a_t) \Bbb{E}_{s_{t+1} \sim p(s_{t+1} \vert s_t, a_t)} \big\lbrack \beta_{t+1}(s_{t+1}) \big\rbrack\\
-\beta(s_t) &amp;= \Bbb{E}_{a_t \sim p(a_t \vert s_t)} \big\lbrack \beta(s_t, a_t) \big\rbrack\\
-\end{aligned}\]</div>
-</div>
-<ul>
-<li><span class="arithmatex">\(V_t(s_t) = \log \beta(s_t)\)</span>, <span class="arithmatex">\(Q_t(s_t, a_t) = \log \beta(s_t, a_t)\)</span> 라고 재정의 하자. 따라서 <span class="arithmatex">\(V_t(s_t) = \log \int \exp \big( Q_t(s_t, a_t) \big) da_t\)</span>로 쓸 수 있으며, 이는 <strong>soft value function</strong>이라고 함.</li>
-<li><span class="arithmatex">\(Q_t(s_t, a_t)\)</span>가 커짐에 다라서 <span class="arithmatex">\(V_t(s_t)\)</span> 도 커짐. <span class="arithmatex">\(V_t(s_t) \rightarrow \underset{a_t}{\max} Q_(s_t, a_t)\)</span>.</li>
-<li><span class="arithmatex">\(Q_t(s_t, a_t) = r(s_t, a_t) + \log \Bbb{E} \big\lbrack \exp( V_{t+1}(s_{t+1}) ) \big\rbrack\)</span><ul>
-<li>deterministic transition: <span class="arithmatex">\(Q_t(s_t, a_t) = r(s_t, a_t) + V_{t+1}(s_{t+1})\)</span></li>
-<li>sthocastic case는 차후에 다룸</li>
-</ul>
-</li>
-<li>Log domain에서 알고리즘을 다시 쓰면 다음과 같음.</li>
-</ul>
-<div class="admonition info">
-<p class="admonition-title">Backward Message Passing(Log Domain)</p>
-<div class="arithmatex">\[\begin{aligned}
-\text{for } \ t = T-1, &amp;\dots, 1: \\
-Q_t(s_t, a_t) &amp;= r(s_t, a_t) + \log \Bbb{E}\big\lbrack \exp( V_{t+1}(s_{t+1}) ) \big\rbrack \\
-V_t(s_t) &amp;= \log \int \exp \big( Q_t(s_t, a_t) \big) da_t \\
-\end{aligned}\]</div>
-</div>
-<h3 id="policy-computation">Policy Computation<a class="headerlink" href="#policy-computation" title="Permanent link">¶</a></h3>
-<div class="arithmatex">\[\begin{aligned}
-p(a_t \vert s_t, \mathcal{O}_{1:T}) &amp;= \pi(a_t \vert s_t) = p(a \vert s_t, \mathcal{O}_{t:T}) \\
-&amp;= \dfrac{p(a_t, s_t \vert \mathcal{O}_{t:T})}{p(s_t \vert \mathcal{O}_{t:T})} \\
-&amp;= \dfrac{p(a_t, s_t \vert \mathcal{O}_{t:T})p(a_t, s_t) / p(\mathcal{O}_{t:T}) }{p(\mathcal{O}_{t:T} \vert s_t) p(s_t) / p(\mathcal{O}_{t:T}) } \\
-&amp;= \dfrac{p(a_t, s_t \vert \mathcal{O}_{t:T})}{p(\mathcal{O}_{t:T} \vert s_t) } \dfrac{p(a_t, s_t)}{p(s_t)} = \dfrac{\beta_t(s_t, a_t)}{\beta_t(s_t)} p(a_t \vert s_t)
-\end{aligned}\]</div>
-<ul>
-<li><span class="arithmatex">\(p(a_t \vert s_t)\)</span>는 action prior이라 무시하고, policy <span class="arithmatex">\(\pi(a_t \vert s_t) = \dfrac{\beta_t(s_t, a_t)}{\beta_t(s_t)}\)</span>를 얻을 수 있음.</li>
-<li>Log domain에서 <span class="arithmatex">\(\pi(a_t \vert s_t) = \exp \big( Q_t(s_t, a_t) - V_t(s_t) \big) = \exp \big( A_t(s_t, a_t) \big)\)</span> 로 쓸 수 있음.</li>
-<li>Temperature <span class="arithmatex">\(\alpha\)</span> 를 도입하면 <span class="arithmatex">\(\pi(a_t \vert s_t) = \exp \big( \dfrac{1}{\alpha} Q_t(s_t, a_t) - \dfrac{1}{\alpha} V_t(s_t) \big) = \exp \big( \dfrac{1}{\alpha} A_t(s_t, a_t) \big)\)</span></li>
-<li><span class="arithmatex">\(\alpha\)</span> 가 0으로 갈 수록 deterministic policy가 되고 greedy policy에 가까움.</li>
-</ul>
-<h3 id="forward-messages">Forward Messages<a class="headerlink" href="#forward-messages" title="Permanent link">¶</a></h3>
-<div class="arithmatex">\[\begin{aligned}
-\alpha(s_t) &amp;= p(s_t \vert \mathcal{O}_{1:t-1} ) \\
-&amp;= \int p(s_t, s_{t-1}, a_{t-1} \vert \mathcal{O}_{1:t-1}) da_{t-1} ds_{t-1} = \int p(s_t \vert s_{t-1}, a_{t-1}, \mathcal{O}_{1:t-1}) p(a_{t-1} \vert s_{t-1}, \mathcal{O}_{1:t-1}) p(s_{t-1} \vert \mathcal{O}_{1:t-1} ) da_{t-1} ds_{t-1} \\
-&amp;= \int p(s_t \vert s_{t-1}, a_{t-1}) p(a_{t-1} \vert s_{t-1}, \mathcal{O}_{1:t-1}) p(s_{t-1} \vert \mathcal{O}_{1:t-1} ) da_{t-1} ds_{t-1}
-\end{aligned}\]</div>
-<ul>
-<li><span class="arithmatex">\(p(s_t \vert s_{t-1}, a_{t-1}, \mathcal{O}_{1:t-1})\)</span> 에서 <span class="arithmatex">\(\mathcal{O}_{1:t-1}\)</span>는 <span class="arithmatex">\(s_{t-1}\)</span>과 <span class="arithmatex">\(a_{t-1}\)</span>에 의존하지 않으므로 생략 가능.</li>
-<li><span class="arithmatex">\(\alpha_1(s_1) = p(s_1)\)</span> 보통 알고 시작함.</li>
-<li><span class="arithmatex">\(p(s_t \vert \mathcal{O}_{1:T})\)</span> 를 계산하고 싶으면?</li>
-</ul>
-<div class="arithmatex">\[p(s_t \vert \mathcal{O}_{1:T}) = \dfrac{ p(s_t, \mathcal{O}_{1:T}) }{ p(\mathcal{O}_{1:T}) } = \dfrac{p(\mathcal{O}_{t:T} \vert s_t) p(s_t, \mathcal{O}_{1:t-1})}{p(\mathcal{O}_{1:T})} \propto \beta_t(s_t) \alpha_t(s_t) \]</div>
-<h2 id="message-intersection">Message Intersection<a class="headerlink" href="#message-intersection" title="Permanent link">¶</a></h2>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H-xkwcHqXyKbBtFqVwWyLpB2Q_X03P3u" width="100%"/></p>
-<ul>
-<li>예를 들어 그림과 같이 목표지점에 공을 가져다 놓는 Task가 있다.</li>
-<li>Backward message는 목표지점에 도달하기 위한 상태의 확률을 나타내고, Forward message는 처음 상태에서 목표지점에 도달되는 상태를 표현한다(높은 reward 와 함께).</li>
-<li>그리고 두 메시지의 곱은 목표지점에 도달하기 위한 상태의 확률을 나타낸다.</li>
-</ul>
-<h2 id="control-as-variational-inference">Control as Variational Inference<a class="headerlink" href="#control-as-variational-inference" title="Permanent link">¶</a></h2>
-<ul>
-<li>Inference Problem: <span class="arithmatex">\(p(s_{1:T}, a_{1:T} \vert \mathcal{O}_{1:T})\)</span></li>
-<li>Marginalizaing과 conditioning을 통해 목적 policy <span class="arithmatex">\(p(a_t \vert s_t, \mathcal{O}_{1:T})\)</span> 를 계산하고 싶음. "높은 리워드가 주어졌을 때, action probability가 어떻게 되는가?"</li>
-<li><span class="arithmatex">\(q(s_{1:T}, a_{1:T})\)</span> 분포로 <span class="arithmatex">\(p(s_{1:T}, a_{1:T} \vert \mathcal{O}_{1:T})\)</span> 를 근사하면 어떻까(단 dynamics <span class="arithmatex">\(p(s_{t+1} \vert s_t, a_t)\)</span> 하에서)?</li>
-<li><span class="arithmatex">\(x = \mathcal{O}_{1:T}\)</span>, <span class="arithmatex">\(z = (s_{1:T}, a_{1:T})\)</span> 로 두어서 <span class="arithmatex">\(p(z \vert x)\)</span> 를 <span class="arithmatex">\(q(z)\)</span> 로 근사해보자! </li>
-</ul>
-<div class="admonition info">
-<p class="admonition-title">과정<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">1</label><label for="__tabbed_1_2">2</label><label for="__tabbed_1_3">3</label><label for="__tabbed_1_4">4</label></div>
+<h1>All about similarity</h1>
+<p>https://www.youtube.com/playlist?list=PLIUOU7oqGTLhlWpTz4NnuT3FekouIVlqc</p>
+<p>유사도 검색(Similarity Search)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>은 일반적으로 말해서 광범위한 공간에서 주어진 쿼리(query)에 대해 가장 유사한 객체를 찾는 방법론이라고 할 수 있다. 최근 벡터 데이터베이스에서 많이 사용하고 있는 cosine-similarty가 그 예시 중 하나다. (수학적 정의는 차후에 llm-book 시리즈를 다룰때 다루도록 함). 최근에 RAG(Retrieval Augmented Generation)에서도 유사도 검색을 통해서 쿼리와 적합문 문서를 주입시켜서 환각효과(Hallucination)을 줄이는 효과를 거둘 수 있다고 한다. 이 글에서는 다양한 유사도를 소개하며, 어떤 상황에서 어떤 유사도 기법을 사용해야하는지 알아보자. </p>
+<h2 id="jaccard-similarity">Jaccard Similarity<a class="headerlink" href="#jaccard-similarity" title="Permanent link">¶</a></h2>
+<p>자카드(Jaccard) 유사도<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>는 두 집합 사이의 유사도를 측정하는 방법이다. 수식으로 표현하면 다음과 같다.</p>
+<div class="arithmatex">\[J(A, B) = \dfrac{\vert A \cap B \vert}{\vert A \cup B \vert}\]</div>
+<p>자카드 유사도는 두 집합의 교집합을 두 집합의 합집합으로 나눈 값이다. 자카드 유사도는 0과 1사이의 값을 가지며, 1에 가까울수록 유사도가 높다고 볼 수 있다. 자카드 유사도는 집합의 크기가 작을 때 유용하게 사용할 수 있으며 고전적인 방법이다. </p>
+<details class="info">
+<summary>code for Jaccard similarity and Examples</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Jaccard similarity in Python</label><label for="__tabbed_1_2">Examples</label><label for="__tabbed_1_3">Figures</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H0dW_tU8kTzz3jlzowFNJQlQwmZcmai2" width="100%"/></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">jaccard</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">set</span><span class="p">):</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="n">shared</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="n">union</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">shared</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">union</span><span class="p">)</span>
+</code></pre></div>
 </div>
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H3afCl4d1HC5Lk3SUhWv0FupT20t79PK" width="100%"/></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">matplotlib_venn</span> <span class="kn">import</span> <span class="n">venn3</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">sentence1</span> <span class="o">=</span> <span class="s1">'The quick brown fox jumps over the lazy dog'</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">sentence2</span> <span class="o">=</span> <span class="s1">'A fast brown fox leaps over a lazy dog'</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">sentence3</span> <span class="o">=</span> <span class="s1">'The brown cat walks under the busy dog'</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sentence1</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sentence2</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="n">set3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sentence3</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Jaccard similarity for sentences:</span><span class="se">\n</span><span class="s1">s1: </span><span class="si">{</span><span class="n">sentence1</span><span class="si">}</span><span class="se">\n</span><span class="s1">s2: </span><span class="si">{</span><span class="n">sentence2</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'J = </span><span class="si">{</span><span class="n">jaccard</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span><span class="w"> </span><span class="n">set2</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Jaccard similarity for sentences:</span><span class="se">\n</span><span class="s1">s1: </span><span class="si">{</span><span class="n">sentence1</span><span class="si">}</span><span class="se">\n</span><span class="s1">s3: </span><span class="si">{</span><span class="n">sentence3</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'J = </span><span class="si">{</span><span class="n">jaccard</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span><span class="w"> </span><span class="n">set3</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</code></pre></div>
 </div>
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1H4ZVOYG5Jk1gPeI7bqxt3lhyAYHjF9bg" width="100%"/></p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">v</span> <span class="o">=</span> <span class="n">venn3</span><span class="p">([</span><span class="n">set1</span><span class="p">,</span> <span class="n">set2</span><span class="p">,</span> <span class="n">set3</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">'Sentence 1'</span><span class="p">,</span> <span class="s1">'Sentence 2'</span><span class="p">,</span> <span class="s1">'Sentence3'</span><span class="p">))</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># S = s_1 \cup s_2 \cup s_3</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="n">s100</span> <span class="o">=</span> <span class="n">set1</span><span class="o">-</span><span class="n">set2</span><span class="o">-</span><span class="n">set3</span>  <span class="c1"># S \setminus (s_2 \cup s_3)</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">s010</span> <span class="o">=</span> <span class="n">set2</span><span class="o">-</span><span class="n">set1</span><span class="o">-</span><span class="n">set3</span>  <span class="c1"># S \setminus (s_1 \cup s_3)</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">s001</span> <span class="o">=</span> <span class="n">set3</span><span class="o">-</span><span class="n">set1</span><span class="o">-</span><span class="n">set2</span>  <span class="c1"># S \setminus (s_1 \cup s_2)</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="n">s110</span> <span class="o">=</span> <span class="n">set1</span><span class="o">&amp;</span><span class="n">set2</span><span class="o">-</span><span class="n">set3</span>  <span class="c1"># (s_1 \cap s_2) \setminus s_3</span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="n">s101</span> <span class="o">=</span> <span class="n">set1</span><span class="o">&amp;</span><span class="n">set3</span><span class="o">-</span><span class="n">set2</span>  <span class="c1"># (s_1 \cap s_3) \setminus s_2</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">s011</span> <span class="o">=</span> <span class="n">set2</span><span class="o">&amp;</span><span class="n">set3</span><span class="o">-</span><span class="n">set1</span>  <span class="c1"># (s_2 \cap s_3) \setminus s_1</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="n">s111</span> <span class="o">=</span> <span class="n">set1</span><span class="o">&amp;</span><span class="n">set2</span><span class="o">&amp;</span><span class="n">set3</span>  <span class="c1"># s_1 \cap s_2 \cap s_3</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>
+<a href="#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">s_id</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">s100</span><span class="p">,</span> <span class="n">s010</span><span class="p">,</span> <span class="n">s001</span><span class="p">,</span> <span class="n">s110</span><span class="p">,</span> <span class="n">s101</span><span class="p">,</span> <span class="n">s011</span><span class="p">,</span> <span class="n">s111</span><span class="p">],</span> 
+<a href="#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>                <span class="p">[</span><span class="s1">'100'</span><span class="p">,</span> <span class="s1">'010'</span><span class="p">,</span> <span class="s1">'001'</span><span class="p">,</span> <span class="s1">'110'</span><span class="p">,</span> <span class="s1">'101'</span><span class="p">,</span> <span class="s1">'011'</span><span class="p">,</span> <span class="s1">'111'</span><span class="p">]):</span>
+<a href="#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="n">v</span><span class="o">.</span><span class="n">get_label_by_id</span><span class="p">(</span><span class="n">s_id</span><span class="p">)</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))]</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+<a href="#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="n">v</span><span class="o">.</span><span class="n">get_label_by_id</span><span class="p">(</span><span class="n">s_id</span><span class="p">)</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<a href="#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a>
+<a href="#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</input></input></input></div>
+</details>
+<figure>
+<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1ccJurJEKP7i6ZpFSSGaM4CHiTxUmDicD" width="100%">
+</img></p>
+<figcaption>Figure: 각 문장 별 집합 S</figcaption>
+</figure>
+<p>위 예제에서 자카드 유사도를 계산해보자. 전체 집합을 <span class="arithmatex">\(S = s_1 \cup s_2 \cup s_3\)</span>라고 한다.</p>
+<div class="admonition info">
+<p class="admonition-title">Jaccard similarity for sentences</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Sentence 1 and Sentence 2</label><label for="__tabbed_2_2">Sentence 1 and Sentence 3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="arithmatex">\[ J = \dfrac{\vert s_1 \cap s_2 \vert}{\vert s_1 \cup s_2 \vert} = \dfrac{\vert \text{fox, over, lazy, brown, dog} \vert}{\vert \text{quick, jumps, the, } \cdots \text{, fast, leaps, a}\vert} = \dfrac{5}{11} = 0.4545\]</div>
 </div>
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HId1TGidfizjX-fn4EkgQIDubMfyZZKC" width="100%"/></p>
+<div class="arithmatex">\[ J =  \dfrac{\vert s_1 \cap s_3 \vert}{\vert s_1 \cup s_3 \vert} = \dfrac{\vert \text{the, brown, dog} \vert}{\vert \text{quick, jumps, the, }\cdots \text{, under, busy, cat}\vert} = \dfrac{3}{12} = 0.25\]</div>
 </div>
 </div>
-</input></input></input></input></div>
+</input></input></div>
 </div>
-<h2 id="algorithms-for-rl-as-inference">Algorithms for RL as Inference<a class="headerlink" href="#algorithms-for-rl-as-inference" title="Permanent link">¶</a></h2>
-<h3 id="q-learning-with-soft-optimality">Q-Learning with soft optimality<a class="headerlink" href="#q-learning-with-soft-optimality" title="Permanent link">¶</a></h3>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1HJ8Rg5E_JTrVSc3leWtvwCWYStO-ZbBu" width="100%"/></p>
-<h3 id="benefits-of-soft-optimality">Benefits of Soft Optimality<a class="headerlink" href="#benefits-of-soft-optimality" title="Permanent link">¶</a></h3>
-<ul>
-<li>exploration을 향상시키고 entropy collapse를 방지할 수 있음</li>
-<li>policies를 더 쉽게 fine-tuning 할 수 있음</li>
-<li>더 로버스트함. 더 많은 state를 커버하기 때문</li>
-</ul>
+<p>그러나 자카드 유사도는 집합의 특성 때문에 빈도수를 반영하지 못한다. 특히 자연어 처리에서 단어의 빈도수가 곧 그 단어의 중요도를 반영하는 경우(TF-IDF)에는 자카드 유사도가 적합하지 않다.</p>
+<h2 id="levenshtein-distance">Levenshtein Distance<a class="headerlink" href="#levenshtein-distance" title="Permanent link">¶</a></h2>
+<p>tbd</p>
 <div class="footnote">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="https://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-19.pdf">CS 285 L19 - LectureNote</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Similarity_search">Similarity Search</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div>
