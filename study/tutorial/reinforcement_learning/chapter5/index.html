@@ -1,117 +1,209 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter5/">
+      
+      
+        <link rel="prev" href="../chapter4/">
+      
+      
+        <link rel="next" href="../chapter6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24+insiders-4.53.10">
+    
+    
+      
+        <title>5. Monte Carlo Method - Soopace</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.c0d16a3a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
 
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter5/" rel="canonical"/>
-<link href="../chapter4/" rel="prev"/>
-<link href="../chapter6/" rel="next"/>
-<link href="../../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
-<title>5. Monte Carlo Method - Soopace</title>
-<link href="../../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
-<link href="../../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
-<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-            html.glightbox-open { overflow: initial; height: 100%; }
-            .gslide-title { margin-top: 0px; user-select: text; }
-            .gslide-desc { color: #666; user-select: text; }
-            .gslide-image img { background: white; }
-            
-                .gscrollbar-fixer { padding-right: 15px; }
-                .gdesc-inner { font-size: 0.75rem; }
-                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#monte-carlo-method">
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#monte-carlo-method" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-<nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
-<img alt="logo" src="../../../../img/logo/logo.png"/>
-</a>
-<label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
-</label>
-<div class="md-header__title" data-md-component="header-title">
-<div class="md-header__ellipsis">
-<div class="md-header__topic">
-<span class="md-ellipsis">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../../img/logo/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             Soopace
           </span>
-</div>
-<div class="md-header__topic" data-md-component="header-topic">
-<span class="md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               5. Monte Carlo Method
             
           </span>
-</div>
-</div>
-</div>
-<label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-</label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
-</label>
-<nav aria-label="Search" class="md-search__options">
-<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
-</button>
-</nav>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list" role="presentation"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</nav>
-<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
-<div class="md-grid">
-<ul class="md-tabs__list">
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../..">
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
         
   
     
@@ -119,9 +211,18 @@
   About
 
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../../blog/">
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../blog/" class="md-tabs__link">
           
   
     
@@ -129,9 +230,21 @@
   Blog
 
         </a>
-</li>
-<li class="md-tabs__item md-tabs__item--active">
-<a class="md-tabs__link" href="../../../">
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
           
   
     
@@ -139,9 +252,19 @@
   Study
 
         </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../../project/">
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../project/" class="md-tabs__link">
           
   
     
@@ -149,38 +272,74 @@
   Project
 
         </a>
-</li>
-</ul>
-</div>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
 </nav>
+    
+  
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
-<img alt="logo" src="../../../../img/logo/logo.png"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../../img/logo/logo.png" alt="logo">
+
+    </a>
     Soopace
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../..">
-<span class="md-ellipsis">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     About
@@ -188,13 +347,51 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../../blog/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../blog/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Blog
@@ -202,55 +399,63 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_2">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Blog
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../../blog/archive/2020/">
-<span class="md-ellipsis">
-    
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
   
-    Archive
+
+      
+    </li>
   
 
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../../blog/category/lifelog/">
-<span class="md-ellipsis">
+      
+      
+  
+  
     
   
-    Categories
   
-
+  
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../">
-<span class="md-ellipsis">
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Study
@@ -258,24 +463,92 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_3">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Study
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../paper/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../paper/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Paper
@@ -283,14 +556,71 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Tutorial
@@ -298,24 +628,66 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_3">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Tutorial
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../algorithm/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../algorithm/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Algorithm
@@ -323,12 +695,54 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../deeplearning/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../deeplearning/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Deeplearning
@@ -336,12 +750,58 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../gcp/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../gcp/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Gcp
@@ -349,12 +809,56 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../math/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../math/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Math
@@ -362,12 +866,62 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../mongodb/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../mongodb/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Mongodb
@@ -375,12 +929,56 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../nlp/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../nlp/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Nlp
@@ -388,14 +986,77 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_8" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Reinforcement learning
@@ -403,24 +1064,42 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_8">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3_8">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Reinforcement learning
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L19/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS285_L19/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     CS 285: Lecture 19, Control as Inference
@@ -428,11 +1107,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L20/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS285_L20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     CS 285: Lecture 20, Inverse Reinforcement Learning
@@ -440,11 +1134,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter1/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     1. Introduction
@@ -452,11 +1161,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter2/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     2. Multi-armed Bandits
@@ -464,11 +1188,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter3/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     3. Finite Markov Decision Processes
@@ -476,11 +1215,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter4/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     4. Dynamic Programming
@@ -488,12 +1242,33 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
     
   
     5. Monte Carlo Method
@@ -501,10 +1276,16 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
     
   
     5. Monte Carlo Method
@@ -512,139 +1293,194 @@
 
     
   </span>
-</a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-method">
-<span class="md-ellipsis">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-method" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Method
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-prediction">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Prediction
       
     </span>
-</a>
-<nav aria-label="Monte Carlo Prediction" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#first-visit-mc">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Monte Carlo Prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-visit-mc" class="md-nav__link">
+    <span class="md-ellipsis">
       
         First-visit MC
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#every-visit-mc">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#every-visit-mc" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Every-visit MC
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-prediction-of-action-values">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-prediction-of-action-values" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Prediction of Action Values
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-control">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-control" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Control
       
     </span>
-</a>
-<nav aria-label="Monte Carlo Control" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-with-exploring-starts">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Monte Carlo Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monte-carlo-with-exploring-starts" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte carlo with Exploring Starts
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#on-policy-and-off-policy">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#on-policy-and-off-policy" class="md-nav__link">
+    <span class="md-ellipsis">
       
         On-policy and Off-policy
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policy-improvement-guarantees-with-soft-policy">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#policy-improvement-guarantees-with-soft-policy" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Policy Improvement Guarantees with ε-soft Policy
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#off-policy-prediction">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#off-policy-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Off-policy Prediction
       
     </span>
-</a>
-<nav aria-label="Off-policy Prediction" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#importance-sampling">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Off-policy Prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importance-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Importance Sampling
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#off-policy-prediction-using-importance-sampling">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#off-policy-prediction-using-importance-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Off-policy Prediction using Importance sampling
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter6/">
-<span class="md-ellipsis">
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     6. Temporal-Difference Learning
@@ -652,11 +1488,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter7/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     7. n-step Bootstrapping
@@ -664,11 +1515,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter8/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     8. Planning and Learning with Tabular Methods
@@ -676,22 +1542,71 @@
 
     
   </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../../project/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../project/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Project
@@ -699,207 +1614,329 @@
 
     
   </span>
-</a>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Project
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-</ul>
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-method">
-<span class="md-ellipsis">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-method" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Method
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-prediction">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Prediction
       
     </span>
-</a>
-<nav aria-label="Monte Carlo Prediction" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#first-visit-mc">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Monte Carlo Prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-visit-mc" class="md-nav__link">
+    <span class="md-ellipsis">
       
         First-visit MC
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#every-visit-mc">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#every-visit-mc" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Every-visit MC
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-prediction-of-action-values">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-prediction-of-action-values" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Prediction of Action Values
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-control">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#monte-carlo-control" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte Carlo Control
       
     </span>
-</a>
-<nav aria-label="Monte Carlo Control" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#monte-carlo-with-exploring-starts">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Monte Carlo Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monte-carlo-with-exploring-starts" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Monte carlo with Exploring Starts
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#on-policy-and-off-policy">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#on-policy-and-off-policy" class="md-nav__link">
+    <span class="md-ellipsis">
       
         On-policy and Off-policy
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policy-improvement-guarantees-with-soft-policy">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#policy-improvement-guarantees-with-soft-policy" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Policy Improvement Guarantees with ε-soft Policy
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#off-policy-prediction">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#off-policy-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Off-policy Prediction
       
     </span>
-</a>
-<nav aria-label="Off-policy Prediction" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#importance-sampling">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Off-policy Prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importance-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Importance Sampling
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#off-policy-prediction-using-importance-sampling">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#off-policy-prediction-using-importance-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Off-policy Prediction using Importance sampling
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content" data-md-component="content">
-<nav aria-label="Navigation" class="md-path">
-<ol class="md-path__list">
-<li class="md-path__item">
-<a class="md-path__link" href="../../../..">
-<span class="md-ellipsis">
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+  
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
     About
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../../../">
-<span class="md-ellipsis">
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Study
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../../">
-<span class="md-ellipsis">
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Tutorial
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../">
-<span class="md-ellipsis">
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Reinforcement learning
   </span>
-</a>
-</li>
-</ol>
-</nav>
-<article class="md-content__inner md-typeset">
-<nav class="md-tags" hidden="">
-<span class="md-tag">reinforcement learning</span>
-<span class="md-tag">monte carlo</span>
-</nav>
-<h1>5. Monte Carlo Method</h1>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+  
+
+
+  <nav class="md-tags" hidden>
+    
+      
+      
+      
+      
+        <span class="md-tag">monte carlo</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">reinforcement learning</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+  <h1>5. Monte Carlo Method</h1>
+
 <blockquote>
 <p>데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.</p>
 </blockquote>
-<h2 id="monte-carlo-method">Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permanent link">¶</a></h2>
+<h2 id="monte-carlo-method">Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permanent link">&para;</a></h2>
 <p><strong>Monte Carlo</strong> 방법은 여러 곳에서 쓰이는 용어로 전체를 알기 위해 random sampling을 통해 근사해서 추정하는 방법이다. 강화학습에서 어떻게 사용이 되는지 알아본다.</p>
 <p>지금까지는 complete model, 즉, MDP의 dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 완전히 아는 상태를 가정했지만, 현실은 그렇지 않다. 현실에서 우리는 <strong>경험(experience)</strong>으로부터 배운다. 경험이란 상태, 행동, 그리고 보상으로 이루어진 <span class="arithmatex">\(\lbrace s, a, r, s' \rbrace\)</span> 일련의 시퀀스다. </p>
 <p>우선 이번 챕터에서 episodic, undiscounted(<span class="arithmatex">\(\gamma = 1\)</span>), 그리고 episode-by-episode incremental update를 진행한다고 가정해보자. 또한, bandit 알고리즘 처럼 각 state-action pair 별로 평균 수익(average return)을 구한다고 가정한다.</p>
-<h2 id="monte-carlo-prediction">Monte Carlo Prediction<a class="headerlink" href="#monte-carlo-prediction" title="Permanent link">¶</a></h2>
+<h2 id="monte-carlo-prediction">Monte Carlo Prediction<a class="headerlink" href="#monte-carlo-prediction" title="Permanent link">&para;</a></h2>
 <p>Monte Carlo Prediction를 수행하려면 <a href="../chapter4/#policy-evaluation">Policy Evaluation</a>, 즉, 주어진 policy <span class="arithmatex">\(\pi\)</span> 에서 state-value function을 학습하면 된다.</p>
 <p>예를 들어 <span class="arithmatex">\(A, B, T\)</span> 세 개의 state(<span class="arithmatex">\(T\)</span>는 종료)가 존재하고, Agent가 경험한 두 개의 episode가 관찰되었다. </p>
 <table>
@@ -953,18 +1990,18 @@
 <p>Return을 계산하는 방법에 따라 두 개의 알고리즘으로 나뉜다.   </p>
 <div class="admonition info">
 <p class="admonition-title">First-visit MC prediction</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">pseduo code</label><label for="__tabbed_1_2">every-visit 차이</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">pseduo code</label><label for="__tabbed_1_2">every-visit 차이</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18PPPbW18TSVP6lLKpWar-2HMGDt90mCA" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18PPPbW18TSVP6lLKpWar-2HMGDt90mCA" width="100%" /></p>
 </div>
 <div class="tabbed-block">
 <p><a href="https://ai.stackexchange.com/questions/10812/what-is-the-difference-between-first-visit-monte-carlo-and-every-visit-monte-car">StackExchange</a></p>
 </div>
 </div>
-</input></input></div>
 </div>
-<h3 id="first-visit-mc">First-visit MC<a class="headerlink" href="#first-visit-mc" title="Permanent link">¶</a></h3>
+</div>
+<h3 id="first-visit-mc">First-visit MC<a class="headerlink" href="#first-visit-mc" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(\gamma = 1\)</span>, episodic return을 사용해서 계산시(<a href="../chapter3/#reward-hypothesis">3. Finite Markov Decision Processes</a> 참고) A의 가치를 first-visit MC로 계산하는 방법: 각 episode 별로 처음 A라는 state가 등장 했을 때 부터 계산하면 된다. 따라서 다음과 같이 계산된다.</p>
 <div class="arithmatex">\[\begin{aligned} 
 G^{e_1} &amp;= 3 + 2 - 4 + 4 - 3 = 2 \\
@@ -977,7 +2014,7 @@ G^{e_1} &amp;= -4 + 4 - 3 = -3 \\
 G^{e_2} &amp;= 3 - 3 = 0 \\
 V(B) &amp;= \dfrac{G^{e_1} + G^{e_2}}{2} = \dfrac{-3 - 2}{2} = -2.5
 \end{aligned}\]</div>
-<h3 id="every-visit-mc">Every-visit MC<a class="headerlink" href="#every-visit-mc" title="Permanent link">¶</a></h3>
+<h3 id="every-visit-mc">Every-visit MC<a class="headerlink" href="#every-visit-mc" title="Permanent link">&para;</a></h3>
 <p>Every-visit MC로 계산하는 방법은 매번 해당 state가 나올 때 마다 계산 해준다는 뜻이다. episode의 return을 계산시 매번 state가 나올 때 마다 해당 시퀀스를 return 계산에 포함하게 되는데, A의 가치를 예를 들면 다음과 같다.</p>
 <div class="arithmatex">\[\begin{aligned} 
 G^{e_1}_1 &amp;= 3 + 2 - 4 + 4 - 3 = 2 ,\quad G^{e_1}_2 = 2 - 4 + 4 - 3 = -1 \\
@@ -990,11 +2027,11 @@ G^{e_1}_1 &amp;= -4 + 4 - 3 = -3 ,\quad G^{e_1}_2 = -3 \\
 G^{e_2}_1 &amp;= 3 - 3 = 0 ,\quad G^{e_2}_1 = 3 \\
 V(B) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_2}_1 + G^{e_2}}{4} = \dfrac{-3 -3 -2 - 3}{4} = -2.75
 \end{aligned}\]</div>
-<h2 id="monte-carlo-prediction-of-action-values">Monte Carlo Prediction of Action Values<a class="headerlink" href="#monte-carlo-prediction-of-action-values" title="Permanent link">¶</a></h2>
+<h2 id="monte-carlo-prediction-of-action-values">Monte Carlo Prediction of Action Values<a class="headerlink" href="#monte-carlo-prediction-of-action-values" title="Permanent link">&para;</a></h2>
 <p>만약에 model이 불분명하다면(=dynamics를 이용할 수 없다면), state-value function <span class="arithmatex">\(v_\pi(s)\)</span> 대신 action-value function <span class="arithmatex">\(q_\pi(s, a)\)</span>를 사용해야한다. State <span class="arithmatex">\(s\)</span>에서 action <span class="arithmatex">\(a\)</span>를 선택하고 기대 수익을 계산하면 된다.</p>
 <div class="arithmatex">\[q_{\pi}(s, a) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s, A_t = a\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s, A_t = a \Bigg\rbrack\]</div>
 <p>그러나 어떤 state-action 쌍은 한번도 선택되지 않을 수 있는 경우가 생길 수 있다. 따라서 state-action 쌍에 0이 아닌 확률을 부여하여 <strong>탐색(exploration)</strong>할 수 있게 해야한다. 이러한 결과로 policy도 확률적(stochastic)으로 선택하게 된다. </p>
-<h2 id="monte-carlo-control">Monte Carlo Control<a class="headerlink" href="#monte-carlo-control" title="Permanent link">¶</a></h2>
+<h2 id="monte-carlo-control">Monte Carlo Control<a class="headerlink" href="#monte-carlo-control" title="Permanent link">&para;</a></h2>
 <p>기본적으로 <a href="../chapter4/#generalized-policy-iteration">Generalized Policy Iteration(GPI)</a>와 같은 패턴을 가진다. 여기서 <span class="arithmatex">\(E\)</span>는 policy evaluation, <span class="arithmatex">\(I\)</span>는 policy improvement다.</p>
 <div class="arithmatex">\[\pi_0 \xrightarrow[]{E} q_{\pi_0} \xrightarrow[]{I} \pi_1 \xrightarrow[]{E} q_{\pi_1} \cdots \xrightarrow[]{I} \pi_* \xrightarrow[]{E} q_{\pi_*} \]</div>
 <p>그러나 GPI 과 다른점은 (1) 평가시 epidosic 하게 업데이트, (2) <span class="arithmatex">\(v_\pi\)</span> 대신에 <span class="arithmatex">\(q_\pi\)</span>를 사용, 그리고 (3) <span class="arithmatex">\(I\)</span> 과정에서 <span class="arithmatex">\(q(s,a)\)</span>를 이용해 최적의 행동을 선택하여 policy를 선택한다. </p>
@@ -1003,38 +2040,38 @@ V(B) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_2}_1 + G^{e_2}}{4} = \dfrac{-3 -
 <div class="arithmatex">\[\begin{aligned}q_{\pi_k} \big(s, \pi_{k+1}(s) \big) &amp;= q_{\pi_k} \big(s, \underset{a}{\arg \max}\ q_{\pi_k}(s, a) \big) \\
 &amp;= \underset{a}{\max}\ q_{\pi_k}(s, a) \geq q_{\pi_k}\big(s, \pi_k(s)\big) \geq v_{\pi_k}(s)
 \end{aligned}\]</div>
-<h3 id="monte-carlo-with-exploring-starts">Monte carlo with Exploring Starts<a class="headerlink" href="#monte-carlo-with-exploring-starts" title="Permanent link">¶</a></h3>
+<h3 id="monte-carlo-with-exploring-starts">Monte carlo with Exploring Starts<a class="headerlink" href="#monte-carlo-with-exploring-starts" title="Permanent link">&para;</a></h3>
 <div class="admonition info">
 <p class="admonition-title">Monte Carlo ES</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">pseduo code</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">pseduo code</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18hhd4TQyk1o5BAY6ChUvl9Vszub3eWlI" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18hhd4TQyk1o5BAY6ChUvl9Vszub3eWlI" width="100%" /></p>
 </div>
 </div>
-</input></div>
+</div>
 </div>
 <p>Exploring starts는 확률이 0이 상인 state-action 쌍을 고른다는 뜻이다. 그러나 해당 알고리즘은 실용적이지 않다. 모든 state-action 쌍마다 모든 return을 유지하고 중복적으로 평균을 계산하기 때문이다. </p>
-<h3 id="on-policy-and-off-policy">On-policy and Off-policy<a class="headerlink" href="#on-policy-and-off-policy" title="Permanent link">¶</a></h3>
+<h3 id="on-policy-and-off-policy">On-policy and Off-policy<a class="headerlink" href="#on-policy-and-off-policy" title="Permanent link">&para;</a></h3>
 <p><strong>On-policy</strong> 방법은 의사 결정에 사용되는 policy를 평가하거나 개선하려고 시도한다. 즉, 업데이트 하려는 policy와 최종 의사결정에 사용되는 policy(action 선택)가 같다고 보면 된다. <strong>Off-policy</strong> 방법은 데이터 생성에 사용되는 것과 다른 정책을 평가하거나 개선한다. 이 개념은 차후에 behavior policy와 target policy 연결지어서 설명된다.</p>
 <p>보통 on-policy 방법에서 policy 는 soft한 성격을 듸고 있다. 즉, 모든 state <span class="arithmatex">\(s \in \mathcal{S}\)</span> 와 action <span class="arithmatex">\(a \in \mathcal{A}\)</span>에 대해서 <span class="arithmatex">\(\pi(a \vert s) &gt; 0\)</span> 이며, 점진적으로 deterministic optimal policy에 다가간다는 뜻이다. 예로 <span class="arithmatex">\(\epsilon\)</span>-greedy policy를 들 수가 있다.</p>
 <div class="arithmatex">\[\begin{cases}
 \dfrac{\epsilon}{\vert \mathcal{A}(s) \vert} &amp; \text{non-greedy action} \\
 1 - \epsilon + \dfrac{\epsilon}{\vert \mathcal{A}(s) \vert} &amp; \text{greedy action}
 \end{cases}\]</div>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18mpw3St6NI0TP9vBLgG6E1lIE62vQsBE" width="65%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18mpw3St6NI0TP9vBLgG6E1lIE62vQsBE" width="65%" /></p>
 <p>이러니저러니해도 on-policy MC control 는 GPI의 한 종류다. Exploring starts 이라는 가정 없이는 policy를 개선 시킬 수 없는데 왜냐면 non-greedy actions의 선택을 방지 해주기 때문이다. 다행이 GPI는 policy가 greedy policy로 향하게 끔만 하면되지 강제로 greedy policy가 되어야 한다는 필요 조건이 없다. 어떠한 <span class="arithmatex">\(\epsilon\)</span>-soft policy <span class="arithmatex">\(\pi\)</span>에 대해서 <span class="arithmatex">\(\epsilon\)</span>-greedy policy에 관한 <span class="arithmatex">\(q_\pi\)</span>는 <span class="arithmatex">\(\pi\)</span> 보다 항상 좋다는 것을 보장한다.</p>
 <div class="admonition info">
 <p class="admonition-title">On-policy first-visit MC control <span class="arithmatex">\(\epsilon\)</span>-soft policies</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">pseduo code</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">pseduo code</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18mZ2An-k0x9p-t29lxpgyvUWwUukEsIP" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18mZ2An-k0x9p-t29lxpgyvUWwUukEsIP" width="100%" /></p>
 </div>
 </div>
-</input></div>
 </div>
-<h3 id="policy-improvement-guarantees-with-soft-policy">Policy Improvement Guarantees with ε-soft Policy<a class="headerlink" href="#policy-improvement-guarantees-with-soft-policy" title="Permanent link">¶</a></h3>
+</div>
+<h3 id="policy-improvement-guarantees-with-soft-policy">Policy Improvement Guarantees with ε-soft Policy<a class="headerlink" href="#policy-improvement-guarantees-with-soft-policy" title="Permanent link">&para;</a></h3>
 <p>왜 보장되는지 살펴보자. <span class="arithmatex">\(\epsilon\)</span>-greedy policy인 <span class="arithmatex">\(\pi'(a \vert s)\)</span>가 있다.</p>
 <ul>
 <li>Greedy: <span class="arithmatex">\(1 - \epsilon + \dfrac{\epsilon}{\vert \mathcal{A}(s)\vert}\)</span> 확률로 <span class="arithmatex">\(A=\underset{a}{\arg \max}\ q_\pi(s, a)\)</span> 선택</li>
@@ -1047,19 +2084,19 @@ V(B) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_2}_1 + G^{e_2}}{4} = \dfrac{-3 -
 &amp;= \sum_a \pi(a \vert s) q_\pi(s, a)  = v_\pi(s), \quad \forall s \in \mathcal{S}
 \end{aligned}\]</div>
 <p>즉, <a href="../chapter4/#policy-improvement">policy improvement theorem</a>에 의해서 action-value가 state-value보다 같거나 높기 때문에 <span class="arithmatex">\(\pi'\)</span>는 <span class="arithmatex">\(\pi\)</span>보다 좋은 policy이며, action-value function을 최대화 하는 policy가 결국에 좋은 policy를 선택하는 것과 같게 된다. 그림으로 개념을 표현하면 다음과 같다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18n6jlc2x6iGZwMiPuFVX_wcD2Ta3alzp" width="65%"/></p>
-<h2 id="off-policy-prediction">Off-policy Prediction<a class="headerlink" href="#off-policy-prediction" title="Permanent link">¶</a></h2>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18n6jlc2x6iGZwMiPuFVX_wcD2Ta3alzp" width="65%" /></p>
+<h2 id="off-policy-prediction">Off-policy Prediction<a class="headerlink" href="#off-policy-prediction" title="Permanent link">&para;</a></h2>
 <p><strong>Off-policy</strong>는 <ins class="critic">target</ins> policy <span class="arithmatex">\(\pi(a\vert s)\)</span> 를 평가 혹은 개선하는데 다른 <ins class="critic">behavior</ins> policy <span class="arithmatex">\(b(a\vert s)\)</span>가 생성하는 데이터를 바탕으로 진행한다는 점에서 On-policy와 다르다. 즉, target policy는 학습되고 최적화의 대상이라면, behavior policy는 환경과 상호작용한다. 사실 On-policy는 Off-policy의 특별한 케이스다 <span class="arithmatex">\(\pi(a \vert s) = b(a \vert s)\)</span>.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18rD0i1KAgszxddFRTHOi8AQEXFy1z-OQ" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18rD0i1KAgszxddFRTHOi8AQEXFy1z-OQ" width="100%" /></p>
 <p>Grid-World 예를 들자면, 그림과 같다. 우리의 목적은 behavior policy로 target policy <span class="arithmatex">\(\pi\)</span>의 value function <span class="arithmatex">\(v_\pi\)</span>을 학습하고자 한다. 조건으로 모든 action <span class="arithmatex">\(a \in \mathcal{A}(s), \pi(a \vert s) &gt; 0\)</span> 에 대해서 <span class="arithmatex">\(b(a \vert s) &gt; 0\)</span>이어야 한다.</p>
-<h3 id="importance-sampling">Importance Sampling<a class="headerlink" href="#importance-sampling" title="Permanent link">¶</a></h3>
+<h3 id="importance-sampling">Importance Sampling<a class="headerlink" href="#importance-sampling" title="Permanent link">&para;</a></h3>
 <p><strong>Importance Sampling</strong>은 behavior policy로부터 <span class="arithmatex">\(v_\pi\)</span>를 학습시킬 수 있는 방법 중 하나다. Behavior policy로부터 random sampling을 한 후에 <ins class="critic">중요도 가중치(importance weight)</ins> <span class="arithmatex">\(\rho\)</span>를 사용하여 분포를 조정한다(=policy control). Random variable <span class="arithmatex">\(X \backsim b\)</span>이 있고, <span class="arithmatex">\(\Bbb{E}_\pi \lbrack X \rbrack\)</span>가 목적인 상황에서 <span class="arithmatex">\(\rho\)</span>를 도출 할 수 있다.</p>
 <div class="arithmatex">\[\begin{aligned} 
 \Bbb{E}_\pi \lbrack X \rbrack &amp;= \sum_{x\in \mathcal{X}} \pi(x) \cdot x = \sum_{x\in \mathcal{X}} \dfrac{b(x)}{b(x)}\pi(x) \cdot x = \sum_{x\in \mathcal{X}} \dfrac{\pi(x)}{b(x)} b(x) \cdot x \\
 &amp; := \sum_{x\in \mathcal{X}} \rho(x) b(x) \cdot x = \Bbb{E}_b\lbrack \rho(X)X \rbrack \\
 &amp;\approx \dfrac{1}{n} \sum_{i=1}^n \rho(x_i) x_i \quad \text{with } x_i \backsim b
 \end{aligned}\]</div>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18v3YCtLF3cJ9jidOjiQ1L-y6EdME9TrC" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18v3YCtLF3cJ9jidOjiQ1L-y6EdME9TrC" width="100%" /></p>
 <p>예를 들어, 확률이 균일한 파란 주사위와 균일하지 않은 빨간 주사위가 있다. 우리의 목적은 파란색 주사위를 굴려서 빨간색 주사위의 기댓값을 알려고한다. 3번 굴렸을 때 R.V. 의 realization은 다음과 같다.</p>
 <ol>
 <li><span class="arithmatex">\(X_1^{blue} = 1, \pi(1)=0.7, b(1)=0.167\)</span></li>
@@ -1068,14 +2105,14 @@ V(B) &amp;= \dfrac{G^{e_1}_1 + G^{e_1}_2 + G^{e_2}_1 + G^{e_2}}{4} = \dfrac{-3 -
 </ol>
 <p>따라서 기댓값은 다음과 같이 계산할 수 있다.</p>
 <div class="arithmatex">\[\Bbb{E}_\pi\lbrack X\rbrack \approx \dfrac{1}{n}\sum_{i=1}^n \rho(x_i) x_i = \dfrac{1}{3}\big( (1\times \dfrac{0.7}{0.167}) + (2\times \dfrac{0.1}{0.167}) + (1\times \dfrac{0.7}{0.167})\big) = 3.2\]</div>
-<h3 id="off-policy-prediction-using-importance-sampling">Off-policy Prediction using Importance sampling<a class="headerlink" href="#off-policy-prediction-using-importance-sampling" title="Permanent link">¶</a></h3>
+<h3 id="off-policy-prediction-using-importance-sampling">Off-policy Prediction using Importance sampling<a class="headerlink" href="#off-policy-prediction-using-importance-sampling" title="Permanent link">&para;</a></h3>
 <p>Policy <span class="arithmatex">\(\pi\)</span> 하에서 어떤 trajectory(어떤 시나리오 시퀀스)의 likelihood와 importance weight <span class="arithmatex">\(\rho\)</span>는 다음과 같다.</p>
 <div class="arithmatex">\[\begin{aligned}
 Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \rbrace = \prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1}\vert S_k, A_k) \\
 \rho_{t:T-1} = \dfrac{\prod_{k=t}^{T-1}\pi(A_k \vert S_k) \cdot p(S_{k+1}\vert S_k, A_k)}{\prod_{k=t}^{T-1}b(A_k \vert S_k) \cdot p(S_{k+1} \vert S_k, A_k)} = \prod_{k=t}^{T-1}\dfrac{\pi(A_k \vert S_k)}{b(A_k \vert S_k)} 
 \end{aligned}\]</div>
 <p>그리고 value function는 두 가지 방법으로 계산 할 수 있다.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio"><input id="__tabbed_4_2" name="__tabbed_4" type="radio"><div class="tabbed-labels"><label for="__tabbed_4_1">ordinary</label><label for="__tabbed_4_2">weighted</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">ordinary</label><label for="__tabbed_4_2">weighted</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="arithmatex">\[V(S) = \dfrac{\sum_{t\in \mathcal{J}(s)} \rho_{t:T(t)-1} G_t}{\vert \mathcal{J}(s) \vert}\]</div>
@@ -1084,54 +2121,100 @@ Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \r
 <div class="arithmatex">\[V(S) = \dfrac{\sum_{t\in \mathcal{J}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t\in \mathcal{J}(s)} \rho_{t:T(t)-1}}\]</div>
 </div>
 </div>
-</input></input></div>
+</div>
 <div class="admonition info">
 <p class="admonition-title">Off-policy MC prediction and control</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio"><input id="__tabbed_5_2" name="__tabbed_5" type="radio"><div class="tabbed-labels"><label for="__tabbed_5_1">Off-policy MC prediction (policy evaluation)</label><label for="__tabbed_5_2">Off-policy MC control</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Off-policy MC prediction (policy evaluation)</label><label for="__tabbed_5_2">Off-policy MC control</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18y-Ddxcy20MULt0ualdtc6iZby6A5WWo" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18y-Ddxcy20MULt0ualdtc6iZby6A5WWo" width="100%" /></p>
 </div>
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=18zGTpS0DVK7Jphd_4QwVmRwRgYtL8lka" width="100%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/18zGTpS0DVK7Jphd_4QwVmRwRgYtL8lka" width="100%" /></p>
 </div>
 </div>
-</input></input></div>
 </div>
-<form class="md-feedback" hidden="" name="feedback">
-<fieldset>
-<legend class="md-feedback__title">
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
         Was this page helpful?
       </legend>
-<div class="md-feedback__inner">
-<div class="md-feedback__list">
-<button class="md-feedback__icon md-icon" data-md-value="1" title="This page was helpful" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="0" title="This page could be improved" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
-</button>
-</div>
-<div class="md-feedback__note">
-<div data-md-value="1" hidden="">
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
               
               
                 
               
               Thanks for your feedback!
             </div>
-<div data-md-value="0" hidden="">
-</div>
-</div>
-</div>
-</fieldset>
-</form>
-<!-- Giscus -->
-<h2 id="__comments">Comments</h2>
-<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
-</script>
-<!-- Synchronize Giscus theme with palette -->
-<script>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+  <script src="https://giscus.app/client.js"
+        data-repo="simonjisu/comments_bot"
+        data-repo-id="R_kgDOHRhxjQ"
+        data-category="General"
+        data-category-id="DIC_kwDOHRhxjc4CQSuI"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
     var giscus = document.querySelector("script[src*=giscus]")
 
     /* Set palette on initial load */
@@ -1159,42 +2242,74 @@ Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \r
       })
     })
   </script>
-</article>
-</div>
+
+              </article>
+            </div>
+          
+          
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-</div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
-            Back to top
-          </button>
-</main>
-<footer class="md-footer">
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-copyright">
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs Insiders
     </a>
+  
 </div>
-<div class="md-social">
-<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-</a>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<div class="md-dialog" data-md-component="dialog">
-<div class="md-dialog__inner md-typeset"></div>
-</div>
-<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../../assets/javascripts/bundle.65061dd4.min.js"></script>
-<script src="../../../../javascripts/mathjax.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.1e90e0fb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.e3055991.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>
