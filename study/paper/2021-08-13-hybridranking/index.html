@@ -1631,12 +1631,12 @@ P(c_i \in \mathcal{S}_q \vert q) &amp;= \text{sigmoid}(w_{sc} \cdot h_{\text{[CL
 2. 각 Task에 해당하는 모델의 출력들은 독립적으로 예측한 것이다. 따라서 말이 안되는 조합을 생성할 수 도 있다. string-type의 칼럼에 aggregation operator, greater-than이라는 condition operator를 예측하는 등을 예로 들 수 있다. 이런 케이스들은 가능성을 원천적으로 제거해야한다.</p>
 <p>이러한 이슈를 해결하기 위해 Wang et al. 2018<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> 에서는 Execution-guided decoding(EG)를 제안했다. 이 논문에서는 SQL 쿼리문 생성시, 만약 데이터베이스 엔진이 런타임 에러가 나거나 빈 출력을 반환 시, 수정을 해주는 아이디어를 제안했다.</p>
 <p>Execution Guided Decoding 알고리즘은 다음과 같다.</p>
-<p><a class="glightbox" href="https://drive.google.com/uc?export=view&amp;id=1NJelQlAmhTJdr62nH40QwTDul3kkUMY5" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure1" height="90%" src="https://drive.google.com/uc?export=view&amp;id=1NJelQlAmhTJdr62nH40QwTDul3kkUMY5" /></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1NJelQlAmhTJdr62nH40QwTDul3kkUMY5" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure1" height="90%" src="https://lh3.googleusercontent.com/d/1NJelQlAmhTJdr62nH40QwTDul3kkUMY5" /></a></p>
 <h2 id="4-experiment">4. Experiment<a class="headerlink" href="#4-experiment" title="Permanent link">&para;</a></h2>
 <p>Logical form accuracy를 봤을 때, WikiSQL 데이터 세트에서 우수함을 보인다.</p>
-<p><a class="glightbox" href="https://drive.google.com/uc?export=view&amp;id=1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table1" src="https://drive.google.com/uc?export=view&amp;id=1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN" width="100%" /></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table1" src="https://lh3.googleusercontent.com/d/1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN" width="100%" /></a></p>
 <p>Execution accuracy에서 볼 수 있듯이, HydraNet은 generalization에서도 더 우수함을 보였다.</p>
-<p><a class="glightbox" href="https://drive.google.com/uc?export=view&amp;id=1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table2" src="https://drive.google.com/uc?export=view&amp;id=1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp" width="100%" /></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table2" src="https://lh3.googleusercontent.com/d/1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp" width="100%" /></a></p>
 <div class="footnote">
 <hr />
 <ol>
