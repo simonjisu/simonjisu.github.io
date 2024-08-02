@@ -22,7 +22,7 @@ tags:
 ### Agent–Environment Interface
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt){ class="skipglightbox" width="100%" }
   <figcaption>Agent-Environment Interface</figcaption>
 </figure>
 
@@ -68,7 +68,7 @@ MDP dynamics $p(s', r \vert s, a)$를 사용하여 다른 항들을 계산 할 �
 
         $$r(s, a, s') := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrack = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}$$
 
-![HeadImg](https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O){ class="skipglightbox" width="50%" }
+![HeadImg](https://lh3.googleusercontent.com/d/170sHrxs6vihx29lfFRt-fOvek9VSSJ6O){ class="skipglightbox" width="50%" }
 
 이 그림은 세 개의 State $\mathcal{S} = \lbrace s_0, s_1, s_3 \rbrace$, 두 개의 행동 $\mathcal{A} = \lbrace a_0, a_1 \rbrace$ 이 존재한다. 또한, $+5$와 $-1$을 제외하고 나머지는 모두 $0$의 보상을 가진다. 몇 가지 예제로 MDP를 이해해보자.
 
@@ -104,7 +104,7 @@ Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 **�
 
     === "Episodic + Continuning"
 
-        ![HeadImg](https://drive.google.com/uc?id=175964pau-XWCIuiz7u4DJItFDrf-sEGJ){ class="skipglightbox" width="50%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/175964pau-XWCIuiz7u4DJItFDrf-sEGJ){ class="skipglightbox" width="50%" }
 
         이러한 모형을 absorbing state라고 한다. $T = \infty$ 혹은 $\gamma = 1$
 
@@ -145,13 +145,13 @@ v_{\pi}(s) & := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
 
 아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy $\pi$ 하에 현재 상태-가치(state-value) $v_{\pi}(s)$ 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태-가치 $\gamma v_{\pi}(s')$ 와 다음 보상 $r$의 합을 가중 평균함으로써 구할 수 있다.
 
-![HeadImg](https://drive.google.com/uc?id=17ErRNwcyluBH0eRffR-NmGqm-VXYRnor){ class="skipglightbox" width="40%" }
+![HeadImg](https://lh3.googleusercontent.com/d/17ErRNwcyluBH0eRffR-NmGqm-VXYRnor){ class="skipglightbox" width="40%" }
 
 !!! note "Example: Grid-World"
 
     아래의 좌측 그림 처럼 지도가 있는데, 네 개의 행동 $\mathcal{A} = \lbrace N, S, E, W \rbrace$을 취할 수 있다. 그리고 웜홀이 있어서 $A$ 에서 $A'$로 전송하는 웜홀을 타면 $+10$, $B$ 에서 $B'$로가는 웜홀을 타면 $+5$, 그리고 지도 밖을 벗어나면 $-1$를 받는 보상 상황이 주어졌다. 여기서 각각의 grid(네모칸)은 state라고 할 수 있다. 따라서, state transition은 결정적이다. 우측 그림은 state value를 구한 것이다. 우측 그림에서 볼 수 있듯이 A와 B grid(state)에서 높은 value를 갖는다.
 
-    ![HeadImg](https://drive.google.com/uc?id=1779PnyTHiERWiXWWAChWpukv5ujz1g5f){ class="skipglightbox" width="80%" }
+    ![HeadImg](https://lh3.googleusercontent.com/d/1779PnyTHiERWiXWWAChWpukv5ujz1g5f){ class="skipglightbox" width="80%" }
 
 ### Optimal Policies and Optimal Value Functions
 
@@ -180,7 +180,7 @@ v_{*}(s) & := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
 
 이전의 Bellman backup diagram과 다르게 최적 상태-가치(optimal state-value)를 구하기 위해서 $v_{*}$ 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태-가치를 보상에 대한 가중 평균 하면 되는 것이다. 
 
-![HeadImg](https://drive.google.com/uc?id=17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r){ class="skipglightbox" width="80%" }
+![HeadImg](https://lh3.googleusercontent.com/d/17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r){ class="skipglightbox" width="80%" }
 
 또한 Bellman optimality equation은 $v_*$에 대해 단 하나의 유일한 솔루션을 가진다. 
 
@@ -188,7 +188,7 @@ v_{*}(s) & := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
 
     중간의 그림이 optimal state-value 이고 우측은 optimal policy다. 각 state에서 여러 optimal policy를 가질 수 있지만, optimal state-value는 단 하나다. 예를 들어, 좌표 `(4, 0)`에서는 N으로 이동하던 E로 이동하던 모두 최적의 $v_{*}$를 얻을 수 있다.
 
-    ![HeadImg](https://drive.google.com/uc?id=17HM0n2h1sWSan32R-2zD3xkHXnoCrD9Z){ class="skipglightbox" width="80%" }
+    ![HeadImg](https://lh3.googleusercontent.com/d/17HM0n2h1sWSan32R-2zD3xkHXnoCrD9Z){ class="skipglightbox" width="80%" }
 
 ### ETC
 

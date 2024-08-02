@@ -1,117 +1,209 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://simonjisu.github.io/study/paper/2020-12-31-xaitutorial/">
+      
+      
+        <link rel="prev" href="../2020-07-23-casm/">
+      
+      
+        <link rel="next" href="../2021-04-12-spider/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24+insiders-4.53.10">
+    
+    
+      
+        <title>Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI - Soopace</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c0d16a3a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
 
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/paper/2020-12-31-xaitutorial/" rel="canonical"/>
-<link href="../2020-07-23-casm/" rel="prev"/>
-<link href="../2021-04-12-spider/" rel="next"/>
-<link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
-<title>Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI - Soopace</title>
-<link href="../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
-<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-            html.glightbox-open { overflow: initial; height: 100%; }
-            .gslide-title { margin-top: 0px; user-select: text; }
-            .gslide-desc { color: #666; user-select: text; }
-            .gslide-image img { background: white; }
-            
-                .gscrollbar-fixer { padding-right: 15px; }
-                .gdesc-inner { font-size: 0.75rem; }
-                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai">
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-<nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
-</a>
-<label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
-</label>
-<div class="md-header__title" data-md-component="header-title">
-<div class="md-header__ellipsis">
-<div class="md-header__topic">
-<span class="md-ellipsis">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../img/logo/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             Soopace
           </span>
-</div>
-<div class="md-header__topic" data-md-component="header-topic">
-<span class="md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
             
           </span>
-</div>
-</div>
-</div>
-<label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-</label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
-</label>
-<nav aria-label="Search" class="md-search__options">
-<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
-</button>
-</nav>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list" role="presentation"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</nav>
-<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
-<div class="md-grid">
-<ul class="md-tabs__list">
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../..">
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -119,9 +211,18 @@
   About
 
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../blog/">
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
           
   
     
@@ -129,9 +230,21 @@
   Blog
 
         </a>
-</li>
-<li class="md-tabs__item md-tabs__item--active">
-<a class="md-tabs__link" href="../../">
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -139,9 +252,19 @@
   Study
 
         </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../project/">
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
           
   
     
@@ -149,38 +272,74 @@
   Project
 
         </a>
-</li>
-</ul>
-</div>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
 </nav>
+    
+  
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../img/logo/logo.png" alt="logo">
+
+    </a>
     Soopace
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../..">
-<span class="md-ellipsis">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     About
@@ -188,13 +347,51 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../blog/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../blog/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Blog
@@ -202,55 +399,63 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_2">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Blog
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/archive/2020/">
-<span class="md-ellipsis">
-    
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
   
-    Archive
+
+      
+    </li>
   
 
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/category/lifelog/">
-<span class="md-ellipsis">
+      
+      
+  
+  
     
   
-    Categories
   
-
+  
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
-<span class="md-ellipsis">
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Study
@@ -258,26 +463,95 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_3">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Study
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Paper
@@ -285,24 +559,42 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_2">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Paper
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2017-08-04-E2EMN/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2017-08-04-E2EMN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     End-to-End Memory Network
@@ -310,11 +602,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2018-04-04-nsmcbidreclstmselfattn/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-04-04-nsmcbidreclstmselfattn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     A Structured Self-Attentive Sentence Embedding
@@ -322,11 +629,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2019-08-22-neuralnetworklm/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-08-22-neuralnetworklm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     A Neural Probabilistic Language Model
@@ -334,11 +656,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2019-09-18-introxai/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-09-18-introxai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Explaining Explanations: An Overview of Interpretability of Machine Learning
@@ -346,11 +683,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-01-14-attentionisallyouneed/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-01-14-attentionisallyouneed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Attention Is All You Need
@@ -358,11 +710,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-03-12-deepinsidecnn/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-03-12-deepinsidecnn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
@@ -370,11 +737,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-07-19-maskpredict/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-19-maskpredict/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Mask-Predict: Parallel Decoding of Conditional Masked Language Models
@@ -382,11 +764,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-07-23-casm/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-23-casm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Classifier-agnostic saliency map extraction
@@ -394,12 +791,35 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
     
   
     Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
@@ -407,11 +827,27 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-04-12-spider/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-04-12-spider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task
@@ -419,11 +855,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-04-20-featurevisualization/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-04-20-featurevisualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Feature Visualization
@@ -431,11 +882,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-05-14-bridge/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-05-14-bridge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Bridging Textual and Tabular Data for Cross-Domain Text-to-SQL Semantic Parsing
@@ -443,11 +909,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-08-13-hybridranking/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-08-13-hybridranking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Hybrid Ranking Network for Text-to-SQL
@@ -455,11 +936,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-11-21-nbdt/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-11-21-nbdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     NBDT: Neural-Backed Decision Trees
@@ -467,14 +963,70 @@
 
     
   </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../tutorial/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../tutorial/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Tutorial
@@ -482,17 +1034,61 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../project/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../project/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Project
@@ -500,67 +1096,154 @@
 
     
   </span>
-</a>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Project
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-</ul>
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-</nav>
-</div>
-</div>
-</div>
-<div class="md-content" data-md-component="content">
-<nav aria-label="Navigation" class="md-path">
-<ol class="md-path__list">
-<li class="md-path__item">
-<a class="md-path__link" href="../../..">
-<span class="md-ellipsis">
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+  
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
     About
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../../">
-<span class="md-ellipsis">
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Study
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../">
-<span class="md-ellipsis">
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Paper
   </span>
-</a>
-</li>
-</ol>
-</nav>
-<article class="md-content__inner md-typeset">
-<nav class="md-tags" hidden="">
-<span class="md-tag">Survey Paper</span>
-<span class="md-tag">XAI</span>
-<span class="md-tag">Explainable AI</span>
-</nav>
-<h1 id="explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai">Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI<a class="headerlink" href="#explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai" title="Permanent link">¶</a></h1>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+  
+
+
+  <nav class="md-tags" hidden>
+    
+      
+      
+      
+      
+        <span class="md-tag">Explainable AI</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">Survey Paper</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">XAI</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai">Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI<a class="headerlink" href="#explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai" title="Permanent link">&para;</a></h1>
 <p>Paper Link: <a href="https://arxiv.org/abs/1910.10045">https://arxiv.org/abs/1910.10045</a></p>
 <p>XAI에 대한 전반적인 소개를 정리한 논문이 나와서 차근 차근 요약 정리해보려고 한다(무려 115페이지, reference만 6페이지). 약간의 번역 어투와 생략된 것도 있으니 영어 원문을 참고하길 바란다.</p>
 <ol>
@@ -572,7 +1255,7 @@
 <li>Toward responsible AI: Principles of artificial intelligence, fairness, privacy and data fusion</li>
 <li>Conclusions and outlook</li>
 </ol>
-<h1 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">¶</a></h1>
+<h1 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h1>
 <p>[expand]summary:영어원문 👈 </p>
 <p>Artificial Intelligence (AI) lies at the core of many activity sectors that have embraced new information technologies [1]. While the roots of AI trace back to several decades ago, there is a clear consensus on the paramount importance featured nowadays by intelligent machines endowed with learning, reasoning and adaptation capabilities. It is by virtue of these capabilities that AI methods are achieving unprecedented levels of performance when learning to solve increasingly complex computational tasks, making them pivotal for the future development of the human society [2]. The sophistication of AI-powered systems has lately increased to such an extent that almost no human intervention is required for their design and deployment. When decisions derived from such systems ultimately affect humans’ lives (as in e.g. medicine, law or defense), there is an emerging need for understanding how such decisions are furnished by AI methods [3].</p>
 <p>[/expand]</p>
@@ -641,8 +1324,8 @@
 <li>Section 6: "책임감 있는 인공지능" 개념에 대한 설명</li>
 <li>Section 7: 사회에 영향을 미칠 가능성이 있는 연구 영역인 만큼, ML 기술을 채택한 사람들을 커뮤니티를 참여시키는 목표로 결론을 내리고자 한다.</li>
 </ul>
-<h1 id="explainable-artificial-intelligence-xai-2">Explainable Artificial Intelligence (XAI) - 2<a class="headerlink" href="#explainable-artificial-intelligence-xai-2" title="Permanent link">¶</a></h1>
-<h1 id="explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai_1">Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI<a class="headerlink" href="#explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai_1" title="Permanent link">¶</a></h1>
+<h1 id="explainable-artificial-intelligence-xai-2">Explainable Artificial Intelligence (XAI) - 2<a class="headerlink" href="#explainable-artificial-intelligence-xai-2" title="Permanent link">&para;</a></h1>
+<h1 id="explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai_1">Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI<a class="headerlink" href="#explainable-artificial-intelligence-xai-concepts-taxonomies-opportunities-and-challenges-toward-responsible-ai_1" title="Permanent link">&para;</a></h1>
 <p>Paper Link: <a href="https://arxiv.org/abs/1910.10045">https://arxiv.org/abs/1910.10045</a></p>
 <p>XAI에 대한 전반적인 소개를 정리한 논문이 나와서 차근 차근 요약 정리해보려고 한다(무려 115페이지, reference만 6페이지). 약간의 번역 어투와 생략된 것도 있으니 영어 원문을 참고하길 바란다.</p>
 <ol>
@@ -654,7 +1337,7 @@
 <li>Toward responsible AI: Principles of artificial intelligence, fairness, privacy and data fusion</li>
 <li>Conclusions and outlook</li>
 </ol>
-<h1 id="2-explainability-what-why-what-for-and-how">2. Explainability: What, Why, What For and How?<a class="headerlink" href="#2-explainability-what-why-what-for-and-how" title="Permanent link">¶</a></h1>
+<h1 id="2-explainability-what-why-what-for-and-how">2. Explainability: What, Why, What For and How?<a class="headerlink" href="#2-explainability-what-why-what-for-and-how" title="Permanent link">&para;</a></h1>
 <p>[expand]summary:영어원문 👈 </p>
 <p>Before proceeding with our literature study, it is convenient to first establish a common point of understanding on what the term explainability stands for in the context of AI and, more specifically, ML. This is indeed the purpose of this section, namely, to pause at the numerous definitions that have been done in regards to this concept (what?), to argue why explainability is an important issue in AI and ML (why? what for?) and to introduce the general classification of XAI approaches that will drive the literature study thereafter (how?).</p>
 <p>[/expand]</p>
@@ -664,8 +1347,8 @@
 <li>Why? What for? 왜 설명가능성이 AI와 ML에서 중요한 이슈인지</li>
 <li>How? 이후 연구할 XAI 접근 방식의 일반적인 분류방식들 소개</li>
 </ul>
-<hr/>
-<h2 id="21-terminology-clarification">2.1 Terminology Clarification<a class="headerlink" href="#21-terminology-clarification" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="21-terminology-clarification">2.1 Terminology Clarification<a class="headerlink" href="#21-terminology-clarification" title="Permanent link">&para;</a></h2>
 <p>[expand]summary:영어원문 👈 </p>
 <p>One of the issues that hinders the establishment of common grounds is the interchangeable misuse of interpretability and explainability in the literature. There are notable differences among these concepts. To begin with, interpretability refers to a passive characteristic of a model referring to the level at which a given model makes sense for a human observer. This feature is also expressed as transparency. By contrast, explainability can be viewed as an active characteristic of a model, denoting any action or procedure taken by a model with the intent of clarifying or detailing its internal functions.</p>
 <p>To summarize the most commonly used nomenclature, in this section we clarify the distinction and similarities among terms often used in the ethical AI and XAI communities.</p>
@@ -681,10 +1364,10 @@
 <p><span style="color:#e25252">요약:</span> 공통의 이해점 확립을 방해하는 요소중 하나는 <strong>설명가능성(explainability)</strong>과 <strong>해석가능성(interpretability)</strong>용어의 혼용이다. 이 둘의 개념읜 차이점이 있다. 결론부터 말하자면</p>
 <ul>
 <li>
-<p><strong>해석가능성(Interpretability):</strong> 모델이 인간에게 맞춰서 설명하는 <u>모델의 수동적 특성</u>, 투명성(transparency)과 같은 말</p>
+<p><strong>해석가능성(Interpretability):</strong> 모델이 인간에게 맞춰서 설명하는 <U>모델의 수동적 특성</U>, 투명성(transparency)과 같은 말</p>
 </li>
 <li>
-<p><strong>설명가능성(Explainability):</strong> 모델의 내부 기능을 명확히 하거나 자세히 설명할 목적으로, 수행된 모든 행동 또는 절차를 나타내는 <u>모델의 능동적 특성</u></p>
+<p><strong>설명가능성(Explainability):</strong> 모델의 내부 기능을 명확히 하거나 자세히 설명할 목적으로, 수행된 모든 행동 또는 절차를 나타내는 <U>모델의 능동적 특성</U></p>
 </li>
 </ul>
 <p>가장 일반적으로 사용되는 명명법을 이야기하고자 ethical AI 및 XAI 커뮤니티에서 자주 사용되는 용어 간의 구별과 그 유사성을 명확히한다.</p>
@@ -713,17 +1396,17 @@
 <p><span style="color:#e25252">요약:</span> 위의 모든 정의에서 이해가능성(understandability)은 XAI에서 가장 필수적인 개념이다. 투명성(transparency)과 해석가능성(interpretability)은 모두 이 개념과 강하게 연관되어 있다. 투명성(transparency)은 인간에게는 이해가능해야 하고, 모델 스스로는 이해할 수 있는 특성이지만, 이해가능성(interpretability)은 모델의 결정을 인간이 얼만큼 이해가능한지 측정한다. </p>
 <p>또한 포괄적 이해가능성(comprehensibility)은 <strong>청중</strong>(audience, <span style="color:#aaa">[주] 설명을 듣는 사람</span>)이 얼만큼 모델에 포함된 지식을 이해하는 지를 측정한다는 점에서 이해가능성(understandability)과 연결된다. </p>
 <p>대체로, 이해가능성(understandability)은 "모델"과 "인간"의 이해가능성으로 나눌 수 있다. 모델 이용자의 인지능력 및 추구목표는 모델의 명료성과 포괄적 이해가능성이 함께 고려되어야 하기 때문에, Section 2.2에서는 XAI개념을 정의할 때, <strong>청중</strong><span style="color:#aaa">([주] 모델을 사용하는 인간)</span>의 개념을 먼저 이야기하려고 한다. 이해가능성은 XAI의 초석이 되는 청중의 개념을 만드는 역할을 한다.</p>
-<hr/>
-<h2 id="22-what">2.2 What?<a class="headerlink" href="#22-what" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="22-what">2.2 What?<a class="headerlink" href="#22-what" title="Permanent link">&para;</a></h2>
 <p>[expand]summary:영어원문 👈 </p>
 <p>Although it might be considered to be beyond the scope of this paper, it is worth noting the discussion held around general theories of explanation in the realm of philosophy [23]. Many proposals have been done in this regard, suggesting the need for a general, unified theory that approximates the structure and intent of an explanation. However, nobody has stood the critique when presenting such a general theory. For the time being, the most agreed-upon thought blends together different approaches to explanation drawn from diverse knowledge disciplines. A similar problem is found when addressing interpretability in AI. It appears from the literature that there is not yet a common point of understanding on what interpretability or explainability are. However, many contributions claim the achievement of interpretable models and techniques that empower explainability.</p>
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> 철학의 영역에서 설명(explanation)에 대해 토의에 주목할 필요가 있다<a href="https://scholar.google.com/scholar_lookup?title=General%20theories%20of%20explanation%3A%20buyer%20beware&amp;publication_year=2013&amp;author=J.%20D%C3%ADez&amp;author=K.%20Khalifa&amp;author=B.%20Leuridan">[23]</a>. 왜냐면 일반적이고 통일된 설명 이론의 구조와 의도를 근사하게나마 제시했기 때문이다. 그렇지만 튼튼한 이론은 아니였다. 그래서 그동안 다양한 지식 분야에서 도출된 설명에 대한 접근 박싱을 혼합한 정의를 사용했다. AI에서 해석가능성(interpretability)을 다룰 때도 비슷한 문제가 발견됐다. 해석가능성(interpretability)이나 설명가능성(explainability)의 공통점을 찾지 못했으나, 많은 연구자들은 해석가능한 모델의 생성과 모델 설명력을 강화했다는 연구성과를 주장해왔다.</p>
 <p>[expand]summary:영어원문 👈 </p>
 <p>To shed some light on this lack of consensus, it might be interesting to place the reference starting point at the definition of the term Explainable Artificial Intelligence (XAI) given by D. Gunning in [7]:
-<br/>
+<br>
 'XAI will create a suite of machine learning techniques that enables human users to understand, appropriately trust, and effectively manage the emerging generation of artificially intelligent partners.'
-<br/>
+<br>
 This definition brings together two concepts (understanding and trust) that need to be addressed in advance. However, it misses to consider other purposes motivating the need for interpretable AI models, such as causality, transferability, informativeness, fairness and confidence [5], [24], [25], [26]. We will later delve into these topics, mentioning them here as a supporting example of the incompleteness of the above definition.</p>
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> 부족한 공감대를 어느 정도 형성하기 위해서 D. Gunning이 제시한 Explainable Artificial Intelligence(XAI) 용어의 정의를 기준점으로 시작할 수 있을 것 같다. <a href="https://scholar.google.com/scholar?q=Explainable%20artificial%20intelligence">[7]</a></p>
@@ -757,17 +1440,17 @@ This definition brings together two concepts (understanding and trust) that need
 XAI 방법들의 퀄리티를 평가하기 위한 일반적인 측정지표의 도출은 향후 몇 년간 과제로 남아있다. 이를 Section 5에서 논의 할 것이다.</p>
 <p>[expand]summary:영어원문 👈 </p>
 <p>Explainability is linked to post-hoc explainability since it covers the techniques used to convert a non-interpretable model into a explainable one. In the remaining of this manuscript, explainability will be considered as the main design objective, since it represents a broader concept. A model can be explained, but the interpretability of the model is something that comes from the design of the model itself. Bearing these observations in mind, explainable AI can be defined as follows:
-<br/>
+<br>
 'Given an audience, an explainable Artificial Intelligence is one that produces details or reasons to make its functioning clear or easy to understand.'
-<br/>
+<br>
 This definition is posed here as a first contribution of the present overview, implicitly assumes that the ease of understanding and clarity targeted by XAI techniques for the model at hand reverts on different application purposes, such as a better trustworthiness of the model’s output by the audience.</p>
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> 설명가능성(explainability)는 해석이 불가능한 모델을 가능케한다는 점에서 사후(post-hoc) 설명성과 연관이 있다. 이 후의 논문에서는 더 넓은 의미인 설명가능성을 주요 목표로 생각할 것이다. 그러나 모델의 해석가능성(interpretability)은 모델 자체 설계에서 비롯된다. 이러한 생각을 염두해두고, explainable AI는 다음과 같이 정의할 수 있다.</p>
 <blockquote>
 <p><strong>설명 가능한 인공지능(explainable Artificial Intelligence)은 청중에게 자신의 기능을 명백하게 혹은 이해하기 쉬운 세부사항/이유를 생산하는 인공지능을 말한다.</strong></p>
 </blockquote>
-<hr/>
-<h2 id="23-why">2.3 Why?<a class="headerlink" href="#23-why" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="23-why">2.3 Why?<a class="headerlink" href="#23-why" title="Permanent link">&para;</a></h2>
 <p>[expand]summary:영어원문 👈 </p>
 <p>As stated in the introduction, explainability is one of the main barriers AI is facing nowadays in regards to its practical implementation. The inability to explain or to fully understand the reasons by which state-of-the-art ML algorithms perform as well as they do, is a problem that find its roots in two different causes, which are conceptually illustrated in Fig. 2.</p>
 <p>[/expand]</p>
@@ -779,12 +1462,12 @@ This definition is posed here as a first contribution of the present overview, i
 <p><span style="color:#e25252">요약:</span> 의심할 여지 없이, 첫 번째 원인은 연구 커뮤니티와 사업 부문 사이의 격차로 인해 은행, 금융, 보안, 건강 등 전통적으로 프로세스의 디지털 전환에서 뒤처진 분야에서 최신 ML 모델의 완전한 보급에 장애가 되고 있다. 일반적으로 이 문제는 엄격하게 규제되는 부문에서 발생하며 자산의 위험을 초래할 수 있는 기법의 시행을 일부 꺼린다.</p>
 <p>[expand]summary:영어원문 👈 </p>
 <p>The second axis is that of knowledge. AI has helped research across the world with the task of inferring relations that were far beyond the human cognitive reach. Every field dealing with huge amounts of reliable data has largely benefited from the adoption of AI and ML techniques. However, we are entering an era in which results and performance metrics are the only interest shown up in research studies. Although for certain disciplines this might be the fair case, science and society are far from being concerned just by performance. The search for understanding is what opens the door for further model improvement and its practical utility.
-<br/>
+<br>
 The following section develops these ideas further by analyzing the goals motivating the search for explainable AI models.</p>
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> 두번째는 지식을 추구하는 측면이다. AI는 인간의 인지 범위를 벗어난 관계를 추론하는 연구를 도왔다. 막대한 양의 데이터를 다루는 모든 분야는 AI와 ML 기술을 도입함으로서 큰 혜택을 입었다. 그러나 연구 성과 지표에만 관심을 가지는 시대가 접어들 면서 이는 문제가 된다. 성과 지표로만 과학과 사회를 이야기 하기에는 올바르지 않기 때문이다. 이해를 연구한다는 것은 모델을 개선시키고 그 유용성을 증진시키는 일이다.</p>
-<hr/>
-<h2 id="24-what-for">2.4 What for?<a class="headerlink" href="#24-what-for" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="24-what-for">2.4 What for?<a class="headerlink" href="#24-what-for" title="Permanent link">&para;</a></h2>
 <p>[expand]summary:영어원문 👈 </p>
 <p>The research activity around XAI has so far exposed different goals to draw from the achievement of an explainable model. Almost none of the papers reviewed completely agrees in the goals required to describe what an explainable model should compel. However, all these different goals might help discriminate the purpose for which a given exercise of ML explainability is performed. Unfortunately, scarce contributions have attempted to define such goals from a conceptual perspective [5], [13], [24], [30]. We now synthesize and enumerate definitions for these XAI goals, so as to settle a first classification criteria for the full suit of papers covered in this review:</p>
 <p>[/expand]</p>
@@ -900,8 +1583,8 @@ The following section develops these ideas further by analyzing the goals motiva
 </tbody>
 </table>
 <p><code>표 1</code> 설명가능성에 도달하기 위해 검토된 문헌에서 추구된 목표들과 그들의 주요 목표 청중들.</p>
-<hr/>
-<h2 id="25-how">2.5 How?<a class="headerlink" href="#25-how" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="25-how">2.5 How?<a class="headerlink" href="#25-how" title="Permanent link">&para;</a></h2>
 <p>[expand]summary:영어원문 👈 </p>
 <p>The literature makes a clear distinction among models that are interpretable by design, and those that can be explained by means of external XAI techniques. This duality could also be regarded as the difference between interpretable models and model interpretability techniques; a more widely accepted classification is that of transparent models and post-hoc explainability. This same duality also appears in the paper presented in [17] in which the distinction its authors make refers to the methods to solve the transparent box design problem against the problem of explaining the black-box problem. This work, further extends the distinction made among transparent models including the different levels of transparency considered.</p>
 <p>[/expand]</p>
@@ -910,7 +1593,7 @@ The following section develops these ideas further by analyzing the goals motiva
 <p>Within transparency, three levels are contemplated: algorithmic transparency, decomposability and simulatability Among post-hoc techniques we may distinguish among text explanations, visualizations, local explanations, explanations by example, explanations by simplification and feature relevance. In this context, there is a broader distinction proposed by [24] discerning between 1) opaque systems, where the mappings from input to output are invisible to the user; 2) interpretable systems, in which users can mathematically analyze the mappings; and 3) comprehensible systems, in which the models should output symbols or rules along with their specific output to aid in the understanding process of the rationale behind the mappings being made. This last classification criterion could be considered included within the one proposed earlier, hence this paper will attempt at following the more specific one.</p>
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> 투명성(transparency)은 알고리즘 투명성(algorithmic transparency), 분해가능성(decomposability) 그리고 시뮬레이션성(simulatability) <span style="color:#aaa">([주] 시스템 혹은 프로세스의 시뮬레이션 능력, the capacity of a system or process to be simulated, 아직 어떤 느낌이 안온다.)</span>순으로 3 가지 단계를 고려해야한다. 사후 분석(post-hoc) 기법은 텍스트 설명, 시각화, 국지적 설명, 예시 설명, 단순화 및 피처중요도등 방법과 구별되어야 한다. 이러한 맥락에서 더 광범위한 구별법이 <a href="https://scholar.google.com/scholar?q=D.%20Doran,%20S.%20Schulz,%20T.R.%20Besold,%20What%20does%20explainable%20AI%20really%20mean%20a%20new%20conceptualization%20of%20perspectives,%202017.">[24]</a>에서 제시 되었다. 1) 입력에서 출력까지의 매핑이 사용자에게 보이지 않는 불투명한(opaque) 시스템 2) 사용자가 수학적으로 매핑을 분석할 수 있는 해석 가능한(interpretable) 시스템 3) 모델이 결정한 매핑의 이유를 사람이 이해 가능하게 출력하는 포괄적 이해 가능한(comprehensible) 시스템</p>
-<h3 id="251-levels-of-transparency-in-machine-learning-models">2.5.1. Levels of transparency in machine learning models<a class="headerlink" href="#251-levels-of-transparency-in-machine-learning-models" title="Permanent link">¶</a></h3>
+<h3 id="251-levels-of-transparency-in-machine-learning-models">2.5.1. Levels of transparency in machine learning models<a class="headerlink" href="#251-levels-of-transparency-in-machine-learning-models" title="Permanent link">&para;</a></h3>
 <p>[expand]summary:영어원문 👈 </p>
 <p>Transparent models convey some degree of interpretability by themselves. Models belonging to this category can be also approached in terms of the domain in which they are interpretable, namely, algorithmic transparency, decomposability and simulatability. As we elaborate next in connection to Fig. 3, each of these classes contains its predecessors, e.g. a simulatable model is at the same time a model that is decomposable and algorithmically transparent:</p>
 <p>[/expand]</p>
@@ -936,10 +1619,10 @@ The following section develops these ideas further by analyzing the goals motiva
 <p>{% include image.html id="1iZXqf9hnwcu-N9If2_R4WWF5RinPIhPX" desc="Fig 3. 다양한 단계의 투명성" width="100%" height="auto" %}</p>
 <p><span style="color:#e25252">요약:</span> 다양한 단계의 투명성을 설명해두었다. 머신러닝 모델은 <span class="arithmatex">\(M_{\varphi}\)</span>, 그에 해당하는 파라미터는 <span class="arithmatex">\(\varphi\)</span> 로 표기했다. (a) 시뮬레이션성 (b) 분해가능성 (c) 알고리즘적 투명성. 각 예제는 일반적인 손실값 가정을 고려하지 않은 선에서, 모델이 설명 대상에 따라서 얼마나 달라지는지를 보여준다.</p>
 <p><span style="color:#aaa"> [주] 이 파트가 제일 이해하기 어려웠는데, (a) 같은 경우 입력 데이터는 잘 몰라도, 내부의 구조를 그대로 재현 가능하면 만족하는 것 같고, (b) 의 경우 사람이 각 입력 피처까지 이해할 수 있어야 한다. (c)의 경우 사람이 전체 데이터의 특성까지 파악하고 이에 대한 규칙을 이해해야 한다라고 이해했다. </span></p>
-<h3 id="252-post-hoc-explainability-techniques-for-machine-learning-models">2.5.2. Post-hoc explainability techniques for machine learning models<a class="headerlink" href="#252-post-hoc-explainability-techniques-for-machine-learning-models" title="Permanent link">¶</a></h3>
+<h3 id="252-post-hoc-explainability-techniques-for-machine-learning-models">2.5.2. Post-hoc explainability techniques for machine learning models<a class="headerlink" href="#252-post-hoc-explainability-techniques-for-machine-learning-models" title="Permanent link">&para;</a></h3>
 <p>[expand]summary:영어원문 👈 </p>
 <p>Post-hoc explainability targets models that are not readily interpretable by design by resorting to diverse means to enhance their interpretability, such as text explanations, visual explanations, local explanations, explanations by example, explanations by simplification and feature relevance explanations techniques. Each of these techniques covers one of the most common ways humans explain systems and processes by themselves.
-<br/>
+<br>
 Further along this river, actual techniques, or better put, actual group of techniques are specified to ease the future work of any researcher that intends to look up for an specific technique that suits its knowledge. Not ending there, the classification also includes the type of data in which the techniques has been applied. Note that many techniques might be suitable for many different types of data, although the categorization only considers the type used by the authors that proposed such technique. Overall, post-hoc explainability techniques are divided first by the intention of the author (explanation technique e.g. Explanation by simplification), then, by the method utilized (actual technique e.g. sensitivity analysis) and finally by the type of data in which it was applied (e.g. images).</p>
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> <strong>사후 설명가능성(post-hoc explainability)</strong>은 쉽게 해석할 수 없는 모델을 위해 고안된 방법이다. 텍스트, 시각화, 부분, 예시, 단순화 그리고 피처 연관 설명 등 방법들이 있다. </p>
@@ -985,7 +1668,7 @@ Further along this river, actual techniques, or better put, actual group of tech
 <p>[/expand]</p>
 <p><span style="color:#e25252">요약:</span> 위 분류를 Fig 4로 표현했으며, 표 2에서도 정리했다. </p>
 <p>{% include image.html id="1CDEwm6jcM8SKvE3YT21n9HlTTPq2Orol" desc="Fig 4. 사후 설명가능성 방법에 대한 컨셉 다이어그램" width="100%" height="auto" %}</p>
-<hr/>
+<hr />
 <p>| | Transparent ML Models | Transparent ML Models |Transparent ML Models | Post-hoc analysis | 
 | Model | Simulatability | Decomposability | Algorithmic Transparency | Post-hoc analysis | 
 | --- | --- | --- | --- | --- |
@@ -1001,40 +1684,86 @@ Further along this river, actual techniques, or better put, actual group of tech
 | Convolutional Neural Network | ✗ | ✗ | ✗ | 필요: 모델 단순화, 피처 연관 설명 혹은 시각화 설명 |
 | Recurrent Neural Network | ✗ | ✗ | ✗ | 필요: 피처 연관 설명 |</p>
 <p><code>표 2</code> 설명가능성 수준에 따른 ML 모델의 분류에 대한 전체적인 그림.</p>
-<form class="md-feedback" hidden="" name="feedback">
-<fieldset>
-<legend class="md-feedback__title">
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
         Was this page helpful?
       </legend>
-<div class="md-feedback__inner">
-<div class="md-feedback__list">
-<button class="md-feedback__icon md-icon" data-md-value="1" title="This page was helpful" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="0" title="This page could be improved" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
-</button>
-</div>
-<div class="md-feedback__note">
-<div data-md-value="1" hidden="">
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
               
               
                 
               
               Thanks for your feedback!
             </div>
-<div data-md-value="0" hidden="">
-</div>
-</div>
-</div>
-</fieldset>
-</form>
-<!-- Giscus -->
-<h2 id="__comments">Comments</h2>
-<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
-</script>
-<!-- Synchronize Giscus theme with palette -->
-<script>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+  <script src="https://giscus.app/client.js"
+        data-repo="simonjisu/comments_bot"
+        data-repo-id="R_kgDOHRhxjQ"
+        data-category="General"
+        data-category-id="DIC_kwDOHRhxjc4CQSuI"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
     var giscus = document.querySelector("script[src*=giscus]")
 
     /* Set palette on initial load */
@@ -1062,42 +1791,74 @@ Further along this river, actual techniques, or better put, actual group of tech
       })
     })
   </script>
-</article>
-</div>
+
+              </article>
+            </div>
+          
+          
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-</div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
-            Back to top
-          </button>
-</main>
-<footer class="md-footer">
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-copyright">
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs Insiders
     </a>
+  
 </div>
-<div class="md-social">
-<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-</a>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<div class="md-dialog" data-md-component="dialog">
-<div class="md-dialog__inner md-typeset"></div>
-</div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.65061dd4.min.js"></script>
-<script src="../../../javascripts/mathjax.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.1e90e0fb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e3055991.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

@@ -35,7 +35,7 @@ Planning과 Learning의 차이점은 학습에 사용되는 경험 종류다. Pl
 
     === "pseudo code"
     
-        ![HeadImg](https://drive.google.com/uc?id=1B5ouTXjMSO0A2wJxkFeHP2UPL67MYe-E){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1B5ouTXjMSO0A2wJxkFeHP2UPL67MYe-E){ class="skipglightbox" width="100%" }
 
         * 2번에서 보통 real experience를 쓰지만, sample method가 사용되었다.
 
@@ -43,7 +43,7 @@ Planning과 Learning의 차이점은 학습에 사용되는 경험 종류다. Pl
 
 |Dyna |General Dyna| 
 |:-:|:-:|
-| ![HeadImg](https://drive.google.com/uc?id=1BHRiar1J0oJMe0ZrHF9pKFO54I_7jPPp){ class="skipglightbox" width="100%" } | ![HeadImg](https://drive.google.com/uc?id=1BMxCdEq2dTAnaD6dOgg1JwLWVJjSE0Qi){ class="skipglightbox" width="100%" } |
+| ![HeadImg](https://lh3.googleusercontent.com/d/1BHRiar1J0oJMe0ZrHF9pKFO54I_7jPPp){ class="skipglightbox" width="100%" } | ![HeadImg](https://lh3.googleusercontent.com/d/1BMxCdEq2dTAnaD6dOgg1JwLWVJjSE0Qi){ class="skipglightbox" width="100%" } |
 
 **Dyna-Q**는 online planning agent의 주요 functions을 포함하는 간단한 아키텍쳐다. Online 상황에서 planning, acting, learning을 결합한 방법이다. 
 
@@ -58,14 +58,14 @@ Planning과 Learning의 차이점은 학습에 사용되는 경험 종류다. Pl
 
     === "pseudo code"
     
-        ![HeadImg](https://drive.google.com/uc?id=1BOyzRDso-Lw8HrBjBIlxIhbH0YJL1Pb4){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1BOyzRDso-Lw8HrBjBIlxIhbH0YJL1Pb4){ class="skipglightbox" width="100%" }
 
         * 여기서 (e) 와 (f) 과정이 없으면 one-step tabular Q-learning과 동일하다.
 
 
 !!! note "Dyna Maze"
 
-    ![HeadImg](https://drive.google.com/uc?id=1BXGoERyTg6R1Q1YURb2rVxhCXFRIowd7){ class="skipglightbox" width="100%" }
+    ![HeadImg](https://lh3.googleusercontent.com/d/1BXGoERyTg6R1Q1YURb2rVxhCXFRIowd7){ class="skipglightbox" width="100%" }
 
     미로 문제에서 Dyna-Q를 적용한 결과다. Dyna-Q는 planning을 통해 더 많은 경험을 얻어서 더 빠르게 optimal policy를 찾을 수 있다.
 
@@ -73,7 +73,7 @@ Planning과 Learning의 차이점은 학습에 사용되는 경험 종류다. Pl
     * Actions = 상, 하, 좌, 우
     * Reward = $G$에 도착시 $+1$, 나머지는 $0$.
 
-    ![HeadImg](https://drive.google.com/uc?id=1BXQ7GQ__7ov2V_7RAP48kf6RRMRUOCfc){ class="skipglightbox" width="100%" }
+    ![HeadImg](https://lh3.googleusercontent.com/d/1BXQ7GQ__7ov2V_7RAP48kf6RRMRUOCfc){ class="skipglightbox" width="100%" }
 
     위 그림은 두번째 episode에서 Planning 유무에 다른 policy 차이를 보여준다. Planning의 유무에 따라서 optimal policy를 찾는 속도가 달라진다.
     
@@ -85,13 +85,13 @@ Model이 항상 옳은 것은 아니다. 예를 들어, (1) 환경이 stochastic
 
     === "Blocking Maze" 
 
-        ![HeadImg](https://drive.google.com/uc?id=1BZ_NWxjrRoukE0kaZ1X7vKl3OgksSsAO){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1BZ_NWxjrRoukE0kaZ1X7vKl3OgksSsAO){ class="skipglightbox" width="80%" }
 
         간단한 미로이지만 1000 time steps 이후에 장벽으로 생긴 블록이 오른쪽으로 한칸 이동한다. 처음에 최적의 경로는 오른쪽으로 탐색하는 것이고 블록이 옮겨지면 왼쪽으로 찾는 것이 최적의 경로다. 
 
     === "Shortcut Maze" 
 
-        ![HeadImg](https://drive.google.com/uc?id=1BgPlwrHxWAv-Eni7UvGx0qO2Nrpk9tf3){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1BgPlwrHxWAv-Eni7UvGx0qO2Nrpk9tf3){ class="skipglightbox" width="80%" }
 
         간단한 미로이지만 3000 time steps 이후에 장벽의 오른쪽이 뚫리며 숏컷이 생긴다. 처음에 최적의 경로는 왼쪽으로  탐색하는 것이고 블록이 사라지면 오른쪽으로 찾는 것이 최적의 경로다. 그러나 Dyna-Q는 블록이 사라지고 나서 최적의 경로를 찾지 못하고 이전의 경로에 만족하는 모습을 보인다(cumulateive reward의 기울기가 급격하게 상승하지 않는다). Exploration-exploitation trade-off가 존재한다.
 
@@ -116,13 +116,13 @@ Dyan-Q Planning 단계에서 랜덤하게(uniformly) 경험들을 선택해서 �
 
     === "pseudo code"
     
-        ![HeadImg](https://drive.google.com/uc?id=1BilaMm2xjjYc6AWijbrjXY1EVuQ0rYFT){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1BilaMm2xjjYc6AWijbrjXY1EVuQ0rYFT){ class="skipglightbox" width="100%" }
 
 ## Trajectory Sampling
 
 Dynamic Programming에서 모든 state를 방문해서 value를 업데이트 했는데 이를 **exhaustive sweep**이라고 한다. 일단 dynamics를 알아야 하지만, 모든 state를 탐색한다는 것은 현실에서 거의 불가능하다. 그래서 특정 분포를 가지는 state space를 샘플링하여 planning을 하게 된다. Dyna-Q에서는 Uniform sampling을 사용했다. **Trajectory Sampling**은 on-policy distribution에 따라 샘플링을 한다. 주어진 model로 state transitions와 rewards을 샘플링하고, 현재 policy를 기반으로 action을 샘플링한다. 
 
-![HeadImg](https://drive.google.com/uc?id=1BkvoAyyvO4KUHRdyH0fZ8fJha6Nqylvj){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/1BkvoAyyvO4KUHRdyH0fZ8fJha6Nqylvj){ class="skipglightbox" width="100%" }
 
 위 그림에서 b는 branching factor이다.
 
@@ -135,7 +135,7 @@ On-policy distribution을 사용의 장단점은 다음과 같다.
 
 ## Real-time Dynamic Programming (RTDP)
 
-![HeadImg](https://drive.google.com/uc?id=1BlzjFO8mWgLr1wGgxZ6CYEWVOiwf6PIf){ align=left class="skipglightbox" width="40%" }
+![HeadImg](https://lh3.googleusercontent.com/d/1BlzjFO8mWgLr1wGgxZ6CYEWVOiwf6PIf){ align=left class="skipglightbox" width="40%" }
 
 Dynamic Programming에서 valute iteration을 on-policy trajectory sampling로 하는 방법이 **Real-time Dynamic Programming (RTDP)**이다. 다음 수식을 사용하여 state-action 쌍이 주어졌을 때(real experience 혹은 simulated experience) value를 업데이트 한다.
 
@@ -157,7 +157,7 @@ $$v_{k+1}(s) = \underset{a}{\max} \sum_{s', r} p(s', r|s, a) \left[ r + \gamma v
 
 **Heuristic Search**는 매 State 방문마다 tree를 생성하여 planning을 진행하는 방법이다. Tree의 리프 노드에 추정한 value function을 적용하고, 현재 state를 root node로 두어 리프 노드부터 루트까지 거꾸로 올라가는(Backup) 방식으로 탐색을 진행한다. 아래 그림은 DFS(Depth First Search)를 사용한 예시이다.
 
-![HeadImg](https://drive.google.com/uc?id=1BnBuyRV43vfqBuWsBHqsEGhf-0zhOn8-){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/1BnBuyRV43vfqBuWsBHqsEGhf-0zhOn8-){ class="skipglightbox" width="100%" }
 
 ### Rollout Algorithms
 
@@ -175,7 +175,7 @@ MCTS는 action을 선택하기 위해 새로운 state를 방문했을 때 실행
 
     === "Illustration"
 
-        ![HeadImg](https://drive.google.com/uc?id=1BuR89m2TSROMwCo9FjUAjMWBUPUFbl9X){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1BuR89m2TSROMwCo9FjUAjMWBUPUFbl9X){ class="skipglightbox" width="100%" }
 
         1. **Selection**: 자식 노드 선택 policy를 재귀적으로 적용하여, Root 노드에서 가장 중요 확장 가능한(urgent expandable) 노드로 트리를 따라 내려간다. "확장 가능한"이란 노드가 비 종료 상태이고 방문하지 않은 자식들(unexpanded 포함)을 뜻한다. 여기서 leaf node는 제일 끝에 있는 노드가 아니라 확장 가능한 노드를 뜻한다.
         2. **Expansion**: 가능한 action에 따라 하나 이상의 자식노드가 추가되서 트리를 확장한다.
@@ -186,11 +186,11 @@ MCTS는 action을 선택하기 위해 새로운 state를 방문했을 때 실행
 
         [https://ieeexplore.ieee.org/document/6145622](https://ieeexplore.ieee.org/document/6145622) 참고
 
-        ![HeadImg](https://drive.google.com/uc?id=1C3ETh5IGNWgjJ4_HfZdAS4RAm4W1NJ-W){  class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1C3ETh5IGNWgjJ4_HfZdAS4RAm4W1NJ-W){  class="skipglightbox" width="100%" }
 
-        ![HeadImg](https://drive.google.com/uc?id=1C8xzduGqj2YbjIE-ldjjoXT0NnC2BSgj){  class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1C8xzduGqj2YbjIE-ldjjoXT0NnC2BSgj){  class="skipglightbox" width="100%" }
 
-        ![HeadImg](https://drive.google.com/uc?id=1CHVeW_dV2dCXMoTAKV02xe-paUSIlNPc){  class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/1CHVeW_dV2dCXMoTAKV02xe-paUSIlNPc){  class="skipglightbox" width="100%" }
 
 [^1]: [Monte Carlo Tree Search 알고리즘(MCTS)](https://mongxmongx2.tistory.com/17)
 [^2]: [A Survey of Monte Carlo Tree Search Methods](https://ieeexplore.ieee.org/document/6145622)

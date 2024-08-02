@@ -20,7 +20,7 @@ Paper Link: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 [^2]: [Gated Recurrent Unit](https://arxiv.org/abs/1412.3555) 
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz){ class="skipglightbox" width="75%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1si3KMBjwZJ3inzTuoeUUsl7mutbDLNbz){ class="skipglightbox" width="75%" }
   <figcaption>[그림 1] RNN의 forward propagation</figcaption>
 </figure>
 
@@ -45,7 +45,7 @@ Input 과 Output 문장의 길이와 관계없이 의존성(dependencies)을 해
 $$\begin{aligned} \mathbf{x}&=(x_1, x_2, \cdots, x_n) \rightarrow \mathbf{z}=(z_1, z_2, \cdots, z_n)\\ \mathbf{y}&=(y_1, y_2, \cdots, y_m)\ \text{for}\  y_{t}=f(y_{t-1}, \mathbf{z}) \end{aligned}$$
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97){ class="skipglightbox" width="50%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/15FPAUru5Rm1x3LUu6pcSjaZiuRrBkj97){ class="skipglightbox" width="50%" }
   <figcaption>[그림 2] 모델구조: Encoder(좌), Decoder(우)</figcaption>
 </figure>
 
@@ -81,7 +81,7 @@ $$O = \text{Attention}(Q, K, V)$$
 영어를 한국어로 번역하는 문제를 예로 들자면, 영어는 소스 문장, 한국어는 타겟 문장이 된다. <span style="color:#e25252">**query(Q)**</span>, <span style="color:#5470cc">**key(K)**</span>, <span style="color:#cfb648">**value(V)**</span> 관계는 `그림 3` 과같이 표현할 수 있다.
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G){ class="skipglightbox" width="65%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/14tFq4-RDEDFbc9vEABWqiFxG0pI4qq3G){ class="skipglightbox" width="65%" }
   <figcaption>[그림 3] 기계번역 문제로 Q, K-V 의 관계 알아보기</figcaption>
 </figure>
 
@@ -95,7 +95,7 @@ $$O = \text{Attention}(Q, K, V)$$
 꼭 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>-<span style="color:#cfb648">**V**</span> 가 다른 성격을 가진 시퀀스가 아니어도 된다. 세 토큰 모두 하나의 시퀀스를 가르킬 수도 있으며, 이를 Self-Attention 이라고 한다. 예를 들어 감성 분석(Sentiment Analysis) 문제를 예로 들면, 모델은 문장을 읽고 이를 사전에 정의해 놓은 감성 카테고리로 판단하게 되는 데, 이때 <span style="color:#e25252">**Q**</span>, <span style="color:#5470cc">**K**</span>, <span style="color:#cfb648">**V**</span> 모두 같은 문장을 지정하여 `그림 4`처럼 Attention 을 사용할 수 있다. 
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX){ class="skipglightbox" width="65%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1vFw0wuulHhzu5kwZLQ1QStl24KjnlsgX){ class="skipglightbox" width="65%" }
   <figcaption>[그림 4] 감성 분류 문제를 통해 Self-Attention 에 대해 알아보기</figcaption>
 </figure>
 
@@ -106,7 +106,7 @@ Attention을 구하는 방법은 사실 다양하지만 Transformer 에서는 �
 $$\text{Attention}(Q, K, V) = \text{softmax}(\dfrac{QK^T}{\sqrt{d_k}})V$$
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM){ class="skipglightbox" width="65%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1CtBsDHkyU8hmFj2MB0IDhEQO7wCKUEkM){ class="skipglightbox" width="65%" }
   <figcaption>[그림 5] Q, K, V크기를 표기한 Scaled-Dot Product Attention</figcaption>
 </figure>
 
@@ -198,7 +198,7 @@ after divide by sqrt(d_k), count of gradients that smaller than threshod(1e-10) 
 ### Multi-Head Attention
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_){ class="skipglightbox" width="65%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1jpQdv3lFrYNRZ5FbCvcXF4RDtpho0og_){ class="skipglightbox" width="65%" }
   <figcaption>[그림 6] Multi-Head Attention</figcaption>
 </figure>
 
@@ -291,7 +291,7 @@ $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{
 결론을 말하자면 각 시퀀스의 순서 인덱서는 PE(Positonal Encoding) 테이블에서 각자의 위치를 조회후에 임베딩된 텐서와 결합하게 된다. pos 는 시퀀스의 위치정보, 예를 들어 텐서의 크기가 $d_{model}$ = 1024 의 경우, 각 1024의 짝수(2i)에 위치한 값들은 sin 함수를 적용하고, 홀수(2i+1) 에 위치한 값들은 cos 함수를 적용한다. PE 테이블을 그리면 `그림 7` 과 같은데, 자세히 보시면 각 포지션에 해당하는 1 줄(1024 크기의 벡터)값은 모두 차별화 되어있다. 
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1IznpVENdNpwyKqJCD0mWnZRcQ2XaIh22){ class="skipglightbox" width="100%" }
   <figcaption>[그림 7] 최대 길이가 51인 Positional Encoding Table</figcaption>
 </figure>
 
@@ -311,7 +311,7 @@ $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{
     예를 들어 `그림 8`처럼 (검은색이 마스킹 위치) Decoder 의 입력 데이터 최대 길이가 4인 경우, <span style="color:#e25252">**Q**</span> 에서 0 번째 토큰은 1 번째 토큰을 예측해야 함으로 Self-Attention 시 <span style="color:#5470cc">**K**</span> 의 1, 2, 3 번째의 토큰의 관계를 무시해야한다. <span style="color:#e25252">**Q**</span> 의 1 번째 토큰을 입력시 2 번째 토큰을 예측하게 되는데, 자기 자신을 포함한 그 이전의 정보를 참조 할 수는 있지만 미래의 2, 3 번째의 정보를 미리 참고하면 안된다.
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn){ class="skipglightbox" width="75%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1VnSx8Ct5_NNNoa13zGfA5p-RSgbzBIMn){ class="skipglightbox" width="75%" }
   <figcaption>[그림 8] Decoder Sub-sequence Attention Masking</figcaption>
 </figure>
 
@@ -322,7 +322,7 @@ $$\begin{aligned} PE_{pos, 2i} &= \sin(\frac{pos}{10000^{2i/d_{model}}}) \\ PE_{
     예를 들어 Decoder 에 들어가는 타겟 데이터의 최대 길이는 4이지만 실제 토큰의 길이가 3이라면 Attention Matrix 에 해당하는 마스킹은 `그림 9`와 같다. 여기서는 마지막 토큰이 `Padding` 토큰이기 때문에 Self Attention 시 마지막 토큰은 참조하지 않는다. Attention 코드([GitHub](https://github.com/simonjisu/annotated-transformer-kr/blob/master/transformer/modules.py) 참고) 구현하게 되면 3 번째 행은 Softmax 를 통과시 `nan` 값이 된다. 따라서 해당하는 값을 0으로 다시 마스킹하는 과정이 필요하다. 
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2){ class="skipglightbox" width="75%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1KOJA8DNlTQjnKb19zn2vRtzEIRbB8Ut2){ class="skipglightbox" width="75%" }
   <figcaption>[그림 9] 실제 토큰 길이에 대한 Masking</figcaption>
 </figure>
 
@@ -396,7 +396,7 @@ $$lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \c
 해당 수식에 따르면 처음 warmup_steps 동안 학습률은 가파르게 상승하다가 차후에 천천히 하강하게 된다.
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1d0xw7_xjr1rv7-SjuxQKRmML4oio561j){ class="skipglightbox" width="75%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1d0xw7_xjr1rv7-SjuxQKRmML4oio561j){ class="skipglightbox" width="75%" }
   <figcaption>[그림 10] hidden 크기 및 warmup steps 에 따른 학습률의 변화</figcaption>
 </figure>
 
@@ -409,7 +409,7 @@ $$lrate = d_{model}^{-0.5} \cdot \min(\text{step_num}^{-0.5}, \text{step_num} \c
 PyTorch의 `torchtext`에 있는 Multi30k 데이터 세트(영어-독일어 번역)로 테스트 해보았다. 큰 데이터는 아니기 때문에, NVIDIA GTX 1080 ti 로 약 36분 훈련시켰다. 기존의 RNN 으로 훈련시키는 것 보다 월등히 빨랐다. 모델에서 Attention에 대한 그림도 [github](https://github.com/simonjisu/annotated-transformer-kr)에 올려두었으니 확인해보길 바란다.
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1HsVRsp3mMjo8UBSTU81ZE4i_MUZ4Z1Xa){ class="skipglightbox" width="100%" }
   <figcaption>[그림 11] Multi30k 성능 테스트</figcaption>
 </figure>
 

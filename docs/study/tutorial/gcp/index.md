@@ -7,7 +7,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1fnSskBrNmd90GnsYoD2tjlcuw2eT2k7o){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1fnSskBrNmd90GnsYoD2tjlcuw2eT2k7o){ class="skipglightbox" width="100%" }
   <figcaption>Reference: Google Cloud Platform</figcaption>
 </figure>
 
@@ -18,7 +18,7 @@ Google Cloud Platform(GCP)[^1]는 아마존의 AWS[^2], 마이크로소프트의
 [^3]: [Microsoft Azure](https://azure.microsoft.com/ko-kr/)
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1AACALNGjAVutIsEWiULu8iaQWTZTTEbS){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1AACALNGjAVutIsEWiULu8iaQWTZTTEbS){ class="skipglightbox" width="100%" }
   <figcaption> 클라우스 서비스 3 대장 </figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ Google Cloud Platform(GCP)[^1]는 아마존의 AWS[^2], 마이크로소프트의
 - **리전(Region) 리소스**: 고정 외부 IP 주소 등, 같은 리전 내에서만 엑세스 가능
 - **영역(Zone) 리소스**: VM 인스턴스, 디스크 등, 같은 영역 내에서만 엑세스 가능
 
-![Image title](https://drive.google.com/uc?id=1UTCMkWU-VXtwuLovioU9_GN44r8laLe-){ align=left width=100% }
+![Image title](https://lh3.googleusercontent.com/d/1UTCMkWU-VXtwuLovioU9_GN44r8laLe-){ align=left width=100% }
 
 ### 프로젝트(Project)
 

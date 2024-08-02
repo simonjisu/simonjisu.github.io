@@ -34,7 +34,7 @@ Return을 계산하는 방법에 따라 두 개의 알고리즘으로 나뉜다.
 
     === "pseduo code"
         
-        ![HeadImg](https://drive.google.com/uc?id=18PPPbW18TSVP6lLKpWar-2HMGDt90mCA){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18PPPbW18TSVP6lLKpWar-2HMGDt90mCA){ class="skipglightbox" width="100%" }
 
     === "every-visit 차이" 
     
@@ -106,7 +106,7 @@ $$\begin{aligned}q_{\pi_k} \big(s, \pi_{k+1}(s) \big) &= q_{\pi_k} \big(s, \unde
 
     === "pseduo code"
         
-        ![HeadImg](https://drive.google.com/uc?id=18hhd4TQyk1o5BAY6ChUvl9Vszub3eWlI){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18hhd4TQyk1o5BAY6ChUvl9Vszub3eWlI){ class="skipglightbox" width="100%" }
 
 Exploring starts는 확률이 0이 상인 state-action 쌍을 고른다는 뜻이다. 그러나 해당 알고리즘은 실용적이지 않다. 모든 state-action 쌍마다 모든 return을 유지하고 중복적으로 평균을 계산하기 때문이다. 
 
@@ -121,7 +121,7 @@ $$\begin{cases}
 1 - \epsilon + \dfrac{\epsilon}{\vert \mathcal{A}(s) \vert} & \text{greedy action}
 \end{cases}$$
 
-![HeadImg](https://drive.google.com/uc?id=18mpw3St6NI0TP9vBLgG6E1lIE62vQsBE){ class="skipglightbox" width="65%" }
+![HeadImg](https://lh3.googleusercontent.com/d/18mpw3St6NI0TP9vBLgG6E1lIE62vQsBE){ class="skipglightbox" width="65%" }
 
 이러니저러니해도 on-policy MC control 는 GPI의 한 종류다. Exploring starts 이라는 가정 없이는 policy를 개선 시킬 수 없는데 왜냐면 non-greedy actions의 선택을 방지 해주기 때문이다. 다행이 GPI는 policy가 greedy policy로 향하게 끔만 하면되지 강제로 greedy policy가 되어야 한다는 필요 조건이 없다. 어떠한 $\epsilon$-soft policy $\pi$에 대해서 $\epsilon$-greedy policy에 관한 $q_\pi$는 $\pi$ 보다 항상 좋다는 것을 보장한다.
 
@@ -129,7 +129,7 @@ $$\begin{cases}
 
     === "pseduo code"
         
-        ![HeadImg](https://drive.google.com/uc?id=18mZ2An-k0x9p-t29lxpgyvUWwUukEsIP){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18mZ2An-k0x9p-t29lxpgyvUWwUukEsIP){ class="skipglightbox" width="100%" }
 
 ### Policy Improvement Guarantees with ε-soft Policy
 
@@ -147,13 +147,13 @@ $$\begin{aligned}q_\pi \big(s, \pi'(s) \big) &= \sum_a \pi'(a \vert s) q_\pi(s, 
 
 즉, [policy improvement theorem](../chapter4/#policy-improvement)에 의해서 action-value가 state-value보다 같거나 높기 때문에 $\pi'$는 $\pi$보다 좋은 policy이며, action-value function을 최대화 하는 policy가 결국에 좋은 policy를 선택하는 것과 같게 된다. 그림으로 개념을 표현하면 다음과 같다.
 
-![HeadImg](https://drive.google.com/uc?id=18n6jlc2x6iGZwMiPuFVX_wcD2Ta3alzp){ class="skipglightbox" width="65%" }
+![HeadImg](https://lh3.googleusercontent.com/d/18n6jlc2x6iGZwMiPuFVX_wcD2Ta3alzp){ class="skipglightbox" width="65%" }
 
 ## Off-policy Prediction
 
 **Off-policy**는 {++target++} policy $\pi(a\vert s)$ 를 평가 혹은 개선하는데 다른 {++behavior++} policy $b(a\vert s)$가 생성하는 데이터를 바탕으로 진행한다는 점에서 On-policy와 다르다. 즉, target policy는 학습되고 최적화의 대상이라면, behavior policy는 환경과 상호작용한다. 사실 On-policy는 Off-policy의 특별한 케이스다 $\pi(a \vert s) = b(a \vert s)$.
 
-![HeadImg](https://drive.google.com/uc?id=18rD0i1KAgszxddFRTHOi8AQEXFy1z-OQ){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/18rD0i1KAgszxddFRTHOi8AQEXFy1z-OQ){ class="skipglightbox" width="100%" }
 
 Grid-World 예를 들자면, 그림과 같다. 우리의 목적은 behavior policy로 target policy $\pi$의 value function $v_\pi$을 학습하고자 한다. 조건으로 모든 action $a \in \mathcal{A}(s), \pi(a \vert s) > 0$ 에 대해서 $b(a \vert s) > 0$이어야 한다.
 
@@ -167,7 +167,7 @@ $$\begin{aligned}
 &\approx \dfrac{1}{n} \sum_{i=1}^n \rho(x_i) x_i \quad \text{with } x_i \backsim b
 \end{aligned}$$
 
-![HeadImg](https://drive.google.com/uc?id=18v3YCtLF3cJ9jidOjiQ1L-y6EdME9TrC){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/18v3YCtLF3cJ9jidOjiQ1L-y6EdME9TrC){ class="skipglightbox" width="100%" }
 
 예를 들어, 확률이 균일한 파란 주사위와 균일하지 않은 빨간 주사위가 있다. 우리의 목적은 파란색 주사위를 굴려서 빨간색 주사위의 기댓값을 알려고한다. 3번 굴렸을 때 R.V. 의 realization은 다음과 같다.
 
@@ -203,8 +203,8 @@ Pr\lbrace A_t, S_{t+1}, A_{t+1}, \dots, S_T \vert S_t, A_{t:T-1} \backsim \pi \r
 
     === "Off-policy MC prediction (policy evaluation)"
         
-        ![HeadImg](https://drive.google.com/uc?id=18y-Ddxcy20MULt0ualdtc6iZby6A5WWo){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18y-Ddxcy20MULt0ualdtc6iZby6A5WWo){ class="skipglightbox" width="100%" }
 
     === "Off-policy MC control"
         
-        ![HeadImg](https://drive.google.com/uc?id=18zGTpS0DVK7Jphd_4QwVmRwRgYtL8lka){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18zGTpS0DVK7Jphd_4QwVmRwRgYtL8lka){ class="skipglightbox" width="100%" }

@@ -1,117 +1,209 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter3/">
+      
+      
+        <link rel="prev" href="../chapter2/">
+      
+      
+        <link rel="next" href="../chapter4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24+insiders-4.53.10">
+    
+    
+      
+        <title>3. Finite Markov Decision Processes - Soopace</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.c0d16a3a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
 
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/tutorial/reinforcement_learning/chapter3/" rel="canonical"/>
-<link href="../chapter2/" rel="prev"/>
-<link href="../chapter4/" rel="next"/>
-<link href="../../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
-<title>3. Finite Markov Decision Processes - Soopace</title>
-<link href="../../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
-<link href="../../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
-<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-            html.glightbox-open { overflow: initial; height: 100%; }
-            .gslide-title { margin-top: 0px; user-select: text; }
-            .gslide-desc { color: #666; user-select: text; }
-            .gslide-image img { background: white; }
-            
-                .gscrollbar-fixer { padding-right: 15px; }
-                .gdesc-inner { font-size: 0.75rem; }
-                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#markov-decision-processes-mdps">
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#markov-decision-processes-mdps" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-<nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
-<img alt="logo" src="../../../../img/logo/logo.png"/>
-</a>
-<label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
-</label>
-<div class="md-header__title" data-md-component="header-title">
-<div class="md-header__ellipsis">
-<div class="md-header__topic">
-<span class="md-ellipsis">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../../img/logo/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             Soopace
           </span>
-</div>
-<div class="md-header__topic" data-md-component="header-topic">
-<span class="md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               3. Finite Markov Decision Processes
             
           </span>
-</div>
-</div>
-</div>
-<label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-</label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
-</label>
-<nav aria-label="Search" class="md-search__options">
-<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
-</button>
-</nav>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list" role="presentation"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</nav>
-<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
-<div class="md-grid">
-<ul class="md-tabs__list">
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../..">
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
         
   
     
@@ -119,9 +211,18 @@
   About
 
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../../blog/">
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../blog/" class="md-tabs__link">
           
   
     
@@ -129,9 +230,21 @@
   Blog
 
         </a>
-</li>
-<li class="md-tabs__item md-tabs__item--active">
-<a class="md-tabs__link" href="../../../">
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
           
   
     
@@ -139,9 +252,19 @@
   Study
 
         </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../../project/">
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../project/" class="md-tabs__link">
           
   
     
@@ -149,38 +272,74 @@
   Project
 
         </a>
-</li>
-</ul>
-</div>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
 </nav>
+    
+  
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../../.." title="Soopace">
-<img alt="logo" src="../../../../img/logo/logo.png"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../../img/logo/logo.png" alt="logo">
+
+    </a>
     Soopace
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../..">
-<span class="md-ellipsis">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     About
@@ -188,13 +347,51 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../../blog/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../blog/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Blog
@@ -202,55 +399,63 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_2">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Blog
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../../blog/archive/2020/">
-<span class="md-ellipsis">
-    
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
   
-    Archive
+
+      
+    </li>
   
 
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../../blog/category/lifelog/">
-<span class="md-ellipsis">
+      
+      
+  
+  
     
   
-    Categories
   
-
+  
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../">
-<span class="md-ellipsis">
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Study
@@ -258,24 +463,92 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_3">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Study
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../paper/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../paper/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Paper
@@ -283,14 +556,71 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Tutorial
@@ -298,24 +628,66 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_3">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Tutorial
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../algorithm/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../algorithm/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Algorithm
@@ -323,12 +695,54 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../deeplearning/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../deeplearning/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Deeplearning
@@ -336,12 +750,58 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../gcp/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../gcp/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Gcp
@@ -349,12 +809,56 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../math/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../math/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Math
@@ -362,12 +866,62 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../mongodb/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../mongodb/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Mongodb
@@ -375,12 +929,56 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../nlp/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../nlp/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Nlp
@@ -388,14 +986,77 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_3_8" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_8" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Reinforcement learning
@@ -403,24 +1064,42 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_3_8_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_3_3_8">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3_8" id="__nav_3_3_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3_8">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Reinforcement learning
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L19/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS285_L19/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     CS 285: Lecture 19, Control as Inference
@@ -428,11 +1107,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../CS285_L20/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CS285_L20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     CS 285: Lecture 20, Inverse Reinforcement Learning
@@ -440,11 +1134,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter1/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     1. Introduction
@@ -452,11 +1161,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter2/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     2. Multi-armed Bandits
@@ -464,12 +1188,33 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
     
   
     3. Finite Markov Decision Processes
@@ -477,10 +1222,16 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
     
   
     3. Finite Markov Decision Processes
@@ -488,117 +1239,166 @@
 
     
   </span>
-</a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-decision-processes-mdps">
-<span class="md-ellipsis">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#markov-decision-processes-mdps" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Markov Decision Processes (MDPs)
       
     </span>
-</a>
-<nav aria-label="Markov Decision Processes (MDPs)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#agentenvironment-interface">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Markov Decision Processes (MDPs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agentenvironment-interface" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Agent–Environment Interface
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#dynamics-of-mdp">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#dynamics-of-mdp" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Dynamics of MDP
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-property">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Markov Property
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#reward-hypothesis">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#reward-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Reward Hypothesis
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policies-and-value-functions">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#policies-and-value-functions" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Policies and Value Functions
       
     </span>
-</a>
-<nav aria-label="Policies and Value Functions" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-equation">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Policies and Value Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bellman-equation" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Bellman Equation
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-policies-and-optimal-value-functions">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#optimal-policies-and-optimal-value-functions" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Optimal Policies and Optimal Value Functions
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-optimality">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#bellman-optimality" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Bellman Optimality
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#etc">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#etc" class="md-nav__link">
+    <span class="md-ellipsis">
       
         ETC
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter4/">
-<span class="md-ellipsis">
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     4. Dynamic Programming
@@ -606,11 +1406,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter5/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     5. Monte Carlo Method
@@ -618,11 +1433,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter6/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     6. Temporal-Difference Learning
@@ -630,11 +1460,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter7/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     7. n-step Bootstrapping
@@ -642,11 +1487,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../chapter8/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     8. Planning and Learning with Tabular Methods
@@ -654,22 +1514,71 @@
 
     
   </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../../project/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../../project/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Project
@@ -677,189 +1586,305 @@
 
     
   </span>
-</a>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Project
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-</ul>
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-decision-processes-mdps">
-<span class="md-ellipsis">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#markov-decision-processes-mdps" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Markov Decision Processes (MDPs)
       
     </span>
-</a>
-<nav aria-label="Markov Decision Processes (MDPs)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#agentenvironment-interface">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Markov Decision Processes (MDPs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agentenvironment-interface" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Agent–Environment Interface
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#dynamics-of-mdp">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#dynamics-of-mdp" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Dynamics of MDP
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#markov-property">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Markov Property
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#reward-hypothesis">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#reward-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Reward Hypothesis
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#policies-and-value-functions">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#policies-and-value-functions" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Policies and Value Functions
       
     </span>
-</a>
-<nav aria-label="Policies and Value Functions" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-equation">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="Policies and Value Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bellman-equation" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Bellman Equation
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#optimal-policies-and-optimal-value-functions">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#optimal-policies-and-optimal-value-functions" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Optimal Policies and Optimal Value Functions
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#bellman-optimality">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#bellman-optimality" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Bellman Optimality
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#etc">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#etc" class="md-nav__link">
+    <span class="md-ellipsis">
       
         ETC
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content" data-md-component="content">
-<nav aria-label="Navigation" class="md-path">
-<ol class="md-path__list">
-<li class="md-path__item">
-<a class="md-path__link" href="../../../..">
-<span class="md-ellipsis">
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+  
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
     About
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../../../">
-<span class="md-ellipsis">
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Study
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../../">
-<span class="md-ellipsis">
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Tutorial
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../">
-<span class="md-ellipsis">
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Reinforcement learning
   </span>
-</a>
-</li>
-</ol>
-</nav>
-<article class="md-content__inner md-typeset">
-<nav class="md-tags" hidden="">
-<span class="md-tag">reinforcement learning</span>
-<span class="md-tag">mdp</span>
-</nav>
-<h1>3. Finite Markov Decision Processes</h1>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+  
+
+
+  <nav class="md-tags" hidden>
+    
+      
+      
+      
+      
+        <span class="md-tag">mdp</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">reinforcement learning</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+  <h1>3. Finite Markov Decision Processes</h1>
+
 <blockquote>
 <p>데이터사이언스 대학원 강화학습 수업, Deep RL Bootcamp<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 를 듣고 정리한 내용입니다.</p>
 </blockquote>
-<h2 id="markov-decision-processes-mdps">Markov Decision Processes (MDPs)<a class="headerlink" href="#markov-decision-processes-mdps" title="Permanent link">¶</a></h2>
+<h2 id="markov-decision-processes-mdps">Markov Decision Processes (MDPs)<a class="headerlink" href="#markov-decision-processes-mdps" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>Markov decision process (MDP) is a discrete-time stochastic control process. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
 </blockquote>
 <p>마르코프 결정 프로세스에서 행동(Actions)은 현재의 보상(Rewards)에 영향을 줄 뿐만 아니라 다음 상태(States)에도 영향을 준다.</p>
-<h3 id="agentenvironment-interface">Agent–Environment Interface<a class="headerlink" href="#agentenvironment-interface" title="Permanent link">¶</a></h3>
+<h3 id="agentenvironment-interface">Agent–Environment Interface<a class="headerlink" href="#agentenvironment-interface" title="Permanent link">&para;</a></h3>
 <figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt" width="100%">
-</img></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/16zYrZQHAbWoVWJAiPIwViNpyjAH1CCZt" width="100%" />
+  </p>
 <figcaption>Agent-Environment Interface</figcaption>
 </figure>
 <p>Agent-Environment Interface에서는 다음과 같은 상황을 서술한다. 매 time stamp <span class="arithmatex">\(t=0, 1, 2, \cdots\)</span> 마다</p>
@@ -869,12 +1894,12 @@
 <li>한 스텝 이후(<span class="arithmatex">\(t+1\)</span>), Agent는 보상 <span class="arithmatex">\(R_{t+1}\)</span>을 받고 다음 상태 <span class="arithmatex">\(S_{t+1}\)</span>가 결정된다.</li>
 </ol>
 <p>따라서 이러한 상호작용은 일련의 시퀀스(혹은 trajectory) <span class="arithmatex">\(S_0, A_0, R_1, S_1, A_1, R_2, A_2, R_3, \cdots\)</span> 를 생성한다.</p>
-<h3 id="dynamics-of-mdp">Dynamics of MDP<a class="headerlink" href="#dynamics-of-mdp" title="Permanent link">¶</a></h3>
+<h3 id="dynamics-of-mdp">Dynamics of MDP<a class="headerlink" href="#dynamics-of-mdp" title="Permanent link">&para;</a></h3>
 <p><strong>Dynamics function</strong>은 두 개의 현재와 다음 상태(<span class="arithmatex">\(S_t\)</span>, <span class="arithmatex">\(S_{t+1}\)</span>), 보상(<span class="arithmatex">\(R_t\)</span>), 그리고 행동(<span class="arithmatex">\(A_t\)</span>)를 받아서 <span class="arithmatex">\(0\)</span>과 <span class="arithmatex">\(1\)</span>로 사이의 확률로 매핑해주는 함수다.</p>
 <div class="arithmatex">\[p: \mathcal{S} \times \mathcal{R} \times \mathcal{S} \times \mathcal{A} \rightarrow \lbrack 0, 1 \rbrack\]</div>
 <p>이 함수는 현재 상태, 행동이 주어졌을 때 다음 상태와 보상을 기술한다. <span class="arithmatex">\(s', s \in \mathcal{S}, r \in \mathcal{R}, a \in \mathcal{A(s)}\)</span> 일때 확률은 다음과 같다.</p>
 <div class="arithmatex">\[p(s', r \vert s, a) := \Bbb{P} \lbrace S_t = s', R_t = r \vert S_{t-1}=s, A_{t-1}=a \rbrace\]</div>
-<h3 id="markov-property">Markov Property<a class="headerlink" href="#markov-property" title="Permanent link">¶</a></h3>
+<h3 id="markov-property">Markov Property<a class="headerlink" href="#markov-property" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>"The future is independent of the past given the present."</p>
 </blockquote>
@@ -883,7 +1908,7 @@
 <p>MDP dynamics <span class="arithmatex">\(p(s', r \vert s, a)\)</span>를 사용하여 다른 항들을 계산 할 수 있다.</p>
 <div class="admonition info">
 <p class="admonition-title">MDP calculation from dynamics</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">State-trainsition</label><label for="__tabbed_1_2">Expected rewards for state–action pair</label><label for="__tabbed_1_3">Expected rewards for state–action-next-state triple</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">State-trainsition</label><label for="__tabbed_1_2">Expected rewards for state–action pair</label><label for="__tabbed_1_3">Expected rewards for state–action-next-state triple</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="arithmatex">\[p(s' \vert s, a) := \Bbb{P}\lbrace S_t = s', \vert S_{t-1}=s, A_{t-1}=a \rbrace = \sum_{r \in \mathcal{R}} p(s', r \vert s, a) \]</div>
@@ -895,9 +1920,9 @@
 <div class="arithmatex">\[r(s, a, s') := \Bbb{E} \lbrack R_t \vert S_{t-1}=s, A_{t-1}=a, S_t = s' \rbrack = \sum_{r \in \mathcal{R}} r \dfrac{p(s', r \vert s, a)}{p(s' \vert s, a)}\]</div>
 </div>
 </div>
-</input></input></input></div>
 </div>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=170sHrxs6vihx29lfFRt-fOvek9VSSJ6O" width="50%"/></p>
+</div>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/170sHrxs6vihx29lfFRt-fOvek9VSSJ6O" width="50%" /></p>
 <p>이 그림은 세 개의 State <span class="arithmatex">\(\mathcal{S} = \lbrace s_0, s_1, s_3 \rbrace\)</span>, 두 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace a_0, a_1 \rbrace\)</span> 이 존재한다. 또한, <span class="arithmatex">\(+5\)</span>와 <span class="arithmatex">\(-1\)</span>을 제외하고 나머지는 모두 <span class="arithmatex">\(0\)</span>의 보상을 가진다. 몇 가지 예제로 MDP를 이해해보자.</p>
 <ol>
 <li><span class="arithmatex">\(s_1\)</span> 상태에서 시작하여 <span class="arithmatex">\(a_0\)</span>의 행동을 취한 경우, <span class="arithmatex">\(s_0\)</span> 와 보상 <span class="arithmatex">\(r=5\)</span>를 얻을 확률은 <span class="arithmatex">\(p(s_0, 5 \vert s_1, a_0) = 0.7\)</span>. </li>
@@ -910,7 +1935,7 @@
 </li>
 </ol>
 <p>MDP 프레임워크에서 경계값은 꼭 Agent의 물리적 경계값 일 필요는 없다. 또한, MDP 프레임워크에서 Agent는 환경(Environment)을 임의대로 변경 할 수 없다.</p>
-<h2 id="reward-hypothesis">Reward Hypothesis<a class="headerlink" href="#reward-hypothesis" title="Permanent link">¶</a></h2>
+<h2 id="reward-hypothesis">Reward Hypothesis<a class="headerlink" href="#reward-hypothesis" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>The goal of the agent is the maximization of the expected value of the cumulative sum of a received scalar (reward) signal.</p>
 </blockquote>
@@ -918,7 +1943,7 @@
 <p>Agent 목표 장기적인 보상 합의 최대화를 달성하기 위해서 <strong>기대 수익(expected return)</strong>을 <span class="arithmatex">\(G_t\)</span> 라고 하면 두 가지 시나리오에서 수식으로 다음과 같이 정의 할 수 있다.</p>
 <div class="admonition info">
 <p class="admonition-title">Expected Reward from difference scenario</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Episodic</label><label for="__tabbed_2_2">Continuing</label><label for="__tabbed_2_3">Episodic + Continuning</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Episodic</label><label for="__tabbed_2_2">Continuing</label><label for="__tabbed_2_3">Episodic + Continuning</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="arithmatex">\[G_t := R_{t+1} + R_{t+1} + \cdots + R_T\]</div>
@@ -928,14 +1953,14 @@
 <p>여기서 <span class="arithmatex">\(\gamma \in \lbrack 0, 1 \rbrack\)</span>는 할인율(discount rate)이라고 한다. </p>
 </div>
 <div class="tabbed-block">
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=175964pau-XWCIuiz7u4DJItFDrf-sEGJ" width="50%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/175964pau-XWCIuiz7u4DJItFDrf-sEGJ" width="50%" /></p>
 <p>이러한 모형을 absorbing state라고 한다. <span class="arithmatex">\(T = \infty\)</span> 혹은 <span class="arithmatex">\(\gamma = 1\)</span></p>
 <div class="arithmatex">\[G_t := \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k \]</div>
 </div>
 </div>
-</input></input></input></div>
 </div>
-<h2 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">¶</a></h2>
+</div>
+<h2 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">&para;</a></h2>
 <p><strong>Policy</strong>는 주어진 상태 <span class="arithmatex">\(S_t = s\)</span> 에서 가능한 행동 <span class="arithmatex">\(A_t = a\)</span>으로 매핑하는 함수 <span class="arithmatex">\(\pi_t(a \vert s)\)</span>다. Policy 함수는 항상 확률 함수일 필요는 없다. 예를 들어 다음과 같은 deterministic policy 도 존재한다. </p>
 <div class="arithmatex">\[ \pi_t(a \vert s) = \begin{cases} 1 &amp; \text{where } a=a' \\ 0 &amp; \text{where } a\neq a' \end{cases}\]</div>
 <p>Policy가 확률 함수의 경우 선택된 행동의 실패 확률을 보통 noise라고 한다. 예를 들어, 특정 상태 <span class="arithmatex">\(s\)</span>에서 <span class="arithmatex">\(a, a'\)</span> 두 개의 행동을 선택할 수 있는 경우, <span class="arithmatex">\(\pi_t(a \vert s) = 0.9\)</span> 이면 <span class="arithmatex">\(a\)</span>를 선택할 확률이 90%이고, <span class="arithmatex">\(a'\)</span>를 선택할 확률은 10%이다(noise). </p>
@@ -951,7 +1976,7 @@
 <div class="arithmatex">\[q_{\pi}(s, a) := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s, A_t = a\rbrack = \Bbb{E}_{\pi} \Bigg\lbrack \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \vert S_t = s, A_t = a \Bigg\rbrack\]</div>
 </li>
 </ul>
-<h3 id="bellman-equation">Bellman Equation<a class="headerlink" href="#bellman-equation" title="Permanent link">¶</a></h3>
+<h3 id="bellman-equation">Bellman Equation<a class="headerlink" href="#bellman-equation" title="Permanent link">&para;</a></h3>
 <p><strong>벨만 방정식(Bellman Equation)</strong>은 현재 상태(<span class="arithmatex">\(s\)</span>)의 value와 다음 상태(<span class="arithmatex">\(s'\)</span>)의 value 관계를 보여주는 식이다.</p>
 <div class="arithmatex">\[\begin{aligned}
 v_{\pi}(s) &amp; := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
@@ -960,20 +1985,20 @@ v_{\pi}(s) &amp; := \Bbb{E}_{\pi} \lbrack G_t \vert S_t = s\rbrack \\
 &amp;= \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi}(s') \rbrack
 \end{aligned}\]</div>
 <p>아래 그림은 bellman-backup diagram 이라는 그림인데, Bellman Equation을 잘 설명하고 있다. 즉, policy <span class="arithmatex">\(\pi\)</span> 하에 현재 상태-가치(state-value) <span class="arithmatex">\(v_{\pi}(s)\)</span> 는 모든 기대 수익을 각각의 행동에 따른 가중 평균을 구하는 것이며, 각 기대 수익은 할인된 다음 상태-가치 <span class="arithmatex">\(\gamma v_{\pi}(s')\)</span> 와 다음 보상 <span class="arithmatex">\(r\)</span>의 합을 가중 평균함으로써 구할 수 있다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17ErRNwcyluBH0eRffR-NmGqm-VXYRnor" width="40%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/17ErRNwcyluBH0eRffR-NmGqm-VXYRnor" width="40%" /></p>
 <div class="admonition note">
 <p class="admonition-title">Example: Grid-World</p>
 <p>아래의 좌측 그림 처럼 지도가 있는데, 네 개의 행동 <span class="arithmatex">\(\mathcal{A} = \lbrace N, S, E, W \rbrace\)</span>을 취할 수 있다. 그리고 웜홀이 있어서 <span class="arithmatex">\(A\)</span> 에서 <span class="arithmatex">\(A'\)</span>로 전송하는 웜홀을 타면 <span class="arithmatex">\(+10\)</span>, <span class="arithmatex">\(B\)</span> 에서 <span class="arithmatex">\(B'\)</span>로가는 웜홀을 타면 <span class="arithmatex">\(+5\)</span>, 그리고 지도 밖을 벗어나면 <span class="arithmatex">\(-1\)</span>를 받는 보상 상황이 주어졌다. 여기서 각각의 grid(네모칸)은 state라고 할 수 있다. 따라서, state transition은 결정적이다. 우측 그림은 state value를 구한 것이다. 우측 그림에서 볼 수 있듯이 A와 B grid(state)에서 높은 value를 갖는다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=1779PnyTHiERWiXWWAChWpukv5ujz1g5f" width="80%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/1779PnyTHiERWiXWWAChWpukv5ujz1g5f" width="80%" /></p>
 </div>
-<h3 id="optimal-policies-and-optimal-value-functions">Optimal Policies and Optimal Value Functions<a class="headerlink" href="#optimal-policies-and-optimal-value-functions" title="Permanent link">¶</a></h3>
+<h3 id="optimal-policies-and-optimal-value-functions">Optimal Policies and Optimal Value Functions<a class="headerlink" href="#optimal-policies-and-optimal-value-functions" title="Permanent link">&para;</a></h3>
 <p>Policy의 비교는 주어진 policy <span class="arithmatex">\(\pi\)</span>하에서 state-value <span class="arithmatex">\(v_{\pi}(s)\)</span> 가 높으면 좋은 것이다 <span style="color:gray">(주의: state-value function이 항상 monotic한 것은 아니다)</span>. 따라서 최적의 policy <span class="arithmatex">\(\pi_{*}\)</span>는 주어진 상태 <span class="arithmatex">\(s\)</span>에서 다른 <ins class="critic">모든 policy</ins> 보다 좋은 state-value를 가지면 된다. 이 최적의 state-value를 <strong>optimal state-value function</strong> 이라고 하며 다음과 같이 정의 된다. </p>
 <div class="arithmatex">\[v_{*}(s) := \underset{\pi}{max} \ v_{\pi}(s) \quad \forall s \in \mathcal{s}\]</div>
 <p>또한, 최적의 <strong>action-value function</strong>도 같이 정의할 수 있다.</p>
 <div class="arithmatex">\[\begin{aligned} q_{*}(s, a) &amp; := \underset{\pi}{max} \ q_{\pi}(s, a) \quad \forall s \in \mathcal{s}, a \in \mathcal{A} \\ 
 &amp;= \Bbb{E} \lbrack R_{t+1} + \gamma v_{*}(S_{t+1}) \vert S_t = s, A_t = a \rbrack
 \end{aligned}\]</div>
-<h3 id="bellman-optimality">Bellman Optimality<a class="headerlink" href="#bellman-optimality" title="Permanent link">¶</a></h3>
+<h3 id="bellman-optimality">Bellman Optimality<a class="headerlink" href="#bellman-optimality" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>"The value of a state under an optimal policy must equal the expected return for the best action from that state."</p>
 </blockquote>
@@ -985,60 +2010,106 @@ v_{*}(s) &amp; := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
 &amp;= \underset{a}{\max} \sum_{s', r} p(s', r \vert s, a) \lbrack r + \gamma v_{\pi_{*}}(s') \rbrack
 \end{aligned}\]</div>
 <p>이전의 Bellman backup diagram과 다르게 최적 상태-가치(optimal state-value)를 구하기 위해서 <span class="arithmatex">\(v_{*}\)</span> 이제는 기대 수익을 모든 행동에 대한 가중 평균 합이 아니라 최적 행동에 해당하는 기대 수익만 선택하면 되는 것이다. 그리고 최적 행동 가치(optimal action-value)는 선택된 최적 상태-가치를 보상에 대한 가중 평균 하면 되는 것이다. </p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r" width="80%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/17GXbg5NZpxI-NPdacgaNcwnMMw9xEE3r" width="80%" /></p>
 <p>또한 Bellman optimality equation은 <span class="arithmatex">\(v_*\)</span>에 대해 단 하나의 유일한 솔루션을 가진다. </p>
 <div class="admonition note">
 <p class="admonition-title">Example: Grid-World 에서의 optimal value function과 policy</p>
 <p>중간의 그림이 optimal state-value 이고 우측은 optimal policy다. 각 state에서 여러 optimal policy를 가질 수 있지만, optimal state-value는 단 하나다. 예를 들어, 좌표 <code>(4, 0)</code>에서는 N으로 이동하던 E로 이동하던 모두 최적의 <span class="arithmatex">\(v_{*}\)</span>를 얻을 수 있다.</p>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?id=17HM0n2h1sWSan32R-2zD3xkHXnoCrD9Z" width="80%"/></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/17HM0n2h1sWSan32R-2zD3xkHXnoCrD9Z" width="80%" /></p>
 </div>
-<h3 id="etc">ETC<a class="headerlink" href="#etc" title="Permanent link">¶</a></h3>
+<h3 id="etc">ETC<a class="headerlink" href="#etc" title="Permanent link">&para;</a></h3>
 <p>두 개의 policy <span class="arithmatex">\(\pi_A\)</span>, <span class="arithmatex">\(\pi_B\)</span>가 있는데, 어떤 state에서 optimal state-value가 <span class="arithmatex">\(\pi_A\)</span>가 더 큰 경우가 있고, 어떤 state에서는 <span class="arithmatex">\(\pi_B\)</span>가 더 크다. 그렇다면 optimal policy는 없는 것일까? 아니다. 각 state에서 state-value가 큰 policy를 선택해서 새로운 policy <span class="arithmatex">\(\pi_C\)</span>를 만들면 된다. 따라서, 항상 <span class="arithmatex">\(v_{\pi}(s) \geq v_{\pi^{'}}(s)\)</span>를 만족하는 <span class="arithmatex">\(\pi\)</span>를 찾을 수 있다.</p>
 <div class="footnote">
-<hr/>
+<hr />
 <ol>
 <li id="fn:1">
-<p><a href="https://sites.google.com/view/deep-rl-bootcamp/lectures">Deep RL Bootcamp</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://sites.google.com/view/deep-rl-bootcamp/lectures">Deep RL Bootcamp</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p><a href="https://en.wikipedia.org/wiki/Markov_decision_process">Wikipedia - Markove Decision Processes</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Markov_decision_process">Wikipedia - Markove Decision Processes</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
-<form class="md-feedback" hidden="" name="feedback">
-<fieldset>
-<legend class="md-feedback__title">
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
         Was this page helpful?
       </legend>
-<div class="md-feedback__inner">
-<div class="md-feedback__list">
-<button class="md-feedback__icon md-icon" data-md-value="1" title="This page was helpful" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="0" title="This page could be improved" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
-</button>
-</div>
-<div class="md-feedback__note">
-<div data-md-value="1" hidden="">
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
               
               
                 
               
               Thanks for your feedback!
             </div>
-<div data-md-value="0" hidden="">
-</div>
-</div>
-</div>
-</fieldset>
-</form>
-<!-- Giscus -->
-<h2 id="__comments">Comments</h2>
-<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
-</script>
-<!-- Synchronize Giscus theme with palette -->
-<script>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+  <script src="https://giscus.app/client.js"
+        data-repo="simonjisu/comments_bot"
+        data-repo-id="R_kgDOHRhxjQ"
+        data-category="General"
+        data-category-id="DIC_kwDOHRhxjc4CQSuI"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
     var giscus = document.querySelector("script[src*=giscus]")
 
     /* Set palette on initial load */
@@ -1066,42 +2137,74 @@ v_{*}(s) &amp; := \underset{a \in \mathcal{A(s)}}{\max} q_{\pi_{*}}(s, a) \\
       })
     })
   </script>
-</article>
-</div>
+
+              </article>
+            </div>
+          
+          
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-</div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
-            Back to top
-          </button>
-</main>
-<footer class="md-footer">
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-copyright">
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs Insiders
     </a>
+  
 </div>
-<div class="md-social">
-<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-</a>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<div class="md-dialog" data-md-component="dialog">
-<div class="md-dialog__inner md-typeset"></div>
-</div>
-<script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../../assets/javascripts/bundle.65061dd4.min.js"></script>
-<script src="../../../../javascripts/mathjax.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.1e90e0fb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.e3055991.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

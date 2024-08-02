@@ -8,7 +8,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1pptc4MA_slesmfXtkRZJjjFeuAkGWO2r){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1pptc4MA_slesmfXtkRZJjjFeuAkGWO2r){ class="skipglightbox" width="100%" }
   <figcaption>Reference: Pixabay</figcaption>
 </figure>
 
@@ -21,7 +21,7 @@ John이라는 외국인이 카지도 슬롯머신(한국에서는 사적으로 �
 ## K-armed Bandit Problem
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1T8eAgwwVHfEzMWtpkVk0sQFx5ak3rZ7B){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1T8eAgwwVHfEzMWtpkVk0sQFx5ak3rZ7B){ class="skipglightbox" width="100%" }
   <figcaption>Reference: Pixabay</figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ $\epsilon$-Greedy는 $\epsilon$의 확률로 탐색(랜덤으로 행동 선택)�
 ### 10-armed Testbed
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=16OTEhabzmwcn0lfilsqBW5Rqxi6ZkMtw){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/16OTEhabzmwcn0lfilsqBW5Rqxi6ZkMtw){ class="skipglightbox" width="100%" }
   <figcaption>Figure 1: 10-armed Testbed</figcaption>
 </figure>
 
@@ -237,13 +237,13 @@ Sample average 방법으로 각기 다른 $\epsilon$ 을 취해서 최적의 전
 
     
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=16PxBqC4xZFeJFpxB09Ko_R4tFNNofiKr){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/16PxBqC4xZFeJFpxB09Ko_R4tFNNofiKr){ class="skipglightbox" width="100%" }
   <figcaption>Figure: epsilon greedy</figcaption>
 </figure>
 
 실험 결과 초깃값이 모두 동일($q_0(a) = 0.0$)할 때, greey policy는 평균적으로 $1$의 보상을 얻었다. $\epsilon$이 높을 수록 탐색 초기에는 보상이 높았으나, 시간이 점점 지날 수록 작은 $\epsilon$과 큰 $\epsilon$간의 간극이 줄어든 것을 볼 수 있다. 다만, 최적의 선택을 고른 비율에서는 탐색을 상대적으로 많이 하는 경우 경험을 많이 할 수록 더 높다는 것을 알 수 있다. 높은 $\epsilon$의 문제점은 최적의 선택이 어떤 것인지 대략 안 상황에서 계속해서 10% 확률로 다른 것을 탐색한 다는 것이다. 즉, 효율적이지 않다는 것이다.
 
-![HeadImg](https://drive.google.com/uc?id=16ae6JejpJXHKrxMlEJIqANDdWGJYaTyA){ class="skipglightbox" width="60%" }
+![HeadImg](https://lh3.googleusercontent.com/d/16ae6JejpJXHKrxMlEJIqANDdWGJYaTyA){ class="skipglightbox" width="60%" }
 
 행여나 실험에서 Best Action이 불균형하게 세팅될 수도 있다는 걱정이 있었는데, 각 실험 Bandit의 best action histogram을 그려보니, 모든 action이 거의 균등하게 세팅되어 있었다(3개 실험의 bar의 길이가 비슷비슷하다). 
 
@@ -266,7 +266,7 @@ $$
 
 초깃값도 최적의 선택에 영향을 준다. 아래 그림에서 <span style="color:red">greedy</span> 전략은 초깃값이 5이지만 초깃값이 0인 <span style="color:blue">$\epsilon$-greedy</span> 전략보다 더 낮은 보상을 얻었다.
 
-![HeadImg](https://drive.google.com/uc?id=16ajGe7dJG6ybQ-lo8Qyt9h1VEBEgqj1-){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/16ajGe7dJG6ybQ-lo8Qyt9h1VEBEgqj1-){ class="skipglightbox" width="100%" }
 
 ## UCB Action Selection
 
@@ -306,7 +306,7 @@ $$A_t := \underset{a}{\arg \max} \Bigg\lbrack Q_t(a) + c \sqrt{\dfrac{\ln t}{N_t
     plt.show()
     ```
 
-![HeadImg](https://drive.google.com/uc?id=16bnqh78hTMnDBMe_iJqz6r18ptcIed6R){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/16bnqh78hTMnDBMe_iJqz6r18ptcIed6R){ class="skipglightbox" width="100%" }
 
 시뮬레이션 결과 UCB를 사용한 <span style="color:red">greedy</span> 전략이 UCB를 사용하지 않은 <span style="color:blue">$\epsilon$-greedy</span> 전략 보다 더 높은 평균 보상을 획득했다.
 
@@ -316,7 +316,7 @@ $t=1000$ 일때의 $Q_t(a)$를 보면 다음과 같다. 선택된 actions 횟수
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | count | 6 | 2 | 5 | 842 | 71 | 5 | 6 | 5 | 55 | 3 |
 
-![HeadImg](https://drive.google.com/uc?id=16mezLe0bWgGd4umK_2TAMQw8dMbuzL7J){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/16mezLe0bWgGd4umK_2TAMQw8dMbuzL7J){ class="skipglightbox" width="100%" }
 
 ## Gradient Bandit Algorithms
 
@@ -359,7 +359,7 @@ H_{t+1}(a) &:= H_t(a) + \alpha (R_t - \bar{R}_t)( - \pi_t(A_t) ) & \text{where }
         # ...
     ```
 
-![HeadImg](https://drive.google.com/uc?id=16n3h97z9hPOFrfWzyrae2iJTB-QNz_8f){ class="skipglightbox" width="100%" }
+![HeadImg](https://lh3.googleusercontent.com/d/16n3h97z9hPOFrfWzyrae2iJTB-QNz_8f){ class="skipglightbox" width="100%" }
 
 ??? info "code for figures"
 

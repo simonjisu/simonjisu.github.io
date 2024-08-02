@@ -21,7 +21,7 @@ Feature Visualization[^1] 논문을 보면서 정리한다는게 통째로 번�
 
 인간이 신경망을 해석 할 수 있어야한다는 인식이 점차 커지고 있는 가운데 neural network interpretability 분야가 점점 발전하고 있다. 특히 비전분야에서 feature visualization 와 attribution 두 가지 방법이 많이 연구되고 있다.
 
-![Figure1](https://drive.google.com/uc?export=view&id=1Ra-1t_qmuJKc9zmqhx5uiFMJMyi9_QkG){ width="100%" }
+![Figure1](https://lh3.googleusercontent.com/d/1Ra-1t_qmuJKc9zmqhx5uiFMJMyi9_QkG){ width="100%" }
 
 ---
 
@@ -35,7 +35,7 @@ Reference: Visualizing higher-layer features of a deep network[^3]
 
 ### Optimization Objectives
 
-![Figure2](https://drive.google.com/uc?export=view&id=1x6MT8wNRMAVAiWWTrZsA1wVF0JP1Jkrl){ width="100%" }
+![Figure2](https://lh3.googleusercontent.com/d/1x6MT8wNRMAVAiWWTrZsA1wVF0JP1Jkrl){ width="100%" }
 
 목적에 따라서 전혀 다른 해석을 가질 수 있다.
 
@@ -61,7 +61,7 @@ optimization을 통해 예시를 만들때 주의해야할 점은 전체 그림�
 
 아래 그림을 예로 들어 본다. Positive optimized는 특정 뉴런 A을 최대화하게 optimization 과정을 거친 이미지라면, Maximum activation example은 데이터 세트 이미지를 모델에게 입력으로 넣어서, 우리가 optimization을 진행한 뉴런 A을 제일 크게 만드는 이미지만 골라내는 것이다. 
 
-![Figure3](https://drive.google.com/uc?export=view&id=1sH6G1DatWGtZvoHpFSLPLIHfvIeVfZhG){ width="100%" }
+![Figure3](https://lh3.googleusercontent.com/d/1sH6G1DatWGtZvoHpFSLPLIHfvIeVfZhG){ width="100%" }
 
 ### Achieving Diversity with Optimization
 
@@ -79,7 +79,7 @@ diversity를 이루는 방법은 "diversity" 항을 목적함수에 추가함으
 
 ??? info "add 'diversity' term?" 
 
-    ![Figure4](https://drive.google.com/uc?export=view&id=1eAqOW5e_zGMMRCfdrhbC-owHqpVl9hHs){ width="100%" }
+    ![Figure4](https://lh3.googleusercontent.com/d/1eAqOW5e_zGMMRCfdrhbC-owHqpVl9hHs){ width="100%" }
 
     artistic style transfer로부터 영감을 얻음. Gram matrix $G$의 채널들로부터 계산을 시작한다. $G_{i,j}$는 flatten된 필터 $i$와 필터 $j$의 dot product다.
 
@@ -94,27 +94,27 @@ diversity를 이루는 방법은 "diversity" 항을 목적함수에 추가함으
 
 낮은 차원의 뉴런들에서 diversity 항은 표현된 피처(feature representations)의 다양한 방면을 보여줄 수 있다.
 
-![Figure5](https://drive.google.com/uc?export=view&id=1VSLv-i9JG5uDZa2h4WSY4ECi3AsilOwE){ width="100%" }
+![Figure5](https://lh3.googleusercontent.com/d/1VSLv-i9JG5uDZa2h4WSY4ECi3AsilOwE){ width="100%" }
 
 다양한 피처 시각화는 무엇이 뉴런을 활성화하는지 자세히 들여다 볼 수 있게 해준다. 특히 데이터 세트로 본다면, 어떤 입력이 뉴런을 활성화 시키는지 더 다양하게 관찰하고 예측 할 수 있다. 예를 들어 다음 한 장의 optimization결과를 살펴본다.
 
-![Figure6](https://drive.google.com/uc?export=view&id=19yqLldmhfok_rt3pYP6L5fbu2S2jz_yd){ height="50%" }
+![Figure6](https://lh3.googleusercontent.com/d/19yqLldmhfok_rt3pYP6L5fbu2S2jz_yd){ height="50%" }
 
 위 그림을 개의 머리 부분이 뉴런을 활성화 시킨 것으로 보인다. 그림의 일부를 보자면 개의 눈과 아래로 향하는 곡선으로 추측할 수 있다. 그러나 어떤 부분에서는 눈이 포함 안될 때도 있고, 아래로 향하는 곡선뿐만 아니라 위로 향하는 곡선도 있다. 따라서 이 뉴런이 활성화하는 것이 주로 모피 텍스처에 관한 것으로 가설을 세울 수 있다.
 
-![Figure7](https://drive.google.com/uc?export=view&id=1Hx7DEAK6jpHXmbTUeHPmGZ51D_ADUqJ6){ width="100%" }
+![Figure7](https://lh3.googleusercontent.com/d/1Hx7DEAK6jpHXmbTUeHPmGZ51D_ADUqJ6){ width="100%" }
 
 이 가설을 데이터 세트 예제를 통해 생성한 결과로 비교해 보면, 대체로 가설이 맞는 것으로 나타난다. 개의 털과 비슷한 질감의 색상과 텍스처를 활성화 했다는 점을 주목해야한다.
 
 다양함의 효과는 더 높은 층의 뉴런에서 두드러진다. 뉴런을 통해 다양한 물체 종류를 시뮬레이션 할 수 있다. 예를 들어, 다음 그림과 같이 다양한 종류의 볼들이 생성된 것을 볼 수 있다.
 
-![Figure8](https://drive.google.com/uc?export=view&id=1GjxqNJ7uwvONizNoTp7_CiZ4HIOXP5Ij){ width="100%" }
+![Figure8](https://lh3.googleusercontent.com/d/1GjxqNJ7uwvONizNoTp7_CiZ4HIOXP5Ij){ width="100%" }
 
 이러한 접근법에도 단점이 있다. 예시를 다르게 만드려는 강압적인 방법 때문에 오히려 연관이 없는 물체가 생성 될 수도 있다. 추가로 optimization을 통해서 예시를 다르게 생성하는 것은 부자연스러운 방법이다. 예를 들어, 위 그림의 경우, 누군가는 다른 공들은 제외하고 깨끗한 축구공의 예시를 보고 싶었을 것이다. 데이터 세트에 기반한 기법들([Wei et al. 2015](https://arxiv.org/abs/1507.02379))은 이와 다르게 조금 더 자연스럽게 피처를 분리할 수 있지만, 각기 다른 데이터들이 어떻게 모델에서 동작하는 지를 이해하는 것에 크게 도움이 안될 수 있다.
 
 또 다른 근본적인 문제가 있다면, 다양함은 일관된 예시를 보여줄 수도 있지만 그렇지 않을 수 도 있다는 점이다. 아래 예시는 두 동물의 얼굴 그리고 차체의 결과다. 이러한 결과들로부터 우리는 뉴럴넷을 이해하는데 있어서, 하나의 뉴런이 꼭 정확한 의미론적(semantic) 단위는 아니라는 것을 알 수 있다. 
 
-![Figure9](https://drive.google.com/uc?export=view&id=153l1TwIixnPAIatf2TD3nqD1EhgMBIDb){ width="100%" }
+![Figure9](https://lh3.googleusercontent.com/d/153l1TwIixnPAIatf2TD3nqD1EhgMBIDb){ width="100%" }
 
 ---
 
@@ -150,11 +150,11 @@ Intriguing properties of neural networks(Szegedy et al. 2014)[^8]에서 저자�
 
     Mnist에 대한 실험 결과:
 
-    ![Figure10](https://drive.google.com/uc?export=view&id=1L0A9ZvvQe2UzsWcHTK3UJyUVxrXFG59J){ width="100%" }
+    ![Figure10](https://lh3.googleusercontent.com/d/1L0A9ZvvQe2UzsWcHTK3UJyUVxrXFG59J){ width="100%" }
 
     ImageNet에 대한 실험결과:
 
-    ![Figure11](https://drive.google.com/uc?export=view&id=1C55n-ng_wxzPLlH9qsSn6jDQE-xbXF2){ width="100%" }
+    ![Figure11](https://lh3.googleusercontent.com/d/1C55n-ng_wxzPLlH9qsSn6jDQE-xbXF2){ width="100%" }
     
     여러 분석을 통해 뉴럴넷 $\phi(x)$의 특성을 살펴보는데 natural basis vector가 random vector와 큰 차이가 없다는 것을 뜻한다. 입력 분포의 특정 부분 집합에 대해서 불변성(invariance)을 띄는 $\phi$의 능력을 설명할 수 있지만, 나머지 도메인에 대해서 $\phi$의 행동을 설명 할 수가 없다.
 
@@ -166,13 +166,13 @@ Network Dissection: Quantifying Interpretability of Deep Visual Representations(
 
 Dataset examples and optimized examples of random directions:
 
-![Figure12](https://drive.google.com/uc?export=view&id=1gEssEqwLEh_Cdl9PWq56BdcOey2PmbbD){ width="100%" }
+![Figure12](https://lh3.googleusercontent.com/d/1gEssEqwLEh_Cdl9PWq56BdcOey2PmbbD){ width="100%" }
 
 우리는 활성화 공간에서 뉴런에 대해 약간의 산수를 통해 조금 더 흥미로운 방향을 정의할 수 있다. 예를 들어, "검정과 하양"을 "모자이크" 뉴런에 더하면, 검정고 하얀 모자이크를 얻을 수 있었다. 마치 Word2Vec의 의미론적 단어 임베딩과 비슷하다.
 
 Jointly optimizing two neurons:
 
-![Figure13](https://drive.google.com/uc?export=view&id=1cNO3z_mtgocM0d0ggTIEE-llzqAxOt9Q){ width="100%" }
+![Figure13](https://lh3.googleusercontent.com/d/1cNO3z_mtgocM0d0ggTIEE-llzqAxOt9Q){ width="100%" }
 
 위 그림의 예시는 뉴런들이 조건부 결합으로 표현된 이미지다. 이 둘 사이에 보간법을 적용해 뉴런들의 상호작용을 더 잘 이해하게 만들 수있다. 생성 모델(generative models)에서 latent space에 보간법을 적용하는 것과 비슷하다. 
 
@@ -199,7 +199,7 @@ Jointly optimizing two neurons:
 
 정확히 말하자면, 전체 optimization의 목적은 개별 채널의 목적함수의 선형 보간과 같다. 보간법을 더 잘 하기 위해서, 낮은 활성화 층과 비슷하도록 작은 alignment 목표를 추가한다. 더 쉽게 optimization을 달성하기 위해서, 분리되고 공유된 이미지의 매개변수 조합을 사용했다(랜덤하게 주어도 되지만). 
 
-![Figure14](https://drive.google.com/uc?export=view&id=1ugBFfZq4HhAtBuAQEJBz1iJFQrj33C8W){ width="100%" }
+![Figure14](https://lh3.googleusercontent.com/d/1ugBFfZq4HhAtBuAQEJBz1iJFQrj33C8W){ width="100%" }
 
 이 부분은 뉴런들이 어떻게 상호작용하는지 알아가는 시작 단계일 뿐이다. 우리도 어떻게 의미있는 방향을 선택하는지 아니면 실제로 의미가 있는 방향이 존재하는 지를 아직 모르겠다. 방향을 찾는 것과 별개로 방향들간에 서로 어떻게 작용하지에 대한 의문도 있다.
 
@@ -211,7 +211,7 @@ Jointly optimizing two neurons:
 
 Optimization results with noise:
 
-![Figure15](https://drive.google.com/uc?export=view&id=14QbrkQC29NRJVA4XTzKVO7IFc0nx-wBr){ width="100%" }
+![Figure15](https://lh3.googleusercontent.com/d/14QbrkQC29NRJVA4XTzKVO7IFc0nx-wBr){ width="100%" }
 
 이는 실제 생활에서 일어나지 않을 법한 패턴이다. 만약에 충분이 오랬동안 최적화를 진행한다면, 일부 뉴런이 특출나게 어떤 것을 탐지해내지만, 이미지는 고주파 패턴으로 도배될 것이다. 이러한 패턴들은 Intriguing properties of neural networks(Szegedy et al. 2014)[^10]에서 언급한 **적대적 예시의 현상(phenomenon of adversarial examples)**으로 보인다.
 
@@ -223,7 +223,7 @@ Optimization results with noise:
 
 Reason why causes the hight frequency patterns:
 
-![Figure16](https://drive.google.com/uc?export=view&id=1vndh70zXGkfumkWigTbm36Ty3boFo0hn){ width="100%" }
+![Figure16](https://lh3.googleusercontent.com/d/1vndh70zXGkfumkWigTbm36Ty3boFo0hn){ width="100%" }
 
 고주파 패턴을 통해 우리는 최적화 기반의 시각화에서 제약으로부터 자유로울수록 매력적이지만, 이는 양날의 검이기도 하다는 것을 알 수 있다. 아무런 제약이 없다면 적대적 예시를 결과로 얻을 것이다. 
 
@@ -233,7 +233,7 @@ Reason why causes the hight frequency patterns:
 
 **정규화(regularization)**는 최근 피처 시각화 연구에서 확인 할 수 있는 주요 포인트다. 이를 하나의 스펙트럼으로 나눌 수 있을 것이다. 극단적으로 아예 정규화를 하지 않으면, 적대적 예시를 얻고, 너무 강한 정규화를 하게 되면 오해를 부르는 연관성을 야기할 수 있다.
 
-![Figure17](https://drive.google.com/uc?export=view&id=1jOkkAiLo4I_Ui-OJbGRcYe4JpLN335s1){ width="100%" }
+![Figure17](https://lh3.googleusercontent.com/d/1jOkkAiLo4I_Ui-OJbGRcYe4JpLN335s1){ width="100%" }
 
 ### Three Families of Regularization
 
@@ -258,7 +258,7 @@ Frequency penalization는 고주파 노이즈를 직접 없에는 것을 목표�
 
 아래 그림에서 높은 패널티를 줄 수록 고주파 패턴이 사라지고 선명해지는 경향이 있다.
 
-![Figure18](https://drive.google.com/uc?export=view&id=1_cTAnFiCtXB2D-zaYVBgAoH494JUaBhn){ height="60%" }
+![Figure18](https://lh3.googleusercontent.com/d/1_cTAnFiCtXB2D-zaYVBgAoH494JUaBhn){ height="60%" }
 
 #### Transformation robustness
 
@@ -268,7 +268,7 @@ Transformation robustness는 약간의 변형이 있어도 계속 최적화 타�
 
 Stochastically transforming the image:
 
-![Figure19](https://drive.google.com/uc?export=view&id=10VzBQqtUVnPGIuGCUBSd2vgcQLr66L-O){ width="100%" }
+![Figure19](https://lh3.googleusercontent.com/d/10VzBQqtUVnPGIuGCUBSd2vgcQLr66L-O){ width="100%" }
 
 #### Learned priors
 
@@ -292,7 +292,7 @@ Stochastically transforming the image:
 
 Three directions of steepest descent under different notions of distance: 
 
-![Figure20](https://drive.google.com/uc?export=view&id=1w5oDxg5cMQuTlFUgbKb08YPBGV5RQhNi){ width="100%" }
+![Figure20](https://lh3.googleusercontent.com/d/1w5oDxg5cMQuTlFUgbKb08YPBGV5RQhNi){ width="100%" }
 
 위에서 서술한 모든 방향들은 다 유효한 경사 방향이지만,  결과물을 보면 근본적으로 다르다. decorrelated space로 최적화시, 높은 주파수를 줄일 수 있으며,  $L^{\infty}$ 방법은 오히려 반대로 이를 증가시킨다.
 
@@ -300,7 +300,7 @@ decorrelated 경사 방향을 사용하면 꽤나 다른 시각화 결과를 얻
 
 Combining the preconditioning and transformation robustness:
 
-![Figure21](https://drive.google.com/uc?export=view&id=1FCCHjI1N6DhzOXz5JebyIeVUjdlgC94b){ width="100%" }
+![Figure21](https://lh3.googleusercontent.com/d/1FCCHjI1N6DhzOXz5JebyIeVUjdlgC94b){ width="100%" }
 
 preconditioner가 단순 최적화를 가속 시키는 것인지? 즉, 같은 조건에 평범한 경사를 사용하여 오랜 시간 기다리면, preconditioner을 사용한 것과 같은 결과를 얻을지? 정규화를 함으로써 local minima를 피할 수 있는 것인지? 이는 아직 확실하게 말하기 어렵다. 한편으로 만약에 충분히 오랜 스텝동안 경사하강법을 진행한다면, 느리지만 결국에 수렴하게 된다. 또 다른 한편으로 정규화를 하지 않으면 preconditioner가 높은 주파스 패턴을 줄여준다.
 
@@ -318,4 +318,4 @@ preconditioner가 단순 최적화를 가속 시키는 것인지? 즉, 같은 �
 
 Inception 모델에 대한 Layer 번호 설명:
 
-![Figure21](https://drive.google.com/uc?export=view&id=1_61451LmD03-WIxRI2z6Auy5nRs6TauO){ width="100%" }
+![Figure21](https://lh3.googleusercontent.com/d/1_61451LmD03-WIxRI2z6Auy5nRs6TauO){ width="100%" }

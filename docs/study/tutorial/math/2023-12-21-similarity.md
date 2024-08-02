@@ -82,7 +82,7 @@ $$J(A, B) = \dfrac{\vert A \cap B \vert}{\vert A \cup B \vert}$$
         ```
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1ccJurJEKP7i6ZpFSSGaM4CHiTxUmDicD){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1ccJurJEKP7i6ZpFSSGaM4CHiTxUmDicD){ class="skipglightbox" width="100%" }
   <figcaption>Figure: 각 문장 별 집합 S</figcaption>
 </figure>
 

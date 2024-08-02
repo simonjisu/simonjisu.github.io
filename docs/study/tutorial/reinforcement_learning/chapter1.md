@@ -6,10 +6,12 @@ tags:
   - "reinforcement learning"
 ---
 
-<figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1WdmT_ynavkgaz-Ur0uKGdEQE_GnjF734){ class="skipglightbox" width="80%" }
+<figure markdown="span">
+  ![HeadImg](https://lh3.googleusercontent.com/d/1WdmT_ynavkgaz-Ur0uKGdEQE_GnjF734){ class="skipglightbox" width="80%" }
   <figcaption>Refernece: Pixabay</figcaption>
 </figure>
+
+
 
 > 데이터사이언스 대학원 강화학습 수업을 듣고 정리한 내용입니다.
 

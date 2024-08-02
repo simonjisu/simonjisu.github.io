@@ -164,14 +164,14 @@ Neural Network 모델은 입력 질문, column-value 관계에서 추출된 synt
 
 Execution Guided Decoding 알고리즘은 다음과 같다.
 
-![Figure1](https://drive.google.com/uc?export=view&id=1NJelQlAmhTJdr62nH40QwTDul3kkUMY5){ height="90%" }
+![Figure1](https://lh3.googleusercontent.com/d/1NJelQlAmhTJdr62nH40QwTDul3kkUMY5){ height="90%" }
 
 ## 4. Experiment
 
 Logical form accuracy를 봤을 때, WikiSQL 데이터 세트에서 우수함을 보인다.
 
-![Table1](https://drive.google.com/uc?export=view&id=1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN){ width="100%" }
+![Table1](https://lh3.googleusercontent.com/d/1KwHiNi20fOvrP3Cf7TzhlEmZjHf68jlN){ width="100%" }
 
 Execution accuracy에서 볼 수 있듯이, HydraNet은 generalization에서도 더 우수함을 보였다.
 
-![Table2](https://drive.google.com/uc?export=view&id=1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp){ width="100%" }
+![Table2](https://lh3.googleusercontent.com/d/1WT043OhVRZ5ARrv81DZJZhLuLzsctFUp){ width="100%" }

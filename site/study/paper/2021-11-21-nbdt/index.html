@@ -1,117 +1,209 @@
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://simonjisu.github.io/study/paper/2021-11-21-nbdt/">
+      
+      
+        <link rel="prev" href="../2021-08-13-hybridranking/">
+      
+      
+        <link rel="next" href="../../tutorial/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24+insiders-4.53.10">
+    
+    
+      
+        <title>NBDT: Neural-Backed Decision Trees - Soopace</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.c0d16a3a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
 
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://simonjisu.github.io/study/paper/2021-11-21-nbdt/" rel="canonical"/>
-<link href="../2021-08-13-hybridranking/" rel="prev"/>
-<link href="../../tutorial/" rel="next"/>
-<link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0" name="generator"/>
-<title>NBDT: Neural-Backed Decision Trees - Soopace</title>
-<link href="../../../assets/stylesheets/main.f2778614.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.46987102.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
-<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
 <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-2D0S4P2SJ9"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-2D0S4P2SJ9",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-<script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-            html.glightbox-open { overflow: initial; height: 100%; }
-            .gslide-title { margin-top: 0px; user-select: text; }
-            .gslide-desc { color: #666; user-select: text; }
-            .gslide-image img { background: white; }
-            
-                .gscrollbar-fixer { padding-right: 15px; }
-                .gdesc-inner { font-size: 0.75rem; }
-                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
-                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
-                </style><script src="../../../assets/javascripts/glightbox.min.js"></script></head>
-<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#abstract">
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#abstract" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-<nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="Soopace" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
-</a>
-<label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
-</label>
-<div class="md-header__title" data-md-component="header-title">
-<div class="md-header__ellipsis">
-<div class="md-header__topic">
-<span class="md-ellipsis">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Soopace" class="md-header__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../img/logo/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             Soopace
           </span>
-</div>
-<div class="md-header__topic" data-md-component="header-topic">
-<span class="md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               NBDT: Neural-Backed Decision Trees
             
           </span>
-</div>
-</div>
-</div>
-<label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-</label>
-<div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
-</label>
-<nav aria-label="Search" class="md-search__options">
-<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
-</button>
-</nav>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list" role="presentation"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-header__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-</nav>
-<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
-<div class="md-grid">
-<ul class="md-tabs__list">
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../..">
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -119,9 +211,18 @@
   About
 
       </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../blog/">
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/" class="md-tabs__link">
           
   
     
@@ -129,9 +230,21 @@
   Blog
 
         </a>
-</li>
-<li class="md-tabs__item md-tabs__item--active">
-<a class="md-tabs__link" href="../../">
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -139,9 +252,19 @@
   Study
 
         </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../../project/">
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../project/" class="md-tabs__link">
           
   
     
@@ -149,38 +272,74 @@
   Project
 
         </a>
-</li>
-</ul>
-</div>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
 </nav>
+    
+  
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="Soopace" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="Soopace">
-<img alt="logo" src="../../../img/logo/logo.png"/>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Soopace" class="md-nav__button md-logo" aria-label="Soopace" data-md-component="logo">
+      
+  <img src="../../../img/logo/logo.png" alt="logo">
+
+    </a>
     Soopace
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-component="source" href="https://github.com/simonjisu.github.io" title="Go to repository">
-<div class="md-source__icon md-icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/simonjisu.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
     GitHub
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../..">
-<span class="md-ellipsis">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     About
@@ -188,13 +347,51 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../blog/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../blog/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Blog
@@ -202,55 +399,63 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_2">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Blog
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/archive/2020/">
-<span class="md-ellipsis">
-    
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
   
-    Archive
+
+      
+    </li>
   
 
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../../blog/category/lifelog/">
-<span class="md-ellipsis">
+      
+      
+  
+  
     
   
-    Categories
   
-
+  
     
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../">
-<span class="md-ellipsis">
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Study
@@ -258,26 +463,95 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_3">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Study
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
     
   
     Paper
@@ -285,24 +559,42 @@
 
     
   </span>
-</a>
-<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-<span class="md-nav__icon md-icon"></span>
-</label>
-</div>
-<nav aria-expanded="true" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_2">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
             
   
     Paper
   
 
           </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2017-08-04-E2EMN/">
-<span class="md-ellipsis">
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2017-08-04-E2EMN/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     End-to-End Memory Network
@@ -310,11 +602,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2018-04-04-nsmcbidreclstmselfattn/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2018-04-04-nsmcbidreclstmselfattn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     A Structured Self-Attentive Sentence Embedding
@@ -322,11 +629,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2019-08-22-neuralnetworklm/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-08-22-neuralnetworklm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     A Neural Probabilistic Language Model
@@ -334,11 +656,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2019-09-18-introxai/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2019-09-18-introxai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Explaining Explanations: An Overview of Interpretability of Machine Learning
@@ -346,11 +683,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-01-14-attentionisallyouneed/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-01-14-attentionisallyouneed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Attention Is All You Need
@@ -358,11 +710,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-03-12-deepinsidecnn/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-03-12-deepinsidecnn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps
@@ -370,11 +737,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-07-19-maskpredict/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-19-maskpredict/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Mask-Predict: Parallel Decoding of Conditional Masked Language Models
@@ -382,11 +764,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-07-23-casm/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-07-23-casm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Classifier-agnostic saliency map extraction
@@ -394,11 +791,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2020-12-31-xaitutorial/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2020-12-31-xaitutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
@@ -406,11 +818,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-04-12-spider/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-04-12-spider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task
@@ -418,11 +845,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-04-20-featurevisualization/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-04-20-featurevisualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Feature Visualization
@@ -430,11 +872,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-05-14-bridge/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-05-14-bridge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Bridging Textual and Tabular Data for Cross-Domain Text-to-SQL Semantic Parsing
@@ -442,11 +899,26 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../2021-08-13-hybridranking/">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2021-08-13-hybridranking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
     
   
     Hybrid Ranking Network for Text-to-SQL
@@ -454,12 +926,33 @@
 
     
   </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
-<span class="md-ellipsis">
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
     
   
     NBDT: Neural-Backed Decision Trees
@@ -467,10 +960,16 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="./">
-<span class="md-ellipsis">
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
     
   
     NBDT: Neural-Backed Decision Trees
@@ -478,187 +977,293 @@
 
     
   </span>
-</a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#abstract">
-<span class="md-ellipsis">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Abstract
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#1-introduction">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
       
         1. Introduction
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#2-related-works">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#2-related-works" class="md-nav__link">
+    <span class="md-ellipsis">
       
         2. Related works
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-methods">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#3-methods" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3. Methods
       
     </span>
-</a>
-<nav aria-label="3. Methods" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#31-inference">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-inference" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.1 Inference
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#32-building-induced-hierarchies">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#32-building-induced-hierarchies" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.2 Building Induced Hierarchies
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#33-labeling-decision-nodes-with-wordnet">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#33-labeling-decision-nodes-with-wordnet" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.3 Labeling Decision Nodes with WordNet
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#34-fine-tuning-with-tree-supervision-loss">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#34-fine-tuning-with-tree-supervision-loss" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.4 Fine-Tuning with Tree Supervision Loss
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#4-experiments">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#4-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
       
         4. Experiments
       
     </span>
-</a>
-<nav aria-label="4. Experiments" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#41-results">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-results" class="md-nav__link">
+    <span class="md-ellipsis">
       
         4.1 Results
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#42-analysis">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#42-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
       
         4.2 Analysis
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#5-interpretability">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#5-interpretability" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5. Interpretability
       
     </span>
-</a>
-<nav aria-label="5. Interpretability" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#51-survey-identifying-faulty-model-predictions">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Interpretability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-survey-identifying-faulty-model-predictions" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.1 Survey: Identifying Faulty Model Predictions
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#52-survey-explanation-guided-image-classification">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#52-survey-explanation-guided-image-classification" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.2 Survey: Explanation-Guided Image Classification
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#53-survey-human-diagnosed-level-of-trust">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#53-survey-human-diagnosed-level-of-trust" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.3 Survey: Human-Diagnosed Level of Trust
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#54-analysis-identifying-faulty-dataset-labels">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#54-analysis-identifying-faulty-dataset-labels" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.4 Analysis: Identifying Faulty Dataset Labels
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
       
         느낀점
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-<a class="md-nav__link" href="../../tutorial/">
-<span class="md-ellipsis">
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../tutorial/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Tutorial
@@ -666,17 +1271,61 @@
 
     
   </span>
-<span class="md-nav__icon md-icon"></span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
-<div class="md-nav__link md-nav__container">
-<a class="md-nav__link" href="../../../project/">
-<span class="md-ellipsis">
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../project/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
     
   
     Project
@@ -684,251 +1333,385 @@
 
     
   </span>
-</a>
-</div>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
-            
   
-    Project
   
 
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-</ul>
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#abstract">
-<span class="md-ellipsis">
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
       
         Abstract
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#1-introduction">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
       
         1. Introduction
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#2-related-works">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#2-related-works" class="md-nav__link">
+    <span class="md-ellipsis">
       
         2. Related works
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-methods">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#3-methods" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3. Methods
       
     </span>
-</a>
-<nav aria-label="3. Methods" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#31-inference">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-inference" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.1 Inference
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#32-building-induced-hierarchies">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#32-building-induced-hierarchies" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.2 Building Induced Hierarchies
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#33-labeling-decision-nodes-with-wordnet">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#33-labeling-decision-nodes-with-wordnet" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.3 Labeling Decision Nodes with WordNet
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#34-fine-tuning-with-tree-supervision-loss">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#34-fine-tuning-with-tree-supervision-loss" class="md-nav__link">
+    <span class="md-ellipsis">
       
         3.4 Fine-Tuning with Tree Supervision Loss
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#4-experiments">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#4-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
       
         4. Experiments
       
     </span>
-</a>
-<nav aria-label="4. Experiments" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#41-results">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-results" class="md-nav__link">
+    <span class="md-ellipsis">
       
         4.1 Results
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#42-analysis">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#42-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
       
         4.2 Analysis
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#5-interpretability">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#5-interpretability" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5. Interpretability
       
     </span>
-</a>
-<nav aria-label="5. Interpretability" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#51-survey-identifying-faulty-model-predictions">
-<span class="md-ellipsis">
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Interpretability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-survey-identifying-faulty-model-predictions" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.1 Survey: Identifying Faulty Model Predictions
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#52-survey-explanation-guided-image-classification">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#52-survey-explanation-guided-image-classification" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.2 Survey: Explanation-Guided Image Classification
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#53-survey-human-diagnosed-level-of-trust">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#53-survey-human-diagnosed-level-of-trust" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.3 Survey: Human-Diagnosed Level of Trust
       
     </span>
-</a>
+  </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#54-analysis-identifying-faulty-dataset-labels">
-<span class="md-ellipsis">
+        
+          <li class="md-nav__item">
+  <a href="#54-analysis-identifying-faulty-dataset-labels" class="md-nav__link">
+    <span class="md-ellipsis">
       
         5.4 Analysis: Identifying Faulty Dataset Labels
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
       
         느낀점
       
     </span>
-</a>
+  </a>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content" data-md-component="content">
-<nav aria-label="Navigation" class="md-path">
-<ol class="md-path__list">
-<li class="md-path__item">
-<a class="md-path__link" href="../../..">
-<span class="md-ellipsis">
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+  
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
     About
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../../">
-<span class="md-ellipsis">
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Study
   </span>
-</a>
-</li>
-<li class="md-path__item">
-<a class="md-path__link" href="../">
-<span class="md-ellipsis">
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
     Paper
   </span>
-</a>
-</li>
-</ol>
-</nav>
-<article class="md-content__inner md-typeset">
-<nav class="md-tags" hidden="">
-<span class="md-tag">NBDT</span>
-<span class="md-tag">XAI</span>
-<span class="md-tag">Explainable AI</span>
-<span class="md-tag">Neural-Backed Decision Trees</span>
-</nav>
-<h1>NBDT: Neural-Backed Decision Trees</h1>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+  
+
+
+  <nav class="md-tags" hidden>
+    
+      
+      
+      
+      
+        <span class="md-tag">Explainable AI</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">NBDT</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">Neural-Backed Decision Trees</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">XAI</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+  <h1>NBDT: Neural-Backed Decision Trees</h1>
+
 <figure>
-<p><img alt="HeadImg" class="skipglightbox" src="https://drive.google.com/uc?export=view&amp;id=1OWtD9O8Xl16-61fMHTfQKxQIZggnExFL" width="100%">
-</img></p>
+<p><img alt="HeadImg" class="skipglightbox" src="https://lh3.googleusercontent.com/d/1OWtD9O8Xl16-61fMHTfQKxQIZggnExFL" width="100%" />
+  </p>
 <figcaption>Reference: Pixabay</figcaption>
 </figure>
-<h2 id="abstract">Abstract<a class="headerlink" href="#abstract" title="Permanent link">¶</a></h2>
+<h2 id="abstract">Abstract<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
 <p>금융, 의료 분야의 머신러닝은 정확도뿐만 아니라 납득이 가는 예측(justifiable predictions)이 필요할 때가 많다. 의사결정 나무와 딥러닝을 결합하는 시도는 많았으나, interpretability와 accuracy중 한쪽을 희생해야 하는 trade-off가 항상 있었다. 이 논문에서는 이 둘을 함께 향상하는 Neural-Backed Decision Trees(NBDTs)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>를 제안한다. NBDTs는 네트워크의 마지막 linear classifier를 <strong>미분 가능한 의사결정 나무 시퀀스</strong>와 <strong>대체 손실(Surrogate Loss)</strong>로 대체한다. 이런 과정이 더 높은 레벨의 개념을 학습하고 불확실한 결정에 대한 의존도를 완화한다. 이로써 CIFAR, ImageNet 에서 높거나 비슷한 정확도를 달성했고, 한 번도 보지 못한 데이터에서 좋은 성능을 달성했다(최대 16% 향상). 그리고 제안한 surrogate loss가 2%의 정확도를 더 향상했다. 또한, 모델의 실수와 데이터 세트 디버깅을 도움으로써 신뢰성에서 향상을 도모했다. </p>
-<hr/>
-<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
 <p>논문 참고</p>
-<hr/>
-<h2 id="2-related-works">2. Related works<a class="headerlink" href="#2-related-works" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="2-related-works">2. Related works<a class="headerlink" href="#2-related-works" title="Permanent link">&para;</a></h2>
 <p>논문 참고</p>
 <ul>
 <li>Saliency maps</li>
@@ -936,12 +1719,12 @@
 <li>Hybrid Models</li>
 <li>Hierarchical Classification</li>
 </ul>
-<hr/>
-<h2 id="3-methods">3. Methods<a class="headerlink" href="#3-methods" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="3-methods">3. Methods<a class="headerlink" href="#3-methods" title="Permanent link">&para;</a></h2>
 <p>Neural-Backed Decision Trees(NBDTs)는 네트워크의 마지막 linear 층을 <strong>의사결정 나무(Decision Trees)</strong>로 대체한다. 다른 전통적인 의사결정 나무와 달리, (Sec 3.1) 추론 시에는 path probabilities<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>를 사용해서 불확실한 중간 결정을 줄인다. 이를 통해, 학습된 모델의 가중치로부터 계층(hierarchy)을 만들어(Sec 3.2, 3.3) 과적합을 피한다. 그리고 훈련은 계층적 손실(Sec 3.4)을 사용해서 높은 레벨의 결정을 학습할 수 있게 한다.</p>
-<h3 id="31-inference">3.1 Inference<a class="headerlink" href="#31-inference" title="Permanent link">¶</a></h3>
+<h3 id="31-inference">3.1 Inference<a class="headerlink" href="#31-inference" title="Permanent link">&para;</a></h3>
 <p>네트워크의 뼈대는 마지막 linear 층을 제외한 네트워크로 유지하고, fully-connected 층을 유사 의사결정 나무(oblique decision tree, 이하 "유사 트리")로 실행한다. 하지만 전통적인 트리는 두 가지 문제점: (a) 초기 단계에서 한 번 잘못 분류하면 계속 틀린다는 점, (b) 정확도가 하락(최대 11%)이 되기 때문에 변형된 결정 규칙을 정한다(Fig 1, B).</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5"><img alt="Figure1" src="https://drive.google.com/uc?export=view&amp;id=1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure1" src="https://lh3.googleusercontent.com/d/1JX_w8PSsWFI3dxZZb_oa-1w9PjapoGc5" width="100%" /></a></p>
 <ol>
 <li>
 <p><strong>유사 트리의 규칙 weights를 네트워크의 weights로 초기화</strong></p>
@@ -966,71 +1749,71 @@
 <p>Soft Inference 단계에서는 마지막 클래스 예측 <span class="arithmatex">\(\hat{k}\)</span>는 다음과 같이 정해진다.</p>
 <div class="arithmatex">\[\hat{k} = {\arg \max}_k \ p(k) = {\arg \max}_k \ \prod_{i \in P_k} p(C_k(i) \vert i)\]</div>
 <p>장점은 (a) 아키텍쳐가 변하지 않았기 때문에 평소처럼 fully-connected 층 혹은 유사 트리를 유연하게 선택할 수 있다. (b) 다른 트리계열 방법들과 달리, 초기 단계에서 충분한 불확실성이 많은 잘못된 Path에 진입하는 경우에서 회복할 수 있다. </p>
-<h3 id="32-building-induced-hierarchies">3.2 Building Induced Hierarchies<a class="headerlink" href="#32-building-induced-hierarchies" title="Permanent link">¶</a></h3>
+<h3 id="32-building-induced-hierarchies">3.2 Building Induced Hierarchies<a class="headerlink" href="#32-building-induced-hierarchies" title="Permanent link">&para;</a></h3>
 <p>기존의 전통적 의사결정 나무를 만드는 방식은 (a) 데이터 의존성이 강한(e.g. information gain) 방법 혹은 (b) WordNet과 같이 사람이 이미 만든 계층이 있다. 그러나 전자는 과적합의 문제가 있고, 후자는 유사성보다는 개념을 더 중요시한다. 예를 들어, WordNet에서 animal에 속하는 것 중 bird는 cat과 더 가깝고, plane과는 멀어야 한다. 그러나 sky에 존재하는 것으로 가면 bird는 cat과 멀고, plane과 가까워야 한다.</p>
 <p>여기서 미리학습된 모델에서 가중치가 필요하다. 마지막 fully-connected layer의 가중치 매트릭스 <span class="arithmatex">\(W\)</span>의 행 벡터 <span class="arithmatex">\(w_k : k \in [1, K]\)</span>를 가지고 노말라이즈된 클래스 representations <span class="arithmatex">\(w_k / \Vert w_k \Vert_2\)</span>을 agglomerative clustering<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">4</a></sup>한다.</p>
 <p>Sec 3.1에서 언급 했듯이, 각 리프 노드들의 가중치 <span class="arithmatex">\(w_k \in W\)</span>와 리프 노드의 평균인 내부 노드의 가중치 <span class="arithmatex">\(n_i\)</span> 로 Agglomerative clustering를 수행해서, Figure 2 처럼 각 노드들이 묶인다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g"><img alt="Figure2" src="https://drive.google.com/uc?export=view&amp;id=1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g" width="100%"/></a></p>
-<h3 id="33-labeling-decision-nodes-with-wordnet">3.3 Labeling Decision Nodes with WordNet<a class="headerlink" href="#33-labeling-decision-nodes-with-wordnet" title="Permanent link">¶</a></h3>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure2" src="https://lh3.googleusercontent.com/d/1_SqLZiVDi_sfyYU3ZZeuixM8xZ2ODP2g" width="100%" /></a></p>
+<h3 id="33-labeling-decision-nodes-with-wordnet">3.3 Labeling Decision Nodes with WordNet<a class="headerlink" href="#33-labeling-decision-nodes-with-wordnet" title="Permanent link">&para;</a></h3>
 <p>WordNet은 영어 명사로 구성된 계층이다. 명사를 노드에 할당하기 위해서 서브 트리에서 가장 가까운 공통된 조상(ancestor)을 참고한다. 예를 들어, 개와 고양이 경우, WordNet에서 모든 조상을 찾는다. "Mammal", "Animal", "Living Thing"이 있는데, 제일 가까운 "Mammal"을 선택한다. 내부 노드도 이처럼 선택한다.</p>
 <details class="example">
 <summary>Example</summary>
 <p>예시, ancestors에서 carnivore(육식동물)이 가장 뒤에 가까운 공통요인이기 때문에 해당 단어를 parent node의 의미로 설정한다.</p>
-<div class="highlight"><span class="filename">WordNet 예시</span><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
-<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">def</span> <span class="nf">find_common</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
-<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l1</span><span class="p">:</span>
-<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l2</span><span class="p">:</span>
-<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="k">return</span> <span class="n">res</span>
-<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>
-<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="n">cat</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">'cat'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="n">dog</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">'dog'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>
-<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="n">p_cats</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">hypernym_paths</span><span class="p">()</span>
-<a href="#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="n">p_dogs</span> <span class="o">=</span> <span class="n">dog</span><span class="o">.</span><span class="n">hypernym_paths</span><span class="p">()</span>
-<a href="#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>
-<a href="#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="n">all_res</span> <span class="o">=</span> <span class="p">[]</span>
-<a href="#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_cats</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_dogs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
-<a href="#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_cats</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<a href="#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a>        <span class="n">p_cat</span> <span class="o">=</span> <span class="n">p_cats</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a href="#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_dogs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<a href="#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="n">p_dog</span> <span class="o">=</span> <span class="n">p_dogs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a href="#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">find_common</span><span class="p">(</span><span class="n">p_cat</span><span class="p">,</span> <span class="n">p_dog</span><span class="p">)</span>
-<a href="#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="n">all_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-<a href="#__codelineno-0-24" id="__codelineno-0-24" name="__codelineno-0-24"></a>
-<a href="#__codelineno-0-25" id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ps</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_res</span><span class="p">):</span>
-<a href="#__codelineno-0-26" id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Path </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<a href="#__codelineno-0-27" id="__codelineno-0-27" name="__codelineno-0-27"></a>    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ps</span><span class="p">)):</span>
-<a href="#__codelineno-0-28" id="__codelineno-0-28" name="__codelineno-0-28"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<a href="#__codelineno-0-29" id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="nb">print</span><span class="p">()</span>
-<a href="#__codelineno-0-30" id="__codelineno-0-30" name="__codelineno-0-30"></a>
-<a href="#__codelineno-0-31" id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="c1"># Path 0</span>
-<a href="#__codelineno-0-32" id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="c1"># Synset('carnivore.n.01')</span>
-<a href="#__codelineno-0-33" id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="c1"># Synset('placental.n.01')</span>
-<a href="#__codelineno-0-34" id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="c1"># Synset('mammal.n.01')</span>
-<a href="#__codelineno-0-35" id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="c1"># Synset('vertebrate.n.01')</span>
-<a href="#__codelineno-0-36" id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="c1"># Synset('chordate.n.01')</span>
-<a href="#__codelineno-0-37" id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="c1"># Synset('animal.n.01')</span>
-<a href="#__codelineno-0-38" id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="c1"># Synset('organism.n.01')</span>
-<a href="#__codelineno-0-39" id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="c1"># Synset('living_thing.n.01')</span>
-<a href="#__codelineno-0-40" id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="c1"># Synset('whole.n.02')</span>
-<a href="#__codelineno-0-41" id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="c1"># Synset('object.n.01')</span>
-<a href="#__codelineno-0-42" id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="c1"># Synset('physical_entity.n.01')</span>
-<a href="#__codelineno-0-43" id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="c1"># Synset('entity.n.01')</span>
-<a href="#__codelineno-0-44" id="__codelineno-0-44" name="__codelineno-0-44"></a>
-<a href="#__codelineno-0-45" id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="c1"># Path 1</span>
-<a href="#__codelineno-0-46" id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="c1"># Synset('animal.n.01')</span>
-<a href="#__codelineno-0-47" id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="c1"># Synset('organism.n.01')</span>
-<a href="#__codelineno-0-48" id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="c1"># Synset('living_thing.n.01')</span>
-<a href="#__codelineno-0-49" id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="c1"># Synset('whole.n.02')</span>
-<a href="#__codelineno-0-50" id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="c1"># Synset('object.n.01')</span>
-<a href="#__codelineno-0-51" id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="c1"># Synset('physical_entity.n.01')</span>
-<a href="#__codelineno-0-52" id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="c1"># Synset('entity.n.01')</span>
+<div class="highlight"><span class="filename">WordNet 예시</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span> <span class="nf">find_common</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l1</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l2</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="n">res</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">cat</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">dog</span> <span class="o">=</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="s1">&#39;dog&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">p_cats</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">hypernym_paths</span><span class="p">()</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">p_dogs</span> <span class="o">=</span> <span class="n">dog</span><span class="o">.</span><span class="n">hypernym_paths</span><span class="p">()</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">all_res</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">while</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_cats</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_dogs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_cats</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">p_cat</span> <span class="o">=</span> <span class="n">p_cats</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_dogs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="n">p_dog</span> <span class="o">=</span> <span class="n">p_dogs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">find_common</span><span class="p">(</span><span class="n">p_cat</span><span class="p">,</span> <span class="n">p_dog</span><span class="p">)</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">all_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ps</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_res</span><span class="p">):</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Path </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ps</span><span class="p">)):</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="nb">print</span><span class="p">()</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="c1"># Path 0</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="c1"># Synset(&#39;carnivore.n.01&#39;)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="c1"># Synset(&#39;placental.n.01&#39;)</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="c1"># Synset(&#39;mammal.n.01&#39;)</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="c1"># Synset(&#39;vertebrate.n.01&#39;)</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="c1"># Synset(&#39;chordate.n.01&#39;)</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="c1"># Synset(&#39;animal.n.01&#39;)</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="c1"># Synset(&#39;organism.n.01&#39;)</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="c1"># Synset(&#39;living_thing.n.01&#39;)</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="c1"># Synset(&#39;whole.n.02&#39;)</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="c1"># Synset(&#39;object.n.01&#39;)</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="c1"># Synset(&#39;physical_entity.n.01&#39;)</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="c1"># Synset(&#39;entity.n.01&#39;)</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="c1"># Path 1</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="c1"># Synset(&#39;animal.n.01&#39;)</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="c1"># Synset(&#39;organism.n.01&#39;)</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c1"># Synset(&#39;living_thing.n.01&#39;)</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="c1"># Synset(&#39;whole.n.02&#39;)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="c1"># Synset(&#39;object.n.01&#39;)</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="c1"># Synset(&#39;physical_entity.n.01&#39;)</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="c1"># Synset(&#39;entity.n.01&#39;)</span>
 </code></pre></div>
 </details>
-<h3 id="34-fine-tuning-with-tree-supervision-loss">3.4 Fine-Tuning with Tree Supervision Loss<a class="headerlink" href="#34-fine-tuning-with-tree-supervision-loss" title="Permanent link">¶</a></h3>
+<h3 id="34-fine-tuning-with-tree-supervision-loss">3.4 Fine-Tuning with Tree Supervision Loss<a class="headerlink" href="#34-fine-tuning-with-tree-supervision-loss" title="Permanent link">&para;</a></h3>
 <p><strong>Tree supervision Loss</strong>를 추가했는데, 이는 클래스 path probabilities의 Cross Entropy를 구한 것이다. </p>
 <div class="arithmatex">\[\mathcal{D}_{nbdt} = \lbrace p(k) \rbrace^K_{k=1}\]</div>
 <div class="arithmatex">\[\mathcal{L} = \beta_t \underbrace{\text{CrossEntropy}(\mathcal{D}_{pred}, \mathcal{D}_{label})}_{\mathcal{L}_{\text{original}}} + w_t \underbrace{\text{CrossEntropy}(\mathcal{D}_{nbdt}, \mathcal{D}_{label})}_{\mathcal{L}_{\text{soft}}}\]</div>
@@ -1038,33 +1821,33 @@
 <p><strong>Tree supervision Loss</strong>인 <span class="arithmatex">\(\mathcal{L}_{\text{soft}}\)</span>는 미리 정의된 hierarchy가 필요하다. 저자들은 tree supervision loss가 초기에 리프 가중치가 무의미할 때 학습 속도를 저해시키는 것을 발견했다. 그래서 tree supervision loss를 조절하는 tree supervision weight인 <span class="arithmatex">\(w_t\)</span>가 <span class="arithmatex">\(0\)</span>부터 <span class="arithmatex">\(0.5\)</span>까지 선형적으로 증가하게 했다. <span class="arithmatex">\(\beta_t \in [0, 1]\)</span>의 경우 선형적으로 줄어들게 했다.</p>
 <p>원래 모델의 정확도가 재현 불가능 할 때, 모델을 <span class="arithmatex">\(\mathcal{L}_{\text{soft}}\)</span>와 함께 다시 훈련시켰다.</p>
 <p>Hierarchical softmax<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">5</a></sup>와 달리 path-probability cross-entropy loss인 <span class="arithmatex">\(\mathcal{L}_{\text{soft}}\)</span>는 약간 불균형적으로 계층 초기의 결정 가중치를 높이는 경향이 있었다. 이는 높은 계층에서 더 정확한 결정을 끌어냈다. 이는 Table 6에서 unseen classes의 성능에서 최대 16%의 정확도 상승으로 나타난다.</p>
-<hr/>
-<h2 id="4-experiments">4. Experiments<a class="headerlink" href="#4-experiments" title="Permanent link">¶</a></h2>
-<h3 id="41-results">4.1 Results<a class="headerlink" href="#41-results" title="Permanent link">¶</a></h3>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=13afAiJrncapvrJbFaGeBf4XeblOkPpeo"><img alt="Table3" src="https://drive.google.com/uc?export=view&amp;id=13afAiJrncapvrJbFaGeBf4XeblOkPpeo" width="100%"/></a></p>
+<hr />
+<h2 id="4-experiments">4. Experiments<a class="headerlink" href="#4-experiments" title="Permanent link">&para;</a></h2>
+<h3 id="41-results">4.1 Results<a class="headerlink" href="#41-results" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/13afAiJrncapvrJbFaGeBf4XeblOkPpeo" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table3" src="https://lh3.googleusercontent.com/d/13afAiJrncapvrJbFaGeBf4XeblOkPpeo" width="100%" /></a></p>
 <p>Small-scale Datasets에서 기존 모델보다 약 1%의 성능 향상이 있었으며, 설명 가능한 특성도 보존하고 있다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw"><img alt="Figure3" src="https://drive.google.com/uc?export=view&amp;id=1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure3" src="https://lh3.googleusercontent.com/d/1P_Oulk2x8C8h9cN5JYy5XdOFnd2LLwRw" width="100%" /></a></p>
 <p>Large-scale Dataset의 Top-1 Accuracy에서 동일 Backbone을 가진 기존 SOTA와 비슷하거나 좋은 성능을 냈다. 다만 여기서 explainable accuracy가 무슨 것인지 나오지는 않아서 애매모호하다.</p>
-<h3 id="42-analysis">4.2 Analysis<a class="headerlink" href="#42-analysis" title="Permanent link">¶</a></h3>
+<h3 id="42-analysis">4.2 Analysis<a class="headerlink" href="#42-analysis" title="Permanent link">&para;</a></h3>
 <p>높은 계층의 컨셉(e.g., Animal vs. Vehicle)에서 성능 향상이 있었다.</p>
-<h4 id="comparison-of-hierarchies">Comparison of Hierarchies<a class="headerlink" href="#comparison-of-hierarchies" title="Permanent link">¶</a></h4>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy"><img alt="Table2" src="https://drive.google.com/uc?export=view&amp;id=1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy" width="100%"/></a></p>
+<h4 id="comparison-of-hierarchies">Comparison of Hierarchies<a class="headerlink" href="#comparison-of-hierarchies" title="Permanent link">&para;</a></h4>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table2" src="https://lh3.googleusercontent.com/d/1fweNrdEoPoImAlrBZIWdW-0slwvVUGfy" width="100%" /></a></p>
 <p>Tree를 어떤 방식으로 훈련 시켰는지 비교를 하자면, class weight로 Tree(Fig 1의 Soft)를 구성하는 것이 가장 좋은 성능을 보였다. OCI는 Fig 1의 Hard 방법, Info Gain은 고전적인 트리 그리고 WordNet은 사람이 구축한 계층 방법이다.</p>
-<h4 id="comparison-of-losses">Comparison of Losses<a class="headerlink" href="#comparison-of-losses" title="Permanent link">¶</a></h4>
+<h4 id="comparison-of-losses">Comparison of Losses<a class="headerlink" href="#comparison-of-losses" title="Permanent link">&para;</a></h4>
 <p>Hierarchical softmax 보다 좋은 성능을 보였다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq"><img alt="Table3" src="https://drive.google.com/uc?export=view&amp;id=1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table3" src="https://lh3.googleusercontent.com/d/1luQaAnxNH-W_mWuKKdz3CVz23S2cV3fq" width="100%" /></a></p>
 <p>Hard Tree Supervision Loss 와 Soft Tree Supervision Loss의 차이</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX"><img alt="Figure12" src="https://drive.google.com/uc?export=view&amp;id=1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX" width="100%"/></a></p>
-<h4 id="original-neural-network">Original Neural Network<a class="headerlink" href="#original-neural-network" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure12" src="https://lh3.googleusercontent.com/d/1vv5s6dEbAB91qEmNfgqfTl_DPFvtnOvX" width="100%" /></a></p>
+<h4 id="original-neural-network">Original Neural Network<a class="headerlink" href="#original-neural-network" title="Permanent link">&para;</a></h4>
 <p>Tree supervision loss를 결합을 했을때 약간의 성능향상이 있었다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN"><img alt="Table5" height="40%" src="https://drive.google.com/uc?export=view&amp;id=1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN"/></a></p>
-<h4 id="zero-shot-superclass-generalization">Zero-Shot Superclass Generalization<a class="headerlink" href="#zero-shot-superclass-generalization" title="Permanent link">¶</a></h4>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table5" height="40%" src="https://lh3.googleusercontent.com/d/1bh4wQE3QBSuqbgAbuV1dEHt8-ZJCdduN" /></a></p>
+<h4 id="zero-shot-superclass-generalization">Zero-Shot Superclass Generalization<a class="headerlink" href="#zero-shot-superclass-generalization" title="Permanent link">&para;</a></h4>
 <p>WordNet을 이용해 여러 개 클래스의 상위어(hypernym)로 Superclass를 정의했다. 그래서 unseen data가 내부 노드에서 잘 나뉘어 지는지 살펴보았다. 예를 들어, Turtle은 Animal vs. Vehicle 분기에서 Animal을 선택해야 한다.</p>
 <p>비교를 위해 일반적인 신경망 네트워크는, 예측 레이블이 속한 superclass를 사용했다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA"><img alt="Table6" height="40%" src="https://drive.google.com/uc?export=view&amp;id=1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table6" height="40%" src="https://lh3.googleusercontent.com/d/1Dcmv0MIwYDNNNfPqyvGyb34BRWu8wdKA" /></a></p>
 <p>다만 노드의 비쥬얼 의미를 자세히 살펴볼 필요가 있다(Appendix B.2)</p>
 <p>Induced hierarchy(Soft Tree)는 모델의 가중치를 사용하기 때문에, 중간 단계의 노드가 꼭 분리를 위한 특정 객체를 가르칠 필요가 없다. 즉, 아무 의미가 없을 수도 있다는 말이다. 게다가 WordNet을 사용했을 때, 예상치 못한 의미로 분리될 수가 있다. 이를 진단하기 위해 다음과 같이 4개의 스텝을 거친다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW"><img alt="Figure9" src="https://drive.google.com/uc?export=view&amp;id=1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure9" src="https://lh3.googleusercontent.com/d/1ArihxzppLJiEp-I-MI6yrLnnOqaYSFRW" width="100%" /></a></p>
 <ol>
 <li>노드의 의미에 대한 가설을 세운다(e.g., Animal vs. Vehicle). 이 가설은 주어진 분류법에서 자동으로 계산되거나 각 자식 노드에 대해 자동으로 추론한다(Fig 9).</li>
 <li>1단계에서 가정을 테스트하는 새로운 클래스로 데이터 세트를 수집한다. 수집한 데이터는 별도의 레이블에서 추출하기 때문에 OOD(Out-of-Distribution) 샘플이라고 한다.</li>
@@ -1072,11 +1855,11 @@
 <li>가설의 정확도는 올바른 자식 노드에 전달된 샘플의 비율이다. 정확도가 낮으면 다른 가설을 사용하여 반복한다.</li>
 </ol>
 <p>Fig 9b에서 WordNet의 가설은 Animal(파랑) vs. Vehicle(빨강)이다. CIFAR100의 validation 세트로 OOD 샘플로 구성하여 CIFAR10데이터 세트를 사용해 훈련한 Tree를 테스트했다. 측정된 정확도는 가설과 Tree에서 분류된 superclass가 정확한지 검증 정확도라고 할 수 있다.</p>
-<h4 id="mid-training-hierarchy">Mid-Training Hierarchy<a class="headerlink" href="#mid-training-hierarchy" title="Permanent link">¶</a></h4>
+<h4 id="mid-training-hierarchy">Mid-Training Hierarchy<a class="headerlink" href="#mid-training-hierarchy" title="Permanent link">&para;</a></h4>
 <p>미리 훈련된 가중치를 사용하지 않은 것을 비교했다. </p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15"><img alt="Table4" src="https://drive.google.com/uc?export=view&amp;id=11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15" width="100%"/></a></p>
-<hr/>
-<h2 id="5-interpretability">5. Interpretability<a class="headerlink" href="#5-interpretability" title="Permanent link">¶</a></h2>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Table4" src="https://lh3.googleusercontent.com/d/11OXdWkG9GjgDRPIS85YT6aCrfzvN3h15" width="100%" /></a></p>
+<hr />
+<h2 id="5-interpretability">5. Interpretability<a class="headerlink" href="#5-interpretability" title="Permanent link">&para;</a></h2>
 <p>복잡한 의사결정을 보다 작은 중간 단계의 의사결정으로 나눔으로써 Decision Tree는 인사이트를 제공한다. 그러나 중간 단계의 의사결정이 뉴럴 네트워크이기 때문에, 인사이트를 추출하기에 많은 어려움이 있다. 이를 해결하기 위해 Poursabzi-Sangdeh et al. (2018)<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">6</a></sup>에서 제한 벤치마크와 interpretability 정의를 가져왔다.</p>
 <p>인간이 예측의 유효성을 검증할 수 있는 경우 "해석 가능하다"라고 말할 수 있으며, 모델이 실수했을 때 인간이 이를 알 수가 있다. 해당 논문 저자의 컴퓨터 비전에 사용된 벤치마크를 가져왔고, 적용 결과 다음과 같다.</p>
 <ol>
@@ -1091,7 +1874,7 @@
 <li>앙상블 예측이 아님: 예측과 원인의 귀착(attribution)이 서로 독립적이다.</li>
 </ol>
 <p>모든 서베이 데이터는 CIFAR 10 데이터에 훈련된 ResNet18 모델을 사용했다.</p>
-<h3 id="51-survey-identifying-faulty-model-predictions">5.1 Survey: Identifying Faulty Model Predictions<a class="headerlink" href="#51-survey-identifying-faulty-model-predictions" title="Permanent link">¶</a></h3>
+<h3 id="51-survey-identifying-faulty-model-predictions">5.1 Survey: Identifying Faulty Model Predictions<a class="headerlink" href="#51-survey-identifying-faulty-model-predictions" title="Permanent link">&para;</a></h3>
 <p>이 섹션에서는 Poursabzi-Sangdeh et al. (2018)<sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">6</a></sup>에서 언급한 다음 질문을 대답하려고 한다.</p>
 <blockquote>
 <p><em>"How well can someone detect when the model has made a sizable mistake?"</em></p>
@@ -1100,13 +1883,13 @@
 <p>이 서베이에서는 사용자에게 2개의 정확히 분류된 이미지 그리고 1개의 틀리게 분류된 이미지가 주어진다. 사용자는 모델의 설명과 최종예측이 없는 상태에서 어떤 이미지가 잘 못 분류되었는지 예측해야 한다. Saliency maps의 경우 이미지가 맞든 틀리든 이미지에 대한 attribution을 표기하기 때문에 이 질문을 대답하기가 어렵다. 그러나 계층적(hierarchical) 방법은 <strong>합리적인 의사결정 시퀀스</strong>를 제공하기 때문에 이를 확인 할 수가 있다.</p>
 <p>저자들은 각 설명기법에 대해 600개의 서베이 응답을 결과로 받았고, 유저들은 saliency maps와 클래스 확률을 줬을 때, 87개의 예측만이 정확하게 틀렸다는 것을 인지했다. 반면, 유저들에게 NBDT로 예측한 클래스와 자식 확률(예, Animal (90%) → Mammal (95%), 최종 리프 노드 예측은 주지 않는다)을 줬을 때, 237개의 이미지를 정확하게 틀렸다고 인지했다. 따라서 NBDT 방법이 모델이 일으킨 실수를 약 3배 더 잘 탐지할 수 있다.</p>
 <p>비록 saliency maps보다 더 나은 결과를 보였지만, 아직도 363개의 예측에 대해서는 정확하게 판별하지 못했다. 약 37% NBDT의 에러는 최종 binary decision에서 나왔으며, 최종 결정을 유저들에게 제공하지 않았기에, leaf errors는 구별할 수가 없었다.</p>
-<h3 id="52-survey-explanation-guided-image-classification">5.2 Survey: Explanation-Guided Image Classification<a class="headerlink" href="#52-survey-explanation-guided-image-classification" title="Permanent link">¶</a></h3>
+<h3 id="52-survey-explanation-guided-image-classification">5.2 Survey: Explanation-Guided Image Classification<a class="headerlink" href="#52-survey-explanation-guided-image-classification" title="Permanent link">&para;</a></h3>
 <p>이 섹션에서는 Poursabzi-Sangdeh et al. (2018)<sup id="fnref3:5"><a class="footnote-ref" href="#fn:5">6</a></sup>에서 언급한 다음 질문을 대답하려고 한다.</p>
 <blockquote>
 <p><em>"To what extent do people follow a model’s predictions when it is beneficial to do so?"</em></p>
 <p><em>사람들은 모델의 예측이 유익하다고 판단할때 이를 어느 정도까지 따를까?</em></p>
 </blockquote>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL"><img alt="Figure4" src="https://drive.google.com/uc?export=view&amp;id=1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure4" src="https://lh3.googleusercontent.com/d/1N-FZP8yX60kye9-SCSMRCob0uq4B_jYL" width="100%" /></a></p>
 <p>첫 번째 서베이에서 유저들은 여러 블러 처리된 이미지(Fig 4)를 분류하게 된다. 600개의 이미지 중 163개만 맞춰서 저자들은 해당 과제가 어렵다는 것을 확인했다.</p>
 <p>그다음 서베이로, 블러 처리된 이미지와 2개의 자료를 제공했다.</p>
 <ol>
@@ -1116,84 +1899,130 @@
 <p>두 모델이 다른 클래스를 예측된 데이터를 선정했다. 30%는 NBDT가 맞고, 원래 네트워크는 틀린 예제들이고, 또 다른 30%는 반대로 원래 네트워크가 맞고 NBDT가 틀렸다. 그리고 나머지 40%는 둘 다 틀린 예제들로 구성됐다. Fig 4처럼 이미지가 아주 많이 블러 처리됐기 때문에, 유저들은 모델에서 제공된 정보에 의존해 판별해야 했다.</p>
 <p>정보를 줬을 때 유저들은 600개 중 255개(42.5%의 정확도)를 기록했다. 분석 결과 사람들은 NBDT의 설명된 예측을 더 신뢰했다. 600개 중 312개의 응답에서 NBDT의 예측을 더 신뢰했고, 167개는 기존 모델의 예측을, 그리고 119개의 응답은 모두 신뢰하지 않았다.</p>
 <p>주의할 점은 비록 모델이 40%나 틀린 예측을 했음에도 불구하고 대부분의 유저가 대략 80% 정도 두 모델을 신뢰했다는 점이다. 이는 모델을 의존할 만큼 준비한 이미지가 충분히 흐렸다는 것을 증명해준다. 게다가 NBDT가 30%의 샘플만 맞췄음에도 불구하고, 52%의 응답자들은 NBDT 결정에 동의했는데(saliency maps는 28%), 이는 모델의 신뢰성에 향상을 의미한다.</p>
-<h3 id="53-survey-human-diagnosed-level-of-trust">5.3 Survey: Human-Diagnosed Level of Trust<a class="headerlink" href="#53-survey-human-diagnosed-level-of-trust" title="Permanent link">¶</a></h3>
+<h3 id="53-survey-human-diagnosed-level-of-trust">5.3 Survey: Human-Diagnosed Level of Trust<a class="headerlink" href="#53-survey-human-diagnosed-level-of-trust" title="Permanent link">&para;</a></h3>
 <p>NBDT의 예측 설명은 path를 순회(traverse)하는 것과 같다. 저자들은 참가자들에게 Figure 13처럼 믿을 만한 둘 중 하나의 전문가를 고르라고 했다(혹은 둘 다 안고를 수도 있음). 원래 모델과 NBDT 모델이 모두 같은 클래스를 예측한 데이터 샘플을 사용했다. 374개의 응답 중, 둘 중 어느 게 더 나았냐는 질문에는 65.9%가 NBDT의 설명을 더 선호했다. 잘못 분류된 샘플들에서 73.5%가 NBDT를 더 선호했다. 이는 사람은 NBDT를 더 선호한다는 이전의 서베이 결과들을 증명해주었다(Expert A. ResNet18, GradCAM / Expert B. NBDT).</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB"><img alt="Figure13" src="https://drive.google.com/uc?export=view&amp;id=1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB" width="100%"/></a></p>
-<h3 id="54-analysis-identifying-faulty-dataset-labels">5.4 Analysis: Identifying Faulty Dataset Labels<a class="headerlink" href="#54-analysis-identifying-faulty-dataset-labels" title="Permanent link">¶</a></h3>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=149YlpXOZCzSlqWx8DvylaPy27trepOy9"><img alt="Figure5" src="https://drive.google.com/uc?export=view&amp;id=149YlpXOZCzSlqWx8DvylaPy27trepOy9" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure13" src="https://lh3.googleusercontent.com/d/1V3mNPqfEnxQWtCdICIwf5RFlWb6IbKxB" width="100%" /></a></p>
+<h3 id="54-analysis-identifying-faulty-dataset-labels">5.4 Analysis: Identifying Faulty Dataset Labels<a class="headerlink" href="#54-analysis-identifying-faulty-dataset-labels" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/149YlpXOZCzSlqWx8DvylaPy27trepOy9" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure5" src="https://lh3.googleusercontent.com/d/149YlpXOZCzSlqWx8DvylaPy27trepOy9" width="100%" /></a></p>
 <p>Fig 5처럼 모델의 퍼포먼스를 해치는 애매모호한 데이터들이 있다. 이런 데이터들을 찾아내기 위해서 NBDT의 결정 중 Entropy를 살펴보았다. 이는 원래 모델의 Entropy보다 애매모호함을 나타내기 위한 더 좋은 지표였다.</p>
 <p>인사이트는 다음과 같다. 만약에 몇 가지 결정을 제외한 중간 결정 과정에서 높은 확실성을 가진다면, 그 결정들은 여러 동등하게 타당한 케이스 중에서 결정된 것이다. 따라서, 높은 "path entropy"를 가진 혹은 이질적인 entropy를 가진 샘플들을 애매모호한 레이블로 선정한다.</p>
-<p><a class="glightbox" data-desc-position="bottom" data-height="100%" data-width="70%" href="https://drive.google.com/uc?export=view&amp;id=13DWwJjGFt1QgUp7cnhczmL84NumH8Bja"><img alt="Figure6" src="https://drive.google.com/uc?export=view&amp;id=13DWwJjGFt1QgUp7cnhczmL84NumH8Bja" width="100%"/></a></p>
+<p><a class="glightbox" href="https://lh3.googleusercontent.com/d/13DWwJjGFt1QgUp7cnhczmL84NumH8Bja" data-type="image" data-width="70%" data-height="100%" data-desc-position="bottom"><img alt="Figure6" src="https://lh3.googleusercontent.com/d/13DWwJjGFt1QgUp7cnhczmL84NumH8Bja" width="100%" /></a></p>
 <p>Fig 6에서 NBDT는 ImageNet의 애매모호한 레이블을 찾아낼 수 있다는 것을 보여준다. TinyImagenet200데이터로 훈련된 모델을 사용해서 가장 많은 혼돈을 유발하는 2개 클래스를 그렸다.</p>
 <p>좌측에는 ResNet18를 실행 시켜 상위 2개의 클래스 엔트로피를 최대화하고 상위 2개의 클래스 엔트로피를 평균시킨 모든 클래스에서 엔트로피를 최소화한 샘플을 찾는다. 높은 불확실성을 가짐에도 불구하고, 절반의 클래스들이 "벌, 오렌지, 다리, 바나나, 리모컨"에서 생겼는데, 사람이 보았을 때 전혀 애매모호한 점이 없다.</p>
 <p>우측에는 NBDT의 결과를 보여주는데, 각 노드 예측 분포의 엔트로피를 계산한다. 그리고 가장 큰 값과 가장 작은 값의 차이를 가지는 샘플을 선택한다. 그 결과, 절반의 이미지가 정말로 애매모호한 이미지들이 선택됐다. 이는 NBDT의 entropy가 더 많은 정보를 가지고 있다는 것을 보여준다.</p>
-<hr/>
-<h2 id="_1">느낀점<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<hr />
+<h2 id="_1">느낀점<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>사람이 알기 쉬운 의사결정 나무를 Neural Network와 연결하려는 노력은 이전에 많았었는데, 이 논문은 뉴럴 넷을 따라 하는 shallow 모델 아니라 직접 뒷단에 연결한 다는 점에서 신선했음</li>
 <li>Vector Representation을 기반으로 트리를 만들어서 자칫 설명력이 부족할 뻔한 것을 WordNet을 사용하여 이를 보완함. 물론 WordNet에 없는 계층은 설명 못 한다는 점에서 아직 더 발전시켜야 함.</li>
 <li>이 분야는 평가 방법이 어려운데, 특정 서베이를 이용하여 자신들의 모델이 왜 더 설명력이 좋고, 신뢰성이 높은지 수치화시킴</li>
 </ul>
 <div class="footnote">
-<hr/>
+<hr />
 <ol>
 <li id="fn:1">
-<p><a href="https://arxiv.org/abs/2004.00221">NBDT: Neural-Backed Decision Trees</a> <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p><a href="https://arxiv.org/abs/2004.00221">NBDT: Neural-Backed Decision Trees</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>Probability Path: <a href="https://www.youtube.com/watch?v=8QyQSZQ4uKQ&amp;ab_channel=MITOpenCourseWare">L25.4 The Probability of a Path</a> <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+<p>Probability Path: <a href="https://www.youtube.com/watch?v=8QyQSZQ4uKQ&amp;ab_channel=MITOpenCourseWare">L25.4 The Probability of a Path</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:6">
-<p><a href="http://vision.stanford.edu/pdf/DengKrauseBergFei-Fei_CVPR2012.pdf">Deng et al. 2012</a> <a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 3 in the text">↩</a></p>
+<p><a href="http://vision.stanford.edu/pdf/DengKrauseBergFei-Fei_CVPR2012.pdf">Deng et al. 2012</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
 <p>Agglomerative clustering 
 (1) <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical clustering - Wikipedia</a> 
 (2) <a href="https://www.slideshare.net/pierluca.lanzi/dmtm-lecture-12-hierarchical-clustering?qid=94d8b25a-8cfa-421c-9ed5-03c0b33c29fb&amp;v=&amp;b=&amp;from_search=1">DMTM Lecture 12 Hierarchical clustering</a> 
-(3) <a href="https://todayisbetterthanyesterday.tistory.com/61">[Python] Hierarchical clustering(계층적 군집분석)</a> <a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 4 in the text">↩</a></p>
+(3) <a href="https://todayisbetterthanyesterday.tistory.com/61">[Python] Hierarchical clustering(계층적 군집분석)</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 <li id="fn:4">
-<p><a href="https://seunghan96.github.io/ne/03.Hierarchical_Softmax/">Hierarchical Softmax</a> <a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 5 in the text">↩</a></p>
+<p><a href="https://seunghan96.github.io/ne/03.Hierarchical_Softmax/">Hierarchical Softmax</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 <li id="fn:5">
-<p><a href="https://arxiv.org/abs/1802.07810">Poursabzi-Sangdeh et al. (2018)</a> <a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 6 in the text">↩</a><a class="footnote-backref" href="#fnref2:5" title="Jump back to footnote 6 in the text">↩</a><a class="footnote-backref" href="#fnref3:5" title="Jump back to footnote 6 in the text">↩</a></p>
+<p><a href="https://arxiv.org/abs/1802.07810">Poursabzi-Sangdeh et al. (2018)</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:5" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:5" title="Jump back to footnote 6 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
-<form class="md-feedback" hidden="" name="feedback">
-<fieldset>
-<legend class="md-feedback__title">
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+  
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
         Was this page helpful?
       </legend>
-<div class="md-feedback__inner">
-<div class="md-feedback__list">
-<button class="md-feedback__icon md-icon" data-md-value="1" title="This page was helpful" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
-</button>
-<button class="md-feedback__icon md-icon" data-md-value="0" title="This page could be improved" type="submit">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
-</button>
-</div>
-<div class="md-feedback__note">
-<div data-md-value="1" hidden="">
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
               
               
                 
               
               Thanks for your feedback!
             </div>
-<div data-md-value="0" hidden="">
-</div>
-</div>
-</div>
-</fieldset>
-</form>
-<!-- Giscus -->
-<h2 id="__comments">Comments</h2>
-<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDOHRhxjc4CQSuI" data-emit-metadata="0" data-input-position="top" data-lang="ko" data-mapping="pathname" data-reactions-enabled="1" data-repo="simonjisu/comments_bot" data-repo-id="R_kgDOHRhxjQ" data-theme="light" src="https://giscus.app/client.js">
-</script>
-<!-- Synchronize Giscus theme with palette -->
-<script>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+  <script src="https://giscus.app/client.js"
+        data-repo="simonjisu/comments_bot"
+        data-repo-id="R_kgDOHRhxjQ"
+        data-category="General"
+        data-category-id="DIC_kwDOHRhxjc4CQSuI"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
     var giscus = document.querySelector("script[src*=giscus]")
 
     /* Set palette on initial load */
@@ -1221,42 +2050,74 @@
       })
     })
   </script>
-</article>
-</div>
+
+              </article>
+            </div>
+          
+          
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-</div>
-<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
-            Back to top
-          </button>
-</main>
-<footer class="md-footer">
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-copyright">
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs Insiders
     </a>
+  
 </div>
-<div class="md-social">
-<a class="md-social__link" href="https://github.com/simonjisu" rel="noopener" target="_blank" title="github.com">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-</a>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/simonjisu" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
 </div>
-</div>
-</div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<div class="md-dialog" data-md-component="dialog">
-<div class="md-dialog__inner md-typeset"></div>
-</div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../../../assets/javascripts/bundle.65061dd4.min.js"></script>
-<script src="../../../javascripts/mathjax.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});})</script></body>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "toc.follow", "navigation.prune", "navigation.path", "content.tooltips", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.1e90e0fb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e3055991.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": false, "draggable": false, "openEffect": "none", "closeEffect": "none", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

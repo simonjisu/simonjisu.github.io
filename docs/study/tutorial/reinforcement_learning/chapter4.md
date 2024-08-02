@@ -31,12 +31,12 @@ $$ v_{k+1}(s) \leftarrow \sum_a \pi(a \vert s) \sum_{s'} \sum_{r} p(s', r \vert 
 
     === "pseduo code"
 
-        ![HeadImg](https://drive.google.com/uc?id=17NvdzduDS2oGvzrxtWJSSLz3JZHqSUIJ){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/17NvdzduDS2oGvzrxtWJSSLz3JZHqSUIJ){ class="skipglightbox" width="100%" }
 
 
 ### Example: 4 x 4 Grid-World
 
-![HeadImg](https://drive.google.com/uc?id=17QDTYlqN6vnyEf7hPzi72wugJZY35XQ1){ class="skipglightbox" width="80%" }
+![HeadImg](https://lh3.googleusercontent.com/d/17QDTYlqN6vnyEf7hPzi72wugJZY35XQ1){ class="skipglightbox" width="80%" }
 
 이번 Grid-World 예시는 다음과 같다.
 
@@ -153,42 +153,42 @@ $$\begin{aligned}
 
         좌: $v_k$, 우: greedy policy with $v_k$
 
-        ![HeadImg](https://drive.google.com/uc?id=18CQbcDeyWC3EhrpXP9QpeMZLGCBrIOVc){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18CQbcDeyWC3EhrpXP9QpeMZLGCBrIOVc){ class="skipglightbox" width="80%" }
 
 
     === "k=1" 
 
         좌: $v_k$, 우: greedy policy with $v_k$
 
-        ![HeadImg](https://drive.google.com/uc?id=18Titx56BZmXJ5GSfDHctFnnPvzRo_JQ4){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18Titx56BZmXJ5GSfDHctFnnPvzRo_JQ4){ class="skipglightbox" width="80%" }
 
 
     === "k=2" 
 
         좌: $v_k$, 우: greedy policy with $v_k$
 
-        ![HeadImg](https://drive.google.com/uc?id=18SclBIzSNGxltIyLd9PcKrImB6NpD2Jr){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18SclBIzSNGxltIyLd9PcKrImB6NpD2Jr){ class="skipglightbox" width="80%" }
 
 
     === "k=5" 
 
         좌: $v_k$, 우: greedy policy with $v_k$
         
-        ![HeadImg](https://drive.google.com/uc?id=18P1ZaLI-84XRUwmjeEDM42nTVEb9jFQz){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18P1ZaLI-84XRUwmjeEDM42nTVEb9jFQz){ class="skipglightbox" width="80%" }
 
 
     === "k=50" 
 
         좌: $v_k$, 우: greedy policy with $v_k$
 
-        ![HeadImg](https://drive.google.com/uc?id=18NtEy9S6GexXq6AOgUXIpHbBuB5roC4g){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18NtEy9S6GexXq6AOgUXIpHbBuB5roC4g){ class="skipglightbox" width="80%" }
 
 
     === "k=257($\infty)$" 
 
         좌: $v_k$, 우: greedy policy with $v_k$
 
-        ![HeadImg](https://drive.google.com/uc?id=18HjAhpZon6lI7mOuqpvVaQOg1ustjkzP){ class="skipglightbox" width="80%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18HjAhpZon6lI7mOuqpvVaQOg1ustjkzP){ class="skipglightbox" width="80%" }
 
 ## Policy Iteration
 
@@ -200,7 +200,7 @@ $$\pi_0 \xrightarrow{E} v_{\pi_0} \xrightarrow{I} \pi_1 \xrightarrow{E} \cdots \
 
     === "pseduo code"
 
-        ![HeadImg](https://drive.google.com/uc?id=18CJr76sGYo6ep4HziO8GadFfJUoIWBeV){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18CJr76sGYo6ep4HziO8GadFfJUoIWBeV){ class="skipglightbox" width="100%" }
 
     === "해설"
 
@@ -226,11 +226,11 @@ Policy Iteration의 단점은 매 스텝마다 policy evaluation이 포함된다
 
     === "pseduo code"
         
-        ![HeadImg](https://drive.google.com/uc?id=18YooWM9zQP3OxwOy0MZIcsqQ0XYDicG8){ class="skipglightbox" width="100%" }
+        ![HeadImg](https://lh3.googleusercontent.com/d/18YooWM9zQP3OxwOy0MZIcsqQ0XYDicG8){ class="skipglightbox" width="100%" }
 
 ## Generalized Policy Iteration
 
-![HeadImg](https://drive.google.com/uc?id=18ZWmwU39nqzio5lhW7yvbhz9tvwOazFx){ align=left class="skipglightbox" width="20%" }
+![HeadImg](https://lh3.googleusercontent.com/d/18ZWmwU39nqzio5lhW7yvbhz9tvwOazFx){ align=left class="skipglightbox" width="20%" }
 
 > the general idea of letting policy-evaluation and policyimprovement processes interact, independent of the granularity and other details of the two processes
 

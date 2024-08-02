@@ -7,7 +7,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1d6DGjVD44lyiJnvoMD3uRFPLwuOQwibW){ class="skipglightbox" width="100%" }
   <figcaption>Reference: MongoDB</figcaption>
 </figure>
 
@@ -34,19 +34,19 @@ tags:
 
 === "Example of Schema Validation 1"
 
-    ![Image title](https://drive.google.com/uc?id=1CbzFfzlSDHKWBrWMh2IZh5KwDdRA8zHq){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/1CbzFfzlSDHKWBrWMh2IZh5KwDdRA8zHq){ align=left width=50% }
 
     Schema Validation을 적용하기전 `b` 필드에는 `int` 타입과 `string` 타입이 들어 갈 수 있었다.
 
 === "Example of Schema Validation 2"
 
-    ![Image title](https://drive.google.com/uc?id=1q5Smz36LKgzn4Eeqcw2Ado5-Bkpqgp4k){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/1q5Smz36LKgzn4Eeqcw2Ado5-Bkpqgp4k){ align=left width=50% }
 
     `b` 필드에 Schema Validation을 적용하여 `int` 타입만 받게 한다.
 
 === "Example of Schema Validation 3"
 
-    ![Image title](https://drive.google.com/uc?id=1DpIFemooBVtvt4N8-RLcbYjAfxlZweLV){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/1DpIFemooBVtvt4N8-RLcbYjAfxlZweLV){ align=left width=50% }
 
     더 이상 `string` 타입의 데이터를 삽입할 수 없게 된다.
 
@@ -58,7 +58,7 @@ tags:
 
 === "Connect to DB"
     
-    ![Image title](https://drive.google.com/uc?id=1o-qs6KQAoEWxK7BXI1JnUyAil_9Oiz5V){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/1o-qs6KQAoEWxK7BXI1JnUyAil_9Oiz5V){ align=left width=50% }
 
     MongoDB Compass를 로컬에서 구동 중인 DB를 연결하는 방법은 아래와 같이 URI를 연결하면 된다.
 
@@ -68,19 +68,19 @@ tags:
 
 === "Create DB 1"
 
-    ![Image title](https://drive.google.com/uc?id=11BosWHGm-tn_i_5-DaQSiD0kwR0cVfys){ align=left width=30% }
+    ![Image title](https://lh3.googleusercontent.com/d/11BosWHGm-tn_i_5-DaQSiD0kwR0cVfys){ align=left width=30% }
 
     MongoDB Compass 좌측 상단에서 `+`를 눌러 새로운 데이터 베이스를 생성하자.
 
 === "Create DB 2"
 
-    ![Image title](https://drive.google.com/uc?id=11Eut57Ecz5PaWUq4_Yop_XH6HR2ruvum){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/11Eut57Ecz5PaWUq4_Yop_XH6HR2ruvum){ align=left width=50% }
 
     새로운 데이터 베이스 이름을 지어주자 Database Name은 `mydb` Collection Name은 `test`로 한다.
 
 === "Create DB 3"
     
-    ![Image title](https://drive.google.com/uc?export=view&id=11UZTu5VM9npLBW53ttZEPk91fol4QxlX){ align=left width=30% }
+    ![Image title](https://lh3.googleusercontent.com/d/11UZTu5VM9npLBW53ttZEPk91fol4QxlX){ align=left width=30% }
 
     좌측 패널에 데이터베이스가 생기면서 컬렉션도 같이 만들어 졌다.
 

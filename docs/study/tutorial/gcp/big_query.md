@@ -8,7 +8,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://drive.google.com/uc?id=1rVmsigPLPnvqh-1YweLmepy4iiR3H0Dk){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1rVmsigPLPnvqh-1YweLmepy4iiR3H0Dk){ class="skipglightbox" width="100%" }
   <figcaption>Reference: Google Big Query</figcaption>
 </figure>
 
@@ -26,25 +26,25 @@ tags:
 
 빅쿼리를 시작하면 다음과 같은 화면이 뜬다. 여기서 데이터를 불러오고, 쿼리를 질의할 수 있는 작업환경까지 마련되어 있다. 이제 데이터 세트 에셋을 생성해보자. Titanic 데이터 세트를 작업 공간에 불러서 작업해본다.
 
-![Image title](https://drive.google.com/uc?id=1Xs11szdHuYoiEOtNotv51CAwRC1SBdz_)
+![Image title](https://lh3.googleusercontent.com/d/1Xs11szdHuYoiEOtNotv51CAwRC1SBdz_)
 
 === "Create Dataset 1"
 
-    ![Image title](https://drive.google.com/uc?id=1ZGhm1twS9bn2WNUYBvJLePx3nRRUMSp3){ align=left width=40% }
+    ![Image title](https://lh3.googleusercontent.com/d/1ZGhm1twS9bn2WNUYBvJLePx3nRRUMSp3){ align=left width=40% }
 
     프로젝트 ID에서 데이터 세트를 만든다.
 
 === "Create Dataset 2"
 
-    ![Image title](https://drive.google.com/uc?id=1K1j0MkcYfIDurmG2ikDviM_0O0815XhQ){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/1K1j0MkcYfIDurmG2ikDviM_0O0815XhQ){ align=left width=50% }
 
     데이터 세트 ID `titanic`를 입력한다. 데이터 세트가 생성되고나면 에셋이 생성 되었다는 문구가 뜬다.
 
-    ![Image title](https://drive.google.com/uc?id=1xsGTsh-m12E8DBdfvzCp7sGgkKY2c3eZ){ align=left width=50% }
+    ![Image title](https://lh3.googleusercontent.com/d/1xsGTsh-m12E8DBdfvzCp7sGgkKY2c3eZ){ align=left width=50% }
     
 === "Create Dataset 3"
 
-    ![Image title](https://drive.google.com/uc?id=1T7IVytoywr-2W-lnPXaHH02OK4L5qsK9)
+    ![Image title](https://lh3.googleusercontent.com/d/1T7IVytoywr-2W-lnPXaHH02OK4L5qsK9)
 
     데이터세트가 생성되었다.
 
@@ -52,13 +52,13 @@ tags:
 
 === "Create Table 1"
 
-    ![Image title](https://drive.google.com/uc?id=1niATIQ_ibXPTIoFdIx4nSJIVIqxmhIZL){ align=left width=70% }
+    ![Image title](https://lh3.googleusercontent.com/d/1niATIQ_ibXPTIoFdIx4nSJIVIqxmhIZL){ align=left width=70% }
 
     `업로드`를 통해서 소스 파일을 테이블로 만들자. 스키마는 직접 설정하거나 자동으로 감지하여 생성할 수 있다.
 
 === "Create Table 2"
 
-    ![Image title](https://drive.google.com/uc?id=1yvw1eKNlxL3knao6I7Ic9fnLg_qtSfRC){ align=left width=100% }
+    ![Image title](https://lh3.googleusercontent.com/d/1yvw1eKNlxL3knao6I7Ic9fnLg_qtSfRC){ align=left width=100% }
 
     생성된 테이블을 보면 스키마가 잘 지정되어 있는 것을 확인 할 수 있다.
 
@@ -131,7 +131,7 @@ tags:
 
 BigQuery ML을 사용하면 GoogleSQL 쿼리를 사용하여 BigQuery에서 머신러닝 모델을 만들고 실행할 수 있다. 실행 가능한 모델의 선택 가이드는 다음 그림과 같다. 
 
-![Image title](https://drive.google.com/uc?id=1AQWIhi5aw_AgfR5bw7k_nwCVR1NNASx_){ width=100% }
+![Image title](https://lh3.googleusercontent.com/d/1AQWIhi5aw_AgfR5bw7k_nwCVR1NNASx_){ width=100% }
 
 이번 튜토리얼에서는 Kaggle Titanic[^2] 데이터 세트를 사용하여 머신러닝 파이프라인을 SQL로만 만들어보자. 
 
@@ -207,11 +207,11 @@ FROM
 
 실행된 쿼리 결과를 살펴보자. 처리된 쿼리양은 32.34GB이며, 총 10분 16초의 시간이 걸렸다.
 
-![Image title](https://drive.google.com/uc?id=1a4YylPF-V3DnZM5ta5QoLlGiHAjdF9k0){ width=80% }
+![Image title](https://lh3.googleusercontent.com/d/1a4YylPF-V3DnZM5ta5QoLlGiHAjdF9k0){ width=80% }
 
 그리고 `titanic_model`를 클릭하여 평가 항목을 살펴보면 모델의 평가 데이터로 평가된 결과를 볼 수 있다. 
 
-![Image title](https://drive.google.com/uc?id=1fsGNURF6214AhTGDO4Rrx0HvViY4C3a9){ width=100% }
+![Image title](https://lh3.googleusercontent.com/d/1fsGNURF6214AhTGDO4Rrx0HvViY4C3a9){ width=100% }
 
 ### 3. PREDICT
 
@@ -251,6 +251,6 @@ FROM
 
 [^3]: [BigQuery ML - Pricing](https://cloud.google.com/bigquery-ml/pricing?hl=ko)
 
-![Image title](https://drive.google.com/uc?id=1Q9Jezc00RzMkQqC3u5ZMPztcdgNqeZrJ){ width=100% }
+![Image title](https://lh3.googleusercontent.com/d/1Q9Jezc00RzMkQqC3u5ZMPztcdgNqeZrJ){ width=100% }
 
 

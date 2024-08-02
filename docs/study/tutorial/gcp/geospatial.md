@@ -29,7 +29,7 @@ Big Query에서 제공하는 공개 데이터세트 Global Hurricane Tracks (IBT
 
 Big Query 탐색기에서 `+추가`를 누르고 공개 데이터 세트에서 Global Hurricane Tracks를 검색하여 데이터를 추가한다.
 
-![Image title](https://drive.google.com/uc?id=19N7VANFTk-YNqfNGi16NJhcOEGqgNowb){ align=left width=40% }
+![Image title](https://lh3.googleusercontent.com/d/19N7VANFTk-YNqfNGi16NJhcOEGqgNowb){ align=left width=40% }
 
 공개 데이터 세트 `noaa_hurricanes`의 `hurricanes` 테이블을 선택하고 `스키마`를 눌러 데이터의 타입을 확인한다. 그리고 `쿼리`를 눌러서 아래의 쿼리를 실행한다. 
 
@@ -99,15 +99,15 @@ ORDER BY
 
     === "fillColor"
             
-        ![Image title](https://drive.google.com/uc?id=19R4YTCWSw7GbQA5z7wqJ88r5ICuPSOqS){ class="skipglightbox" width=80% }
+        ![Image title](https://lh3.googleusercontent.com/d/19R4YTCWSw7GbQA5z7wqJ88r5ICuPSOqS){ class="skipglightbox" width=80% }
 
     === "fillOpacity"
 
-        ![Image title](https://drive.google.com/uc?id=19UI6-JHAGc0YqU9OkVz_1bNcxDg0UsvL){ class="skipglightbox" width=100% }
+        ![Image title](https://lh3.googleusercontent.com/d/19UI6-JHAGc0YqU9OkVz_1bNcxDg0UsvL){ class="skipglightbox" width=100% }
 
     === "circleRadius"
 
-        ![Image title](https://drive.google.com/uc?id=19RES057I0jjPzi5GY2BnlVhIo1_xLAZp){ class="skipglightbox" width=80% }
+        ![Image title](https://lh3.googleusercontent.com/d/19RES057I0jjPzi5GY2BnlVhIo1_xLAZp){ class="skipglightbox" width=80% }
 
 ## 예제2: 스타벅스와 생활인구 데이터 시각화
 
@@ -139,22 +139,22 @@ WHERE s.city = "서울특별시" AND p.time = "2022-12-25 15:00:00"
 
     === "fillColor"
 
-        ![Image title](https://drive.google.com/uc?id=19sk0mFPKCWNlR4l5FOQs-un4TnqEUyxz){ class="skipglightbox" width=80% }
+        ![Image title](https://lh3.googleusercontent.com/d/19sk0mFPKCWNlR4l5FOQs-un4TnqEUyxz){ class="skipglightbox" width=80% }
 
         각 카테고리는 서울시 자치구역 통합 계획에 따라 부여했다. 
 
-        ![Image title](https://drive.google.com/uc?id=19zn8qnF8PgFe5iw_lbrbXu8lxFqX_L_x){ class="skipglightbox" align=left width=80% }
+        ![Image title](https://lh3.googleusercontent.com/d/19zn8qnF8PgFe5iw_lbrbXu8lxFqX_L_x){ class="skipglightbox" align=left width=80% }
 
     === "fillOpacity"
 
-        ![Image title](https://drive.google.com/uc?id=19sLrIOmItqEqU9CzQgLQVSV18JgIkKtp){ class="skipglightbox" width=100% }
+        ![Image title](https://lh3.googleusercontent.com/d/19sLrIOmItqEqU9CzQgLQVSV18JgIkKtp){ class="skipglightbox" width=100% }
 
     === "circleRadius"
 
-        ![Image title](https://drive.google.com/uc?id=19sywjCFLpbUH6dyTq2Pi7wRkopqRz3Lz){ class="skipglightbox" width=80% }
+        ![Image title](https://lh3.googleusercontent.com/d/19sywjCFLpbUH6dyTq2Pi7wRkopqRz3Lz){ class="skipglightbox" width=80% }
 
 ### 최종 시각화 결과물
 
 꼭 구글로 써야한다면 해당 툴을 쓰지만 조금 더 자유롭게 하려면 Python의 Folium 패키지 등 다른 툴을 쓰는 것이 좋아보인다.
 
-![Image title](https://drive.google.com/uc?id=19YzCpliuViyYzOhOW99eCiXbbGKuP4wG){ class="skipglightbox" width=100% }
+![Image title](https://lh3.googleusercontent.com/d/19YzCpliuViyYzOhOW99eCiXbbGKuP4wG){ class="skipglightbox" width=100% }

@@ -334,7 +334,7 @@ Genesis Story-Understanding 시스템은 상위 개념 패턴(higher-level conce
 
 우리는 다음 표에 리뷰한 방법들에 대한 카테고리를 분류했다. 
 
-<img src="https://drive.google.com/uc?id=1dyldd53JbfefIvlrNH34qqVMgWRdRK95">
+<img src="https://lh3.googleusercontent.com/d/1dyldd53JbfefIvlrNH34qqVMgWRdRK95">
 
 주목할 점은 처리(processing)과 해설을 만들어내는(explanation-producing) 역할이 표현(representation)보다 더 많다는 것이다. 우리는 이러한 차이가 "표현에 기반한 모델(representation-based models)은 평가하기 어렵다"라는 사실에 기인한다고 믿는다. 유저-스터디 기반 평가가 항상 적절한 것은 아니다. 특정 표현을 추가하고 제거하는 방법으로 더 좋은 퍼포먼스를 측정하는 수치적 방법은 사용하기 힘들다.
 
@@ -357,7 +357,7 @@ Genesis Story-Understanding 시스템은 상위 개념 패턴(higher-level conce
 
 따라서 두 번째 테이블에서 볼 수 있듯이, 해석가능성과 완전무결성 사이의 트레이드 오프가 프록시 모델의 단순성과 정확성 사이의 균형을 뜻하지는 않는다. 중요한 모델의 편향을 찾아내는 능력 측면에서 다른 작업에 대한 설명 혹은 설명의 평가를 통해서 트레이트 오프를 절충할 수 있다. 각 세 가지 유형의 설명 방법은 완전무결성을 평가할 수 있는 설명을 제공할 뿐만 아니라 모델의 모든 세부 결정을 설명하는 것 보다 더 쉽다.
 
-<img src="https://drive.google.com/uc?id=1eXbhIESzWl7pqu8Yf5CEPYa5NstGhDi2">
+<img src="https://lh3.googleusercontent.com/d/1eXbhIESzWl7pqu8Yf5CEPYa5NstGhDi2">
 
 1. **Processing**
 
