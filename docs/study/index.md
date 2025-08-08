@@ -3,6 +3,7 @@
 <div class="grid cards" markdown>
 
 - :roll_of_paper: __PaperReading__ [:material-arrow-right:](paper/index.md) 
+- :octicons-info-24: __Information Theory__[:material-arrow-right:](info/index.md) 
 - :material-alpha: __Algorithms__ [:material-arrow-right:](tutorial/algorithm/index.md) 
 - :simple-pytorch: __DeepLearning__ [:material-arrow-right:](tutorial/deeplearning/index.md) 
 - :material-math-integral: __Math__ [:material-arrow-right:](tutorial/math/index.md) 

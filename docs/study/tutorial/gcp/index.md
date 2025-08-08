@@ -7,7 +7,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://lh3.googleusercontent.com/d/1fnSskBrNmd90GnsYoD2tjlcuw2eT2k7o){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1fnSskBrNmd90GnsYoD2tjlcuw2eT2k7o){ class="skipglightbox" width="30%" }
   <figcaption>Reference: Google Cloud Platform</figcaption>
 </figure>
 

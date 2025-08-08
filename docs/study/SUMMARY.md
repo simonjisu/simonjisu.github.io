@@ -1,3 +1,4 @@
 - [Study](index.md)
 - [Paper](paper/)
 - [Tutorial](tutorial/)
+- [Intormation Theory](info/)

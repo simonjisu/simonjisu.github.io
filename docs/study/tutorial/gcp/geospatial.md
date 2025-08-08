@@ -71,7 +71,7 @@ ORDER BY
 [^4]: [ST_GeogFromText](https://cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext)
 [^6]: [Well-known text representation of geometry](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry)
 
-??? note "Quadraphonic Wind[^2]"
+??? note "Quadraphonic Wind[^5]"
 
     ![Image title](https://www.noaa.gov/sites/default/files/2022-11//ll_quadwind_soln5.png){ align=left width=50% }
 
@@ -111,7 +111,7 @@ ORDER BY
 
 ## 예제2: 스타벅스와 생활인구 데이터 시각화
 
-스타벅스 매장의 위치 데이터와 생활인구를 시각화해보자. 생활인구란 통신데이터로 특정 시점에 개인이 위치한 지역을 집계한 '현주인구'를 말한다. 시간대에 따라 변화하는 인구의 규모로 지역간 특성을 추측해 볼 수 있는 유용한 데이터다. 서울 열린데이터 광장[^2]에서 데이터를 받을 수 있다.
+스타벅스 매장의 위치 데이터와 생활인구를 시각화해보자. 생활인구란 통신데이터로 특정 시점에 개인이 위치한 지역을 집계한 '현주인구'를 말한다. 시간대에 따라 변화하는 인구의 규모로 지역간 특성을 추측해 볼 수 있는 유용한 데이터다. 서울 열린데이터 광장[^7]에서 데이터를 받을 수 있다.
 
 [^7]: [서울 열린데이터 광장 - 서울 생활인구](https://data.seoul.go.kr/dataVisual/seoul/seoulLivingPopulation.do)
 

@@ -8,7 +8,7 @@ tags:
 ---
 
 <figure markdown>
-  ![HeadImg](https://lh3.googleusercontent.com/d/1rVmsigPLPnvqh-1YweLmepy4iiR3H0Dk){ class="skipglightbox" width="100%" }
+  ![HeadImg](https://lh3.googleusercontent.com/d/1rVmsigPLPnvqh-1YweLmepy4iiR3H0Dk){ class="skipglightbox" width="30%" }
   <figcaption>Reference: Google Big Query</figcaption>
 </figure>
 

@@ -25,9 +25,9 @@ hide:
 
     ---
 
-    내가 경험한 프로젝트 발자취를 따라 돌아보는 공간.
+    CV
 
-    [:octicons-arrow-right-24: Go To Project](project/index.md)
+    [:octicons-arrow-right-24: Go To Project](cv/index.md)
 
 -   :blue_book:{ .lg .middle } __Study__
 
