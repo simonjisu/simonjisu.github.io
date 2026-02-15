@@ -21,13 +21,13 @@ hide:
 
     [:octicons-arrow-right-24: Go To Blog](blog/index.md)
 
--   :projector:{ .lg .middle } __Project__
+-   :eyeglasses:{ .lg .middle } __Research__
 
     ---
 
-    CV
+    Research
 
-    [:octicons-arrow-right-24: Go To Project](cv/index.md)
+    [:octicons-arrow-right-24: Go To Research](research/index.md)
 
 -   :blue_book:{ .lg .middle } __Study__
 

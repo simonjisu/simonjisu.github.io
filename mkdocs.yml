@@ -1,6 +1,7 @@
 site_name: Soopace
 site_url: https://simonjisu.github.io
 repo_url: https://github.com/simonjisu.github.io
+dev_addr: 127.0.0.1:8123
 
 theme:
   name: "material"
@@ -99,13 +100,6 @@ plugins:
         kwds:
           case: lower
       post_slugify_separator: "-"
-
-nav:
-  - About: index.md
-  - Blog:
-    - blog/index.md
-  - Study: study/
-  - Project: project/
 
 extra:
   social:
