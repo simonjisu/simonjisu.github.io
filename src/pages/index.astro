@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { isResearchVisible, sortResearchProjects } from "@/lib/research-config";
+import { getCollection } from "astro:content";
+
+const researchProjects = sortResearchProjects(
+  (await getCollection("research")).filter((project) => isResearchVisible(project.id))
+);
+const featured = researchProjects.slice(0, 3);
+---
+
+<BaseLayout
+  title="Simon Jisoo Jang"
+  description="Reliable systems for analytical decision support by Simon Jisoo Jang."
+>
+  <section class="section hero">
+    <div>
+      <p class="eyebrow">PhD Researcher Portfolio</p>
+      <h1>Simon Jisoo Jang</h1>
+      <p class="lead">
+        I study intelligent data systems, LLM agents, and human-centered
+        analytics workflows, with a focus on making complex computational
+        processes more reliable, inspectable, and useful.
+      </p>
+      <div class="action-row">
+        <a class="button" href="/research/">View Research</a>
+        <a class="button secondary" href="/cv/">CV</a>
+      </div>
+    </div>
+    <aside class="hero-panel">
+      <p>
+        Current focus: process-aware agents, business intelligence interaction,
+        retrieval-augmented generation, and enterprise data analysis systems.
+      </p>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Selected Research</p>
+        <h2>Reliable Systems for Analytical Decision Support</h2>
+      </div>
+      <p>
+        A compact entry point for current thesis-adjacent projects and published
+        work.
+      </p>
+    </div>
+    <div class="grid">
+      {
+        featured.map((project) => (
+          <a class="project-card" href={`/research/${project.id}/`}>
+            <img src={project.data.image} alt={`${project.data.title} overview`} />
+            <div class="project-card-content">
+              <div class="meta">
+                <span>{project.data.year}</span>
+                <span>{project.data.status}</span>
+                {project.data.venue && <span>{project.data.venue}</span>}
+              </div>
+              <h3>{project.data.title}</h3>
+              <p>{project.data.summary}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

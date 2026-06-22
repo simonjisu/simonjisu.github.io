@@ -1,5 +1,0 @@
-- [Soopace](index.md)
-- [CV](cv/)
-- [Research](research/)
-- [Study](study/)
-- [Blog](blog/)

@@ -1,0 +1,25 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="CV | Simon Jisoo Jang"
+  description="Curriculum vitae for Simon Jisoo Jang."
+>
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">CV</p>
+        <h1>Curriculum vitae</h1>
+      </div>
+      <div class="action-row">
+        <a class="button" href="/cv/JISOO_CV_NEW.pdf">Download PDF</a>
+      </div>
+    </div>
+    <iframe
+      class="cv-frame"
+      src="/cv/JISOO_CV_NEW.pdf"
+      title="Simon Jisoo Jang CV PDF"
+    ></iframe>
+  </section>
+</BaseLayout>

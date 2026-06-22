@@ -1,0 +1,363 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { isResearchVisible, sortResearchProjects } from "@/lib/research-config";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const researchProjects = (await getCollection("research")).filter((project) =>
+    isResearchVisible(project.id)
+  );
+
+  return researchProjects.map((project) => ({
+    params: { slug: project.id },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+const researchProjects = sortResearchProjects(
+  (await getCollection("research")).filter((item) => isResearchVisible(item.id))
+);
+---
+
+<BaseLayout
+  title={`${project.data.title} | Simon Jisoo Jang`}
+  description={project.data.subtitle}
+>
+  <article class="research-story" data-research-story>
+    <div class="research-shell">
+      <aside class="research-project-rail" aria-label="Research list">
+        <p class="rail-label">Research</p>
+        <nav>
+          {researchProjects.map((item) => (
+            <a
+              class={`research-project-link${item.id === project.id ? " is-active" : ""}`}
+              href={`/research/${item.id}/`}
+            >
+              <span>{item.data.title}</span>
+              <small>{item.data.year}</small>
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="research-main">
+        <section class="section research-hero">
+          <div>
+            <p class="eyebrow">
+              {[project.data.year, project.data.status, project.data.venue].filter(Boolean).join(" · ")}
+            </p>
+            <h1>{project.data.title}</h1>
+            <p class="lead" data-lang="ko">{project.data.subtitleKo ?? project.data.subtitle}</p>
+            <p class="lead" data-lang="en">{project.data.subtitle}</p>
+            <p class="research-summary" data-lang="ko">
+              {project.data.summaryKo ?? project.data.summary}
+            </p>
+            <p class="research-summary" data-lang="en">{project.data.summary}</p>
+            {
+              project.data.links.length > 0 && (
+                <div class="action-row">
+                  {project.data.links.map((link) => (
+                    <a class="button secondary" href={link.href}>
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+          </div>
+          <div class="research-media-stack">
+            {project.data.showHeroImage && (
+              <img src={project.data.image} alt={`${project.data.title} overview`} />
+            )}
+            {
+              project.data.demoVideos.map((video) => (
+                <div class="research-demo">
+                  <iframe
+                    src={video.embedUrl}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  />
+                  <div>
+                    <a href={video.url} data-lang="ko">{video.titleKo ?? video.title}</a>
+                    <a href={video.url} data-lang="en">{video.titleEn ?? video.title}</a>
+                    <p data-lang="ko">{video.descriptionKo}</p>
+                    <p data-lang="en">{video.descriptionEn}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        {
+          project.data.sections.map((section, index) => {
+            const mediaFigures =
+              section.gallery.length > 0 ? section.gallery : section.figure ? [section.figure] : [];
+            const slideCount = mediaFigures.length + (section.table ? 1 : 0);
+
+            return (
+              <section
+                class={`section research-story-section${slideCount > 0 ? " has-media" : " no-media"}`}
+                id={section.key}
+              >
+                <div class="research-section-copy">
+                  <p class="eyebrow">
+                    {String(index + 1).padStart(2, "0")} · <span data-lang="ko">{section.navKo}</span>
+                    <span data-lang="en">{section.navEn}</span>
+                  </p>
+                  <h2 data-lang="ko">{section.titleKo}</h2>
+                  <h2 data-lang="en">{section.titleEn}</h2>
+                  <div class="research-section-body">
+                    {section.bodyKo.map((paragraph) => (
+                      <p data-lang="ko">{paragraph}</p>
+                    ))}
+                    {section.bodyEn.map((paragraph) => (
+                      <p data-lang="en">{paragraph}</p>
+                    ))}
+                  </div>
+                  {(section.highlightsKo.length > 0 || section.highlightsEn.length > 0) && (
+                    <div class="research-highlights">
+                      {section.highlightsKo.length > 0 && (
+                        <ul data-lang="ko">
+                          {section.highlightsKo.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {section.highlightsEn.length > 0 && (
+                        <ul data-lang="en">
+                          {section.highlightsEn.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )}
+                </div>
+                {slideCount > 1 ? (
+                  <div class="research-gallery" data-gallery>
+                    <div class="research-gallery-viewport">
+                      {section.table && (
+                        <figure class="research-gallery-slide research-gallery-table-slide" data-slide={0}>
+                          <div class="research-table-wrap">
+                            {section.table.captionKo && (
+                              <p class="research-table-caption" data-lang="ko">
+                                {section.table.captionKo}
+                              </p>
+                            )}
+                            {section.table.captionEn && (
+                              <p class="research-table-caption" data-lang="en">
+                                {section.table.captionEn}
+                              </p>
+                            )}
+                            <table class="research-table">
+                              <thead>
+                                <tr>
+                                  {section.table.columns.map((column) => (
+                                    <th>
+                                      <span data-lang="ko">{column.labelKo}</span>
+                                      <span data-lang="en">{column.labelEn}</span>
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {section.table.rows.map((row) => (
+                                  <tr>
+                                    {section.table!.columns.map((column) => (
+                                      <td>{row[column.key]}</td>
+                                    ))}
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </figure>
+                      )}
+                      {mediaFigures.map((figure, figureIndex) => (
+                        <figure
+                          class="research-gallery-slide"
+                          data-slide={figureIndex + (section.table ? 1 : 0)}
+                        >
+                          <img src={figure.src} alt={figure.alt} loading="lazy" />
+                          {(figure.captionKo || figure.captionEn || figure.creditHtml) && (
+                            <figcaption>
+                              {figure.captionKo && <span data-lang="ko">{figure.captionKo}</span>}
+                              {figure.captionEn && <span data-lang="en">{figure.captionEn}</span>}
+                              {figure.creditHtml && (
+                                <span
+                                  class="research-figure-credit"
+                                  set:html={figure.creditHtml}
+                                />
+                              )}
+                            </figcaption>
+                          )}
+                        </figure>
+                      ))}
+                    </div>
+                    <div class="research-gallery-controls">
+                      <button type="button" data-gallery-prev aria-label="Previous slide">&larr;</button>
+                      <div class="research-gallery-dots" aria-label="Slides">
+                        {Array.from({ length: slideCount }).map((_, slideIndex) => (
+                          <button
+                            type="button"
+                            data-gallery-dot={slideIndex}
+                            aria-label={`Show slide ${slideIndex + 1}`}
+                          />
+                        ))}
+                      </div>
+                      <button type="button" data-gallery-next aria-label="Next slide">&rarr;</button>
+                    </div>
+                  </div>
+                ) : section.table ? (
+                  <div class="research-table-wrap">
+                    {section.table.captionKo && (
+                      <p class="research-table-caption" data-lang="ko">
+                        {section.table.captionKo}
+                      </p>
+                    )}
+                    {section.table.captionEn && (
+                      <p class="research-table-caption" data-lang="en">
+                        {section.table.captionEn}
+                      </p>
+                    )}
+                    <table class="research-table">
+                      <thead>
+                        <tr>
+                          {section.table.columns.map((column) => (
+                            <th>
+                              <span data-lang="ko">{column.labelKo}</span>
+                              <span data-lang="en">{column.labelEn}</span>
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.table.rows.map((row) => (
+                          <tr>
+                            {section.table!.columns.map((column) => (
+                              <td>{row[column.key]}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : section.figure && (
+                  <figure
+                    class="research-section-figure"
+                    style={`--figure-width: ${section.figure.width ?? "100%"}`}
+                  >
+                    <img src={section.figure.src} alt={section.figure.alt} />
+                    {(section.figure.captionKo || section.figure.captionEn || section.figure.creditHtml) && (
+                      <figcaption>
+                        {section.figure.captionKo && <span data-lang="ko">{section.figure.captionKo}</span>}
+                        {section.figure.captionEn && <span data-lang="en">{section.figure.captionEn}</span>}
+                        {section.figure.creditHtml && (
+                          <span
+                            class="research-figure-credit"
+                            set:html={section.figure.creditHtml}
+                          />
+                        )}
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+              </section>
+            );
+          })
+        }
+        {project.data.references.length > 0 && (
+          <section class="section research-references" id="references">
+            <div class="research-section-copy">
+              <p class="eyebrow">References</p>
+              <h2>References</h2>
+              <ol>
+                {project.data.references.map((reference) => (
+                  <li>
+                    {reference.href ? (
+                      <a href={reference.href}>{reference.text}</a>
+                    ) : (
+                      reference.text
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        )}
+      </div>
+
+      <aside class="research-controls">
+        <p class="rail-label">Sections</p>
+        <nav class="research-section-nav" aria-label="Research sections">
+          {project.data.sections.map((section) => (
+            <a href={`#${section.key}`}>
+              <span data-lang="ko">{section.navKo}</span>
+              <span data-lang="en">{section.navEn}</span>
+            </a>
+          ))}
+          {project.data.references.length > 0 && <a href="#references">References</a>}
+        </nav>
+        <div class="language-toggle" aria-label="Language">
+          <button type="button" class="is-active" data-set-lang="ko">한국어</button>
+          <button type="button" data-set-lang="en">English</button>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <script is:inline>
+    const story = document.querySelector("[data-research-story]");
+    const buttons = Array.from(document.querySelectorAll("[data-set-lang]"));
+    const setLanguage = (language) => {
+      story?.classList.toggle("is-en", language === "en");
+      buttons.forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.setLang === language);
+      });
+      localStorage.setItem("research-language", language);
+    };
+
+    document.documentElement.classList.add("research-snap");
+    setLanguage(localStorage.getItem("research-language") || "ko");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.setLang));
+    });
+
+    document.querySelectorAll("[data-gallery]").forEach((gallery) => {
+      const slides = Array.from(gallery.querySelectorAll("[data-slide]"));
+      const dots = Array.from(gallery.querySelectorAll("[data-gallery-dot]"));
+      const previous = gallery.querySelector("[data-gallery-prev]");
+      const next = gallery.querySelector("[data-gallery-next]");
+      let current = 0;
+
+      const showSlide = (index) => {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => {
+          slide.toggleAttribute("hidden", slideIndex !== current);
+        });
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("is-active", dotIndex === current);
+        });
+      };
+
+      previous?.addEventListener("click", (event) => {
+        event.currentTarget.blur();
+        showSlide(current - 1);
+      });
+      next?.addEventListener("click", (event) => {
+        event.currentTarget.blur();
+        showSlide(current + 1);
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener("click", (event) => {
+          event.currentTarget.blur();
+          showSlide(dotIndex);
+        });
+      });
+      showSlide(0);
+    });
+  </script>
+</BaseLayout>

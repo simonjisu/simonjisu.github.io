@@ -1,2 +1,13 @@
 .vscode
 .venv
+workdir
+*.ipynb
+node_modules
+dist
+.astro
+sources
+archive
+.DS_Store
+*.log
+*.tmp
+*.bak

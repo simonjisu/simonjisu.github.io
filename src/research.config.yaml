@@ -1,0 +1,21 @@
+# Toggle portfolio research pages without editing content files.
+# Set a project to false to hide it from /research and omit its static detail page.
+projects:
+  au-rag: true
+  nl2sql-plus: true
+  polyfit: true
+  querycapsule: true
+  strategy-map: true
+  trace2map: true
+  twinbi: true
+
+# Display order for /research and the research detail sidebar.
+# Projects not listed here fall back to year-desc, then title.
+order:
+  - trace2map
+  - strategy-map
+  - nl2sql-plus
+  - twinbi
+  - querycapsule
+  - au-rag
+  - polyfit

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { isResearchVisible, sortResearchProjects } from "@/lib/research-config";
+import { getCollection } from "astro:content";
+
+const researchProjects = sortResearchProjects(
+  (await getCollection("research")).filter((project) => isResearchVisible(project.id))
+);
+---
+
+<BaseLayout
+  title="Research | Simon Jisoo Jang"
+  description="Research projects by Simon Jisoo Jang."
+>
+  <section class="section research-index">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Research</p>
+        <h1>Selected projects and papers</h1>
+      </div>
+      <p>
+        Research on LLM agents, retrieval, NL2SQL, interpretability, and
+        dashboard-centered analysis workflows.
+      </p>
+    </div>
+    <div class="grid">
+      {
+        researchProjects.map((project) => (
+          <a class="project-card" href={`/research/${project.id}/`}>
+            <img src={project.data.image} alt={`${project.data.title} overview`} />
+            <div class="project-card-content">
+              <div class="meta">
+                <span>{project.data.year}</span>
+                <span>{project.data.status}</span>
+                {project.data.venue && <span>{project.data.venue}</span>}
+              </div>
+              <h3>{project.data.title}</h3>
+              <p>{project.data.subtitle}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

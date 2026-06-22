@@ -1,0 +1,197 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { excerptFromBody } from "@/lib/excerpt";
+import { getCollection } from "astro:content";
+
+const isIndexPage = (id: string) => {
+  const navigationIds = new Set([
+    "info",
+    "paper",
+    "summary",
+    "tutorial",
+    "tutorial/algorithm",
+    "tutorial/deeplearning",
+    "tutorial/gcp",
+    "tutorial/math",
+    "tutorial/mongodb",
+    "tutorial/nlp",
+    "tutorial/reinforcement_learning"
+  ]);
+  const parts = id.toLowerCase().split("/");
+  const leaf = parts.at(-1);
+  return navigationIds.has(id.toLowerCase()) || leaf === "index" || leaf === "summary";
+};
+
+const titleFromId = (id: string, title?: string) =>
+  title ??
+  id
+    .split("/")
+    .at(-1)!
+    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const seriesLabel = (id: string) => {
+  const parts = id.split("/");
+
+  if (parts[0] === "paper") return "Paper Reading";
+  if (parts[0] === "info") return "Information Theory";
+  if (parts[0] === "tutorial" && parts[1] === "reinforcement_learning") {
+    return "Reinforcement Learning";
+  }
+  if (parts[0] === "tutorial" && parts[1] === "mongodb") return "MongoDB";
+  if (parts[0] === "tutorial" && parts[1] === "gcp") return "Google Cloud Platform";
+  if (parts[0] === "tutorial" && parts[1] === "math") return "Math";
+  if (parts[0] === "tutorial" && parts[1] === "algorithm") return "Algorithms";
+  if (parts[0] === "tutorial" && parts[1] === "nlp") return "NLP";
+  if (parts[0] === "tutorial" && parts[1] === "deeplearning") return "Deep Learning";
+
+  return parts[0]?.replace(/[-_]/g, " ") ?? "Archive";
+};
+
+const topicFromPath = (id: string) =>
+  id
+    .split("/")
+    .slice(0, -1)
+    .flatMap((part) => part.split(/[-_]/))
+    .filter((part) => part && part !== "tutorial" && part !== "paper");
+
+const notes = (await getCollection("notes", ({ data }) => !data.draft))
+  .filter((note) => !isIndexPage(note.id))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+type NoteEntry = (typeof notes)[number];
+
+const series = notes.reduce<Record<string, NoteEntry[]>>((acc, note) => {
+  const label = seriesLabel(note.id);
+  acc[label] ??= [];
+  acc[label].push(note);
+  return acc;
+}, {});
+
+const seriesCards = Object.entries(series)
+  .map(([label, entries]) => {
+    const topics = Array.from(
+      new Set(
+        entries.flatMap((entry) => [
+          ...topicFromPath(entry.id),
+          ...(entry.data.tags ?? []),
+          label.toLowerCase()
+        ])
+      )
+    )
+      .map((topic) => topic.toLowerCase())
+      .sort();
+
+    return {
+      label,
+      entries,
+      topics
+    };
+  })
+  .sort((a, b) => a.label.localeCompare(b.label));
+
+const topicCounts = new Map<string, number>();
+for (const card of seriesCards) {
+  for (const topic of card.topics) {
+    topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1);
+  }
+}
+
+const visibleTopics = Array.from(topicCounts.entries())
+  .filter(([, count]) => count >= 1)
+  .map(([topic]) => topic)
+  .filter((topic) => !["study", "archive"].includes(topic))
+  .sort();
+---
+
+<BaseLayout
+  title="Notes | Simon Jisoo Jang"
+  description="Study archive grouped by topic and series."
+>
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Study Archive</p>
+        <h1>Notes by topic and series</h1>
+      </div>
+      <p>
+        Study notes are grouped as series cards. Use the topic filters to narrow
+        the archive without leaving the page.
+      </p>
+    </div>
+
+    <div class="topic-filter" aria-label="Study archive topic filters">
+      <button class="topic-chip is-active" type="button" data-topic="all">All</button>
+      {
+        visibleTopics.map((topic) => (
+          <button class="topic-chip" type="button" data-topic={topic}>
+            {topic}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="series-grid" data-series-grid>
+      {
+        seriesCards.map((card) => (
+          <article class="series-card" data-topics={card.topics.join(" ")}>
+            <div class="series-card-head">
+              <div>
+                <div class="meta">{card.entries.length} notes</div>
+                <h3>{card.label}</h3>
+              </div>
+            </div>
+            <div class="series-topics">
+              {card.topics.slice(0, 8).map((topic) => (
+                <span>{topic}</span>
+              ))}
+            </div>
+            <ul class="series-links">
+              {card.entries.map((note) => (
+                <li>
+                  <a href={`/notes/${note.id}/`}>
+                    {titleFromId(note.id, note.data.title)}
+                  </a>
+                  <p>{note.data.description ?? excerptFromBody(note.body)}</p>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="empty-state" data-empty-state hidden>
+      No study series matches this topic.
+    </p>
+  </section>
+
+  <script is:inline>
+    const chips = Array.from(document.querySelectorAll(".topic-chip"));
+    const cards = Array.from(document.querySelectorAll(".series-card"));
+    const emptyState = document.querySelector("[data-empty-state]");
+
+    for (const chip of chips) {
+      chip.addEventListener("click", () => {
+        const topic = chip.dataset.topic;
+        let visibleCount = 0;
+
+        for (const current of chips) {
+          current.classList.toggle("is-active", current === chip);
+        }
+
+        for (const card of cards) {
+          const topics = (card.dataset.topics ?? "").split(" ");
+          const visible = topic === "all" || topics.includes(topic);
+          card.hidden = !visible;
+          if (visible) visibleCount += 1;
+        }
+
+        if (emptyState) {
+          emptyState.hidden = visibleCount > 0;
+        }
+      });
+    }
+  </script>
+</BaseLayout>

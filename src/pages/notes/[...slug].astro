@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { excerptFromBody } from "@/lib/excerpt";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const isIndexPage = (id: string) => {
+    const navigationIds = new Set([
+      "info",
+      "paper",
+      "summary",
+      "tutorial",
+      "tutorial/algorithm",
+      "tutorial/deeplearning",
+      "tutorial/gcp",
+      "tutorial/math",
+      "tutorial/mongodb",
+      "tutorial/nlp",
+      "tutorial/reinforcement_learning"
+    ]);
+    const parts = id.toLowerCase().split("/");
+    const leaf = parts.at(-1);
+    return navigationIds.has(id.toLowerCase()) || leaf === "index" || leaf === "summary";
+  };
+
+  const notes = (await getCollection("notes", ({ data }) => !data.draft)).filter(
+    (note) => !isIndexPage(note.id)
+  );
+
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: { note }
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+
+const title =
+  note.data.title ??
+  note.id
+    .split("/")
+    .at(-1)!
+    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+const description = note.data.description ?? excerptFromBody(note.body);
+---
+
+<BaseLayout title={`${title} | Notes | Simon Jisoo Jang`} description={description}>
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Notes</p>
+        <h1>{title}</h1>
+      </div>
+      <p>{description}</p>
+    </div>
+    <article class="content">
+      <Content />
+    </article>
+  </section>
+</BaseLayout>

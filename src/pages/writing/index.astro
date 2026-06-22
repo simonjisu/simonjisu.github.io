@@ -1,0 +1,57 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { excerptFromBody } from "@/lib/excerpt";
+import { getCollection } from "astro:content";
+
+const writingPosts = (await getCollection("writing", ({ data }) => !data.draft)).sort(
+  (a, b) => {
+    const aDate = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const bDate = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return bDate - aDate;
+  }
+);
+
+const formatTitle = (id: string) =>
+  id
+    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const formatDate = (date: string | Date | undefined) =>
+  date
+    ? new Intl.DateTimeFormat("en", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }).format(new Date(date))
+    : "Undated";
+---
+
+<BaseLayout
+  title="Writing | Simon Jisoo Jang"
+  description="Writing and archived notes by Simon Jisoo Jang."
+>
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Writing</p>
+        <h1>Blog</h1>
+      </div>
+      <p>Writing down everyday life and thoughts.</p>
+    </div>
+    <div class="list">
+      {
+        writingPosts.map((post) => (
+          <a class="list-item" href={`/writing/${post.id}/`}>
+            <div class="meta">
+              <span>{formatDate(post.data.date)}</span>
+              {post.data.categories?.map((category) => <span>{category}</span>)}
+            </div>
+            <h3>{post.data.title ?? formatTitle(post.id)}</h3>
+            <p>{post.data.description ?? excerptFromBody(post.body)}</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
