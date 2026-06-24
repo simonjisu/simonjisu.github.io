@@ -31,6 +31,16 @@ const navItems = [
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="alternate" type="application/rss+xml" title="Soopace Writing" href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2D0S4P2SJ9"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-2D0S4P2SJ9");
+    </script>
     <title>{title}</title>
   </head>
   <body>
