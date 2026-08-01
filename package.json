@@ -16,6 +16,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.4.5",
     "katex": "^0.16.47",
+    "mdast-util-from-markdown": "^2.0.3",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
   }

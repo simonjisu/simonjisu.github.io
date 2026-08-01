@@ -23,6 +23,18 @@ npm install
 npm run dev
 ```
 
+또는 로컬 실행 스크립트를 사용합니다. `node_modules/`가 없으면 의존성도 자동으로 설치합니다.
+
+```bash
+./scripts/serve.sh
+```
+
+다른 포트를 사용하려면 포트 번호를 인자로 전달합니다.
+
+```bash
+./scripts/serve.sh 4322
+```
+
 기본 주소:
 
 ```text

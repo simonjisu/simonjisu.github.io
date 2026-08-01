@@ -1,3 +1,7 @@
+import { fromMarkdown } from "mdast-util-from-markdown";
+import { mathFromMarkdown } from "mdast-util-math";
+import { math } from "micromark-extension-math";
+
 const calloutPattern = /^(?<marker>!!!|\?\?\?)\s+(?<kind>[A-Za-z0-9_-]+)?(?:\s+(?<title>.+))?$/;
 const tabPattern = /^===\s+(?<title>.+)$/;
 
@@ -151,7 +155,27 @@ function closeTab() {
   return { type: "html", value: "</div></section>" };
 }
 
-function transformChildren(children) {
+function isIndentedSourceNode(node, source) {
+  const offset = node.position?.start?.offset;
+  if (!Number.isInteger(offset)) return false;
+
+  const lineStart = source.lastIndexOf("\n", Math.max(0, offset - 1)) + 1;
+  const line = source.slice(lineStart);
+  return line.startsWith("\t") || line.startsWith("    ");
+}
+
+function parseIndentedBody(node) {
+  if (node.type !== "code") return [node];
+
+  const tree = fromMarkdown(String(node.value ?? ""), {
+    extensions: [math()],
+    mdastExtensions: [mathFromMarkdown()]
+  });
+
+  return transformChildren(tree.children, String(node.value ?? ""));
+}
+
+function transformChildren(children, source = "") {
   const next = [];
   let activeCallout = null;
   let activeTab = false;
@@ -182,6 +206,16 @@ function transformChildren(children) {
       continue;
     }
 
+    if (activeCallout) {
+      if (expandedChild.type === "code" || isIndentedSourceNode(expandedChild, source)) {
+        next.push(...parseIndentedBody(expandedChild));
+        closeActiveCallout();
+        continue;
+      }
+
+      closeActiveCallout();
+    }
+
     if (marker?.type === "tab") {
       closeActiveTab();
       next.push(openTab(marker));
@@ -205,8 +239,8 @@ function transformChildren(children) {
 }
 
 export default function remarkMkdocsBlocks() {
-  return (tree) => {
+  return (tree, file) => {
     if (!Array.isArray(tree.children)) return;
-    tree.children = transformChildren(tree.children);
+    tree.children = transformChildren(tree.children, String(file.value ?? ""));
   };
 }

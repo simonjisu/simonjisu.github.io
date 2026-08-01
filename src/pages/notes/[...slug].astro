@@ -2,8 +2,27 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { excerptFromBody } from "@/lib/excerpt";
 import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const titleFromNote = (note: CollectionEntry<"notes">) =>
+  note.data.title ??
+  note.id
+    .split("/")
+    .at(-1)!
+    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 
 export async function getStaticPaths() {
+  const lectureTitleFromNote = (note: CollectionEntry<"notes">) =>
+    note.data.title ??
+    note.id
+      .split("/")
+      .at(-1)!
+      .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+      .replace(/[-_]/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
   const isIndexPage = (id: string) => {
     const navigationIds = new Set([
       "info",
@@ -27,28 +46,42 @@ export async function getStaticPaths() {
     (note) => !isIndexPage(note.id)
   );
 
-  return notes.map((note) => ({
-    params: { slug: note.id },
-    props: { note }
-  }));
+  const lectureNotes = notes
+    .filter((note) => /^tutorial\/llm_lecture\/w\d{2}_/.test(note.id))
+    .sort((a, b) => a.id.localeCompare(b.id));
+
+  return notes.map((note) => {
+    const lectureIndex = lectureNotes.findIndex((lecture) => lecture.id === note.id);
+    const lectureLink = (lecture: CollectionEntry<"notes"> | undefined) =>
+      lecture
+        ? {
+            href: `/notes/${lecture.id}/`,
+            title: lectureTitleFromNote(lecture)
+          }
+        : null;
+
+    return {
+      params: { slug: note.id },
+      props: {
+        note,
+        previousLecture:
+          lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex - 1]) : null,
+        nextLecture:
+          lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex + 1]) : null
+      }
+    };
+  });
 }
 
-const { note } = Astro.props;
+const { note, previousLecture, nextLecture } = Astro.props;
 const { Content } = await render(note);
 
-const title =
-  note.data.title ??
-  note.id
-    .split("/")
-    .at(-1)!
-    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
-    .replace(/[-_]/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+const title = titleFromNote(note);
 const description = note.data.description ?? excerptFromBody(note.body);
 ---
 
 <BaseLayout title={`${title} | Notes | Simon Jisoo Jang`} description={description}>
-  <section class="section">
+  <section class="section note-page">
     <div class="section-heading">
       <div>
         <p class="eyebrow">Notes</p>
@@ -58,6 +91,24 @@ const description = note.data.description ?? excerptFromBody(note.body);
     </div>
     <article class="content">
       <Content />
+      {
+        (previousLecture || nextLecture) && (
+          <nav class="lecture-navigation" aria-label="강의 이동">
+            {previousLecture && (
+              <a class="lecture-navigation-link previous" href={previousLecture.href} rel="prev">
+                <span>← 이전 강의</span>
+                <strong>{previousLecture.title}</strong>
+              </a>
+            )}
+            {nextLecture && (
+              <a class="lecture-navigation-link next" href={nextLecture.href} rel="next">
+                <span>다음 강의 →</span>
+                <strong>{nextLecture.title}</strong>
+              </a>
+            )}
+          </nav>
+        )
+      }
     </article>
   </section>
 </BaseLayout>

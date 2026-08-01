@@ -11,3 +11,6 @@ archive
 *.log
 *.tmp
 *.bak
+/src/content/notes/tutorial/llm_lecture/.llm-lecture-memory.md
+/_workspace/
+/llm_lecture/
