@@ -8,6 +8,8 @@ tags:
   - REINFORCE
 ---
 
+<p class="ai-assisted-disclosure">이 글은 AI의 도움을 받아 작성되었습니다.</p>
+
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
 4주차까지는 모델에게 모범 답안을 직접 보여줬다. 이번 주부터는 모델이 먼저 행동하고 그 결과에 받은 점수로 학습한다. 강화학습의 state, action, reward를 짧은 길 찾기 게임에서 익힌 뒤 LLM의 token 생성 과정과 연결해본다.

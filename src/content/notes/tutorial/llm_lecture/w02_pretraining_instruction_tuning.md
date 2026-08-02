@@ -7,6 +7,8 @@ tags:
   - instruction tuning
 ---
 
+<p class="ai-assisted-disclosure">이 글은 AI의 도움을 받아 작성되었습니다.</p>
+
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
 1주차에서는 모델이 다음 token을 맞히며 학습한다는 사실을 배웠다. 이번 주에는 같은 학습 원리가 두 종류의 데이터에서 어떻게 쓰이는지 살펴본다. 일반 문서로 언어의 넓은 규칙을 익히는 단계가 pre-training이고, 질문과 모범 답안으로 지시를 따르는 연습을 하는 단계가 instruction tuning이다.
@@ -84,8 +86,10 @@ model_id = "Qwen/Qwen2.5-0.5B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 
 messages = [
-    {"role": "system", "content": "쉽고 짧게 설명한다."},
-    {"role": "user", "content": "달이 왜 모양을 바꾸는지 알려줘."},
+    {
+        "role": "user",
+        "content": "Explain why sleep matters in exactly two sentences.",
+    },
 ]
 
 formatted = tokenizer.apply_chat_template(
@@ -96,6 +100,25 @@ formatted = tokenizer.apply_chat_template(
 
 print(repr(formatted))
 ```
+
+현재 Qwen2.5-Instruct tokenizer로 실행하면 다음 문자열이 나온다.[^2][^4]
+
+```text
+<|im_start|>system
+You are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Explain why sleep matters in exactly two sentences.<|im_end|>
+<|im_start|>assistant
+```
+
+`<|im_start|>` 다음의 `system`, `user`, `assistant`가 message의 role을 알려준다. `<|im_end|>`는 한 message가 끝났다는 표시다. 마지막 assistant message에는 내용과 `<|im_end|>`가 아직 없다. 모델이 바로 그 자리부터 답을 생성하기 때문이다.
+
+| 입력 방식 | 모델에 전달된 text | 입력 token 수 |
+| --- | --- | ---: |
+| Base | 질문 원문만 전달 | 10 |
+| Instruct | 기본 system message, user message, assistant 시작 표시 | 39 |
+
+질문 문장은 같아도 실제 입력 길이는 다르다. Instruct model의 39 token에는 답변 내용이 아니라 role과 message 경계를 알려주는 token도 들어 있다. 생성 시간을 비교할 때 이 차이까지 실행 조건에 기록해야 한다.
 
 `add_generation_prompt=True`는 이제 assistant가 답할 차례라는 표시를 끝에 붙인다. 학습 데이터를 만들 때와 답을 생성할 때 이 값의 쓰임이 다르므로 공식 문서의 예제를 함께 확인한다.[^2]
 

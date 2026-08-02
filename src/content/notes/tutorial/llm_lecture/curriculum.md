@@ -9,8 +9,6 @@ tags:
   - serving
 ---
 
-# LLM은 어떻게 배우고 대답할까
-
 거대한 언어 모델을 무작정 외우기보다, 모델이 배우고 답하는 순서를 차근차근 따라가 본다. 글을 익히는 단계에서 출발해 사람의 지시와 선호를 배우는 과정을 거친 뒤, 실제 서버에서 여러 사람에게 답하기까지 살펴보는 것이 이 과정의 목표다.
 
 !!! note "전체 과정을 한 문장으로"
@@ -176,11 +174,11 @@ state, action, policy, trajectory, reward, return, value, advantage를 짧은 �
 
 policy model, reference model, Reward Model, value model의 역할을 나눈다. rollout, advantage, clipped objective, KL, entropy를 로그로 읽는 방법도 익힌다.
 
-- [ ] `week07-ppo-rlhf.md`에 네 모델이 주고받는 값을 순서대로 설명한다.
-- [ ] 아주 작은 모델과 데이터로 PPO pipeline을 실행한다.
+- [x] `w07_ppo_rlhf.md`에 네 model이 주고받는 값을 순서대로 설명한다.
+- [x] 아주 작은 모델과 데이터로 PPO pipeline을 실행한다.
 - [ ] clip range와 KL coefficient를 바꾸어 학습 안정성을 비교한다.
-- [ ] reward 상승과 실제 답변 품질이 어긋난 사례를 찾는다.
-- [ ] 결과물로 `작은 PPO-RLHF pipeline 보고서`를 남긴다.
+- [x] reward 상승과 실제 답변 품질이 어긋난 사례를 찾는다.
+- [x] 결과물로 `작은 PPO-RLHF pipeline 보고서`를 남긴다.
 
 참고 자료:
 
@@ -195,11 +193,11 @@ policy model, reference model, Reward Model, value model의 역할을 나눈다.
 
 DPO loss에서 policy model과 reference model의 log probability가 쓰이는 방식을 배운다. beta를 바꾸며 선호를 따르는 정도와 기준 모델에 머무는 정도가 어떻게 달라지는지도 실험한다.
 
-- [ ] `week08-dpo.md`에 DPO와 PPO 기반 RLHF의 차이를 표로 정리한다.
-- [ ] 같은 preference dataset으로 DPO 학습을 실행한다.
+- [x] `w08_direct_preference_optimization.md`에 DPO와 PPO 기반 RLHF의 차이를 표로 정리한다.
+- [x] 같은 preference dataset으로 DPO 학습을 실행한다.
 - [ ] beta를 바꾸어 chosen/rejected margin과 답변 품질을 비교한다.
-- [ ] reference model이 필요한 까닭을 설명한다.
-- [ ] 결과물로 `Preference-tuned model`을 저장한다.
+- [x] reference model이 필요한 까닭을 설명한다.
+- [x] 결과물로 `Preference-tuned model`을 저장한다.
 
 참고 자료:
 

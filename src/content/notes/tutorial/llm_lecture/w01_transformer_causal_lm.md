@@ -7,6 +7,8 @@ tags:
   - causal language modeling
 ---
 
+<p class="ai-assisted-disclosure">이 글은 AI의 도움을 받아 작성되었습니다.</p>
+
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
 이번 주에는 LLM이 문장을 읽고 다음 token을 맞히는 과정을 배운다. Transformer의 모든 수식을 외울 필요는 없다. 입력 문장이 어떤 모양의 tensor로 바뀌고 모델이 무엇을 정답으로 삼는지 설명하는 데 초점을 둔다.

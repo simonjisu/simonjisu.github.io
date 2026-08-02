@@ -9,6 +9,8 @@ tags:
   - quantization
 ---
 
+<p class="ai-assisted-disclosure">이 글은 AI의 도움을 받아 작성되었습니다.</p>
+
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
 3주차에는 모든 weight를 바꾸는 SFT를 실행했다. 모델이 커지면 weight뿐 아니라 gradient와 optimizer state도 GPU 메모리를 차지한다. 이번 주에는 원래 weight를 얼리고 작은 LoRA adapter만 학습한다. 이어서 Base model을 4-bit로 보관하는 QLoRA까지 비교한다.

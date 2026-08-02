@@ -8,6 +8,8 @@ tags:
   - TRL
 ---
 
+<p class="ai-assisted-disclosure">이 글은 AI의 도움을 받아 작성되었습니다.</p>
+
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
 2주차에서는 Base model과 instruction model의 차이를 살펴봤다. 이번 주에는 그 사이에 있는 SFT 학습을 직접 따라간다. 질문과 모범 답안 한 쌍이 어떻게 token, label, loss로 바뀌는지 확인하고 작은 데이터로 학습을 실행한다.

@@ -8,6 +8,8 @@ tags:
   - preference learning
 ---
 
+<p class="ai-assisted-disclosure">이 글은 AI의 도움을 받아 작성되었습니다.</p>
+
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
 5주차에는 agent가 reward를 높이도록 policy를 바꾸는 원리를 배웠다. LLM의 답변에는 게임 점수처럼 미리 정해진 reward가 없는 경우가 많다. 이번 주에는 사람이 두 답을 비교한 자료로 Reward Model을 만들고 이 모델이 새 답변에 점수를 주는 과정을 살펴본다.
