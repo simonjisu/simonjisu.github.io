@@ -97,7 +97,7 @@ const title = titleFromNote(note);
 const description = note.data.description ?? excerptFromBody(note.body);
 ---
 
-<BaseLayout title={`${title} | Notes | Simon Jisoo Jang`} description={description}>
+<BaseLayout title={`${title} | Notes | Simon Jisoo Jang`} description={description} lang="ko">
   <section class="section note-page">
     <div class="section-heading">
       <div>
@@ -154,3 +154,13 @@ const description = note.data.description ?? excerptFromBody(note.body);
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const mobileSeries = window.matchMedia("(max-width: 980px)");
+
+  if (mobileSeries.matches) {
+    document
+      .querySelectorAll<HTMLDetailsElement>(".series-directory")
+      .forEach((directory) => directory.removeAttribute("open"));
+  }
+</script>

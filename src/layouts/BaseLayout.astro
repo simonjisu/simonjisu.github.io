@@ -5,11 +5,13 @@ import "katex/dist/katex.min.css";
 type Props = {
   title?: string;
   description?: string;
+  lang?: string;
 };
 
 const {
   title = "Simon Jisoo Jang",
-  description = "PhD researcher portfolio and research notes."
+  description = "PhD researcher portfolio and research notes.",
+  lang = "en"
 } = Astro.props;
 
 const navItems = [
@@ -22,7 +24,7 @@ const navItems = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
