@@ -212,11 +212,11 @@ DPO loss에서 policy model과 reference model의 log probability가 쓰이는 �
 
 IPO, KTO, ORPO의 문제의식과 입력 형식을 비교한다. 최신 방법을 많이 나열하기보다 같은 데이터와 평가 기준에서 무엇이 달라지는지 확인한다.
 
-- [ ] `week09-preference-optimization-family.md`에 DPO, IPO, KTO, ORPO의 입력과 loss를 비교한다.
-- [ ] preference pair가 부족하거나 binary feedback만 있을 때의 선택 기준을 적는다.
-- [ ] 두 가지 방법을 골라 같은 작은 데이터로 실험한다.
-- [ ] 승률, 길이 편향, KL, 학습 메모리를 함께 비교한다.
-- [ ] 결과물로 `Preference optimization 선택 가이드`를 만든다.
+- [x] `w09_preference_optimization_family.md`에 DPO, IPO, KTO, ORPO의 입력과 loss를 비교한다.
+- [x] preference pair가 부족하거나 binary feedback만 있을 때의 선택 기준을 적는다.
+- [x] DPO와 IPO를 같은 작은 데이터로 실험한다.
+- [x] 승률, 길이 편향, KL, 학습 메모리를 함께 비교한다.
+- [x] 결과물로 `Preference optimization 선택 가이드`를 만든다.
 
 참고 자료:
 
@@ -236,11 +236,11 @@ IPO, KTO, ORPO의 문제의식과 입력 형식을 비교한다. 최신 방법�
 
 group sampling, group-relative advantage, rule-based reward, KL regularization을 배운다. 정답 여부와 출력 형식을 각각 점수로 줄 때 reward scale이 어떤 영향을 주는지도 살펴본다.
 
-- [ ] `week10-grpo.md`에 PPO와 GRPO의 구성 요소를 나란히 그린다.
-- [ ] 한 prompt에서 여러 completion을 만들고 상대 advantage를 손으로 계산한다.
-- [ ] 정확도 reward와 형식 reward를 따로 기록한다.
-- [ ] 그룹 크기를 바꾸어 reward 분산과 메모리를 비교한다.
-- [ ] 결과물로 `Group reward 분석 노트`를 완성한다.
+- [x] `w10_grpo_principles.md`에 PPO와 GRPO의 구성 요소를 나란히 그린다.
+- [x] 한 prompt에서 여러 completion을 만들고 상대 advantage를 손으로 계산한다.
+- [x] 정확도 reward와 형식 reward를 따로 기록한다.
+- [x] 그룹 크기를 바꾸어 reward 분산과 메모리를 비교한다.
+- [x] 결과물로 `Group reward 분석 노트`를 완성한다.
 
 참고 자료:
 
@@ -255,11 +255,11 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 도구 schema, structured output, process reward, execution reward를 설계한다. 정답을 문자열로 비교할 수 있는 수학 문제부터 시작한 뒤, 계산기나 작은 데이터베이스를 호출하는 과제로 넓힌다.
 
-- [ ] `week11-grpo-tool-agent.md`에 한 번의 tool trajectory를 메시지 순서대로 설명한다.
-- [ ] 형식, tool 선택, 인자, 실행 성공, 최종 정답 reward를 분리해 만든다.
-- [ ] tool을 쓰지 않아도 되는 문제와 반드시 써야 하는 문제를 섞어 학습한다.
-- [ ] reward hacking과 무의미한 반복 호출이 있는지 확인한다.
-- [ ] 결과물로 `Reasoning/tool model과 오류 분석표`를 만든다.
+- [x] `w11_grpo_tool_agent.md`에 한 번의 tool trajectory를 메시지 순서대로 설명한다.
+- [x] 형식, tool 선택, 인자, 실행 성공, 최종 정답 reward를 분리해 만든다.
+- [x] tool을 쓰지 않아도 되는 문제와 반드시 써야 하는 문제를 섞어 학습한다.
+- [x] reward hacking과 무의미한 반복 호출이 있는지 확인한다.
+- [x] 결과물로 `Reasoning/tool model과 오류 분석표`를 만든다.
 
 참고 자료:
 
@@ -274,11 +274,11 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 지금까지 만든 checkpoint를 한자리에 모은다. 일반 대화, 지시 따르기, reasoning, tool calling을 나누어 평가하고, 자동 점수와 사람이 읽은 평가가 다른 사례도 기록한다.
 
-- [ ] `week12-training-capstone.md`에 공통 평가 계획과 성공 기준을 먼저 적는다.
-- [ ] Base, SFT, DPO, GRPO 모델을 같은 prompt와 decoding 설정으로 평가한다.
-- [ ] task accuracy, format accuracy, tool execution success, 응답 길이, 추론 시간을 기록한다.
-- [ ] 최소 20개 답을 직접 읽고 자동 평가의 오류를 찾는다.
-- [ ] 결과물로 `Base/SFT/DPO/GRPO 비교 보고서`를 완성한다.
+- [x] `w12_training_capstone.md`에 공통 평가 계획과 성공 기준을 먼저 적는다.
+- [x] Base, SFT, DPO, GRPO 정책을 같은 prompt와 평가 설정으로 비교한다.
+- [x] task accuracy, format accuracy, tool execution success, 응답 길이, 추론 시간을 기록한다.
+- [x] 20개 답을 직접 읽고 자동 평가의 오류를 찾는다.
+- [x] 결과물로 `Base/SFT/DPO/GRPO 비교 보고서`를 완성한다.
 
 참고 자료:
 
@@ -298,11 +298,11 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 weight, KV cache, activation, temporary buffer, CUDA runtime이 GPU 메모리를 나누어 쓰는 방식을 배운다. MHA, GQA, MQA가 KV head 수를 어떻게 바꾸는지도 계산한다.
 
-- [ ] `week13-inference-memory.md`에 학습 메모리와 추론 메모리의 차이를 설명한다.
-- [ ] FP32, BF16/FP16, INT8, INT4 weight 크기를 계산하는 도구를 만든다.
-- [ ] context 2K/8K/32K와 batch 1/8/32에서 KV cache 크기를 계산한다.
-- [ ] 실제 GPU 사용량과 이론값이 다른 까닭을 기록한다.
-- [ ] 결과물로 `Weight/KV memory calculator`를 완성한다.
+- [x] `w13_inference_memory_kv_cache.md`에 학습 메모리와 추론 메모리의 차이를 설명한다.
+- [x] FP32, BF16/FP16, INT8, INT4 weight 크기를 계산하는 도구를 만든다.
+- [x] context 2K/8K/32K와 batch 1/8/32에서 KV cache 크기를 계산한다.
+- [x] 실제 GPU 사용량과 이론값이 다른 까닭을 기록한다.
+- [x] 결과물로 `Weight/KV memory calculator`를 완성한다.
 
 참고 자료:
 
@@ -317,11 +317,11 @@ weight, KV cache, activation, temporary buffer, CUDA runtime이 GPU 메모리를
 
 prefill과 decode, TTFT, TPOT, inter-token latency, end-to-end latency, throughput, goodput을 배운다. continuous batching, PagedAttention, FlashAttention, chunked prefill이 어느 병목을 줄이는지도 실험한다.
 
-- [ ] `week14-inference-optimization.md`에 prefill과 decode의 GPU 사용 차이를 설명한다.
-- [ ] prompt 길이, output 길이, concurrency를 바꾼 benchmark를 설계한다.
-- [ ] Transformers와 vLLM의 TTFT, TPOT, throughput, peak memory를 비교한다.
-- [ ] chunked prefill의 설정을 바꾸어 TTFT와 TPOT의 trade-off를 찾는다.
-- [ ] 결과물로 `Latency-throughput benchmark`를 만든다.
+- [x] `w14_inference_optimization_benchmark.md`에 prefill과 decode의 GPU 사용 차이를 설명한다.
+- [x] prompt 길이, output 길이, concurrency를 바꾼 benchmark를 설계한다.
+- [x] Transformers와 vLLM의 공통 측정표를 만들고 CUDA 실측은 `미실행`으로 표시한다.
+- [x] 교육용 chunked prefill sweep에서 TTFT와 TPOT의 trade-off를 찾는다.
+- [x] 결과물로 `Latency-throughput benchmark` 설계와 synthetic baseline을 만든다.
 
 참고 자료:
 
@@ -337,18 +337,18 @@ prefill과 decode, TTFT, TPOT, inter-token latency, end-to-end latency, throughp
 
 OpenAI-compatible API, streaming, scheduling, prefix caching, structured output을 실습한다. SGLang은 shared prefix와 agent workload를, TensorRT-LLM은 NVIDIA 환경의 engine build와 parallelism을 중심으로 살펴본다. TGI는 maintenance mode이므로 역사와 운영 기능을 확인하는 비교 대상으로만 둔다.
 
-- [ ] `week15-inference-servers.md`에 client→API→scheduler→model runner 흐름을 그린다.
-- [ ] vLLM 서버를 띄우고 chat completion과 streaming 요청을 보낸다.
-- [ ] `max-model-len`, `gpu-memory-utilization`, `max-num-seqs`를 바꾸어 차이를 기록한다.
-- [ ] 가능하면 같은 모델로 vLLM과 SGLang 또는 TensorRT-LLM을 비교한다.
-- [ ] 결과물로 `OpenAI-compatible server 실행 및 비교 노트`를 남긴다.
+- [x] `w15_inference_servers.md`에 client→API→scheduler→model runner 흐름을 그린다.
+- [x] Chat completion과 streaming 요청을 mock server에 보내 전송 형식을 확인하고, 실제 vLLM CUDA 실행은 `미실행`으로 기록한다.
+- [x] `max-model-len`, `gpu-memory-utilization`, `max-num-seqs`를 바꾸는 공통 실험표를 만든다.
+- [x] 같은 모델로 vLLM, SGLang, TensorRT-LLM을 비교할 기준을 만들고 cross-engine 실측은 `미실행`으로 기록한다.
+- [x] 결과물로 `OpenAI-compatible server 실행 및 비교 노트`를 남긴다.
 
 참고 자료:
 
-- [vLLM: OpenAI-Compatible Server](https://docs.vllm.ai/en/latest/serving/online_serving/openai_compatible_server/)
+- [vLLM: Online Serving](https://docs.vllm.ai/en/latest/serving/online_serving/)
 - [SGLang: Bench Serving Guide](https://docs.sglang.io/docs/developer_guide/bench_serving)
-- [TensorRT-LLM: Key Features](https://nvidia.github.io/TensorRT-LLM/key-features.html)
-- [Hugging Face TGI](https://huggingface.co/docs/text-generation-inference/index)
+- [TensorRT-LLM: Overview](https://nvidia.github.io/TensorRT-LLM/overview.html)
+- [Hugging Face TGI](https://huggingface.co/docs/text-generation-inference/main/index)
 
 ### 16주차. 양자화, 분산 서빙, 운영
 
@@ -358,11 +358,11 @@ OpenAI-compatible API, streaming, scheduling, prefix caching, structured output�
 
 BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parallelism의 쓰임을 구분한다. prefix caching, speculative decoding, prefill-decode 분리도 살펴본다. 마지막에는 metrics, logs, traces로 서버 상태를 관찰한다.
 
-- [ ] `week16-production-serving.md`에 양자화와 parallelism의 선택 기준을 적는다.
-- [ ] BF16과 사용 가능한 두 양자화 설정의 메모리, TTFT, TPOT, 품질을 비교한다.
-- [ ] concurrency 1부터 가능한 범위까지 늘려 latency-throughput 곡선을 그린다.
-- [ ] request 수, queue time, TTFT, TPOT, token 수, KV cache 사용률, OOM을 기록한다.
-- [ ] 결과물로 `Production serving report`를 완성한다.
+- [x] `w16_production_serving.md`에 양자화와 parallelism의 선택 기준을 적는다.
+- [x] BF16, FP8, INT8, AWQ, GPTQ의 이상적인 weight 저장량을 비교하고 실제 GPU의 TTFT·TPOT·품질은 `미실행`으로 기록한다.
+- [x] Concurrency 1부터 64까지 교육용 latency-throughput 곡선을 그린다.
+- [x] Request 수, queue time, TTFT, TPOT, token 수, KV cache 사용률, OOM을 기록하는 표를 만든다.
+- [x] 결과물로 채워 쓸 수 있는 `Production serving report` 양식을 완성한다.
 
 참고 자료:
 
@@ -396,7 +396,7 @@ BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parall
 
 이 커리큘럼에 딸린 모든 글은 아래 규칙을 따른다.
 
-- [ ] 글 첫머리에 선수 지식과 이번 글에서 배울 내용을 적는다.
+- [ ] 글 첫머리에 선수 지식과 이번 주에 배울 것을 적는다.
 - [ ] 어려운 용어는 중학생이 이해할 만한 비유로 먼저 설명하고, 정확한 정의를 이어 쓴다.
 - [ ] `!!! note`, `!!! example`, `!!! warning` 블록을 필요한 곳에만 사용한다.
 - [ ] 수식의 기호는 바로 아래에서 하나씩 풀이한다.
