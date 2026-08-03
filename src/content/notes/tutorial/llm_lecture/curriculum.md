@@ -47,7 +47,7 @@ tags:
 
 이번 주에는 token, embedding, positional information, self-attention, MLP, residual connection, causal mask를 배운다. 작은 decoder-only Transformer의 입력이 logits로 바뀌고, 정답 token과 비교해 cross-entropy loss를 계산하는 과정도 직접 추적한다.
 
-- `w01_transformer_causal_lm.md`에 attention과 causal mask를 그림으로 설명한다.
+- 이 주차에는 attention과 causal mask를 그림으로 이해한다.
 - 문장 하나를 token으로 나누고 embedding tensor의 shape를 기록한다.
 - 한 번의 forward pass에서 입력, logits, shifted label, loss의 shape를 출력한다.
 - “미래 token을 가리지 않으면 왜 정답을 훔쳐보는 셈인가?”에 답한다.
@@ -66,7 +66,7 @@ tags:
 
 사전 학습 데이터가 입력과 정답으로 바뀌는 모습을 살펴본다. `system`, `user`, `assistant` 메시지를 chat template이 하나의 token 열로 바꾸는 과정도 확인하고, Base model과 SFT model의 답변을 비교한다.
 
-- `w02_pretraining_instruction_tuning.md`에 두 학습 단계의 목적을 구분해 쓴다.
+- 이 주차에는 Pre-training과 instruction tuning의 목적을 나눠 살펴본다.
 - 같은 prompt를 Base model과 Instruct model에 넣어 답변을 비교한다.
 - chat template 적용 전후의 문자열과 token ID를 확인한다.
 - 데이터 중복, 개인정보, 유해 데이터가 학습에 미치는 문제를 정리한다.
@@ -89,7 +89,7 @@ tags:
 
 데이터를 train, validation, test로 나누고 padding, truncation, packing, assistant-only loss를 배운다. 학습 loss가 내려가도 실제 답변은 나아지지 않을 수 있다. 둘을 따로 평가해야 하는 이유도 확인한다.
 
-- `w03_supervised_fine_tuning.md`에 데이터가 loss로 바뀌는 과정을 예시 하나로 설명한다.
+- 이 주차에는 데이터 한 건이 SFT loss로 바뀌는 과정을 예시로 따라간다.
 - 작은 공개 데이터로 `SFTTrainer` 학습을 실행한다.
 - 학습 전후의 답변을 같은 decoding 설정으로 비교한다.
 - train loss와 validation loss가 벌어지는 시점을 찾아본다.
@@ -108,7 +108,7 @@ tags:
 
 full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비교한다. rank, alpha, target module이 어떤 뜻인지 실험하고, adapter merge 전후의 출력도 확인한다.
 
-- `w04_lora_qlora.md`에 low-rank 행렬을 작은 숫자 예제로 설명한다.
+- 이 주차에는 low-rank 행렬을 작은 숫자 예제로 풀어본다.
 - 같은 데이터로 LoRA와 QLoRA를 각각 실행한다.
 - trainable parameter, peak GPU memory, 학습 시간, 품질을 표로 비교한다.
 - rank를 바꾸었을 때 속도와 결과가 어떻게 달라지는지 기록한다.
@@ -132,7 +132,7 @@ full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비
 
 state, action, policy, trajectory, reward, return, value, advantage를 짧은 게임으로 익힌다. LLM에서는 지금까지의 token이 state, 다음 token이 action이라는 연결도 다룬다.
 
-- `w05_reinforcement_learning_basics.md`에 강화학습 용어를 token 생성 과정과 연결해 쓴다.
+- 이 주차에는 강화학습 용어를 LLM의 token 생성 과정과 연결한다.
 - 두세 개 action만 있는 작은 환경에서 REINFORCE를 구현한다.
 - reward가 드문 경우와 잦은 경우의 학습 곡선을 비교한다.
 - baseline이 gradient의 흔들림을 줄이는 까닭을 설명한다.
@@ -151,7 +151,7 @@ state, action, policy, trajectory, reward, return, value, advantage를 짧은 �
 
 `chosen`과 `rejected` 답변 쌍, Bradley–Terry 형태의 pairwise loss, reward accuracy를 공부한다. labeler가 동의하지 않거나 엉뚱한 지름길을 학습하는 reward hacking도 작은 사례로 확인한다.
 
-- `w06_reward_model_rlhf.md`에 SFT→Reward Model→RL의 흐름을 그린다.
+- 이 주차에는 SFT에서 Reward Model 학습과 RL로 이어지는 흐름을 살펴본다.
 - preference dataset의 한 행이 loss로 바뀌는 과정을 계산한다.
 - 작은 Reward Model을 학습하고 pairwise accuracy를 측정한다.
 - 길기만 한 답에 높은 점수를 주는 편향이 있는지 확인한다.
@@ -170,7 +170,7 @@ state, action, policy, trajectory, reward, return, value, advantage를 짧은 �
 
 policy model, reference model, Reward Model, value model의 역할을 나눈다. rollout, advantage, clipped objective, KL, entropy를 로그로 읽는 방법도 익힌다.
 
-- `w07_ppo_rlhf.md`에 네 model이 주고받는 값을 순서대로 설명한다.
+- 이 주차에는 PPO 학습에 쓰이는 네 model이 어떤 값을 주고받는지 따라간다.
 - 아주 작은 모델과 데이터로 PPO pipeline을 실행한다.
 - clip range와 KL coefficient를 바꾸어 학습 안정성을 비교한다.
 - reward 상승과 실제 답변 품질이 어긋난 사례를 찾는다.
@@ -189,7 +189,7 @@ policy model, reference model, Reward Model, value model의 역할을 나눈다.
 
 DPO loss에서 policy model과 reference model의 log probability가 쓰이는 방식을 배운다. beta를 바꾸며 선호를 따르는 정도와 기준 모델에 머무는 정도가 어떻게 달라지는지도 실험한다.
 
-- `w08_direct_preference_optimization.md`에 DPO와 PPO 기반 RLHF의 차이를 표로 정리한다.
+- 이 주차에는 DPO와 PPO 기반 RLHF의 학습 흐름을 나란히 비교한다.
 - 같은 preference dataset으로 DPO 학습을 실행한다.
 - beta를 바꾸어 chosen/rejected margin과 답변 품질을 비교한다.
 - reference model이 필요한 까닭을 설명한다.
@@ -208,7 +208,7 @@ DPO loss에서 policy model과 reference model의 log probability가 쓰이는 �
 
 IPO, KTO, ORPO의 문제의식과 입력 형식을 비교한다. 최신 방법을 많이 나열하기보다 같은 데이터와 평가 기준에서 무엇이 달라지는지 확인한다.
 
-- `w09_preference_optimization_family.md`에 DPO, IPO, KTO, ORPO의 입력과 loss를 비교한다.
+- 이 주차에는 DPO, IPO, KTO, ORPO가 요구하는 데이터와 loss를 비교한다.
 - preference pair가 부족하거나 binary feedback만 있을 때의 선택 기준을 적는다.
 - DPO와 IPO를 같은 작은 데이터로 실험한다.
 - 승률, 길이 편향, KL, 학습 메모리를 함께 비교한다.
@@ -232,7 +232,7 @@ IPO, KTO, ORPO의 문제의식과 입력 형식을 비교한다. 최신 방법�
 
 group sampling, group-relative advantage, rule-based reward, KL regularization을 배운다. 정답 여부와 출력 형식을 각각 점수로 줄 때 reward scale이 어떤 영향을 주는지도 살펴본다.
 
-- `w10_grpo_principles.md`에 PPO와 GRPO의 구성 요소를 나란히 그린다.
+- 이 주차에는 PPO와 GRPO의 구성 요소를 나란히 놓고 차이를 찾는다.
 - 한 prompt에서 여러 completion을 만들고 상대 advantage를 손으로 계산한다.
 - 정확도 reward와 형식 reward를 따로 기록한다.
 - 그룹 크기를 바꾸어 reward 분산과 메모리를 비교한다.
@@ -251,7 +251,7 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 도구 schema, structured output, process reward, execution reward를 설계한다. 정답을 문자열로 비교할 수 있는 수학 문제부터 시작한 뒤, 계산기나 작은 데이터베이스를 호출하는 과제로 넓힌다.
 
-- `w11_grpo_tool_agent.md`에 한 번의 tool trajectory를 메시지 순서대로 설명한다.
+- 이 주차에는 하나의 tool trajectory를 message 순서대로 따라간다.
 - 형식, tool 선택, 인자, 실행 성공, 최종 정답 reward를 분리해 만든다.
 - tool을 쓰지 않아도 되는 문제와 반드시 써야 하는 문제를 섞어 학습한다.
 - reward hacking과 무의미한 반복 호출이 있는지 확인한다.
@@ -270,7 +270,7 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 지금까지 만든 checkpoint를 한자리에 모은다. 일반 대화, 지시 따르기, reasoning, tool calling을 나누어 평가하고, 자동 점수와 사람이 읽은 평가가 다른 사례도 기록한다.
 
-- `w12_training_capstone.md`에 공통 평가 계획과 성공 기준을 먼저 적는다.
+- 이 주차에는 공통 평가 계획과 성공 기준을 결과보다 먼저 정한다.
 - Base, SFT, DPO, GRPO 정책을 같은 prompt와 평가 설정으로 비교한다.
 - task accuracy, format accuracy, tool execution success, 응답 길이, 추론 시간을 기록한다.
 - 20개 답을 직접 읽고 자동 평가의 오류를 찾는다.
@@ -294,7 +294,7 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 weight, KV cache, activation, temporary buffer, CUDA runtime이 GPU 메모리를 나누어 쓰는 방식을 배운다. MHA, GQA, MQA가 KV head 수를 어떻게 바꾸는지도 계산한다.
 
-- `w13_inference_memory_kv_cache.md`에 학습 메모리와 추론 메모리의 차이를 설명한다.
+- 이 주차에는 학습 메모리와 추론 메모리가 어디에 쓰이는지 구분한다.
 - FP32, BF16/FP16, INT8, INT4 weight 크기를 계산하는 도구를 만든다.
 - context 2K/8K/32K와 batch 1/8/32에서 KV cache 크기를 계산한다.
 - 실제 GPU 사용량과 이론값이 다른 까닭을 기록한다.
@@ -313,7 +313,7 @@ weight, KV cache, activation, temporary buffer, CUDA runtime이 GPU 메모리를
 
 prefill과 decode, TTFT, TPOT, inter-token latency, end-to-end latency, throughput, goodput을 배운다. continuous batching, PagedAttention, FlashAttention, chunked prefill이 어느 병목을 줄이는지도 실험한다.
 
-- `w14_inference_optimization_benchmark.md`에 prefill과 decode의 GPU 사용 차이를 설명한다.
+- 이 주차에는 prefill과 decode가 GPU를 쓰는 방식을 비교한다.
 - prompt 길이, output 길이, concurrency를 바꾼 benchmark를 설계한다.
 - Transformers와 vLLM의 공통 측정표를 만들고 CUDA 실측은 `미실행`으로 표시한다.
 - 교육용 chunked prefill sweep에서 TTFT와 TPOT의 trade-off를 찾는다.
@@ -333,7 +333,7 @@ prefill과 decode, TTFT, TPOT, inter-token latency, end-to-end latency, throughp
 
 OpenAI-compatible API, streaming, scheduling, prefix caching, structured output을 실습한다. SGLang은 shared prefix와 agent workload를, TensorRT-LLM은 NVIDIA 환경의 engine build와 parallelism을 중심으로 살펴본다. TGI는 maintenance mode이므로 역사와 운영 기능을 확인하는 비교 대상으로만 둔다.
 
-- `w15_inference_servers.md`에 client→API→scheduler→model runner 흐름을 그린다.
+- 이 주차에는 client의 요청이 API, scheduler, model runner를 거쳐 응답이 되는 흐름을 따라간다.
 - Chat completion과 streaming 요청을 mock server에 보내 전송 형식을 확인하고, 실제 vLLM CUDA 실행은 `미실행`으로 기록한다.
 - `max-model-len`, `gpu-memory-utilization`, `max-num-seqs`를 바꾸는 공통 실험표를 만든다.
 - 같은 모델로 vLLM, SGLang, TensorRT-LLM을 비교할 기준을 만들고 cross-engine 실측은 `미실행`으로 기록한다.
@@ -354,7 +354,7 @@ OpenAI-compatible API, streaming, scheduling, prefix caching, structured output�
 
 BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parallelism의 쓰임을 구분한다. prefix caching, speculative decoding, prefill-decode 분리도 살펴본다. 마지막에는 metrics, logs, traces로 서버 상태를 관찰한다.
 
-- `w16_production_serving.md`에 양자화와 parallelism의 선택 기준을 적는다.
+- 이 주차에는 양자화와 parallelism을 고르는 기준을 세운다.
 - BF16, FP8, INT8, AWQ, GPTQ의 이상적인 weight 저장량을 비교하고 실제 GPU의 TTFT·TPOT·품질은 `미실행`으로 기록한다.
 - Concurrency 1부터 64까지 교육용 latency-throughput 곡선을 그린다.
 - Request 수, queue time, TTFT, TPOT, token 수, KV cache 사용률, OOM을 기록하는 표를 만든다.
@@ -398,10 +398,10 @@ BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parall
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 커리큘럼
 검토 단위: 5개 단계와 최종 프로젝트를 각각 5,000자 이하로 나누어 점검
-원본/수정본: 16577자 / 15492자, 요청된 구조 변경률 6.55%
+원본/수정본: 15905자 / 15613자, 이번 후처리 변경률 1.84%
 카테고리별 탐지/수정: A-7 0→0, A-8 0→0, C-5 0→0, D-1 0→0, H-1 0→0
 정량 점검: humanize-korean metrics v2.0 risk band low
 자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 평어체 유지 / S1 잔존 없음 / 인공 수사 추가 없음
-등급: B — 자체검증 6/6을 통과했고 사용자 요청에 따른 목록 서식과 문서 구조만 바꿈
-주요 변경: 모든 체크박스를 일반 목록으로 바꾸고 공개 작성 규칙을 agent 전용 작업 메모로 옮김
+등급: B — 자체검증 6/6을 통과했고 학습 내용은 유지한 채 내부 파일명만 독자용 문장으로 바꿈
+주요 변경: 내부 파일명을 앞세운 작업 문구를 `이 주차에는 ... 이해한다` 형태의 학습 안내로 고침
 -->
