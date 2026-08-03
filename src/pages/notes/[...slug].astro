@@ -59,6 +59,22 @@ export async function getStaticPaths() {
             title: lectureTitleFromNote(lecture)
           }
         : null;
+    const seriesParent = note.id.split("/").slice(0, -1).join("/");
+    const seriesArticles = seriesParent.startsWith("tutorial/")
+      ? notes
+          .filter(
+            (candidate) =>
+              candidate.id.split("/").slice(0, -1).join("/") === seriesParent
+          )
+          .sort((a, b) =>
+            a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: "base" })
+          )
+          .map((article) => ({
+            href: `/notes/${article.id}/`,
+            title: lectureTitleFromNote(article),
+            isCurrent: article.id === note.id
+          }))
+      : [];
 
     return {
       params: { slug: note.id },
@@ -67,13 +83,14 @@ export async function getStaticPaths() {
         previousLecture:
           lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex - 1]) : null,
         nextLecture:
-          lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex + 1]) : null
+          lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex + 1]) : null,
+        seriesArticles: seriesArticles.length > 1 ? seriesArticles : []
       }
     };
   });
 }
 
-const { note, previousLecture, nextLecture } = Astro.props;
+const { note, previousLecture, nextLecture, seriesArticles } = Astro.props;
 const { Content } = await render(note);
 
 const title = titleFromNote(note);
@@ -89,26 +106,51 @@ const description = note.data.description ?? excerptFromBody(note.body);
       </div>
       <p>{description}</p>
     </div>
-    <article class="content">
-      <Content />
+    <div class:list={["note-content-layout", { "has-series": seriesArticles.length > 1 }]}>
+      <article class="content">
+        <Content />
+        {
+          (previousLecture || nextLecture) && (
+            <nav class="lecture-navigation" aria-label="강의 이동">
+              {previousLecture && (
+                <a class="lecture-navigation-link previous" href={previousLecture.href} rel="prev">
+                  <span>← 이전 강의</span>
+                  <strong>{previousLecture.title}</strong>
+                </a>
+              )}
+              {nextLecture && (
+                <a class="lecture-navigation-link next" href={nextLecture.href} rel="next">
+                  <span>다음 강의 →</span>
+                  <strong>{nextLecture.title}</strong>
+                </a>
+              )}
+            </nav>
+          )
+        }
+      </article>
       {
-        (previousLecture || nextLecture) && (
-          <nav class="lecture-navigation" aria-label="강의 이동">
-            {previousLecture && (
-              <a class="lecture-navigation-link previous" href={previousLecture.href} rel="prev">
-                <span>← 이전 강의</span>
-                <strong>{previousLecture.title}</strong>
-              </a>
-            )}
-            {nextLecture && (
-              <a class="lecture-navigation-link next" href={nextLecture.href} rel="next">
-                <span>다음 강의 →</span>
-                <strong>{nextLecture.title}</strong>
-              </a>
-            )}
-          </nav>
+        seriesArticles.length > 1 && (
+          <aside class="series-sidebar" aria-label="관련 시리즈">
+            <details class="series-directory" open>
+              <summary>
+                <span>이 시리즈의 글</span>
+                <small>{seriesArticles.length}</small>
+              </summary>
+              <nav class="series-directory-links" aria-label="시리즈 글 바로가기">
+                {seriesArticles.map((article) => (
+                  <a
+                    class:list={["series-directory-link", { current: article.isCurrent }]}
+                    href={article.href}
+                    aria-current={article.isCurrent ? "page" : undefined}
+                  >
+                    {article.title}
+                  </a>
+                ))}
+              </nav>
+            </details>
+          </aside>
         )
       }
-    </article>
+    </div>
   </section>
 </BaseLayout>

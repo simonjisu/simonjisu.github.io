@@ -19,15 +19,11 @@ tags:
 
 한 주는 개념, 실습, 확인 문제, 결과물로 구성한다. 새 용어가 나오면 먼저 쉬운 비유로 뜻을 잡고, 그다음 수식과 코드를 살펴본다. 실습 결과에는 실행 환경, 모델, 데이터, 주요 설정값을 함께 적는다. 그래야 몇 달 뒤에도 같은 실험을 다시 해볼 수 있다.
 
-- [ ] 시작 전에 Python, PyTorch tensor, 행렬 곱, 확률의 평균을 복습한다.
-- [ ] 실습할 컴퓨터의 GPU 이름과 메모리 용량을 기록한다. GPU가 없다면 0.5B 안팎의 작은 모델이나 Colab을 쓴다.
-- [ ] `transformers`, `datasets`, `accelerate`, `peft`, `trl`의 버전을 기록한다.
-- [ ] 매주 참고 자료를 먼저 읽고, 강의 글 아래에 논문이나 공식 문서 링크를 남긴다.
-- [ ] 실습 결과는 성공한 값만 남기지 않고 실패 원인과 수정 내용도 적는다.
-
-!!! warning "완료 표시 기준"
-
-    글을 읽기만 해서는 해당 주차를 끝낸 것으로 보지 않는다. 개념 설명, 코드 실행, 확인 문제, 결과물 정리까지 마쳤을 때 체크한다.
+- 시작 전에 Python, PyTorch tensor, 행렬 곱, 확률의 평균을 복습한다.
+- 실습할 컴퓨터의 GPU 이름과 메모리 용량을 기록한다. GPU가 없다면 0.5B 안팎의 작은 모델이나 Colab을 쓴다.
+- `transformers`, `datasets`, `accelerate`, `peft`, `trl`의 버전을 기록한다.
+- 매주 참고 자료를 먼저 읽고, 강의 글 아래에 논문이나 공식 문서 링크를 남긴다.
+- 실습 결과는 성공한 값만 남기지 않고 실패 원인과 수정 내용도 적는다.
 
 ## 전체 지도
 
@@ -51,11 +47,11 @@ tags:
 
 이번 주에는 token, embedding, positional information, self-attention, MLP, residual connection, causal mask를 배운다. 작은 decoder-only Transformer의 입력이 logits로 바뀌고, 정답 token과 비교해 cross-entropy loss를 계산하는 과정도 직접 추적한다.
 
-- [x] `w01_transformer_causal_lm.md`에 attention과 causal mask를 그림으로 설명한다.
-- [ ] 문장 하나를 token으로 나누고 embedding tensor의 shape를 기록한다.
-- [ ] 한 번의 forward pass에서 입력, logits, shifted label, loss의 shape를 출력한다.
-- [ ] “미래 token을 가리지 않으면 왜 정답을 훔쳐보는 셈인가?”에 답한다.
-- [ ] 결과물로 `Forward/loss 분석 노트`를 완성한다.
+- `w01_transformer_causal_lm.md`에 attention과 causal mask를 그림으로 설명한다.
+- 문장 하나를 token으로 나누고 embedding tensor의 shape를 기록한다.
+- 한 번의 forward pass에서 입력, logits, shifted label, loss의 shape를 출력한다.
+- “미래 token을 가리지 않으면 왜 정답을 훔쳐보는 셈인가?”에 답한다.
+- 결과물로 `Forward/loss 분석 노트`를 완성한다.
 
 참고 자료:
 
@@ -70,11 +66,11 @@ tags:
 
 사전 학습 데이터가 입력과 정답으로 바뀌는 모습을 살펴본다. `system`, `user`, `assistant` 메시지를 chat template이 하나의 token 열로 바꾸는 과정도 확인하고, Base model과 SFT model의 답변을 비교한다.
 
-- [x] `w02_pretraining_instruction_tuning.md`에 두 학습 단계의 목적을 구분해 쓴다.
-- [ ] 같은 prompt를 Base model과 Instruct model에 넣어 답변을 비교한다.
-- [ ] chat template 적용 전후의 문자열과 token ID를 확인한다.
-- [ ] 데이터 중복, 개인정보, 유해 데이터가 학습에 미치는 문제를 정리한다.
-- [ ] 결과물로 `Base/SFT 차이 분석표`를 만든다.
+- `w02_pretraining_instruction_tuning.md`에 두 학습 단계의 목적을 구분해 쓴다.
+- 같은 prompt를 Base model과 Instruct model에 넣어 답변을 비교한다.
+- chat template 적용 전후의 문자열과 token ID를 확인한다.
+- 데이터 중복, 개인정보, 유해 데이터가 학습에 미치는 문제를 정리한다.
+- 결과물로 `Base/SFT 차이 분석표`를 만든다.
 
 참고 자료:
 
@@ -93,11 +89,11 @@ tags:
 
 데이터를 train, validation, test로 나누고 padding, truncation, packing, assistant-only loss를 배운다. 학습 loss가 내려가도 실제 답변은 나아지지 않을 수 있다. 둘을 따로 평가해야 하는 이유도 확인한다.
 
-- [x] `w03_supervised_fine_tuning.md`에 데이터가 loss로 바뀌는 과정을 예시 하나로 설명한다.
-- [ ] 작은 공개 데이터로 `SFTTrainer` 학습을 실행한다.
-- [ ] 학습 전후의 답변을 같은 decoding 설정으로 비교한다.
-- [ ] train loss와 validation loss가 벌어지는 시점을 찾아본다.
-- [ ] 결과물로 `작은 instruction model과 학습 기록`을 남긴다.
+- `w03_supervised_fine_tuning.md`에 데이터가 loss로 바뀌는 과정을 예시 하나로 설명한다.
+- 작은 공개 데이터로 `SFTTrainer` 학습을 실행한다.
+- 학습 전후의 답변을 같은 decoding 설정으로 비교한다.
+- train loss와 validation loss가 벌어지는 시점을 찾아본다.
+- 결과물로 `작은 instruction model과 학습 기록`을 남긴다.
 
 참고 자료:
 
@@ -112,11 +108,11 @@ tags:
 
 full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비교한다. rank, alpha, target module이 어떤 뜻인지 실험하고, adapter merge 전후의 출력도 확인한다.
 
-- [x] `w04_lora_qlora.md`에 low-rank 행렬을 작은 숫자 예제로 설명한다.
-- [ ] 같은 데이터로 LoRA와 QLoRA를 각각 실행한다.
-- [ ] trainable parameter, peak GPU memory, 학습 시간, 품질을 표로 비교한다.
-- [ ] rank를 바꾸었을 때 속도와 결과가 어떻게 달라지는지 기록한다.
-- [ ] 결과물로 `PEFT 비교 보고서`를 만든다.
+- `w04_lora_qlora.md`에 low-rank 행렬을 작은 숫자 예제로 설명한다.
+- 같은 데이터로 LoRA와 QLoRA를 각각 실행한다.
+- trainable parameter, peak GPU memory, 학습 시간, 품질을 표로 비교한다.
+- rank를 바꾸었을 때 속도와 결과가 어떻게 달라지는지 기록한다.
+- 결과물로 `PEFT 비교 보고서`를 만든다.
 
 참고 자료:
 
@@ -136,11 +132,11 @@ full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비
 
 state, action, policy, trajectory, reward, return, value, advantage를 짧은 게임으로 익힌다. LLM에서는 지금까지의 token이 state, 다음 token이 action이라는 연결도 다룬다.
 
-- [x] `w05_reinforcement_learning_basics.md`에 강화학습 용어를 token 생성 과정과 연결해 쓴다.
-- [ ] 두세 개 action만 있는 작은 환경에서 REINFORCE를 구현한다.
-- [ ] reward가 드문 경우와 잦은 경우의 학습 곡선을 비교한다.
-- [ ] baseline이 gradient의 흔들림을 줄이는 까닭을 설명한다.
-- [ ] 결과물로 `Policy gradient 실습 노트`를 완성한다.
+- `w05_reinforcement_learning_basics.md`에 강화학습 용어를 token 생성 과정과 연결해 쓴다.
+- 두세 개 action만 있는 작은 환경에서 REINFORCE를 구현한다.
+- reward가 드문 경우와 잦은 경우의 학습 곡선을 비교한다.
+- baseline이 gradient의 흔들림을 줄이는 까닭을 설명한다.
+- 결과물로 `Policy gradient 실습 노트`를 완성한다.
 
 참고 자료:
 
@@ -155,11 +151,11 @@ state, action, policy, trajectory, reward, return, value, advantage를 짧은 �
 
 `chosen`과 `rejected` 답변 쌍, Bradley–Terry 형태의 pairwise loss, reward accuracy를 공부한다. labeler가 동의하지 않거나 엉뚱한 지름길을 학습하는 reward hacking도 작은 사례로 확인한다.
 
-- [x] `w06_reward_model_rlhf.md`에 SFT→Reward Model→RL의 흐름을 그린다.
-- [ ] preference dataset의 한 행이 loss로 바뀌는 과정을 계산한다.
-- [ ] 작은 Reward Model을 학습하고 pairwise accuracy를 측정한다.
-- [ ] 길기만 한 답에 높은 점수를 주는 편향이 있는지 확인한다.
-- [ ] 결과물로 `Preference Reward Model 카드`를 작성한다.
+- `w06_reward_model_rlhf.md`에 SFT→Reward Model→RL의 흐름을 그린다.
+- preference dataset의 한 행이 loss로 바뀌는 과정을 계산한다.
+- 작은 Reward Model을 학습하고 pairwise accuracy를 측정한다.
+- 길기만 한 답에 높은 점수를 주는 편향이 있는지 확인한다.
+- 결과물로 `Preference Reward Model 카드`를 작성한다.
 
 참고 자료:
 
@@ -174,11 +170,11 @@ state, action, policy, trajectory, reward, return, value, advantage를 짧은 �
 
 policy model, reference model, Reward Model, value model의 역할을 나눈다. rollout, advantage, clipped objective, KL, entropy를 로그로 읽는 방법도 익힌다.
 
-- [x] `w07_ppo_rlhf.md`에 네 model이 주고받는 값을 순서대로 설명한다.
-- [x] 아주 작은 모델과 데이터로 PPO pipeline을 실행한다.
-- [ ] clip range와 KL coefficient를 바꾸어 학습 안정성을 비교한다.
-- [x] reward 상승과 실제 답변 품질이 어긋난 사례를 찾는다.
-- [x] 결과물로 `작은 PPO-RLHF pipeline 보고서`를 남긴다.
+- `w07_ppo_rlhf.md`에 네 model이 주고받는 값을 순서대로 설명한다.
+- 아주 작은 모델과 데이터로 PPO pipeline을 실행한다.
+- clip range와 KL coefficient를 바꾸어 학습 안정성을 비교한다.
+- reward 상승과 실제 답변 품질이 어긋난 사례를 찾는다.
+- 결과물로 `작은 PPO-RLHF pipeline 보고서`를 남긴다.
 
 참고 자료:
 
@@ -193,11 +189,11 @@ policy model, reference model, Reward Model, value model의 역할을 나눈다.
 
 DPO loss에서 policy model과 reference model의 log probability가 쓰이는 방식을 배운다. beta를 바꾸며 선호를 따르는 정도와 기준 모델에 머무는 정도가 어떻게 달라지는지도 실험한다.
 
-- [x] `w08_direct_preference_optimization.md`에 DPO와 PPO 기반 RLHF의 차이를 표로 정리한다.
-- [x] 같은 preference dataset으로 DPO 학습을 실행한다.
-- [ ] beta를 바꾸어 chosen/rejected margin과 답변 품질을 비교한다.
-- [x] reference model이 필요한 까닭을 설명한다.
-- [x] 결과물로 `Preference-tuned model`을 저장한다.
+- `w08_direct_preference_optimization.md`에 DPO와 PPO 기반 RLHF의 차이를 표로 정리한다.
+- 같은 preference dataset으로 DPO 학습을 실행한다.
+- beta를 바꾸어 chosen/rejected margin과 답변 품질을 비교한다.
+- reference model이 필요한 까닭을 설명한다.
+- 결과물로 `Preference-tuned model`을 저장한다.
 
 참고 자료:
 
@@ -212,11 +208,11 @@ DPO loss에서 policy model과 reference model의 log probability가 쓰이는 �
 
 IPO, KTO, ORPO의 문제의식과 입력 형식을 비교한다. 최신 방법을 많이 나열하기보다 같은 데이터와 평가 기준에서 무엇이 달라지는지 확인한다.
 
-- [x] `w09_preference_optimization_family.md`에 DPO, IPO, KTO, ORPO의 입력과 loss를 비교한다.
-- [x] preference pair가 부족하거나 binary feedback만 있을 때의 선택 기준을 적는다.
-- [x] DPO와 IPO를 같은 작은 데이터로 실험한다.
-- [x] 승률, 길이 편향, KL, 학습 메모리를 함께 비교한다.
-- [x] 결과물로 `Preference optimization 선택 가이드`를 만든다.
+- `w09_preference_optimization_family.md`에 DPO, IPO, KTO, ORPO의 입력과 loss를 비교한다.
+- preference pair가 부족하거나 binary feedback만 있을 때의 선택 기준을 적는다.
+- DPO와 IPO를 같은 작은 데이터로 실험한다.
+- 승률, 길이 편향, KL, 학습 메모리를 함께 비교한다.
+- 결과물로 `Preference optimization 선택 가이드`를 만든다.
 
 참고 자료:
 
@@ -236,11 +232,11 @@ IPO, KTO, ORPO의 문제의식과 입력 형식을 비교한다. 최신 방법�
 
 group sampling, group-relative advantage, rule-based reward, KL regularization을 배운다. 정답 여부와 출력 형식을 각각 점수로 줄 때 reward scale이 어떤 영향을 주는지도 살펴본다.
 
-- [x] `w10_grpo_principles.md`에 PPO와 GRPO의 구성 요소를 나란히 그린다.
-- [x] 한 prompt에서 여러 completion을 만들고 상대 advantage를 손으로 계산한다.
-- [x] 정확도 reward와 형식 reward를 따로 기록한다.
-- [x] 그룹 크기를 바꾸어 reward 분산과 메모리를 비교한다.
-- [x] 결과물로 `Group reward 분석 노트`를 완성한다.
+- `w10_grpo_principles.md`에 PPO와 GRPO의 구성 요소를 나란히 그린다.
+- 한 prompt에서 여러 completion을 만들고 상대 advantage를 손으로 계산한다.
+- 정확도 reward와 형식 reward를 따로 기록한다.
+- 그룹 크기를 바꾸어 reward 분산과 메모리를 비교한다.
+- 결과물로 `Group reward 분석 노트`를 완성한다.
 
 참고 자료:
 
@@ -255,11 +251,11 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 도구 schema, structured output, process reward, execution reward를 설계한다. 정답을 문자열로 비교할 수 있는 수학 문제부터 시작한 뒤, 계산기나 작은 데이터베이스를 호출하는 과제로 넓힌다.
 
-- [x] `w11_grpo_tool_agent.md`에 한 번의 tool trajectory를 메시지 순서대로 설명한다.
-- [x] 형식, tool 선택, 인자, 실행 성공, 최종 정답 reward를 분리해 만든다.
-- [x] tool을 쓰지 않아도 되는 문제와 반드시 써야 하는 문제를 섞어 학습한다.
-- [x] reward hacking과 무의미한 반복 호출이 있는지 확인한다.
-- [x] 결과물로 `Reasoning/tool model과 오류 분석표`를 만든다.
+- `w11_grpo_tool_agent.md`에 한 번의 tool trajectory를 메시지 순서대로 설명한다.
+- 형식, tool 선택, 인자, 실행 성공, 최종 정답 reward를 분리해 만든다.
+- tool을 쓰지 않아도 되는 문제와 반드시 써야 하는 문제를 섞어 학습한다.
+- reward hacking과 무의미한 반복 호출이 있는지 확인한다.
+- 결과물로 `Reasoning/tool model과 오류 분석표`를 만든다.
 
 참고 자료:
 
@@ -274,11 +270,11 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 지금까지 만든 checkpoint를 한자리에 모은다. 일반 대화, 지시 따르기, reasoning, tool calling을 나누어 평가하고, 자동 점수와 사람이 읽은 평가가 다른 사례도 기록한다.
 
-- [x] `w12_training_capstone.md`에 공통 평가 계획과 성공 기준을 먼저 적는다.
-- [x] Base, SFT, DPO, GRPO 정책을 같은 prompt와 평가 설정으로 비교한다.
-- [x] task accuracy, format accuracy, tool execution success, 응답 길이, 추론 시간을 기록한다.
-- [x] 20개 답을 직접 읽고 자동 평가의 오류를 찾는다.
-- [x] 결과물로 `Base/SFT/DPO/GRPO 비교 보고서`를 완성한다.
+- `w12_training_capstone.md`에 공통 평가 계획과 성공 기준을 먼저 적는다.
+- Base, SFT, DPO, GRPO 정책을 같은 prompt와 평가 설정으로 비교한다.
+- task accuracy, format accuracy, tool execution success, 응답 길이, 추론 시간을 기록한다.
+- 20개 답을 직접 읽고 자동 평가의 오류를 찾는다.
+- 결과물로 `Base/SFT/DPO/GRPO 비교 보고서`를 완성한다.
 
 참고 자료:
 
@@ -298,11 +294,11 @@ group sampling, group-relative advantage, rule-based reward, KL regularization�
 
 weight, KV cache, activation, temporary buffer, CUDA runtime이 GPU 메모리를 나누어 쓰는 방식을 배운다. MHA, GQA, MQA가 KV head 수를 어떻게 바꾸는지도 계산한다.
 
-- [x] `w13_inference_memory_kv_cache.md`에 학습 메모리와 추론 메모리의 차이를 설명한다.
-- [x] FP32, BF16/FP16, INT8, INT4 weight 크기를 계산하는 도구를 만든다.
-- [x] context 2K/8K/32K와 batch 1/8/32에서 KV cache 크기를 계산한다.
-- [x] 실제 GPU 사용량과 이론값이 다른 까닭을 기록한다.
-- [x] 결과물로 `Weight/KV memory calculator`를 완성한다.
+- `w13_inference_memory_kv_cache.md`에 학습 메모리와 추론 메모리의 차이를 설명한다.
+- FP32, BF16/FP16, INT8, INT4 weight 크기를 계산하는 도구를 만든다.
+- context 2K/8K/32K와 batch 1/8/32에서 KV cache 크기를 계산한다.
+- 실제 GPU 사용량과 이론값이 다른 까닭을 기록한다.
+- 결과물로 `Weight/KV memory calculator`를 완성한다.
 
 참고 자료:
 
@@ -317,11 +313,11 @@ weight, KV cache, activation, temporary buffer, CUDA runtime이 GPU 메모리를
 
 prefill과 decode, TTFT, TPOT, inter-token latency, end-to-end latency, throughput, goodput을 배운다. continuous batching, PagedAttention, FlashAttention, chunked prefill이 어느 병목을 줄이는지도 실험한다.
 
-- [x] `w14_inference_optimization_benchmark.md`에 prefill과 decode의 GPU 사용 차이를 설명한다.
-- [x] prompt 길이, output 길이, concurrency를 바꾼 benchmark를 설계한다.
-- [x] Transformers와 vLLM의 공통 측정표를 만들고 CUDA 실측은 `미실행`으로 표시한다.
-- [x] 교육용 chunked prefill sweep에서 TTFT와 TPOT의 trade-off를 찾는다.
-- [x] 결과물로 `Latency-throughput benchmark` 설계와 synthetic baseline을 만든다.
+- `w14_inference_optimization_benchmark.md`에 prefill과 decode의 GPU 사용 차이를 설명한다.
+- prompt 길이, output 길이, concurrency를 바꾼 benchmark를 설계한다.
+- Transformers와 vLLM의 공통 측정표를 만들고 CUDA 실측은 `미실행`으로 표시한다.
+- 교육용 chunked prefill sweep에서 TTFT와 TPOT의 trade-off를 찾는다.
+- 결과물로 `Latency-throughput benchmark` 설계와 synthetic baseline을 만든다.
 
 참고 자료:
 
@@ -337,11 +333,11 @@ prefill과 decode, TTFT, TPOT, inter-token latency, end-to-end latency, throughp
 
 OpenAI-compatible API, streaming, scheduling, prefix caching, structured output을 실습한다. SGLang은 shared prefix와 agent workload를, TensorRT-LLM은 NVIDIA 환경의 engine build와 parallelism을 중심으로 살펴본다. TGI는 maintenance mode이므로 역사와 운영 기능을 확인하는 비교 대상으로만 둔다.
 
-- [x] `w15_inference_servers.md`에 client→API→scheduler→model runner 흐름을 그린다.
-- [x] Chat completion과 streaming 요청을 mock server에 보내 전송 형식을 확인하고, 실제 vLLM CUDA 실행은 `미실행`으로 기록한다.
-- [x] `max-model-len`, `gpu-memory-utilization`, `max-num-seqs`를 바꾸는 공통 실험표를 만든다.
-- [x] 같은 모델로 vLLM, SGLang, TensorRT-LLM을 비교할 기준을 만들고 cross-engine 실측은 `미실행`으로 기록한다.
-- [x] 결과물로 `OpenAI-compatible server 실행 및 비교 노트`를 남긴다.
+- `w15_inference_servers.md`에 client→API→scheduler→model runner 흐름을 그린다.
+- Chat completion과 streaming 요청을 mock server에 보내 전송 형식을 확인하고, 실제 vLLM CUDA 실행은 `미실행`으로 기록한다.
+- `max-model-len`, `gpu-memory-utilization`, `max-num-seqs`를 바꾸는 공통 실험표를 만든다.
+- 같은 모델로 vLLM, SGLang, TensorRT-LLM을 비교할 기준을 만들고 cross-engine 실측은 `미실행`으로 기록한다.
+- 결과물로 `OpenAI-compatible server 실행 및 비교 노트`를 남긴다.
 
 참고 자료:
 
@@ -358,11 +354,11 @@ OpenAI-compatible API, streaming, scheduling, prefix caching, structured output�
 
 BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parallelism의 쓰임을 구분한다. prefix caching, speculative decoding, prefill-decode 분리도 살펴본다. 마지막에는 metrics, logs, traces로 서버 상태를 관찰한다.
 
-- [x] `w16_production_serving.md`에 양자화와 parallelism의 선택 기준을 적는다.
-- [x] BF16, FP8, INT8, AWQ, GPTQ의 이상적인 weight 저장량을 비교하고 실제 GPU의 TTFT·TPOT·품질은 `미실행`으로 기록한다.
-- [x] Concurrency 1부터 64까지 교육용 latency-throughput 곡선을 그린다.
-- [x] Request 수, queue time, TTFT, TPOT, token 수, KV cache 사용률, OOM을 기록하는 표를 만든다.
-- [x] 결과물로 채워 쓸 수 있는 `Production serving report` 양식을 완성한다.
+- `w16_production_serving.md`에 양자화와 parallelism의 선택 기준을 적는다.
+- BF16, FP8, INT8, AWQ, GPTQ의 이상적인 weight 저장량을 비교하고 실제 GPU의 TTFT·TPOT·품질은 `미실행`으로 기록한다.
+- Concurrency 1부터 64까지 교육용 latency-throughput 곡선을 그린다.
+- Request 수, queue time, TTFT, TPOT, token 수, KV cache 사용률, OOM을 기록하는 표를 만든다.
+- 결과물로 채워 쓸 수 있는 `Production serving report` 양식을 완성한다.
 
 참고 자료:
 
@@ -377,14 +373,14 @@ BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parall
 
 주제는 `SFT·GRPO로 학습한 Process-Aware Agent 모델의 최적화와 서빙`이다. 하나의 모델을 학습한 뒤 끝내지 않고, 학습 방법과 추론 엔진을 함께 비교한다.
 
-- [ ] Base model을 정하고 SFT checkpoint를 만든다.
-- [ ] DPO 또는 GRPO를 적용해 정렬된 checkpoint를 만든다.
-- [ ] BF16과 한 가지 이상의 양자화 버전을 준비한다.
-- [ ] Transformers, vLLM, SGLang 가운데 둘 이상으로 같은 workload를 실행한다.
-- [ ] 짧은 대화, 긴 RAG context, tool calling workload를 따로 평가한다.
-- [ ] TTFT, TPOT, throughput, GPU memory, task success를 한 표에 모은다.
-- [ ] continuous batching, prefix caching, chunked prefill 중 두 가지 이상을 끄고 켜며 ablation을 수행한다.
-- [ ] 어떤 설정이 언제 좋은지, 실패한 설정은 왜 실패했는지 보고서로 설명한다.
+- Base model을 정하고 SFT checkpoint를 만든다.
+- DPO 또는 GRPO를 적용해 정렬된 checkpoint를 만든다.
+- BF16과 한 가지 이상의 양자화 버전을 준비한다.
+- Transformers, vLLM, SGLang 가운데 둘 이상으로 같은 workload를 실행한다.
+- 짧은 대화, 긴 RAG context, tool calling workload를 따로 평가한다.
+- TTFT, TPOT, throughput, GPU memory, task success를 한 표에 모은다.
+- continuous batching, prefix caching, chunked prefill 중 두 가지 이상을 끄고 켜며 ablation을 수행한다.
+- 어떤 설정이 언제 좋은지, 실패한 설정은 왜 실패했는지 보고서로 설명한다.
 
 !!! note "과정을 마치며 답할 세 질문"
 
@@ -392,26 +388,20 @@ BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parall
     2. 추론 단계에서는 weight와 KV cache를 제한된 GPU에 어떻게 배치할 것인가?
     3. 서빙 단계에서는 latency, throughput, 품질 가운데 무엇을 먼저 지킬 것인가?
 
-## 강의 글 작성 규칙
-
-이 커리큘럼에 딸린 모든 글은 아래 규칙을 따른다.
-
-- [ ] 글 첫머리에 선수 지식과 이번 주에 배울 것을 적는다.
-- [ ] 어려운 용어는 중학생이 이해할 만한 비유로 먼저 설명하고, 정확한 정의를 이어 쓴다.
-- [ ] `!!! note`, `!!! example`, `!!! warning` 블록을 필요한 곳에만 사용한다.
-- [ ] 수식의 기호는 바로 아래에서 하나씩 풀이한다.
-- [ ] 코드는 작은 입력으로 먼저 실행하며 예상 출력과 실패 사례를 함께 적는다.
-- [ ] 확인 문제는 암기보다 “왜 그런가?”를 묻는다.
-- [ ] 주장과 실습 방법에는 원 논문이나 공식 문서를 붙인다. 블로그만 단독 근거로 쓰지 않는다.
-- [ ] 패키지 문서는 글을 쓸 때 현재 버전을 다시 확인하고, 확인 날짜를 참고 자료에 남긴다.
-- [ ] 초안이 끝나면 `humanize-korean` 규칙으로 번역투, 이중 피동, 접속사 반복, 과장된 표현을 점검한다.
+<nav class="lecture-navigation" aria-label="강의 시작">
+  <a class="lecture-navigation-link next" href="/notes/tutorial/llm_lecture/w01_transformer_causal_lm/" rel="next">
+    <span>1주차 시작하기 →</span>
+    <strong>Transformer와 Causal LM</strong>
+  </a>
+</nav>
 
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 커리큘럼
-검토 단위: 5개 단계와 작성 규칙을 각각 5,000자 이하로 나누어 점검
-원본/윤문본: 16385자 / 16452자, 변경률 1.74%
-탐지/수정: C-8 1→0, A-18 2→0, I-2 1→0, E-1 1→0, 그 밖의 S1 0→0
-자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 높임말 일관 / S1 잔존 없음 / 인공 수사 추가 없음
-등급: B — 자체검증 6/6을 통과했으며, 신규 작성문을 보수적으로 다듬어 변경률이 A 등급 구간보다 낮음
-주요 변경: “목표는 ~ 데 있지 않다”→“~보다”, 긴 문장 분리, “~라는 점도 확인한다”→직접 서술
+검토 단위: 5개 단계와 최종 프로젝트를 각각 5,000자 이하로 나누어 점검
+원본/수정본: 16577자 / 15492자, 요청된 구조 변경률 6.55%
+카테고리별 탐지/수정: A-7 0→0, A-8 0→0, C-5 0→0, D-1 0→0, H-1 0→0
+정량 점검: humanize-korean metrics v2.0 risk band low
+자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 평어체 유지 / S1 잔존 없음 / 인공 수사 추가 없음
+등급: B — 자체검증 6/6을 통과했고 사용자 요청에 따른 목록 서식과 문서 구조만 바꿈
+주요 변경: 모든 체크박스를 일반 목록으로 바꾸고 공개 작성 규칙을 agent 전용 작업 메모로 옮김
 -->
