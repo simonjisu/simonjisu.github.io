@@ -36,6 +36,9 @@ const seriesLabel = (id: string) => {
 
   if (parts[0] === "paper") return "Paper Reading";
   if (parts[0] === "info") return "Information Theory";
+  if (parts[0] === "tutorial" && parts[1] === "llm_lecture") {
+    return "Language Model & Agent Study";
+  }
   if (parts[0] === "tutorial" && parts[1] === "reinforcement_learning") {
     return "Reinforcement Learning";
   }

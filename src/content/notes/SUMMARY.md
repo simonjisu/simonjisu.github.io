@@ -1,4 +1,4 @@
 - [Study](index.md)
 - [Paper](paper/)
-- [Tutorial](tutorial/)
+- [Language Model & Agent Study](tutorial/)
 - [Intormation Theory](info/)

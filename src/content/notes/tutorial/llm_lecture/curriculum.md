@@ -1,19 +1,22 @@
 ---
-title: "LLM은 어떻게 배우고 대답할까: 16주 학습 커리큘럼"
-description: "Transformer의 기초부터 SFT, DPO, GRPO, 추론 최적화와 모델 서빙까지 직접 실험하며 익히는 과정"
+title: "LLM과 VLM은 어떻게 배우고, Agent는 어떻게 기억할까: 26주 학습 커리큘럼"
+description: "Transformer의 기초부터 모델 학습과 서빙, 이미지와 언어를 함께 다루는 VLM, 경험을 저장하고 다시 쓰는 Agent Memory까지 직접 실험하며 익히는 과정"
 tags:
   - LLM
+  - VLM
+  - Agent Memory
   - Transformer
+  - multimodal
   - post-training
   - inference
   - serving
 ---
 
-거대한 언어 모델을 무작정 외우기보다, 모델이 배우고 답하는 순서를 차근차근 따라가 본다. 글을 익히는 단계에서 출발해 사람의 지시와 선호를 배우는 과정을 거친 뒤, 실제 서버에서 여러 사람에게 답하기까지 살펴보는 것이 이 과정의 목표다.
+거대한 언어 모델을 무작정 외우기보다, 모델이 배우고 답하는 순서를 차근차근 따라가 본다. 글을 익히는 단계에서 출발해 사람의 지시와 선호를 배우고, 실제 서버에서 여러 사람에게 답하기까지 살펴본다. 사진과 문서를 읽는 VLM을 거쳐, 이전 대화와 작업 경험을 다음 행동에 활용하는 Agent Memory까지 범위를 넓힌다.
 
 !!! note "전체 과정을 한 문장으로"
 
-    LLM은 먼저 다음 token을 맞히며 언어를 배우고, 좋은 답의 예시와 사람의 선호를 보며 행동을 다듬은 다음, 제한된 GPU 메모리를 나누어 쓰며 사용자에게 답한다.
+    LLM은 다음 token을 맞히며 언어를 배운다. VLM은 이미지를 작은 조각으로 나누어 token처럼 다루고, 글과 이미지의 관계를 함께 배운다. Agent Memory는 대화와 작업에서 남길 내용을 골라 외부 저장소에 기록하고, 다음 작업에 필요한 기억만 다시 불러온다.
 
 ## 이 과정을 공부하는 방법
 
@@ -34,6 +37,8 @@ tags:
 | 사람의 선호로 정렬 | 5~9주 | 강화학습, Reward Model, PPO, DPO 계열 | preference-tuned model |
 | 추론과 도구 사용 학습 | 10~12주 | GRPO, tool calling, 통합 평가 | process-aware agent 비교 보고서 |
 | 빠르고 안정적인 추론 | 13~16주 | KV cache, vLLM, 양자화, 분산 서빙, 관측 | production serving 보고서 |
+| 이미지와 언어 함께 이해 | 17~22주 | ViT, CLIP, 연결 구조, 멀티모달 학습, 평가와 서빙 | VLM 비교·서빙 보고서 |
+| 경험을 저장하고 다시 사용 | 23~26주 | memory 종류, 저장·검색·갱신, reflection, skill memory, 평가와 보안 | Agent Memory 비교 보고서 |
 
 ---
 
@@ -369,24 +374,260 @@ BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parall
 
 ---
 
+## 6단계. 이미지와 언어를 함께 이해하기
+
+앞의 16주를 마쳤다면 VLM을 배우는 데 필요한 LLM 기초는 이미 갖춘 셈이다. 여기에 이미지가 tensor로 바뀌는 과정, 이미지와 글을 같은 의미 공간에 놓는 방법, vision encoder와 LLM을 연결하는 구조를 더하면 된다. 이미지 한 장을 이해하고 답하는 VLM의 전체 흐름은 6주면 한 번 완주할 수 있다.
+
+!!! note "왜 6주일까?"
+
+    첫 3주는 이미지와 글이 만나는 구조를 배우고, 다음 2주는 데이터와 평가를 다룬다. 마지막 1주는 실제 서버에 올려 속도와 메모리를 잰다. 영상까지 깊게 다루려면 2주를 더 잡는 편이 좋지만, 먼저 정지 이미지로 기본 원리를 익힌다.
+
+### 17주차. 이미지 tensor와 Vision Transformer
+
+!!! note "사진을 작은 낱말로 나누기"
+
+    언어 모델이 문장을 token으로 나누듯이 Vision Transformer는 사진을 바둑판 같은 patch로 나눈다. 각 patch를 숫자 묶음으로 바꾸면 Transformer가 읽을 수 있는 visual token이 된다.
+
+RGB, channel, height, width, resize, crop, normalization을 익힌다. 한 장의 이미지가 `pixel_values`를 거쳐 patch embedding이 되는 과정을 살펴보고, 해상도와 patch 크기가 visual token 수에 어떤 영향을 주는지 계산한다.
+
+- 이 주차에는 이미지 한 장을 `[channel, height, width]` 모양의 tensor로 바꾸는 과정을 따라간다.
+- 같은 사진에 resize, crop, normalization을 적용하고 값과 shape가 어떻게 달라지는지 확인한다.
+- 해상도와 patch 크기를 바꾸며 visual token 수를 계산한다.
+- 사전 학습된 ViT의 patch embedding과 attention 출력을 살펴본다.
+- 결과물로 `이미지 전처리와 patch 흐름도`를 만든다.
+
+참고 자료:
+
+- [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
+- [Hugging Face Transformers: Image classification](https://huggingface.co/docs/transformers/tasks/image_classification)
+
+### 18주차. CLIP과 이미지-글 정렬
+
+!!! note "사진과 설명을 같은 지도에 놓기"
+
+    강아지 사진과 “a photo of a dog”라는 문장이 지도에서 가까운 곳에 놓인다고 생각해보자. CLIP은 맞는 사진과 글은 가깝게, 관계없는 쌍은 멀게 만드는 방법으로 둘의 의미를 맞춘다.
+
+image encoder, text encoder, embedding, cosine similarity, temperature, contrastive loss를 배운다. 같은 image-text embedding을 이용해 zero-shot 분류와 검색을 할 수 있는 까닭도 작은 행렬로 확인한다.
+
+- 이 주차에는 이미지와 caption을 각각 embedding으로 바꾸고 similarity 행렬을 만든다.
+- cosine similarity와 temperature가 점수 차이에 미치는 영향을 손으로 계산한다.
+- 여러 caption 가운데 사진과 가장 가까운 문장을 찾는 검색 실험을 한다.
+- class 이름을 prompt로 바꾸어 zero-shot 분류를 실행하고 prompt에 따른 차이를 기록한다.
+- 결과물로 `CLIP 검색·분류 실험 보고서`를 완성한다.
+
+참고 자료:
+
+- [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
+
+### 19주차. Vision encoder와 LLM을 잇는 구조
+
+!!! note "서로 다른 두 교실 사이의 통역사"
+
+    Vision encoder는 이미지 특징을 만들고 LLM은 글을 이어 쓴다. 두 model이 주고받는 숫자의 모양과 뜻이 다르므로, projector나 Q-Former 같은 작은 연결 장치가 통역을 맡는다.
+
+LLaVA의 projector, BLIP-2의 Q-Former, Flamingo의 Perceiver Resampler와 cross-attention을 비교한다. Vision encoder와 LLM을 고정할지 함께 학습할지도 나누어 보고, 이미지가 최종적으로 몇 개의 visual token이 되어 LLM에 들어가는지 추적한다.
+
+- 이 주차에는 vision encoder, connector, LLM의 역할을 하나의 구조도에 표시한다.
+- LLaVA, BLIP-2, Flamingo가 이미지 특징을 언어 model에 전달하는 방식을 비교한다.
+- 각 단계의 batch, token, hidden dimension shape를 기록한다.
+- 고정된 부분과 학습되는 부분을 나누고 필요한 메모리의 차이를 설명한다.
+- 결과물로 `VLM 구조 비교 지도`를 만든다.
+
+참고 자료:
+
+- [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485)
+- [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](https://arxiv.org/abs/2301.12597)
+- [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)
+
+### 20주차. 멀티모달 데이터와 Instruction Tuning
+
+!!! note "질문 안에 사진도 함께 넣기"
+
+    글만 다루는 chat template에는 `user`와 `assistant` 문장이 들어간다. VLM의 한 message에는 text와 image가 순서대로 들어간다. Processor는 이 둘을 각각 token ID와 pixel 값으로 바꾸어 model에 전달한다.
+
+caption, VQA, OCR, 대화형 instruction data의 차이를 살펴본다. 멀티모달 chat template, image placeholder, assistant-only loss를 확인하고, vision encoder·connector·LLM 가운데 어느 부분을 LoRA로 학습할지 계획한다.
+
+- 이 주차에는 text와 image가 섞인 message가 `input_ids`와 `pixel_values`로 바뀌는 과정을 확인한다.
+- caption, 짧은 VQA, 자세한 설명, 지시 수행 자료를 train, validation, test로 나눈다.
+- 이미지 없이도 답을 맞힐 수 있는 질문과 데이터 중복을 찾아낸다.
+- 작은 VLM에서 connector 또는 LoRA를 학습하고 학습 전후 답변을 같은 설정으로 비교한다.
+- 결과물로 `멀티모달 데이터 카드와 instruction-tuned adapter`를 만든다.
+
+참고 자료:
+
+- [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485)
+- [Hugging Face Transformers: Multimodal chat templates](https://huggingface.co/docs/transformers/chat_templating_multimodal)
+
+### 21주차. VLM 과제와 실패 분석
+
+!!! note "그럴듯한 답과 사진을 본 답은 다르다"
+
+    모델이 사진에 없는 물건을 있다고 말해도 문장은 자연스러울 수 있다. 그래서 VLM은 말투만 읽어서는 평가할 수 없다. 이미지에 실제로 근거한 답인지 따로 확인해야 한다.
+
+image captioning, VQA, 문서·표 읽기, OCR, 공간 관계, grounding을 나누어 평가한다. 일반 지식이 필요한 문제와 이미지를 정확히 봐야 하는 문제도 구분한다. 해상도를 줄였을 때 작은 글자가 사라지는 현상과 object hallucination을 실패 사례로 다룬다.
+
+- 이 주차에는 caption, 일반 VQA, 문서 VQA, 공간 추론 과제를 같은 model로 풀어본다.
+- 이미지를 가리거나 바꾼 text-only 대조 실험으로 model이 사진을 실제로 쓰는지 확인한다.
+- 정확도, 문서 답변 점수, grounding IoU, hallucination 비율을 과제에 맞게 고른다.
+- 틀린 답을 인식, OCR, 지식, 추론, 지시 위반으로 나누어 읽는다.
+- 결과물로 `VLM 오류 유형표와 평가 보고서`를 완성한다.
+
+참고 자료:
+
+- [MMMU: A Massive Multi-discipline Multimodal Understanding and Reasoning Benchmark](https://arxiv.org/abs/2311.16502)
+- [DocVQA: A Dataset for VQA on Document Images](https://arxiv.org/abs/2007.00398)
+- [Evaluating Object Hallucination in Large Vision-Language Models](https://arxiv.org/abs/2305.10355)
+
+### 22주차. VLM 추론과 멀티모달 서빙
+
+!!! note "사진이 커지면 기다림도 길어진다"
+
+    글이 길수록 LLM의 계산량이 늘듯이, 사진의 해상도와 장수가 늘면 visual token도 많아진다. 같은 질문이라도 사진 한 장과 열 장을 넣었을 때 필요한 메모리와 첫 token 대기 시간은 달라진다.
+
+Transformers와 vLLM에서 같은 VLM 요청을 실행한다. 이미지 해상도, 이미지 수, 동시 요청 수를 바꾸며 TTFT, TPOT, throughput, GPU memory를 잰다. 외부 이미지 URL을 받는 서버에서는 허용할 주소와 파일 크기를 제한해야 하는 이유도 살펴본다.
+
+- 이 주차에는 model revision, Processor, chat template, decoding 설정을 고정한 공통 benchmark를 만든다.
+- 이미지 해상도와 장수를 바꾸며 visual token 수와 peak memory를 기록한다.
+- 단일 이미지, 문서 이미지, 여러 이미지 대화의 TTFT와 throughput을 비교한다.
+- 허용 media domain, 파일 크기, timeout을 정하고 잘못된 입력의 처리 방법을 점검한다.
+- 결과물로 `VLM production serving report`를 작성한다.
+
+참고 자료:
+
+- [Hugging Face Transformers: Image-text-to-text](https://huggingface.co/docs/transformers/main/tasks/image_text_to_text)
+- [vLLM: Multimodal Inputs](https://docs.vllm.ai/en/latest/features/multimodal_inputs/)
+- [LLaVA-NeXT-Interleave: Tackling Multi-image, Video, and 3D in Large Multimodal Models](https://arxiv.org/abs/2407.07895)
+
+---
+
+## 7단계. 경험을 저장하고 다시 사용하기
+
+앞 과정에서 agent가 reasoning하고 tool을 부르는 방법을 배웠다. 하지만 모델의 weight는 작업을 한 번 마칠 때마다 저절로 바뀌지 않는다. 다음 실행에서도 경험을 쓰려면 무엇을 남기고, 어디에 저장하며, 언제 다시 꺼낼지 정하는 memory system이 필요하다. 이 흐름을 이해하고 작은 구현까지 만드는 데는 4주가 알맞다.
+
+!!! note "Agent Memory가 작동하는 순서"
+
+    Agent는 먼저 대화와 tool 실행 결과를 관찰한다. 그중 다시 쓸 만한 사실, 경험, 규칙을 골라 출처와 시간과 함께 저장한다. 새 작업이 들어오면 질문과 가까운 기억을 검색하고, 일부만 context에 넣어 행동한다. 작업이 끝난 뒤에는 틀린 기억을 고치거나 오래된 기억을 잊는다.
+
+대화 기록을 전부 보관하는 것만으로 memory system이 완성되지는 않는다. Agent Memory에는 무엇을 쓸지 정하는 write policy, 기억을 찾는 retrieval, token 예산에 맞게 줄이는 selection, 충돌한 사실을 고치는 update, 필요 없는 정보를 지우는 forgetting이 함께 들어간다. Multi-agent shared memory와 memory 자체를 학습하는 방법까지 연구하려면 2주를 더 잡을 수 있지만, 먼저 한 agent의 핵심 흐름을 익힌다.
+
+### 23주차. Agent Memory의 종류와 생명주기
+
+!!! note "녹취록, 작업판, 백과사전, 개인 노트"
+
+    Conversation History는 대화를 순서대로 적은 녹취록이다. Agent State는 지금 할 일과 중간 결과가 놓인 작업판이고, Knowledge Base는 여러 사람이 함께 참고하는 백과사전에 가깝다. Memory는 agent가 경험에서 골라 적어둔 개인 노트다.
+
+#### 먼저 구분할 네 가지
+
+| 개념 | 무엇을 담는가 | 범위와 수명 | 예시 |
+| --- | --- | --- | --- |
+| Memory | Agent가 다음 작업에 다시 쓰려고 고른 사실, 경험, 규칙 | 여러 session과 task에서 불러오며 갱신하거나 삭제할 때까지 남는다 | 사용자 선호, 과거 실패의 교훈, 재사용할 skill |
+| Knowledge Base | 특정 agent의 경험과 상관없이 참고하는 외부 지식 | 여러 사용자나 agent가 공유하며 원본 문서를 다시 넣을 때 바뀐다 | 제품 설명서, 사내 규정, 논문 모음 |
+| Conversation History | `user`, `assistant`, `tool` message를 시간순으로 쌓은 기록 | 보통 하나의 session이나 thread에 속하며 길어지면 자르거나 요약한다 | 질문, 답변, tool call과 반환값 |
+| Agent State | 지금 실행 중인 workflow를 이어가는 데 필요한 현재 상태 | 매 step마다 바뀌며 checkpoint를 남기면 중단한 지점에서 다시 시작할 수 있다 | 현재 목표, plan, 중간 계산값, 승인 대기 상태 |
+
+이 네 가지는 저장 기술이 아니라 역할로 나눈다. Conversation History는 Agent State의 한 항목이 될 수 있고, History와 State에서 중요한 내용을 골라 Memory를 만들기도 한다. Knowledge Base와 Memory가 같은 vector database를 쓰더라도, 외부 자료를 찾아보는지 agent 자신의 경험을 다시 쓰는지에 따라 역할이 달라진다.
+
+모델 weight에 들어 있는 parametric memory, 현재 context와 state에 놓인 working memory, 세션을 넘어 남는 long-term memory를 구분한다. Long-term memory는 다시 사실을 담는 semantic memory, 지나간 작업을 담는 episodic memory, 문제를 푸는 규칙과 skill을 담는 procedural memory로 나눈다.
+
+- 이 주차에는 Memory, Knowledge Base, Conversation History, Agent State를 같은 사례로 비교한다.
+- Model weight의 parametric memory, 현재 context의 working memory, 외부 store의 long-term memory를 구분한다.
+- 하나의 agent 실행에서 관찰, 저장 판단, 기록, 검색, 행동, 갱신 순서를 그린다.
+- 짧은 Conversation History와 Agent State를 checkpoint로 저장하고 같은 thread를 다시 시작한다.
+- 사용자 선호, 과거 실패, 계산기 사용법을 분류한 `Agent Memory 종류와 생명주기 지도`를 만든다.
+
+참고 자료:
+
+- [Cognitive Architectures for Language Agents](https://arxiv.org/abs/2309.02427)
+- [MemGPT: Towards LLMs as Operating Systems](https://arxiv.org/abs/2310.08560)
+- [LangGraph: Memory overview](https://docs.langchain.com/oss/python/concepts/memory)
+- [LangGraph: Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)
+- [OpenAI Agents SDK: Sessions](https://openai.github.io/openai-agents-python/sessions/)
+
+### 24주차. 기억을 저장하고 찾고 고치기
+
+!!! note "기억 창고에도 사서가 필요하다"
+
+    모든 대화를 한 상자에 던져 넣으면 필요한 기억을 찾기 어렵다. 누가 말했는지, 언제 생긴 정보인지, 무엇에 관한 내용인지 이름표를 붙여야 한다. 새 정보가 들어오면 예전 기록과 충돌하는지도 살펴야 한다.
+
+write, index, retrieve, rerank, read, update, delete pipeline을 만든다. Memory 한 건에는 본문뿐 아니라 user ID, source, timestamp, memory type, confidence를 함께 기록한다. Keyword, embedding similarity, recency, importance를 섞은 검색 점수도 비교한다.
+
+- 이 주차에는 대화에서 장기 보관할 사실만 뽑는 write policy를 만든다.
+- 같은 내용을 raw message, summary, 구조화된 JSON으로 저장하고 검색 결과를 비교한다.
+- semantic similarity, keyword, recency, importance 점수를 각각 계산한다.
+- 새 정보가 과거 정보와 충돌할 때 덮어쓰기, 이력 보존, 확인 요청을 나누어 적용한다.
+- 결과물로 `저장·검색·갱신이 가능한 memory pipeline`을 완성한다.
+
+참고 자료:
+
+- [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442)
+- [A-MEM: Agentic Memory for LLM Agents](https://arxiv.org/abs/2502.12110)
+- [Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory](https://arxiv.org/abs/2504.19413)
+- [LangGraph: Add memory](https://docs.langchain.com/oss/python/langgraph/add-memory)
+
+### 25주차. Reflection과 Skill Memory
+
+!!! note "실패 일기와 나만의 공략집"
+
+    실패한 기록을 그대로 다시 읽는 것보다 “다음에는 단위를 먼저 확인한다”처럼 교훈을 짧게 남기는 편이 쓸모 있다. 여러 번 성공한 행동은 순서가 있는 skill로 묶어 공략집처럼 다시 사용할 수 있다.
+
+Episodic memory에서 교훈을 만드는 reflection과 실행 가능한 절차를 모으는 skill library를 배운다. Reflexion처럼 feedback을 글로 남기는 방식과 Voyager처럼 재사용할 code skill을 저장하는 방식을 비교한다. 이 과정은 보통 model weight를 업데이트하지 않고 inference 중에 일어난다.
+
+- 이 주차에는 task, trajectory, 결과, 실패 원인, 다음 규칙을 한 memory schema로 만든다.
+- 실패한 tool trajectory를 짧은 reflection으로 바꾸고 다음 시도에 넣는다.
+- 성공한 여러 trajectory에서 반복되는 절차를 하나의 skill로 정리한다.
+- memory 없음, raw trajectory, reflection, skill library 조건을 같은 과제로 비교한다.
+- 결과물로 `경험에서 교훈과 skill을 만드는 agent`를 구현한다.
+
+참고 자료:
+
+- [Reflexion: Language Agents with Verbal Reinforcement Learning](https://arxiv.org/abs/2303.11366)
+- [Voyager: An Open-Ended Embodied Agent with Large Language Models](https://arxiv.org/abs/2305.16291)
+- [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442)
+
+### 26주차. Agent Memory 평가와 안전한 운영
+
+!!! note "틀린 기억은 잊어버린 것보다 위험하다"
+
+    관련 없는 기억을 불러오면 답이 흔들리고, 오래된 주소를 최신 정보처럼 쓰면 실제 행동까지 틀릴 수 있다. 다른 사용자의 기억이 섞이면 개인정보 문제도 생긴다. 얼마나 많이 기억했는지만 재서는 부족하다.
+
+정보 추출, 여러 세션을 잇는 추론, 시간 이해, 정보 갱신, 모를 때 답하지 않는 능력을 나누어 평가한다. Retrieval recall@k와 최종 답변 정확도뿐 아니라 task success, retrieved token 수, latency, 저장 비용도 함께 잰다. User namespace, 접근 제어, provenance, TTL, 삭제, memory poisoning 방어도 점검한다.
+
+- 이 주차에는 no-memory, full-history, summary, vector retrieval, reflective memory를 같은 문제로 비교한다.
+- 검색 recall@k와 최종 답변 정확도를 따로 재어 retrieval과 reasoning 오류를 구분한다.
+- 정보가 바뀌거나 삭제된 뒤 예전 memory가 다시 나타나는지 시험한다.
+- 다른 사용자의 memory와 악성 instruction이 섞이지 않도록 격리와 write-time 검사를 적용한다.
+- 결과물로 `Agent Memory 평가·보안·운영 보고서`를 작성한다.
+
+참고 자료:
+
+- [LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory](https://arxiv.org/abs/2410.10813)
+- [Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions](https://arxiv.org/abs/2507.05257)
+- [Memory Poisoning Attack and Defense on Memory Based LLM-Agents](https://arxiv.org/abs/2601.05504)
+- [OpenAI Agents SDK: Sessions](https://openai.github.io/openai-agents-python/sessions/)
+
+---
+
 ## 최종 프로젝트
 
-주제는 `SFT·GRPO로 학습한 Process-Aware Agent 모델의 최적화와 서빙`이다. 하나의 모델을 학습한 뒤 끝내지 않고, 학습 방법과 추론 엔진을 함께 비교한다.
+주제는 `Process-Aware Multimodal Memory Agent의 평가와 서빙`이다. 하나의 모델을 학습한 뒤 끝내지 않고, 글과 이미지를 이해하는지, 과거 경험을 올바르게 사용하는지, 추론 엔진에 따라 성능이 어떻게 달라지는지 비교한다.
 
-- Base model을 정하고 SFT checkpoint를 만든다.
-- DPO 또는 GRPO를 적용해 정렬된 checkpoint를 만든다.
+- 공개된 작은 VLM을 정하고 멀티모달 instruction adapter를 만든다.
+- 필요하다면 DPO 또는 GRPO를 적용해 지시 따르기와 tool 사용을 다듬는다.
 - BF16과 한 가지 이상의 양자화 버전을 준비한다.
 - Transformers, vLLM, SGLang 가운데 둘 이상으로 같은 workload를 실행한다.
-- 짧은 대화, 긴 RAG context, tool calling workload를 따로 평가한다.
-- TTFT, TPOT, throughput, GPU memory, task success를 한 표에 모은다.
-- continuous batching, prefix caching, chunked prefill 중 두 가지 이상을 끄고 켜며 ablation을 수행한다.
+- 일반 대화, 단일 이미지, 문서·표, 여러 이미지, tool calling을 나누어 평가한다.
+- Thread state와 사용자별 long-term memory store를 연결하고, memory가 없는 조건과 비교한다.
+- task success, memory recall, hallucination, TTFT, TPOT, throughput, GPU memory를 한 표에 모은다.
+- 이미지 해상도, visual token 수, concurrency, cache 설정을 바꾸어 ablation을 수행한다.
+- 저장 형식, retrieval top-k, reflection 유무를 바꾸고 오래된 정보와 악성 memory도 시험한다.
 - 어떤 설정이 언제 좋은지, 실패한 설정은 왜 실패했는지 보고서로 설명한다.
 
-!!! note "과정을 마치며 답할 세 질문"
+!!! note "과정을 마치며 답할 네 질문"
 
-    1. 학습 단계에서는 어떤 objective로 모델의 행동을 바꿀 것인가?
-    2. 추론 단계에서는 weight와 KV cache를 제한된 GPU에 어떻게 배치할 것인가?
-    3. 서빙 단계에서는 latency, throughput, 품질 가운데 무엇을 먼저 지킬 것인가?
+    1. 학습 단계에서는 text와 image를 어떤 objective로 연결할 것인가?
+    2. 평가 단계에서는 model이 이미지를 실제로 보고 답했는지 어떻게 확인할 것인가?
+    3. Memory 단계에서는 무엇을 저장하고, 언제 불러오고, 언제 고치거나 지울 것인가?
+    4. 서빙 단계에서는 visual token, latency, throughput, 품질 가운데 무엇을 먼저 지킬 것인가?
 
 <nav class="lecture-navigation" aria-label="강의 시작">
   <a class="lecture-navigation-link next" href="/notes/tutorial/llm_lecture/w01_transformer_causal_lm/" rel="next">
@@ -397,11 +638,11 @@ BF16, FP8, INT8, AWQ, GPTQ를 비교하고 tensor, pipeline, data, expert parall
 
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 커리큘럼
-검토 단위: 5개 단계와 최종 프로젝트를 각각 5,000자 이하로 나누어 점검
-원본/수정본: 15905자 / 15613자, 이번 후처리 변경률 1.84%
+검토 단위: 23주차의 네 개념 비교 문단과 표
+원본/수정본: 새 문단 초안 1,372자 / 윤문본 1,338자, 이번 후처리 변경률 2.48%
 카테고리별 탐지/수정: A-7 0→0, A-8 0→0, C-5 0→0, D-1 0→0, H-1 0→0
 정량 점검: humanize-korean metrics v2.0 risk band low
 자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 평어체 유지 / S1 잔존 없음 / 인공 수사 추가 없음
-등급: B — 자체검증 6/6을 통과했고 학습 내용은 유지한 채 내부 파일명만 독자용 문장으로 바꿈
-주요 변경: 내부 파일명을 앞세운 작업 문구를 `이 주차에는 ... 이해한다` 형태의 학습 안내로 고침
+등급: B — 자체검증 6/6을 통과했고 의미를 유지한 채 반복되는 연결 표현을 줄임
+주요 변경: Memory, Knowledge Base, Conversation History, Agent State의 역할과 겹치는 지점을 표로 구분함
 -->
