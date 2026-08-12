@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import NoteLayout from "@/layouts/NoteLayout.astro";
 import { excerptFromBody } from "@/lib/excerpt";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -46,121 +46,71 @@ export async function getStaticPaths() {
     (note) => !isIndexPage(note.id)
   );
 
-  const lectureNotes = notes
-    .filter((note) => /^tutorial\/llm_lecture\/w\d{2}_/.test(note.id))
-    .sort((a, b) => a.id.localeCompare(b.id));
+  const compareSeriesNotes = (
+    a: CollectionEntry<"notes">,
+    b: CollectionEntry<"notes">
+  ) => {
+    const aIsCurriculum = a.id.endsWith("/curriculum");
+    const bIsCurriculum = b.id.endsWith("/curriculum");
+
+    if (aIsCurriculum !== bIsCurriculum) return aIsCurriculum ? -1 : 1;
+
+    return a.id.localeCompare(b.id, undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
+  };
 
   return notes.map((note) => {
-    const lectureIndex = lectureNotes.findIndex((lecture) => lecture.id === note.id);
-    const lectureLink = (lecture: CollectionEntry<"notes"> | undefined) =>
-      lecture
+    const articleLink = (article: CollectionEntry<"notes"> | undefined) =>
+      article
         ? {
-            href: `/notes/${lecture.id}/`,
-            title: lectureTitleFromNote(lecture)
+            href: `/notes/${article.id}/`,
+            title: lectureTitleFromNote(article)
           }
         : null;
     const seriesParent = note.id.split("/").slice(0, -1).join("/");
-    const seriesArticles = seriesParent.startsWith("tutorial/")
-      ? notes
-          .filter(
-            (candidate) =>
-              candidate.id.split("/").slice(0, -1).join("/") === seriesParent
-          )
-          .sort((a, b) =>
-            a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: "base" })
-          )
-          .map((article) => ({
-            href: `/notes/${article.id}/`,
-            title: lectureTitleFromNote(article),
-            isCurrent: article.id === note.id
-          }))
-      : [];
+    const seriesNotes = notes
+      .filter(
+        (candidate) =>
+          candidate.id.split("/").slice(0, -1).join("/") === seriesParent
+      )
+      .sort(compareSeriesNotes);
+    const seriesIndex = seriesNotes.findIndex((article) => article.id === note.id);
+    const seriesArticles = seriesNotes.map((article) => ({
+      href: `/notes/${article.id}/`,
+      title: lectureTitleFromNote(article),
+      isCurrent: article.id === note.id
+    }));
 
     return {
       params: { slug: note.id },
       props: {
         note,
-        previousLecture:
-          lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex - 1]) : null,
-        nextLecture:
-          lectureIndex >= 0 ? lectureLink(lectureNotes[lectureIndex + 1]) : null,
+        previousArticle: articleLink(seriesNotes[seriesIndex - 1]),
+        nextArticle: articleLink(seriesNotes[seriesIndex + 1]),
+        navigationLabel:
+          seriesParent === "tutorial/llm_lecture" ? "강의" : "글",
         seriesArticles: seriesArticles.length > 1 ? seriesArticles : []
       }
     };
   });
 }
 
-const { note, previousLecture, nextLecture, seriesArticles } = Astro.props;
+const { note, previousArticle, nextArticle, navigationLabel, seriesArticles } = Astro.props;
 const { Content } = await render(note);
 
 const title = titleFromNote(note);
 const description = note.data.description ?? excerptFromBody(note.body);
 ---
 
-<BaseLayout title={`${title} | Notes | Simon Jisoo Jang`} description={description} lang="ko">
-  <section class="section note-page">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Notes</p>
-        <h1>{title}</h1>
-      </div>
-      <p>{description}</p>
-    </div>
-    <div class:list={["note-content-layout", { "has-series": seriesArticles.length > 1 }]}>
-      <article class="content">
-        <Content />
-        {
-          (previousLecture || nextLecture) && (
-            <nav class="lecture-navigation" aria-label="강의 이동">
-              {previousLecture && (
-                <a class="lecture-navigation-link previous" href={previousLecture.href} rel="prev">
-                  <span>← 이전 강의</span>
-                  <strong>{previousLecture.title}</strong>
-                </a>
-              )}
-              {nextLecture && (
-                <a class="lecture-navigation-link next" href={nextLecture.href} rel="next">
-                  <span>다음 강의 →</span>
-                  <strong>{nextLecture.title}</strong>
-                </a>
-              )}
-            </nav>
-          )
-        }
-      </article>
-      {
-        seriesArticles.length > 1 && (
-          <aside class="series-sidebar" aria-label="관련 시리즈">
-            <details class="series-directory" open>
-              <summary>
-                <span>이 시리즈의 글</span>
-                <small>{seriesArticles.length}</small>
-              </summary>
-              <nav class="series-directory-links" aria-label="시리즈 글 바로가기">
-                {seriesArticles.map((article) => (
-                  <a
-                    class:list={["series-directory-link", { current: article.isCurrent }]}
-                    href={article.href}
-                    aria-current={article.isCurrent ? "page" : undefined}
-                  >
-                    {article.title}
-                  </a>
-                ))}
-              </nav>
-            </details>
-          </aside>
-        )
-      }
-    </div>
-  </section>
-</BaseLayout>
-
-<script>
-  const mobileSeries = window.matchMedia("(max-width: 980px)");
-
-  if (mobileSeries.matches) {
-    document
-      .querySelectorAll<HTMLDetailsElement>(".series-directory")
-      .forEach((directory) => directory.removeAttribute("open"));
-  }
-</script>
+<NoteLayout
+  title={title}
+  description={description}
+  previousArticle={previousArticle}
+  nextArticle={nextArticle}
+  navigationLabel={navigationLabel}
+  seriesArticles={seriesArticles}
+>
+  <Content />
+</NoteLayout>

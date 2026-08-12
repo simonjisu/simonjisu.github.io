@@ -1,0 +1,114 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+type ArticleLink = {
+  href: string;
+  title: string;
+};
+
+type SeriesArticle = ArticleLink & {
+  isCurrent: boolean;
+};
+
+type Props = {
+  title: string;
+  description: string;
+  previousArticle?: ArticleLink | null;
+  nextArticle?: ArticleLink | null;
+  navigationLabel?: string;
+  seriesArticles?: SeriesArticle[];
+};
+
+const {
+  title,
+  description,
+  previousArticle = null,
+  nextArticle = null,
+  navigationLabel = "글",
+  seriesArticles = []
+} = Astro.props;
+
+const hasSeries = seriesArticles.length > 1;
+---
+
+<BaseLayout title={`${title} | Notes | Simon Jisoo Jang`} description={description} lang="ko">
+  <section class="section note-page">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Notes</p>
+        <h1>{title}</h1>
+      </div>
+      <p>{description}</p>
+    </div>
+
+    <div class:list={["note-content-layout", { "has-series": hasSeries }]}>
+      <article class="content">
+        <slot />
+
+        {
+          (previousArticle || nextArticle) && (
+            <nav class="lecture-navigation" aria-label="시리즈 글 이동">
+              {previousArticle && (
+                <a
+                  class="lecture-navigation-link previous"
+                  href={previousArticle.href}
+                  rel="prev"
+                >
+                  <span>← 이전 {navigationLabel}</span>
+                  <strong>{previousArticle.title}</strong>
+                </a>
+              )}
+              {nextArticle && (
+                <a
+                  class="lecture-navigation-link next"
+                  href={nextArticle.href}
+                  rel="next"
+                >
+                  <span>다음 {navigationLabel} →</span>
+                  <strong>{nextArticle.title}</strong>
+                </a>
+              )}
+            </nav>
+          )
+        }
+      </article>
+
+      {
+        hasSeries && (
+          <aside class="series-sidebar" aria-label="관련 시리즈">
+            <details class="series-directory" open>
+              <summary>
+                <span>이 시리즈의 글</span>
+                <small>{seriesArticles.length}</small>
+              </summary>
+              <nav class="series-directory-links" aria-label="시리즈 글 바로가기">
+                {seriesArticles.map((article) => (
+                  <a
+                    class:list={[
+                      "series-directory-link",
+                      { current: article.isCurrent }
+                    ]}
+                    href={article.href}
+                    aria-current={article.isCurrent ? "page" : undefined}
+                  >
+                    {article.title}
+                  </a>
+                ))}
+              </nav>
+            </details>
+          </aside>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const mobileSeries = window.matchMedia("(max-width: 980px)");
+
+  if (mobileSeries.matches) {
+    document
+      .querySelectorAll<HTMLDetailsElement>(".series-directory")
+      .forEach((directory) => directory.removeAttribute("open"));
+  }
+</script>

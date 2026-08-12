@@ -629,13 +629,6 @@ Episodic memory에서 교훈을 만드는 reflection과 실행 가능한 절차�
     3. Memory 단계에서는 무엇을 저장하고, 언제 불러오고, 언제 고치거나 지울 것인가?
     4. 서빙 단계에서는 visual token, latency, throughput, 품질 가운데 무엇을 먼저 지킬 것인가?
 
-<nav class="lecture-navigation" aria-label="강의 시작">
-  <a class="lecture-navigation-link next" href="/notes/tutorial/llm_lecture/w01_transformer_causal_lm/" rel="next">
-    <span>1주차 시작하기 →</span>
-    <strong>Transformer와 Causal LM</strong>
-  </a>
-</nav>
-
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 커리큘럼
 검토 단위: 23주차의 네 개념 비교 문단과 표

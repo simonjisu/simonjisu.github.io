@@ -68,3 +68,142 @@ const navItems = [
     </footer>
   </body>
 </html>
+
+<script>
+  const diagrams = Array.from(
+    document.querySelectorAll<HTMLElement>(".mermaid[data-mermaid-source='markdown']")
+  );
+
+  if (diagrams.length > 0) {
+    import("mermaid").then(({ default: mermaid }) => {
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: "strict",
+        theme: "neutral",
+        suppressErrorRendering: true,
+        flowchart: {
+          htmlLabels: false,
+          useMaxWidth: true
+        }
+      });
+
+      mermaid
+        .run({ nodes: diagrams, suppressErrors: true })
+        .then(() => {
+          diagrams.forEach((diagram, index) => {
+            diagram.classList.add("is-rendered");
+
+            const shell = document.createElement("div");
+            shell.className = "mermaid-shell";
+            diagram.before(shell);
+            shell.append(diagram);
+
+            const expandButton = document.createElement("button");
+            expandButton.className = "mermaid-expand-button";
+            expandButton.type = "button";
+            expandButton.textContent = "확대";
+            expandButton.setAttribute(
+              "aria-label",
+              `다이어그램 ${index + 1} 확대해서 보기`
+            );
+            shell.append(expandButton);
+
+            expandButton.addEventListener("click", () => {
+              openMermaidViewer(diagram, index + 1);
+            });
+          });
+        })
+        .catch((error) => {
+          console.error("Mermaid diagram rendering failed", error);
+        });
+    });
+  }
+
+  const openMermaidViewer = (diagram: HTMLElement, diagramNumber: number) => {
+    const sourceSvg = diagram.querySelector<SVGSVGElement>("svg");
+    if (!sourceSvg) return;
+
+    const dialog = document.createElement("dialog");
+    dialog.className = "mermaid-viewer";
+    dialog.setAttribute("aria-label", `다이어그램 ${diagramNumber} 확대 보기`);
+    dialog.innerHTML = `
+      <div class="mermaid-viewer-panel">
+        <div class="mermaid-viewer-toolbar">
+          <strong>다이어그램 ${diagramNumber}</strong>
+          <div class="mermaid-viewer-actions">
+            <button type="button" data-mermaid-zoom-out aria-label="축소">−</button>
+            <output data-mermaid-zoom-level aria-live="polite">100%</output>
+            <button type="button" data-mermaid-zoom-in aria-label="확대">+</button>
+            <button type="button" data-mermaid-zoom-reset>맞춤</button>
+            <button type="button" data-mermaid-close>닫기</button>
+          </div>
+        </div>
+        <div class="mermaid-viewer-viewport">
+          <div class="mermaid-viewer-canvas"></div>
+        </div>
+      </div>
+    `;
+
+    const canvas = dialog.querySelector<HTMLElement>(".mermaid-viewer-canvas");
+    const viewport = dialog.querySelector<HTMLElement>(".mermaid-viewer-viewport");
+    const zoomLevel = dialog.querySelector<HTMLOutputElement>(
+      "[data-mermaid-zoom-level]"
+    );
+    const placeholder = document.createComment("mermaid-viewer-placeholder");
+    const originalStyle = sourceSvg.getAttribute("style");
+    sourceSvg.before(placeholder);
+    canvas?.append(sourceSvg);
+
+    let zoom = 1;
+    const updateZoom = () => {
+      if (canvas) canvas.style.width = `${zoom * 100}%`;
+      sourceSvg.style.width = "100%";
+      sourceSvg.style.maxWidth = "none";
+      if (zoomLevel) zoomLevel.value = `${Math.round(zoom * 100)}%`;
+    };
+
+    dialog
+      .querySelector<HTMLButtonElement>("[data-mermaid-zoom-in]")
+      ?.addEventListener("click", () => {
+        zoom = Math.min(3, zoom + 0.25);
+        updateZoom();
+      });
+    dialog
+      .querySelector<HTMLButtonElement>("[data-mermaid-zoom-out]")
+      ?.addEventListener("click", () => {
+        zoom = Math.max(1, zoom - 0.25);
+        updateZoom();
+      });
+    dialog
+      .querySelector<HTMLButtonElement>("[data-mermaid-zoom-reset]")
+      ?.addEventListener("click", () => {
+        zoom = 1;
+        updateZoom();
+        viewport?.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      });
+    dialog
+      .querySelector<HTMLButtonElement>("[data-mermaid-close]")
+      ?.addEventListener("click", () => dialog.close());
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener(
+      "close",
+      () => {
+        placeholder.replaceWith(sourceSvg);
+        if (originalStyle === null) {
+          sourceSvg.removeAttribute("style");
+        } else {
+          sourceSvg.setAttribute("style", originalStyle);
+        }
+        dialog.remove();
+      },
+      { once: true }
+    );
+
+    document.body.append(dialog);
+    updateZoom();
+    dialog.showModal();
+  };
+</script>
