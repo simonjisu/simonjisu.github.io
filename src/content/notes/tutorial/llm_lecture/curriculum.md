@@ -92,9 +92,10 @@ tags:
 
     선생님이 질문과 모범 답안을 함께 보여주면 학생은 답하는 방식부터 배운다. SFT도 prompt와 정답 response를 짝으로 주고 정답 token의 확률을 높인다.
 
-데이터를 train, validation, test로 나누고 padding, truncation, packing, assistant-only loss를 배운다. 학습 loss가 내려가도 실제 답변은 나아지지 않을 수 있다. 둘을 따로 평가해야 하는 이유도 확인한다.
+데이터를 train, validation, test로 나눈다. Padding, truncation, packing, assistant-only loss도 배운다. 학습에서는 모범 답안의 이전 token을 읽는다. 생성에서는 모델이 고른 이전 token을 읽는데, 이 차이를 exposure bias라고 부른다. 학습 loss가 내려가도 실제 답변은 나아지지 않기도 한다. 둘을 따로 평가해야 하는 이유도 확인한다.
 
 - 이 주차에는 데이터 한 건이 SFT loss로 바뀌는 과정을 예시로 따라간다.
+- teacher forcing과 실제 생성의 prefix 차이를 비교하고 오류가 이어지는 조건을 살펴본다.
 - 작은 공개 데이터로 `SFTTrainer` 학습을 실행한다.
 - 학습 전후의 답변을 같은 decoding 설정으로 비교한다.
 - train loss와 validation loss가 벌어지는 시점을 찾아본다.
@@ -104,6 +105,8 @@ tags:
 
 - [Hugging Face TRL: SFT Trainer](https://huggingface.co/docs/trl/sft_trainer)
 - [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155)
+- [Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks](https://papers.nips.cc/paper_files/paper/2015/hash/e995f98d56967d946471af29d7bf99f1-Abstract.html)
+- [Exposure Bias versus Self-Recovery](https://aclanthology.org/2021.emnlp-main.415/)
 
 ### 4주차. LoRA와 QLoRA
 
@@ -111,8 +114,10 @@ tags:
 
     두꺼운 교과서 전체를 다시 인쇄하는 대신, 바뀐 내용만 얇은 정정 노트로 붙이는 방법과 비슷하다. LoRA는 원래 weight를 고정하고 작은 행렬만 학습한다.
 
-full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비교한다. rank, alpha, target module이 어떤 뜻인지 실험하고, adapter merge 전후의 출력도 확인한다.
+SFT는 모범 답안과 loss를 정하는 학습 방식이고, LoRA는 바꿀 parameter를 줄이는 방법이다. 둘 중 하나를 고르는 관계가 아니라 LoRA로도 SFT를 실행한다는 점부터 구분한다. 이어 full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비교한다. Rank, alpha, target module이 어떤 뜻인지 실험하고, adapter merge 전후의 출력도 확인한다.
 
+- 이 주차에는 SFT, full fine-tuning, LoRA가 각각 어떤 질문에 답하는 개념인지 구분한다.
+- GPU memory, 목표 task의 변화 폭, 기존 능력 보존, adapter 전환 여부로 학습 방법을 고른다.
 - 이 주차에는 low-rank 행렬을 작은 숫자 예제로 풀어본다.
 - 같은 데이터로 LoRA와 QLoRA를 각각 실행한다.
 - trainable parameter, peak GPU memory, 학습 시간, 품질을 표로 비교한다.
@@ -123,6 +128,8 @@ full fine-tuning, LoRA, QLoRA의 trainable parameter 수와 GPU 메모리를 비
 
 - [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
 - [QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
+- [LoRA Learns Less and Forgets Less](https://openreview.net/forum?id=aloEru2qCG)
+- [Beyond Full Fine-tuning: Harnessing the Power of LoRA for Multi-Task Instruction Tuning](https://aclanthology.org/2024.lrec-main.206/)
 - [Hugging Face TRL: PEFT Integration](https://huggingface.co/docs/trl/peft_integration)
 
 ---
@@ -631,11 +638,11 @@ Episodic memory에서 교훈을 만드는 reflection과 실행 가능한 절차�
 
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 커리큘럼
-검토 단위: 23주차의 네 개념 비교 문단과 표
-원본/수정본: 새 문단 초안 1,372자 / 윤문본 1,338자, 이번 후처리 변경률 2.48%
-카테고리별 탐지/수정: A-7 0→0, A-8 0→0, C-5 0→0, D-1 0→0, H-1 0→0
+검토 단위: 4주차 SFT·LoRA 선택 기준과 참고 자료
+원본/윤문본: 27,647자 / 28,108자, metrics v2.0 변경률 0.83%
+카테고리별 탐지/수정: C-11 연결어미 뒤 쉼표 0→0, A-10 가능 표현 1→0, D-1 결산 표현 0→0, H-1 문두 접속사 0→0, A-8 이중 피동 0→0
 정량 점검: humanize-korean metrics v2.0 risk band low
 자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 평어체 유지 / S1 잔존 없음 / 인공 수사 추가 없음
-등급: B — 자체검증 6/6을 통과했고 의미를 유지한 채 반복되는 연결 표현을 줄임
-주요 변경: Memory, Knowledge Base, Conversation History, Agent State의 역할과 겹치는 지점을 표로 구분함
+등급: B — 자체검증 6/6을 통과했고 기존 주차 설명과 참고 자료 형식을 유지함
+주요 변경: “full fine-tuning, LoRA, QLoRA 비교” → 개념 층위와 상황별 선택 기준을 먼저 설명함
 -->

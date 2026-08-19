@@ -17,6 +17,7 @@ tags:
 
 - Base model과 instruction model의 차이
 - pre-training 문서가 다음 token 정답으로 바뀌는 과정
+- 학습과 생성에서 이전 token의 출처가 달라지는 이유
 - `system`, `user`, `assistant` 메시지가 token 열로 바뀌는 과정
 - 같은 계열의 Base/Instruct model을 공정하게 비교하는 방법
 
@@ -52,6 +53,8 @@ tokenization
 ```
 
 사람이 문장마다 정답표를 따로 만들 필요는 없다. 원문에서 오른쪽으로 한 칸 옮긴 token이 곧 정답이 된다. 이런 방식을 self-supervised learning이라고 부른다. “아무 도움 없이 스스로 배운다”는 뜻은 아니다. 데이터 수집, 정제, tokenizer 설계에는 여전히 사람의 판단이 들어간다.
+
+여기에는 학습과 생성의 작은 차이가 숨어 있다. 학습할 때 모델은 실제 문서에서 가져온 올바른 왼쪽 문맥을 보고 다음 token을 맞힌다. 실제 생성에서는 조금 전에 자신이 고른 token을 다시 입력으로 읽는다. 두 입력의 분포가 달라지는 현상을 exposure bias라고 부른다.[^7] 3주차에서는 teacher forcing과 exposure bias가 오류 누적, 생성 평가와 어떻게 이어지는지 자세히 살펴본다.
 
 pre-training을 마친 Base model은 문장을 자연스럽게 잇고 다양한 지식을 흉내 낸다. 다만 사용자의 질문에 짧고 정확하게 답하는 규칙은 충분히 배우지 못했을 수 있다. 그래서 질문을 이어 쓰거나 답 대신 비슷한 문서를 계속 생성하기도 한다.
 
@@ -128,7 +131,7 @@ Explain why sleep matters in exactly two sentences.<|im_end|>
 
 *그림 1. InstructGPT의 세 학습 단계. 출처: Ouyang et al. (2022), Figure 2에서 발췌.[^1]*
 
-그림의 첫 번째 열이 이번 주와 다음 주에 집중할 SFT 단계다. 사람이 prompt에 맞는 답을 작성하고, 모델은 그 demonstration을 따라 하도록 학습한다. 두 번째 열의 Reward Model과 세 번째 열의 PPO는 6~7주차에 자세히 다룬다.
+그림의 첫 번째 열이 이번 주와 다음 주에 집중할 SFT 단계다. 사람이 prompt에 맞는 답을 작성하고, 모델은 그 demonstration을 따라 하도록 학습한다. 두 번째 열의 Reward Model과 세 번째 열의 PPO는 6-7주차에 자세히 다룬다.
 
 이 논문은 모델 크기만 늘린다고 사람의 의도를 더 잘 따르는 것은 아니라고 설명한다. 연구진은 demonstration으로 supervised fine-tuning을 하고, 답변 순위로 Reward Model을 학습한 뒤, PPO로 policy를 조정했다.[^1] Base model이 instruction model로 바뀌어도 새로운 언어 학습 장치가 생기지는 않는다. 모델은 여전히 다음 token의 확률을 계산하지만, 어떤 text를 정답으로 보여주는지가 달라진다.
 
@@ -259,10 +262,12 @@ pre-training과 instruction tuning은 데이터의 목적이 다르지만, 데�
 3. chat template이 role 정보를 특별한 token으로 바꾸는 이유는 무엇인가?
 4. Base model과 Instruct model을 비교할 때 생성 설정을 맞춰야 하는 이유는 무엇인가?
 5. instruction tuning 뒤에도 모델이 하는 기본 계산이 next-token prediction인 이유를 설명해보자.
+6. 학습할 때 읽는 왼쪽 문맥과 실제 생성 중에 읽는 왼쪽 문맥은 어떻게 다른가?
 
 ## 완료 체크
 
 - [ ] pre-training과 instruction tuning의 데이터 차이를 설명했다.
+- [ ] exposure bias가 생기는 학습·생성 입력의 차이를 확인했다.
 - [ ] Qwen2.5 Instruct tokenizer의 chat template 결과를 출력했다.
 - [ ] Base/Instruct model에 같은 질문 묶음을 실행했다.
 - [ ] 답변, token 수, 생성 설정, 지시 준수 여부를 표로 정리했다.
@@ -276,13 +281,14 @@ pre-training과 instruction tuning은 데이터의 목적이 다르지만, 데�
 [^4]: Qwen Team. [Qwen/Qwen2.5-0.5B-Instruct model card](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct). 확인일: 2026-07-31.
 [^5]: Zhou, J. et al. (2023). [Instruction-Following Evaluation for Large Language Models](https://arxiv.org/abs/2311.07911). 검증 가능한 지시 유형과 평가 원칙을 참고했다.
 [^6]: Google. [google/IFEval dataset](https://huggingface.co/datasets/google/IFEval). 541개 영어 prompt의 필드와 지시 유형을 확인했다. 확인일: 2026-08-02.
+[^7]: Bengio, S. et al. (2015). [Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks](https://papers.nips.cc/paper_files/paper/2015/hash/e995f98d56967d946471af29d7bf99f1-Abstract.html). 학습에서는 정답인 이전 token을 사용하고 추론에서는 모델이 생성한 token을 사용하면서 생기는 차이와 오류 누적 문제를 참고했다.
 
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 강의 노트
-검토 단위: 절별로 5,000자 이하로 나누어 점검
-원본/윤문본: 7322자 / 7615자, 변경률 2.55%
-탐지/수정: E-2 2→0, I-2 1→0, A-10 2→1, 그 밖의 S1 0→0
+검토 단위: 새 exposure bias 설명과 확인 항목
+원본/윤문본: 10,477자 / 11,124자, metrics v2.0 변경률 3.04%
+탐지/수정: C-11 연결어미 뒤 쉼표 0→0, A-10 가능 표현 0→0, D-1 결산 표현 0→0, H-1 문두 접속사 0→0
 자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 평어체 유지 / S1 잔존 없음 / 인공 수사 추가 없음
-등급: B — 자체검증 6/6을 통과했고 신규 작성문을 보수적으로 다듬음
-주요 변경: 반복되는 “~수 있다” 종결을 분산하고 “기억할 부분은 ~점이다”를 직접 서술로 수정, IFEval-style 영어 task 10개의 Base/Instruct 비교와 실패 원인 추가
+등급: B — 자체검증 6/6을 통과했고 기존 강의의 평어체와 기술 용어를 보존함
+주요 변경: pre-training의 정답 prefix와 실제 생성의 model prefix 차이를 한 문단으로 추가함
 -->

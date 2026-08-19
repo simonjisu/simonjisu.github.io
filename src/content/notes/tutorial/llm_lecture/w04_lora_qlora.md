@@ -3,6 +3,7 @@ title: "4주차. LoRA와 QLoRA"
 description: "전체 weight를 고치는 대신 작은 adapter를 학습하고, 4-bit 양자화로 GPU 메모리를 더 줄이는 방법을 익힌다."
 tags:
   - LLM
+  - SFT
   - LoRA
   - QLoRA
   - PEFT
@@ -13,11 +14,13 @@ tags:
 
 [← 16주 커리큘럼](/notes/tutorial/llm_lecture/curriculum/)
 
-3주차에는 모든 weight를 바꾸는 SFT를 실행했다. 모델이 커지면 weight뿐 아니라 gradient와 optimizer state도 GPU 메모리를 차지한다. 이번 주에는 원래 weight를 얼리고 작은 LoRA adapter만 학습한다. 이어서 Base model을 4-bit로 보관하는 QLoRA까지 비교한다.
+3주차에는 모든 weight를 바꾸는 방식으로 SFT를 실행했다. 하지만 SFT가 언제나 모든 weight를 바꿔야 하는 것은 아니다. 같은 SFT loss를 쓰면서 LoRA adapter만 학습할 수도 있다. 이번 주에는 SFT와 LoRA의 관계를 바로잡은 뒤 full fine-tuning, LoRA, QLoRA를 비교한다.
 
 ## 이번 주에 배울 것
 
 - full fine-tuning과 LoRA가 바꾸는 parameter의 차이
+- SFT와 LoRA가 서로 다른 층위의 개념인 이유
+- full fine-tuning, LoRA, QLoRA를 상황에 맞게 고르는 기준
 - LoRA의 두 작은 행렬 $A$, $B$와 rank $r$의 뜻
 - `r`, `lora_alpha`, `target_modules`가 맡는 역할
 - QLoRA의 4-bit NF4, double quantization, paged optimizer
@@ -29,7 +32,54 @@ tags:
 
     full fine-tuning은 두꺼운 교과서의 모든 문장을 다시 인쇄하는 일과 비슷하다. LoRA는 교과서는 그대로 두고 작은 정정 노트만 학습한다. QLoRA는 교과서를 더 작은 글자 체계로 압축해 보관하고, 정정 노트는 계산하기 좋은 정밀도로 학습한다.
 
-## 1. LoRA는 weight의 변화량을 작게 나눈다
+## 1. SFT와 LoRA는 둘 중 하나를 고르는 관계가 아니다
+
+“SFT와 LoRA 중 무엇을 써야 할까?”라는 질문에는 두 개념이 섞여 있다. SFT는 prompt와 모범 답안을 사용해 next-token loss를 계산하는 **학습 목적과 데이터 구성**이다. LoRA는 그 loss로 역전파할 때 전체 weight 대신 작은 adapter만 바꾸는 **parameter update 방법**이다.[^1]
+
+옷을 만드는 일에 빗대면 SFT는 어떤 견본을 보고 어떤 옷을 만들지 정하는 설계 수업이다. Full fine-tuning과 LoRA는 재봉틀의 어느 부분까지 조절할지 정하는 방법이다. 견본은 같아도 조절 범위는 다르게 고른다.
+
+| 구분 | 답하는 질문 | 학습하는 값 |
+| --- | --- | --- |
+| SFT | 어떤 데이터와 loss로 행동을 가르칠까? | 선택한 update 방법에 따라 달라짐 |
+| Full fine-tuning | SFT loss로 전체 weight를 바꿀까? | 원래 model weight 전체 |
+| LoRA SFT | SFT loss로 작은 adapter만 바꿀까? | LoRA 행렬 $A$, $B$ |
+| QLoRA SFT | Base model을 4-bit로 보관하며 adapter를 바꿀까? | LoRA 행렬 $A$, $B$ |
+
+LoRA는 SFT에만 묶인 기술도 아니다. Preference data로 DPO를 학습할 때 LoRA를 붙인다. 일반 문서로 continued pre-training을 할 때도 LoRA를 사용한다. `LoRA`라는 이름만으로는 데이터와 loss를 알 수 없다.
+
+### 어떤 상황에서 무엇을 고를까?
+
+개인 실험이나 작은 팀이라면 LoRA SFT부터 시작하기 좋다. 학습할 parameter와 checkpoint가 작아서 설정을 여러 번 시험하기 쉽다. 하나의 Base model에 작업별 adapter를 따로 보관하기도 좋다. LoRA 원 논문은 RoBERTa, DeBERTa, GPT-2, GPT-3의 여러 task에서 full fine-tuning과 비슷하거나 더 나은 품질을 보고했다.[^1] 이는 모든 model과 task에서 LoRA가 이긴다는 보장은 아니다.
+
+| 상황 | 먼저 시험할 방법 | 까닭 |
+| --- | --- | --- |
+| 한두 장의 GPU로 말투·출력 형식·업무 지시를 가르침 | LoRA SFT | 학습 parameter와 checkpoint가 작아 반복 실험이 쉬움 |
+| 16-bit Base model조차 GPU memory에 들어가지 않음 | QLoRA SFT | 고정된 Base weight를 4-bit로 보관해 memory를 더 줄임 |
+| 고객이나 task마다 다른 버전을 자주 바꿈 | LoRA SFT | Base model 하나와 여러 adapter를 따로 관리하기 좋음 |
+| 특정 영역을 최대한 깊게 학습하는 일이 가장 중요함 | LoRA와 full-parameter SFT를 함께 비교 | LoRA의 rank가 필요한 변화량을 충분히 표현하는지 확인해야 함 |
+| 충분한 GPU와 저장 공간이 있고 하나의 통합 model만 배포함 | Full-parameter SFT도 후보 | adapter 구조에 제한받지 않고 전체 weight를 조정함 |
+| 자주 바뀌는 사실이나 사내 문서를 답하게 함 | 먼저 RAG 검토 | 학습 weight보다 외부 지식을 갱신하는 편이 빠르고 출처를 연결하기 쉬움 |
+
+Full-parameter SFT는 바꾸는 값이 많으므로 target domain을 더 강하게 학습할 여지가 있다. Biderman et al.은 약 10만 개의 prompt-response pair를 사용한 코딩·수학 instruction tuning에서 일반적인 low-rank LoRA가 full fine-tuning보다 target domain을 덜 학습했다고 보고했다. 대신 LoRA는 target 밖의 기존 능력을 더 잘 보존했다.[^8] “더 많이 배우는 대신 더 많이 잊는가?”를 함께 살펴야 한다.
+
+LoRA가 풍부한 데이터나 multi-task 학습에 무조건 약한 것도 아니다. Xin et al.은 rank와 학습 범위를 알맞게 설정했을 때 multi-task instruction tuning에서도 full fine-tuning과 견줄 만한 결과를 관찰했다.[^9] 논문 결과가 갈리는 까닭은 model, data, task, rank, target module, 평가 방법이 서로 다르기 때문이다.
+
+!!! note "선택은 작은 비교 실험으로 끝낸다"
+
+    먼저 같은 Base model, train data, validation data, seed, 생성 설정으로 LoRA SFT를 실행한다. 목표 점수에 못 미치면 rank와 target module을 점검한다. 그래도 차이가 남고 자원이 충분할 때 full-parameter SFT를 같은 조건으로 비교한다. Target task 점수뿐 아니라 기존 일반 능력, peak memory, 학습 시간, checkpoint 크기도 함께 기록한다.
+
+QLoRA는 LoRA의 품질을 높이는 상위 방법이 아니라 memory를 더 줄이는 선택지다. QLoRA 논문은 고정된 4-bit Base model을 통과한 gradient로 LoRA adapter를 학습했다. 65B model을 단일 48GB GPU에서 fine-tuning하면서 논문이 비교한 task에서 16-bit full fine-tuning 성능을 유지했다고 보고했다.[^2] 이 수치를 다른 model, data, GPU에 그대로 적용하지 않는다.
+
+선택 순서는 간단하다.
+
+```text
+1. prompt-response 모범 답안으로 행동을 가르치는가? -> SFT
+2. 전체 weight를 학습할 memory가 부족한가?        -> LoRA
+3. 16-bit Base model도 올릴 수 없는가?            -> QLoRA
+4. LoRA가 목표 품질에 못 미치고 자원이 충분한가? -> Full-parameter SFT와 비교
+```
+
+## 2. LoRA는 weight의 변화량을 작게 나눈다
 
 ![LoRA의 pretrained weight와 저랭크 행렬 A, B](/notes/tutorial/llm_lecture/images/w04_lora_reparameterization.png)
 
@@ -51,7 +101,7 @@ LoRA parameter (r=16) = 16 × 4096 × 2     =    131,072
 
 이 계산은 layer 하나의 단순 예시다. 실제 모델의 trainable parameter 비율은 LoRA를 붙이는 layer와 module 수에 따라 달라진다.
 
-## 2. LoRA 설정값은 각각 역할이 다르다
+## 3. LoRA 설정값은 각각 역할이 다르다
 
 | 설정 | 쉬운 뜻 | 값이 커질 때 |
 | --- | --- | --- |
@@ -64,7 +114,7 @@ LoRA 식에서 scale은 보통 `lora_alpha / r`로 적용된다. `r`만 바꾸�
 
 PEFT는 모델 구조를 알고 있으면 기본 target module을 고른다. QLoRA 방식처럼 Transformer의 linear layer 전반에 adapter를 붙일 때는 `target_modules="all-linear"`를 사용한다.[^3] 어떤 설정이 늘 최고라고 가정하지 말고, trainable parameter 수와 validation 결과를 함께 확인한다.
 
-## 3. QLoRA는 Base model을 4-bit로 보관한다
+## 4. QLoRA는 Base model을 4-bit로 보관한다
 
 ![Full fine-tuning, LoRA, QLoRA의 메모리 구조 비교](/notes/tutorial/llm_lecture/images/w04_qlora_memory_comparison.png)
 
@@ -84,7 +134,7 @@ QLoRA 논문은 메모리를 줄이기 위해 세 가지를 함께 사용했다.
 
 현재 Transformers 문서도 4-bit Base model 학습에 NF4를 권하고, nested quantization으로 parameter당 약 0.4 bit를 더 줄일 수 있다고 설명한다.[^5] 이 수치는 저장 공간에 대한 설명이지 모델이 네 배 빨라진다는 뜻은 아니다. 속도는 GPU, kernel, sequence length, batch 크기에 따라 달라진다.
 
-## 4. 먼저 LoRA를 실행한다
+## 5. 먼저 LoRA를 실행한다
 
 3주차와 같은 모델, 데이터, seed, `max_length`를 사용해야 학습 방법의 차이를 비교하기 쉽다. 이 실습도 `Qwen/Qwen3-0.6B`를 쓴다.[^6] LoRA와 QLoRA에서는 작은 adapter만 학습하므로 full fine-tuning보다 높은 learning rate를 쓰는 경우가 많다. 현재 TRL 가이드는 SFT 예시로 full fine-tuning의 `2e-5`, LoRA의 `2e-4`를 제시한다.[^4]
 
@@ -146,7 +196,7 @@ trainer.save_model()
 
 출력된 `trainable params`, `all params`, `trainable%`를 기록한다. 모델 크기만 보고 adapter 크기를 짐작하지 말고 실제 값을 남긴다.
 
-## 5. 같은 설정에서 QLoRA로 바꾼다
+## 6. 같은 설정에서 QLoRA로 바꾼다
 
 QLoRA에는 `bitsandbytes`가 더 필요하다. 아래 코드는 현재 TRL의 PEFT integration 방식처럼 `quantization_config`와 `peft_config`를 `SFTTrainer`에 함께 전달한다.[^4]
 
@@ -216,7 +266,7 @@ trainer.save_model()
 
 `bfloat16`을 지원하지 않는 GPU라면 `bnb_4bit_compute_dtype`와 학습 precision을 장비에 맞게 바꿔야 한다. QLoRA가 메모리를 줄여도 모든 GPU와 운영체제에서 같은 kernel을 지원하는 것은 아니다. 설치 오류가 나면 먼저 공식 bitsandbytes hardware compatibility 표와 CUDA 버전을 확인한다.[^5]
 
-## 6. 세 방법을 같은 표로 비교한다
+## 7. 세 방법을 같은 표로 비교한다
 
 full fine-tuning, LoRA, QLoRA를 비교할 때 데이터와 생성 설정이 달라지면 원인을 구분하기 어렵다. 아래 표의 빈칸을 실제 측정값으로 채운다.
 
@@ -244,7 +294,7 @@ adapter를 merge하면 Base model weight에 LoRA 변화량을 합친 새 모델�
 
     QLoRA의 peak memory가 가장 작더라도 학습 속도나 최종 품질이 항상 최고인 것은 아니다. 같은 데이터와 seed에서 메모리, 시간, validation loss, 실제 답변을 함께 본다.
 
-## 7. 실제 비교 결과
+## 8. 실제 비교 결과
 
 `HuggingFaceTB/SmolLM2-135M-Instruct`를 Apple MPS에서 Full FT와 LoRA로 각각 4 step 학습했다. LoRA는 rank 16으로 모든 linear layer에 adapter를 붙였다.[^3][^7]
 
@@ -271,10 +321,15 @@ QLoRA는 실행하지 못했다. 이번 환경의 Apple MPS에서는 bitsandbyte
 3. `lora_alpha`와 `r`를 함께 기록해야 하는 이유는 무엇인가?
 4. QLoRA에서 Base model은 4-bit인데 계산은 더 높은 정밀도로 할 수 있는 이유를 설명해보자.
 5. adapter merge가 편리한 경우와 불편한 경우를 하나씩 적어보자.
+6. SFT와 LoRA를 둘 중 하나만 고르는 관계로 보면 안 되는 이유는 무엇인가?
+7. LoRA SFT를 먼저 실행한 뒤 full-parameter SFT와 비교할 조건을 두 가지 적어보자.
+8. 자주 바뀌는 사실을 학습시키려 할 때 fine-tuning보다 RAG를 먼저 검토할 이유는 무엇인가?
 
 ## 완료 체크
 
 - [ ] LoRA의 $W_0x + (\alpha/r)BAx$ 식과 각 행렬 shape를 설명했다.
+- [ ] SFT가 학습 목적이고 LoRA가 parameter update 방법인 이유를 설명했다.
+- [ ] 내 환경의 목표, GPU memory, 배포 방식에 맞춰 첫 학습 방법을 골랐다.
 - [ ] LoRA와 QLoRA의 trainable parameter 수를 출력했다.
 - [ ] 같은 데이터와 seed로 LoRA와 QLoRA를 각각 실행했다.
 - [ ] peak GPU memory, 학습 시간, validation loss, 답변을 표로 비교했다.
@@ -291,13 +346,17 @@ QLoRA는 실행하지 못했다. 이번 환경의 Apple MPS에서는 bitsandbyte
 [^5]: Hugging Face. [Transformers: bitsandbytes](https://huggingface.co/docs/transformers/main/quantization/bitsandbytes). NF4, compute dtype, nested quantization을 참고했다. 확인일: 2026-07-31.
 [^6]: Qwen Team. [Qwen/Qwen3-0.6B model card](https://huggingface.co/Qwen/Qwen3-0.6B). 확인일: 2026-07-31.
 [^7]: Hugging Face. [HuggingFaceTB/SmolLM2-135M-Instruct model card](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct). 실행 모델의 구조와 사용법을 참고했다. 확인일: 2026-08-01.
+[^8]: Biderman, D. et al. (2024). [LoRA Learns Less and Forgets Less](https://openreview.net/forum?id=aloEru2qCG). 코딩·수학 영역의 instruction tuning과 continued pre-training에서 LoRA와 full fine-tuning의 target domain 학습, 기존 능력 보존, update rank를 비교한 결과를 참고했다.
+[^9]: Xin, C. et al. (2024). [Beyond Full Fine-tuning: Harnessing the Power of LoRA for Multi-Task Instruction Tuning](https://aclanthology.org/2024.lrec-main.206/). Rank와 학습 범위를 조정한 LoRA가 high-resource multi-task instruction tuning에서 full fine-tuning과 견줄 만한 결과를 낸 실험을 참고했다.
 
 <!-- HUMANIZE-SUMMARY
 장르: 교육용 강의 노트
-검토 단위: 절별로 5,000자 이하로 나누어 점검
-원본/윤문본: 9748자 / 9882자, 변경률 1.37%
-탐지/수정: A-10 7→1, D-1 0→0, H-1 0→0, I-2 0→0, 그 밖의 S1 0→0
+검토 단위: 새 SFT·LoRA 개념 및 선택 기준 절
+원본/윤문본: 11,308자 / 15,193자, metrics v2.0 변경률 15.45%
+탐지/수정: C-11 연결어미 뒤 쉼표 2→0, A-10 가능 표현 5→0, D-1 결산 표현 0→0, H-1 문두 접속사 0→0, A-8 이중 피동 0→0
 자체검증: 고유명사·수치 보존 / 변경률 30% 이하 / 장르 유지 / 평어체 유지 / S1 잔존 없음 / 인공 수사 추가 없음
-등급: B — 자체검증 6/6을 통과했고 수식·수치·설정값을 보존하며 반복 표현만 줄임
-주요 변경: “쓸 수 있다”→“사용한다”, LoRA 식과 행렬 shape를 inline math 형식으로 변경, Full FT·LoRA 실측표와 QLoRA 미실행 사유 추가
+등급: B — 자체검증 6/6을 통과했고 논문별 상반된 결과와 적용 범위를 보존함
+주요 변경 1: “LoRA를 붙일 수 있고” → “LoRA를 붙인다. 일반 문서로”
+주요 변경 2: “보관할 수 있다” → “보관하기도 좋다”
+주요 변경 3: “담지 못할 수 있음” → “충분히 표현하는지 확인해야 함”
 -->
