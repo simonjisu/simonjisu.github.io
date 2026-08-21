@@ -15,7 +15,7 @@ tags:
 
 > 부제: 놀라움의 양에서 언어 모델의 손실 함수까지
 
-작성된 원고: [Chapter 1. 정보란 무엇인가](/notes/info/c01_introduction/) · [Chapter 2. 확률은 불확실성을 표현하는 언어다](/notes/info/c02_probability/)
+작성된 원고: [Chapter 1. 정보란 무엇인가](/notes/info/c01_introduction/) · [Chapter 2. 확률은 불확실성을 표현하는 언어다](/notes/info/c02_probability/) · [Chapter 3. 엔트로피: 평균적으로 얼마나 놀라운가](/notes/info/c03_entropy/)
 
 ## 0. 이 책의 목표
 

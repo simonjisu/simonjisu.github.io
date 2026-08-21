@@ -18,6 +18,7 @@ hide:
 | 0 | 12주 핵심 과정과 4주 LLM 심화 과정 | [Information Theory 학습 커리큘럼](curriculum.md) |
 | 1 | 스무고개, 자기정보량(self-information), 비트(bit)와 내트(nat), 토큰 손실(token loss) | [Chapter 1. 정보란 무엇인가](c01_introduction.md) |
 | 2 | 확률변수(random variable), 결합·주변·조건부확률, 독립(independence), 베이즈 정리(Bayes' theorem) | [Chapter 2. 확률은 불확실성을 표현하는 언어다](c02_probability.md) |
+| 3 | 샤논 엔트로피(Shannon entropy), 베르누이 엔트로피, 최대 엔트로피, 다음 토큰 엔트로피 | [Chapter 3. 엔트로피: 평균적으로 얼마나 놀라운가](c03_entropy.md) |
 
 ## 참고 자료
 

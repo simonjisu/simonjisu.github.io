@@ -406,6 +406,26 @@ h3 {
   color: var(--muted);
 }
 
+.content blockquote {
+  margin: 1.25rem 0;
+  border-left: 3px solid var(--line);
+  padding: 0.85rem 1rem;
+  background: var(--surface-muted);
+  color: var(--muted);
+}
+
+.content blockquote > :first-child {
+  margin-top: 0;
+}
+
+.content blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.content blockquote p {
+  color: inherit;
+}
+
 .note-page .content {
   line-break: strict;
   overflow-wrap: anywhere;
