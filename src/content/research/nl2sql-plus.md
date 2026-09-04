@@ -3,13 +3,16 @@ title: "NL2SQL+"
 subtitle: "An extended framework for SQL generation with on-demand embedded machine learning functions."
 subtitleKo: "자연어 질문에서 예측이 필요한 경우를 탐지해 데이터베이스 안에서 Embedded ML Function을 수행하는 SQL로 바꾸는 연구입니다."
 year: "2026"
-status: "Under review"
+status: "Published"
+venue: "IEEE Access"
 image: "/research/img/nl2sql-plus-overview.png"
 showHeroImage: false
 summary: "NL2SQL+ extends text-to-SQL from retrieval and aggregation queries to predictive analytics by routing ML-intent questions into model selection and platform-specific ML SQL generation."
 summaryKo: "기존 NL2SQL은 조회와 집계에 강했습니다. NL2SQL+는 여기서 더 나아가 예측 모델이 필요한 질문을 감지하고, 알맞은 모델과 SQL 템플릿을 골라 실행 가능한 쿼리로 만듭니다."
 sourceFolder: "workdir/papers/NL2SQL_plus"
 links:
+  - label: "IEEE Xplore"
+    href: "https://ieeexplore.ieee.org/document/11652980"
   - label: "Code"
     href: "https://github.com/simonjisu/NL2ML-SQL"
 sections:
